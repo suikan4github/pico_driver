@@ -4,6 +4,11 @@ cmake_minimum_required(VERSION 3.14)
 # Redefine project for testing.
 project(test_i2s)
 
+# Enable test to let the VS code find the test.
+include(CTest)
+enable_testing()
+
+
 # GoogleTest requires at least C++14
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -18,14 +23,12 @@ FetchContent_MakeAvailable(googletest)
 
 
 # Add the executable for the testcase which is using googletest
-add_executable(${PROJECT_NAME} test_pico_wrapper.cpp)
+add_executable(${PROJECT_NAME} test_picowrapper.cpp)
 
     # Add the library under test.
     target_link_libraries(${PROJECT_NAME}  
                             GTest::gtest_main
                             )
-    target_include_directories(${PROJECT_NAME} PUBLIC
-                            ${PROJECT_SOURCE_DIR}/../src/)
 
 include(GoogleTest)
 gtest_discover_tests(${PROJECT_NAME})

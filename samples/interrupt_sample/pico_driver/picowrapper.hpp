@@ -1,5 +1,5 @@
-#ifndef __DRIVER_PICO_WRAPPER_HPP__
-#define __DRIVER_PICO_WRAPPER_HPP__
+#ifndef __DRIVER_PICOWRAPPER_HPP__
+#define __DRIVER_PICOWRAPPER_HPP__
 
 #ifndef EXPECT_EQ  // If not build for GTest, include followings.
 
@@ -16,9 +16,9 @@
  *         target_link_libraries(${PROJECT_NAME} pico_stdlib hardware_i2c)
  * @endcode
  */
-class pico_wrapper {
+class PicoWrapper {
  public:
-  virtual ~pico_wrapper() {}
+  virtual ~PicoWrapper() {}
   virtual void gpio_init(uint gpio);
   /**
    * @brief Set a single GPIO direction.
@@ -85,4 +85,4 @@ class pico_wrapper {
   virtual int i2c_write_blocking(i2c_inst_t *i2c, uint8_t addr,
                                  const uint8_t *src, size_t len, bool nostop);
 };
-#endif  // __DRIVER_PICO_WRAPPER_HPP__
+#endif  // __DRIVER_PICOWRAPPER_HPP__
