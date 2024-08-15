@@ -30,9 +30,9 @@ FAKE_VALUE_FUNC(int, i2c_write_blocking, i2c_inst_t *, uint8_t, const uint8_t *,
                 size_t, bool);
 
 // The header file of the library to test.
-#include "../samples/interrupt_sample/pico_driver/picowrapper.hpp"
+#include "../rpi/samples/interrupt_sample/pico_driver/picowrapper.hpp"
 // The cpp file of the library to test.
-#include "../samples/interrupt_sample/pico_driver/picowrapper.cpp"
+#include "../rpi/samples/interrupt_sample/pico_driver/picowrapper.cpp"
 
 TEST(PicoWrapper, gpio_init) {
   PicoWrapper pico;
