@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.13)
 
 # local library for hardeware driver
 add_library(driver INTERFACE)
-        target_sources(driver INTERFACE outputpin.cpp pico_wrapper.cpp)
+        target_sources(driver INTERFACE outputpin.cpp picowrapper.cpp)
         target_include_directories(driver INTERFACE .)
         target_link_libraries(driver INTERFACE pico_stdlib)
 
