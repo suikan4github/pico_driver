@@ -11,11 +11,11 @@
 // Include for test
 #include <stdint.h>
 
-// Dummy data type for test.
-typedef int i2c_inst_t;
-
 // Preparation for fff
 DEFINE_FFF_GLOBALS;
+
+// The header file of the library to test.
+#include "../rpi_pico/samples/interrupt_sample/pico_driver/picowrapper.hpp"
 
 // Create Test Spies
 FAKE_VOID_FUNC(sleep_ms, uint32_t);
@@ -30,8 +30,6 @@ FAKE_VALUE_FUNC(int, i2c_read_blocking, i2c_inst_t *, uint8_t, uint8_t *,
 FAKE_VALUE_FUNC(int, i2c_write_blocking, i2c_inst_t *, uint8_t, const uint8_t *,
                 size_t, bool);
 
-// The header file of the library to test.
-#include "../rpi_pico/samples/interrupt_sample/pico_driver/picowrapper.hpp"
 // The cpp file of the library to test.
 #include "../rpi_pico/samples/interrupt_sample/pico_driver/picowrapper.cpp"
 

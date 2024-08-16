@@ -11,10 +11,9 @@ add_executable(${PROJECT_NAME}
 # pull in common dependencies
         target_link_libraries(${PROJECT_NAME} pico_stdlib hardware_i2c)
 # local dependencies
-        target_link_libraries(${PROJECT_NAME} algorithm driver)
+        target_link_libraries(${PROJECT_NAME}  driver)
    
 # create map/bin/hex file etc.
    pico_add_extra_outputs(${PROJECT_NAME})
 
-add_subdirectory(algorithm)
-add_subdirectory(pico_driver)
+add_subdirectory(${PROJECT_SOURCE_DIR}/pico_driver)

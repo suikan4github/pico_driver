@@ -5,7 +5,8 @@
 
 #include "hardware/i2c.h"
 #include "pico/stdlib.h"
-
+#else
+typedef int i2c_inst_t;
 #endif
 
 /**
