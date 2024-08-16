@@ -235,7 +235,7 @@ TEST(PicoWrapper, i2c_read_blocking) {
   // Check the data from test spy. How many time called?
   ASSERT_EQ(i2c_read_blocking_fake.call_count, 8);
 
-  // Check wether return value is correct.
+  // Check wether parameters are passed collectly.
   index = 0;
   for (auto &&addrs : addrs_array) {
     for (auto &&bufsize : bufsize_array) {
@@ -260,34 +260,47 @@ TEST(PicoWrapper, i2c_write_blocking) {
   PicoWrapper pico;
   i2c_inst_t i2c = 17;
   uint8_t buf[10];
-  uint8_t addrs[8] = {3, 3, 3, 3, 5, 5, 5, 5};
-  size_t bufsize[8] = {6, 6, 7, 7, 6, 6, 7, 7};
-  bool nostop[8] = {true, false, true, false, true, false, true, false};
-  int myReturnVals[] = {1, 2, 3, 4, 5, 6, 7, 8};
+  uint8_t addrs_array[] = {3, 5};
+  size_t bufsize_array[2] = {2, 7};
+  bool nostop_array[2] = {true, false};
+  int myReturnVals_array[8] = {1, 2, 3, 4, 5, 6, 7, 8};
 
   FFF_RESET_HISTORY();
   RESET_FAKE(i2c_write_blocking);
 
-  SET_RETURN_SEQ(i2c_write_blocking, myReturnVals,
-                 sizeof(myReturnVals) / sizeof(bool));
+  SET_RETURN_SEQ(i2c_write_blocking, myReturnVals_array,
+                 std::size(myReturnVals_array));
 
-  for (int i = 0; i < 8; i++) {
-    ASSERT_EQ(
-        pico.i2c_write_blocking(&i2c, addrs[i], buf, bufsize[i], nostop[i]),
-        myReturnVals[i]);
+  // Check wether return value is correct.
+  int index = 0;
+  for (auto &&addrs : addrs_array) {
+    for (auto &&bufsize : bufsize_array) {
+      for (auto &&nostop : nostop_array) {
+        ASSERT_EQ(pico.i2c_write_blocking(&i2c, addrs, buf, bufsize, nostop),
+                  myReturnVals_array[index]);
+        index++;
+      }
+    }
   }
 
   // Check the data from test spy. How many time called?
   ASSERT_EQ(i2c_write_blocking_fake.call_count, 8);
 
-  for (int i = 0; i < 8; i++) {
-    // Check the data from test spy. Call order.
-    ASSERT_EQ(fff.call_history[i], (void *)i2c_write_blocking);
-    // Check the data from test spy. DrawRelative Parameters.
-    ASSERT_EQ(i2c_write_blocking_fake.arg0_history[i], &i2c);
-    ASSERT_EQ(i2c_write_blocking_fake.arg1_history[i], addrs[i]);
-    ASSERT_EQ(i2c_write_blocking_fake.arg2_history[i], buf);
-    ASSERT_EQ(i2c_write_blocking_fake.arg3_history[i], bufsize[i]);
-    ASSERT_EQ(i2c_write_blocking_fake.arg4_history[i], nostop[i]);
+  // Check wether parameters are passed collectly.
+  index = 0;
+  for (auto &&addrs : addrs_array) {
+    for (auto &&bufsize : bufsize_array) {
+      for (auto &&nostop : nostop_array) {
+        // Check the data from test spy. Call order.
+        ASSERT_EQ(fff.call_history[index], (void *)i2c_write_blocking);
+        // Check the data from test spy. DrawRelative Parameters.
+        ASSERT_EQ(i2c_write_blocking_fake.arg0_history[index], &i2c);
+        ASSERT_EQ(i2c_write_blocking_fake.arg1_history[index], addrs);
+        ASSERT_EQ(i2c_write_blocking_fake.arg2_history[index], buf);
+        ASSERT_EQ(i2c_write_blocking_fake.arg3_history[index], bufsize);
+        ASSERT_EQ(i2c_write_blocking_fake.arg4_history[index], nostop);
+        index++;
+      }
+    }
   }
 }
