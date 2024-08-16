@@ -36,99 +36,89 @@ FAKE_VALUE_FUNC(int, i2c_write_blocking, i2c_inst_t *, uint8_t, const uint8_t *,
 
 TEST(PicoWrapper, gpio_init) {
   PicoWrapper pico;
-  uint gpio = 17;
+  uint gpioarray[] = {17, 11};
 
   FFF_RESET_HISTORY();
   RESET_FAKE(gpio_init);
 
-  pico.gpio_init(gpio);
+  for (auto &&gpio : gpioarray) {
+    pico.gpio_init(gpio);
+  }
 
   // Check the data from test spy. How many time called?
-  ASSERT_EQ(gpio_init_fake.call_count, 1);
+  ASSERT_EQ(gpio_init_fake.call_count, std::size(gpioarray));
 
-  // Check the data from test spy. Call order.
-  ASSERT_EQ(fff.call_history[0], (void *)gpio_init);
-
-  // Check the data from test spy. DrawRelative Parameters.
-  ASSERT_EQ(gpio_init_fake.arg0_history[0], gpio);
-
-  // Try another parameter
-  FFF_RESET_HISTORY();
-  RESET_FAKE(gpio_init);
-
-  gpio = 11;
-  pico.gpio_init(gpio);
-
-  // Check the data from test spy. DrawRelative Parameters.
-  ASSERT_EQ(gpio_init_fake.arg0_history[0], gpio);
+  int index = 0;
+  for (auto &&gpio : gpioarray) {
+    // Check the data from test spy. Call order.
+    ASSERT_EQ(fff.call_history[index], (void *)gpio_init);
+    // Check the data from test spy. DrawRelative Parameters.
+    ASSERT_EQ(gpio_init_fake.arg0_history[index], gpio);
+    index++;
+  }
 }
 
 TEST(PicoWrapper, gpio_set_dir) {
   PicoWrapper pico;
-  uint gpio = 17;
-  bool dir = true;
+  uint gpioarray[] = {17, 11};
+  bool dirarray[] = {true, false};
 
   FFF_RESET_HISTORY();
   RESET_FAKE(gpio_set_dir);
 
-  pico.gpio_set_dir(gpio, dir);
+  for (auto &&gpio : gpioarray) {
+    for (auto &&dir : dirarray) {
+      pico.gpio_set_dir(gpio, dir);
+    }
+  }
 
   // Check the data from test spy. How many time called?
-  ASSERT_EQ(gpio_set_dir_fake.call_count, 1);
+  ASSERT_EQ(gpio_set_dir_fake.call_count,
+            std::size(gpioarray) * std::size(dirarray));
 
-  // Check the data from test spy. Call order.
-  ASSERT_EQ(fff.call_history[0], (void *)gpio_set_dir);
-
-  // Check the data from test spy. DrawRelative Parameters.
-  ASSERT_EQ(gpio_set_dir_fake.arg0_history[0], gpio);
-  ASSERT_EQ(gpio_set_dir_fake.arg1_history[0], dir);
-
-  FFF_RESET_HISTORY();
-  RESET_FAKE(gpio_set_dir);
-
-  // Test another parameters.
-  gpio = 11;
-  dir = false;
-
-  pico.gpio_set_dir(gpio, dir);
-
-  // Check the data from test spy. DrawRelative Parameters.
-  ASSERT_EQ(gpio_set_dir_fake.arg0_history[0], gpio);
-  ASSERT_EQ(gpio_set_dir_fake.arg1_history[0], dir);
+  uint index = 0;
+  for (auto &&gpio : gpioarray) {
+    for (auto &&dir : dirarray) {
+      // Check the data from test spy. Call order.
+      ASSERT_EQ(fff.call_history[index], (void *)gpio_set_dir);
+      // Check the data from test spy. DrawRelative Parameters.
+      ASSERT_EQ(gpio_set_dir_fake.arg0_history[index], gpio);
+      ASSERT_EQ(gpio_set_dir_fake.arg1_history[index], dir);
+      index++;
+    }
+  }
 }
 
 TEST(PicoWrapper, gpio_put) {
   PicoWrapper pico;
-  uint gpio = 17;
-  bool value = true;
+  uint gpioarray[] = {17, 11};
+  bool valuearray[] = {true, false};
 
   FFF_RESET_HISTORY();
   RESET_FAKE(gpio_put);
 
-  pico.gpio_put(gpio, value);
+  for (auto &&gpio : gpioarray) {
+    for (auto &&value : valuearray) {
+      pico.gpio_put(gpio, value);
+    }
+  }
 
   // Check the data from test spy. How many time called?
-  ASSERT_EQ(gpio_put_fake.call_count, 1);
+  ASSERT_EQ(gpio_put_fake.call_count,
+            std::size(gpioarray) * std::size(valuearray));
 
-  // Check the data from test spy. Call order.
-  ASSERT_EQ(fff.call_history[0], (void *)gpio_put);
-
-  // Check the data from test spy. DrawRelative Parameters.
-  ASSERT_EQ(gpio_put_fake.arg0_history[0], gpio);
-  ASSERT_EQ(gpio_put_fake.arg1_history[0], value);
-
-  FFF_RESET_HISTORY();
-  RESET_FAKE(gpio_put);
-
-  // Test another parameters.
-  gpio = 11;
-  value = false;
-
-  pico.gpio_put(gpio, value);
-
-  // Check the data from test spy. DrawRelative Parameters.
-  ASSERT_EQ(gpio_put_fake.arg0_history[0], gpio);
-  ASSERT_EQ(gpio_put_fake.arg1_history[0], value);
+  // Test all combination of the parameter.
+  uint index = 0;
+  for (auto &&gpio : gpioarray) {
+    for (auto &&value : valuearray) {
+      // Check the data from test spy. Call order.
+      ASSERT_EQ(fff.call_history[index], (void *)gpio_put);
+      // Check the data from test spy. DrawRelative Parameters.
+      ASSERT_EQ(gpio_put_fake.arg0_history[index], gpio);
+      ASSERT_EQ(gpio_put_fake.arg1_history[index], value);
+      index++;
+    }
+  }
 }
 
 TEST(PicoWrapper, gpio_get) {
@@ -219,41 +209,53 @@ TEST(PicoWrapper, i2c_read_blocking) {
   PicoWrapper pico;
   i2c_inst_t i2c = 17;
   uint8_t buf[10];
-  uint8_t addrs[8] = {3, 3, 3, 3, 5, 5, 5, 5};
-  size_t bufsize[8] = {6, 6, 7, 7, 6, 6, 7, 7};
-  bool nostop[8] = {true, false, true, false, true, false, true, false};
-  int myReturnVals[] = {1, 2, 3, 4, 5, 6, 7, 8};
+  uint8_t addrs_array[] = {3, 5};
+  size_t bufsize_array[2] = {2, 7};
+  bool nostop_array[2] = {true, false};
+  int myReturnVals_array[8] = {1, 2, 3, 4, 5, 6, 7, 8};
 
   FFF_RESET_HISTORY();
   RESET_FAKE(i2c_read_blocking);
 
-  SET_RETURN_SEQ(i2c_read_blocking, myReturnVals,
-                 sizeof(myReturnVals) / sizeof(bool));
+  SET_RETURN_SEQ(i2c_read_blocking, myReturnVals_array,
+                 std::size(myReturnVals_array));
 
-  for (int i = 0; i < 8; i++) {
-    ASSERT_EQ(
-        pico.i2c_read_blocking(&i2c, addrs[i], buf, bufsize[i], nostop[i]),
-        myReturnVals[i]);
+  // Check wether return value is correct.
+  int index = 0;
+  for (auto &&addrs : addrs_array) {
+    for (auto &&bufsize : bufsize_array) {
+      for (auto &&nostop : nostop_array) {
+        ASSERT_EQ(pico.i2c_read_blocking(&i2c, addrs, buf, bufsize, nostop),
+                  myReturnVals_array[index]);
+        index++;
+      }
+    }
   }
 
   // Check the data from test spy. How many time called?
   ASSERT_EQ(i2c_read_blocking_fake.call_count, 8);
 
-  for (int i = 0; i < 8; i++) {
-    // Check the data from test spy. Call order.
-    ASSERT_EQ(fff.call_history[i], (void *)i2c_read_blocking);
-    // Check the data from test spy. DrawRelative Parameters.
-    ASSERT_EQ(i2c_read_blocking_fake.arg0_history[i], &i2c);
-    ASSERT_EQ(i2c_read_blocking_fake.arg1_history[i], addrs[i]);
-    ASSERT_EQ(i2c_read_blocking_fake.arg2_history[i], buf);
-    ASSERT_EQ(i2c_read_blocking_fake.arg3_history[i], bufsize[i]);
-    ASSERT_EQ(i2c_read_blocking_fake.arg4_history[i], nostop[i]);
+  // Check wether return value is correct.
+  index = 0;
+  for (auto &&addrs : addrs_array) {
+    for (auto &&bufsize : bufsize_array) {
+      for (auto &&nostop : nostop_array) {
+        // Check the data from test spy. Call order.
+        ASSERT_EQ(fff.call_history[index], (void *)i2c_read_blocking);
+        // Check the data from test spy. DrawRelative Parameters.
+        ASSERT_EQ(i2c_read_blocking_fake.arg0_history[index], &i2c);
+        ASSERT_EQ(i2c_read_blocking_fake.arg1_history[index], addrs);
+        ASSERT_EQ(i2c_read_blocking_fake.arg2_history[index], buf);
+        ASSERT_EQ(i2c_read_blocking_fake.arg3_history[index], bufsize);
+        ASSERT_EQ(i2c_read_blocking_fake.arg4_history[index], nostop);
+        index++;
+      }
+    }
   }
 }
 
-// FAKE_VALUE_FUNC(int, i2c_write_blocking, i2c_inst_t *, uint8_t, const uint8_t
-// *,
-//                size_t, bool);
+// FAKE_VALUE_FUNC(int, i2c_write_blocking, i2c_inst_t *, uint8_t,
+// const uint8_t *,  size_t, bool);
 TEST(PicoWrapper, i2c_write_blocking) {
   PicoWrapper pico;
   i2c_inst_t i2c = 17;
