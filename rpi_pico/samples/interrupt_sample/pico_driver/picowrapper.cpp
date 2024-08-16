@@ -1,11 +1,4 @@
-#ifndef EXPECT_EQ  // If not build for GTest, include followings.
-
 #include "picowrapper.hpp"
-
-#include "hardware/i2c.h"
-#include "pico/stdlib.h"
-
-#endif
 
 void PicoWrapper::sleep_ms(uint32_t ms) { ::sleep_ms(ms); }
 

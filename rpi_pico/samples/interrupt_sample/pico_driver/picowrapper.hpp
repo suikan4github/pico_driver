@@ -1,12 +1,14 @@
 #ifndef __DRIVER_PICOWRAPPER_HPP__
 #define __DRIVER_PICOWRAPPER_HPP__
 
-#ifndef EXPECT_EQ  // If not build for GTest, include followings.
-
+#ifdef GTEST_BUILD  // If not build for GTest, include followings.
+typedef int i2c_inst_t;
+typedef unsigned uint;
+#include <stdint.h>
+#include <stdlib.h>
+#else  // Build for pico
 #include "hardware/i2c.h"
 #include "pico/stdlib.h"
-#else
-typedef int i2c_inst_t;
 #endif
 
 /**
