@@ -1,5 +1,9 @@
 # test_picowrapper TDD
 
+- [x] Create PicoWrapper.sleep_ms() to fail. 
+- [x] Make it success. 
+- [x] Remove the duplication. 
+
 - [x] Create PicoWrapper.i2c_write_blocking() to fail. 
 - [x] Make it success. 
 - [x] Remove the duplication. 

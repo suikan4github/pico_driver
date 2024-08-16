@@ -20,6 +20,13 @@ class PicoWrapper {
  public:
   virtual ~PicoWrapper() {}
   virtual void gpio_init(uint gpio);
+
+  /**
+   * @brief Wait for the given number of milliseconds before returning.
+   * @param ms the number of milliseconds to sleep
+   */
+  virtual void sleep_ms(uint32_t ms);
+
   /**
    * @brief Set a single GPIO direction.
    * @param gpio GPIO number.

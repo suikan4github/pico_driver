@@ -18,6 +18,7 @@ typedef int i2c_inst_t;
 DEFINE_FFF_GLOBALS;
 
 // Create Test Spies
+FAKE_VOID_FUNC(sleep_ms, uint32_t);
 FAKE_VOID_FUNC(gpio_init, uint);
 FAKE_VOID_FUNC(gpio_set_dir, uint, bool);
 FAKE_VOID_FUNC(gpio_put, uint, bool);
@@ -33,6 +34,30 @@ FAKE_VALUE_FUNC(int, i2c_write_blocking, i2c_inst_t *, uint8_t, const uint8_t *,
 #include "../rpi_pico/samples/interrupt_sample/pico_driver/picowrapper.hpp"
 // The cpp file of the library to test.
 #include "../rpi_pico/samples/interrupt_sample/pico_driver/picowrapper.cpp"
+
+TEST(PicoWrapper, sleep_ms) {
+  PicoWrapper pico;
+  uint ms_array[] = {17, 11};
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(sleep_ms);
+
+  for (auto &&ms : ms_array) {
+    pico.sleep_ms(ms);
+  }
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(sleep_ms_fake.call_count, std::size(ms_array));
+
+  int index = 0;
+  for (auto &&ms : ms_array) {
+    // Check the data from test spy. Call order.
+    ASSERT_EQ(fff.call_history[index], (void *)sleep_ms);
+    // Check the data from test spy. DrawRelative Parameters.
+    ASSERT_EQ(sleep_ms_fake.arg0_history[index], ms);
+    index++;
+  }
+}
 
 TEST(PicoWrapper, gpio_init) {
   PicoWrapper pico;

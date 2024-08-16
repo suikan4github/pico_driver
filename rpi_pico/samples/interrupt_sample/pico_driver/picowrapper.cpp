@@ -7,6 +7,8 @@
 
 #endif
 
+void PicoWrapper::sleep_ms(uint32_t ms) { ::sleep_ms(ms); }
+
 void PicoWrapper::gpio_init(uint gpio) { ::gpio_init(gpio); }
 
 void PicoWrapper::gpio_set_dir(uint gpio, bool out) {
