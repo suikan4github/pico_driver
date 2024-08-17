@@ -3,7 +3,7 @@
 /**
  * @file
  */
-
+#include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
 #include "fff.h"

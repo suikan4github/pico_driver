@@ -1,7 +1,7 @@
 #ifndef __DRIVER_PICOWRAPPER_HPP__
 #define __DRIVER_PICOWRAPPER_HPP__
 
-#ifdef GTEST_BUILD  // If not build for GTest, include followings.
+#ifdef GTEST_BUILD  // If  build for GTest, include followings.
 typedef int i2c_inst_t;
 typedef unsigned uint;
 #include <stdint.h>
@@ -95,4 +95,24 @@ class PicoWrapper {
   virtual int i2c_write_blocking(i2c_inst_t *i2c, uint8_t addr,
                                  const uint8_t *src, size_t len, bool nostop);
 };
+
+#ifdef MOCK_METHOD1  // If build for GTest, declare a mock.
+
+class MockPicoWrapper : public PicoWrapper {
+ public:
+  MOCK_METHOD1(sleep_ms, void(uint32_t ms));
+  MOCK_METHOD2(gpio_set_dir, void(uint gpio, bool out));
+  MOCK_METHOD2(gpio_put, void(uint gpio, bool value));
+  MOCK_METHOD1(gpio_get, bool(uint gpio));
+  MOCK_METHOD1(gpio_pull_up, void(uint gpio));
+  MOCK_METHOD2(i2c_init, uint(i2c_inst_t *i2c, uint baudrate));
+  MOCK_METHOD5(i2c_read_blocking, int(i2c_inst_t *i2c, uint8_t addr,
+                                      uint8_t *dst, size_t len, bool nostop));
+  MOCK_METHOD5(i2c_write_blocking,
+               int(i2c_inst_t *i2c, uint8_t addr, const uint8_t *src,
+                   size_t len, bool nostop));
+};
+
+#endif  // GTEST_BUILD
+
 #endif  // __DRIVER_PICOWRAPPER_HPP__
