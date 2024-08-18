@@ -8,6 +8,7 @@ cmake_minimum_required(VERSION 3.13)
 if((${WIN32}) OR (${UNIX})) # Is Target Windows or Unix? 
         add_library(driver  
 #                       picowrapper.cpp
+                        adau1361.cpp
                         i2cmaster.cpp)
                 target_include_directories(driver PUBLIC .)
                 target_compile_definitions(driver PRIVATE GTEST_BUILD=1)
@@ -19,6 +20,7 @@ else()  # Is target RasPi Pico?
         add_library(driver INTERFACE)
                 target_sources(driver INTERFACE 
                                 picowrapper.cpp
+                                adau1361.cpp
                                 i2cmaster.cpp)
                 target_include_directories(driver INTERFACE .)
                 target_link_libraries(driver INTERFACE pico_stdlib)

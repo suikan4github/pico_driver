@@ -8,12 +8,14 @@
 #ifndef MURASAKI_TP_ADAU1361_HPP_
 #define MURASAKI_TP_ADAU1361_HPP_
 
-#include <audiocodecstrategy.hpp>
+#include <i2cmasterinterface.hpp>
 
 #include "i2cmaster.hpp"
 
-class Adau1361 : public AudioCodecStrategy {
+class Adau1361 {
  public:
+  enum CodecChannel { LineInput, AuxInput, LineOutput, HeadphoneOutput };
+
   /**
    * \brief constructor.
    * \param fs Sampling frequency[Hz]
@@ -59,8 +61,7 @@ class Adau1361 : public AudioCodecStrategy {
    *   @li HP out   : LHP/RHP
    */
   Adau1361(unsigned int fs, unsigned int master_clock,
-           murasaki::I2cMasterStrategy *controller,
-           unsigned int i2c_device_addr);
+           I2CMasterInterface& controller, unsigned int i2c_device_addr);
 
   /**
    * \brief Set up the ADAU1361 codec,  and then, start the codec.
@@ -71,8 +72,8 @@ class Adau1361 : public AudioCodecStrategy {
    * funny but ADAU1361 datasheet specifies to do it. The positive in and diff
    * in are killed. All biases are set as "normal".
    *
-   *   The CODEC is configured as master mode. That mean, bclk and WS are given
-   * from ADAU1361 to the micro processor.
+   *   The CODEC is configured as master mode. That mean, bclk and WS are
+   * given from ADAU1361 to the micro processor.
    *
    *   At initial state, ADAU1361 is set as :
    *   @li All input and output channels are set as 0.0dB and muted.
@@ -80,22 +81,21 @@ class Adau1361 : public AudioCodecStrategy {
   virtual void Start(void);
   /**
    * @brief Set channel gain
-   * @param channel CODEC input output channels like line-in, line-out, aux-in,
-   * headphone-out
+   * @param channel CODEC input output channels like line-in, line-out,
+   * aux-in, headphone-out
    * @param left_gain Gain by dB. [6 .. -12],  The gain value outside of the
    * acceptable range will be saturated.
    * @param right_gain Gain by dB. [6 .. -12],  The gain value outside of the
    * acceptable range will be saturated.
    */
-  virtual void SetGain(murasaki::CodecChannel channel, float left_gain,
-                       float right_gain);
+  virtual void SetGain(CodecChannel channel, float left_gain, float right_gain);
 
   /**
    * @brief Mute the specific channel.
    * @param channel Channel to mute on / off
    * @param mute On if true, off if false.
    */
-  virtual void Mute(murasaki::CodecChannel channel, bool mute = true);
+  virtual void Mute(CodecChannel channel, bool mute = true);
 
   /**
    *  Service function for the ADAu1361 board implementer.
@@ -105,14 +105,15 @@ class Adau1361 : public AudioCodecStrategy {
    * ADAU1361 in first two bytes. \param size number of bytes in the command,
    * including the regsiter address. \details Send one complete command to
    * ADAU3161 by I2C. In the typical case, the command length is 3. \li
-   * command[0] : USB of the register address. 0x40. \li command[1] : LSB of the
-   * register address. \li command[2] : Value to right the register.
+   * command[0] : USB of the register address. 0x40. \li command[1] : LSB of
+   * the register address. \li command[2] : Value to right the register.
    */
   virtual void SendCommand(const uint8_t command[], int size);
 
- protected:
+ private:
+  unsigned int fs_;
   const unsigned int master_clock_;
-  murasaki::I2cMasterStrategy *const i2c_;
+  I2CMasterInterface& i2c_;
   const unsigned int device_addr_;
 
   float line_input_left_gain_;
@@ -152,8 +153,8 @@ class Adau1361 : public AudioCodecStrategy {
    * \param mute set true to mute
    * \details
    *   As same as start(), this gain control function uses the single-end
-   * negative input only. Other input signal of the line in like positive signal
-   * or diff signal are killed.
+   * negative input only. Other input signal of the line in like positive
+   * signal or diff signal are killed.
    *
    *   Other input line like aux are not killed. To kill it, user have to mute
    * them explicitly.
@@ -195,8 +196,8 @@ class Adau1361 : public AudioCodecStrategy {
    * -12], The gain value outside of the acceptable range will be saturated.
    * \param mute set true to mute
    * \details
-   *   Other out line like line in are not killed. To kill it, user have to mute
-   * them explicitly.
+   *   Other out line like line in are not killed. To kill it, user have to
+   * mute them explicitly.
    */
   virtual void SetHpOutputGain(float left_gain, float right_gain,
                                bool mute = false);
@@ -206,8 +207,8 @@ class Adau1361 : public AudioCodecStrategy {
    * has only 1 byte data after reg address. \param rows number of the rows in
    * the table. \details Service function for the ADAu1361 board implementer.
    *
-   *   Send a list of command to ADAU1361. All commands has 3 bytes length. That
-   * mean, after two byte register address, only 1 byte data pay load is
+   *   Send a list of command to ADAU1361. All commands has 3 bytes length.
+   * That mean, after two byte register address, only 1 byte data pay load is
    * allowed. Commadns are sent by I2C
    */
   virtual void SendCommandTable(const uint8_t table[][3], int rows);
