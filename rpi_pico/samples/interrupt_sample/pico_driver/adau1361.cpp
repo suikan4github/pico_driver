@@ -23,16 +23,6 @@
 #define CODEC_SYSLOG(fmt, ...) \
   //  MURASAKI_SYSLOG(this, kfaAudioCodec, kseDebug, fmt, ##__VA_ARGS__)
 
-/*
- * Constructor. Initialize the internal variables.
- */
-Adau1361::Adau1361(unsigned int fs, unsigned int master_clock,
-                   I2CMasterInterface &controller, unsigned int i2c_device_addr)
-    : fs_(fs),
-      master_clock_(master_clock),
-      i2c_(controller),
-      device_addr_(i2c_device_addr) {}
-
 // Core clock setting
 static const uint8_t init_core[] = {
     0x40, 0x00, 0x00};  // R0:Clock control. Core clock disabled. PLL off.
@@ -113,534 +103,28 @@ static const uint8_t config_Adau1361[][3] = {
     {0x40, 0x36, 0x03}   // R67: Dejitter control
 };
 
-static const uint8_t lock_status_address[] = {0x40,
-                                              0x02};  // R1 : 6 byte register.
-
-/*
- *  Send single command
- *  table : command table :
- *  size : size of table.
- */
-void Adau1361::SendCommand(const uint8_t table[], int size) {
-  CODEC_SYSLOG("Enter %p, %d", table, size)
-
-  /*
-   * Send the given table to the I2C slave device at device_addr
-   */
-  i2c_.i2c_write_blocking(device_addr_, table, size, false);
-
-  CODEC_SYSLOG("Leave.")
-}
-
-/*
- * Send entire command table
- */
-
-void Adau1361::SendCommandTable(const uint8_t table[][3], int rows) {
-  CODEC_SYSLOG("Enter %p, %d", table, rows)
-
-  /*
-   * Send all rows of command table.
-   */
-  for (int i = 0; i < rows; i++) SendCommand(table[i], 3);
-
-  CODEC_SYSLOG("Leave.")
-}
-
-// loop while the PLL is not locked.
-void Adau1361::WaitPllLock(void) {
-  uint8_t status[6];
-
-  CODEC_SYSLOG("Enter.")
-
-  int count = 0;
-
-  do {
-    // Obtain PLL status
-    // Write the lock status address and then, read the status by
-    // repeated-stard.
-    i2c_.i2c_write_blocking(device_addr_, lock_status_address,
-                            sizeof(lock_status_address),
-                            true);  // true for repeated start.
-    i2c_.i2c_read_blocking(device_addr_, status, sizeof(status), false);
-
-    CODEC_SYSLOG("Status : %02x, %02x, %02x, %02x, %02x, %02x", status[0],
-                 status[1], status[2], status[3], status[4], status[5])
-
-    // Check byte 5 of the control registers.
-    // If bit 1 is 1, locked. If it is 0, unlocked.
-    // if locked, terminate the loop.
-  } while (!(status[5] & (1 << 1)));
-
-  CODEC_SYSLOG("Leave.")
-}
-
-// Configure PLL and start. Then, initiate the core and set the CODEC Fs.
-void Adau1361::ConfigurePll(void) {
-  CODEC_SYSLOG("Enter.")
-
-  if (fs_ == 24000 || fs_ == 32000 || fs_ == 48000 || fs_ == 96000) {
-    // Configure the PLL. Target PLL out is 49.152MHz = 1024xfs
-    // Regarding X, R, M, N, check ADAU1361 Datasheet register R1.
-    // In the following code, the config_pll[0] and config_pll[1] contains
-    // regsiter address of R1.
-
-    switch (master_clock_) {
-      case 8000000: {
-        /**
-         * X : 1
-         * R : 6
-         * M : 125
-         * N : 18
-         * PLL = ( MCLK / X ) * ( R + N/M ) = 49.152MHz
-         */
-        uint8_t config_pll[] = {0x40, 0x02, 0x00, 0x7D, 0x00, 0x12, 0x31, 0x01};
-
-        SendCommand(config_pll, sizeof(config_pll));
-        break;
-      }
-
-      case 12000000: {
-        /**
-         * X : 1
-         * R : 4
-         * M : 125
-         * N : 12
-         * PLL = ( MCLK / X ) * ( R + N/M ) = 49.152MHz
-         */
-        uint8_t config_pll[] = {0x40, 0x02, 0x00, 0x7D, 0x00, 0x0C, 0x21, 0x01};
-
-        SendCommand(config_pll, sizeof(config_pll));
-        break;
-      }
-
-      case 13000000: {
-        /**
-         * X : 1
-         * R : 3
-         * M : 1625
-         * N : 1269
-         * PLL = ( MCLK / X ) * ( R + N/M ) = 49.152MHz
-         */
-        uint8_t config_pll[] = {0x40, 0x02, 0x06, 0x59, 0x04, 0xF5, 0x19, 0x01};
-
-        SendCommand(config_pll, sizeof(config_pll));
-        break;
-      }
-
-      case 14400000: {
-        /**
-         * X : 2
-         * R : 6
-         * M : 75
-         * N : 62
-         * PLL = ( MCLK / X ) * ( R + N/M ) = 49.152MHz
-         */
-        uint8_t config_pll[] = {0x40, 0x02, 0x00, 0x4B, 0x00, 0x3E, 0x33, 0x01};
-
-        SendCommand(config_pll, sizeof(config_pll));
-        break;
-      }
-
-      case 19200000: {
-        /**
-         * X : 2
-         * R : 4
-         * M : 25
-         * N : 3
-         * PLL = ( MCLK / X ) * ( R + N/M ) = 49.152MHz
-         */
-        uint8_t config_pll[] = {0x40, 0x02, 0x00, 0x19, 0x00, 0x03, 0x2B, 0x01};
-
-        SendCommand(config_pll, sizeof(config_pll));
-        break;
-      }
-
-      case 19680000: {
-        /**
-         * X : 2
-         * R : 4
-         * M : 205
-         * N : 204
-         * PLL = ( MCLK / X ) * ( R + N/M ) = 49.152MHz
-         */
-        uint8_t config_pll[] = {0x40, 0x02, 0x00, 0xCD, 0x00, 0xCC, 0x23, 0x01};
-
-        SendCommand(config_pll, sizeof(config_pll));
-        break;
-      }
-
-      case 19800000: {
-        /**
-         * X : 2
-         * R : 4
-         * M : 825
-         * N : 796
-         * PLL = ( MCLK / X ) * ( R + N/M ) = 49.152MHz
-         */
-        uint8_t config_pll[] = {0x40, 0x02, 0x03, 0x39, 0x03, 0x1C, 0x23, 0x01};
-
-        SendCommand(config_pll, sizeof(config_pll));
-        break;
-      }
-
-      case 24000000: {
-        /**
-         * X : 2
-         * R : 4
-         * M : 125
-         * N : 12
-         * PLL = ( MCLK / X ) * ( R + N/M ) = 49.152MHz
-         */
-        uint8_t config_pll[] = {0x40, 0x02, 0x00, 0x7D, 0x00, 0x0C, 0x23, 0x01};
-
-        SendCommand(config_pll, sizeof(config_pll));
-        break;
-      }
-
-      case 26000000: {
-        /**
-         * X : 2
-         * R : 3
-         * M : 1625
-         * N : 1269
-         * PLL = ( MCLK / X ) * ( R + N/M ) = 49.152MHz
-         */
-        uint8_t config_pll[] = {0x40, 0x02, 0x06, 0x59, 0x04, 0xF5, 0x1B, 0x01};
-
-        SendCommand(config_pll, sizeof(config_pll));
-        break;
-      }
-
-      case 27000000: {
-        /**
-         * X : 2
-         * R : 3
-         * M : 1125
-         * N : 721
-         * PLL = ( MCLK / X ) * ( R + N/M ) = 49.152MHz
-         */
-        uint8_t config_pll[] = {0x40, 0x02, 0x04, 0x65, 0x02, 0xD1, 0x1B, 0x01};
-
-        SendCommand(config_pll, sizeof(config_pll));
-        break;
-      }
-
-      case 12288000: {
-        /**
-         * X : 1
-         * R : 4
-         * M : Don't care
-         * N : Don't care
-         * PLL = ( MCLK / X ) * ( R + N/M ) = 49.152MHz
-         */
-        uint8_t config_pll[] = {0x40, 0x02, 0x04, 0x65, 0x02, 0xD1, 0x20, 0x01};
-
-        SendCommand(config_pll, sizeof(config_pll));
-        break;
-      }
-
-      case 24576000: {
-        /**
-         * X : 1
-         * R : 4
-         * M : Don't care
-         * N : Don't care
-         * PLL = ( MCLK / X ) * ( R + N/M ) = 49.152MHz
-         */
-        uint8_t config_pll[] = {0x40, 0x02, 0x04, 0x65, 0x02, 0xD1, 0x10, 0x01};
-
-        SendCommand(config_pll, sizeof(config_pll));
-        break;
-      }
-
-      default:
-        assert(false);
-    }
-
-    // Wait for PLL lock
-    WaitPllLock();
-
-    // Enable core.
-    SendCommand(config_core, sizeof(config_core));
-
-    // Set the converter clock.
-    switch (fs_) {
-      case 24000: {
-        // R17: Converter 0, SRC = 1/2 * core clock
-        const uint8_t config_src[] = {0x40, 0x17, 0x04};
-
-        SendCommand(config_src, sizeof(config_src));
-        break;
-      }
-      case 32000: {
-        // R17: Converter 0, SRC = 2/3 * core clock
-        const uint8_t config_src[] = {0x40, 0x17, 0x05};
-
-        SendCommand(config_src, sizeof(config_src));
-        break;
-      }
-      case 48000: {
-        // R17: Converter 0, SRC = 1 * core clock
-        const uint8_t config_src[] = {0x40, 0x17, 0x00};
-
-        SendCommand(config_src, sizeof(config_src));
-        break;
-      }
-      case 96000: {
-        // R17: Converter 0, SRC = 2 * core clock
-        const uint8_t config_src[] = {0x40, 0x17, 0x06};
-
-        SendCommand(config_src, sizeof(config_src));
-        break;
-      }
-      default:
-        assert(false);
-    }
-
-  } else if (fs_ == 22050 || fs_ == 44100 || fs_ == 88200) {
-    // Configure the PLL. Target PLL out is 45.1584MHz = 1024xfs
-
-    switch (master_clock_) {
-      case 8000000: {
-        /**
-         * X : 1
-         * R : 5
-         * M : 625
-         * N : 403
-         * PLL = ( MCLK / X ) * ( R + N/M ) = 45.1584MHz
-         */
-        uint8_t config_pll[] = {0x40, 0x02, 0x02, 0x71, 0x01, 0x93, 0x29, 0x01};
-
-        SendCommand(config_pll, sizeof(config_pll));
-        break;
-      }
-
-      case 12000000: {
-        /**
-         * X : 1
-         * R : 3
-         * M : 625
-         * N : 477
-         * PLL = ( MCLK / X ) * ( R + N/M ) = 45.1584MHz
-         */
-        uint8_t config_pll[] = {0x40, 0x02, 0x02, 0x71, 0x01, 0xDD, 0x19, 0x01};
-
-        SendCommand(config_pll, sizeof(config_pll));
-        break;
-      }
-
-      case 13000000: {
-        /**
-         * X : 1
-         * R : 3
-         * M : 8125
-         * N : 3849
-         * PLL = ( MCLK / X ) * ( R + N/M ) = 45.1584MHz
-         */
-        uint8_t config_pll[] = {0x40, 0x02, 0x1F, 0xBD, 0x0F, 0x09, 0x19, 0x01};
-
-        SendCommand(config_pll, sizeof(config_pll));
-        break;
-      }
-
-      case 14400000: {
-        /**
-         * X : 2
-         * R : 6
-         * M : 125
-         * N : 34
-         * PLL = ( MCLK / X ) * ( R + N/M ) = 45.1584MHz
-         */
-        uint8_t config_pll[] = {0x40, 0x02, 0x00, 0x7D, 0x00, 0x22, 0x33, 0x01};
-
-        SendCommand(config_pll, sizeof(config_pll));
-        break;
-      }
-
-      case 19200000: {
-        /**
-         * X : 2
-         * R : 4
-         * M : 125
-         * N : 88
-         * PLL = ( MCLK / X ) * ( R + N/M ) = 45.1584MHz
-         */
-        uint8_t config_pll[] = {0x40, 0x02, 0x00, 0x7D, 0x00, 0x58, 0x23, 0x01};
-
-        SendCommand(config_pll, sizeof(config_pll));
-        break;
-      }
-
-      case 19680000: {
-        /**
-         * X : 2
-         * R : 4
-         * M : 1025
-         * N : 604
-         * PLL = ( MCLK / X ) * ( R + N/M ) = 45.1584MHz
-         */
-        uint8_t config_pll[] = {0x40, 0x02, 0x04, 0x01, 0x02, 0x5C, 0x23, 0x01};
-
-        SendCommand(config_pll, sizeof(config_pll));
-        break;
-      }
-
-      case 19800000: {
-        /**
-         * X : 2
-         * R : 4
-         * M : 1375
-         * N : 772
-         * PLL = ( MCLK / X ) * ( R + N/M ) = 45.1584MHz
-         */
-        uint8_t config_pll[] = {0x40, 0x02, 0x05, 0x5F, 0x03, 0x04, 0x23, 0x01};
-
-        SendCommand(config_pll, sizeof(config_pll));
-        break;
-      }
-
-      case 24000000: {
-        /**
-         * X : 2
-         * R : 3
-         * M : 625
-         * N : 477
-         * PLL = ( MCLK / X ) * ( R + N/M ) = 45.1584MHz
-         */
-        uint8_t config_pll[] = {0x40, 0x02, 0x02, 0x71, 0x01, 0xDD, 0x1B, 0x01};
-
-        SendCommand(config_pll, sizeof(config_pll));
-        break;
-      }
-
-      case 26000000: {
-        /**
-         * X : 1
-         * R : 3
-         * M : 8125
-         * N : 3849
-         * PLL = ( MCLK / X ) * ( R + N/M ) = 45.1584MHz
-         */
-        uint8_t config_pll[] = {0x40, 0x02, 0x1F, 0xBD, 0x0F, 0x09, 0x1B, 0x01};
-
-        SendCommand(config_pll, sizeof(config_pll));
-        break;
-      }
-
-      case 27000000: {
-        /**
-         * X : 2
-         * R : 3
-         * M : 1875
-         * N : 647
-         * PLL = ( MCLK / X ) * ( R + N/M ) = 45.1584MHz
-         */
-        uint8_t config_pll[] = {0x40, 0x02, 0x07, 0x53, 0x02, 0x87, 0x1B, 0x01};
-
-        SendCommand(config_pll, sizeof(config_pll));
-        break;
-      }
-
-      case 12288000: {
-        /**
-         * X : 1
-         * R : 3
-         * M : 1000
-         * N : 675
-         * PLL = ( MCLK / X ) * ( R + N/M ) = 45.1584MHz
-         */
-        uint8_t config_pll[] = {0x40, 0x02, 0x03, 0xE8, 0x02, 0xA3, 0x19, 0x01};
-
-        SendCommand(config_pll, sizeof(config_pll));
-        break;
-      }
-
-      case 24576000: {
-        /**
-         * X : 2
-         * R : 3
-         * M : 1000
-         * N : 675
-         * PLL = ( MCLK / X ) * ( R + N/M ) = 45.1584MHz
-         */
-        uint8_t config_pll[] = {0x40, 0x02, 0x03, 0xE8, 0x02, 0xA3, 0x1B, 0x01};
-
-        SendCommand(config_pll, sizeof(config_pll));
-        break;
-      }
-
-      default:
-        assert(false);
-    }
-
-    // Waiting for the PLL lock.
-    WaitPllLock();
-
-    // Enable core.
-    SendCommand(config_core, sizeof(config_core));
-
-    // Set the converter clock.
-    switch (fs_) {
-      case 22050: {
-        // R17: Converter 0, SRC = 1/2 * core clock
-        const uint8_t config_src[] = {0x40, 0x17, 0x04};
-
-        SendCommand(config_src, sizeof(config_src));
-        break;
-      }
-      case 44100: {
-        // R17: Converter 0, SRC = 1 * core clock
-        const uint8_t config_src[] = {0x40, 0x17, 0x00};
-
-        SendCommand(config_src, sizeof(config_src));
-        break;
-      }
-      case 88200: {
-        // R17: Converter 0, SRC = 2 * core clock
-        const uint8_t config_src[] = {0x40, 0x17, 0x06};
-
-        SendCommand(config_src, sizeof(config_src));
-        break;
-      }
-      default:
-        assert(false);
-    }
-  } else {  // if the required Fs is unknown, it is critical error.
-    assert(false);
-  }
-
-  CODEC_SYSLOG("Leave.")
-}
-
 void Adau1361::Start(void) {
   CODEC_SYSLOG("Enter.")
 
   // Check if target device exist.
   // send no payload. Just enquire address.
-  int status;
-  status = i2c_.i2c_write_blocking(device_addr_, lock_status_address, 0, false);
-  if (status == PICO_ERROR_GENERIC) {
-    // If it I2C returns NAK, there is no CODEC device on the specific I2C
-    // address. Report it
-    assert(false);
-  }
+  assert(adau1361_lower_.DoesI2CDeivceExist());
 
   // then, start of configuration as register address order
-  SendCommand(init_core, sizeof(init_core));
+  adau1361_lower_.SendCommand(init_core, sizeof(init_core));
   // And then, stop PLL explicitly.
-  SendCommand(disable_pll, sizeof(disable_pll));
+  adau1361_lower_.SendCommand(disable_pll, sizeof(disable_pll));
   // Now, start PLL again as desired frequency.
-  ConfigurePll();
+  adau1361_lower_.ConfigurePll();
 
   // Set all registers.
-  SendCommandTable(
+  adau1361_lower_.SendCommandTable(
       config_Adau1361,
       sizeof(config_Adau1361) / 3);  // init Adau1361 as default state.
 
   // Set certain signal pass. If it doen't fit to your system, override it by
-  // SendCommand()
-  SendCommandTable(
+  // adau1361_lower_.SendCommand()
+  adau1361_lower_.SendCommandTable(
       config_UMB_ADAU1361A,
       sizeof(config_UMB_ADAU1361A) / 3);  // init UMB-ADAU1361 as default state.
 
@@ -678,27 +162,27 @@ void Adau1361::SetGain(CodecChannel channel, float left_gain,
     case LineInput:
       line_input_left_gain_ = left_gain;
       line_input_right_gain_ = right_gain;
-      SetLineInputGain(line_input_left_gain_, line_input_right_gain_,
-                       line_input_mute_);
+      adau1361_lower_.SetLineInputGain(
+          line_input_left_gain_, line_input_right_gain_, line_input_mute_);
       break;
     case AuxInput:
       aux_input_left_gain_ = left_gain;
       aux_input_right_gain_ = right_gain;
-      SetAuxInputGain(aux_input_left_gain_, aux_input_right_gain_,
-                      aux_input_mute_);
+      adau1361_lower_.SetAuxInputGain(aux_input_left_gain_,
+                                      aux_input_right_gain_, aux_input_mute_);
       break;
     case LineOutput:
       line_output_left_gain_ = left_gain;
       line_output_right_gain_ = right_gain;
-      SetLineOutputGain(line_output_left_gain_, line_output_right_gain_,
-                        line_output_mute_);
+      adau1361_lower_.SetLineOutputGain(
+          line_output_left_gain_, line_output_right_gain_, line_output_mute_);
       break;
 
     case HeadphoneOutput:
       hp_output_left_gain_ = left_gain;
       hp_output_right_gain_ = right_gain;
-      SetHpOutputGain(hp_output_left_gain_, hp_output_right_gain_,
-                      hp_output_mute_);
+      adau1361_lower_.SetHpOutputGain(hp_output_left_gain_,
+                                      hp_output_right_gain_, hp_output_mute_);
       break;
     default:
       assert(false);
@@ -717,307 +201,28 @@ void Adau1361::Mute(CodecChannel channel, bool mute) {
   switch (channel) {
     case LineInput:
       line_input_mute_ = mute;
-      SetLineInputGain(line_input_left_gain_, line_input_right_gain_,
-                       line_input_mute_);
+      adau1361_lower_.SetLineInputGain(
+          line_input_left_gain_, line_input_right_gain_, line_input_mute_);
       break;
     case AuxInput:
       aux_input_mute_ = mute;
-      SetAuxInputGain(aux_input_left_gain_, aux_input_right_gain_,
-                      aux_input_mute_);
+      adau1361_lower_.SetAuxInputGain(aux_input_left_gain_,
+                                      aux_input_right_gain_, aux_input_mute_);
       break;
     case LineOutput:
       line_output_mute_ = mute;
-      SetLineOutputGain(line_output_left_gain_, line_output_right_gain_,
-                        line_output_mute_);
+      adau1361_lower_.SetLineOutputGain(
+          line_output_left_gain_, line_output_right_gain_, line_output_mute_);
       break;
 
     case HeadphoneOutput:
       hp_output_mute_ = mute;
-      SetHpOutputGain(hp_output_left_gain_, hp_output_right_gain_,
-                      hp_output_mute_);
+      adau1361_lower_.SetHpOutputGain(hp_output_left_gain_,
+                                      hp_output_right_gain_, hp_output_mute_);
       break;
     default:
       assert(false);
       break;
   }
-  CODEC_SYSLOG("Leave.")
-}
-
-#define DATA 2 /* data payload of register */
-#define ADDL 1 /* lower address of register */
-#define ADDH 0 /* upper address of register */
-
-#define SET_INPUT_GAIN(x, mute) ((mute) ? 0x00 : (x << 1))
-/*
- * This function assumes the single-end input. The gain control is LINNG.
- * See Figure 31 "Record Signal Path" in the ADAU1361 data sheet
- *
- */
-void Adau1361::SetLineInputGain(float left_gain, float right_gain, bool mute) {
-  uint8_t txbuf[3];
-  uint8_t rxbuf[1];
-  int left, right;
-
-  CODEC_SYSLOG("Enter. %d, %d, %d", (int)left_gain, (int)right_gain, mute)
-
-  // set left gain
-  left = std::max(left, -12);
-  left = std::min(left, 6);
-  left = (left_gain + 15) / 3;  // See table 31 LINNG
-
-  // set right gain
-  right = std::max(right, -12);
-  right = std::min(right, 6);
-  right = (right_gain + 15) / 3;  // See table 31 LINNG
-
-  /*
-   *  *************** Read Modify light the Left Channel Gain
-   * *********************
-   */
-  // R4 : Record Mixer Left
-  txbuf[ADDH] = 0x40;  // Upper address of register
-  txbuf[ADDL] = 0x0a;
-
-  // Obtain the Register
-  i2c_.i2c_write_blocking(device_addr_, txbuf, 2, true);
-  i2c_.i2c_read_blocking(device_addr_, rxbuf, 1, false);
-  CODEC_SYSLOG("R4 : 0x%02x", rxbuf[0]);
-  // Create a register value
-  txbuf[DATA] = (rxbuf[0] & 0xF1) | SET_INPUT_GAIN(left, mute);
-  CODEC_SYSLOG("Transmitting %02x, %02x, %02x", txbuf[0], txbuf[1], txbuf[2]);
-
-  // Set the R4.
-  SendCommand(txbuf, 3);
-
-  /*
-   *  *************** Read Modify light the Right Channel Gain
-   * *********************
-   */
-  // R6 : Record Mixer 2
-  txbuf[ADDH] = 0x40;  // Upper address of register
-  txbuf[ADDL] = 0x0c;
-
-  // Obtain the Register
-  i2c_.i2c_write_blocking(device_addr_, txbuf, 2, true);
-  i2c_.i2c_read_blocking(device_addr_, rxbuf, 1, false);
-
-  CODEC_SYSLOG("R6 : 0x%02x", rxbuf[0]);
-  // Create a register value
-  txbuf[DATA] = (rxbuf[0] & 0xF1) | SET_INPUT_GAIN(right, mute);
-  CODEC_SYSLOG("Transmitting %02x, %02x, %02x", txbuf[0], txbuf[1], txbuf[2]);
-
-  // Set the R4.
-  SendCommand(txbuf, 3);
-
-  CODEC_SYSLOG("Leave.")
-}
-
-#define SET_AUX_GAIN(x, mute) ((mute) ? 0x00 : x)
-
-/*
- * This function assumes the input is the single end. Then,
- */
-void Adau1361::SetAuxInputGain(float left_gain, float right_gain, bool mute) {
-  uint8_t txbuf[3];
-  uint8_t rxbuf[1];
-  int left, right;
-
-  CODEC_SYSLOG("Enter. %d, %d, %d", (int)left_gain, (int)right_gain, mute)
-
-  // set left gain LDBOOST is muted.
-  left = std::max(left, -12);
-  left = std::min(left, 6);
-  left = (left_gain + 15) / 3;  // See table 32 MX1AUGXG
-  // set right gain. LDBOOST is muted.
-  right = std::max(right, -12);
-  right = std::min(right, 6);
-  right = (right_gain + 15) / 3;  // See table 34 MX1AUGXG
-
-  /*
-   *  *************** Read Modify light the Left Channel Gain
-   * *********************
-   */
-  // R5 : Record Mixer Left Control 1
-  txbuf[ADDH] = 0x40;  // Upper address of register
-  txbuf[ADDL] = 0x0b;
-
-  // Obtain the Register
-  i2c_.i2c_write_blocking(device_addr_, txbuf, 2, true);
-  i2c_.i2c_read_blocking(device_addr_, rxbuf, 1, false);
-
-  CODEC_SYSLOG("Obtain R5 : 0x%02x", rxbuf[0]);
-  // Create a register value
-  txbuf[DATA] = (rxbuf[0] & 0xF8) | SET_AUX_GAIN(left, mute);
-  CODEC_SYSLOG("Transmitting %02x, %02x, %02x", txbuf[0], txbuf[1], txbuf[2]);
-  // Set the R5.
-  SendCommand(txbuf, 3);
-
-  /*
-   *  *************** Read Modify light the Right Channel Gain
-   * *********************
-   */
-  // R7 : Record Mixer Right Control 1
-  txbuf[ADDH] = 0x40;  // Upper address of register
-  txbuf[ADDL] = 0x0d;
-
-  // Obtain the Register
-  i2c_.i2c_write_blocking(device_addr_, txbuf, 2, true);
-  i2c_.i2c_read_blocking(device_addr_, rxbuf, 1, false);
-
-  CODEC_SYSLOG("Obtain R7 : 0x%02x", rxbuf[0]);
-  // Create a register value
-  txbuf[DATA] = (rxbuf[0] & 0xF8) | SET_AUX_GAIN(left, mute);
-  CODEC_SYSLOG("Transmitting %02x, %02x, %02x", txbuf[0], txbuf[1], txbuf[2]);
-  // Set the R7.
-  SendCommand(txbuf, 3);
-
-  CODEC_SYSLOG("Leave.")
-}
-
-#define SET_LO_GAIN(x, unmute, headphone) \
-  ((x << 2) | (unmute << 1) | (headphone))
-
-// Read modify right the R31 and R32
-void Adau1361::SetLineOutputGain(float left_gain, float right_gain, bool mute) {
-  uint8_t txbuf[3];
-  uint8_t rxbuf[1];
-  int left, right;
-
-  CODEC_SYSLOG("Enter. %d, %d, %d", (int)left_gain, (int)right_gain, mute)
-
-  // set 0 if mute, set 1 if unmute;
-  int unmute_flag = mute ? 0 : 1;
-
-  // Calc left gain setting.
-  // LOUTVOL[5:0] = 0  ; -57dB
-  // LOUTVOL[5:0] = 63 ; 6dB
-  left = left_gain + 57;
-  left = std::max(left, 0);
-  left = std::min(left, 63);
-
-  // Calc left gain setting.
-  // ROUTVOL[5:0] = 0  ; -57dB
-  // ROUTVOL[5:0] = 63 ; 6dB
-  right = right_gain + 57;
-  right = std::max(right, 0);
-  right = std::min(right, 63);
-
-  /*
-   *  *************** Read Modify light the Left Channel Gain
-   * *********************
-   */
-  txbuf[ADDH] = 0x40;  // Upper address of register
-  txbuf[ADDL] = 0x25;  // R31: LOUTVOL
-
-  // Obtain the R31
-  i2c_.i2c_write_blocking(device_addr_, txbuf, 2, true);
-  i2c_.i2c_read_blocking(device_addr_, rxbuf, 1, false);
-
-  CODEC_SYSLOG("R31 : 0x%02x", rxbuf[0]);
-
-  // Set line out of Left
-  txbuf[DATA] = SET_LO_GAIN(left,          /* GAIN */
-                            unmute_flag,   /* UNMUTE */
-                            rxbuf[0] & 1); /* LOMODE of R31*/
-  CODEC_SYSLOG("Transmitting %02x, %02x, %02x", txbuf[0], txbuf[1], txbuf[2]);
-  // Set LOUTVOL : R31
-  SendCommand(txbuf, 3);
-
-  /*
-   *  *************** Read Modify light the Right Channel Gain
-   * *********************
-   */
-  txbuf[ADDH] = 0x40;  // Upper address of register
-  txbuf[ADDL] = 0x26;  // R32: ROUTVOL
-
-  // Obtain the R32
-  i2c_.i2c_write_blocking(device_addr_, txbuf, 2, true);
-  i2c_.i2c_read_blocking(device_addr_, rxbuf, 1, false);
-
-  CODEC_SYSLOG("R32 : 0x%02x", rxbuf[0]);
-
-  txbuf[DATA] = SET_LO_GAIN(right,         /* GAIN */
-                            unmute_flag,   /* UNMUTE */
-                            rxbuf[0] & 1); /* ROMODE of R32 */
-  CODEC_SYSLOG("Transmitting %02x, %02x, %02x", txbuf[0], txbuf[1], txbuf[2]);
-  // Set ROUTVOL : R32
-  SendCommand(txbuf, 3);
-
-  CODEC_SYSLOG("Leave.")
-}
-
-#define SET_HP_GAIN(x, unmute, headphone) \
-  ((x << 2) | (unmute << 1) | (headphone))
-
-// Read modify right the R29 and R30
-
-void Adau1361::SetHpOutputGain(float left_gain, float right_gain, bool mute) {
-  uint8_t txbuf[3];
-  uint8_t rxbuf[1];
-  int left, right;
-
-  CODEC_SYSLOG("Enter. %d, %d, %d", (int)left_gain, (int)right_gain, mute)
-
-  // set 0 if mute, set 1 if unmute;
-  int unmute_flag = mute ? 0 : 1;
-
-  // Calc left gain setting.
-  // LHPVOL[5:0] = 0  ; -57dB
-  // LHPVOL[5:0] = 63 ; 6dB
-  left = left_gain + 57;
-  left = std::max(left, 0);
-  left = std::min(left, 63);
-
-  // Calc left gain setting.
-  // RHPVOL[5:0] = 0  ; -57dB
-  // RHPVOL[5:0] = 63 ; 6dB
-  right = right_gain + 57;
-  right = std::max(right, 0);
-  right = std::min(right, 63);
-
-  /*
-   *  *************** Read Modify light the Left Channel Gain
-   * *********************
-   */
-  // R29: LHPVOL
-  txbuf[ADDH] = 0x40;  // Upper address of register
-  txbuf[ADDL] = 0x23;
-
-  // Obtain R29
-  i2c_.i2c_write_blocking(device_addr_, txbuf, 2, true);
-  i2c_.i2c_read_blocking(device_addr_, rxbuf, 1, false);
-
-  CODEC_SYSLOG("R29 : 0x%02x", rxbuf[0]);
-
-  // HP left out control data
-  txbuf[DATA] = SET_HP_GAIN(left,          /* GAIN */
-                            unmute_flag,   /* UNMUTE */
-                            rxbuf[0] & 1); /* HPEN of R29*/
-  CODEC_SYSLOG("Transmitting %02x, %02x, %02x", txbuf[0], txbuf[1], txbuf[2]);
-  // SET LHPVOL : R29
-  SendCommand(txbuf, 3);
-
-  /*
-   *  *************** Read Modify light the Left Channel Gain
-   * *********************
-   */
-  // R30 : RHPVOL address
-  txbuf[ADDH] = 0x40;  // Upper address of register
-  txbuf[ADDL] = 0x24;
-
-  // Obtain R30
-  i2c_.i2c_write_blocking(device_addr_, txbuf, 2, true);
-  i2c_.i2c_read_blocking(device_addr_, rxbuf, 1, false);
-
-  CODEC_SYSLOG("R30 : 0x%02x", rxbuf[0]);
-
-  // HP right out control data
-  txbuf[DATA] = SET_HP_GAIN(right,         /* GAIN */
-                            unmute_flag,   /* UNMUTE */
-                            rxbuf[0] & 1); /* HPMODE of R30*/
-  CODEC_SYSLOG("Transmitting %02x, %02x, %02x", txbuf[0], txbuf[1], txbuf[2]);
-  // SET RHPVOL : R30
-  SendCommand(txbuf, 3);
-
   CODEC_SYSLOG("Leave.")
 }
