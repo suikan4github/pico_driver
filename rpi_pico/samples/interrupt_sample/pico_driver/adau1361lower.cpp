@@ -42,7 +42,7 @@ void Adau1361Lower::WaitPllLock(void) {
 
   int count = 0;
 
-  do {
+  while (true) {
     // Obtain PLL status
     // Write the lock status address and then, read the status by
     // repeated-stard.
@@ -54,7 +54,8 @@ void Adau1361Lower::WaitPllLock(void) {
     // Check byte 5 of the control registers.
     // If bit 1 is 1, locked. If it is 0, unlocked.
     // if locked, terminate the loop.
-  } while (!(status[5] & (1 << 1)));
+    if (status[5] & (1 << 1)) break;
+  }
 }
 
 // Set core source to PLL

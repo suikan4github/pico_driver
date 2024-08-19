@@ -1,8 +1,8 @@
 #test_i2cmaster TDD
 
 - [x] Create Adau1361Lower.WaitPll()to fail.
-- [] Make it success.-
-- [] Remove the duplication.
+- [x] Make it success.-
+- [s] Remove the duplication.
 
 - [x] Create Adau1361Lower.DoesI2CDeviceExist()to fail.
 - [x] Make it success.-

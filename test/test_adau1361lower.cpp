@@ -69,22 +69,77 @@ TEST_F(Adau1361LowerTest, DoesI2CDeviceExist) {
 }
 
 TEST_F(Adau1361LowerTest, WaitPllLock) {
-  uint8_t cmd[7];
+  const uint8_t lock_status_address[] = {0x40, 0x02};  // R1 : 6 byte register.
+  uint8_t status_notlocked[6] = {0, 0, 0, 0, 0, 0};
+  uint8_t status_locked[6] = {0, 0, 0, 0, 0, 2};
 
-  using ::testing::_;
-  using ::testing::Return;
-
+  using ::testing::Args;
+  using ::testing::DoAll;
+  using ::testing::ElementsAreArray;
   using ::testing::InSequence;
+  using ::testing::NotNull;
+  using ::testing::Return;
+  using ::testing::SetArrayArgument;
+
   {
     InSequence dummy;
 
+    // Now we test unlocked status. Funciton must not return.
+
     // nostop parameter must be true. That mean repeated start of I2C.
     // The write command give only 2 byte length register address.
-    EXPECT_CALL(i2c_, i2c_write_blocking(device_address_, _, 2, true));
-    // nostop parameter must be true. That mean, stop condition of I2C.
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(device_address_,  // Arg 0 : I2C Address.
+                                   NotNull(),  // Arg 1 : Data buffer address.
+                                   2,  // Arg 2 : Data buffer length to send.
+                                   true))  // Arg 3 : true to repeated start.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(lock_status_address)))
+        .WillOnce(Return(2));  // 2 is the transfered data length
+
+    // nostop parameter must be false. That mean, stop condition of I2C.
     // This will check the status register of ADAU1361A. These status
     // registers must be read 6 byte at once.
-    EXPECT_CALL(i2c_, i2c_read_blocking(device_address_, _, 6, false));
+    EXPECT_CALL(i2c_,
+                i2c_read_blocking(device_address_,  // Arg 0 : I2C Address
+                                  NotNull(),  // Arg 1 : Data buffer address
+                                  6,          // Arg 2 : Data buffer length
+                                  false))     // Arg 3 : fasle to stop I2C.
+        .WillOnce(DoAll(
+            SetArrayArgument<1>  // parameter position of the array : 0 origin.
+            (status_notlocked,   // pointer to the beginning of the data.
+             status_notlocked + 6),  // pointer to the end of the data + 1.
+            Return(3)));             // 6 is the transfered data length.
+
+    // Now, we test the locked status. The funciton must return.
+
+    // nostop parameter must be true. That mean repeated start of I2C.
+    // The write command give only 2 byte length register address.
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(device_address_,  // Arg 0 : I2C Address.
+                                   NotNull(),  // Arg 1 : Data buffer address.
+                                   2,  // Arg 2 : Data buffer length to send.
+                                   true))  // Arg 3 : true to repeated start.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(lock_status_address)))
+        .WillOnce(Return(2));  // 2 is the transfered data length
+
+    // nostop parameter must be false. That mean, stop condition of I2C.
+    // This will check the status register of ADAU1361A. These status
+    // registers must be read 6 byte at once.
+    EXPECT_CALL(i2c_,
+                i2c_read_blocking(device_address_,  // Arg 0 : I2C Address
+                                  NotNull(),  // Arg 1 : Data buffer address
+                                  6,          // Arg 2 : Data buffer length
+                                  false))     // Arg 3 : fasle to stop I2C.
+        .WillOnce(DoAll(
+            SetArrayArgument<1>   // parameter position of the array : 0 origin.
+            (status_locked,       // pointer to the beginning of the data.
+             status_locked + 6),  // pointer to the end of the data + 1.
+            Return(3)));          // 6 is the transfered data length.
   }
+
   codec_lower_->WaitPllLock();
 }
