@@ -12,12 +12,8 @@
 
 class Adau1361Lower {
  public:
-  Adau1361Lower(unsigned int fs, unsigned int master_clock,
-                I2CMasterInterface& controller, unsigned int i2c_device_addr)
-      : fs_(fs),
-        master_clock_(master_clock),
-        i2c_(controller),
-        device_addr_(i2c_device_addr) {};
+  Adau1361Lower(I2CMasterInterface& controller, unsigned int i2c_device_addr)
+      : i2c_(controller), device_addr_(i2c_device_addr) {};
   Adau1361Lower() = delete;
   virtual ~Adau1361Lower() {}
   /**
@@ -48,7 +44,17 @@ class Adau1361Lower {
    * \brief Check whether I2C device exist or not.
    * \return true if device exist. false if not exist.
    */
-  virtual bool DoesI2CDeivceExist();
+  virtual bool IsI2CDeivceExisting();
+
+  /**
+   * @brief Reset the core for fresh procedure.
+   */
+  virtual void InitializeCore();
+
+  /**
+   * @brief stop PLL to re-proguram.
+   */
+  virtual void DisablePLL();
 
   /**
    * \brief wait until PLL locks.
@@ -62,11 +68,48 @@ class Adau1361Lower {
 
   /**
    * @brief Initialize the PLL with given fs and master clock.
+   * @param fs Sampling Frequency [Hz].
+   * @param master_clock Master Clock innput to the CODEC [Hz].
    * @details
    * At first, initialize the PLL based on the given fst and master clock.
    * Then, setup the Converter sampling rate.
    */
-  virtual void ConfigurePll(void);
+  virtual void ConfigurePll(unsigned int fs, unsigned int master_clock);
+
+  /**
+   * @brief Initialize the SRC with given fs clock.
+   * @details
+   * This routine must be called after :
+   * @li ConfigurePll()
+   * @li WaitPllLock()
+   * @li InitializeCore.
+   *
+   * And then
+   *
+   * @li ConfigurePll()
+   */
+  virtual void ConfigureSRC(unsigned int fs);
+
+  /**
+   * @brief Initialize the core part of the ADAU1361A.
+   */
+  virtual void EnableCore();
+
+  /**
+   * @brief Initialize registers for the chip operation.
+   * @details This is is board independent initialization.
+   *
+   * Need to call before InitializeSignalPath()
+   */
+  virtual void InitializeRegisters();
+
+  /**
+   * @brief Initialize registers for the signal routing.
+   * @details THis is baord dependent initialization.
+   *
+   * Need to call after InitializeRegisters.
+   */
+  virtual void ConfigureSignalPath();
 
   /**
    * \brief Set the line input gain and enable the relevant mixer.
@@ -125,8 +168,6 @@ class Adau1361Lower {
                                bool mute = false);
 
  private:
-  unsigned int fs_;
-  const unsigned int master_clock_;
   I2CMasterInterface& i2c_;
   const unsigned int device_addr_;
 };

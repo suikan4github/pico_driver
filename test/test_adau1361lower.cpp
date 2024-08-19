@@ -7,14 +7,10 @@
 class Adau1361LowerTest : public ::testing::Test {
  protected:
   virtual void SetUp() {
-    fs_ = 48000;               // Hz
-    master_clock_ = 12000000;  // Hz
-    device_address_ = 31;      // 7bit I2C address
-    codec_lower_ = new Adau1361Lower(fs_, master_clock_, i2c_, device_address_);
+    device_address_ = 31;  // 7bit I2C address
+    codec_lower_ = new Adau1361Lower(i2c_, device_address_);
   }
 
-  unsigned int fs_;              // Hz
-  unsigned int master_clock_;    // Hz
   unsigned int device_address_;  // 7bit I2C address
   MockI2CMaster i2c_;
   Adau1361Lower *codec_lower_;
@@ -48,7 +44,7 @@ TEST_F(Adau1361LowerTest, SendCommandTable) {
   codec_lower_->SendCommandTable(cmd, sizeof(cmd) / 3);
 }
 
-TEST_F(Adau1361LowerTest, DoesI2CDeviceExist) {
+TEST_F(Adau1361LowerTest, IsI2CDeviceExist) {
   uint8_t cmd[7];
 
   using ::testing::_;
@@ -64,8 +60,8 @@ TEST_F(Adau1361LowerTest, DoesI2CDeviceExist) {
     EXPECT_CALL(i2c_, i2c_write_blocking(device_address_, _, 0, false))
         .WillOnce(Return(3));
   }
-  EXPECT_FALSE(codec_lower_->DoesI2CDeivceExist());
-  EXPECT_TRUE(codec_lower_->DoesI2CDeivceExist());
+  EXPECT_FALSE(codec_lower_->IsI2CDeivceExisting());
+  EXPECT_TRUE(codec_lower_->IsI2CDeivceExisting());
 }
 
 TEST_F(Adau1361LowerTest, WaitPllLock) {
@@ -142,4 +138,49 @@ TEST_F(Adau1361LowerTest, WaitPllLock) {
   }
 
   codec_lower_->WaitPllLock();
+}
+
+TEST_F(Adau1361LowerTest, InititializeCore) {
+  // Core clock setting
+  const uint8_t init_core[] = {
+      0x40, 0x00, 0x00};  // R0:Clock control. Core clock disabled. PLL off.
+
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::NotNull;
+
+  // Now we test initialization of core.
+
+  EXPECT_CALL(i2c_,
+              i2c_write_blocking(device_address_,  // Arg 0 : I2C Address.
+                                 NotNull(),  // Arg 1 : Data buffer address.
+                                 3,       // Arg 2 : Data buffer length to send.
+                                 false))  // Arg 3 : false to stop.
+      .With(Args<1,  // parameter position of the array : 0 origin.
+                 2>  // parameter position of the size : 0 origin.
+            (ElementsAreArray(init_core)));
+  codec_lower_->InitializeCore();
+}
+
+TEST_F(Adau1361LowerTest, DisablePLL) {
+  // PLL Disable.
+  // R1 : Must write 6 byte at once.
+  const uint8_t disable_pll[] = {0x40, 0x02, 0x00, 0xFD,
+                                 0x00, 0x0C, 0x10, 0x00};
+
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::NotNull;
+
+  // Now we test initialization of core.
+
+  EXPECT_CALL(i2c_,
+              i2c_write_blocking(device_address_,  // Arg 0 : I2C Address.
+                                 NotNull(),  // Arg 1 : Data buffer address.
+                                 8,       // Arg 2 : Data buffer length to send.
+                                 false))  // Arg 3 : false to stop.
+      .With(Args<1,  // parameter position of the array : 0 origin.
+                 2>  // parameter position of the size : 0 origin.
+            (ElementsAreArray(disable_pll)));
+  codec_lower_->DisablePLL();
 }

@@ -60,8 +60,9 @@ class Adau1361 {
    *   @li LINE out : LOUTP/ROUTP single ended
    *   @li HP out   : LHP/RHP
    */
-  explicit Adau1361(Adau1361Lower& adau1361_lower)
-      : adau1361_lower_(adau1361_lower) {}
+  explicit Adau1361(unsigned int fs, unsigned int master_clock,
+                    Adau1361Lower& adau1361_lower)
+      : fs_(fs), master_clock_(master_clock), adau1361_lower_(adau1361_lower) {}
   Adau1361() = delete;
   /**
    * \brief Set up the ADAU1361 codec,  and then, start the codec.
@@ -98,6 +99,8 @@ class Adau1361 {
   virtual void Mute(CodecChannel channel, bool mute = true);
 
  private:
+  const unsigned int fs_;
+  const unsigned int master_clock_;
   Adau1361Lower& adau1361_lower_;
 
   float line_input_left_gain_;

@@ -4,6 +4,82 @@
 
 #include <algorithm>
 
+// Core clock setting
+static const uint8_t init_core[] = {
+    0x40, 0x00, 0x00};  // R0:Clock control. Core clock disabled. PLL off.
+
+// PLL Disable.
+// R1 : Must write 6 byte at once.
+static const uint8_t disable_pll[] = {0x40, 0x02, 0x00, 0xFD,
+                                      0x00, 0x0C, 0x10, 0x00};
+
+// Set non clock registers as default
+static const uint8_t config_Adau1361[][3] = {
+    // R0,1, are set by init_freq_xxx table
+    {0x40, 0x08, 0x00},  // R2: Digital Mic
+    {0x40, 0x09, 0x00},  // R3: Rec Power Management
+    {0x40, 0x0a, 0x00},  // R4: Rec Mixer Left 0
+    {0x40, 0x0b, 0x00},  // R5: Rec Mixer Left 1
+    {0x40, 0x0c, 0x00},  // R6: Rec Mixer Right 0
+    {0x40, 0x0d, 0x00},  // R7: Rec Mixer Right 1
+    {0x40, 0x0e, 0x00},  // R8: Left diff input vol
+    {0x40, 0x0f, 0x00},  // R9: Right diff input vol
+    {0x40, 0x10, 0x00},  // R10: Rec mic bias
+    {0x40, 0x11, 0x00},  // R11: ALC0
+    {0x40, 0x12, 0x00},  // R12: ALC1
+    {0x40, 0x13, 0x00},  // R13: ALC2
+    {0x40, 0x14, 0x00},  // R14: ALC3
+    {0x40, 0x15, 0x00},  // R15: Serial Port 0
+    {0x40, 0x16, 0x00},  // R16: Serial Port 1
+    // R17 is set by config_src_xx table
+    {0x40, 0x18, 0x00},  // R18: Converter 1
+    {0x40, 0x19, 0x10},  // R19:ADC Control.
+    {0x40, 0x1a, 0x00},  // R20: Left digital volume
+    {0x40, 0x1b, 0x00},  // R21: Rignt digital volume
+    {0x40, 0x1c, 0x00},  // R22: Play Mixer Left 0
+    {0x40, 0x1d, 0x00},  // R23: Play Mixer Left 1
+    {0x40, 0x1e, 0x00},  // R24: Play Mixer Right 0
+    {0x40, 0x1f, 0x00},  // R25: Play Mixer Right 1
+    {0x40, 0x20, 0x00},  // R26: Play L/R mixer left
+    {0x40, 0x21, 0x00},  // R27: Play L/R mixer right
+    {0x40, 0x22, 0x00},  // R28: Play L/R mixer monot
+    {0x40, 0x23, 0x03},  // R29: Play HP Left vol : Mute, Enable
+    {0x40, 0x24, 0x03},  // R30: Play HP Right vol : Mute, HP Mode
+    {0x40, 0x25, 0x02},  // R31: Line output Left vol : Mute, Line out mode
+    {0x40, 0x26, 0x02},  // R32: Line output Right vol : Mute, Line out mode
+    {0x40, 0x27, 0x02},  // R33: Play Mono output
+    {0x40, 0x28, 0x00},  // R34: Pop surpress
+    {0x40, 0x29, 0x00},  // R35: Play Power Management
+    {0x40, 0x2a, 0x00},  // R36: DAC Control 0
+    {0x40, 0x2b, 0x00},  // R37: DAC Control 1
+    {0x40, 0x2c, 0x00},  // R38: DAC control 2
+    {0x40, 0x2d, 0xaa},  // R39: Seial port Pad
+    {0x40, 0x2f, 0xaa},  // R40: Control Pad 1
+    {0x40, 0x30, 0x00},  // R41: Control Pad 2
+    {0x40, 0x31, 0x08},  // R42: Jack detect
+    {0x40, 0x36, 0x03}   // R67: Dejitter control
+};
+
+// Set UMB_ADAU1361A. No mono output, No cross channel Mix, No analog path
+// through.
+static const uint8_t config_UMB_ADAU1361A[][3] = {
+    // Configuration for UMB-ADAU1361-A http://dsps.shop-pro.jp/?pid=82798273
+    {0x40, 0x0a, 0x0B},  // R4: Rec Mixer Left 0,  Mixer enable, LINNG 0dB
+    {0x40, 0x0c, 0x0B},  // R6: Rec Mixer Right 0, Mixer enable, RINNG 0dB
+    {0x40, 0x15,
+     0x01},  // R15:Serial Port control, Set code as Master mode I2S.
+    {0x40, 0x19,
+     0x63},  // R19:ADC Control. Enable ADC, Both Cannel ADC on, HPF on
+    {0x40, 0x29,
+     0x03},  // R35:Left Right Play back enable. Play back power Management
+    {0x40, 0x2a, 0x03},  // R36:DAC Control 0. Enable DAC. Both channels on.
+    {0x40, 0x1c, 0x21},  // R22:MIXER 3, Left DAC Mixer (set L DAC to L Mixer )
+    {0x40, 0x1e, 0x41},  // R24:MIXER 4, Right DAC Mixer (set R DAC to R Mixer )
+    {0x40, 0x20, 0x03},  // R26:MIXER 5, Left out mixer. L out MIX5G3 and enable
+    {0x40, 0x21,
+     0x09},  // R27:MIXER 6, Right out mixer. R out MIX6G4 and enable.
+};
+
 /*
  *  Send single command
  *  table : command table :
@@ -30,10 +106,18 @@ void Adau1361Lower::SendCommandTable(const uint8_t table[][3], int rows) {
 static const uint8_t lock_status_address[] = {0x40,
                                               0x02};  // R1 : 6 byte register.
 
-bool Adau1361Lower::DoesI2CDeivceExist() {
+bool Adau1361Lower::IsI2CDeivceExisting() {
   int status;
   status = i2c_.i2c_write_blocking(device_addr_, lock_status_address, 0, false);
   return (status != PICO_ERROR_GENERIC);
+}
+
+void Adau1361Lower::InitializeCore() {
+  SendCommand(init_core, sizeof(init_core));
+}
+
+void Adau1361Lower::DisablePLL() {
+  SendCommand(disable_pll, sizeof(disable_pll));
 }
 
 // loop while the PLL is not locked.
@@ -63,14 +147,14 @@ static const uint8_t config_core[] = {
     0x40, 0x00, 0xff};  // R0:Clock control. Core clock enabled. Set source PLL.
 
 // Configure PLL and start. Then, initiate the core and set the CODEC Fs.
-void Adau1361Lower::ConfigurePll(void) {
-  if (fs_ == 24000 || fs_ == 32000 || fs_ == 48000 || fs_ == 96000) {
+void Adau1361Lower::ConfigurePll(unsigned int fs, unsigned int master_clock) {
+  if (fs == 24000 || fs == 32000 || fs == 48000 || fs == 96000) {
     // Configure the PLL. Target PLL out is 49.152MHz = 1024xfs
     // Regarding X, R, M, N, check ADAU1361 Datasheet register R1.
     // In the following code, the config_pll[0] and config_pll[1] contains
     // regsiter address of R1.
 
-    switch (master_clock_) {
+    switch (master_clock) {
       case 8000000: {
         /**
          * X : 1
@@ -243,10 +327,10 @@ void Adau1361Lower::ConfigurePll(void) {
         assert(false);
     }
 
-  } else if (fs_ == 22050 || fs_ == 44100 || fs_ == 88200) {
+  } else if (fs == 22050 || fs == 44100 || fs == 88200) {
     // Configure the PLL. Target PLL out is 45.1584MHz = 1024xfs
 
-    switch (master_clock_) {
+    switch (master_clock) {
       case 8000000: {
         /**
          * X : 1
@@ -423,14 +507,34 @@ void Adau1361Lower::ConfigurePll(void) {
     assert(false);
   }
 
-  // Waiting for the PLL lock.
-  WaitPllLock();
+}  // ConfigurePlll
 
-  // Enable core.
+// Enable core.
+void Adau1361Lower::EnableCore() {
   SendCommand(config_core, sizeof(config_core));
+}
 
-  // Set the converter clock.
-  switch (fs_) {
+void Adau1361Lower::InitializeRegisters() {
+  // Set all registers.
+  SendCommandTable(
+      config_Adau1361,
+      sizeof(config_Adau1361) / 3);  // init Adau1361 as default state.
+}
+
+void Adau1361Lower::ConfigureSignalPath() {
+  // Set certain signal pass. If it
+  // doen't fit to your system,
+  // override it by
+  // SendCommand()
+
+  SendCommandTable(
+      config_UMB_ADAU1361A,
+      sizeof(config_UMB_ADAU1361A) / 3);  // init UMB-ADAU1361 as default state.
+}
+
+// Set the converter clock.
+void Adau1361Lower::ConfigureSRC(unsigned int fs) {
+  switch (fs) {
     case 22050:
     case 24000: {
       // R17: Converter 0, SRC = 1/2 * core clock
@@ -465,8 +569,7 @@ void Adau1361Lower::ConfigurePll(void) {
     default:
       assert(false);
   }
-
-}  // ConfigurePlll
+}
 
 #define DATA 2 /* data payload of register */
 #define ADDL 1 /* lower address of register */
