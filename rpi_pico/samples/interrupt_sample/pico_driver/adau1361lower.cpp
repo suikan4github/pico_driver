@@ -148,6 +148,9 @@ static const uint8_t config_core[] = {
 
 // Configure PLL and start. Then, initiate the core and set the CODEC Fs.
 void Adau1361Lower::ConfigurePll(unsigned int fs, unsigned int master_clock) {
+  assert(fs == 24000 || fs == 32000 || fs == 48000 || fs == 96000 ||
+         fs == 22050 || fs == 44100 || fs == 88200);
+
   if (fs == 24000 || fs == 32000 || fs == 48000 || fs == 96000) {
     // Configure the PLL. Target PLL out is 49.152MHz = 1024xfs
     // Regarding X, R, M, N, check ADAU1361 Datasheet register R1.
@@ -312,7 +315,7 @@ void Adau1361Lower::ConfigurePll(unsigned int fs, unsigned int master_clock) {
       case 24576000: {
         /**
          * X : 1
-         * R : 4
+         * R : 2
          * M : Don't care
          * N : Don't care
          * PLL = ( MCLK / X ) * ( R + N/M ) = 49.152MHz

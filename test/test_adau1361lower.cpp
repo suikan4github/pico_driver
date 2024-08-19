@@ -184,3 +184,706 @@ TEST_F(Adau1361LowerTest, DisablePLL) {
             (ElementsAreArray(disable_pll)));
   codec_lower_->DisablePLL();
 }
+
+// #include <iostream>
+static float pll_out(unsigned int mclock, const uint8_t config[]) {
+  float x = ((config[6] >> 1) & 0x03) + 1;
+  float r = (config[6] >> 3) & 0x0F;
+  if (0 == r) r = 8;
+  float n = config[4] * 256 + config[5];
+  float m = config[2] * 256 + config[3];
+  bool fractional = (config[6] & 1) != 0;
+
+  // std::cout << x << "," << r << "," << n << "," << m << std::endl;
+  if (fractional)
+    return mclock * (1 / x) * (r + n / m);
+  else
+    return mclock * (1 / x) * r;
+}
+// ------------------------------------------------------------
+//
+//                               48kHz
+//
+// ------------------------------------------------------------
+
+TEST_F(Adau1361LowerTest, ConfigurePll_48_08000) {
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::NotNull;
+  const unsigned int target_pll_freq_48 = 49152000;  // Hz. See data sheet.
+  const float acceptable_error = 5;  // Hz. Error of the PLL out.
+
+  // Test 8MHz master clock for Fs 48kHz series.
+  {
+    const unsigned int mclock = 8000000;
+    const unsigned int fs = 24000;
+    uint8_t config_pll[] = {0x40, 0x02, 0x00, 0x7D, 0x00, 0x12, 0x31, 0x01};
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,     // Arg 0 : I2C Address.
+                    NotNull(),           // Arg 1 : Data buffer address.
+                    sizeof(config_pll),  // Arg 2 : Data buffer length to send.
+                    false))              // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(config_pll)));
+    // error must be less than 0.5Hz.
+    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
+                acceptable_error);
+    codec_lower_->ConfigurePll(fs, mclock);
+  }
+}  // ConfigurePll_48_08000
+
+TEST_F(Adau1361LowerTest, ConfigurePll_48_12000) {
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::NotNull;
+  const unsigned int target_pll_freq_48 = 49152000;  // Hz. See data sheet.
+  const float acceptable_error = 5;  // Hz. Error of the PLL out.
+
+  // Test 12MHz master clock for Fs 48kHz series.
+  {
+    const unsigned int mclock = 12000000;
+    const unsigned int fs = 48000;
+    uint8_t config_pll[] = {0x40, 0x02, 0x00, 0x7D, 0x00, 0x0C, 0x21, 0x01};
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,     // Arg 0 : I2C Address.
+                    NotNull(),           // Arg 1 : Data buffer address.
+                    sizeof(config_pll),  // Arg 2 : Data buffer length to send.
+                    false))              // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(config_pll)));
+    // error must be less than 0.5Hz.
+    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
+                acceptable_error);
+    codec_lower_->ConfigurePll(fs, mclock);
+  }
+}  // ConfigurePll_48_12000
+
+TEST_F(Adau1361LowerTest, ConfigurePll_48_13000) {
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::NotNull;
+  const unsigned int target_pll_freq_48 = 49152000;  // Hz. See data sheet.
+  const float acceptable_error = 5;  // Hz. Error of the PLL out.
+
+  // Test 13MHz master clock for Fs 48kHz series.
+  {
+    const unsigned int mclock = 13000000;
+    const unsigned int fs = 32000;
+    uint8_t config_pll[] = {0x40, 0x02, 0x06, 0x59, 0x04, 0xF5, 0x19, 0x01};
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,     // Arg 0 : I2C Address.
+                    NotNull(),           // Arg 1 : Data buffer address.
+                    sizeof(config_pll),  // Arg 2 : Data buffer length to send.
+                    false))              // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(config_pll)));
+    // error must be less than 0.5Hz.
+    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
+                acceptable_error);
+    codec_lower_->ConfigurePll(fs, mclock);
+  }
+}  // ConfigurePll_48_13000
+
+TEST_F(Adau1361LowerTest, ConfigurePll_48_14400) {
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::NotNull;
+  const unsigned int target_pll_freq_48 = 49152000;  // Hz. See data sheet.
+  const float acceptable_error = 5;  // Hz. Error of the PLL out.
+
+  // Test 14.4MHz master clock for Fs 48kHz series.
+  {
+    const unsigned int mclock = 14400000;
+    const unsigned int fs = 48000;
+    uint8_t config_pll[] = {0x40, 0x02, 0x00, 0x4B, 0x00, 0x3E, 0x33, 0x01};
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,     // Arg 0 : I2C Address.
+                    NotNull(),           // Arg 1 : Data buffer address.
+                    sizeof(config_pll),  // Arg 2 : Data buffer length to send.
+                    false))              // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(config_pll)));
+    // error must be less than 0.5Hz.
+    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
+                acceptable_error);
+    codec_lower_->ConfigurePll(fs, mclock);
+  }
+}  // ConfigurePll_48_14400
+
+TEST_F(Adau1361LowerTest, ConfigurePll_48_19200) {
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::NotNull;
+  const unsigned int target_pll_freq_48 = 49152000;  // Hz. See data sheet.
+  const float acceptable_error = 5;  // Hz. Error of the PLL out.
+
+  // Test 19.2MHz master clock for Fs 48kHz series.
+  {
+    const unsigned int mclock = 19200000;
+    const unsigned int fs = 96000;
+    uint8_t config_pll[] = {0x40, 0x02, 0x00, 0x19, 0x00, 0x03, 0x2B, 0x01};
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,     // Arg 0 : I2C Address.
+                    NotNull(),           // Arg 1 : Data buffer address.
+                    sizeof(config_pll),  // Arg 2 : Data buffer length to send.
+                    false))              // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(config_pll)));
+    // error must be less than 0.5Hz.
+    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
+                acceptable_error);
+    codec_lower_->ConfigurePll(fs, mclock);
+  }
+
+}  // ConfigurePll_48_19200
+
+TEST_F(Adau1361LowerTest, ConfigurePll_48_19680) {
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::NotNull;
+  const unsigned int target_pll_freq_48 = 49152000;  // Hz. See data sheet.
+  const float acceptable_error = 5;  // Hz. Error of the PLL out.
+
+  // Test 19.6MHz master clock for Fs 48kHz series.
+  {
+    const unsigned int mclock = 19680000;
+    const unsigned int fs = 48000;
+    uint8_t config_pll[] = {0x40, 0x02, 0x00, 0xCD, 0x00, 0xCC, 0x23, 0x01};
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,     // Arg 0 : I2C Address.
+                    NotNull(),           // Arg 1 : Data buffer address.
+                    sizeof(config_pll),  // Arg 2 : Data buffer length to send.
+                    false))              // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(config_pll)));
+    // error must be less than 0.5Hz.
+    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
+                acceptable_error);
+    codec_lower_->ConfigurePll(fs, mclock);
+  }
+}  // ConfigurePll_48_19680
+
+TEST_F(Adau1361LowerTest, ConfigurePll_48_19800) {
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::NotNull;
+  const unsigned int target_pll_freq_48 = 49152000;  // Hz. See data sheet.
+  const float acceptable_error = 5;  // Hz. Error of the PLL out.
+
+  // Test 19.8MHz master clock for Fs 48kHz series.
+  {
+    const unsigned int mclock = 19800000;
+    const unsigned int fs = 48000;
+    uint8_t config_pll[] = {0x40, 0x02, 0x03, 0x39, 0x03, 0x1C, 0x23, 0x01};
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,     // Arg 0 : I2C Address.
+                    NotNull(),           // Arg 1 : Data buffer address.
+                    sizeof(config_pll),  // Arg 2 : Data buffer length to send.
+                    false))              // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(config_pll)));
+    // error must be less than 0.5Hz.
+    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
+                acceptable_error);
+    codec_lower_->ConfigurePll(fs, mclock);
+  }
+}  // ConfigurePll_48_19800
+
+TEST_F(Adau1361LowerTest, ConfigurePll_48_24000) {
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::NotNull;
+  const unsigned int target_pll_freq_48 = 49152000;  // Hz. See data sheet.
+  const float acceptable_error = 5;  // Hz. Error of the PLL out.
+
+  // Test 24MHz master clock for Fs 48kHz series.
+  {
+    const unsigned int mclock = 24000000;
+    const unsigned int fs = 48000;
+    uint8_t config_pll[] = {0x40, 0x02, 0x00, 0x7D, 0x00, 0x0C, 0x23, 0x01};
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,     // Arg 0 : I2C Address.
+                    NotNull(),           // Arg 1 : Data buffer address.
+                    sizeof(config_pll),  // Arg 2 : Data buffer length to send.
+                    false))              // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(config_pll)));
+    // error must be less than 0.5Hz.
+    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
+                acceptable_error);
+    codec_lower_->ConfigurePll(fs, mclock);
+  }
+
+}  // ConfigurePll_48_24000
+
+TEST_F(Adau1361LowerTest, ConfigurePll_48_26000) {
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::NotNull;
+  const unsigned int target_pll_freq_48 = 49152000;  // Hz. See data sheet.
+  const float acceptable_error = 5;  // Hz. Error of the PLL out.
+
+  // Test 26MHz master clock for Fs 48kHz series.
+  {
+    const unsigned int mclock = 26000000;
+    const unsigned int fs = 48000;
+    uint8_t config_pll[] = {0x40, 0x02, 0x06, 0x59, 0x04, 0xF5, 0x1B, 0x01};
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,     // Arg 0 : I2C Address.
+                    NotNull(),           // Arg 1 : Data buffer address.
+                    sizeof(config_pll),  // Arg 2 : Data buffer length to send.
+                    false))              // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(config_pll)));
+    // error must be less than 0.5Hz.
+    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
+                acceptable_error);
+    codec_lower_->ConfigurePll(fs, mclock);
+  }
+}  // ConfigurePll_48_26000
+
+TEST_F(Adau1361LowerTest, ConfigurePll_48_27000) {
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::NotNull;
+  const unsigned int target_pll_freq_48 = 49152000;  // Hz. See data sheet.
+  const float acceptable_error = 5;  // Hz. Error of the PLL out.
+
+  // Test 27MHz master clock for Fs 48kHz series.
+  {
+    const unsigned int mclock = 27000000;
+    const unsigned int fs = 48000;
+    uint8_t config_pll[] = {0x40, 0x02, 0x04, 0x65, 0x02, 0xD1, 0x1B, 0x01};
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,     // Arg 0 : I2C Address.
+                    NotNull(),           // Arg 1 : Data buffer address.
+                    sizeof(config_pll),  // Arg 2 : Data buffer length to send.
+                    false))              // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(config_pll)));
+    // error must be less than 0.5Hz.
+    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
+                acceptable_error);
+    codec_lower_->ConfigurePll(fs, mclock);
+  }
+}  // ConfigurePll_48_27000
+
+TEST_F(Adau1361LowerTest, ConfigurePll_48_12288) {
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::NotNull;
+  const unsigned int target_pll_freq_48 = 49152000;  // Hz. See data sheet.
+  const float acceptable_error = 5;  // Hz. Error of the PLL out.
+
+  // Test 27MHz master clock for Fs 48kHz series.
+  {
+    const unsigned int mclock = 12288000;
+    const unsigned int fs = 48000;
+    uint8_t config_pll[] = {0x40, 0x02, 0x04, 0x65, 0x02, 0xD1, 0x20, 0x01};
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,     // Arg 0 : I2C Address.
+                    NotNull(),           // Arg 1 : Data buffer address.
+                    sizeof(config_pll),  // Arg 2 : Data buffer length to send.
+                    false))              // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(config_pll)));
+    // error must be less than 0.5Hz.
+    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
+                acceptable_error);
+    codec_lower_->ConfigurePll(fs, mclock);
+  }
+}  // ConfigurePll_48_12288
+
+TEST_F(Adau1361LowerTest, ConfigurePll_48_24576) {
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::NotNull;
+  const unsigned int target_pll_freq_48 = 49152000;  // Hz. See data sheet.
+  const float acceptable_error = 5;  // Hz. Error of the PLL out.
+
+  // Test 27MHz master clock for Fs 48kHz series.
+  {
+    const unsigned int mclock = 24576000;
+    const unsigned int fs = 48000;
+    uint8_t config_pll[] = {0x40, 0x02, 0x04, 0x65, 0x02, 0xD1, 0x10, 0x01};
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,     // Arg 0 : I2C Address.
+                    NotNull(),           // Arg 1 : Data buffer address.
+                    sizeof(config_pll),  // Arg 2 : Data buffer length to send.
+                    false))              // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(config_pll)));
+    // error must be less than 0.5Hz.
+    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
+                acceptable_error);
+    codec_lower_->ConfigurePll(fs, mclock);
+  }
+}  // ConfigurePll_48_24576
+
+// ------------------------------------------------------------
+//
+//                               41.1kHz
+//
+// ------------------------------------------------------------
+
+TEST_F(Adau1361LowerTest, ConfigurePll_411_08000) {
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::NotNull;
+  const unsigned int target_pll_freq_48 = 49152000;  // Hz. See data sheet.
+  const float acceptable_error = 5;  // Hz. Error of the PLL out.
+
+  // Test 8MHz master clock for Fs 48kHz series.
+  {
+    const unsigned int mclock = 8000000;
+    const unsigned int fs = 22050;
+    uint8_t config_pll[] = {0x40, 0x02, 0x00, 0x7D, 0x00, 0x12, 0x31, 0x01};
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,     // Arg 0 : I2C Address.
+                    NotNull(),           // Arg 1 : Data buffer address.
+                    sizeof(config_pll),  // Arg 2 : Data buffer length to send.
+                    false))              // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(config_pll)));
+    // error must be less than 0.5Hz.
+    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
+                acceptable_error);
+    codec_lower_->ConfigurePll(fs, mclock);
+  }
+}  // ConfigurePll_411_08000
+
+TEST_F(Adau1361LowerTest, ConfigurePll_411_12000) {
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::NotNull;
+  const unsigned int target_pll_freq_48 = 49152000;  // Hz. See data sheet.
+  const float acceptable_error = 5;  // Hz. Error of the PLL out.
+
+  // Test 12MHz master clock for Fs 48kHz series.
+  {
+    const unsigned int mclock = 12000000;
+    const unsigned int fs = 44100;
+    uint8_t config_pll[] = {0x40, 0x02, 0x00, 0x7D, 0x00, 0x0C, 0x21, 0x01};
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,     // Arg 0 : I2C Address.
+                    NotNull(),           // Arg 1 : Data buffer address.
+                    sizeof(config_pll),  // Arg 2 : Data buffer length to send.
+                    false))              // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(config_pll)));
+    // error must be less than 0.5Hz.
+    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
+                acceptable_error);
+    codec_lower_->ConfigurePll(fs, mclock);
+  }
+}  // ConfigurePll_411_12000
+
+TEST_F(Adau1361LowerTest, ConfigurePll_411_13000) {
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::NotNull;
+  const unsigned int target_pll_freq_48 = 49152000;  // Hz. See data sheet.
+  const float acceptable_error = 5;  // Hz. Error of the PLL out.
+
+  // Test 13MHz master clock for Fs 48kHz series.
+  {
+    const unsigned int mclock = 13000000;
+    const unsigned int fs = 88200;
+    uint8_t config_pll[] = {0x40, 0x02, 0x06, 0x59, 0x04, 0xF5, 0x19, 0x01};
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,     // Arg 0 : I2C Address.
+                    NotNull(),           // Arg 1 : Data buffer address.
+                    sizeof(config_pll),  // Arg 2 : Data buffer length to send.
+                    false))              // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(config_pll)));
+    // error must be less than 0.5Hz.
+    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
+                acceptable_error);
+    codec_lower_->ConfigurePll(fs, mclock);
+  }
+}  // ConfigurePll_411_13000
+
+TEST_F(Adau1361LowerTest, ConfigurePll_411_14400) {
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::NotNull;
+  const unsigned int target_pll_freq_48 = 49152000;  // Hz. See data sheet.
+  const float acceptable_error = 5;  // Hz. Error of the PLL out.
+
+  // Test 14.4MHz master clock for Fs 48kHz series.
+  {
+    const unsigned int mclock = 14400000;
+    const unsigned int fs = 44100;
+    uint8_t config_pll[] = {0x40, 0x02, 0x00, 0x4B, 0x00, 0x3E, 0x33, 0x01};
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,     // Arg 0 : I2C Address.
+                    NotNull(),           // Arg 1 : Data buffer address.
+                    sizeof(config_pll),  // Arg 2 : Data buffer length to send.
+                    false))              // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(config_pll)));
+    // error must be less than 0.5Hz.
+    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
+                acceptable_error);
+    codec_lower_->ConfigurePll(fs, mclock);
+  }
+}  // ConfigurePll_411_14400
+
+TEST_F(Adau1361LowerTest, ConfigurePll_411_19200) {
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::NotNull;
+  const unsigned int target_pll_freq_48 = 49152000;  // Hz. See data sheet.
+  const float acceptable_error = 5;  // Hz. Error of the PLL out.
+
+  // Test 19.2MHz master clock for Fs 48kHz series.
+  {
+    const unsigned int mclock = 19200000;
+    const unsigned int fs = 88200;
+    uint8_t config_pll[] = {0x40, 0x02, 0x00, 0x19, 0x00, 0x03, 0x2B, 0x01};
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,     // Arg 0 : I2C Address.
+                    NotNull(),           // Arg 1 : Data buffer address.
+                    sizeof(config_pll),  // Arg 2 : Data buffer length to send.
+                    false))              // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(config_pll)));
+    // error must be less than 0.5Hz.
+    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
+                acceptable_error);
+    codec_lower_->ConfigurePll(fs, mclock);
+  }
+
+}  // ConfigurePll_411_19200
+
+TEST_F(Adau1361LowerTest, ConfigurePll_411_19680) {
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::NotNull;
+  const unsigned int target_pll_freq_48 = 49152000;  // Hz. See data sheet.
+  const float acceptable_error = 5;  // Hz. Error of the PLL out.
+
+  // Test 19.6MHz master clock for Fs 48kHz series.
+  {
+    const unsigned int mclock = 19680000;
+    const unsigned int fs = 44100;
+    uint8_t config_pll[] = {0x40, 0x02, 0x00, 0xCD, 0x00, 0xCC, 0x23, 0x01};
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,     // Arg 0 : I2C Address.
+                    NotNull(),           // Arg 1 : Data buffer address.
+                    sizeof(config_pll),  // Arg 2 : Data buffer length to send.
+                    false))              // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(config_pll)));
+    // error must be less than 0.5Hz.
+    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
+                acceptable_error);
+    codec_lower_->ConfigurePll(fs, mclock);
+  }
+}  // ConfigurePll_411_19680
+
+TEST_F(Adau1361LowerTest, ConfigurePll_411_19800) {
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::NotNull;
+  const unsigned int target_pll_freq_48 = 49152000;  // Hz. See data sheet.
+  const float acceptable_error = 5;  // Hz. Error of the PLL out.
+
+  // Test 19.8MHz master clock for Fs 48kHz series.
+  {
+    const unsigned int mclock = 19800000;
+    const unsigned int fs = 44100;
+    uint8_t config_pll[] = {0x40, 0x02, 0x03, 0x39, 0x03, 0x1C, 0x23, 0x01};
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,     // Arg 0 : I2C Address.
+                    NotNull(),           // Arg 1 : Data buffer address.
+                    sizeof(config_pll),  // Arg 2 : Data buffer length to send.
+                    false))              // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(config_pll)));
+    // error must be less than 0.5Hz.
+    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
+                acceptable_error);
+    codec_lower_->ConfigurePll(fs, mclock);
+  }
+}  // ConfigurePll_411_19800
+
+TEST_F(Adau1361LowerTest, ConfigurePll_411_24000) {
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::NotNull;
+  const unsigned int target_pll_freq_48 = 49152000;  // Hz. See data sheet.
+  const float acceptable_error = 5;  // Hz. Error of the PLL out.
+
+  // Test 24MHz master clock for Fs 48kHz series.
+  {
+    const unsigned int mclock = 24000000;
+    const unsigned int fs = 44100;
+    uint8_t config_pll[] = {0x40, 0x02, 0x00, 0x7D, 0x00, 0x0C, 0x23, 0x01};
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,     // Arg 0 : I2C Address.
+                    NotNull(),           // Arg 1 : Data buffer address.
+                    sizeof(config_pll),  // Arg 2 : Data buffer length to send.
+                    false))              // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(config_pll)));
+    // error must be less than 0.5Hz.
+    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
+                acceptable_error);
+    codec_lower_->ConfigurePll(fs, mclock);
+  }
+
+}  // ConfigurePll_411_24000
+
+TEST_F(Adau1361LowerTest, ConfigurePll_411_26000) {
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::NotNull;
+  const unsigned int target_pll_freq_48 = 49152000;  // Hz. See data sheet.
+  const float acceptable_error = 5;  // Hz. Error of the PLL out.
+
+  // Test 26MHz master clock for Fs 48kHz series.
+  {
+    const unsigned int mclock = 26000000;
+    const unsigned int fs = 44100;
+    uint8_t config_pll[] = {0x40, 0x02, 0x06, 0x59, 0x04, 0xF5, 0x1B, 0x01};
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,     // Arg 0 : I2C Address.
+                    NotNull(),           // Arg 1 : Data buffer address.
+                    sizeof(config_pll),  // Arg 2 : Data buffer length to send.
+                    false))              // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(config_pll)));
+    // error must be less than 0.5Hz.
+    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
+                acceptable_error);
+    codec_lower_->ConfigurePll(fs, mclock);
+  }
+}  // ConfigurePll_411_26000
+
+TEST_F(Adau1361LowerTest, ConfigurePll_411_27000) {
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::NotNull;
+  const unsigned int target_pll_freq_48 = 49152000;  // Hz. See data sheet.
+  const float acceptable_error = 5;  // Hz. Error of the PLL out.
+
+  // Test 27MHz master clock for Fs 48kHz series.
+  {
+    const unsigned int mclock = 27000000;
+    const unsigned int fs = 44100;
+    uint8_t config_pll[] = {0x40, 0x02, 0x04, 0x65, 0x02, 0xD1, 0x1B, 0x01};
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,     // Arg 0 : I2C Address.
+                    NotNull(),           // Arg 1 : Data buffer address.
+                    sizeof(config_pll),  // Arg 2 : Data buffer length to send.
+                    false))              // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(config_pll)));
+    // error must be less than 0.5Hz.
+    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
+                acceptable_error);
+    codec_lower_->ConfigurePll(fs, mclock);
+  }
+}  // ConfigurePll_411_27000
+
+TEST_F(Adau1361LowerTest, ConfigurePll_411_12288) {
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::NotNull;
+  const unsigned int target_pll_freq_48 = 49152000;  // Hz. See data sheet.
+  const float acceptable_error = 5;  // Hz. Error of the PLL out.
+
+  // Test 27MHz master clock for Fs 48kHz series.
+  {
+    const unsigned int mclock = 12288000;
+    const unsigned int fs = 44100;
+    uint8_t config_pll[] = {0x40, 0x02, 0x04, 0x65, 0x02, 0xD1, 0x20, 0x01};
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,     // Arg 0 : I2C Address.
+                    NotNull(),           // Arg 1 : Data buffer address.
+                    sizeof(config_pll),  // Arg 2 : Data buffer length to send.
+                    false))              // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(config_pll)));
+    // error must be less than 0.5Hz.
+    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
+                acceptable_error);
+    codec_lower_->ConfigurePll(fs, mclock);
+  }
+}  // ConfigurePll_411_12288
+
+TEST_F(Adau1361LowerTest, ConfigurePll_411_24576) {
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::NotNull;
+  const unsigned int target_pll_freq_48 = 49152000;  // Hz. See data sheet.
+  const float acceptable_error = 5;  // Hz. Error of the PLL out.
+
+  // Test 27MHz master clock for Fs 48kHz series.
+  {
+    const unsigned int mclock = 24576000;
+    const unsigned int fs = 44100;
+    uint8_t config_pll[] = {0x40, 0x02, 0x04, 0x65, 0x02, 0xD1, 0x10, 0x01};
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,     // Arg 0 : I2C Address.
+                    NotNull(),           // Arg 1 : Data buffer address.
+                    sizeof(config_pll),  // Arg 2 : Data buffer length to send.
+                    false))              // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(config_pll)));
+    // error must be less than 0.5Hz.
+    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
+                acceptable_error);
+    codec_lower_->ConfigurePll(fs, mclock);
+  }
+}  // ConfigurePll_411_24576

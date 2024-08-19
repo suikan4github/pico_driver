@@ -16,7 +16,7 @@
 - [x] Make it success.-
 - [s] Remove the duplication.
 
-- [x] Create Adau1361Lower.DoesI2CDeviceExist()to fail.
+- [x] Create Adau1361Lower.IsI2CDeviceExisting()to fail.
 - [x] Make it success.-
 - [x] Remove the duplication.
 
