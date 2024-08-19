@@ -11,7 +11,6 @@
 #include <i2cmasterinterface.hpp>
 
 #include "adau1361lower.hpp"
-#include "i2cmaster.hpp"
 
 class Adau1361 {
  public:

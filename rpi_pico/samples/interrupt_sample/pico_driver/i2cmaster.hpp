@@ -13,6 +13,7 @@
 
 #ifdef GTEST_BUILD  // If not build for GTest, include followings.
 typedef int i2c_inst_t;
+#define PICO_ERROR_GENERIC -1
 #else  // Build for pico
 #include "hardware/i2c.h"
 #endif
@@ -58,5 +59,23 @@ class I2CMaster : public I2CMasterInterface {
   i2c_inst_t &i2c_;
   PicoWrapper &sdk_;
 };
+
+#ifdef MOCK_METHOD1  // If build for GTest, declare a mock.
+
+class MockI2CMaster : public I2CMaster {
+ public:
+  // Dummy constructor
+  MockI2CMaster() : I2CMaster(i2c_, sdk) {}
+  MOCK_METHOD4(i2c_read_blocking,
+               int(uint8_t addr, uint8_t *dst, size_t len, bool nostop));
+  MOCK_METHOD4(i2c_write_blocking,
+               int(uint8_t addr, const uint8_t *src, size_t len, bool nostop));
+
+ private:
+  i2c_inst_t i2c_ = 0;
+  PicoWrapper sdk;
+};
+
+#endif  // GTEST_BUILD
 
 #endif /* _I2CMASTER_HPP_ */

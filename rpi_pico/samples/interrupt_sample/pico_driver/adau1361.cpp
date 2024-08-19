@@ -9,15 +9,7 @@
 
 #include <assert.h>
 
-#include <algorithm>
-
 #include "i2cmasterinterface.hpp"
-
-#ifdef GTEST_BUILD
-#define PICO_ERROR_GENERIC -1
-#else
-#include <hardware/i2c>
-#endif
 
 // Macro for easy-to-read
 #define CODEC_SYSLOG(fmt, ...) \
@@ -26,10 +18,6 @@
 // Core clock setting
 static const uint8_t init_core[] = {
     0x40, 0x00, 0x00};  // R0:Clock control. Core clock disabled. PLL off.
-
-// Set core source to PLL
-static const uint8_t config_core[] = {
-    0x40, 0x00, 0xff};  // R0:Clock control. Core clock enabled. Set source PLL.
 
 // PLL Disable.
 // R1 : Must write 6 byte at once.

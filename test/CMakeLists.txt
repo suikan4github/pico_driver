@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.14)
 
 # Add the executable for the testcase which is using googletest
 add_executable(${PROJECT_NAME} test_picowrapper.cpp
+                                test_adau1361lower.cpp
                                 test_i2cmaster.cpp)
 
     # Add the library under test.

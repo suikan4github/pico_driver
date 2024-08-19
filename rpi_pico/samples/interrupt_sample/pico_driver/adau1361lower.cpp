@@ -1,5 +1,9 @@
 #include "adau1361lower.hpp"
 
+#include <assert.h>
+
+#include <algorithm>
+
 /*
  *  Send single command
  *  table : command table :
@@ -9,7 +13,7 @@ void Adau1361Lower::SendCommand(const uint8_t command[], int size) {
   /*
    * Send the given table to the I2C slave device at device_addr
    */
-  i2c_.i2c_write_blocking(device_addr_, table, size, false);
+  i2c_.i2c_write_blocking(device_addr_, command, size, false);
 }
 
 /*
@@ -20,7 +24,7 @@ void Adau1361Lower::SendCommandTable(const uint8_t table[][3], int rows) {
   /*
    * Send all rows of command table.
    */
-  for (int i = 0; i < rows; i++) adau1361_lower_.SendCommand(table[i], 3);
+  for (int i = 0; i < rows; i++) SendCommand(table[i], 3);
 }
 
 static const uint8_t lock_status_address[] = {0x40,
@@ -28,12 +32,12 @@ static const uint8_t lock_status_address[] = {0x40,
 
 bool Adau1361Lower::DoesI2CDeivceExist() {
   int status;
-  status = i2c_.i2c_write_blocking(device_addr_, init_core, 0, false);
+  status = i2c_.i2c_write_blocking(device_addr_, lock_status_address, 0, false);
   return (status != PICO_ERROR_GENERIC);
 }
 
 // loop while the PLL is not locked.
-void Adau1361::WaitPllLock(void) {
+void Adau1361Lower::WaitPllLock(void) {
   uint8_t status[6];
 
   int count = 0;
@@ -47,19 +51,18 @@ void Adau1361::WaitPllLock(void) {
                             true);  // true for repeated start.
     i2c_.i2c_read_blocking(device_addr_, status, sizeof(status), false);
 
-    CODEC_SYSLOG("Status : %02x, %02x, %02x, %02x, %02x, %02x", status[0],
-                 status[1], status[2], status[3], status[4], status[5])
-
     // Check byte 5 of the control registers.
     // If bit 1 is 1, locked. If it is 0, unlocked.
     // if locked, terminate the loop.
   } while (!(status[5] & (1 << 1)));
 }
 
-// Configure PLL and start. Then, initiate the core and set the CODEC Fs.
-void Adau1361::ConfigurePll(void) {
-  CODEC_SYSLOG("Enter.")
+// Set core source to PLL
+static const uint8_t config_core[] = {
+    0x40, 0x00, 0xff};  // R0:Clock control. Core clock enabled. Set source PLL.
 
+// Configure PLL and start. Then, initiate the core and set the CODEC Fs.
+void Adau1361Lower::ConfigurePll(void) {
   if (fs_ == 24000 || fs_ == 32000 || fs_ == 48000 || fs_ == 96000) {
     // Configure the PLL. Target PLL out is 49.152MHz = 1024xfs
     // Regarding X, R, M, N, check ADAU1361 Datasheet register R1.
@@ -77,7 +80,7 @@ void Adau1361::ConfigurePll(void) {
          */
         uint8_t config_pll[] = {0x40, 0x02, 0x00, 0x7D, 0x00, 0x12, 0x31, 0x01};
 
-        adau1361_lower_.SendCommand(config_pll, sizeof(config_pll));
+        SendCommand(config_pll, sizeof(config_pll));
         break;
       }
 
@@ -91,7 +94,7 @@ void Adau1361::ConfigurePll(void) {
          */
         uint8_t config_pll[] = {0x40, 0x02, 0x00, 0x7D, 0x00, 0x0C, 0x21, 0x01};
 
-        adau1361_lower_.SendCommand(config_pll, sizeof(config_pll));
+        SendCommand(config_pll, sizeof(config_pll));
         break;
       }
 
@@ -105,7 +108,7 @@ void Adau1361::ConfigurePll(void) {
          */
         uint8_t config_pll[] = {0x40, 0x02, 0x06, 0x59, 0x04, 0xF5, 0x19, 0x01};
 
-        adau1361_lower_.SendCommand(config_pll, sizeof(config_pll));
+        SendCommand(config_pll, sizeof(config_pll));
         break;
       }
 
@@ -119,7 +122,7 @@ void Adau1361::ConfigurePll(void) {
          */
         uint8_t config_pll[] = {0x40, 0x02, 0x00, 0x4B, 0x00, 0x3E, 0x33, 0x01};
 
-        adau1361_lower_.SendCommand(config_pll, sizeof(config_pll));
+        SendCommand(config_pll, sizeof(config_pll));
         break;
       }
 
@@ -133,7 +136,7 @@ void Adau1361::ConfigurePll(void) {
          */
         uint8_t config_pll[] = {0x40, 0x02, 0x00, 0x19, 0x00, 0x03, 0x2B, 0x01};
 
-        adau1361_lower_.SendCommand(config_pll, sizeof(config_pll));
+        SendCommand(config_pll, sizeof(config_pll));
         break;
       }
 
@@ -147,7 +150,7 @@ void Adau1361::ConfigurePll(void) {
          */
         uint8_t config_pll[] = {0x40, 0x02, 0x00, 0xCD, 0x00, 0xCC, 0x23, 0x01};
 
-        adau1361_lower_.SendCommand(config_pll, sizeof(config_pll));
+        SendCommand(config_pll, sizeof(config_pll));
         break;
       }
 
@@ -161,7 +164,7 @@ void Adau1361::ConfigurePll(void) {
          */
         uint8_t config_pll[] = {0x40, 0x02, 0x03, 0x39, 0x03, 0x1C, 0x23, 0x01};
 
-        adau1361_lower_.SendCommand(config_pll, sizeof(config_pll));
+        SendCommand(config_pll, sizeof(config_pll));
         break;
       }
 
@@ -175,7 +178,7 @@ void Adau1361::ConfigurePll(void) {
          */
         uint8_t config_pll[] = {0x40, 0x02, 0x00, 0x7D, 0x00, 0x0C, 0x23, 0x01};
 
-        adau1361_lower_.SendCommand(config_pll, sizeof(config_pll));
+        SendCommand(config_pll, sizeof(config_pll));
         break;
       }
 
@@ -189,7 +192,7 @@ void Adau1361::ConfigurePll(void) {
          */
         uint8_t config_pll[] = {0x40, 0x02, 0x06, 0x59, 0x04, 0xF5, 0x1B, 0x01};
 
-        adau1361_lower_.SendCommand(config_pll, sizeof(config_pll));
+        SendCommand(config_pll, sizeof(config_pll));
         break;
       }
 
@@ -203,7 +206,7 @@ void Adau1361::ConfigurePll(void) {
          */
         uint8_t config_pll[] = {0x40, 0x02, 0x04, 0x65, 0x02, 0xD1, 0x1B, 0x01};
 
-        adau1361_lower_.SendCommand(config_pll, sizeof(config_pll));
+        SendCommand(config_pll, sizeof(config_pll));
         break;
       }
 
@@ -217,7 +220,7 @@ void Adau1361::ConfigurePll(void) {
          */
         uint8_t config_pll[] = {0x40, 0x02, 0x04, 0x65, 0x02, 0xD1, 0x20, 0x01};
 
-        adau1361_lower_.SendCommand(config_pll, sizeof(config_pll));
+        SendCommand(config_pll, sizeof(config_pll));
         break;
       }
 
@@ -231,7 +234,7 @@ void Adau1361::ConfigurePll(void) {
          */
         uint8_t config_pll[] = {0x40, 0x02, 0x04, 0x65, 0x02, 0xD1, 0x10, 0x01};
 
-        adau1361_lower_.SendCommand(config_pll, sizeof(config_pll));
+        SendCommand(config_pll, sizeof(config_pll));
         break;
       }
 
@@ -253,7 +256,7 @@ void Adau1361::ConfigurePll(void) {
          */
         uint8_t config_pll[] = {0x40, 0x02, 0x02, 0x71, 0x01, 0x93, 0x29, 0x01};
 
-        adau1361_lower_.SendCommand(config_pll, sizeof(config_pll));
+        SendCommand(config_pll, sizeof(config_pll));
         break;
       }
 
@@ -267,7 +270,7 @@ void Adau1361::ConfigurePll(void) {
          */
         uint8_t config_pll[] = {0x40, 0x02, 0x02, 0x71, 0x01, 0xDD, 0x19, 0x01};
 
-        adau1361_lower_.SendCommand(config_pll, sizeof(config_pll));
+        SendCommand(config_pll, sizeof(config_pll));
         break;
       }
 
@@ -281,7 +284,7 @@ void Adau1361::ConfigurePll(void) {
          */
         uint8_t config_pll[] = {0x40, 0x02, 0x1F, 0xBD, 0x0F, 0x09, 0x19, 0x01};
 
-        adau1361_lower_.SendCommand(config_pll, sizeof(config_pll));
+        SendCommand(config_pll, sizeof(config_pll));
         break;
       }
 
@@ -295,7 +298,7 @@ void Adau1361::ConfigurePll(void) {
          */
         uint8_t config_pll[] = {0x40, 0x02, 0x00, 0x7D, 0x00, 0x22, 0x33, 0x01};
 
-        adau1361_lower_.SendCommand(config_pll, sizeof(config_pll));
+        SendCommand(config_pll, sizeof(config_pll));
         break;
       }
 
@@ -309,7 +312,7 @@ void Adau1361::ConfigurePll(void) {
          */
         uint8_t config_pll[] = {0x40, 0x02, 0x00, 0x7D, 0x00, 0x58, 0x23, 0x01};
 
-        adau1361_lower_.SendCommand(config_pll, sizeof(config_pll));
+        SendCommand(config_pll, sizeof(config_pll));
         break;
       }
 
@@ -323,7 +326,7 @@ void Adau1361::ConfigurePll(void) {
          */
         uint8_t config_pll[] = {0x40, 0x02, 0x04, 0x01, 0x02, 0x5C, 0x23, 0x01};
 
-        adau1361_lower_.SendCommand(config_pll, sizeof(config_pll));
+        SendCommand(config_pll, sizeof(config_pll));
         break;
       }
 
@@ -337,7 +340,7 @@ void Adau1361::ConfigurePll(void) {
          */
         uint8_t config_pll[] = {0x40, 0x02, 0x05, 0x5F, 0x03, 0x04, 0x23, 0x01};
 
-        adau1361_lower_.SendCommand(config_pll, sizeof(config_pll));
+        SendCommand(config_pll, sizeof(config_pll));
         break;
       }
 
@@ -351,7 +354,7 @@ void Adau1361::ConfigurePll(void) {
          */
         uint8_t config_pll[] = {0x40, 0x02, 0x02, 0x71, 0x01, 0xDD, 0x1B, 0x01};
 
-        adau1361_lower_.SendCommand(config_pll, sizeof(config_pll));
+        SendCommand(config_pll, sizeof(config_pll));
         break;
       }
 
@@ -365,7 +368,7 @@ void Adau1361::ConfigurePll(void) {
          */
         uint8_t config_pll[] = {0x40, 0x02, 0x1F, 0xBD, 0x0F, 0x09, 0x1B, 0x01};
 
-        adau1361_lower_.SendCommand(config_pll, sizeof(config_pll));
+        SendCommand(config_pll, sizeof(config_pll));
         break;
       }
 
@@ -379,7 +382,7 @@ void Adau1361::ConfigurePll(void) {
          */
         uint8_t config_pll[] = {0x40, 0x02, 0x07, 0x53, 0x02, 0x87, 0x1B, 0x01};
 
-        adau1361_lower_.SendCommand(config_pll, sizeof(config_pll));
+        SendCommand(config_pll, sizeof(config_pll));
         break;
       }
 
@@ -393,7 +396,7 @@ void Adau1361::ConfigurePll(void) {
          */
         uint8_t config_pll[] = {0x40, 0x02, 0x03, 0xE8, 0x02, 0xA3, 0x19, 0x01};
 
-        adau1361_lower_.SendCommand(config_pll, sizeof(config_pll));
+        SendCommand(config_pll, sizeof(config_pll));
         break;
       }
 
@@ -407,7 +410,7 @@ void Adau1361::ConfigurePll(void) {
          */
         uint8_t config_pll[] = {0x40, 0x02, 0x03, 0xE8, 0x02, 0xA3, 0x1B, 0x01};
 
-        adau1361_lower_.SendCommand(config_pll, sizeof(config_pll));
+        SendCommand(config_pll, sizeof(config_pll));
         break;
       }
 
@@ -420,10 +423,10 @@ void Adau1361::ConfigurePll(void) {
   }
 
   // Waiting for the PLL lock.
-  adau1361_lower_.WaitPllLock();
+  WaitPllLock();
 
   // Enable core.
-  adau1361_lower_.SendCommand(config_core, sizeof(config_core));
+  SendCommand(config_core, sizeof(config_core));
 
   // Set the converter clock.
   switch (fs_) {
@@ -432,14 +435,14 @@ void Adau1361::ConfigurePll(void) {
       // R17: Converter 0, SRC = 1/2 * core clock
       const uint8_t config_src[] = {0x40, 0x17, 0x04};
 
-      adau1361_lower_.SendCommand(config_src, sizeof(config_src));
+      SendCommand(config_src, sizeof(config_src));
       break;
     }
     case 32000: {
       // R17: Converter 0, SRC = 2/3 * core clock
       const uint8_t config_src[] = {0x40, 0x17, 0x05};
 
-      adau1361_lower_.SendCommand(config_src, sizeof(config_src));
+      SendCommand(config_src, sizeof(config_src));
       break;
     }
     case 44100:
@@ -447,7 +450,7 @@ void Adau1361::ConfigurePll(void) {
       // R17: Converter 0, SRC = 1 * core clock
       const uint8_t config_src[] = {0x40, 0x17, 0x00};
 
-      adau1361_lower_.SendCommand(config_src, sizeof(config_src));
+      SendCommand(config_src, sizeof(config_src));
       break;
     }
     case 88200:
@@ -455,14 +458,13 @@ void Adau1361::ConfigurePll(void) {
       // R17: Converter 0, SRC = 2 * core clock
       const uint8_t config_src[] = {0x40, 0x17, 0x06};
 
-      adau1361_lower_.SendCommand(config_src, sizeof(config_src));
+      SendCommand(config_src, sizeof(config_src));
       break;
     }
     default:
       assert(false);
   }
 
-  CODEC_SYSLOG("Leave.")
 }  // ConfigurePlll
 
 #define DATA 2 /* data payload of register */
@@ -475,12 +477,11 @@ void Adau1361::ConfigurePll(void) {
  * See Figure 31 "Record Signal Path" in the ADAU1361 data sheet
  *
  */
-void Adau1361::SetLineInputGain(float left_gain, float right_gain, bool mute) {
+void Adau1361Lower::SetLineInputGain(float left_gain, float right_gain,
+                                     bool mute) {
   uint8_t txbuf[3];
   uint8_t rxbuf[1];
   int left, right;
-
-  CODEC_SYSLOG("Enter. %d, %d, %d", (int)left_gain, (int)right_gain, mute)
 
   // set left gain
   left = std::max(left, -12);
@@ -503,13 +504,11 @@ void Adau1361::SetLineInputGain(float left_gain, float right_gain, bool mute) {
   // Obtain the Register
   i2c_.i2c_write_blocking(device_addr_, txbuf, 2, true);  // repeated start.
   i2c_.i2c_read_blocking(device_addr_, rxbuf, 1, false);
-  CODEC_SYSLOG("R4 : 0x%02x", rxbuf[0]);
   // Create a register value
   txbuf[DATA] = (rxbuf[0] & 0xF1) | SET_INPUT_GAIN(left, mute);
-  CODEC_SYSLOG("Transmitting %02x, %02x, %02x", txbuf[0], txbuf[1], txbuf[2]);
 
   // Set the R4.
-  adau1361_lower_.SendCommand(txbuf, 3);
+  SendCommand(txbuf, 3);
 
   /*
    *  *************** Read Modify light the Right Channel Gain
@@ -523,15 +522,11 @@ void Adau1361::SetLineInputGain(float left_gain, float right_gain, bool mute) {
   i2c_.i2c_write_blocking(device_addr_, txbuf, 2, true);  // repeated start.
   i2c_.i2c_read_blocking(device_addr_, rxbuf, 1, false);
 
-  CODEC_SYSLOG("R6 : 0x%02x", rxbuf[0]);
   // Create a register value
   txbuf[DATA] = (rxbuf[0] & 0xF1) | SET_INPUT_GAIN(right, mute);
-  CODEC_SYSLOG("Transmitting %02x, %02x, %02x", txbuf[0], txbuf[1], txbuf[2]);
 
   // Set the R4.
-  adau1361_lower_.SendCommand(txbuf, 3);
-
-  CODEC_SYSLOG("Leave.")
+  SendCommand(txbuf, 3);
 }
 
 #define SET_AUX_GAIN(x, mute) ((mute) ? 0x00 : x)
@@ -539,12 +534,11 @@ void Adau1361::SetLineInputGain(float left_gain, float right_gain, bool mute) {
 /*
  * This function assumes the input is the single end. Then,
  */
-void Adau1361::SetAuxInputGain(float left_gain, float right_gain, bool mute) {
+void Adau1361Lower::SetAuxInputGain(float left_gain, float right_gain,
+                                    bool mute) {
   uint8_t txbuf[3];
   uint8_t rxbuf[1];
   int left, right;
-
-  CODEC_SYSLOG("Enter. %d, %d, %d", (int)left_gain, (int)right_gain, mute)
 
   // set left gain LDBOOST is muted.
   left = std::max(left, -12);
@@ -567,12 +561,10 @@ void Adau1361::SetAuxInputGain(float left_gain, float right_gain, bool mute) {
   i2c_.i2c_write_blocking(device_addr_, txbuf, 2, true);  // repeated start.
   i2c_.i2c_read_blocking(device_addr_, rxbuf, 1, false);
 
-  CODEC_SYSLOG("Obtain R5 : 0x%02x", rxbuf[0]);
   // Create a register value
   txbuf[DATA] = (rxbuf[0] & 0xF8) | SET_AUX_GAIN(left, mute);
-  CODEC_SYSLOG("Transmitting %02x, %02x, %02x", txbuf[0], txbuf[1], txbuf[2]);
   // Set the R5.
-  adau1361_lower_.SendCommand(txbuf, 3);
+  SendCommand(txbuf, 3);
 
   /*
    *  *************** Read Modify light the Right Channel Gain
@@ -586,26 +578,21 @@ void Adau1361::SetAuxInputGain(float left_gain, float right_gain, bool mute) {
   i2c_.i2c_write_blocking(device_addr_, txbuf, 2, true);  // repeated start.
   i2c_.i2c_read_blocking(device_addr_, rxbuf, 1, false);
 
-  CODEC_SYSLOG("Obtain R7 : 0x%02x", rxbuf[0]);
   // Create a register value
   txbuf[DATA] = (rxbuf[0] & 0xF8) | SET_AUX_GAIN(left, mute);
-  CODEC_SYSLOG("Transmitting %02x, %02x, %02x", txbuf[0], txbuf[1], txbuf[2]);
   // Set the R7.
-  adau1361_lower_.SendCommand(txbuf, 3);
-
-  CODEC_SYSLOG("Leave.")
+  SendCommand(txbuf, 3);
 }
 
 #define SET_LO_GAIN(x, unmute, headphone) \
   ((x << 2) | (unmute << 1) | (headphone))
 
 // Read modify right the R31 and R32
-void Adau1361::SetLineOutputGain(float left_gain, float right_gain, bool mute) {
+void Adau1361Lower::SetLineOutputGain(float left_gain, float right_gain,
+                                      bool mute) {
   uint8_t txbuf[3];
   uint8_t rxbuf[1];
   int left, right;
-
-  CODEC_SYSLOG("Enter. %d, %d, %d", (int)left_gain, (int)right_gain, mute)
 
   // set 0 if mute, set 1 if unmute;
   int unmute_flag = mute ? 0 : 1;
@@ -635,15 +622,12 @@ void Adau1361::SetLineOutputGain(float left_gain, float right_gain, bool mute) {
   i2c_.i2c_write_blocking(device_addr_, txbuf, 2, true);  // repeated start.
   i2c_.i2c_read_blocking(device_addr_, rxbuf, 1, false);
 
-  CODEC_SYSLOG("R31 : 0x%02x", rxbuf[0]);
-
   // Set line out of Left
   txbuf[DATA] = SET_LO_GAIN(left,          /* GAIN */
                             unmute_flag,   /* UNMUTE */
                             rxbuf[0] & 1); /* LOMODE of R31*/
-  CODEC_SYSLOG("Transmitting %02x, %02x, %02x", txbuf[0], txbuf[1], txbuf[2]);
   // Set LOUTVOL : R31
-  adau1361_lower_.SendCommand(txbuf, 3);
+  SendCommand(txbuf, 3);
 
   /*
    *  *************** Read Modify light the Right Channel Gain
@@ -656,16 +640,11 @@ void Adau1361::SetLineOutputGain(float left_gain, float right_gain, bool mute) {
   i2c_.i2c_write_blocking(device_addr_, txbuf, 2, true);  // repeated start.
   i2c_.i2c_read_blocking(device_addr_, rxbuf, 1, false);
 
-  CODEC_SYSLOG("R32 : 0x%02x", rxbuf[0]);
-
   txbuf[DATA] = SET_LO_GAIN(right,         /* GAIN */
                             unmute_flag,   /* UNMUTE */
                             rxbuf[0] & 1); /* ROMODE of R32 */
-  CODEC_SYSLOG("Transmitting %02x, %02x, %02x", txbuf[0], txbuf[1], txbuf[2]);
   // Set ROUTVOL : R32
-  adau1361_lower_.SendCommand(txbuf, 3);
-
-  CODEC_SYSLOG("Leave.")
+  SendCommand(txbuf, 3);
 }
 
 #define SET_HP_GAIN(x, unmute, headphone) \
@@ -673,12 +652,11 @@ void Adau1361::SetLineOutputGain(float left_gain, float right_gain, bool mute) {
 
 // Read modify right the R29 and R30
 
-void Adau1361::SetHpOutputGain(float left_gain, float right_gain, bool mute) {
+void Adau1361Lower::SetHpOutputGain(float left_gain, float right_gain,
+                                    bool mute) {
   uint8_t txbuf[3];
   uint8_t rxbuf[1];
   int left, right;
-
-  CODEC_SYSLOG("Enter. %d, %d, %d", (int)left_gain, (int)right_gain, mute)
 
   // set 0 if mute, set 1 if unmute;
   int unmute_flag = mute ? 0 : 1;
@@ -709,15 +687,12 @@ void Adau1361::SetHpOutputGain(float left_gain, float right_gain, bool mute) {
   i2c_.i2c_write_blocking(device_addr_, txbuf, 2, true);  // repeated start.
   i2c_.i2c_read_blocking(device_addr_, rxbuf, 1, false);
 
-  CODEC_SYSLOG("R29 : 0x%02x", rxbuf[0]);
-
   // HP left out control data
   txbuf[DATA] = SET_HP_GAIN(left,          /* GAIN */
                             unmute_flag,   /* UNMUTE */
                             rxbuf[0] & 1); /* HPEN of R29*/
-  CODEC_SYSLOG("Transmitting %02x, %02x, %02x", txbuf[0], txbuf[1], txbuf[2]);
   // SET LHPVOL : R29
-  adau1361_lower_.SendCommand(txbuf, 3);
+  SendCommand(txbuf, 3);
 
   /*
    *  *************** Read Modify light the Left Channel Gain
@@ -731,15 +706,10 @@ void Adau1361::SetHpOutputGain(float left_gain, float right_gain, bool mute) {
   i2c_.i2c_write_blocking(device_addr_, txbuf, 2, true);  // repeated start.
   i2c_.i2c_read_blocking(device_addr_, rxbuf, 1, false);
 
-  CODEC_SYSLOG("R30 : 0x%02x", rxbuf[0]);
-
   // HP right out control data
   txbuf[DATA] = SET_HP_GAIN(right,         /* GAIN */
                             unmute_flag,   /* UNMUTE */
                             rxbuf[0] & 1); /* HPMODE of R30*/
-  CODEC_SYSLOG("Transmitting %02x, %02x, %02x", txbuf[0], txbuf[1], txbuf[2]);
   // SET RHPVOL : R30
-  adau1361_lower_.SendCommand(txbuf, 3);
-
-  CODEC_SYSLOG("Leave.")
+  SendCommand(txbuf, 3);
 }

@@ -9,6 +9,7 @@ if((${WIN32}) OR (${UNIX})) # Is Target Windows or Unix?
         add_library(driver  
 #                       picowrapper.cpp
                         adau1361.cpp
+                        adau1361lower.cpp
                         i2cmaster.cpp)
                 target_include_directories(driver PUBLIC .)
                 target_compile_definitions(driver PRIVATE GTEST_BUILD=1)
@@ -21,6 +22,7 @@ else()  # Is target RasPi Pico?
                 target_sources(driver INTERFACE 
                                 picowrapper.cpp
                                 adau1361.cpp
+                                adau1361lower.cpp
                                 i2cmaster.cpp)
                 target_include_directories(driver INTERFACE .)
                 target_link_libraries(driver INTERFACE pico_stdlib)
