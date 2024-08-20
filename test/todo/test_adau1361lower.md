@@ -4,6 +4,33 @@
 - [] Make it success.-
 - [] Remove the duplication.
 
+- [x] Create Adau1361Lower.SetLineOutputGain_overgain()to fail.
+- [x] Make it success.-
+- [x] Remove the duplication.
+
+- [x] Create Adau1361Lower.SetLineOutputGain_mute()to fail.
+- [x] Make it success.-
+- [x] Remove the duplication.
+
+
+
+- [x] Create Adau1361Lower.SetLineInputGain_appropriate_gain()to fail.
+- [x] Make it success.-
+- [x] Remove the duplication.
+
+- [x] Create Adau1361Lower.SetLineInputGain_undergain()to fail.
+- [x] Make it success.-
+- [x] Remove the duplication.
+
+- [x] Create Adau1361Lower.SetLineInputGain_overgain()to fail.
+- [x] Make it success.-
+- [x] Remove the duplication.
+
+- [x] Create Adau1361Lower.SetLineInputGain_mute()to fail.
+- [x] Make it success.-
+- [x] Remove the duplication.
+
+
 - [x] Create Adau1361Lower.DisablePLL()to fail.
 - [x] Make it success.-
 - [x] Remove the duplication.
