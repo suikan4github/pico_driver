@@ -703,7 +703,6 @@ void Adau1361Lower::SetAuxInputGain(float left_gain, float right_gain,
 void Adau1361Lower::SetLineOutputGain(float left_gain, float right_gain,
                                       bool mute) {
   uint8_t txbuf[3];
-  uint8_t rxbuf[1];
   int left, right;
 
   // set 0 if mute, set 1 if unmute;
@@ -730,14 +729,10 @@ void Adau1361Lower::SetLineOutputGain(float left_gain, float right_gain,
   txbuf[ADDH] = 0x40;  // Upper address of register
   txbuf[ADDL] = 0x25;  // R31: LOUTVOL
 
-  // Obtain the R31
-  i2c_.i2c_write_blocking(device_addr_, txbuf, 2, true);  // repeated start.
-  i2c_.i2c_read_blocking(device_addr_, rxbuf, 1, false);
-
   // Set line out of Left
-  txbuf[DATA] = SET_LO_GAIN(left,          /* GAIN */
-                            unmute_flag,   /* UNMUTE */
-                            rxbuf[0] & 1); /* LOMODE of R31*/
+  txbuf[DATA] = SET_LO_GAIN(left,        /* GAIN */
+                            unmute_flag, /* UNMUTE */
+                            0);          /* LOMODE of R31 : 0 for Line out*/
   // Set LOUTVOL : R31
   SendCommand(txbuf, 3);
 
@@ -748,13 +743,9 @@ void Adau1361Lower::SetLineOutputGain(float left_gain, float right_gain,
   txbuf[ADDH] = 0x40;  // Upper address of register
   txbuf[ADDL] = 0x26;  // R32: ROUTVOL
 
-  // Obtain the R32
-  i2c_.i2c_write_blocking(device_addr_, txbuf, 2, true);  // repeated start.
-  i2c_.i2c_read_blocking(device_addr_, rxbuf, 1, false);
-
-  txbuf[DATA] = SET_LO_GAIN(right,         /* GAIN */
-                            unmute_flag,   /* UNMUTE */
-                            rxbuf[0] & 1); /* ROMODE of R32 */
+  txbuf[DATA] = SET_LO_GAIN(right,       /* GAIN */
+                            unmute_flag, /* UNMUTE */
+                            0);          /* ROMODE of R32 : 0 for Line out*/
   // Set ROUTVOL : R32
   SendCommand(txbuf, 3);
 }

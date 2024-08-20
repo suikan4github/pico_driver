@@ -1431,40 +1431,14 @@ TEST_F(Adau1361LowerTest, SetLineOutputGain_mute) {
   using ::testing::Return;
   using ::testing::SetArrayArgument;
 
-  // Left check
   {
     InSequence dummy;
 
-    uint8_t ltxbuf0[] = {0x40, 0x25};  // R31 : LOUTVOL
-    uint8_t lrxbuf[1] = {0xff};        // R31 contents
-    uint8_t ltxbuf1[3] = {0x40, 0x25, 0xff};
-    // Set the address to read.
-    EXPECT_CALL(i2c_,
-                i2c_write_blocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(ltxbuf0),  // Arg 2 : Data buffer length to send.
-                    true))            // Arg 3 : true for repeated start.
-        .With(Args<1,  // parameter position of the array : 0 origin.
-                   2>  // parameter position of the size : 0 origin.
-              (ElementsAreArray(ltxbuf0)))
-        .WillOnce(Return(sizeof(ltxbuf0)));
+    // Left check
+    uint8_t ltxbuf1[3] = {0x40, 0x25, 0xff};  // R31
 
-    // Then read a data.
-    EXPECT_CALL(i2c_,
-                i2c_read_blocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(lrxbuf),   // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : falset to stop.
-        .WillOnce(DoAll(
-            SetArrayArgument<1>  // parameter position of the array : 0 origin.
-            (lrxbuf,             // pointer to the beginning of the data.
-             lrxbuf + sizeof(lrxbuf)),  // pointer to the end of the data + 1.
-            Return(sizeof(lrxbuf))));   // 6 is the transfered data length.
-
-    // Now expectation of mute.
-    ltxbuf1[2] = (0x39 << 2) | 0x01;  // given 0dB, mute, headphone
+    //  expectation of mute.
+    ltxbuf1[2] = (0x39 << 2) | 0x00;  // given 0dB, mute, line
     EXPECT_CALL(i2c_,
                 i2c_write_blocking(
                     device_address_,  // Arg 0 : I2C Address.
@@ -1477,36 +1451,10 @@ TEST_F(Adau1361LowerTest, SetLineOutputGain_mute) {
         .WillOnce(Return(sizeof(ltxbuf1)));
 
     // right check
-    uint8_t rtxbuf0[] = {0x40, 0x26};  // R32 : ROUTVOL
-    uint8_t rrxbuf[1] = {0xff};        // R6 contents
-    uint8_t rtxbuf1[3] = {0x40, 0x26, 0xff};
-    // Set the address to read.
-    EXPECT_CALL(i2c_,
-                i2c_write_blocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(rtxbuf0),  // Arg 2 : Data buffer length to send.
-                    true))            // Arg 3 : true for repeated start.
-        .With(Args<1,  // parameter position of the array : 0 origin.
-                   2>  // parameter position of the size : 0 origin.
-              (ElementsAreArray(rtxbuf0)))
-        .WillOnce(Return(sizeof(rtxbuf0)));
+    uint8_t rtxbuf1[3] = {0x40, 0x26, 0xff};  // L31
 
-    // Then read a data.
-    EXPECT_CALL(i2c_,
-                i2c_read_blocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(rrxbuf),   // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : falset to stop.
-        .WillOnce(DoAll(
-            SetArrayArgument<1>  // parameter position of the array : 0 origin.
-            (rrxbuf,             // pointer to the beginning of the data.
-             rrxbuf + sizeof(rrxbuf)),  // pointer to the end of the data + 1.
-            Return(sizeof(rrxbuf))));   // the transfered data length.
-
-    // Now expectation of mute.
-    rtxbuf1[2] = (0x39 << 2) | 0x01;  // given 0dB, mute, headphone
+    //  expectation of mute.
+    rtxbuf1[2] = (0x39 << 2) | 0x00;  // given 0dB, mute, line
     EXPECT_CALL(i2c_,
                 i2c_write_blocking(
                     device_address_,  // Arg 0 : I2C Address.
@@ -1522,8 +1470,8 @@ TEST_F(Adau1361LowerTest, SetLineOutputGain_mute) {
   // must be set to muted.
   codec_lower_->SetLineOutputGain(0.0, 0.0, true);
 }  // SetLineOutputGain_mute
-
 #if 0
+
 // The gain over 6dB must be truncated to 6dB.
 TEST_F(Adau1361LowerTest, SetLineOutputGain_overgain) {
   using ::testing::Args;
@@ -1625,6 +1573,8 @@ TEST_F(Adau1361LowerTest, SetLineOutputGain_overgain) {
   // must be truncated to 6dB
   codec_lower_->SetLineOutputGain(20.0, 30.0, false);
 }  // SetLineOutputGain_overgain
+
+
 
 // The gain under -12dB must be truncated to -12dB
 TEST_F(Adau1361LowerTest, SetLineOutputGain_undergain) {
