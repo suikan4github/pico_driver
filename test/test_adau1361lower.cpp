@@ -200,6 +200,12 @@ static float pll_out(unsigned int mclock, const uint8_t config[]) {
   else
     return mclock * (1 / x) * r;
 }
+
+static bool is_pll_enabled(const uint8_t config[]) {
+  // config[7] is the PLL configuration register 5.
+  // It must be 1 ( enable PLL ) when setting PLL.
+  return (1 == config[7]);
+}
 // ------------------------------------------------------------
 //
 //                               48kHz
@@ -230,6 +236,7 @@ TEST_F(Adau1361LowerTest, ConfigurePll_48_08000) {
     // error must be less than 0.5Hz.
     EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
                 acceptable_error);
+    EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
 }  // ConfigurePll_48_08000
@@ -258,6 +265,7 @@ TEST_F(Adau1361LowerTest, ConfigurePll_48_12000) {
     // error must be less than 0.5Hz.
     EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
                 acceptable_error);
+    EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
 }  // ConfigurePll_48_12000
@@ -286,6 +294,7 @@ TEST_F(Adau1361LowerTest, ConfigurePll_48_13000) {
     // error must be less than 0.5Hz.
     EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
                 acceptable_error);
+    EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
 }  // ConfigurePll_48_13000
@@ -314,6 +323,7 @@ TEST_F(Adau1361LowerTest, ConfigurePll_48_14400) {
     // error must be less than 0.5Hz.
     EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
                 acceptable_error);
+    EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
 }  // ConfigurePll_48_14400
@@ -342,6 +352,7 @@ TEST_F(Adau1361LowerTest, ConfigurePll_48_19200) {
     // error must be less than 0.5Hz.
     EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
                 acceptable_error);
+    EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
 
@@ -371,6 +382,7 @@ TEST_F(Adau1361LowerTest, ConfigurePll_48_19680) {
     // error must be less than 0.5Hz.
     EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
                 acceptable_error);
+    EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
 }  // ConfigurePll_48_19680
@@ -399,6 +411,7 @@ TEST_F(Adau1361LowerTest, ConfigurePll_48_19800) {
     // error must be less than 0.5Hz.
     EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
                 acceptable_error);
+    EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
 }  // ConfigurePll_48_19800
@@ -427,6 +440,7 @@ TEST_F(Adau1361LowerTest, ConfigurePll_48_24000) {
     // error must be less than 0.5Hz.
     EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
                 acceptable_error);
+    EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
 
@@ -456,6 +470,7 @@ TEST_F(Adau1361LowerTest, ConfigurePll_48_26000) {
     // error must be less than 0.5Hz.
     EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
                 acceptable_error);
+    EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
 }  // ConfigurePll_48_26000
@@ -484,6 +499,7 @@ TEST_F(Adau1361LowerTest, ConfigurePll_48_27000) {
     // error must be less than 0.5Hz.
     EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
                 acceptable_error);
+    EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
 }  // ConfigurePll_48_27000
@@ -512,6 +528,7 @@ TEST_F(Adau1361LowerTest, ConfigurePll_48_12288) {
     // error must be less than 0.5Hz.
     EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
                 acceptable_error);
+    EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
 }  // ConfigurePll_48_12288
@@ -540,6 +557,7 @@ TEST_F(Adau1361LowerTest, ConfigurePll_48_24576) {
     // error must be less than 0.5Hz.
     EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
                 acceptable_error);
+    EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
 }  // ConfigurePll_48_24576
@@ -554,14 +572,14 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_08000) {
   using ::testing::Args;
   using ::testing::ElementsAreArray;
   using ::testing::NotNull;
-  const unsigned int target_pll_freq_48 = 49152000;  // Hz. See data sheet.
+  const unsigned int target_pll_freq_441 = 45158400;  // Hz. See data sheet.
   const float acceptable_error = 5;  // Hz. Error of the PLL out.
 
   // Test 8MHz master clock for Fs 48kHz series.
   {
     const unsigned int mclock = 8000000;
     const unsigned int fs = 22050;
-    uint8_t config_pll[] = {0x40, 0x02, 0x00, 0x7D, 0x00, 0x12, 0x31, 0x01};
+    uint8_t config_pll[] = {0x40, 0x02, 0x02, 0x71, 0x01, 0x93, 0x29, 0x01};
     EXPECT_CALL(i2c_,
                 i2c_write_blocking(
                     device_address_,     // Arg 0 : I2C Address.
@@ -572,8 +590,9 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_08000) {
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(config_pll)));
     // error must be less than 0.5Hz.
-    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
+    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_441,
                 acceptable_error);
+    EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
 }  // ConfigurePll_411_08000
@@ -582,14 +601,14 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_12000) {
   using ::testing::Args;
   using ::testing::ElementsAreArray;
   using ::testing::NotNull;
-  const unsigned int target_pll_freq_48 = 49152000;  // Hz. See data sheet.
+  const unsigned int target_pll_freq_441 = 45158400;  // Hz. See data sheet.
   const float acceptable_error = 5;  // Hz. Error of the PLL out.
 
   // Test 12MHz master clock for Fs 48kHz series.
   {
     const unsigned int mclock = 12000000;
     const unsigned int fs = 44100;
-    uint8_t config_pll[] = {0x40, 0x02, 0x00, 0x7D, 0x00, 0x0C, 0x21, 0x01};
+    uint8_t config_pll[] = {0x40, 0x02, 0x02, 0x71, 0x01, 0xDD, 0x19, 0x01};
     EXPECT_CALL(i2c_,
                 i2c_write_blocking(
                     device_address_,     // Arg 0 : I2C Address.
@@ -600,8 +619,9 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_12000) {
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(config_pll)));
     // error must be less than 0.5Hz.
-    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
+    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_441,
                 acceptable_error);
+    EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
 }  // ConfigurePll_411_12000
@@ -610,14 +630,14 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_13000) {
   using ::testing::Args;
   using ::testing::ElementsAreArray;
   using ::testing::NotNull;
-  const unsigned int target_pll_freq_48 = 49152000;  // Hz. See data sheet.
+  const unsigned int target_pll_freq_441 = 45158400;  // Hz. See data sheet.
   const float acceptable_error = 5;  // Hz. Error of the PLL out.
 
   // Test 13MHz master clock for Fs 48kHz series.
   {
     const unsigned int mclock = 13000000;
     const unsigned int fs = 88200;
-    uint8_t config_pll[] = {0x40, 0x02, 0x06, 0x59, 0x04, 0xF5, 0x19, 0x01};
+    uint8_t config_pll[] = {0x40, 0x02, 0x1F, 0xBD, 0x0F, 0x09, 0x19, 0x01};
     EXPECT_CALL(i2c_,
                 i2c_write_blocking(
                     device_address_,     // Arg 0 : I2C Address.
@@ -628,8 +648,9 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_13000) {
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(config_pll)));
     // error must be less than 0.5Hz.
-    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
+    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_441,
                 acceptable_error);
+    EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
 }  // ConfigurePll_411_13000
@@ -638,14 +659,14 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_14400) {
   using ::testing::Args;
   using ::testing::ElementsAreArray;
   using ::testing::NotNull;
-  const unsigned int target_pll_freq_48 = 49152000;  // Hz. See data sheet.
+  const unsigned int target_pll_freq_441 = 45158400;  // Hz. See data sheet.
   const float acceptable_error = 5;  // Hz. Error of the PLL out.
 
   // Test 14.4MHz master clock for Fs 48kHz series.
   {
     const unsigned int mclock = 14400000;
     const unsigned int fs = 44100;
-    uint8_t config_pll[] = {0x40, 0x02, 0x00, 0x4B, 0x00, 0x3E, 0x33, 0x01};
+    uint8_t config_pll[] = {0x40, 0x02, 0x00, 0x7D, 0x00, 0x22, 0x33, 0x01};
     EXPECT_CALL(i2c_,
                 i2c_write_blocking(
                     device_address_,     // Arg 0 : I2C Address.
@@ -656,8 +677,9 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_14400) {
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(config_pll)));
     // error must be less than 0.5Hz.
-    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
+    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_441,
                 acceptable_error);
+    EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
 }  // ConfigurePll_411_14400
@@ -666,14 +688,14 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_19200) {
   using ::testing::Args;
   using ::testing::ElementsAreArray;
   using ::testing::NotNull;
-  const unsigned int target_pll_freq_48 = 49152000;  // Hz. See data sheet.
+  const unsigned int target_pll_freq_441 = 45158400;  // Hz. See data sheet.
   const float acceptable_error = 5;  // Hz. Error of the PLL out.
 
   // Test 19.2MHz master clock for Fs 48kHz series.
   {
     const unsigned int mclock = 19200000;
     const unsigned int fs = 88200;
-    uint8_t config_pll[] = {0x40, 0x02, 0x00, 0x19, 0x00, 0x03, 0x2B, 0x01};
+    uint8_t config_pll[] = {0x40, 0x02, 0x00, 0x7D, 0x00, 0x58, 0x23, 0x01};
     EXPECT_CALL(i2c_,
                 i2c_write_blocking(
                     device_address_,     // Arg 0 : I2C Address.
@@ -684,8 +706,9 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_19200) {
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(config_pll)));
     // error must be less than 0.5Hz.
-    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
+    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_441,
                 acceptable_error);
+    EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
 
@@ -695,14 +718,14 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_19680) {
   using ::testing::Args;
   using ::testing::ElementsAreArray;
   using ::testing::NotNull;
-  const unsigned int target_pll_freq_48 = 49152000;  // Hz. See data sheet.
+  const unsigned int target_pll_freq_441 = 45158400;  // Hz. See data sheet.
   const float acceptable_error = 5;  // Hz. Error of the PLL out.
 
   // Test 19.6MHz master clock for Fs 48kHz series.
   {
     const unsigned int mclock = 19680000;
     const unsigned int fs = 44100;
-    uint8_t config_pll[] = {0x40, 0x02, 0x00, 0xCD, 0x00, 0xCC, 0x23, 0x01};
+    uint8_t config_pll[] = {0x40, 0x02, 0x04, 0x01, 0x02, 0x5C, 0x23, 0x01};
     EXPECT_CALL(i2c_,
                 i2c_write_blocking(
                     device_address_,     // Arg 0 : I2C Address.
@@ -713,8 +736,9 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_19680) {
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(config_pll)));
     // error must be less than 0.5Hz.
-    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
+    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_441,
                 acceptable_error);
+    EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
 }  // ConfigurePll_411_19680
@@ -723,14 +747,14 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_19800) {
   using ::testing::Args;
   using ::testing::ElementsAreArray;
   using ::testing::NotNull;
-  const unsigned int target_pll_freq_48 = 49152000;  // Hz. See data sheet.
+  const unsigned int target_pll_freq_441 = 45158400;  // Hz. See data sheet.
   const float acceptable_error = 5;  // Hz. Error of the PLL out.
 
   // Test 19.8MHz master clock for Fs 48kHz series.
   {
     const unsigned int mclock = 19800000;
     const unsigned int fs = 44100;
-    uint8_t config_pll[] = {0x40, 0x02, 0x03, 0x39, 0x03, 0x1C, 0x23, 0x01};
+    uint8_t config_pll[] = {0x40, 0x02, 0x05, 0x5F, 0x03, 0x04, 0x23, 0x01};
     EXPECT_CALL(i2c_,
                 i2c_write_blocking(
                     device_address_,     // Arg 0 : I2C Address.
@@ -741,8 +765,9 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_19800) {
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(config_pll)));
     // error must be less than 0.5Hz.
-    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
+    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_441,
                 acceptable_error);
+    EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
 }  // ConfigurePll_411_19800
@@ -751,14 +776,14 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_24000) {
   using ::testing::Args;
   using ::testing::ElementsAreArray;
   using ::testing::NotNull;
-  const unsigned int target_pll_freq_48 = 49152000;  // Hz. See data sheet.
+  const unsigned int target_pll_freq_441 = 45158400;  // Hz. See data sheet.
   const float acceptable_error = 5;  // Hz. Error of the PLL out.
 
   // Test 24MHz master clock for Fs 48kHz series.
   {
     const unsigned int mclock = 24000000;
     const unsigned int fs = 44100;
-    uint8_t config_pll[] = {0x40, 0x02, 0x00, 0x7D, 0x00, 0x0C, 0x23, 0x01};
+    uint8_t config_pll[] = {0x40, 0x02, 0x02, 0x71, 0x01, 0xDD, 0x1B, 0x01};
     EXPECT_CALL(i2c_,
                 i2c_write_blocking(
                     device_address_,     // Arg 0 : I2C Address.
@@ -769,8 +794,9 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_24000) {
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(config_pll)));
     // error must be less than 0.5Hz.
-    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
+    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_441,
                 acceptable_error);
+    EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
 
@@ -780,14 +806,14 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_26000) {
   using ::testing::Args;
   using ::testing::ElementsAreArray;
   using ::testing::NotNull;
-  const unsigned int target_pll_freq_48 = 49152000;  // Hz. See data sheet.
+  const unsigned int target_pll_freq_441 = 45158400;  // Hz. See data sheet.
   const float acceptable_error = 5;  // Hz. Error of the PLL out.
 
   // Test 26MHz master clock for Fs 48kHz series.
   {
     const unsigned int mclock = 26000000;
     const unsigned int fs = 44100;
-    uint8_t config_pll[] = {0x40, 0x02, 0x06, 0x59, 0x04, 0xF5, 0x1B, 0x01};
+    uint8_t config_pll[] = {0x40, 0x02, 0x1F, 0xBD, 0x0F, 0x09, 0x1B, 0x01};
     EXPECT_CALL(i2c_,
                 i2c_write_blocking(
                     device_address_,     // Arg 0 : I2C Address.
@@ -798,8 +824,9 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_26000) {
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(config_pll)));
     // error must be less than 0.5Hz.
-    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
+    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_441,
                 acceptable_error);
+    EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
 }  // ConfigurePll_411_26000
@@ -808,14 +835,14 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_27000) {
   using ::testing::Args;
   using ::testing::ElementsAreArray;
   using ::testing::NotNull;
-  const unsigned int target_pll_freq_48 = 49152000;  // Hz. See data sheet.
+  const unsigned int target_pll_freq_441 = 45158400;  // Hz. See data sheet.
   const float acceptable_error = 5;  // Hz. Error of the PLL out.
 
   // Test 27MHz master clock for Fs 48kHz series.
   {
     const unsigned int mclock = 27000000;
     const unsigned int fs = 44100;
-    uint8_t config_pll[] = {0x40, 0x02, 0x04, 0x65, 0x02, 0xD1, 0x1B, 0x01};
+    uint8_t config_pll[] = {0x40, 0x02, 0x07, 0x53, 0x02, 0x87, 0x1B, 0x01};
     EXPECT_CALL(i2c_,
                 i2c_write_blocking(
                     device_address_,     // Arg 0 : I2C Address.
@@ -826,8 +853,9 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_27000) {
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(config_pll)));
     // error must be less than 0.5Hz.
-    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
+    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_441,
                 acceptable_error);
+    EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
 }  // ConfigurePll_411_27000
@@ -836,14 +864,14 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_12288) {
   using ::testing::Args;
   using ::testing::ElementsAreArray;
   using ::testing::NotNull;
-  const unsigned int target_pll_freq_48 = 49152000;  // Hz. See data sheet.
+  const unsigned int target_pll_freq_441 = 45158400;  // Hz. See data sheet.
   const float acceptable_error = 5;  // Hz. Error of the PLL out.
 
   // Test 27MHz master clock for Fs 48kHz series.
   {
     const unsigned int mclock = 12288000;
     const unsigned int fs = 44100;
-    uint8_t config_pll[] = {0x40, 0x02, 0x04, 0x65, 0x02, 0xD1, 0x20, 0x01};
+    uint8_t config_pll[] = {0x40, 0x02, 0x03, 0xE8, 0x02, 0xA3, 0x19, 0x01};
     EXPECT_CALL(i2c_,
                 i2c_write_blocking(
                     device_address_,     // Arg 0 : I2C Address.
@@ -854,8 +882,9 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_12288) {
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(config_pll)));
     // error must be less than 0.5Hz.
-    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
+    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_441,
                 acceptable_error);
+    EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
 }  // ConfigurePll_411_12288
@@ -864,14 +893,14 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_24576) {
   using ::testing::Args;
   using ::testing::ElementsAreArray;
   using ::testing::NotNull;
-  const unsigned int target_pll_freq_48 = 49152000;  // Hz. See data sheet.
+  const unsigned int target_pll_freq_441 = 45158400;  // Hz. See data sheet.
   const float acceptable_error = 5;  // Hz. Error of the PLL out.
 
   // Test 27MHz master clock for Fs 48kHz series.
   {
     const unsigned int mclock = 24576000;
     const unsigned int fs = 44100;
-    uint8_t config_pll[] = {0x40, 0x02, 0x04, 0x65, 0x02, 0xD1, 0x10, 0x01};
+    uint8_t config_pll[] = {0x40, 0x02, 0x03, 0xE8, 0x02, 0xA3, 0x1B, 0x01};
     EXPECT_CALL(i2c_,
                 i2c_write_blocking(
                     device_address_,     // Arg 0 : I2C Address.
@@ -882,8 +911,9 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_24576) {
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(config_pll)));
     // error must be less than 0.5Hz.
-    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
+    EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_441,
                 acceptable_error);
+    EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
 }  // ConfigurePll_411_24576
