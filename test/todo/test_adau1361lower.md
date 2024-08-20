@@ -4,6 +4,17 @@
 - [] Make it success.-
 - [] Remove the duplication.
 
+- [] Make it success.-
+- [] Remove the duplication.
+
+- [x] Create Adau1361Lower.SetLineOutputGain_appropriate_gain()to fail.
+- [x] Make it success.-
+- [x] Remove the duplication.
+
+- [x] Create Adau1361Lower.SetLineOutputGain_undergain()to fail.
+- [x] Make it success.-
+- [x] Remove the duplication.
+
 - [x] Create Adau1361Lower.SetLineOutputGain_overgain()to fail.
 - [x] Make it success.-
 - [x] Remove the duplication.
