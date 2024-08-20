@@ -148,8 +148,9 @@ static const uint8_t config_core[] = {
 
 // Configure PLL and start. Then, initiate the core and set the CODEC Fs.
 void Adau1361Lower::ConfigurePll(unsigned int fs, unsigned int master_clock) {
-  assert(fs == 24000 || fs == 32000 || fs == 48000 || fs == 96000 ||
-         fs == 22050 || fs == 44100 || fs == 88200);
+  assert((fs == 24000 || fs == 32000 || fs == 48000 || fs == 96000 ||
+          fs == 22050 || fs == 44100 || fs == 88200) &&
+         "Bad Fs");
 
   if (fs == 24000 || fs == 32000 || fs == 48000 || fs == 96000) {
     // Configure the PLL. Target PLL out is 49.152MHz = 1024xfs
@@ -327,7 +328,7 @@ void Adau1361Lower::ConfigurePll(unsigned int fs, unsigned int master_clock) {
       }
 
       default:
-        assert(false);
+        assert(false && "Wong Master Clock with Fs 48kHz Series");
     }
 
   } else if (fs == 22050 || fs == 44100 || fs == 88200) {
@@ -503,11 +504,11 @@ void Adau1361Lower::ConfigurePll(unsigned int fs, unsigned int master_clock) {
       }
 
       default:
-        assert(false);
+        assert(false && "Wong Master Clock with Fs 44.1kHz Series");
     }
 
-  } else {  // if the required Fs is unknown, it is critical error.
-    assert(false);
+  } else {  // Fs must be checked at the top of this routine.
+    assert(false && "Wrong parameter validation");
   }
 
 }  // ConfigurePlll
@@ -537,6 +538,9 @@ void Adau1361Lower::ConfigureSignalPath() {
 
 // Set the converter clock.
 void Adau1361Lower::ConfigureSRC(unsigned int fs) {
+  assert((fs == 24000 || fs == 32000 || fs == 48000 || fs == 96000 ||
+          fs == 22050 || fs == 44100 || fs == 88200) &&
+         "Bad Fs");
   switch (fs) {
     case 22050:
     case 24000: {

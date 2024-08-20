@@ -16,6 +16,8 @@ class Adau1361LowerTest : public ::testing::Test {
   Adau1361Lower *codec_lower_;
 };
 
+typedef Adau1361LowerTest Adau1361LowerDeathTest;
+
 TEST_F(Adau1361LowerTest, SendCommand) {
   uint8_t cmd[7];
 
@@ -581,7 +583,7 @@ TEST_F(Adau1361LowerTest, ConfigurePll_48_24576) {
 //
 // ------------------------------------------------------------
 
-TEST_F(Adau1361LowerTest, ConfigurePll_411_08000) {
+TEST_F(Adau1361LowerTest, ConfigurePll_441_08000) {
   using ::testing::Args;
   using ::testing::ElementsAreArray;
   using ::testing::NotNull;
@@ -609,9 +611,9 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_08000) {
     EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
-}  // ConfigurePll_411_08000
+}  // ConfigurePll_441_08000
 
-TEST_F(Adau1361LowerTest, ConfigurePll_411_12000) {
+TEST_F(Adau1361LowerTest, ConfigurePll_441_12000) {
   using ::testing::Args;
   using ::testing::ElementsAreArray;
   using ::testing::NotNull;
@@ -639,9 +641,9 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_12000) {
     EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
-}  // ConfigurePll_411_12000
+}  // ConfigurePll_441_12000
 
-TEST_F(Adau1361LowerTest, ConfigurePll_411_13000) {
+TEST_F(Adau1361LowerTest, ConfigurePll_441_13000) {
   using ::testing::Args;
   using ::testing::ElementsAreArray;
   using ::testing::NotNull;
@@ -669,9 +671,9 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_13000) {
     EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
-}  // ConfigurePll_411_13000
+}  // ConfigurePll_441_13000
 
-TEST_F(Adau1361LowerTest, ConfigurePll_411_14400) {
+TEST_F(Adau1361LowerTest, ConfigurePll_441_14400) {
   using ::testing::Args;
   using ::testing::ElementsAreArray;
   using ::testing::NotNull;
@@ -699,9 +701,9 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_14400) {
     EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
-}  // ConfigurePll_411_14400
+}  // ConfigurePll_441_14400
 
-TEST_F(Adau1361LowerTest, ConfigurePll_411_19200) {
+TEST_F(Adau1361LowerTest, ConfigurePll_441_19200) {
   using ::testing::Args;
   using ::testing::ElementsAreArray;
   using ::testing::NotNull;
@@ -730,9 +732,9 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_19200) {
     codec_lower_->ConfigurePll(fs, mclock);
   }
 
-}  // ConfigurePll_411_19200
+}  // ConfigurePll_441_19200
 
-TEST_F(Adau1361LowerTest, ConfigurePll_411_19680) {
+TEST_F(Adau1361LowerTest, ConfigurePll_441_19680) {
   using ::testing::Args;
   using ::testing::ElementsAreArray;
   using ::testing::NotNull;
@@ -760,9 +762,9 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_19680) {
     EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
-}  // ConfigurePll_411_19680
+}  // ConfigurePll_441_19680
 
-TEST_F(Adau1361LowerTest, ConfigurePll_411_19800) {
+TEST_F(Adau1361LowerTest, ConfigurePll_441_19800) {
   using ::testing::Args;
   using ::testing::ElementsAreArray;
   using ::testing::NotNull;
@@ -790,9 +792,9 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_19800) {
     EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
-}  // ConfigurePll_411_19800
+}  // ConfigurePll_441_19800
 
-TEST_F(Adau1361LowerTest, ConfigurePll_411_24000) {
+TEST_F(Adau1361LowerTest, ConfigurePll_441_24000) {
   using ::testing::Args;
   using ::testing::ElementsAreArray;
   using ::testing::NotNull;
@@ -821,9 +823,9 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_24000) {
     codec_lower_->ConfigurePll(fs, mclock);
   }
 
-}  // ConfigurePll_411_24000
+}  // ConfigurePll_441_24000
 
-TEST_F(Adau1361LowerTest, ConfigurePll_411_26000) {
+TEST_F(Adau1361LowerTest, ConfigurePll_441_26000) {
   using ::testing::Args;
   using ::testing::ElementsAreArray;
   using ::testing::NotNull;
@@ -851,9 +853,9 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_26000) {
     EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
-}  // ConfigurePll_411_26000
+}  // ConfigurePll_441_26000
 
-TEST_F(Adau1361LowerTest, ConfigurePll_411_27000) {
+TEST_F(Adau1361LowerTest, ConfigurePll_441_27000) {
   using ::testing::Args;
   using ::testing::ElementsAreArray;
   using ::testing::NotNull;
@@ -881,9 +883,9 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_27000) {
     EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
-}  // ConfigurePll_411_27000
+}  // ConfigurePll_441_27000
 
-TEST_F(Adau1361LowerTest, ConfigurePll_411_12288) {
+TEST_F(Adau1361LowerTest, ConfigurePll_441_12288) {
   using ::testing::Args;
   using ::testing::ElementsAreArray;
   using ::testing::NotNull;
@@ -911,9 +913,9 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_12288) {
     EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
-}  // ConfigurePll_411_12288
+}  // ConfigurePll_441_12288
 
-TEST_F(Adau1361LowerTest, ConfigurePll_411_24576) {
+TEST_F(Adau1361LowerTest, ConfigurePll_441_24576) {
   using ::testing::Args;
   using ::testing::ElementsAreArray;
   using ::testing::NotNull;
@@ -941,4 +943,60 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_24576) {
     EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
-}  // ConfigurePll_411_24576
+}  // ConfigurePll_441_24576
+
+// Validation test for wrong master clock at fs 48kHz.
+TEST_F(Adau1361LowerDeathTest, ConfigurePll_48_wrong_master_clock) {
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::NotNull;
+  const unsigned int target_pll_freq_441 = 45158400;  // Hz. See data sheet.
+  const float acceptable_error = 5;  // Hz. Error of the PLL out.
+
+  // Test 27MHz master clock for Fs 48kHz series.
+  {
+    const unsigned int mclock = 123;
+    const unsigned int fs = 48000;
+    uint8_t config_pll[] = {0x40, 0x02, 0x03, 0xE8, 0x02, 0xA3, 0x1B, 0x01};
+    // check the assertion for bad mclock.
+    ASSERT_DEATH(codec_lower_->ConfigurePll(fs, mclock),
+                 "Wong Master Clock with Fs 48kHz Series");
+  }
+}  // ConfigurePll_48_wrong_master_clock
+
+// Validation test for wrong master clock at fs 44.1kHz.
+TEST_F(Adau1361LowerDeathTest, ConfigurePll_441_wrong_master_clock) {
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::NotNull;
+  const unsigned int target_pll_freq_441 = 45158400;  // Hz. See data sheet.
+  const float acceptable_error = 5;  // Hz. Error of the PLL out.
+
+  // Test 27MHz master clock for Fs 48kHz series.
+  {
+    const unsigned int mclock = 123;
+    const unsigned int fs = 44100;
+    uint8_t config_pll[] = {0x40, 0x02, 0x03, 0xE8, 0x02, 0xA3, 0x1B, 0x01};
+    // check the assertion for bad mclock.
+    ASSERT_DEATH(codec_lower_->ConfigurePll(fs, mclock),
+                 "Wong Master Clock with Fs 44.1kHz Series");
+  }
+}  // ConfigurePll_441_wrong_master_clock
+
+// Validation test for wrong fs .
+TEST_F(Adau1361LowerDeathTest, ConfigurePll_wrong_fs) {
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::NotNull;
+  const unsigned int target_pll_freq_441 = 45158400;  // Hz. See data sheet.
+  const float acceptable_error = 5;  // Hz. Error of the PLL out.
+
+  // Test 27MHz master clock for Fs 48kHz series.
+  {
+    const unsigned int mclock = 8000000;
+    const unsigned int fs = 192000;
+    uint8_t config_pll[] = {0x40, 0x02, 0x03, 0xE8, 0x02, 0xA3, 0x1B, 0x01};
+    // check the assertion for bad mclock.
+    ASSERT_DEATH(codec_lower_->ConfigurePll(fs, mclock), "Bad Fs");
+  }
+}  // ConfigurePll_wrong_fs
