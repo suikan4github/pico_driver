@@ -233,9 +233,10 @@ TEST_F(Adau1361LowerTest, ConfigurePll_48_08000) {
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(config_pll)));
-    // error must be less than 0.5Hz.
+    // check the frequency error of the PLL
     EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
                 acceptable_error);
+    // check whether PLL is enabled or not.
     EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
@@ -262,9 +263,10 @@ TEST_F(Adau1361LowerTest, ConfigurePll_48_12000) {
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(config_pll)));
-    // error must be less than 0.5Hz.
+    // check the frequency error of the PLL
     EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
                 acceptable_error);
+    // check whether PLL is enabled or not.
     EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
@@ -291,9 +293,10 @@ TEST_F(Adau1361LowerTest, ConfigurePll_48_13000) {
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(config_pll)));
-    // error must be less than 0.5Hz.
+    // check the frequency error of the PLL
     EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
                 acceptable_error);
+    // check whether PLL is enabled or not.
     EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
@@ -320,9 +323,10 @@ TEST_F(Adau1361LowerTest, ConfigurePll_48_14400) {
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(config_pll)));
-    // error must be less than 0.5Hz.
+    // check the frequency error of the PLL
     EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
                 acceptable_error);
+    // check whether PLL is enabled or not.
     EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
@@ -349,9 +353,10 @@ TEST_F(Adau1361LowerTest, ConfigurePll_48_19200) {
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(config_pll)));
-    // error must be less than 0.5Hz.
+    // check the frequency error of the PLL
     EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
                 acceptable_error);
+    // check whether PLL is enabled or not.
     EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
@@ -379,9 +384,10 @@ TEST_F(Adau1361LowerTest, ConfigurePll_48_19680) {
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(config_pll)));
-    // error must be less than 0.5Hz.
+    // check the frequency error of the PLL
     EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
                 acceptable_error);
+    // check whether PLL is enabled or not.
     EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
@@ -408,9 +414,10 @@ TEST_F(Adau1361LowerTest, ConfigurePll_48_19800) {
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(config_pll)));
-    // error must be less than 0.5Hz.
+    // check the frequency error of the PLL
     EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
                 acceptable_error);
+    // check whether PLL is enabled or not.
     EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
@@ -437,9 +444,11 @@ TEST_F(Adau1361LowerTest, ConfigurePll_48_24000) {
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(config_pll)));
-    // error must be less than 0.5Hz.
+    // check the frequency error of the PLL
     EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
                 acceptable_error);
+    // check whether PLL is enabled or not.
+    // check whether PLL is enabled or not.
     EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
@@ -467,9 +476,10 @@ TEST_F(Adau1361LowerTest, ConfigurePll_48_26000) {
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(config_pll)));
-    // error must be less than 0.5Hz.
+    // check the frequency error of the PLL
     EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
                 acceptable_error);
+    // check whether PLL is enabled or not.
     EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
@@ -496,9 +506,10 @@ TEST_F(Adau1361LowerTest, ConfigurePll_48_27000) {
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(config_pll)));
-    // error must be less than 0.5Hz.
+    // check the frequency error of the PLL
     EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
                 acceptable_error);
+    // check whether PLL is enabled or not.
     EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
@@ -525,9 +536,10 @@ TEST_F(Adau1361LowerTest, ConfigurePll_48_12288) {
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(config_pll)));
-    // error must be less than 0.5Hz.
+    // check the frequency error of the PLL
     EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
                 acceptable_error);
+    // check whether PLL is enabled or not.
     EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
@@ -554,9 +566,10 @@ TEST_F(Adau1361LowerTest, ConfigurePll_48_24576) {
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(config_pll)));
-    // error must be less than 0.5Hz.
+    // check the frequency error of the PLL
     EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_48,
                 acceptable_error);
+    // check whether PLL is enabled or not.
     EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
@@ -589,9 +602,10 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_08000) {
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(config_pll)));
-    // error must be less than 0.5Hz.
+    // check the frequency error of the PLL
     EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_441,
                 acceptable_error);
+    // check whether PLL is enabled or not.
     EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
@@ -618,9 +632,10 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_12000) {
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(config_pll)));
-    // error must be less than 0.5Hz.
+    // check the frequency error of the PLL
     EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_441,
                 acceptable_error);
+    // check whether PLL is enabled or not.
     EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
@@ -647,9 +662,10 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_13000) {
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(config_pll)));
-    // error must be less than 0.5Hz.
+    // check the frequency error of the PLL
     EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_441,
                 acceptable_error);
+    // check whether PLL is enabled or not.
     EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
@@ -676,9 +692,10 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_14400) {
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(config_pll)));
-    // error must be less than 0.5Hz.
+    // check the frequency error of the PLL
     EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_441,
                 acceptable_error);
+    // check whether PLL is enabled or not.
     EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
@@ -705,9 +722,10 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_19200) {
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(config_pll)));
-    // error must be less than 0.5Hz.
+    // check the frequency error of the PLL
     EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_441,
                 acceptable_error);
+    // check whether PLL is enabled or not.
     EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
@@ -735,9 +753,10 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_19680) {
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(config_pll)));
-    // error must be less than 0.5Hz.
+    // check the frequency error of the PLL
     EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_441,
                 acceptable_error);
+    // check whether PLL is enabled or not.
     EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
@@ -764,9 +783,10 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_19800) {
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(config_pll)));
-    // error must be less than 0.5Hz.
+    // check the frequency error of the PLL
     EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_441,
                 acceptable_error);
+    // check whether PLL is enabled or not.
     EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
@@ -793,9 +813,10 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_24000) {
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(config_pll)));
-    // error must be less than 0.5Hz.
+    // check the frequency error of the PLL
     EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_441,
                 acceptable_error);
+    // check whether PLL is enabled or not.
     EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
@@ -823,9 +844,10 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_26000) {
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(config_pll)));
-    // error must be less than 0.5Hz.
+    // check the frequency error of the PLL
     EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_441,
                 acceptable_error);
+    // check whether PLL is enabled or not.
     EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
@@ -852,9 +874,10 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_27000) {
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(config_pll)));
-    // error must be less than 0.5Hz.
+    // check the frequency error of the PLL
     EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_441,
                 acceptable_error);
+    // check whether PLL is enabled or not.
     EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
@@ -881,9 +904,10 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_12288) {
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(config_pll)));
-    // error must be less than 0.5Hz.
+    // check the frequency error of the PLL
     EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_441,
                 acceptable_error);
+    // check whether PLL is enabled or not.
     EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
@@ -910,9 +934,10 @@ TEST_F(Adau1361LowerTest, ConfigurePll_411_24576) {
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(config_pll)));
-    // error must be less than 0.5Hz.
+    // check the frequency error of the PLL
     EXPECT_NEAR(pll_out(mclock, config_pll), target_pll_freq_441,
                 acceptable_error);
+    // check whether PLL is enabled or not.
     EXPECT_TRUE(is_pll_enabled(config_pll));
     codec_lower_->ConfigurePll(fs, mclock);
   }
