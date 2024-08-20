@@ -541,6 +541,7 @@ void Adau1361Lower::ConfigureSRC(unsigned int fs) {
   assert((fs == 24000 || fs == 32000 || fs == 48000 || fs == 96000 ||
           fs == 22050 || fs == 44100 || fs == 88200) &&
          "Bad Fs");
+
   switch (fs) {
     case 22050:
     case 24000: {
@@ -595,14 +596,14 @@ void Adau1361Lower::SetLineInputGain(float left_gain, float right_gain,
   int left, right;
 
   // set left gain
-  left = std::max(left, -12);
+  left = std::max(static_cast<int>(left_gain), -12);
   left = std::min(left, 6);
-  left = (left_gain + 15) / 3;  // See table 31 LINNG
+  left = (left + 15) / 3;  // See table 31 LINNG
 
   // set right gain
-  right = std::max(right, -12);
+  right = std::max(static_cast<int>(right_gain), -12);
   right = std::min(right, 6);
-  right = (right_gain + 15) / 3;  // See table 31 LINNG
+  right = (right + 15) / 3;  // See table 31 LINNG
 
   /*
    *  *************** Read Modify light the Left Channel Gain
