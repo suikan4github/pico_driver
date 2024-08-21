@@ -11,7 +11,8 @@
 
 #include <stdint.h>
 #include <stdlib.h>
-#ifdef GTEST_BUILD  // If not build for GTest, include followings.
+
+#if !__has_include(<hardware/i2c.h>)
 typedef unsigned uint;
 #endif
 

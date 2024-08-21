@@ -12,7 +12,6 @@ if((${WIN32}) OR (${UNIX})) # Is Target Windows or Unix?
                         adau1361lower.cpp
                         i2cmaster.cpp)
                 target_include_directories(driver PUBLIC .)
-                target_compile_definitions(driver PRIVATE GTEST_BUILD=1)
         include(GoogleTest)
         # If the target is Windows or Unix, this is for testing 
         # by GTest. So it should be build as normal library. 

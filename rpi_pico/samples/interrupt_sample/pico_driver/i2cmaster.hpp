@@ -11,12 +11,12 @@
 
 #include <stdint.h>
 
-#ifdef GTEST_BUILD  // If not build for GTest, include followings.
+#if __has_include(<hardware/i2c.h>)
+#include "hardware/i2c.h"
+#else
 typedef int i2c_inst_t;
 #define PICO_ERROR_GENERIC -1
-#else  // Build for pico
-#include "hardware/i2c.h"
-#endif
+#endif  //__has_include(<hardware/i2c.h>)
 
 #include "i2cmasterinterface.hpp"
 #include "picowrapper.hpp"
@@ -60,7 +60,7 @@ class I2CMaster : public I2CMasterInterface {
   PicoWrapper &sdk_;
 };
 
-#ifdef MOCK_METHOD1  // If build for GTest, declare a mock.
+#if __has_include(<gmock/gmock.h>)
 
 class MockI2CMaster : public I2CMaster {
  public:
@@ -76,6 +76,6 @@ class MockI2CMaster : public I2CMaster {
   PicoWrapper sdk;
 };
 
-#endif  // GTEST_BUILD
+#endif  //  __has_include(<gmock/gmock>)
 
 #endif /* _I2CMASTER_HPP_ */

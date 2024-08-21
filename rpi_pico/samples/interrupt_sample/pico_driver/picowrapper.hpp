@@ -1,14 +1,16 @@
 #ifndef __DRIVER_PICOWRAPPER_HPP__
 #define __DRIVER_PICOWRAPPER_HPP__
 
-#ifdef GTEST_BUILD  // If  build for GTest, include followings.
+#if __has_include("pico/stdlib.h")
+// For Pico
+#include "hardware/i2c.h"
+#include "pico/stdlib.h"
+#else
+// Alternative include and definition for Unix/Win32
 typedef int i2c_inst_t;
 typedef unsigned uint;
 #include <stdint.h>
 #include <stdlib.h>
-#else  // Build for pico
-#include "hardware/i2c.h"
-#include "pico/stdlib.h"
 #endif
 
 /**
@@ -96,8 +98,7 @@ class PicoWrapper {
                                  const uint8_t *src, size_t len, bool nostop);
 };
 
-#ifdef MOCK_METHOD1  // If build for GTest, declare a mock.
-
+#if __has_include(<gmock/gmock.h>)
 class MockPicoWrapper : public PicoWrapper {
  public:
   MOCK_METHOD1(sleep_ms, void(uint32_t ms));
@@ -113,6 +114,6 @@ class MockPicoWrapper : public PicoWrapper {
                    size_t len, bool nostop));
 };
 
-#endif  // GTEST_BUILD
+#endif  // __has_include(<gmock/gmock.h>)
 
 #endif  // __DRIVER_PICOWRAPPER_HPP__
