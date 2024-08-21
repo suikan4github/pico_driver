@@ -1,20 +1,44 @@
 #test_i2cmaster TDD
 
-- [] Create Adau1361Lower.ConfigureSingalPath()to fail.
-- [] Make it success.-
+- [] Create Adau1361LowerTest.ConfigureSingalPath()to fail.
+- [] Make it success.
 - [] Remove the duplication.
 
-- [] Create Adau1361Lower.InitializeRegisters()to fail.
-- [] Make it success.-
+- [] Create Adau1361LowerTest.InitializeRegisters()to fail.
+- [] Make it success.
 - [] Remove the duplication.
 
-- [] Create Adau1361Lower.EnableCore()to fail.
-- [] Make it success.-
+- [] Create Adau1361LowerTest.EnableCore()to fail.
+- [] Make it success.
 - [] Remove the duplication.
 
-- [x] Create Adau1361Lower.ConfigureSRC()to fail.
-- [] Make it success.-
-- [] Remove the duplication.
+- [x] Create Adau1361Lower.ConfigureSRC_96000()to fail.
+- [x] Make it success.
+- [x] Remove the duplication.
+
+- [x] Create Adau1361Lower.ConfigureSRC_88200()to fail.
+- [x] Make it success.-
+- [x] Remove the duplication.
+
+- [x] Create Adau1361Lower.ConfigureSRC_48000()to fail.
+- [x] Make it success.-
+- [x] Remove the duplication.
+
+- [x] Create Adau1361Lower.ConfigureSRC_44100()to fail.
+- [x] Make it success.-
+- [x] Remove the duplication.
+
+- [x] Create Adau1361Lower.ConfigureSRC_32000()to fail.
+- [x] Make it success.-
+- [x] Remove the duplication.
+
+- [x] Create Adau1361Lower.ConfigureSRC_24000()to fail.
+- [x] Make it success.-
+- [x] Remove the duplication.
+
+- [x] Create Adau1361Lower.ConfigureSRC_22050()to fail.
+- [x] Make it success.-
+- [x] Remove the duplication.
 
 - [x] Create Adau1361LowerDeathTest.ConfigureSRC_wrong_fs()to fail.
 - [x] Make it success.-

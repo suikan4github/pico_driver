@@ -1774,16 +1774,188 @@ TEST_F(Adau1361LowerTest, SetHpOutputGain_appropriate_gain) {
 
 // -----------------------------------------------------------------
 //
-//                          SetAuxInputGain()
+//                          ConfigureSRC()
 //
 // -----------------------------------------------------------------
 
-// Validation test for wrong master clock at fs 48kHz.
+// Validation test for wrong fs.
 TEST_F(Adau1361LowerDeathTest, ConfigureSRC_wrong_fs) {
-  // Test 27MHz master clock for Fs 48kHz series.
-  {
-    const unsigned int fs = 192000;
-    // check the assertion for bad mclock.
-    ASSERT_DEATH(codec_lower_->ConfigureSRC(fs), "Bad Fs");
-  }
-}  // ConfigurePll_48_wrong_master_clock
+  const unsigned int fs = 192000;  // not supported by ADAU1361
+  // check the assertion for bad mclock.
+  ASSERT_DEATH(codec_lower_->ConfigureSRC(fs), "Bad Fs");
+}  // ConfigureSRC_wrong_fs
+
+// Validation test for fs 22050 Hz.
+TEST_F(Adau1361LowerTest, ConfigureSRC_22050) {
+  const unsigned int fs = 22050;  // Hz
+  const uint8_t config_src[] = {0x40, 0x17, 0x04};
+
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::NotNull;
+  using ::testing::Return;
+
+  EXPECT_CALL(i2c_,
+              i2c_write_blocking(
+                  device_address_,     // Arg 0 : I2C Address.
+                  NotNull(),           // Arg 1 : Data buffer address.
+                  sizeof(config_src),  // Arg 2 : Data buffer length to send.
+                  false))              // Arg 3 : false to stop.
+      .With(Args<1,  // parameter position of the array : 0 origin.
+                 2>  // parameter position of the size : 0 origin.
+            (ElementsAreArray(config_src)))
+      .WillOnce(Return(sizeof(config_src)));
+
+  // right configuration of SRC.
+  codec_lower_->ConfigureSRC(fs);
+}  // ConfigureSRC_22050
+
+// Validation test for fs 24000 Hz.
+TEST_F(Adau1361LowerTest, ConfigureSRC_24000) {
+  const unsigned int fs = 24000;  // Hz
+  const uint8_t config_src[] = {0x40, 0x17, 0x04};
+
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::NotNull;
+  using ::testing::Return;
+
+  EXPECT_CALL(i2c_,
+              i2c_write_blocking(
+                  device_address_,     // Arg 0 : I2C Address.
+                  NotNull(),           // Arg 1 : Data buffer address.
+                  sizeof(config_src),  // Arg 2 : Data buffer length to send.
+                  false))              // Arg 3 : false to stop.
+      .With(Args<1,  // parameter position of the array : 0 origin.
+                 2>  // parameter position of the size : 0 origin.
+            (ElementsAreArray(config_src)))
+      .WillOnce(Return(sizeof(config_src)));
+
+  // right configuration of SRC.
+  codec_lower_->ConfigureSRC(fs);
+}  // ConfigureSRC_24000
+
+// Validation test for fs 32000 Hz.
+TEST_F(Adau1361LowerTest, ConfigureSRC_32000) {
+  const unsigned int fs = 32000;  // Hz
+  const uint8_t config_src[] = {0x40, 0x17, 0x05};
+
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::NotNull;
+  using ::testing::Return;
+
+  EXPECT_CALL(i2c_,
+              i2c_write_blocking(
+                  device_address_,     // Arg 0 : I2C Address.
+                  NotNull(),           // Arg 1 : Data buffer address.
+                  sizeof(config_src),  // Arg 2 : Data buffer length to send.
+                  false))              // Arg 3 : false to stop.
+      .With(Args<1,  // parameter position of the array : 0 origin.
+                 2>  // parameter position of the size : 0 origin.
+            (ElementsAreArray(config_src)))
+      .WillOnce(Return(sizeof(config_src)));
+
+  // right configuration of SRC.
+  codec_lower_->ConfigureSRC(fs);
+}  // ConfigureSRC_32000
+
+// Validation test for fs 44100 Hz.
+TEST_F(Adau1361LowerTest, ConfigureSRC_44100) {
+  const unsigned int fs = 44100;  // Hz
+  const uint8_t config_src[] = {0x40, 0x17, 0x00};
+
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::NotNull;
+  using ::testing::Return;
+
+  EXPECT_CALL(i2c_,
+              i2c_write_blocking(
+                  device_address_,     // Arg 0 : I2C Address.
+                  NotNull(),           // Arg 1 : Data buffer address.
+                  sizeof(config_src),  // Arg 2 : Data buffer length to send.
+                  false))              // Arg 3 : false to stop.
+      .With(Args<1,  // parameter position of the array : 0 origin.
+                 2>  // parameter position of the size : 0 origin.
+            (ElementsAreArray(config_src)))
+      .WillOnce(Return(sizeof(config_src)));
+
+  // right configuration of SRC.
+  codec_lower_->ConfigureSRC(fs);
+}  // ConfigureSRC_44100
+
+// Validation test for fs 48000 Hz.
+TEST_F(Adau1361LowerTest, ConfigureSRC_48000) {
+  const unsigned int fs = 48000;  // Hz
+  const uint8_t config_src[] = {0x40, 0x17, 0x00};
+
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::NotNull;
+  using ::testing::Return;
+
+  EXPECT_CALL(i2c_,
+              i2c_write_blocking(
+                  device_address_,     // Arg 0 : I2C Address.
+                  NotNull(),           // Arg 1 : Data buffer address.
+                  sizeof(config_src),  // Arg 2 : Data buffer length to send.
+                  false))              // Arg 3 : false to stop.
+      .With(Args<1,  // parameter position of the array : 0 origin.
+                 2>  // parameter position of the size : 0 origin.
+            (ElementsAreArray(config_src)))
+      .WillOnce(Return(sizeof(config_src)));
+
+  // right configuration of SRC.
+  codec_lower_->ConfigureSRC(fs);
+}  // ConfigureSRC_48000
+
+// Validation test for fs 88200 Hz.
+TEST_F(Adau1361LowerTest, ConfigureSRC_88200) {
+  const unsigned int fs = 88200;  // Hz
+  const uint8_t config_src[] = {0x40, 0x17, 0x06};
+
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::NotNull;
+  using ::testing::Return;
+
+  EXPECT_CALL(i2c_,
+              i2c_write_blocking(
+                  device_address_,     // Arg 0 : I2C Address.
+                  NotNull(),           // Arg 1 : Data buffer address.
+                  sizeof(config_src),  // Arg 2 : Data buffer length to send.
+                  false))              // Arg 3 : false to stop.
+      .With(Args<1,  // parameter position of the array : 0 origin.
+                 2>  // parameter position of the size : 0 origin.
+            (ElementsAreArray(config_src)))
+      .WillOnce(Return(sizeof(config_src)));
+
+  // right configuration of SRC.
+  codec_lower_->ConfigureSRC(fs);
+}  // ConfigureSRC_88200
+
+// Validation test for fs 96000 Hz.
+TEST_F(Adau1361LowerTest, ConfigureSRC_96000) {
+  const unsigned int fs = 96000;  // Hz
+  const uint8_t config_src[] = {0x40, 0x17, 0x06};
+
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::NotNull;
+  using ::testing::Return;
+
+  EXPECT_CALL(i2c_,
+              i2c_write_blocking(
+                  device_address_,     // Arg 0 : I2C Address.
+                  NotNull(),           // Arg 1 : Data buffer address.
+                  sizeof(config_src),  // Arg 2 : Data buffer length to send.
+                  false))              // Arg 3 : false to stop.
+      .With(Args<1,  // parameter position of the array : 0 origin.
+                 2>  // parameter position of the size : 0 origin.
+            (ElementsAreArray(config_src)))
+      .WillOnce(Return(sizeof(config_src)));
+
+  // right configuration of SRC.
+  codec_lower_->ConfigureSRC(fs);
+}  // ConfigureSRC_96000
