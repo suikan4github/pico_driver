@@ -647,13 +647,13 @@ void Adau1361Lower::SetAuxInputGain(float left_gain, float right_gain,
   int left, right;
 
   // set left gain LDBOOST is muted.
-  left = std::max(left, -12);
+  left = std::max(static_cast<int>(left_gain), -12);
   left = std::min(left, 6);
-  left = (left_gain + 15) / 3;  // See table 32 MX1AUGXG
+  left = (left + 15) / 3;  // See table 32 MX1AUGXG
   // set right gain. LDBOOST is muted.
-  right = std::max(right, -12);
+  right = std::max(static_cast<int>(right_gain), -12);
   right = std::min(right, 6);
-  right = (right_gain + 15) / 3;  // See table 34 MX1AUGXG
+  right = (right + 15) / 3;  // See table 34 MX1AUGXG
 
   /*
    *  *************** Read Modify light the Left Channel Gain
@@ -663,12 +663,8 @@ void Adau1361Lower::SetAuxInputGain(float left_gain, float right_gain,
   txbuf[ADDH] = 0x40;  // Upper address of register
   txbuf[ADDL] = 0x0b;
 
-  // Obtain the Register
-  i2c_.i2c_write_blocking(device_addr_, txbuf, 2, true);  // repeated start.
-  i2c_.i2c_read_blocking(device_addr_, rxbuf, 1, false);
-
   // Create a register value
-  txbuf[DATA] = (rxbuf[0] & 0xF8) | SET_AUX_GAIN(left, mute);
+  txbuf[DATA] = SET_AUX_GAIN(left, mute);  // Negative input only
   // Set the R5.
   SendCommand(txbuf, 3);
 
@@ -680,12 +676,8 @@ void Adau1361Lower::SetAuxInputGain(float left_gain, float right_gain,
   txbuf[ADDH] = 0x40;  // Upper address of register
   txbuf[ADDL] = 0x0d;
 
-  // Obtain the Register
-  i2c_.i2c_write_blocking(device_addr_, txbuf, 2, true);  // repeated start.
-  i2c_.i2c_read_blocking(device_addr_, rxbuf, 1, false);
-
   // Create a register value
-  txbuf[DATA] = (rxbuf[0] & 0xF8) | SET_AUX_GAIN(left, mute);
+  txbuf[DATA] = SET_AUX_GAIN(right, mute);  // Negative input only
   // Set the R7.
   SendCommand(txbuf, 3);
 }

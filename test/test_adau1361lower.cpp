@@ -1173,7 +1173,7 @@ TEST_F(Adau1361LowerTest, SetLineInputGain_appropriate_gain) {
     InSequence dummy;
 
     uint8_t ltxbuf1[3] = {0x40, 0x0a,
-                          0x09};  // in the case of gain=0dB, bit 3:1 are 101
+                          0x0B};  // in the case of gain=0dB, bit 3:1 are 101
 
     // expectation of appropriate gain.
     EXPECT_CALL(i2c_,
@@ -1407,3 +1407,193 @@ TEST_F(Adau1361LowerTest, SetLineOutputGain_appropriate_gain) {
   // must be set to 2.0 and -5.0dB, not muted.
   codec_lower_->SetLineOutputGain(2.0, -5.0, false);
 }  // SetLineOutputGain_appropriate_gain
+
+// -----------------------------------------------------------------
+//
+//                          SetAuxInputGain()
+//
+// -----------------------------------------------------------------
+
+// Mute test
+TEST_F(Adau1361LowerTest, SetAuxInputGain_mute) {
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::InSequence;
+  using ::testing::NotNull;
+  using ::testing::Return;
+
+  {
+    InSequence dummy;
+
+    // Left check
+    uint8_t ltxbuf1[3] = {0x40, 0x0b, 0x00};  // R5 : 0 if muted.
+
+    //  expectation of mute.
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,  // Arg 0 : I2C Address.
+                    NotNull(),        // Arg 1 : Data buffer address.
+                    sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
+                    false))           // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(ltxbuf1)))
+        .WillOnce(Return(sizeof(ltxbuf1)));
+
+    // right check
+    uint8_t rtxbuf1[3] = {0x40, 0x0d, 0x00};  // R7 : 0 if muted.
+
+    //  expectation of mute.
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,  // Arg 0 : I2C Address.
+                    NotNull(),        // Arg 1 : Data buffer address.
+                    sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
+                    false))           // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(rtxbuf1)))
+        .WillOnce(Return(sizeof(rtxbuf1)));
+  }
+
+  // must be set to muted.
+  codec_lower_->SetAuxInputGain(0.0, 0.0, true);
+}  // SetAuxInputGain_mute
+
+// Overgain test : must be truncated to 6dB
+TEST_F(Adau1361LowerTest, SetAuxInputGain_overgain) {
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::InSequence;
+  using ::testing::NotNull;
+  using ::testing::Return;
+
+  {
+    InSequence dummy;
+
+    // Left check
+    uint8_t ltxbuf1[3] = {0x40, 0x0b, 0x07};  // R5 : 111 if 6dB.
+
+    //  expectation of 6db.
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,  // Arg 0 : I2C Address.
+                    NotNull(),        // Arg 1 : Data buffer address.
+                    sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
+                    false))           // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(ltxbuf1)))
+        .WillOnce(Return(sizeof(ltxbuf1)));
+
+    // right check
+    uint8_t rtxbuf1[3] = {0x40, 0x0d, 0x07};  // R7 : 111 if 6dB.
+
+    //  expectation of 6db.
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,  // Arg 0 : I2C Address.
+                    NotNull(),        // Arg 1 : Data buffer address.
+                    sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
+                    false))           // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(rtxbuf1)))
+        .WillOnce(Return(sizeof(rtxbuf1)));
+  }
+
+  // must be truncated to 6dB, not muted.
+  codec_lower_->SetAuxInputGain(12.0, 18.0, false);
+}  // SetAuxInputGain_overgain
+
+// Overgain test : The gain under -12dB must be truncated to -12dB
+TEST_F(Adau1361LowerTest, SetAuxInputGain_undergain) {
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::InSequence;
+  using ::testing::NotNull;
+  using ::testing::Return;
+
+  {
+    InSequence dummy;
+
+    // Left check
+    uint8_t ltxbuf1[3] = {0x40, 0x0b, 0x01};  // R5 : 001 if -12dB.
+
+    //  expectation of -12dB.
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,  // Arg 0 : I2C Address.
+                    NotNull(),        // Arg 1 : Data buffer address.
+                    sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
+                    false))           // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(ltxbuf1)))
+        .WillOnce(Return(sizeof(ltxbuf1)));
+
+    // right check
+    uint8_t rtxbuf1[3] = {0x40, 0x0d, 0x01};  // R7 : 001 if -12dB.
+
+    //  expectation of -12dB.
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,  // Arg 0 : I2C Address.
+                    NotNull(),        // Arg 1 : Data buffer address.
+                    sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
+                    false))           // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(rtxbuf1)))
+        .WillOnce(Return(sizeof(rtxbuf1)));
+  }
+
+  // must be truncated to 57dB, not muted.
+  codec_lower_->SetAuxInputGain(-60.0, -70.0, false);
+}  // SetAuxInputGain_undergain
+
+// The gain between [-12dB, 6dB] must be truncated to 3dB steps.
+TEST_F(Adau1361LowerTest, SetAuxInputGain_appropriate_gain) {
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::InSequence;
+  using ::testing::NotNull;
+  using ::testing::Return;
+
+  {
+    InSequence dummy;
+
+    // Left check
+    uint8_t ltxbuf1[3] = {0x40, 0x0b, 0x05};  // R5 : 101 if 0dB.
+
+    //  expectation of mute.
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,  // Arg 0 : I2C Address.
+                    NotNull(),        // Arg 1 : Data buffer address.
+                    sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
+                    false))           // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(ltxbuf1)))
+        .WillOnce(Return(sizeof(ltxbuf1)));
+
+    // right check
+    uint8_t rtxbuf1[3] = {0x40, 0x0d, 0x03};  // R7 : 011 if -6dB.
+
+    //  expectation of mute.
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,  // Arg 0 : I2C Address.
+                    NotNull(),        // Arg 1 : Data buffer address.
+                    sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
+                    false))           // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(rtxbuf1)))
+        .WillOnce(Return(sizeof(rtxbuf1)));
+  }
+
+  // must be set to 0.0 and -6.0dB, not muted.
+  codec_lower_->SetAuxInputGain(2.0, -5.0, false);
+}  // SetAuxInputGain_appropriate_gain

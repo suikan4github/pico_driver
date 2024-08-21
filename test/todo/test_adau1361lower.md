@@ -4,6 +4,26 @@
 - [] Make it success.-
 - [] Remove the duplication.
 
+- [] Create Adau1361Lower.SetHPOutputGain_mute()to fail.
+- [] Make it success.-
+- [] Remove the duplication.
+
+- [x] Create Adau1361Lower.SetAuxInputGain_mute()to fail.
+- [x] Make it success.-
+- [x] Remove the duplication.
+
+- [x] Create Adau1361Lower.SetAuxInputGain_undergain()to fail.
+- [x] Make it success.-
+- [x] Remove the duplication.
+
+- [x] Create Adau1361Lower.SetAuxInputGain_overgain()to fail.
+- [x] Make it success.-
+- [x] Remove the duplication.
+
+- [x] Create Adau1361Lower.SetAuxInputGain_appropriate_gain()to fail.
+- [x] Make it success.-
+- [x] Remove the duplication.
+
 - [x] Refactor Adau1361Lower::SetLineItputGain()
 
 - [x] Create Adau1361Lower.SetLineOutputGain_appropriate_gain()to fail.
