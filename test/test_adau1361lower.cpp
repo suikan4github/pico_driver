@@ -82,7 +82,7 @@ TEST_F(Adau1361LowerTest, WaitPllLock) {
   {
     InSequence dummy;
 
-    // Now we test unlocked status. Funciton must not return.
+    //  we test unlocked status. Funciton must not return.
 
     // nostop parameter must be true. That mean repeated start of I2C.
     // The write command give only 2 byte length register address.
@@ -110,7 +110,7 @@ TEST_F(Adau1361LowerTest, WaitPllLock) {
              status_notlocked + 6),  // pointer to the end of the data + 1.
             Return(3)));             // 6 is the transfered data length.
 
-    // Now, we test the locked status. The funciton must return.
+    // we test the locked status. The funciton must return.
 
     // nostop parameter must be true. That mean repeated start of I2C.
     // The write command give only 2 byte length register address.
@@ -151,7 +151,7 @@ TEST_F(Adau1361LowerTest, InititializeCore) {
   using ::testing::ElementsAreArray;
   using ::testing::NotNull;
 
-  // Now we test initialization of core.
+  //  we test initialization of core.
 
   EXPECT_CALL(i2c_,
               i2c_write_blocking(device_address_,  // Arg 0 : I2C Address.
@@ -174,7 +174,7 @@ TEST_F(Adau1361LowerTest, DisablePLL) {
   using ::testing::ElementsAreArray;
   using ::testing::NotNull;
 
-  // Now we test initialization of core.
+  //  we test initialization of core.
 
   EXPECT_CALL(i2c_,
               i2c_write_blocking(device_address_,  // Arg 0 : I2C Address.
@@ -1020,37 +1020,11 @@ TEST_F(Adau1361LowerTest, SetLineInputGain_mute) {
   // Left check
   {
     InSequence dummy;
+    // First two bytes are register number.
+    // in the case of mute, bit3:1 are zero.
+    uint8_t ltxbuf1[3] = {0x40, 0x0a, 0x01};
 
-    uint8_t ltxbuf0[] = {0x40, 0x0a};  // R4 : Record Mixer Left Address
-    uint8_t lrxbuf[1] = {0xaa};        // R4 contents
-    uint8_t ltxbuf1[3] = {0x40, 0x0a, 0xaa};
-    // Set the address to read.
-    EXPECT_CALL(i2c_,
-                i2c_write_blocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(ltxbuf0),  // Arg 2 : Data buffer length to send.
-                    true))            // Arg 3 : true for repeated start.
-        .With(Args<1,  // parameter position of the array : 0 origin.
-                   2>  // parameter position of the size : 0 origin.
-              (ElementsAreArray(ltxbuf0)))
-        .WillOnce(Return(sizeof(ltxbuf0)));
-
-    // Then read a data.
-    EXPECT_CALL(i2c_,
-                i2c_read_blocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(lrxbuf),   // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : falset to stop.
-        .WillOnce(DoAll(
-            SetArrayArgument<1>  // parameter position of the array : 0 origin.
-            (lrxbuf,             // pointer to the beginning of the data.
-             lrxbuf + sizeof(lrxbuf)),  // pointer to the end of the data + 1.
-            Return(sizeof(lrxbuf))));   // 6 is the transfered data length.
-
-    // Now expectation of mute.
-    ltxbuf1[2] = 0xa0;  // in the case of mute, bit3:1 are zero.
+    // Expectation of mute
     EXPECT_CALL(i2c_,
                 i2c_write_blocking(
                     device_address_,  // Arg 0 : I2C Address.
@@ -1062,37 +1036,11 @@ TEST_F(Adau1361LowerTest, SetLineInputGain_mute) {
               (ElementsAreArray(ltxbuf1)))
         .WillOnce(Return(sizeof(ltxbuf1)));
 
-    // right check
-    uint8_t rtxbuf0[] = {0x40, 0x0c};  // R6 : Record Mixer Right Address
-    uint8_t rrxbuf[1] = {0x55};        // R6 contents
-    uint8_t rtxbuf1[3] = {0x40, 0x0c, 0xff};
-    // Set the address to read.
-    EXPECT_CALL(i2c_,
-                i2c_write_blocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(rtxbuf0),  // Arg 2 : Data buffer length to send.
-                    true))            // Arg 3 : true for repeated start.
-        .With(Args<1,  // parameter position of the array : 0 origin.
-                   2>  // parameter position of the size : 0 origin.
-              (ElementsAreArray(rtxbuf0)))
-        .WillOnce(Return(sizeof(rtxbuf0)));
+    // First two bytes are register number.
+    // in the case of mute, bit3:1 are zero.
+    uint8_t rtxbuf1[3] = {0x40, 0x0c, 0x01};
 
-    // Then read a data.
-    EXPECT_CALL(i2c_,
-                i2c_read_blocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(rrxbuf),   // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : falset to stop.
-        .WillOnce(DoAll(
-            SetArrayArgument<1>  // parameter position of the array : 0 origin.
-            (rrxbuf,             // pointer to the beginning of the data.
-             rrxbuf + sizeof(rrxbuf)),  // pointer to the end of the data + 1.
-            Return(sizeof(rrxbuf))));   // the transfered data length.
-
-    // Now expectation of mute.
-    rtxbuf1[2] = 0x51;  // in the case of mute, bit3:1 are zero.
+    // Expectation of mute.
     EXPECT_CALL(i2c_,
                 i2c_write_blocking(
                     device_address_,  // Arg 0 : I2C Address.
@@ -1123,36 +1071,10 @@ TEST_F(Adau1361LowerTest, SetLineInputGain_overgain) {
   {
     InSequence dummy;
 
-    uint8_t ltxbuf0[] = {0x40, 0x0a};  // R4 : Record Mixer Left Address
-    uint8_t lrxbuf[1] = {0xaa};        // R4 contents
-    uint8_t ltxbuf1[3] = {0x40, 0x0a, 0xaa};
-    // Set the address to read.
-    EXPECT_CALL(i2c_,
-                i2c_write_blocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(ltxbuf0),  // Arg 2 : Data buffer length to send.
-                    true))            // Arg 3 : true for repeated start.
-        .With(Args<1,  // parameter position of the array : 0 origin.
-                   2>  // parameter position of the size : 0 origin.
-              (ElementsAreArray(ltxbuf0)))
-        .WillOnce(Return(sizeof(ltxbuf0)));
+    uint8_t ltxbuf1[3] = {0x40, 0x0a,
+                          0x0f};  // in the case of gain=6dB, bit 3:1 are 111.
 
-    // Then read a data.
-    EXPECT_CALL(i2c_,
-                i2c_read_blocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(lrxbuf),   // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : falset to stop.
-        .WillOnce(DoAll(
-            SetArrayArgument<1>  // parameter position of the array : 0 origin.
-            (lrxbuf,             // pointer to the beginning of the data.
-             lrxbuf + sizeof(lrxbuf)),  // pointer to the end of the data + 1.
-            Return(sizeof(lrxbuf))));   // 6 is the transfered data length.
-
-    // Now expectation of mute.
-    ltxbuf1[2] = 0xaE;  // in the case of gain=6dB, bit 3:1 are 111.
+    //  expectation of gain setting.
     EXPECT_CALL(i2c_,
                 i2c_write_blocking(
                     device_address_,  // Arg 0 : I2C Address.
@@ -1165,36 +1087,10 @@ TEST_F(Adau1361LowerTest, SetLineInputGain_overgain) {
         .WillOnce(Return(sizeof(ltxbuf1)));
 
     // right check
-    uint8_t rtxbuf0[] = {0x40, 0x0c};  // R6 : Record Mixer Right Address
-    uint8_t rrxbuf[1] = {0x55};        // R6 contents
-    uint8_t rtxbuf1[3] = {0x40, 0x0c, 0xff};
-    // Set the address to read.
-    EXPECT_CALL(i2c_,
-                i2c_write_blocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(rtxbuf0),  // Arg 2 : Data buffer length to send.
-                    true))            // Arg 3 : true for repeated start.
-        .With(Args<1,  // parameter position of the array : 0 origin.
-                   2>  // parameter position of the size : 0 origin.
-              (ElementsAreArray(rtxbuf0)))
-        .WillOnce(Return(sizeof(rtxbuf0)));
+    uint8_t rtxbuf1[3] = {0x40, 0x0c,
+                          0x0f};  // in the case of gain=6dB, bit 3:1 are 111
 
-    // Then read a data.
-    EXPECT_CALL(i2c_,
-                i2c_read_blocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(rrxbuf),   // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : falset to stop.
-        .WillOnce(DoAll(
-            SetArrayArgument<1>  // parameter position of the array : 0 origin.
-            (rrxbuf,             // pointer to the beginning of the data.
-             rrxbuf + sizeof(rrxbuf)),  // pointer to the end of the data + 1.
-            Return(sizeof(rrxbuf))));   // the transfered data length.
-
-    // Now expectation of mute.
-    rtxbuf1[2] = 0x5F;  // in the case of gain=6dB, bit 3:1 are 111
+    //  expectation of gain setting.
     EXPECT_CALL(i2c_,
                 i2c_write_blocking(
                     device_address_,  // Arg 0 : I2C Address.
@@ -1225,36 +1121,11 @@ TEST_F(Adau1361LowerTest, SetLineInputGain_undergain) {
   {
     InSequence dummy;
 
-    uint8_t ltxbuf0[] = {0x40, 0x0a};  // R4 : Record Mixer Left Address
-    uint8_t lrxbuf[1] = {0xaa};        // R4 contents
-    uint8_t ltxbuf1[3] = {0x40, 0x0a, 0xaa};
+    uint8_t ltxbuf1[3] = {0x40, 0x0a,
+                          0x03};  // in the case of gain=-12dB, bit 3:1 are 001
     // Set the address to read.
-    EXPECT_CALL(i2c_,
-                i2c_write_blocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(ltxbuf0),  // Arg 2 : Data buffer length to send.
-                    true))            // Arg 3 : true for repeated start.
-        .With(Args<1,  // parameter position of the array : 0 origin.
-                   2>  // parameter position of the size : 0 origin.
-              (ElementsAreArray(ltxbuf0)))
-        .WillOnce(Return(sizeof(ltxbuf0)));
 
-    // Then read a data.
-    EXPECT_CALL(i2c_,
-                i2c_read_blocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(lrxbuf),   // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : falset to stop.
-        .WillOnce(DoAll(
-            SetArrayArgument<1>  // parameter position of the array : 0 origin.
-            (lrxbuf,             // pointer to the beginning of the data.
-             lrxbuf + sizeof(lrxbuf)),  // pointer to the end of the data + 1.
-            Return(sizeof(lrxbuf))));   // 6 is the transfered data length.
-
-    // Now expectation of mute.
-    ltxbuf1[2] = 0xa2;  // in the case of gain=-12dB, bit 3:1 are 001
+    //  expectation of -12dB.
     EXPECT_CALL(i2c_,
                 i2c_write_blocking(
                     device_address_,  // Arg 0 : I2C Address.
@@ -1267,36 +1138,10 @@ TEST_F(Adau1361LowerTest, SetLineInputGain_undergain) {
         .WillOnce(Return(sizeof(ltxbuf1)));
 
     // right check
-    uint8_t rtxbuf0[] = {0x40, 0x0c};  // R6 : Record Mixer Right Address
-    uint8_t rrxbuf[1] = {0x55};        // R6 contents
-    uint8_t rtxbuf1[3] = {0x40, 0x0c, 0xff};
-    // Set the address to read.
-    EXPECT_CALL(i2c_,
-                i2c_write_blocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(rtxbuf0),  // Arg 2 : Data buffer length to send.
-                    true))            // Arg 3 : true for repeated start.
-        .With(Args<1,  // parameter position of the array : 0 origin.
-                   2>  // parameter position of the size : 0 origin.
-              (ElementsAreArray(rtxbuf0)))
-        .WillOnce(Return(sizeof(rtxbuf0)));
+    uint8_t rtxbuf1[3] = {0x40, 0x0c,
+                          0x03};  // in the case of gain=-12dB, bit 3:1 are 001
 
-    // Then read a data.
-    EXPECT_CALL(i2c_,
-                i2c_read_blocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(rrxbuf),   // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : falset to stop.
-        .WillOnce(DoAll(
-            SetArrayArgument<1>  // parameter position of the array : 0 origin.
-            (rrxbuf,             // pointer to the beginning of the data.
-             rrxbuf + sizeof(rrxbuf)),  // pointer to the end of the data + 1.
-            Return(sizeof(rrxbuf))));   // the transfered data length.
-
-    // Now expectation of mute.
-    rtxbuf1[2] = 0x53;  // in the case of gain=-12dB, bit 3:1 are 001
+    //  expectation of -12dB.
     EXPECT_CALL(i2c_,
                 i2c_write_blocking(
                     device_address_,  // Arg 0 : I2C Address.
@@ -1327,36 +1172,10 @@ TEST_F(Adau1361LowerTest, SetLineInputGain_appropriate_gain) {
   {
     InSequence dummy;
 
-    uint8_t ltxbuf0[] = {0x40, 0x0a};  // R4 : Record Mixer Left Address
-    uint8_t lrxbuf[1] = {0xaa};        // R4 contents
-    uint8_t ltxbuf1[3] = {0x40, 0x0a, 0xaa};
-    // Set the address to read.
-    EXPECT_CALL(i2c_,
-                i2c_write_blocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(ltxbuf0),  // Arg 2 : Data buffer length to send.
-                    true))            // Arg 3 : true for repeated start.
-        .With(Args<1,  // parameter position of the array : 0 origin.
-                   2>  // parameter position of the size : 0 origin.
-              (ElementsAreArray(ltxbuf0)))
-        .WillOnce(Return(sizeof(ltxbuf0)));
+    uint8_t ltxbuf1[3] = {0x40, 0x0a,
+                          0x09};  // in the case of gain=0dB, bit 3:1 are 101
 
-    // Then read a data.
-    EXPECT_CALL(i2c_,
-                i2c_read_blocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(lrxbuf),   // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : falset to stop.
-        .WillOnce(DoAll(
-            SetArrayArgument<1>  // parameter position of the array : 0 origin.
-            (lrxbuf,             // pointer to the beginning of the data.
-             lrxbuf + sizeof(lrxbuf)),  // pointer to the end of the data + 1.
-            Return(sizeof(lrxbuf))));   // 6 is the transfered data length.
-
-    // Now expectation of mute.
-    ltxbuf1[2] = 0xaa;  // in the case of gain=0dB, bit 3:1 are 101
+    // expectation of appropriate gain.
     EXPECT_CALL(i2c_,
                 i2c_write_blocking(
                     device_address_,  // Arg 0 : I2C Address.
@@ -1369,36 +1188,11 @@ TEST_F(Adau1361LowerTest, SetLineInputGain_appropriate_gain) {
         .WillOnce(Return(sizeof(ltxbuf1)));
 
     // right check
-    uint8_t rtxbuf0[] = {0x40, 0x0c};  // R6 : Record Mixer Right Address
-    uint8_t rrxbuf[1] = {0x55};        // R6 contents
-    uint8_t rtxbuf1[3] = {0x40, 0x0c, 0xff};
+    uint8_t rtxbuf1[3] = {0x40, 0x0c,
+                          0x09};  // in the case of gain=-3dB, bit 3:1 are 100
     // Set the address to read.
-    EXPECT_CALL(i2c_,
-                i2c_write_blocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(rtxbuf0),  // Arg 2 : Data buffer length to send.
-                    true))            // Arg 3 : true for repeated start.
-        .With(Args<1,  // parameter position of the array : 0 origin.
-                   2>  // parameter position of the size : 0 origin.
-              (ElementsAreArray(rtxbuf0)))
-        .WillOnce(Return(sizeof(rtxbuf0)));
 
-    // Then read a data.
-    EXPECT_CALL(i2c_,
-                i2c_read_blocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(rrxbuf),   // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : falset to stop.
-        .WillOnce(DoAll(
-            SetArrayArgument<1>  // parameter position of the array : 0 origin.
-            (rrxbuf,             // pointer to the beginning of the data.
-             rrxbuf + sizeof(rrxbuf)),  // pointer to the end of the data + 1.
-            Return(sizeof(rrxbuf))));   // the transfered data length.
-
-    // Now expectation of mute.
-    rtxbuf1[2] = 0x59;  // in the case of gain=-3dB, bit 3:1 are 100
+    // expectation of appropriate gain.
     EXPECT_CALL(i2c_,
                 i2c_write_blocking(
                     device_address_,  // Arg 0 : I2C Address.

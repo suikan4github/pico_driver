@@ -613,11 +613,8 @@ void Adau1361Lower::SetLineInputGain(float left_gain, float right_gain,
   txbuf[ADDH] = 0x40;  // Upper address of register
   txbuf[ADDL] = 0x0a;
 
-  // Obtain the Register
-  i2c_.i2c_write_blocking(device_addr_, txbuf, 2, true);  // repeated start.
-  i2c_.i2c_read_blocking(device_addr_, rxbuf, 1, false);
-  // Create a register value
-  txbuf[DATA] = (rxbuf[0] & 0xF1) | SET_INPUT_GAIN(left, mute);
+  txbuf[DATA] =
+      0x01 | SET_INPUT_GAIN(left, mute);  // mixer enable and set mute and gain.
 
   // Set the R4.
   SendCommand(txbuf, 3);
@@ -630,12 +627,9 @@ void Adau1361Lower::SetLineInputGain(float left_gain, float right_gain,
   txbuf[ADDH] = 0x40;  // Upper address of register
   txbuf[ADDL] = 0x0c;
 
-  // Obtain the Register
-  i2c_.i2c_write_blocking(device_addr_, txbuf, 2, true);  // repeated start.
-  i2c_.i2c_read_blocking(device_addr_, rxbuf, 1, false);
-
   // Create a register value
-  txbuf[DATA] = (rxbuf[0] & 0xF1) | SET_INPUT_GAIN(right, mute);
+  txbuf[DATA] = 0x01 | SET_INPUT_GAIN(
+                           right, mute);  // mixer enable and set mute and gain.
 
   // Set the R4.
   SendCommand(txbuf, 3);

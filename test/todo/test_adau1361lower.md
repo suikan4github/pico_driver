@@ -4,8 +4,7 @@
 - [] Make it success.-
 - [] Remove the duplication.
 
-- [] Make it success.-
-- [] Remove the duplication.
+- [x] Refactor Adau1361Lower::SetLineItputGain()
 
 - [x] Create Adau1361Lower.SetLineOutputGain_appropriate_gain()to fail.
 - [x] Make it success.-
