@@ -947,55 +947,31 @@ TEST_F(Adau1361LowerTest, ConfigurePll_441_24576) {
 
 // Validation test for wrong master clock at fs 48kHz.
 TEST_F(Adau1361LowerDeathTest, ConfigurePll_48_wrong_master_clock) {
-  using ::testing::Args;
-  using ::testing::ElementsAreArray;
-  using ::testing::NotNull;
-  const unsigned int target_pll_freq_441 = 45158400;  // Hz. See data sheet.
-  const float acceptable_error = 5;  // Hz. Error of the PLL out.
-
-  // Test 27MHz master clock for Fs 48kHz series.
   {
     const unsigned int mclock = 123;
     const unsigned int fs = 48000;
-    uint8_t config_pll[] = {0x40, 0x02, 0x03, 0xE8, 0x02, 0xA3, 0x1B, 0x01};
     // check the assertion for bad mclock.
     ASSERT_DEATH(codec_lower_->ConfigurePll(fs, mclock),
-                 "Wong Master Clock with Fs 48kHz Series");
+                 "Wrong Master Clock with Fs 48kHz Series");
   }
 }  // ConfigurePll_48_wrong_master_clock
 
 // Validation test for wrong master clock at fs 44.1kHz.
 TEST_F(Adau1361LowerDeathTest, ConfigurePll_441_wrong_master_clock) {
-  using ::testing::Args;
-  using ::testing::ElementsAreArray;
-  using ::testing::NotNull;
-  const unsigned int target_pll_freq_441 = 45158400;  // Hz. See data sheet.
-  const float acceptable_error = 5;  // Hz. Error of the PLL out.
-
-  // Test 27MHz master clock for Fs 48kHz series.
   {
     const unsigned int mclock = 123;
     const unsigned int fs = 44100;
-    uint8_t config_pll[] = {0x40, 0x02, 0x03, 0xE8, 0x02, 0xA3, 0x1B, 0x01};
-    // check the assertion for bad mclock.
     ASSERT_DEATH(codec_lower_->ConfigurePll(fs, mclock),
-                 "Wong Master Clock with Fs 44.1kHz Series");
+                 "Wrong Master Clock with Fs 44.1kHz Series");
   }
 }  // ConfigurePll_441_wrong_master_clock
 
 // Validation test for wrong fs .
 TEST_F(Adau1361LowerDeathTest, ConfigurePll_wrong_fs) {
-  using ::testing::Args;
-  using ::testing::ElementsAreArray;
-  using ::testing::NotNull;
-  const unsigned int target_pll_freq_441 = 45158400;  // Hz. See data sheet.
-  const float acceptable_error = 5;  // Hz. Error of the PLL out.
-
   // Test 27MHz master clock for Fs 48kHz series.
   {
     const unsigned int mclock = 8000000;
     const unsigned int fs = 192000;
-    uint8_t config_pll[] = {0x40, 0x02, 0x03, 0xE8, 0x02, 0xA3, 0x1B, 0x01};
     // check the assertion for bad mclock.
     ASSERT_DEATH(codec_lower_->ConfigurePll(fs, mclock), "Bad Fs");
   }
@@ -1597,3 +1573,217 @@ TEST_F(Adau1361LowerTest, SetAuxInputGain_appropriate_gain) {
   // must be set to 0.0 and -6.0dB, not muted.
   codec_lower_->SetAuxInputGain(2.0, -5.0, false);
 }  // SetAuxInputGain_appropriate_gain
+
+// -----------------------------------------------------------------
+//
+//                          SetHpOutputGain()
+//
+// -----------------------------------------------------------------
+
+// Mute test
+TEST_F(Adau1361LowerTest, SetHpOutputGain_mute) {
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::InSequence;
+  using ::testing::NotNull;
+  using ::testing::Return;
+
+  {
+    InSequence dummy;
+
+    // Left check
+    uint8_t ltxbuf1[3] = {0x40, 0x23,
+                          0xe5};  // R29 : 11001,0,1 ( muted, headphone)
+
+    //  expectation of mute.
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,  // Arg 0 : I2C Address.
+                    NotNull(),        // Arg 1 : Data buffer address.
+                    sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
+                    false))           // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(ltxbuf1)))
+        .WillOnce(Return(sizeof(ltxbuf1)));
+
+    // right check
+    uint8_t rtxbuf1[3] = {0x40, 0x24,
+                          0xe5};  // R30 : 11001,0,1 ( muted, headphone)
+
+    //  expectation of mute.
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,  // Arg 0 : I2C Address.
+                    NotNull(),        // Arg 1 : Data buffer address.
+                    sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
+                    false))           // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(rtxbuf1)))
+        .WillOnce(Return(sizeof(rtxbuf1)));
+  }
+
+  // must be set to muted.
+  codec_lower_->SetHpOutputGain(0.0, 0.0, true);
+}  // SetHpOutputGain_mute
+
+// Overgain test : must be truncated to 6dB
+TEST_F(Adau1361LowerTest, SetHpOutputGain_overgain) {
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::InSequence;
+  using ::testing::NotNull;
+  using ::testing::Return;
+
+  {
+    InSequence dummy;
+
+    // Left check
+    uint8_t ltxbuf1[3] = {0x40, 0x23,
+                          0xff};  // R29 : 6dB is 111111, unmute, line
+
+    //  expectation of 6dB.
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,  // Arg 0 : I2C Address.
+                    NotNull(),        // Arg 1 : Data buffer address.
+                    sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
+                    false))           // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(ltxbuf1)))
+        .WillOnce(Return(sizeof(ltxbuf1)));
+
+    // right check
+    uint8_t rtxbuf1[3] = {0x40, 0x24, 0xff};  // R30 : 6dB is 1111, unmute, line
+
+    //  expectation of 6dB.
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,  // Arg 0 : I2C Address.
+                    NotNull(),        // Arg 1 : Data buffer address.
+                    sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
+                    false))           // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(rtxbuf1)))
+        .WillOnce(Return(sizeof(rtxbuf1)));
+  }
+
+  // must be truncated to 6dB, not muted.
+  codec_lower_->SetHpOutputGain(12.0, 18.0, false);
+}  // SetHpOutputGain_overgain
+
+// Overgain test : The gain under -57dB must be truncated to -57dB
+TEST_F(Adau1361LowerTest, SetHpOutputGain_undergain) {
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::InSequence;
+  using ::testing::NotNull;
+  using ::testing::Return;
+
+  {
+    InSequence dummy;
+
+    // Left check
+    uint8_t ltxbuf1[3] = {0x40, 0x23,
+                          0x03};  // R29 : -57dB is 0000, unmute, line
+
+    //  expectation of -57.
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,  // Arg 0 : I2C Address.
+                    NotNull(),        // Arg 1 : Data buffer address.
+                    sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
+                    false))           // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(ltxbuf1)))
+        .WillOnce(Return(sizeof(ltxbuf1)));
+
+    // right check
+    uint8_t rtxbuf1[3] = {0x40, 0x24,
+                          0x03};  // R30 :  -57dB is 0000, unmute, line
+
+    //  expectation of -57dB.
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,  // Arg 0 : I2C Address.
+                    NotNull(),        // Arg 1 : Data buffer address.
+                    sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
+                    false))           // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(rtxbuf1)))
+        .WillOnce(Return(sizeof(rtxbuf1)));
+  }
+
+  // must be truncated to 57dB, not muted.
+  codec_lower_->SetHpOutputGain(-60.0, -70.0, false);
+}  // SetHpOutputGain_undergain
+
+// The gain between [-57dB, 6dB] must be truncated to 1dB steps.
+// Overgain test : The gain under -57dB must be truncated to -57dB
+TEST_F(Adau1361LowerTest, SetHpOutputGain_appropriate_gain) {
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::InSequence;
+  using ::testing::NotNull;
+  using ::testing::Return;
+
+  {
+    InSequence dummy;
+
+    // Left check
+    uint8_t ltxbuf1[3] = {0x40, 0x23,
+                          0xef};  // R29 : 2dB is 111011, unmute, line
+
+    //  expectation of mute.
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,  // Arg 0 : I2C Address.
+                    NotNull(),        // Arg 1 : Data buffer address.
+                    sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
+                    false))           // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(ltxbuf1)))
+        .WillOnce(Return(sizeof(ltxbuf1)));
+
+    // right check
+    uint8_t rtxbuf1[3] = {0x40, 0x24,
+                          0xd3};  // R30 : -5dB is 110100, unmute, line
+
+    //  expectation of mute.
+    EXPECT_CALL(i2c_,
+                i2c_write_blocking(
+                    device_address_,  // Arg 0 : I2C Address.
+                    NotNull(),        // Arg 1 : Data buffer address.
+                    sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
+                    false))           // Arg 3 : false to stop.
+        .With(Args<1,  // parameter position of the array : 0 origin.
+                   2>  // parameter position of the size : 0 origin.
+              (ElementsAreArray(rtxbuf1)))
+        .WillOnce(Return(sizeof(rtxbuf1)));
+  }
+
+  // must be set to 2.0 and -5.0dB, not muted.
+  codec_lower_->SetHpOutputGain(2.0, -5.0, false);
+}  // SetHpOutputGain_appropriate_gain
+
+// -----------------------------------------------------------------
+//
+//                          SetAuxInputGain()
+//
+// -----------------------------------------------------------------
+
+// Validation test for wrong master clock at fs 48kHz.
+TEST_F(Adau1361LowerDeathTest, ConfigureSRC_wrong_fs) {
+  // Test 27MHz master clock for Fs 48kHz series.
+  {
+    const unsigned int fs = 192000;
+    // check the assertion for bad mclock.
+    ASSERT_DEATH(codec_lower_->ConfigureSRC(fs), "Bad Fs");
+  }
+}  // ConfigurePll_48_wrong_master_clock

@@ -1,12 +1,44 @@
 #test_i2cmaster TDD
 
-- [] Create Adau1361Lower.ConfigurePll()to fail.
+- [] Create Adau1361Lower.ConfigureSingalPath()to fail.
 - [] Make it success.-
 - [] Remove the duplication.
 
-- [] Create Adau1361Lower.SetHPOutputGain_mute()to fail.
+- [] Create Adau1361Lower.InitializeRegisters()to fail.
 - [] Make it success.-
 - [] Remove the duplication.
+
+- [] Create Adau1361Lower.EnableCore()to fail.
+- [] Make it success.-
+- [] Remove the duplication.
+
+- [x] Create Adau1361Lower.ConfigureSRC()to fail.
+- [] Make it success.-
+- [] Remove the duplication.
+
+- [x] Create Adau1361LowerDeathTest.ConfigureSRC_wrong_fs()to fail.
+- [x] Make it success.-
+- [x] Remove the duplication.
+
+- [x] Create Adau1361Lower.ConfigurePll()to fail.
+- [x] Make it success.-
+- [x] Remove the duplication.
+
+- [x] Create Adau1361Lower.SetHPOutputGain_appropriate_gain()to fail.
+- [x] Make it success.-
+- [x] Remove the duplication.
+
+- [x] Create Adau1361Lower.SetHPOutputGain_undergain()to fail.
+- [x] Make it success.-
+- [x] Remove the duplication.
+
+- [x] Create Adau1361Lower.SetHPOutputGain_overgain()to fail.
+- [x] Make it success.-
+- [x] Remove the duplication.
+
+- [x] Create Adau1361Lower.SetHPOutputGain_mute()to fail.
+- [x] Make it success.-
+- [x] Remove the duplication.
 
 - [x] Create Adau1361Lower.SetAuxInputGain_mute()to fail.
 - [x] Make it success.-

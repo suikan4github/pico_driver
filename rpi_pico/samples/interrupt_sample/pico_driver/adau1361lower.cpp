@@ -328,7 +328,7 @@ void Adau1361Lower::ConfigurePll(unsigned int fs, unsigned int master_clock) {
       }
 
       default:
-        assert(false && "Wong Master Clock with Fs 48kHz Series");
+        assert(false && "Wrong Master Clock with Fs 48kHz Series");
     }
 
   } else if (fs == 22050 || fs == 44100 || fs == 88200) {
@@ -504,7 +504,7 @@ void Adau1361Lower::ConfigurePll(unsigned int fs, unsigned int master_clock) {
       }
 
       default:
-        assert(false && "Wong Master Clock with Fs 44.1kHz Series");
+        assert(false && "Wrong Master Clock with Fs 44.1kHz Series");
     }
 
   } else {  // Fs must be checked at the top of this routine.
@@ -744,7 +744,6 @@ void Adau1361Lower::SetLineOutputGain(float left_gain, float right_gain,
 void Adau1361Lower::SetHpOutputGain(float left_gain, float right_gain,
                                     bool mute) {
   uint8_t txbuf[3];
-  uint8_t rxbuf[1];
   int left, right;
 
   // set 0 if mute, set 1 if unmute;
@@ -772,14 +771,10 @@ void Adau1361Lower::SetHpOutputGain(float left_gain, float right_gain,
   txbuf[ADDH] = 0x40;  // Upper address of register
   txbuf[ADDL] = 0x23;
 
-  // Obtain R29
-  i2c_.i2c_write_blocking(device_addr_, txbuf, 2, true);  // repeated start.
-  i2c_.i2c_read_blocking(device_addr_, rxbuf, 1, false);
-
   // HP left out control data
-  txbuf[DATA] = SET_HP_GAIN(left,          /* GAIN */
-                            unmute_flag,   /* UNMUTE */
-                            rxbuf[0] & 1); /* HPEN of R29*/
+  txbuf[DATA] = SET_HP_GAIN(left,        /* GAIN */
+                            unmute_flag, /* UNMUTE */
+                            1);          /* HPEN of R29*/
   // SET LHPVOL : R29
   SendCommand(txbuf, 3);
 
@@ -791,14 +786,10 @@ void Adau1361Lower::SetHpOutputGain(float left_gain, float right_gain,
   txbuf[ADDH] = 0x40;  // Upper address of register
   txbuf[ADDL] = 0x24;
 
-  // Obtain R30
-  i2c_.i2c_write_blocking(device_addr_, txbuf, 2, true);  // repeated start.
-  i2c_.i2c_read_blocking(device_addr_, rxbuf, 1, false);
-
   // HP right out control data
-  txbuf[DATA] = SET_HP_GAIN(right,         /* GAIN */
-                            unmute_flag,   /* UNMUTE */
-                            rxbuf[0] & 1); /* HPMODE of R30*/
+  txbuf[DATA] = SET_HP_GAIN(right,       /* GAIN */
+                            unmute_flag, /* UNMUTE */
+                            1);          /* HPMODE of R30*/
   // SET RHPVOL : R30
   SendCommand(txbuf, 3);
 }

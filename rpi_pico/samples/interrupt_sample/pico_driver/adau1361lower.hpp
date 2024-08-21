@@ -99,6 +99,7 @@ class Adau1361Lower {
    * @brief Initialize registers for the chip operation.
    * @details This is is board independent initialization.
    *
+   * This function reset the chip.
    * Need to call before InitializeSignalPath()
    */
   virtual void InitializeRegisters();
@@ -118,7 +119,7 @@ class Adau1361Lower {
    * -12], The gain value outside of the acceptable range will be saturated.
    * \param mute set true to mute
    * \details
-   *   As same as start(), this gain control function uses the single-end
+   *   This gain control function uses the single-end
    * negative input only. Other input signal of the line in like positive
    * signal or diff signal are killed.
    *
