@@ -8,9 +8,9 @@
 - [] Make it success.
 - [] Remove the duplication.
 
-- [] Create Adau1361LowerTest.EnableCore()to fail.
-- [] Make it success.
-- [] Remove the duplication.
+- [x] Create Adau1361LowerTest.EnableCore()to fail.
+- [x] Make it success.
+- [x] Remove the duplication.
 
 - [x] Create Adau1361Lower.ConfigureSRC_96000()to fail.
 - [x] Make it success.

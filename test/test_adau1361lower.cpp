@@ -1959,3 +1959,31 @@ TEST_F(Adau1361LowerTest, ConfigureSRC_96000) {
   // right configuration of SRC.
   codec_lower_->ConfigureSRC(fs);
 }  // ConfigureSRC_96000
+
+// -----------------------------------------------------------------
+//
+//                          ConfigureSRC()
+//
+// -----------------------------------------------------------------
+
+TEST_F(Adau1361LowerTest, EnableCore) {
+  // Set core source to PLL
+  const uint8_t config_core[] = {
+      0x40, 0x00, 0x0f};  // R0: R0:Source is PLL, 1024fs, core clock enable.
+
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::NotNull;
+
+  //  we test initialization of core.
+
+  EXPECT_CALL(i2c_,
+              i2c_write_blocking(device_address_,  // Arg 0 : I2C Address.
+                                 NotNull(),  // Arg 1 : Data buffer address.
+                                 3,       // Arg 2 : Data buffer length to send.
+                                 false))  // Arg 3 : false to stop.
+      .With(Args<1,  // parameter position of the array : 0 origin.
+                 2>  // parameter position of the size : 0 origin.
+            (ElementsAreArray(config_core)));
+  codec_lower_->EnableCore();
+}  // EnableCore
