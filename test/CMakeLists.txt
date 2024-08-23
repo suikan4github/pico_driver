@@ -1,10 +1,11 @@
 # To use FetchContent, we need CMake 3.14 or newer. 
 cmake_minimum_required(VERSION 3.14)
 
+
+file(GLOB SOURCES CMAKE_CONFIGURE_DEPENDS "./*.cpp")
+
 # Add the executable for the testcase which is using googletest
-add_executable(${PROJECT_NAME} test_picowrapper.cpp
-                                test_adau1361lower.cpp
-                                test_i2cmaster.cpp)
+add_executable(${PROJECT_NAME} ${SOURCES})
 
     # Add the library under test.
     target_link_libraries(${PROJECT_NAME}  
