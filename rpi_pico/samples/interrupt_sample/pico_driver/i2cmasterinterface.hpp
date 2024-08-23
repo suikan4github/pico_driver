@@ -48,4 +48,16 @@ class I2CMasterInterface {
                                  bool nostop) = 0;
 };
 
+#if __has_include(<gmock/gmock.h>)
+
+class MockI2CMaster : public I2CMasterInterface {
+ public:
+  MOCK_METHOD4(i2c_read_blocking,
+               int(uint8_t addr, uint8_t *dst, size_t len, bool nostop));
+  MOCK_METHOD4(i2c_write_blocking,
+               int(uint8_t addr, const uint8_t *src, size_t len, bool nostop));
+};
+
+#endif  //  __has_include(<gmock/gmock>)
+
 #endif /* _I2CMASTERINTERFACE_HPP_ */

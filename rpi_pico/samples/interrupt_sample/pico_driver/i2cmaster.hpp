@@ -60,22 +60,4 @@ class I2CMaster : public I2CMasterInterface {
   PicoWrapper &sdk_;
 };
 
-#if __has_include(<gmock/gmock.h>)
-
-class MockI2CMaster : public I2CMaster {
- public:
-  // Dummy constructor
-  MockI2CMaster() : I2CMaster(i2c_, sdk) {}
-  MOCK_METHOD4(i2c_read_blocking,
-               int(uint8_t addr, uint8_t *dst, size_t len, bool nostop));
-  MOCK_METHOD4(i2c_write_blocking,
-               int(uint8_t addr, const uint8_t *src, size_t len, bool nostop));
-
- private:
-  i2c_inst_t i2c_ = 0;
-  PicoWrapper sdk;
-};
-
-#endif  //  __has_include(<gmock/gmock>)
-
 #endif /* _I2CMASTER_HPP_ */
