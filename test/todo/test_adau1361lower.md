@@ -1,12 +1,12 @@
 #test_i2cmaster TDD
 
-- [] Create Adau1361LowerTest.ConfigureSingalPath()to fail.
-- [] Make it success.
-- [] Remove the duplication.
+- [x] Create Adau1361LowerTest.ConfigureSingalPath()to fail.
+- [x] Make it success.
+- [x] Remove the duplication.
 
-- [] Create Adau1361LowerTest.InitializeRegisters()to fail.
-- [] Make it success.
-- [] Remove the duplication.
+- [x] Create Adau1361LowerTest.InitializeRegisters()to fail.
+- [x] Make it success.
+- [x] Remove the duplication.
 
 - [x] Create Adau1361LowerTest.EnableCore()to fail.
 - [x] Make it success.

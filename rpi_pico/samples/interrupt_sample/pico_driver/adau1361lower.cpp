@@ -472,7 +472,7 @@ void Adau1361Lower::InitializeRegisters() {
       {0x40, 0x14, 0x00},  // R14: ALC3
       {0x40, 0x15, 0x00},  // R15: Serial Port 0
       {0x40, 0x16, 0x00},  // R16: Serial Port 1
-      // R17 is set by config_src_xx table
+      // R17 is set by ConfigSrc(). Do not touch.
       {0x40, 0x18, 0x00},  // R18: Converter 1
       {0x40, 0x19, 0x10},  // R19:ADC Control.
       {0x40, 0x1a, 0x00},  // R20: Left digital volume
@@ -484,8 +484,8 @@ void Adau1361Lower::InitializeRegisters() {
       {0x40, 0x20, 0x00},  // R26: Play L/R mixer left
       {0x40, 0x21, 0x00},  // R27: Play L/R mixer right
       {0x40, 0x22, 0x00},  // R28: Play L/R mixer monot
-      {0x40, 0x23, 0x03},  // R29: Play HP Left vol : Mute, Enable
-      {0x40, 0x24, 0x03},  // R30: Play HP Right vol : Mute, HP Mode
+      {0x40, 0x23, 0x02},  // R29: Play HP Left vol : Mute, Line out mode
+      {0x40, 0x24, 0x02},  // R30: Play HP Right vol : Mute, Line out mode
       {0x40, 0x25, 0x02},  // R31: Line output Left vol : Mute, Line out mode
       {0x40, 0x26, 0x02},  // R32: Line output Right vol : Mute, Line out mode
       {0x40, 0x27, 0x02},  // R33: Play Mono output
@@ -518,14 +518,18 @@ void Adau1361Lower::ConfigureSignalPath() {
       // Configuration for UMB-ADAU1361-A http://dsps.shop-pro.jp/?pid=82798273
       {0x40, 0x0a, 0x0B},  // R4: Rec Mixer Left 0,  Mixer enable, LINNG 0dB
       {0x40, 0x0c, 0x0B},  // R6: Rec Mixer Right 0, Mixer enable, RINNG 0dB
-      {0x40, 0x15, 0x01},  // R15:I2S Port control, Set code as Master mode I2S.
-      {0x40, 0x19, 0x63},  // R19:ADC Ctrl. Enable ADC, L/R HPF on
-      {0x40, 0x29, 0x03},  // R35: L/R Play back enable. PB power Management
-      {0x40, 0x2a, 0x03},  // R36:DAC Control 0. Enable DAC. Both channels on.
-      {0x40, 0x1c, 0x21},  // R22:MIXER 3, L DAC Mixer (set L DAC to L Mixer )
-      {0x40, 0x1e, 0x41},  // R24:MIXER 4, R DAC Mixer (set R DAC to R Mixer )
-      {0x40, 0x20, 0x03},  // R26:MIXER 5, L out mixer. L out MIX5G3 and enable
-      {0x40, 0x21, 0x09},  // R27:MIXER 6, R out mixer. R out MIX6G4 and enable.
+      {0x40, 0x15,
+       0x01},  // R15: I2S Port control, Set code as Master mode I2S.
+      {0x40, 0x19, 0x63},  // R19: ADC Ctrl. Inverted, Enable L/R, HPF on
+      {0x40, 0x29, 0x03},  // R35: DAC Ctrl. Stereo, Enable L/R.
+      {0x40, 0x2a, 0x03},  // R36: DAC Control 0. Enable DAC. Both channels on.
+      {0x40, 0x1c, 0x21},  // R22: MIXER 3, L DAC Mixer (set L DAC to L Mixer )
+      {0x40, 0x1e, 0x41},  // R24: MIXER 4, R DAC Mixer (set R DAC to R Mixer )
+      {0x40, 0x20, 0x03},  // R26: MIXER 5, L out mixer. L out MIX5G3 and enable
+      {0x40, 0x21,
+       0x09},  // R27: MIXER 6, R out mixer. R out MIX6G4 and enable.
+      {0x40, 0x23, 0x03},  // R29: Play HP Left vol : Mute, Enable
+      {0x40, 0x24, 0x03},  // R30: Play HP Right vol : Mute, HP Mode
   };
 
   SendCommandTable(

@@ -18,6 +18,12 @@ class Adau1361LowerTest : public ::testing::Test {
 
 typedef Adau1361LowerTest Adau1361LowerDeathTest;
 
+// -----------------------------------------------------------------
+//
+//                          SendCommand()
+//
+// -----------------------------------------------------------------
+
 TEST_F(Adau1361LowerTest, SendCommand) {
   uint8_t cmd[7];
 
@@ -26,6 +32,12 @@ TEST_F(Adau1361LowerTest, SendCommand) {
               i2c_write_blocking(device_address_, cmd, sizeof(cmd), false));
   codec_lower_->SendCommand(cmd, sizeof(cmd));
 }
+
+// -----------------------------------------------------------------
+//
+//                          SendCommandTable()
+//
+// -----------------------------------------------------------------
 
 TEST_F(Adau1361LowerTest, SendCommandTable) {
   const uint8_t cmd[][3] = {
@@ -45,6 +57,12 @@ TEST_F(Adau1361LowerTest, SendCommandTable) {
   }
   codec_lower_->SendCommandTable(cmd, sizeof(cmd) / 3);
 }
+
+// -----------------------------------------------------------------
+//
+//                          IsI2CDeviceExist()
+//
+// -----------------------------------------------------------------
 
 TEST_F(Adau1361LowerTest, IsI2CDeviceExist) {
   uint8_t cmd[7];
@@ -142,6 +160,12 @@ TEST_F(Adau1361LowerTest, WaitPllLock) {
   codec_lower_->WaitPllLock();
 }
 
+// -----------------------------------------------------------------
+//
+//                          InititializeCore()
+//
+// -----------------------------------------------------------------
+
 TEST_F(Adau1361LowerTest, InititializeCore) {
   // Core clock setting
   const uint8_t init_core[] = {
@@ -162,7 +186,13 @@ TEST_F(Adau1361LowerTest, InititializeCore) {
                  2>  // parameter position of the size : 0 origin.
             (ElementsAreArray(init_core)));
   codec_lower_->InitializeCore();
-}
+}  // InititializeCore
+
+// -----------------------------------------------------------------
+//
+//                          DisablePLL()
+//
+// -----------------------------------------------------------------
 
 TEST_F(Adau1361LowerTest, DisablePLL) {
   // PLL Disable.
@@ -185,7 +215,7 @@ TEST_F(Adau1361LowerTest, DisablePLL) {
                  2>  // parameter position of the size : 0 origin.
             (ElementsAreArray(disable_pll)));
   codec_lower_->DisablePLL();
-}
+}  // DisablePLL
 
 // #include <iostream>
 static float pll_out(unsigned int mclock, const uint8_t config[]) {
@@ -208,12 +238,17 @@ static bool is_pll_enabled(const uint8_t config[]) {
   // It must be 1 ( enable PLL ) when setting PLL.
   return (1 == config[7]);
 }
+
+// ------------------------------------------------------------
+//
+//                               ConfigurePll()
+//
+// ------------------------------------------------------------
 // ------------------------------------------------------------
 //
 //                               48kHz
 //
 // ------------------------------------------------------------
-
 TEST_F(Adau1361LowerTest, ConfigurePll_48_08000) {
   using ::testing::Args;
   using ::testing::ElementsAreArray;
@@ -945,6 +980,11 @@ TEST_F(Adau1361LowerTest, ConfigurePll_441_24576) {
   }
 }  // ConfigurePll_441_24576
 
+// ------------------------------------------------------------
+//
+//             ConfigurePll_48_wrong_master_clock
+//
+// ------------------------------------------------------------
 // Validation test for wrong master clock at fs 48kHz.
 TEST_F(Adau1361LowerDeathTest, ConfigurePll_48_wrong_master_clock) {
   {
@@ -956,6 +996,11 @@ TEST_F(Adau1361LowerDeathTest, ConfigurePll_48_wrong_master_clock) {
   }
 }  // ConfigurePll_48_wrong_master_clock
 
+// ------------------------------------------------------------
+//
+//             ConfigurePll_441_wrong_master_clock
+//
+// ------------------------------------------------------------
 // Validation test for wrong master clock at fs 44.1kHz.
 TEST_F(Adau1361LowerDeathTest, ConfigurePll_441_wrong_master_clock) {
   {
@@ -966,6 +1011,11 @@ TEST_F(Adau1361LowerDeathTest, ConfigurePll_441_wrong_master_clock) {
   }
 }  // ConfigurePll_441_wrong_master_clock
 
+// ------------------------------------------------------------
+//
+//             ConfigurePll_wrong_fs
+//
+// ------------------------------------------------------------
 // Validation test for wrong fs .
 TEST_F(Adau1361LowerDeathTest, ConfigurePll_wrong_fs) {
   // Test 27MHz master clock for Fs 48kHz series.
@@ -982,7 +1032,6 @@ TEST_F(Adau1361LowerDeathTest, ConfigurePll_wrong_fs) {
 //                          SetLineInputGain()
 //
 // -----------------------------------------------------------------
-
 // Mute test
 TEST_F(Adau1361LowerTest, SetLineInputGain_mute) {
   using ::testing::Args;
@@ -1190,7 +1239,6 @@ TEST_F(Adau1361LowerTest, SetLineInputGain_appropriate_gain) {
 //                          SetLineOutputGain()
 //
 // -----------------------------------------------------------------
-
 // Mute test
 TEST_F(Adau1361LowerTest, SetLineOutputGain_mute) {
   using ::testing::Args;
@@ -1987,3 +2035,126 @@ TEST_F(Adau1361LowerTest, EnableCore) {
             (ElementsAreArray(config_core)));
   codec_lower_->EnableCore();
 }  // EnableCore
+
+// -----------------------------------------------------------------
+//
+//                          InitializeRegisters()
+//
+// -----------------------------------------------------------------
+
+TEST_F(Adau1361LowerTest, InitializeRegisters) {
+  // Set registers to initialize state
+  const uint8_t config_Adau1361[][3] = {
+      // R0,1, are set by init_freq_xxx table
+      {0x40, 0x08, 0x00},  // R2: Digital Mic
+      {0x40, 0x09, 0x00},  // R3: Rec Power Management
+      {0x40, 0x0a, 0x00},  // R4: Rec Mixer Left 0
+      {0x40, 0x0b, 0x00},  // R5: Rec Mixer Left 1
+      {0x40, 0x0c, 0x00},  // R6: Rec Mixer Right 0
+      {0x40, 0x0d, 0x00},  // R7: Rec Mixer Right 1
+      {0x40, 0x0e, 0x00},  // R8: Left diff input vol
+      {0x40, 0x0f, 0x00},  // R9: Right diff input vol
+      {0x40, 0x10, 0x00},  // R10: Rec mic bias
+      {0x40, 0x11, 0x00},  // R11: ALC0
+      {0x40, 0x12, 0x00},  // R12: ALC1
+      {0x40, 0x13, 0x00},  // R13: ALC2
+      {0x40, 0x14, 0x00},  // R14: ALC3
+      {0x40, 0x15, 0x00},  // R15: Serial Port 0
+      {0x40, 0x16, 0x00},  // R16: Serial Port 1
+      // R17 is set by config_src_xx table
+      {0x40, 0x18, 0x00},  // R18: Converter 1
+      {0x40, 0x19, 0x10},  // R19:ADC Control.
+      {0x40, 0x1a, 0x00},  // R20: Left digital volume
+      {0x40, 0x1b, 0x00},  // R21: Rignt digital volume
+      {0x40, 0x1c, 0x00},  // R22: Play Mixer Left 0
+      {0x40, 0x1d, 0x00},  // R23: Play Mixer Left 1
+      {0x40, 0x1e, 0x00},  // R24: Play Mixer Right 0
+      {0x40, 0x1f, 0x00},  // R25: Play Mixer Right 1
+      {0x40, 0x20, 0x00},  // R26: Play L/R mixer left
+      {0x40, 0x21, 0x00},  // R27: Play L/R mixer right
+      {0x40, 0x22, 0x00},  // R28: Play L/R mixer monot
+      {0x40, 0x23, 0x02},  // R29: Play HP Left vol : Mute, Line out mode
+      {0x40, 0x24, 0x02},  // R30: Play HP Right vol : Mute, Line out Mode
+      {0x40, 0x25, 0x02},  // R31: Line output Left vol : Mute, Line out mode
+      {0x40, 0x26, 0x02},  // R32: Line output Right vol : Mute, Line out mode
+      {0x40, 0x27, 0x02},  // R33: Play Mono output
+      {0x40, 0x28, 0x00},  // R34: Pop surpress
+      {0x40, 0x29, 0x00},  // R35: Play Power Management
+      {0x40, 0x2a, 0x00},  // R36: DAC Control 0
+      {0x40, 0x2b, 0x00},  // R37: DAC Control 1
+      {0x40, 0x2c, 0x00},  // R38: DAC control 2
+      {0x40, 0x2d, 0xaa},  // R39: Seial port Pad
+      {0x40, 0x2f, 0xaa},  // R40: Control Pad 1
+      {0x40, 0x30, 0x00},  // R41: Control Pad 2
+      {0x40, 0x31, 0x08},  // R42: Jack detect
+      {0x40, 0x36, 0x03}   // R67: Dejitter control
+  };
+
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::InSequence;
+  using ::testing::NotNull;
+  //  we test initialization of core.
+  {
+    InSequence dummy;
+
+    for (int i = 0; i < sizeof(config_Adau1361) / 3; i++)
+      EXPECT_CALL(i2c_,
+                  i2c_write_blocking(device_address_,  // Arg 0 : I2C Address.
+                                     NotNull(),  // Arg 1 : Data buffer address.
+                                     3,  // Arg 2 : Data buffer length to send.
+                                     false))  // Arg 3 : false to stop.
+          .With(Args<1,  // parameter position of the array : 0 origin.
+                     2>  // parameter position of the size : 0 origin.
+                (ElementsAreArray(config_Adau1361[i])));
+  }
+  codec_lower_->InitializeRegisters();
+}  // InitializeRegisters
+
+// -----------------------------------------------------------------
+//
+//                          ConfigureSignalPath()
+//
+// -----------------------------------------------------------------
+
+TEST_F(Adau1361LowerTest, ConfigureSignalPath) {
+  // Set UMB_ADAU1361A. No mono output, No cross channel Mix, No analog path
+  // through.
+  const uint8_t config_UMB_ADAU1361A[][3] = {
+      // Configuration for UMB-ADAU1361-A http://dsps.shop-pro.jp/?pid=82798273
+      {0x40, 0x0a, 0x0B},  // R4: Rec Mixer Left 0,  Mixer enable, LINNG 0dB
+      {0x40, 0x0c, 0x0B},  // R6: Rec Mixer Right 0, Mixer enable, RINNG 0dB
+      {0x40, 0x15,
+       0x01},  // R15: I2S Port control, Set code as Master mode I2S.
+      {0x40, 0x19, 0x63},  // R19: ADC Ctrl. Inverted, Enable L/R, HPF on
+      {0x40, 0x29, 0x03},  // R35: DAC Ctrl. Stereo, Enable L/R.
+      {0x40, 0x2a, 0x03},  // R36: DAC Control 0. Enable DAC. Both channels on.
+      {0x40, 0x1c, 0x21},  // R22: MIXER 3, L DAC Mixer (set L DAC to L Mixer )
+      {0x40, 0x1e, 0x41},  // R24: MIXER 4, R DAC Mixer (set R DAC to R Mixer )
+      {0x40, 0x20, 0x03},  // R26: MIXER 5, L out mixer. L out MIX5G3 and enable
+      {0x40, 0x21,
+       0x09},  // R27: MIXER 6, R out mixer. R out MIX6G4 and enable.
+      {0x40, 0x23, 0x03},  // R29: Play HP Left vol : Mute, Enable
+      {0x40, 0x24, 0x03},  // R30: Play HP Right vol : Mute, HP Mode
+  };
+
+  using ::testing::Args;
+  using ::testing::ElementsAreArray;
+  using ::testing::InSequence;
+  using ::testing::NotNull;
+  //  we test initialization of core.
+  {
+    InSequence dummy;
+
+    for (int i = 0; i < sizeof(config_UMB_ADAU1361A) / 3; i++)
+      EXPECT_CALL(i2c_,
+                  i2c_write_blocking(device_address_,  // Arg 0 : I2C Address.
+                                     NotNull(),  // Arg 1 : Data buffer address.
+                                     3,  // Arg 2 : Data buffer length to send.
+                                     false))  // Arg 3 : false to stop.
+          .With(Args<1,  // parameter position of the array : 0 origin.
+                     2>  // parameter position of the size : 0 origin.
+                (ElementsAreArray(config_UMB_ADAU1361A[i])));
+  }
+  codec_lower_->ConfigureSignalPath();
+}  // ConfigureSignalPath
