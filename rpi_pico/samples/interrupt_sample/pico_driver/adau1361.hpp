@@ -20,8 +20,6 @@ class Adau1361 {
    * \brief constructor.
    * \param fs Sampling frequency[Hz]
    * @param master_clock Input master clock frequency to the MCLK pin[Hz]
-   * \param controller Pass the I2C controller object.
-   * \param i2c_device_addr I2C device address. value range is from 0 to 127
    * \details
    *   initialize the internal variables.
    *   This constructor assumes the codec receive a master clock from outside.
