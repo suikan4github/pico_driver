@@ -9,7 +9,22 @@
 #define _ADAU1361LOWER_HPP_
 
 #include "i2cmaster.hpp"
-
+/**
+ * @brief lower part of the ADAU1361 CODEC.
+ * @details
+ * To initialize codec, follow the sequence
+ * @li InitializeCore()
+ * @li DisablePLL()
+ * @li ConfigurePll()
+ * @li WaitPllLock()
+ * @li EnableCore()
+ * @li ConfigureSRC()
+ * @li InitializeRegisters()
+ * @li ConfigureSignalPath()
+ *
+ * After these initialization, the ADC, DAC, Mixer and ISC are alive.
+ * Note, all volumes are muted.
+ */
 class Adau1361Lower {
  public:
   Adau1361Lower(I2CMasterInterface& controller, unsigned int i2c_device_addr)
@@ -48,11 +63,15 @@ class Adau1361Lower {
 
   /**
    * @brief Reset the core for fresh procedure.
+   * @details
+   * Must call at first when initialize codec.
    */
   virtual void InitializeCore();
 
   /**
    * @brief stop PLL to re-proguram.
+   * @details
+   * Must call after InitializeCore().
    */
   virtual void DisablePLL();
 
@@ -73,25 +92,22 @@ class Adau1361Lower {
    * @details
    * At first, initialize the PLL based on the given fst and master clock.
    * Then, setup the Converter sampling rate.
+   *
+   * Must call after DisablePLL().
    */
   virtual void ConfigurePll(unsigned int fs, unsigned int master_clock);
 
   /**
    * @brief Initialize the SRC with given fs clock.
    * @details
-   * This routine must be called after :
-   * @li ConfigurePll()
-   * @li WaitPllLock()
-   * @li InitializeCore.
-   *
-   * And then
-   *
-   * @li ConfigurePll()
+   * Must call after EnableCore().
    */
   virtual void ConfigureSRC(unsigned int fs);
 
   /**
    * @brief Initialize the core part of the ADAU1361A.
+   * @details
+   * Must call after ConfigurePLL(), followings WailtPLLLock().
    */
   virtual void EnableCore();
 
@@ -99,8 +115,8 @@ class Adau1361Lower {
    * @brief Initialize registers for the chip operation.
    * @details This is is board independent initialization.
    *
-   * This function reset the chip.
-   * Need to call before InitializeSignalPath()
+   * This function clean-up.
+   * Need to call after ConfigureSRC() and before InitializeSignalPath()
    */
   virtual void InitializeRegisters();
 
@@ -108,7 +124,7 @@ class Adau1361Lower {
    * @brief Initialize registers for the signal routing.
    * @details THis is baord dependent initialization.
    *
-   * Need to call after InitializeRegisters.
+   * Need to call after InitializeRegisters().
    */
   virtual void ConfigureSignalPath();
 
