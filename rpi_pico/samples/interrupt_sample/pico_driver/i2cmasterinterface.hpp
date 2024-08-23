@@ -50,7 +50,7 @@ class I2CMasterInterface {
 
 #if __has_include(<gmock/gmock.h>)
 
-class MockI2CMaster : public I2CMasterInterface {
+class MockI2CMasterInterface : public I2CMasterInterface {
  public:
   MOCK_METHOD4(i2c_read_blocking,
                int(uint8_t addr, uint8_t *dst, size_t len, bool nostop));

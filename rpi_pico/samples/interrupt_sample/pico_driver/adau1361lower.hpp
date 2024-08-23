@@ -202,7 +202,7 @@ class Adau1361Lower {
 
 class MockAdau1361Lower : public Adau1361Lower {
  public:
-  MockAdau1361Lower(I2CMasterInterface& controller)
+  explicit MockAdau1361Lower(I2CMasterInterface& controller)
       : Adau1361Lower(controller, 31) {};
   MOCK_METHOD2(SendCommand, void(const uint8_t command[], int size));
   MOCK_METHOD2(SendCommandTable, void(const uint8_t table[][3], int rows));

@@ -12,7 +12,7 @@ class Adau1361LowerTest : public ::testing::Test {
   }
 
   unsigned int device_address_;  // 7bit I2C address
-  MockI2CMaster i2c_;
+  MockI2CMasterInterface i2c_;
   Adau1361Lower *codec_lower_;
 };
 

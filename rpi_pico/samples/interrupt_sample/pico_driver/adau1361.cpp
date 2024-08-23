@@ -15,6 +15,24 @@
 #define CODEC_SYSLOG(fmt, ...) \
   //  MURASAKI_SYSLOG(this, kfaAudioCodec, kseDebug, fmt, ##__VA_ARGS__)
 
+Adau1361::Adau1361(unsigned int fs, unsigned int master_clock,
+                   Adau1361Lower& adau1361_lower)
+    : fs_(fs),
+      master_clock_(master_clock),
+      adau1361_lower_(adau1361_lower),
+      line_input_left_gain_(0.0),
+      line_input_right_gain_(0.0),
+      aux_input_left_gain_(0.0),
+      aux_input_right_gain_(0.0),
+      line_output_left_gain_(0.0),
+      line_output_right_gain_(0.0),
+      hp_output_left_gain_(0.0),
+      hp_output_right_gain_(0.0),
+      line_input_mute_(true),
+      aux_input_mute_(true),
+      line_output_mute_(true),
+      hp_output_mute_(true) {}
+
 void Adau1361::Start(void) {
   CODEC_SYSLOG("Enter.")
 
@@ -38,25 +56,6 @@ void Adau1361::Start(void) {
   adau1361_lower_.InitializeRegisters();
   // Board dependent register initialization.
   adau1361_lower_.ConfigureSignalPath();
-
-  // Before calling mute() function, set the gain as appropriate value.
-  // The value is not problem if it is in the appropriate range.
-  // This value is not be able to set by SetGain() member function, because at
-  // this moment, Mute is not clealy specified.
-  line_input_left_gain_ = 0.0;
-  line_input_right_gain_ = 0.0;
-  aux_input_left_gain_ = 0.0;
-  aux_input_right_gain_ = 0.0;
-  line_output_left_gain_ = 0.0;
-  line_output_right_gain_ = 0.0;
-  hp_output_left_gain_ = 0.0;  // headphone
-  hp_output_right_gain_ = 0.0;
-
-  // Mute all channels.
-  Mute(LineInput);
-  Mute(AuxInput);
-  Mute(LineOutput);
-  Mute(HeadphoneOutput);
 
   CODEC_SYSLOG("Leave.")
 }

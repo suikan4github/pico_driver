@@ -59,8 +59,7 @@ class Adau1361 {
    *   @li HP out   : LHP/RHP
    */
   explicit Adau1361(unsigned int fs, unsigned int master_clock,
-                    Adau1361Lower& adau1361_lower)
-      : fs_(fs), master_clock_(master_clock), adau1361_lower_(adau1361_lower) {}
+                    Adau1361Lower& adau1361_lower);
   Adau1361() = delete;
   /**
    * \brief Set up the ADAU1361 codec,  and then, start the codec.
