@@ -11,6 +11,8 @@ class Adau1361LowerTest : public ::testing::Test {
     codec_lower_ = new Adau1361Lower(i2c_, device_address_);
   }
 
+  virtual void TearDown() { delete codec_lower_; }
+
   unsigned int device_address_;  // 7bit I2C address
   MockI2CMasterInterface i2c_;
   Adau1361Lower *codec_lower_;
