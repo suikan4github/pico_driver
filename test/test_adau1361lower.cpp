@@ -2,7 +2,7 @@
 #include <gtest/gtest.h>
 
 #include "adau1361lower.hpp"
-#include "i2cmaster.hpp"
+#include "i2cmasterinterface.hpp"
 
 class Adau1361LowerTest : public ::testing::Test {
  protected:
