@@ -9,7 +9,7 @@ class Adau1361Test : public ::testing::Test {
  protected:
   virtual void SetUp() {
     codec_lower_ = new MockAdau1361Lower(i2c_);
-    codec_ = new Adau1361(48000, 12000000, *codec_lower_);
+    codec_ = new Adau1361(fs_, master_clk_, *codec_lower_);
   }
 
   virtual void TearDown() {
@@ -17,6 +17,8 @@ class Adau1361Test : public ::testing::Test {
     delete codec_lower_;
   }
 
+  uint fs_ = 48000;
+  uint master_clk_ = 12000000;
   MockI2CMasterInterface i2c_;
   MockAdau1361Lower *codec_lower_;
   Adau1361 *codec_;
@@ -205,3 +207,38 @@ TEST_F(Adau1361Test, Mute_HeadhphoneOutput) {
   codec_->SetGain(Adau1361::HeadphoneOutput, 2.0, 3.0);
   codec_->Mute(Adau1361::HeadphoneOutput, true);
 }  // Mute_HeadhphoneOutput
+
+// -----------------------------------------------------------------
+//
+//                          Start()
+//
+// -----------------------------------------------------------------
+
+TEST_F(Adau1361Test, Start) {
+  using ::testing::_;
+  using ::testing::InSequence;
+  using ::testing::Return;
+  // Check required function call order.
+  {
+    InSequence dummy;
+
+    EXPECT_CALL(*codec_lower_, IsI2CDeivceExisting()).WillOnce(Return(true));
+    EXPECT_CALL(*codec_lower_, InitializeCore());
+    EXPECT_CALL(*codec_lower_, DisablePLL());
+    EXPECT_CALL(*codec_lower_, ConfigurePll(fs_, master_clk_));
+    EXPECT_CALL(*codec_lower_, WaitPllLock());
+    EXPECT_CALL(*codec_lower_, EnableCore());
+    EXPECT_CALL(*codec_lower_, ConfigureSRC(fs_));
+    EXPECT_CALL(*codec_lower_, InitializeRegisters());
+    EXPECT_CALL(*codec_lower_, ConfigureSignalPath());
+  }
+  // Check illegal func call is not existing.
+  EXPECT_CALL(*codec_lower_, SetLineOutputGain(_, _, _)).Times(0);
+  EXPECT_CALL(*codec_lower_, SetAuxInputGain(_, _, _)).Times(0);
+  EXPECT_CALL(*codec_lower_, SetHpOutputGain(_, _, _)).Times(0);
+  EXPECT_CALL(*codec_lower_, SetLineInputGain(_, _, _)).Times(0);
+
+  // Test run.
+  codec_->Start();
+
+}  // Start
