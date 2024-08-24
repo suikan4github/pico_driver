@@ -113,3 +113,95 @@ TEST_F(Adau1361Test, SetGain_HeadhphoneOutput) {
   codec_->Mute(Adau1361::HeadphoneOutput, false);
   codec_->SetGain(Adau1361::HeadphoneOutput, 3.0, 2.0);
 }  // SetGain_HeadhphoneOutput
+
+// -----------------------------------------------------------------
+//
+//                          Mute()
+//
+// -----------------------------------------------------------------
+
+TEST_F(Adau1361Test, Mute_LineInput) {
+  using ::testing::_;
+  using ::testing::InSequence;
+  // Check required function call order.
+  {
+    InSequence dummy;
+
+    EXPECT_CALL(*codec_lower_, SetLineInputGain(0.0, 0.0, false));
+    EXPECT_CALL(*codec_lower_, SetLineInputGain(2.0, 3.0, false));
+    EXPECT_CALL(*codec_lower_, SetLineInputGain(2.0, 3.0, true));
+  }
+  // Check illegal func call is not existing.
+  EXPECT_CALL(*codec_lower_, SetLineOutputGain(_, _, _)).Times(0);
+  EXPECT_CALL(*codec_lower_, SetAuxInputGain(_, _, _)).Times(0);
+  EXPECT_CALL(*codec_lower_, SetHpOutputGain(_, _, _)).Times(0);
+
+  // Test run.
+  codec_->Mute(Adau1361::LineInput, false);
+  codec_->SetGain(Adau1361::LineInput, 2.0, 3.0);
+  codec_->Mute(Adau1361::LineInput, true);
+
+}  // Mute_LineInput
+
+TEST_F(Adau1361Test, Mute_LineOutput) {
+  using ::testing::_;
+  using ::testing::InSequence;
+  {
+    InSequence dummy;
+
+    EXPECT_CALL(*codec_lower_, SetLineOutputGain(0.0, 0.0, true));
+    EXPECT_CALL(*codec_lower_, SetLineOutputGain(2.0, 3.0, true));
+    EXPECT_CALL(*codec_lower_, SetLineOutputGain(2.0, 3.0, false));
+  }
+  // Check illegal func call is not existing.
+  EXPECT_CALL(*codec_lower_, SetLineInputGain(_, _, _)).Times(0);
+  EXPECT_CALL(*codec_lower_, SetAuxInputGain(_, _, _)).Times(0);
+  EXPECT_CALL(*codec_lower_, SetHpOutputGain(_, _, _)).Times(0);
+
+  // Test run
+  codec_->Mute(Adau1361::LineOutput, true);
+  codec_->SetGain(Adau1361::LineOutput, 2.0, 3.0);
+  codec_->Mute(Adau1361::LineOutput, false);
+}  // Mute_LineOutput
+
+TEST_F(Adau1361Test, Mute_AuxInput) {
+  using ::testing::_;
+  using ::testing::InSequence;
+  {
+    InSequence dummy;
+
+    EXPECT_CALL(*codec_lower_, SetAuxInputGain(0.0, 0.0, false));
+    EXPECT_CALL(*codec_lower_, SetAuxInputGain(2.0, 3.0, false));
+    EXPECT_CALL(*codec_lower_, SetAuxInputGain(2.0, 3.0, true));
+  }
+  // Check illegal func call is not existing.
+  EXPECT_CALL(*codec_lower_, SetLineInputGain(_, _, _)).Times(0);
+  EXPECT_CALL(*codec_lower_, SetLineOutputGain(_, _, _)).Times(0);
+  EXPECT_CALL(*codec_lower_, SetHpOutputGain(_, _, _)).Times(0);
+
+  // Test run
+  codec_->Mute(Adau1361::AuxInput, false);
+  codec_->SetGain(Adau1361::AuxInput, 2.0, 3.0);
+  codec_->Mute(Adau1361::AuxInput);
+}  // Mute_AuxInput
+
+TEST_F(Adau1361Test, Mute_HeadhphoneOutput) {
+  using ::testing::_;
+  using ::testing::InSequence;
+  {
+    InSequence dummy;
+
+    EXPECT_CALL(*codec_lower_, SetHpOutputGain(0.0, 0.0, false));
+    EXPECT_CALL(*codec_lower_, SetHpOutputGain(2.0, 3.0, false));
+    EXPECT_CALL(*codec_lower_, SetHpOutputGain(2.0, 3.0, true));
+  }
+  // Check illegal func call is not existing.
+  EXPECT_CALL(*codec_lower_, SetLineInputGain(_, _, _)).Times(0);
+  EXPECT_CALL(*codec_lower_, SetLineOutputGain(_, _, _)).Times(0);
+  EXPECT_CALL(*codec_lower_, SetAuxInputGain(_, _, _)).Times(0);
+
+  // Test run
+  codec_->Mute(Adau1361::HeadphoneOutput, false);
+  codec_->SetGain(Adau1361::HeadphoneOutput, 2.0, 3.0);
+  codec_->Mute(Adau1361::HeadphoneOutput, true);
+}  // Mute_HeadhphoneOutput
