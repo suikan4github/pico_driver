@@ -9,7 +9,7 @@
  *  table : command table :
  *  size : size of table.
  */
-void Adau1361Lower::SendCommand(const uint8_t command[], int size) {
+void ::codec::Adau1361Lower::SendCommand(const uint8_t command[], int size) {
   /*
    * Send the given table to the I2C slave device at device_addr
    */
@@ -20,14 +20,15 @@ void Adau1361Lower::SendCommand(const uint8_t command[], int size) {
  * Send entire command table
  */
 
-void Adau1361Lower::SendCommandTable(const uint8_t table[][3], int rows) {
+void ::codec::Adau1361Lower::SendCommandTable(const uint8_t table[][3],
+                                              int rows) {
   /*
    * Send all rows of command table.
    */
   for (int i = 0; i < rows; i++) SendCommand(table[i], 3);
 }
 
-bool Adau1361Lower::IsI2CDeivceExisting() {
+bool ::codec::Adau1361Lower::IsI2CDeivceExisting() {
   int status;
   const uint8_t lock_status_address[] = {0x40, 0x02};  // R1 : 6 byte register.
 
@@ -35,7 +36,7 @@ bool Adau1361Lower::IsI2CDeivceExisting() {
   return (status != PICO_ERROR_GENERIC);
 }
 
-void Adau1361Lower::InitializeCore() {
+void ::codec::Adau1361Lower::InitializeCore() {
   // Core clock setting
   const uint8_t init_core[] = {
       0x40, 0x00, 0x00};  // R0:Clock control. Core clock disabled. PLL off.
@@ -43,7 +44,7 @@ void Adau1361Lower::InitializeCore() {
   SendCommand(init_core, sizeof(init_core));
 }
 
-void Adau1361Lower::DisablePLL() {
+void ::codec::Adau1361Lower::DisablePLL() {
   // PLL Disable.
   // R1 : Must write 6 byte at once.
   const uint8_t disable_pll[] = {0x40, 0x02, 0x00, 0xFD,
@@ -53,7 +54,7 @@ void Adau1361Lower::DisablePLL() {
 }
 
 // loop while the PLL is not locked.
-void Adau1361Lower::WaitPllLock(void) {
+void ::codec::Adau1361Lower::WaitPllLock(void) {
   const uint8_t lock_status_address[] = {0x40, 0x02};  // R1 : 6 byte register.
 
   uint8_t status[6];
@@ -77,7 +78,8 @@ void Adau1361Lower::WaitPllLock(void) {
 }
 
 // Configure PLL and start. Then, initiate the core and set the CODEC Fs.
-void Adau1361Lower::ConfigurePll(unsigned int fs, unsigned int master_clock) {
+void ::codec::Adau1361Lower::ConfigurePll(unsigned int fs,
+                                          unsigned int master_clock) {
   assert((fs == 24000 || fs == 32000 || fs == 48000 || fs == 96000 ||
           fs == 22050 || fs == 44100 || fs == 88200) &&
          "Bad Fs");
@@ -444,7 +446,7 @@ void Adau1361Lower::ConfigurePll(unsigned int fs, unsigned int master_clock) {
 }  // ConfigurePlll
 
 // Enable core.
-void Adau1361Lower::EnableCore() {
+void ::codec::Adau1361Lower::EnableCore() {
   // Set core source to PLL
   const uint8_t config_core[] = {
       0x40, 0x00, 0x0f};  // R0:Source is PLL, 1024fs, core clock enable.
@@ -452,7 +454,7 @@ void Adau1361Lower::EnableCore() {
   SendCommand(config_core, sizeof(config_core));
 }
 
-void Adau1361Lower::InitializeRegisters() {
+void ::codec::Adau1361Lower::InitializeRegisters() {
   // Set all registers.
   // Set non clock registers as default
   const uint8_t config_Adau1361[][3] = {
@@ -506,7 +508,7 @@ void Adau1361Lower::InitializeRegisters() {
       sizeof(config_Adau1361) / 3);  // init Adau1361 as default state.
 }
 
-void Adau1361Lower::ConfigureSignalPath() {
+void ::codec::Adau1361Lower::ConfigureSignalPath() {
   // Set certain signal pass. If it
   // doen't fit to your system,
   // override it by
@@ -538,7 +540,7 @@ void Adau1361Lower::ConfigureSignalPath() {
 }
 
 // Set the converter clock.
-void Adau1361Lower::ConfigureSRC(unsigned int fs) {
+void ::codec::Adau1361Lower::ConfigureSRC(unsigned int fs) {
   assert((fs == 24000 || fs == 32000 || fs == 48000 || fs == 96000 ||
           fs == 22050 || fs == 44100 || fs == 88200) &&
          "Bad Fs");
@@ -590,8 +592,8 @@ void Adau1361Lower::ConfigureSRC(unsigned int fs) {
  * See Figure 31 "Record Signal Path" in the ADAU1361 data sheet
  *
  */
-void Adau1361Lower::SetLineInputGain(float left_gain, float right_gain,
-                                     bool mute) {
+void ::codec::Adau1361Lower::SetLineInputGain(float left_gain, float right_gain,
+                                              bool mute) {
   uint8_t txbuf[3];
   uint8_t rxbuf[1];
   int left, right;
@@ -641,8 +643,8 @@ void Adau1361Lower::SetLineInputGain(float left_gain, float right_gain,
 /*
  * This function assumes the input is the single end. Then,
  */
-void Adau1361Lower::SetAuxInputGain(float left_gain, float right_gain,
-                                    bool mute) {
+void ::codec::Adau1361Lower::SetAuxInputGain(float left_gain, float right_gain,
+                                             bool mute) {
   uint8_t txbuf[3];
   uint8_t rxbuf[1];
   int left, right;
@@ -687,8 +689,8 @@ void Adau1361Lower::SetAuxInputGain(float left_gain, float right_gain,
   ((x << 2) | (unmute << 1) | (headphone))
 
 // Read modify right the R31 and R32
-void Adau1361Lower::SetLineOutputGain(float left_gain, float right_gain,
-                                      bool mute) {
+void ::codec::Adau1361Lower::SetLineOutputGain(float left_gain,
+                                               float right_gain, bool mute) {
   uint8_t txbuf[3];
   int left, right;
 
@@ -742,8 +744,8 @@ void Adau1361Lower::SetLineOutputGain(float left_gain, float right_gain,
 
 // Read modify right the R29 and R30
 
-void Adau1361Lower::SetHpOutputGain(float left_gain, float right_gain,
-                                    bool mute) {
+void ::codec::Adau1361Lower::SetHpOutputGain(float left_gain, float right_gain,
+                                             bool mute) {
   uint8_t txbuf[3];
   int left, right;
 

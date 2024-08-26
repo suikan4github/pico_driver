@@ -9,6 +9,9 @@
 #define _ADAU1361LOWER_HPP_
 
 #include "i2cmaster.hpp"
+
+namespace codec {
+
 /**
  * @brief lower part of the ADAU1361 CODEC.
  * @details
@@ -226,5 +229,6 @@ class MockAdau1361Lower : public Adau1361Lower {
                void(float left_gain, float right_gain, bool mute));
 };
 #endif  //  __has_include(<gmock/gmock>)
+}  // namespace codec
 
 #endif /* _ADAU1361LOWER_HPP_ */

@@ -15,8 +15,8 @@
 #define CODEC_SYSLOG(fmt, ...) \
   //  MURASAKI_SYSLOG(this, kfaAudioCodec, kseDebug, fmt, ##__VA_ARGS__)
 
-Adau1361::Adau1361(unsigned int fs, unsigned int master_clock,
-                   Adau1361Lower& adau1361_lower)
+::codec::Adau1361::Adau1361(unsigned int fs, unsigned int master_clock,
+                            ::codec::Adau1361Lower& adau1361_lower)
     : fs_(fs),
       master_clock_(master_clock),
       adau1361_lower_(adau1361_lower),
@@ -33,7 +33,7 @@ Adau1361::Adau1361(unsigned int fs, unsigned int master_clock,
       line_output_mute_(true),
       hp_output_mute_(true) {}
 
-void Adau1361::Start(void) {
+void ::codec::Adau1361::Start(void) {
   CODEC_SYSLOG("Enter.")
 
   // Check if target device exist.
@@ -64,8 +64,8 @@ void Adau1361::Start(void) {
  * Set gain of the specific input channel.
  * The mute status is not affected.
  */
-void Adau1361::SetGain(CodecChannel channel, float left_gain,
-                       float right_gain) {
+void ::codec::Adau1361::SetGain(CodecChannel channel, float left_gain,
+                                float right_gain) {
   CODEC_SYSLOG("Enter. %d, %f, %f ", channel, left_gain, right_gain)
 
   switch (channel) {
@@ -105,7 +105,7 @@ void Adau1361::SetGain(CodecChannel channel, float left_gain,
  * Set mute status of specific channels.
  * Channel gains are not affected.
  */
-void Adau1361::Mute(CodecChannel channel, bool mute) {
+void ::codec::Adau1361::Mute(CodecChannel channel, bool mute) {
   CODEC_SYSLOG("Enter. %d, %s ", channel, mute ? "true" : "false")
 
   switch (channel) {

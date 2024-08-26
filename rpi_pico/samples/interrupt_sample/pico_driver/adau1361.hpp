@@ -11,6 +11,7 @@
 #include <i2cmasterinterface.hpp>
 
 #include "adau1361lower.hpp"
+namespace codec {
 
 class Adau1361 {
  public:
@@ -114,5 +115,6 @@ class Adau1361 {
   bool line_output_mute_;
   bool hp_output_mute_;  // headphone
 };
+}  // namespace codec
 
 #endif /* MURASAKI_TP_ADAU1361_HPP_ */
