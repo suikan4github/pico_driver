@@ -12,7 +12,7 @@ typedef unsigned uint;
 #include <stdint.h>
 #include <stdlib.h>
 #endif
-
+namespace pico_driver {
 /**
  * @brief Wrapper class for the RasPi Pico SDK functions.
  * @details
@@ -113,7 +113,7 @@ class MockPicoWrapper : public PicoWrapper {
                int(i2c_inst_t *i2c, uint8_t addr, const uint8_t *src,
                    size_t len, bool nostop));
 };
-
 #endif  // __has_include(<gmock/gmock.h>)
+};  // namespace pico_driver
 
 #endif  // __DRIVER_PICOWRAPPER_HPP__

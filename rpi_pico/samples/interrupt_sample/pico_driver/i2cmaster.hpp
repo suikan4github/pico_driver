@@ -21,6 +21,7 @@ typedef int i2c_inst_t;
 #include "i2cmasterinterface.hpp"
 #include "picowrapper.hpp"
 
+namespace pico_driver {
 class I2CMaster : public I2CMasterInterface {
  public:
   I2CMaster(i2c_inst_t &i2c, PicoWrapper &sdk) : i2c_(i2c), sdk_(sdk) {}
@@ -59,5 +60,6 @@ class I2CMaster : public I2CMasterInterface {
   i2c_inst_t &i2c_;
   PicoWrapper &sdk_;
 };
+};  // namespace pico_driver
 
 #endif /* _I2CMASTER_HPP_ */

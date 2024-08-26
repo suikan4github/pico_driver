@@ -16,6 +16,8 @@
 typedef unsigned uint;
 #endif
 
+namespace pico_driver {
+
 class I2CMasterInterface {
  public:
   virtual ~I2CMasterInterface() {}
@@ -59,5 +61,6 @@ class MockI2CMasterInterface : public I2CMasterInterface {
 };
 
 #endif  //  __has_include(<gmock/gmock>)
+}  // namespace pico_driver
 
 #endif /* _I2CMASTERINTERFACE_HPP_ */
