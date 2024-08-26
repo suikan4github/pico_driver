@@ -2,6 +2,10 @@
 
 void ::pico_driver::SDKWrapper::sleep_ms(uint32_t ms) { ::sleep_ms(ms); }
 
+bool pico_driver::SDKWrapper::stdio_init_all(void) {
+  return ::stdio_init_all();
+}
+
 void ::pico_driver::SDKWrapper::gpio_init(uint gpio) { ::gpio_init(gpio); }
 
 void pico_driver::SDKWrapper::gpio_set_function(uint gpio, gpio_function_t fn) {

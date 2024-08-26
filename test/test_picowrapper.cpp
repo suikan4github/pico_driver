@@ -18,6 +18,7 @@ DEFINE_FFF_GLOBALS;
 #include "../rpi_pico/samples/interrupt_sample/pico_driver/picowrapper.hpp"
 
 // Create Test Spies
+FAKE_VALUE_FUNC(bool, stdio_init_all);
 FAKE_VOID_FUNC(sleep_ms, uint32_t);
 FAKE_VOID_FUNC(gpio_init, uint);
 FAKE_VOID_FUNC(gpio_set_function, uint, gpio_function_t);
@@ -33,6 +34,28 @@ FAKE_VALUE_FUNC(int, i2c_write_blocking, i2c_inst_t *, uint8_t, const uint8_t *,
 
 // The cpp file of the library to test.
 #include "../rpi_pico/samples/interrupt_sample/pico_driver/picowrapper.cpp"
+
+TEST(PicoWrapper, stdio_init_all) {
+  ::pico_driver::SDKWrapper pico;
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(stdio_init_all);
+
+  bool myReturnVals[] = {true, false};
+  SET_RETURN_SEQ(stdio_init_all, myReturnVals,
+                 sizeof(myReturnVals) / sizeof(bool));
+
+  ASSERT_EQ(pico.stdio_init_all(), myReturnVals[0]);
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(stdio_init_all_fake.call_count, 1);
+
+  // Check the data from test spy. Call order.
+  ASSERT_EQ(fff.call_history[0], (void *)stdio_init_all);
+
+  // Check the data from test spy. : Parameters.
+  ASSERT_EQ(pico.stdio_init_all(), myReturnVals[1]);
+}  // stdio_init_all
 
 TEST(PicoWrapper, sleep_ms) {
   ::pico_driver::SDKWrapper pico;

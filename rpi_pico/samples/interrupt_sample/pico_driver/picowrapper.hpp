@@ -25,6 +25,29 @@ namespace pico_driver {
 class SDKWrapper {
  public:
   virtual ~SDKWrapper() {}
+
+  /**
+   * @brief Initialize all of the present standard stdio types
+   * that are linked into the binary.
+   * @returns
+   * true if at least one output was successfully initialized, false otherwise.
+   * @details
+   * Call this method once you have set up your clocks
+   * to enable the stdio support for UART, USB, semihosting,
+   * and RTT based on the presence of the respective libraries in the binary.
+   *
+   * When stdio_usb is configured, this method can be optionally made to block,
+   * waiting for a connection via the variables specified in stdio_usb_init
+   * (i.e. PICO_STDIO_USB_CONNECT_WAIT_TIMEOUT_MS)
+   */
+  virtual bool stdio_init_all(void);
+
+  /**
+   * @brief Initialise a GPIO for (enabled I/O and set func to GPIO_FUNC_SIO)
+   * @param gpio GPIO number.
+   * @details
+   * Clear the output enable (i.e. set to input). Clear any output value.
+   */
   virtual void gpio_init(uint gpio);
 
   /**
@@ -108,6 +131,8 @@ class SDKWrapper {
 #if __has_include(<gmock/gmock.h>)
 class MockSDKWrapper : public SDKWrapper {
  public:
+  MOCK_METHOD0(stdio_init_all, bool(void));
+  MOCK_METHOD1(gpio_init, void(uint gpio));
   MOCK_METHOD1(sleep_ms, void(uint32_t ms));
   MOCK_METHOD2(gpio_set_dir, void(uint gpio, bool out));
   MOCK_METHOD2(gpio_put, void(uint gpio, bool value));
