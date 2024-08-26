@@ -27,7 +27,7 @@
  */
 class Adau1361Lower {
  public:
-  Adau1361Lower(pico_driver::I2CMasterInterface& controller,
+  Adau1361Lower(::pico_driver::I2CMasterInterface& controller,
                 unsigned int i2c_device_addr)
       : i2c_(controller), device_addr_(i2c_device_addr) {};
   Adau1361Lower() = delete;
@@ -195,7 +195,7 @@ class Adau1361Lower {
                                bool mute = false);
 
  protected:
-  pico_driver::I2CMasterInterface& i2c_;
+  ::pico_driver::I2CMasterInterface& i2c_;
   const unsigned int device_addr_;
 };
 
@@ -203,7 +203,7 @@ class Adau1361Lower {
 
 class MockAdau1361Lower : public Adau1361Lower {
  public:
-  explicit MockAdau1361Lower(pico_driver::I2CMasterInterface& controller)
+  explicit MockAdau1361Lower(::pico_driver::I2CMasterInterface& controller)
       : Adau1361Lower(controller, 31) {};
   MOCK_METHOD2(SendCommand, void(const uint8_t command[], int size));
   MOCK_METHOD2(SendCommandTable, void(const uint8_t table[][3], int rows));
