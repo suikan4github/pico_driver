@@ -35,7 +35,7 @@ FAKE_VALUE_FUNC(int, i2c_write_blocking, i2c_inst_t *, uint8_t, const uint8_t *,
 #include "../rpi_pico/samples/interrupt_sample/pico_driver/picowrapper.cpp"
 
 TEST(PicoWrapper, sleep_ms) {
-  ::pico_driver::PicoWrapper pico;
+  ::pico_driver::SDKWrapper pico;
   uint ms_array[] = {17, 11};
 
   FFF_RESET_HISTORY();
@@ -59,7 +59,7 @@ TEST(PicoWrapper, sleep_ms) {
 }
 
 TEST(PicoWrapper, gpio_init) {
-  ::pico_driver::PicoWrapper pico;
+  ::pico_driver::SDKWrapper pico;
   uint gpioarray[] = {17, 11};
 
   FFF_RESET_HISTORY();
@@ -83,7 +83,7 @@ TEST(PicoWrapper, gpio_init) {
 }
 
 TEST(PicoWrapper, gpio_set_function) {
-  ::pico_driver::PicoWrapper pico;
+  ::pico_driver::SDKWrapper pico;
   uint gpioarray[] = {17, 11};
   int functionarray[] = {7, 13};
 
@@ -114,7 +114,7 @@ TEST(PicoWrapper, gpio_set_function) {
 }  // gpio_set_function
 
 TEST(PicoWrapper, gpio_set_dir) {
-  ::pico_driver::PicoWrapper pico;
+  ::pico_driver::SDKWrapper pico;
   uint gpioarray[] = {17, 11};
   bool dirarray[] = {true, false};
 
@@ -145,7 +145,7 @@ TEST(PicoWrapper, gpio_set_dir) {
 }
 
 TEST(PicoWrapper, gpio_put) {
-  ::pico_driver::PicoWrapper pico;
+  ::pico_driver::SDKWrapper pico;
   uint gpioarray[] = {17, 11};
   bool valuearray[] = {true, false};
 
@@ -177,7 +177,7 @@ TEST(PicoWrapper, gpio_put) {
 }
 
 TEST(PicoWrapper, gpio_get) {
-  ::pico_driver::PicoWrapper pico;
+  ::pico_driver::SDKWrapper pico;
   uint gpio = 17;
 
   FFF_RESET_HISTORY();
@@ -201,7 +201,7 @@ TEST(PicoWrapper, gpio_get) {
 }
 
 TEST(PicoWrapper, gpio_pull_up) {
-  ::pico_driver::PicoWrapper pico;
+  ::pico_driver::SDKWrapper pico;
   uint gpio = 17;
 
   FFF_RESET_HISTORY();
@@ -231,7 +231,7 @@ TEST(PicoWrapper, gpio_pull_up) {
 
 // FAKE_VALUE_FUNC(uint, i2c_init, i2c_inst_t *, uint);
 TEST(PicoWrapper, i2c_init) {
-  ::pico_driver::PicoWrapper pico;
+  ::pico_driver::SDKWrapper pico;
   i2c_inst_t i2c = 17;
   const uint baud[] = {3, 100000};
 
@@ -261,7 +261,7 @@ TEST(PicoWrapper, i2c_init) {
 // FAKE_VALUE_FUNC(int, i2c_read_blocking, i2c_inst_t *, uint8_t, uint8_t *,
 //                  size_t, bool);
 TEST(PicoWrapper, i2c_read_blocking) {
-  ::pico_driver::PicoWrapper pico;
+  ::pico_driver::SDKWrapper pico;
   i2c_inst_t i2c = 17;
   uint8_t buf[10];
   uint8_t addrs_array[] = {3, 5};
@@ -312,7 +312,7 @@ TEST(PicoWrapper, i2c_read_blocking) {
 // FAKE_VALUE_FUNC(int, i2c_write_blocking, i2c_inst_t *, uint8_t,
 // const uint8_t *,  size_t, bool);
 TEST(PicoWrapper, i2c_write_blocking) {
-  ::pico_driver::PicoWrapper pico;
+  ::pico_driver::SDKWrapper pico;
   i2c_inst_t i2c = 17;
   uint8_t buf[10];
   uint8_t addrs_array[] = {3, 5};

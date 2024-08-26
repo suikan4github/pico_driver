@@ -24,7 +24,7 @@ typedef int i2c_inst_t;
 namespace pico_driver {
 class I2CMaster : public I2CMasterInterface {
  public:
-  I2CMaster(i2c_inst_t &i2c, PicoWrapper &sdk) : i2c_(i2c), sdk_(sdk) {}
+  I2CMaster(i2c_inst_t &i2c, SDKWrapper &sdk) : i2c_(i2c), sdk_(sdk) {}
   I2CMaster() = delete;
   virtual ~I2CMaster() {}
   /**
@@ -58,7 +58,7 @@ class I2CMaster : public I2CMasterInterface {
 
  private:
   i2c_inst_t &i2c_;
-  PicoWrapper &sdk_;
+  SDKWrapper &sdk_;
 };
 };  // namespace pico_driver
 

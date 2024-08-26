@@ -6,7 +6,7 @@
 using testing::Return;
 
 TEST(I2CMaster, i2c_read_blocking) {
-  ::pico_driver::MockPicoWrapper sdk;
+  ::pico_driver::MockSDKWrapper sdk;
   i2c_inst_t i2c_inst;
 
   uint8_t addr = 3;
@@ -30,7 +30,7 @@ TEST(I2CMaster, i2c_read_blocking) {
 }
 
 TEST(I2CMaster, i2c_write_blocking) {
-  ::pico_driver::MockPicoWrapper sdk;
+  ::pico_driver::MockSDKWrapper sdk;
   i2c_inst_t i2c_inst;
 
   uint8_t addr = 3;

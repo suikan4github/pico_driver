@@ -22,9 +22,9 @@ namespace pico_driver {
  *         target_link_libraries(${PROJECT_NAME} pico_stdlib hardware_i2c)
  * @endcode
  */
-class PicoWrapper {
+class SDKWrapper {
  public:
-  virtual ~PicoWrapper() {}
+  virtual ~SDKWrapper() {}
   virtual void gpio_init(uint gpio);
 
   /**
@@ -106,7 +106,7 @@ class PicoWrapper {
 };
 
 #if __has_include(<gmock/gmock.h>)
-class MockPicoWrapper : public PicoWrapper {
+class MockSDKWrapper : public SDKWrapper {
  public:
   MOCK_METHOD1(sleep_ms, void(uint32_t ms));
   MOCK_METHOD2(gpio_set_dir, void(uint gpio, bool out));
