@@ -20,6 +20,7 @@ DEFINE_FFF_GLOBALS;
 // Create Test Spies
 FAKE_VOID_FUNC(sleep_ms, uint32_t);
 FAKE_VOID_FUNC(gpio_init, uint);
+FAKE_VOID_FUNC(gpio_set_function, uint, gpio_function_t);
 FAKE_VOID_FUNC(gpio_set_dir, uint, bool);
 FAKE_VOID_FUNC(gpio_put, uint, bool);
 FAKE_VALUE_FUNC(bool, gpio_get, uint);
@@ -51,7 +52,7 @@ TEST(PicoWrapper, sleep_ms) {
   for (auto &&ms : ms_array) {
     // Check the data from test spy. Call order.
     ASSERT_EQ(fff.call_history[index], (void *)sleep_ms);
-    // Check the data from test spy. DrawRelative Parameters.
+    // Check the data from test spy. : Parameters.
     ASSERT_EQ(sleep_ms_fake.arg0_history[index], ms);
     index++;
   }
@@ -75,11 +76,42 @@ TEST(PicoWrapper, gpio_init) {
   for (auto &&gpio : gpioarray) {
     // Check the data from test spy. Call order.
     ASSERT_EQ(fff.call_history[index], (void *)gpio_init);
-    // Check the data from test spy. DrawRelative Parameters.
+    // Check the data from test spy. : Parameters.
     ASSERT_EQ(gpio_init_fake.arg0_history[index], gpio);
     index++;
   }
 }
+
+TEST(PicoWrapper, gpio_set_function) {
+  ::pico_driver::PicoWrapper pico;
+  uint gpioarray[] = {17, 11};
+  int functionarray[] = {7, 13};
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(gpio_set_function);
+
+  for (auto &&gpio : gpioarray) {
+    for (auto &&fn : functionarray) {
+      pico.gpio_set_function(gpio, fn);
+    }
+  }
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(gpio_set_function_fake.call_count,
+            std::size(gpioarray) * std::size(functionarray));
+
+  uint index = 0;
+  for (auto &&gpio : gpioarray) {
+    for (auto &&fn : functionarray) {
+      // Check the data from test spy. Call order.
+      ASSERT_EQ(fff.call_history[index], (void *)gpio_set_function);
+      // Check the data from test spy.  Parameters.
+      ASSERT_EQ(gpio_set_function_fake.arg0_history[index], gpio);
+      ASSERT_EQ(gpio_set_function_fake.arg1_history[index], fn);
+      index++;
+    }
+  }
+}  // gpio_set_function
 
 TEST(PicoWrapper, gpio_set_dir) {
   ::pico_driver::PicoWrapper pico;
@@ -104,7 +136,7 @@ TEST(PicoWrapper, gpio_set_dir) {
     for (auto &&dir : dirarray) {
       // Check the data from test spy. Call order.
       ASSERT_EQ(fff.call_history[index], (void *)gpio_set_dir);
-      // Check the data from test spy. DrawRelative Parameters.
+      // Check the data from test spy. : Parameters.
       ASSERT_EQ(gpio_set_dir_fake.arg0_history[index], gpio);
       ASSERT_EQ(gpio_set_dir_fake.arg1_history[index], dir);
       index++;
@@ -136,7 +168,7 @@ TEST(PicoWrapper, gpio_put) {
     for (auto &&value : valuearray) {
       // Check the data from test spy. Call order.
       ASSERT_EQ(fff.call_history[index], (void *)gpio_put);
-      // Check the data from test spy. DrawRelative Parameters.
+      // Check the data from test spy. : Parameters.
       ASSERT_EQ(gpio_put_fake.arg0_history[index], gpio);
       ASSERT_EQ(gpio_put_fake.arg1_history[index], value);
       index++;
@@ -164,7 +196,7 @@ TEST(PicoWrapper, gpio_get) {
 
   gpio = 11;
 
-  // Check the data from test spy. DrawRelative Parameters.
+  // Check the data from test spy. : Parameters.
   ASSERT_EQ(pico.gpio_get(gpio), myReturnVals[1]);
 }
 
@@ -183,7 +215,7 @@ TEST(PicoWrapper, gpio_pull_up) {
   // Check the data from test spy. Call order.
   ASSERT_EQ(fff.call_history[0], (void *)gpio_pull_up);
 
-  // Check the data from test spy. DrawRelative Parameters.
+  // Check the data from test spy. : Parameters.
   ASSERT_EQ(gpio_pull_up_fake.arg0_history[0], gpio);
 
   // Try another parameter
@@ -193,7 +225,7 @@ TEST(PicoWrapper, gpio_pull_up) {
   gpio = 11;
   pico.gpio_pull_up(gpio);
 
-  // Check the data from test spy. DrawRelative Parameters.
+  // Check the data from test spy. : Parameters.
   ASSERT_EQ(gpio_pull_up_fake.arg0_history[0], gpio);
 }
 
@@ -219,7 +251,7 @@ TEST(PicoWrapper, i2c_init) {
   ASSERT_EQ(fff.call_history[0], (void *)i2c_init);
   ASSERT_EQ(fff.call_history[1], (void *)i2c_init);
 
-  // Check the data from test spy. DrawRelative Parameters.
+  // Check the data from test spy. : Parameters.
   ASSERT_EQ(i2c_init_fake.arg0_history[0], &i2c);
   ASSERT_EQ(i2c_init_fake.arg1_history[0], baud[0]);
   ASSERT_EQ(i2c_init_fake.arg0_history[1], &i2c);
@@ -265,7 +297,7 @@ TEST(PicoWrapper, i2c_read_blocking) {
       for (auto &&nostop : nostop_array) {
         // Check the data from test spy. Call order.
         ASSERT_EQ(fff.call_history[index], (void *)i2c_read_blocking);
-        // Check the data from test spy. DrawRelative Parameters.
+        // Check the data from test spy. : Parameters.
         ASSERT_EQ(i2c_read_blocking_fake.arg0_history[index], &i2c);
         ASSERT_EQ(i2c_read_blocking_fake.arg1_history[index], addrs);
         ASSERT_EQ(i2c_read_blocking_fake.arg2_history[index], buf);
@@ -316,7 +348,7 @@ TEST(PicoWrapper, i2c_write_blocking) {
       for (auto &&nostop : nostop_array) {
         // Check the data from test spy. Call order.
         ASSERT_EQ(fff.call_history[index], (void *)i2c_write_blocking);
-        // Check the data from test spy. DrawRelative Parameters.
+        // Check the data from test spy. : Parameters.
         ASSERT_EQ(i2c_write_blocking_fake.arg0_history[index], &i2c);
         ASSERT_EQ(i2c_write_blocking_fake.arg1_history[index], addrs);
         ASSERT_EQ(i2c_write_blocking_fake.arg2_history[index], buf);

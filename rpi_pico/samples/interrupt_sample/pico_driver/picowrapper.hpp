@@ -8,6 +8,7 @@
 #else
 // Alternative include and definition for Unix/Win32
 typedef int i2c_inst_t;
+typedef int gpio_function_t;
 typedef unsigned uint;
 #include <stdint.h>
 #include <stdlib.h>
@@ -32,6 +33,12 @@ class PicoWrapper {
    */
   virtual void sleep_ms(uint32_t ms);
 
+  /**
+   * @brief Select GPIO function.
+   * @param gpio GPIO number
+   * @param fn Which GPIO function select to use from list gpio_function.
+   */
+  virtual void gpio_set_function(uint gpio, gpio_function_t fn);
   /**
    * @brief Set a single GPIO direction.
    * @param gpio GPIO number.

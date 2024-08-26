@@ -4,6 +4,11 @@ void ::pico_driver::PicoWrapper::sleep_ms(uint32_t ms) { ::sleep_ms(ms); }
 
 void ::pico_driver::PicoWrapper::gpio_init(uint gpio) { ::gpio_init(gpio); }
 
+void pico_driver::PicoWrapper::gpio_set_function(uint gpio,
+                                                 gpio_function_t fn) {
+  ::gpio_set_function(gpio, fn);
+}
+
 void ::pico_driver::PicoWrapper::gpio_set_dir(uint gpio, bool out) {
   ::gpio_set_dir(gpio, out);
 }

@@ -1,5 +1,9 @@
 # test_picowrapper TDD
 
+- [x] Create PicoWrapper.gpio_set_function() to fail. 
+- [x] Make it success. 
+- [x] Remove the duplication. 
+
 - [x] Create PicoWrapper.sleep_ms() to fail. 
 - [x] Make it success. 
 - [x] Remove the duplication. 
