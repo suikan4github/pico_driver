@@ -2,7 +2,7 @@
 #include "picowrapper.hpp"
 
 int main() {
-  PicoWrapper sdk;
+  ::pico_driver::SDKWrapper sdk;
 
   // Use RasPi Pico on-board LED.
   // 1=> Turn on, 0 => Turn pff.
