@@ -8,11 +8,11 @@
 
 int main() {
   const unsigned int adau1361_i2c_address = 0x38;
-  // 0x38;  // ADDR0:1 = 0:0
+  const unsigned int i2c_clock = 100 * 1000;  // Hz.
+  const unsigned int i2c_scl_pin = 7;
+  const unsigned int i2c_sda_pin = 6;
+
   ::pico_driver::SDKWrapper sdk;
-  ::pico_driver::I2CMaster i2c(*i2c1, sdk);
-  ::codec::Adau1361Lower codec_lower(i2c, adau1361_i2c_address);
-  ::codec::Adau1361 codec(48000, 12000000, codec_lower);
 
   // Init USB-Serial port by 9600bps, 1stop bit, 8bit.
   // add following lines to CMakeLists.txt
@@ -21,15 +21,11 @@ int main() {
   //     pico_enable_stdio_uart($ { PROJECT_NAME } 0)
   sdk.stdio_init_all();
 
-  uint baud = sdk.i2c_init(i2c1, 100 * 1000);  // 100kHz
-
-  sdk.gpio_set_function(6, GPIO_FUNC_I2C);
-  sdk.gpio_set_function(7, GPIO_FUNC_I2C);
-  sdk.gpio_pull_up(6);
-  sdk.gpio_pull_up(7);
+  ::pico_driver::I2CMaster i2c(sdk, *i2c1, i2c_clock, i2c_scl_pin, i2c_sda_pin);
+  ::codec::Adau1361Lower codec_lower(i2c, adau1361_i2c_address);
+  ::codec::Adau1361 codec(48000, 12000000, codec_lower);
 
   sdk.sleep_ms(5000);
-  printf("baud is %d\n", baud);
 
   printf("Check CODEC exsistense\n");
   uint8_t dst[2];

@@ -74,6 +74,14 @@ class I2CMaster : public I2CMasterInterface {
   int i2c_write_blocking(uint8_t addr, const uint8_t *src, size_t len,
                          bool nostop) override;
 
+  /**
+   * @brief Check wether device at specified I2C address exists or not.
+   * @param addr 7-bit address of device to read from
+   * @returns true if exist, false if not exist.
+   */
+
+  bool IsDeviceExisting(uint8_t addr) override;
+
  private:
   i2c_inst_t &i2c_;
   SDKWrapper &sdk_;

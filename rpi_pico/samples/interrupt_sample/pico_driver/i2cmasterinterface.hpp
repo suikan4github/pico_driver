@@ -48,6 +48,12 @@ class I2CMasterInterface {
    */
   virtual int i2c_write_blocking(uint8_t addr, const uint8_t *src, size_t len,
                                  bool nostop) = 0;
+  /**
+   * @brief Check wether device at specified I2C address exists or not.
+   * @param addr 7-bit address of device to read from
+   * @returns true if exist, false if not exist.
+   */
+  virtual bool IsDeviceExisting(uint8_t addr) = 0;
 };
 
 #if __has_include(<gmock/gmock.h>)
@@ -58,6 +64,7 @@ class MockI2CMasterInterface : public I2CMasterInterface {
                int(uint8_t addr, uint8_t *dst, size_t len, bool nostop));
   MOCK_METHOD4(i2c_write_blocking,
                int(uint8_t addr, const uint8_t *src, size_t len, bool nostop));
+  MOCK_METHOD1(IsDeviceExisting, bool(uint8_t addr));
 };
 
 #endif  //  __has_include(<gmock/gmock>)
