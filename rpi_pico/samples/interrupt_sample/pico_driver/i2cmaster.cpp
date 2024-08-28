@@ -1,7 +1,7 @@
 #include "i2cmaster.hpp"
 
 ::pico_driver::I2CMaster::I2CMaster(SDKWrapper& sdk, i2c_inst_t& i2c,
-                                    uint clock_freq, uint sda_pin, uint scl_pin)
+                                    uint clock_freq, uint scl_pin, uint sda_pin)
     : i2c_(i2c), sdk_(sdk) {
   sdk_.i2c_init(&i2c_, clock_freq);  // I2C bitrate
 

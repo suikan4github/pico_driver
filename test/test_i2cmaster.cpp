@@ -24,7 +24,7 @@ TEST(I2CMaster, Constructor) {
 
 }  // Constructor
 
-// Constructor test
+// Destructor test
 TEST(I2CMaster, Destructor) {
   ::pico_driver::MockSDKWrapper sdk;
   i2c_inst_t i2c_inst;
