@@ -28,13 +28,13 @@ int main() {
   sdk.sleep_ms(5000);
 
   printf("Check CODEC exsistense\n");
-  uint8_t dst[2];
-  int ret = i2c.ReadBlocking(adau1361_i2c_address, dst, 1, false);
-  printf("ret is %d\n", ret);
-  if (ret >= 0)
+  if (i2c.IsDeviceExisting(adau1361_i2c_address))
     printf("CODEC exist at address 0x%02x\n", adau1361_i2c_address);
   else
     printf("CODEC doesn't exist at address 0x%02x\n", adau1361_i2c_address);
+
+  printf("Start CODEC\n");
+  codec.Start();
 
   // Use RasPi Pico on-board LED.
   // 1=> Turn on, 0 => Turn pff.
