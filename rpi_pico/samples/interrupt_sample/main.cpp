@@ -29,7 +29,7 @@ int main() {
 
   printf("Check CODEC exsistense\n");
   uint8_t dst[2];
-  int ret = i2c.i2c_read_blocking(adau1361_i2c_address, dst, 1, false);
+  int ret = i2c.ReadBlocking(adau1361_i2c_address, dst, 1, false);
   printf("ret is %d\n", ret);
   if (ret >= 0)
     printf("CODEC exist at address 0x%02x\n", adau1361_i2c_address);

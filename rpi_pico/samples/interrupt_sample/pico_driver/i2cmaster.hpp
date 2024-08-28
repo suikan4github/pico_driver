@@ -58,8 +58,8 @@ class I2CMaster : public I2CMasterInterface {
    * not acknowledged or no device present.
    */
 
-  int i2c_read_blocking(uint8_t addr, uint8_t *dst, size_t len,
-                        bool nostop) override;
+  int ReadBlocking(uint8_t addr, uint8_t *dst, size_t len,
+                   bool nostop) override;
   /**
    * @brief Attempt to write specified number of bytes to address, blocking.
    * @param addr 7-bit address of device to write to
@@ -71,8 +71,8 @@ class I2CMaster : public I2CMasterInterface {
    * @returns Number of bytes written, or PICO_ERROR_GENERIC
    * if address not acknowledged, no device present.
    */
-  int i2c_write_blocking(uint8_t addr, const uint8_t *src, size_t len,
-                         bool nostop) override;
+  int WriteBlocking(uint8_t addr, const uint8_t *src, size_t len,
+                    bool nostop) override;
 
   /**
    * @brief Check wether device at specified I2C address exists or not.

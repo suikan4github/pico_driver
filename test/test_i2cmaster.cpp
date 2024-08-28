@@ -73,15 +73,13 @@ TEST(I2CMaster, i2c_read_blocking) {
               i2c_read_blocking(&i2c_inst, addr, buf, sizeof(buf), !nostop))
       .WillOnce(Return(return_value));
 
-  EXPECT_EQ(i2c.i2c_read_blocking(addr, buf, sizeof(buf), nostop),
-            return_value);
-  EXPECT_EQ(i2c.i2c_read_blocking(addr, buf, sizeof(buf), !nostop),
-            return_value);
+  EXPECT_EQ(i2c.ReadBlocking(addr, buf, sizeof(buf), nostop), return_value);
+  EXPECT_EQ(i2c.ReadBlocking(addr, buf, sizeof(buf), !nostop), return_value);
   // We can ignore these call inside destructor
   EXPECT_CALL(sdk, i2c_deinit(_));
 }
 
-TEST(I2CMaster, i2c_write_blocking) {
+TEST(I2CMaster, WriteBlocking) {
   ::pico_driver::MockSDKWrapper sdk;
   i2c_inst_t i2c_inst;
 
@@ -105,10 +103,8 @@ TEST(I2CMaster, i2c_write_blocking) {
               i2c_write_blocking(&i2c_inst, addr, buf, sizeof(buf), !nostop))
       .WillOnce(Return(return_value));
 
-  EXPECT_EQ(i2c.i2c_write_blocking(addr, buf, sizeof(buf), nostop),
-            return_value);
-  EXPECT_EQ(i2c.i2c_write_blocking(addr, buf, sizeof(buf), !nostop),
-            return_value);
+  EXPECT_EQ(i2c.WriteBlocking(addr, buf, sizeof(buf), nostop), return_value);
+  EXPECT_EQ(i2c.WriteBlocking(addr, buf, sizeof(buf), !nostop), return_value);
   // We can ignore these call inside destructor
   EXPECT_CALL(sdk, i2c_deinit(_));
 }

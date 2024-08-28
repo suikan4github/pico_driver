@@ -33,8 +33,8 @@ class I2CMasterInterface {
    * not acknowledged or no device present.
    */
 
-  virtual int i2c_read_blocking(uint8_t addr, uint8_t *dst, size_t len,
-                                bool nostop) = 0;
+  virtual int ReadBlocking(uint8_t addr, uint8_t *dst, size_t len,
+                           bool nostop) = 0;
   /**
    * @brief Attempt to write specified number of bytes to address, blocking.
    * @param addr 7-bit address of device to write to
@@ -46,8 +46,8 @@ class I2CMasterInterface {
    * @returns Number of bytes written, or PICO_ERROR_GENERIC
    * if address not acknowledged, no device present.
    */
-  virtual int i2c_write_blocking(uint8_t addr, const uint8_t *src, size_t len,
-                                 bool nostop) = 0;
+  virtual int WriteBlocking(uint8_t addr, const uint8_t *src, size_t len,
+                            bool nostop) = 0;
   /**
    * @brief Check wether device at specified I2C address exists or not.
    * @param addr 7-bit address of device to read from
@@ -60,9 +60,9 @@ class I2CMasterInterface {
 
 class MockI2CMasterInterface : public I2CMasterInterface {
  public:
-  MOCK_METHOD4(i2c_read_blocking,
+  MOCK_METHOD4(ReadBlocking,
                int(uint8_t addr, uint8_t *dst, size_t len, bool nostop));
-  MOCK_METHOD4(i2c_write_blocking,
+  MOCK_METHOD4(WriteBlocking,
                int(uint8_t addr, const uint8_t *src, size_t len, bool nostop));
   MOCK_METHOD1(IsDeviceExisting, bool(uint8_t addr));
 };

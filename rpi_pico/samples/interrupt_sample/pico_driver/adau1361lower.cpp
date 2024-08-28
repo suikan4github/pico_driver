@@ -13,7 +13,7 @@ void ::codec::Adau1361Lower::SendCommand(const uint8_t command[], int size) {
   /*
    * Send the given table to the I2C slave device at device_addr
    */
-  i2c_.i2c_write_blocking(device_addr_, command, size, false);
+  i2c_.WriteBlocking(device_addr_, command, size, false);
 }
 
 /*
@@ -61,10 +61,10 @@ void ::codec::Adau1361Lower::WaitPllLock(void) {
     // Obtain PLL status
     // Write the lock status address and then, read the status by
     // repeated-stard.
-    i2c_.i2c_write_blocking(device_addr_, lock_status_address,
-                            sizeof(lock_status_address),
-                            true);  // true for repeated start.
-    i2c_.i2c_read_blocking(device_addr_, status, sizeof(status), false);
+    i2c_.WriteBlocking(device_addr_, lock_status_address,
+                       sizeof(lock_status_address),
+                       true);  // true for repeated start.
+    i2c_.ReadBlocking(device_addr_, status, sizeof(status), false);
 
     // Check byte 5 of the control registers.
     // If bit 1 is 1, locked. If it is 0, unlocked.

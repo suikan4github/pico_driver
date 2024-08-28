@@ -13,14 +13,13 @@
 
 ::pico_driver::I2CMaster::~I2CMaster() { sdk_.i2c_deinit(&i2c_); }
 
-int ::pico_driver::I2CMaster::i2c_read_blocking(uint8_t addr, uint8_t* dst,
-                                                size_t len, bool nostop) {
+int ::pico_driver::I2CMaster::ReadBlocking(uint8_t addr, uint8_t* dst,
+                                           size_t len, bool nostop) {
   return sdk_.i2c_read_blocking(&i2c_, addr, dst, len, nostop);
 }
 
-int ::pico_driver::I2CMaster::i2c_write_blocking(uint8_t addr,
-                                                 const uint8_t* src, size_t len,
-                                                 bool nostop) {
+int ::pico_driver::I2CMaster::WriteBlocking(uint8_t addr, const uint8_t* src,
+                                            size_t len, bool nostop) {
   return sdk_.i2c_write_blocking(&i2c_, addr, src, len, nostop);
 }
 
@@ -30,5 +29,5 @@ bool pico_driver::I2CMaster::IsDeviceExisting(uint8_t addr) {
   // try to read one byte from specific address I2C device.
   // If no error, that mean there is a device.
   return (PICO_ERROR_GENERIC !=
-          i2c_read_blocking(addr, dummy_buf, sizeof(dummy_buf), false));
+          ReadBlocking(addr, dummy_buf, sizeof(dummy_buf), false));
 }
