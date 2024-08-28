@@ -29,11 +29,7 @@ void ::codec::Adau1361Lower::SendCommandTable(const uint8_t table[][3],
 }
 
 bool ::codec::Adau1361Lower::IsI2CDeivceExisting() {
-  int status;
-  const uint8_t lock_status_address[] = {0x40, 0x02};  // R1 : 6 byte register.
-
-  status = i2c_.i2c_write_blocking(device_addr_, lock_status_address, 0, false);
-  return (status != PICO_ERROR_GENERIC);
+  return (i2c_.IsDeviceExisting(device_addr_));
 }
 
 void ::codec::Adau1361Lower::InitializeCore() {

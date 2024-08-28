@@ -77,10 +77,9 @@ TEST_F(Adau1361LowerTest, IsI2CDeviceExist) {
     InSequence dummy;
 
     // nostop parameter must be false. That mean, stop condition of I2C.
-    EXPECT_CALL(i2c_, i2c_write_blocking(device_address_, _, 0, false))
-        .WillOnce(Return(PICO_ERROR_GENERIC));
-    EXPECT_CALL(i2c_, i2c_write_blocking(device_address_, _, 0, false))
-        .WillOnce(Return(3));
+    EXPECT_CALL(i2c_, IsDeviceExisting(device_address_))
+        .WillOnce(Return(false));
+    EXPECT_CALL(i2c_, IsDeviceExisting(device_address_)).WillOnce(Return(true));
   }
   EXPECT_FALSE(codec_lower_->IsI2CDeivceExisting());
   EXPECT_TRUE(codec_lower_->IsI2CDeivceExisting());
