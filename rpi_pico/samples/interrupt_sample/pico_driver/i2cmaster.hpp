@@ -14,8 +14,10 @@
 #if __has_include(<hardware/i2c.h>)
 #include "hardware/i2c.h"
 #else
+// Alternate definition for unit test.
 typedef int i2c_inst_t;
 #define PICO_ERROR_GENERIC -1
+#define GPIO_FUNC_I2C 11
 #endif  //__has_include(<hardware/i2c.h>)
 
 #include "i2cmasterinterface.hpp"
@@ -24,9 +26,10 @@ typedef int i2c_inst_t;
 namespace pico_driver {
 class I2CMaster : public I2CMasterInterface {
  public:
-  I2CMaster(i2c_inst_t &i2c, SDKWrapper &sdk) : i2c_(i2c), sdk_(sdk) {}
+  I2CMaster(SDKWrapper &sdk, i2c_inst_t &i2c, uint clock_freq, uint sda_pin,
+            uint scl_pin);
   I2CMaster() = delete;
-  virtual ~I2CMaster() {}
+  virtual ~I2CMaster();
   /**
    * @brief Attempt to read specified number of bytes from address,
    * blocking.

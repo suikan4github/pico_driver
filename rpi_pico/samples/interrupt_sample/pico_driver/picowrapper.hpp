@@ -95,17 +95,27 @@ class SDKWrapper {
    * @param baudrate Baudrate in Hz (e.g. 100kHz is 100000)
    * @returns Actual set baudrate.
    */
-
   virtual uint i2c_init(i2c_inst_t *i2c, uint baudrate);
+
   /**
-   * @brief Attempt to read specified number of bytes from address, blocking.
+   * @brief Disable the I2C HW block.
+   * @param i2c Either i2c0 or i2c1
+   * @details
+   * Disable the I2C again if it is no longer used.
+   * Must be reinitialised before being used again.
+   */
+  virtual void i2c_deinit(i2c_inst_t *i2c);
+
+  /**
+   * @brief Attempt to read specified number of bytes from address,
+   * blocking.
    * @param i2c Either i2c0 or i2c1
    * @param addr 7-bit address of device to read from
    * @param dst Pointer to buffer to receive data
    * @param len Length of data in bytes to receive
-   * @param nostop If true, master retains control of the bus at the end of
-   * the transfer (no Stop is issued), and the next transfer will begin with
-   * a Restart rather than a Start.
+   * @param nostop If true, master retains control of the bus at the end
+   * of the transfer (no Stop is issued), and the next transfer will begin
+   * with a Restart rather than a Start.
    * @returns Number of bytes read, or PICO_ERROR_GENERIC if address
    * not acknowledged or no device present.
    */
@@ -132,6 +142,7 @@ class SDKWrapper {
 class MockSDKWrapper : public SDKWrapper {
  public:
   MOCK_METHOD0(stdio_init_all, bool(void));
+  MOCK_METHOD2(gpio_set_function, void(uint gpio, gpio_function_t fn));
   MOCK_METHOD1(gpio_init, void(uint gpio));
   MOCK_METHOD1(sleep_ms, void(uint32_t ms));
   MOCK_METHOD2(gpio_set_dir, void(uint gpio, bool out));
@@ -139,6 +150,7 @@ class MockSDKWrapper : public SDKWrapper {
   MOCK_METHOD1(gpio_get, bool(uint gpio));
   MOCK_METHOD1(gpio_pull_up, void(uint gpio));
   MOCK_METHOD2(i2c_init, uint(i2c_inst_t *i2c, uint baudrate));
+  MOCK_METHOD1(i2c_deinit, void(i2c_inst_t *i2c));
   MOCK_METHOD5(i2c_read_blocking, int(i2c_inst_t *i2c, uint8_t addr,
                                       uint8_t *dst, size_t len, bool nostop));
   MOCK_METHOD5(i2c_write_blocking,

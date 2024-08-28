@@ -1,4 +1,8 @@
 # test_SDKWrapper TDD
+- [x] Create SDKWrapper.i2c_deinit() to fail. 
+- [x] Make it success. 
+- [x] Remove the duplication. 
+
 
 - [x] Create SDKWrapper.stdio_init_all() to fail. 
 - [x] Make it success. 

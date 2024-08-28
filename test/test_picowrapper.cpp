@@ -27,6 +27,7 @@ FAKE_VOID_FUNC(gpio_put, uint, bool);
 FAKE_VALUE_FUNC(bool, gpio_get, uint);
 FAKE_VOID_FUNC(gpio_pull_up, uint);
 FAKE_VALUE_FUNC(uint, i2c_init, i2c_inst_t *, uint);
+FAKE_VOID_FUNC(i2c_deinit, i2c_inst_t *);
 FAKE_VALUE_FUNC(int, i2c_read_blocking, i2c_inst_t *, uint8_t, uint8_t *,
                 size_t, bool);
 FAKE_VALUE_FUNC(int, i2c_write_blocking, i2c_inst_t *, uint8_t, const uint8_t *,
@@ -279,6 +280,27 @@ TEST(PicoWrapper, i2c_init) {
   ASSERT_EQ(i2c_init_fake.arg1_history[0], baud[0]);
   ASSERT_EQ(i2c_init_fake.arg0_history[1], &i2c);
   ASSERT_EQ(i2c_init_fake.arg1_history[1], baud[1]);
+}
+
+// FAKE_VOID_FUNC(i2c_deinit, i2c_inst_t *);
+TEST(PicoWrapper, i2c_deinit) {
+  ::pico_driver::SDKWrapper pico;
+  i2c_inst_t i2c = 17;
+  const uint baud[] = {3, 100000};
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(i2c_deinit);
+
+  pico.i2c_deinit(&i2c);
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(i2c_deinit_fake.call_count, 1);
+
+  // Check the data from test spy. Call order.
+  ASSERT_EQ(fff.call_history[0], (void *)i2c_deinit);
+
+  // Check the data from test spy. : Parameters.
+  ASSERT_EQ(i2c_deinit_fake.arg0_history[0], &i2c);
 }
 
 // FAKE_VALUE_FUNC(int, i2c_read_blocking, i2c_inst_t *, uint8_t, uint8_t *,

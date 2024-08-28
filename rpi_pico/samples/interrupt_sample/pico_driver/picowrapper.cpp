@@ -30,6 +30,10 @@ uint ::pico_driver::SDKWrapper::i2c_init(i2c_inst_t* i2c, uint baudrate) {
   return ::i2c_init(i2c, baudrate);
 }
 
+void ::pico_driver::SDKWrapper::i2c_deinit(i2c_inst_t* i2c) {
+  ::i2c_deinit(i2c);
+}
+
 int ::pico_driver::SDKWrapper::i2c_read_blocking(i2c_inst_t* i2c, uint8_t addr,
                                                  uint8_t* dst, size_t len,
                                                  bool nostop) {
