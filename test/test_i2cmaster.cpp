@@ -49,7 +49,7 @@ TEST(I2CMaster, Destructor) {
 
 }  // Destructor
 
-TEST(I2CMaster, i2c_read_blocking) {
+TEST(I2CMaster, ReadBlocking) {
   ::pico_driver::MockSDKWrapper sdk;
   i2c_inst_t i2c_inst;
 
@@ -77,7 +77,7 @@ TEST(I2CMaster, i2c_read_blocking) {
   EXPECT_EQ(i2c.ReadBlocking(addr, buf, sizeof(buf), !nostop), return_value);
   // We can ignore these call inside destructor
   EXPECT_CALL(sdk, i2c_deinit(_));
-}
+}  // ReadBlocking
 
 TEST(I2CMaster, WriteBlocking) {
   ::pico_driver::MockSDKWrapper sdk;
@@ -107,7 +107,7 @@ TEST(I2CMaster, WriteBlocking) {
   EXPECT_EQ(i2c.WriteBlocking(addr, buf, sizeof(buf), !nostop), return_value);
   // We can ignore these call inside destructor
   EXPECT_CALL(sdk, i2c_deinit(_));
-}
+}  // WriteBlocking
 
 TEST(I2CMaster, IsDeviceExisting) {
   ::pico_driver::MockSDKWrapper sdk;
