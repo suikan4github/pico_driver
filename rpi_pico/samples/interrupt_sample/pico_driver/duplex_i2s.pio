@@ -1,0 +1,42 @@
+;
+;  RP2040 / RP2035 PIO program for the duplex I2S signal. 
+;
+;
+; The I2S signal wave form is depicted below : 
+;
+;                  ┐　┌─┐　┌─┐　┌─┐　┌─┐　
+;             BCLK └─┘　└─┘　└─┘　└─┘　└─
+;                  ┐
+;               WS └─────────────────
+;
+;         BIT SLOT │　００│　３１│　３０　│　２９│　
+;
+; The rising edge of the BCLK is the sampling edge of the I2S. 
+; So we can call the period from a falling edge to the next falling
+; edge as a "BIT SLOT". 
+;
+; Per definition of I2S standard, the first bit slot after the
+; falling edge of the WS is the last bit slot (00) of the previous 
+; right channel. 
+;
+; In the program below, we capture the falling edge of the WS as 
+; a begining of the left data, and skip the first bit slot. And then, 
+; start the left channel data transfer. 
+;
+
+.program duplex_i2s
+	wait 0 gpio WS      ; Waiting for 0. L ch. 
+	wait 1 gpio WS      ; Capture rising edge. R ch starts. 
+	wait 0 gpio WS      ; Capture falling edge. L ch starts. 
+	wait 0 gpio BCLK    ; Waiting to be 0; first half of bit slot 00. 
+	wait 1 gpio BCLK    ; Capture rising ege. Second half of bit slot 00.
+.wrap_target            ; Begining of stereo data transfer. 
+	set x,63            ; Loop 64 times ( 32bit stereo )
+bit_loop:               ; Loop here
+	wait 0 gpio BCLK    ; Capture falling edge. First half of bit slot 1. 
+	out pins, 1         ; Output 1 bit to DAC. 
+	wait 1 gpio BCLK    ; Capture riging edge. Second half of bit slot. 
+	in pins, 1          ; Input 1 bit from ADC.
+	jump x-- bit_loop   ; loop 64 times. 
+.wrap
+

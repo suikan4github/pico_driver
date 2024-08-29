@@ -11,7 +11,7 @@ int main() {
   const unsigned int i2c_clock = 100 * 1000;  // Hz.
   const unsigned int i2c_scl_pin = 7;
   const unsigned int i2c_sda_pin = 6;
-  const unsigned int mclock = 12'288'000;  // Hz
+  const unsigned int mclock = 12'000'000;  // Hz
   const unsigned int fs = 48'000;          // Hz
 
   ::pico_driver::SDKWrapper sdk;
@@ -37,6 +37,8 @@ int main() {
   printf("Start CODEC\n");
 #endif
   codec.Start();
+  codec.Mute(codec::Adau1361::LineInput, false);        // unmute
+  codec.Mute(codec::Adau1361::HeadphoneOutput, false);  // unmute
 
   // Use RasPi Pico on-board LED.
   // 1=> Turn on, 0 => Turn pff.
