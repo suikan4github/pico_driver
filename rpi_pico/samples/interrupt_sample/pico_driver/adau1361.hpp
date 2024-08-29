@@ -51,7 +51,8 @@ class Adau1361 {
    *   @li 12288000
    *   @li 24576000
    *
-   *   Note : Only 8, 12, 13, 14.4, 12.288MHz are tested.
+   *   Note : Due to the limitation of the MCLOCK of hardware and PLL,
+   *   only 8, 12, 13, 14.4, 12.288, 19.2MHz are tested
    *
    *   The analog signals are routed as following :
    *   @li Line In  : LINN/RINN single ended.

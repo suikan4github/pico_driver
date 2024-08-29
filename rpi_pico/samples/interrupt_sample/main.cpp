@@ -11,6 +11,8 @@ int main() {
   const unsigned int i2c_clock = 100 * 1000;  // Hz.
   const unsigned int i2c_scl_pin = 7;
   const unsigned int i2c_sda_pin = 6;
+  const unsigned int mclock = 12'288'000;  // Hz
+  const unsigned int fs = 48'000;          // Hz
 
   ::pico_driver::SDKWrapper sdk;
 
@@ -23,8 +25,8 @@ int main() {
 
   ::pico_driver::I2CMaster i2c(sdk, *i2c1, i2c_clock, i2c_scl_pin, i2c_sda_pin);
   ::codec::Adau1361Lower codec_lower(i2c, adau1361_i2c_address);
-  ::codec::Adau1361 codec(48000, 12000000, codec_lower);
-
+  ::codec::Adau1361 codec(fs, mclock, codec_lower);
+#if 0
   sdk.sleep_ms(5000);
 
   printf("Check CODEC exsistense\n");
@@ -32,8 +34,8 @@ int main() {
     printf("CODEC exist at address 0x%02x\n", adau1361_i2c_address);
   else
     printf("CODEC doesn't exist at address 0x%02x\n", adau1361_i2c_address);
-
   printf("Start CODEC\n");
+#endif
   codec.Start();
 
   // Use RasPi Pico on-board LED.
@@ -46,10 +48,10 @@ int main() {
     // Turn LED on
     printf("Hello, ");
     sdk.gpio_put(LED_PIN, true);
-    sdk.sleep_ms(1000);
+    sdk.sleep_ms(200);
     // Turn LED off
     printf("world!\n");
     sdk.gpio_put(LED_PIN, false);
-    sdk.sleep_ms(1000);
+    sdk.sleep_ms(800);
   }
 }
