@@ -1,5 +1,5 @@
 ;
-;  RP2040 / RP2035 PIO program for the duplex I2S signal. 
+;  RP2040 / RP2035 PIO program for the duplex I2S transfer in slave mode. 
 ;
 ;
 ; The I2S signal wave form is depicted below : 
@@ -24,20 +24,31 @@
 ; start the left channel data transfer. 
 ;
 
+.pio_version 0          ; only requires PIO version 0
+
 .program duplex_i2s
-	wait 0 gpio WS      ; Waiting for 0. L ch. 
-	wait 1 gpio WS      ; Capture rising edge. R ch starts. 
-	wait 0 gpio WS      ; Capture falling edge. L ch starts. 
-	wait 0 gpio BCLK    ; Waiting to be 0; first half of bit slot 00. 
-	wait 1 gpio BCLK    ; Capture rising ege. Second half of bit slot 00.
-.wrap_target            ; Begining of stereo data transfer. 
-	set x,63            ; Loop 64 times ( 32bit stereo )
-bit_loop:               ; Loop here
-	wait 0 gpio BCLK    ; Capture falling edge. First half of bit slot 1. 
-	out pins, 1         ; Output 1 bit to DAC. 
-	wait 1 gpio BCLK    ; Capture riging edge. Second half of bit slot. 
-	in pins, 1          ; Input 1 bit from ADC.
-	jump x-- bit_loop   ; loop 64 times. 
+	wait 0 pin 2        ; Waiting for 0 of WS (L ch). 
+	wait 1 pin 2        ; Capture rising edge of WS(Sync to the start of R ch). 
+	wait 0 pin 2        ; Capture falling edge of WS(Sync to the start of L ch). 
+	wait 0 pin 1        ; Waiting for 0 of BCLK(first half of bit slot 00). 
+	wait 1 pin 1        ; Capture rising edge of BCLK( Sync to the second half of bit slot 00).
+.wrap_target            ; Begining of stereo data transfer.
+                        ; Transfer Left ch
+	set x,31            ; Loop 31 times ( 32bit )
+left_loop:              ; Loop here
+        wait 0 pin 1    ; Capture falling edge of BCLK(Sync to the first half of BCLK ). 
+        out pins, 1     ; Output 1 bit to DAC. 
+        wait 1 pin 1    ; Capture riging edge of BCLK(Sync to the Sampling edge of BCLK). 
+        in pins, 1      ; Input 1 bit from ADC.
+	jmp x-- left_loop   ; loop 64 times. 
+                        ; Transfer left ch
+	set x,31            ; Loop 31 times ( 32bit )
+right_loop:             ; Loop here
+        wait 0 pin 1    ; Capture falling edge of BCLK(Sync to the first half of BCLK ). 
+        out pins, 1     ; Output 1 bit to DAC. 
+        wait 1 pin 1    ; Capture riging edge of BCLK(Sync to the Sampling edge of BCLK). 
+        in pins, 1      ; Input 1 bit from ADC.
+	jmp x-- right_loop  ; loop 64 times. 
 .wrap
 
 ; This program takes 4 cycles for the second half of a bit slot. 
