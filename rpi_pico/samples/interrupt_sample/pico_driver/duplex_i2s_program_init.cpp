@@ -17,14 +17,14 @@ extern "C" {
  * programming manner.
  *
  * We need four GPIO pin in this function, and assumes the GPIO pins are
- * following order as sequential numbers.
+ * following order as ascending manner.
  * @li SDOUT as output (DAC)
  * @li SDIN as input (ADC)
  * @li BCLK as input
  * @li WS as input
  *
  * For example, assume the pin_sdout parameter is 5 (GPIO PIN 5). In this case
- * the SDOUT, SDIN, BCLK, and WS are GPIO PIN 5, 6, 7 and 8, respectively.
+ * the SDOUT, SDIN, BCLK, and WS must be GPIO PIN 5, 6, 7 and 8, respectively.
  */
 void duplex_i2s_program_init(PIO pio, uint sm, uint offset, uint pin_sdout) {
   assert(sm < 4);
