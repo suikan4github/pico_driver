@@ -45,3 +45,11 @@ int ::pico_driver::SDKWrapper::i2c_write_blocking(i2c_inst_t* i2c, uint8_t addr,
                                                   size_t len, bool nostop) {
   return ::i2c_write_blocking(i2c, addr, src, len, nostop);
 }
+
+int pico_driver::SDKWrapper::pio_sm_set_consecutive_pindirs(PIO pio, uint sm,
+                                                            uint pins_base,
+                                                            uint pin_count,
+                                                            bool is_out) {
+  return ::pio_sm_set_consecutive_pindirs(pio, sm, pins_base, pin_count,
+                                          is_out);
+}

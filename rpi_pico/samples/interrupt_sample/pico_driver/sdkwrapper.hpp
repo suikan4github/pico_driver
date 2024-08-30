@@ -4,12 +4,15 @@
 #if __has_include("pico/stdlib.h")
 // For Pico
 #include "hardware/i2c.h"
+#include "hardware/pio.h"
 #include "pico/stdlib.h"
+
 #else
 // Alternative include and definition for Unix/Win32
 typedef int i2c_inst_t;
 typedef int gpio_function_t;
 typedef unsigned uint;
+typedef unsigned int PIO;
 #include <stdint.h>
 #include <stdlib.h>
 #endif
@@ -25,6 +28,10 @@ namespace pico_driver {
 class SDKWrapper {
  public:
   virtual ~SDKWrapper() {}
+  /* ***************************************************************************
+   *                              House Keeping
+   * ***************************************************************************
+   */
 
   /**
    * @brief Initialize all of the present standard stdio types
@@ -43,18 +50,23 @@ class SDKWrapper {
   virtual bool stdio_init_all(void);
 
   /**
+   * @brief Wait for the given number of milliseconds before returning.
+   * @param ms the number of milliseconds to sleep
+   */
+  virtual void sleep_ms(uint32_t ms);
+
+  /* ***************************************************************************
+   *                              GPIO
+   * ***************************************************************************
+   */
+
+  /**
    * @brief Initialise a GPIO for (enabled I/O and set func to GPIO_FUNC_SIO)
    * @param gpio GPIO number.
    * @details
    * Clear the output enable (i.e. set to input). Clear any output value.
    */
   virtual void gpio_init(uint gpio);
-
-  /**
-   * @brief Wait for the given number of milliseconds before returning.
-   * @param ms the number of milliseconds to sleep
-   */
-  virtual void sleep_ms(uint32_t ms);
 
   /**
    * @brief Select GPIO function.
@@ -88,6 +100,11 @@ class SDKWrapper {
    * @param gpio GPIO number.
    */
   virtual void gpio_pull_up(uint gpio);
+
+  /* ***************************************************************************
+   *                              I2C
+   * ***************************************************************************
+   */
 
   /**
    * @brief Initialise the I2C HW block.
@@ -136,19 +153,29 @@ class SDKWrapper {
    */
   virtual int i2c_write_blocking(i2c_inst_t *i2c, uint8_t addr,
                                  const uint8_t *src, size_t len, bool nostop);
+
+  /* ***************************************************************************
+   *                              House Keeping
+   * ***************************************************************************
+   */
+
+  virtual int pio_sm_set_consecutive_pindirs(PIO pio, uint sm, uint pins_base,
+                                             uint pin_count, bool is_out);
 };
 
 #if __has_include(<gmock/gmock.h>)
 class MockSDKWrapper : public SDKWrapper {
  public:
   MOCK_METHOD0(stdio_init_all, bool(void));
+  MOCK_METHOD1(sleep_ms, void(uint32_t ms));
+
   MOCK_METHOD2(gpio_set_function, void(uint gpio, gpio_function_t fn));
   MOCK_METHOD1(gpio_init, void(uint gpio));
-  MOCK_METHOD1(sleep_ms, void(uint32_t ms));
   MOCK_METHOD2(gpio_set_dir, void(uint gpio, bool out));
   MOCK_METHOD2(gpio_put, void(uint gpio, bool value));
   MOCK_METHOD1(gpio_get, bool(uint gpio));
   MOCK_METHOD1(gpio_pull_up, void(uint gpio));
+
   MOCK_METHOD2(i2c_init, uint(i2c_inst_t *i2c, uint baudrate));
   MOCK_METHOD1(i2c_deinit, void(i2c_inst_t *i2c));
   MOCK_METHOD5(i2c_read_blocking, int(i2c_inst_t *i2c, uint8_t addr,
@@ -156,6 +183,10 @@ class MockSDKWrapper : public SDKWrapper {
   MOCK_METHOD5(i2c_write_blocking,
                int(i2c_inst_t *i2c, uint8_t addr, const uint8_t *src,
                    size_t len, bool nostop));
+
+  MOCK_METHOD5(pio_sm_set_consecutive_pindirs,
+               int(PIO pio, uint sm, uint pins_base, uint pin_count,
+                   bool is_out));
 };
 #endif  // __has_include(<gmock/gmock.h>)
 };  // namespace pico_driver

@@ -20,6 +20,7 @@ DEFINE_FFF_GLOBALS;
 // Create Test Spies
 FAKE_VALUE_FUNC(bool, stdio_init_all);
 FAKE_VOID_FUNC(sleep_ms, uint32_t);
+
 FAKE_VOID_FUNC(gpio_init, uint);
 FAKE_VOID_FUNC(gpio_set_function, uint, gpio_function_t);
 FAKE_VOID_FUNC(gpio_set_dir, uint, bool);
@@ -27,11 +28,15 @@ FAKE_VOID_FUNC(gpio_put, uint, bool);
 FAKE_VALUE_FUNC(bool, gpio_get, uint);
 FAKE_VOID_FUNC(gpio_pull_up, uint);
 FAKE_VALUE_FUNC(uint, i2c_init, i2c_inst_t *, uint);
+
 FAKE_VOID_FUNC(i2c_deinit, i2c_inst_t *);
 FAKE_VALUE_FUNC(int, i2c_read_blocking, i2c_inst_t *, uint8_t, uint8_t *,
                 size_t, bool);
 FAKE_VALUE_FUNC(int, i2c_write_blocking, i2c_inst_t *, uint8_t, const uint8_t *,
                 size_t, bool);
+
+FAKE_VALUE_FUNC(int, pio_sm_set_consecutive_pindirs, PIO, uint, uint, uint,
+                bool);
 
 // The cpp file of the library to test.
 #include "../rpi_pico/samples/interrupt_sample/pico_driver/sdkwrapper.cpp"
@@ -403,4 +408,63 @@ TEST(PicoWrapper, i2c_write_blocking) {
       }
     }
   }
+}
+
+// FAKE_VALUE_FUNC(int, i2c_write_blocking, i2c_inst_t *, uint8_t,
+// const uint8_t *,  size_t, bool);
+TEST(PicoWrapper, pio_sm_set_consecutive_pindirs) {
+  ::pico_driver::SDKWrapper pico;
+  PIO pio_array[] = {11, 13};
+  uint sm_array[] = {17, 23};
+  uint pins_base_array[] = {3, 5};
+  uint pin_count_array[] = {2, 7};
+  bool is_out_array[2] = {true, false};
+  int myReturnVals_array[32] = {1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8,
+                                1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8};
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(pio_sm_set_consecutive_pindirs);
+
+  SET_RETURN_SEQ(pio_sm_set_consecutive_pindirs, myReturnVals_array,
+                 std::size(myReturnVals_array));
+
+  // Check wether return value is correct.
+  int index = 0;
+  for (auto &&pio : pio_array)
+    for (auto &&sm : sm_array)
+      for (auto &&pins : pins_base_array)
+        for (auto &&pin_count : pin_count_array)
+          for (auto &&is_out : is_out_array) {
+            ASSERT_EQ(pico.pio_sm_set_consecutive_pindirs(pio, sm, pins,
+                                                          pin_count, is_out),
+                      myReturnVals_array[index]);
+            index++;
+          }
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(pio_sm_set_consecutive_pindirs_fake.call_count, 32);
+
+  // Check wether parameters are passed collectly.
+  index = 0;
+  for (auto &&pio : pio_array)
+    for (auto &&sm : sm_array)
+      for (auto &&pins : pins_base_array)
+        for (auto &&pin_count : pin_count_array)
+          for (auto &&is_out : is_out_array) {
+            // Check the data from test spy. Call order.
+            ASSERT_EQ(fff.call_history[index],
+                      (void *)pio_sm_set_consecutive_pindirs);
+            // Check the data from test spy. : Parameters.
+            ASSERT_EQ(pio_sm_set_consecutive_pindirs_fake.arg0_history[index],
+                      pio);
+            ASSERT_EQ(pio_sm_set_consecutive_pindirs_fake.arg1_history[index],
+                      sm);
+            ASSERT_EQ(pio_sm_set_consecutive_pindirs_fake.arg2_history[index],
+                      pins);
+            ASSERT_EQ(pio_sm_set_consecutive_pindirs_fake.arg3_history[index],
+                      pin_count);
+            ASSERT_EQ(pio_sm_set_consecutive_pindirs_fake.arg4_history[index],
+                      is_out);
+            index++;
+          }
 }
