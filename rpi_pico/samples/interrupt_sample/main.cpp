@@ -7,7 +7,7 @@
 #include "duplex_i2s_program_init.hpp"
 #include "hardware/pio.h"
 #include "i2cmaster.hpp"
-#include "picowrapper.hpp"
+#include "sdkwrapper.hpp"
 
 int main() {
   const unsigned int adau1361_i2c_address = 0x38;

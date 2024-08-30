@@ -15,7 +15,7 @@
 DEFINE_FFF_GLOBALS;
 
 // The header file of the library to test.
-#include "../rpi_pico/samples/interrupt_sample/pico_driver/picowrapper.hpp"
+#include "../rpi_pico/samples/interrupt_sample/pico_driver/sdkwrapper.hpp"
 
 // Create Test Spies
 FAKE_VALUE_FUNC(bool, stdio_init_all);
@@ -34,7 +34,7 @@ FAKE_VALUE_FUNC(int, i2c_write_blocking, i2c_inst_t *, uint8_t, const uint8_t *,
                 size_t, bool);
 
 // The cpp file of the library to test.
-#include "../rpi_pico/samples/interrupt_sample/pico_driver/picowrapper.cpp"
+#include "../rpi_pico/samples/interrupt_sample/pico_driver/sdkwrapper.cpp"
 
 TEST(PicoWrapper, stdio_init_all) {
   ::pico_driver::SDKWrapper pico;

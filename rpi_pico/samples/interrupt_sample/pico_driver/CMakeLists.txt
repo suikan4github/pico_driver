@@ -19,7 +19,7 @@ if((${WIN32}) OR (${UNIX})) # Is Target Windows or Unix?
 else()  # Is target RasPi Pico? 
         add_library(driver INTERFACE)
                 target_sources(driver INTERFACE 
-                                picowrapper.cpp
+                                sdkwrapper.cpp
                                 adau1361.cpp
                                 adau1361lower.cpp
                                 i2cmaster.cpp

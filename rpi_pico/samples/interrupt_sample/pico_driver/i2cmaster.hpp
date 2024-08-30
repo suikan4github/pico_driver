@@ -21,7 +21,7 @@ typedef int i2c_inst_t;
 #endif  //__has_include(<hardware/i2c.h>)
 
 #include "i2cmasterinterface.hpp"
-#include "picowrapper.hpp"
+#include "sdkwrapper.hpp"
 
 namespace pico_driver {
 class I2CMaster : public I2CMasterInterface {
