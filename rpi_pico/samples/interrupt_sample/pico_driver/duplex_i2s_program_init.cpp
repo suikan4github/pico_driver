@@ -29,7 +29,6 @@ void duplex_i2s_program_init(PIO pio, uint sm, uint offset, uint pin_sdout) {
   ::pico_driver::SDKWrapper sdk;
 
   // PIO configuration. Set SDOUT as output. Set SDIN, BCLK and WS as input.
-#if 1
   sdk.pio_sm_set_consecutive_pindirs(pio, sm,
                                      pin_sdout,  // PIN_SDOUT
                                      1,          // 1 pin for output.
@@ -38,7 +37,7 @@ void duplex_i2s_program_init(PIO pio, uint sm, uint offset, uint pin_sdout) {
                                      pin_sdout + 1,  // PIN_SDIN.
                                      3,              // 3 pins for input.
                                      false);         // false for input.
-#endif
+
   // Use thse four pins by PIO.
   sdk.pio_gpio_init(pio, pin_sdout);
   sdk.pio_gpio_init(pio, pin_sdout + 1);
@@ -59,11 +58,15 @@ void duplex_i2s_program_init(PIO pio, uint sm, uint offset, uint pin_sdout) {
   sdk.sm_config_set_in_pin_count(&config,
                                  3);  // 3 pins for input.
 
-  // Set the PIO clock divider.
-  // We need 48MHz clock for the duplex I2S PIO program ( Reed the comment
-  // above ). To avoid the jitter, we calculate the division factor in
-  // integer.
+// Set the PIO clock divider.
+// We need 48MHz clock for the duplex I2S PIO program ( Reed the comment
+// above ). To avoid the jitter, we calculate the division factor in
+// integer.
+#if 0
   float div = (sdk.clock_get_hz(clk_sys) / (48'000'000));
+#else
+  float div = 1;
+#endif
   sdk.sm_config_set_clkdiv(&config, div);
 
   // Shift configuration.
