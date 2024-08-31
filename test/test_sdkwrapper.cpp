@@ -43,6 +43,7 @@ FAKE_VOID_FUNC(sm_config_set_out_pins, pio_sm_config *, uint, uint);
 FAKE_VOID_FUNC(sm_config_set_in_pin_base, pio_sm_config *, uint);
 FAKE_VOID_FUNC(sm_config_set_in_pin_count, pio_sm_config *, uint);
 FAKE_VOID_FUNC(sm_config_set_clkdiv, pio_sm_config *, float);
+FAKE_VOID_FUNC(sm_config_set_in_shift, pio_sm_config *, bool, bool, uint);
 
 // The cpp file of the library to test.
 #include "../rpi_pico/samples/interrupt_sample/pico_driver/sdkwrapper.cpp"
@@ -643,3 +644,41 @@ TEST(PicoWrapper, sm_config_set_clkdiv) {
     index++;
   }
 }  // TEST(PicoWrapper, sm_config_set_clkdiv)
+
+TEST(PicoWrapper, sm_config_set_in_shift) {
+  ::pico_driver::SDKWrapper pico;
+  pio_sm_config config;
+
+  bool shift_right_array[] = {true, false};
+  bool autopush_array[] = {true, false};
+  uint push_threshold_array[] = {3, 5};
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(sm_config_set_in_shift);
+
+  // Trial call.
+  for (auto &&shift_right : shift_right_array)
+    for (auto &&autopush : autopush_array)
+      for (auto &&push_threshold : push_threshold_array)
+        pico.sm_config_set_in_shift(&config, shift_right, autopush,
+                                    push_threshold);
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(sm_config_set_in_shift_fake.call_count, 8);
+
+  // Check wether parameters are passed collectly.
+  int index = 0;
+  for (auto &&shift_right : shift_right_array)
+    for (auto &&autopush : autopush_array)
+      for (auto &&push_threshold : push_threshold_array) {
+        // Check the data from test spy. Call order.
+        ASSERT_EQ(fff.call_history[index], (void *)sm_config_set_in_shift);
+        // Check the data from test spy. : Parameters.
+        ASSERT_EQ(sm_config_set_in_shift_fake.arg0_history[index], &config);
+        ASSERT_EQ(sm_config_set_in_shift_fake.arg1_history[index], shift_right);
+        ASSERT_EQ(sm_config_set_in_shift_fake.arg2_history[index], autopush);
+        ASSERT_EQ(sm_config_set_in_shift_fake.arg3_history[index],
+                  push_threshold);
+        index++;
+      }
+}  // TEST(PicoWrapper, sm_config_set_in_shift)

@@ -15,6 +15,13 @@ void pico_driver::SDKWrapper::sm_config_set_clkdiv(pio_sm_config* c,
   ::sm_config_set_clkdiv(c, div);
 }
 
+void pico_driver::SDKWrapper::sm_config_set_in_shift(pio_sm_config* c,
+                                                     bool shift_right,
+                                                     bool autopush,
+                                                     uint push_threshold) {
+  ::sm_config_set_in_shift(c, shift_right, autopush, push_threshold);
+}
+
 void ::pico_driver::SDKWrapper::gpio_init(uint gpio) { ::gpio_init(gpio); }
 
 void pico_driver::SDKWrapper::gpio_set_function(uint gpio, gpio_function_t fn) {

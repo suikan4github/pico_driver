@@ -256,6 +256,18 @@ class SDKWrapper {
    * baud rate. See the datasheet for further detail.
    */
   virtual void sm_config_set_clkdiv(pio_sm_config *c, float div);
+
+  /**
+   * @brief Setup 'in' shifting parameters in a state machine configuration.
+   *
+   * @param c Pointer to the configuration structure to modify.
+   * @param shift_right true to shift ISR to right, false to shift ISR to left.
+   * @param autopush whether autopush is enabled.
+   * @param push_threshold threshold in bits to shift in before auto/conditional
+   * re-pushing of the ISR
+   */
+  virtual void sm_config_set_in_shift(pio_sm_config *c, bool shift_right,
+                                      bool autopush, uint push_threshold);
 };
 
 #if __has_include(<gmock/gmock.h>)
@@ -290,6 +302,9 @@ class MockSDKWrapper : public SDKWrapper {
   MOCK_METHOD2(sm_config_set_in_pin_count,
                void(pio_sm_config *c, uint in_count));
   MOCK_METHOD2(sm_config_set_clkdiv, void(pio_sm_config *c, float div));
+  MOCK_METHOD4(sm_config_set_in_shift,
+               void(pio_sm_config *c, bool shift_right, bool autopush,
+                    uint push_threshold));
 };
 #endif  // __has_include(<gmock/gmock.h>)
 };  // namespace pico_driver
