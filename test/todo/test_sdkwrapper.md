@@ -1,58 +1,58 @@
 # test_SDKWrapper TDD
-- [] Implement SDKWrapper::pio_sm_set_enabled() to fail. 
+- [] Implement SDKWrapper::pio_sm_set_enabled(). 
 - [] Create Test case pio_gpio_init.pio_sm_set_enabled() to fail. 
 - [] Make it success. 
 - [] Remove the duplication. 
 
-- [] Implement SDKWrapper::pio_sm_put() to fail. 
+- [] Implement SDKWrapper::pio_sm_put(). 
 - [] Create Test case pio_gpio_init.pio_sm_put() to fail. 
 - [] Make it success. 
 - [] Remove the duplication. 
 
-- [] Implement SDKWrapper::pio_sm_init() to fail. 
+- [] Implement SDKWrapper::pio_sm_init(). 
 - [] Create Test case pio_gpio_init.pio_sm_init() to fail. 
 - [] Make it success. 
 - [] Remove the duplication. 
 
-- [] Implement SDKWrapper::sm_config_set_out_shift() to fail. 
+- [] Implement SDKWrapper::sm_config_set_out_shift(). 
 - [] Create Test case pio_gpio_init.sm_config_set_out_shift() to fail. 
 - [] Make it success. 
 - [] Remove the duplication. 
 
-- [] Implement SDKWrapper::sm_config_set_in_shift() to fail. 
+- [] Implement SDKWrapper::sm_config_set_in_shift(). 
 - [] Create Test case pio_gpio_init.sm_config_set_in_shift() to fail. 
 - [] Make it success. 
 - [] Remove the duplication. 
 
-- [] Implement SDKWrapper::sm_config_set_clkdiv() to fail. 
+- [] Implement SDKWrapper::sm_config_set_clkdiv(). 
 - [] Create Test case pio_gpio_init.sm_config_set_clkdiv() to fail. 
 - [] Make it success. 
 - [] Remove the duplication. 
 
-- [] Implement SDKWrapper::clock_get_hz() to fail. 
+- [] Implement SDKWrapper::clock_get_hz(). 
 - [] Create Test case pio_gpio_init.clock_get_hz() to fail. 
 - [] Make it success. 
 - [] Remove the duplication. 
 
-- [] Implement SDKWrapper::sm_config_set_in_pin_count() to fail. 
+- [] Implement SDKWrapper::sm_config_set_in_pin_count(). 
 - [] Create Test case pio_gpio_init.sm_config_set_in_pin_count() to fail. 
 - [] Make it success. 
 - [] Remove the duplication. 
 
-- [] Implement SDKWrapper::sm_config_set_in_pin_base() to fail. 
+- [] Implement SDKWrapper::sm_config_set_in_pin_base(). 
 - [] Create Test case pio_gpio_init.sm_config_set_in_pin_base() to fail. 
 - [] Make it success. 
 - [] Remove the duplication. 
 
-- [] Implement SDKWrapper::sm_config_set_out_pins() to fail. 
+- [] Implement SDKWrapper::sm_config_set_out_pins(). 
 - [] Create Test case pio_gpio_init.sm_config_set_out_pins() to fail. 
 - [] Make it success. 
 - [] Remove the duplication. 
 
-- [] Implement SDKWrapper::pio_gpio_init() to fail. 
-- [] Create Test case pio_gpio_init.pio_gpio_init() to fail. 
-- [] Make it success. 
-- [] Remove the duplication. 
+- [x] Implement SDKWrapper::pio_gpio_init(). 
+- [x] Create Test case pio_gpio_init.pio_gpio_init() to fail. 
+- [x] Make it success. 
+- [x] Remove the duplication. 
 
 
 - [x] Implement SDKWrapper::pio_sm_set_consecutive_pindirs() to fail. 

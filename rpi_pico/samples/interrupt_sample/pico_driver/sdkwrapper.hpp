@@ -155,12 +155,14 @@ class SDKWrapper {
                                  const uint8_t *src, size_t len, bool nostop);
 
   /* ***************************************************************************
-   *                              House Keeping
+   *                              PIO
    * ***************************************************************************
    */
 
   virtual int pio_sm_set_consecutive_pindirs(PIO pio, uint sm, uint pins_base,
                                              uint pin_count, bool is_out);
+
+  virtual void pio_gpio_init(PIO pio, uint pin);
 };
 
 #if __has_include(<gmock/gmock.h>)
@@ -187,6 +189,7 @@ class MockSDKWrapper : public SDKWrapper {
   MOCK_METHOD5(pio_sm_set_consecutive_pindirs,
                int(PIO pio, uint sm, uint pins_base, uint pin_count,
                    bool is_out));
+  MOCK_METHOD2(pio_gpio_init, void(PIO pio, uint pin));
 };
 #endif  // __has_include(<gmock/gmock.h>)
 };  // namespace pico_driver
