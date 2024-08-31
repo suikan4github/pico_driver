@@ -9,10 +9,10 @@
 - [] Make it success. 
 - [] Remove the duplication. 
 
-- [] Implement SDKWrapper::pio_sm_init(). 
-- [] Create Test case pio_gpio_init.pio_sm_init() to fail. 
-- [] Make it success. 
-- [] Remove the duplication. 
+- [x] Implement SDKWrapper::pio_sm_init(). 
+- [x] Create Test case pio_gpio_init.pio_sm_init() to fail. 
+- [x] Make it success. 
+- [x] Remove the duplication. 
 
 - [x] Implement SDKWrapper::sm_config_set_out_shift(). 
 - [x] Create Test case pio_gpio_init.sm_config_set_out_shift() to fail. 

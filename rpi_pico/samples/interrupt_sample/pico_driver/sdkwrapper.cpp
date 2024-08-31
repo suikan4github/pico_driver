@@ -29,6 +29,11 @@ void pico_driver::SDKWrapper::sm_config_set_out_shift(pio_sm_config* c,
   ::sm_config_set_out_shift(c, shift_right, autopull, push_threshold);
 }
 
+int pico_driver::SDKWrapper::pio_sm_init(PIO pio, uint sm, uint initial_pc,
+                                         const pio_sm_config* config) {
+  return ::pio_sm_init(pio, sm, initial_pc, config);
+}
+
 void ::pico_driver::SDKWrapper::gpio_init(uint gpio) { ::gpio_init(gpio); }
 
 void pico_driver::SDKWrapper::gpio_set_function(uint gpio, gpio_function_t fn) {

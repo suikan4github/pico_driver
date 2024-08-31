@@ -280,6 +280,27 @@ class SDKWrapper {
    */
   virtual void sm_config_set_out_shift(pio_sm_config *c, bool shift_right,
                                        bool autopull, uint push_threshold);
+
+  /**
+   * @brief Resets the state machine to a consistent state, and configures it
+   * @param pio The PIO instance; e.g.  pio0 or pio1
+   * @param sm State machine index (0..3)
+   * @param initial_pc the initial program memory offset to run from
+   * @param config the configuration to apply (or NULL to apply defaults)
+   * @return PICO_OK, or < 0 for an error (see pico_error_codes)
+   * @details
+   * This method:
+   * @li Disables the state machine (if running)
+   * @li Clears the FIFOs
+   * @li Applies the configuration specified by 'config'
+   * @li Resets any internal state e.g. shift counters
+   * @li Jumps to the initial program location given by 'initial_pc'
+   *
+   * The state machine is left disabled on return from this call.
+   *
+   */
+  virtual int pio_sm_init(PIO pio, uint sm, uint initial_pc,
+                          const pio_sm_config *config);
 };
 
 #if __has_include(<gmock/gmock.h>)
@@ -320,6 +341,8 @@ class MockSDKWrapper : public SDKWrapper {
   MOCK_METHOD4(sm_config_set_out_shift,
                void(pio_sm_config *c, bool shift_right, bool autopull,
                     uint push_threshold));
+  MOCK_METHOD4(pio_sm_init, int(PIO pio, uint sm, uint initial_pc,
+                                const pio_sm_config *config));
 };
 #endif  // __has_include(<gmock/gmock.h>)
 };  // namespace pico_driver

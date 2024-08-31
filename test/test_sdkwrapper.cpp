@@ -45,6 +45,7 @@ FAKE_VOID_FUNC(sm_config_set_in_pin_count, pio_sm_config *, uint);
 FAKE_VOID_FUNC(sm_config_set_clkdiv, pio_sm_config *, float);
 FAKE_VOID_FUNC(sm_config_set_in_shift, pio_sm_config *, bool, bool, uint);
 FAKE_VOID_FUNC(sm_config_set_out_shift, pio_sm_config *, bool, bool, uint);
+FAKE_VALUE_FUNC(int, pio_sm_init, PIO, uint, uint, const pio_sm_config *);
 
 // The cpp file of the library to test.
 #include "../rpi_pico/samples/interrupt_sample/pico_driver/sdkwrapper.cpp"
@@ -722,3 +723,47 @@ TEST(PicoWrapper, sm_config_set_out_shift) {
         index++;
       }
 }  // TEST(PicoWrapper, sm_config_set_out_shift)
+
+TEST(PicoWrapper, pio_sm_init) {
+  ::pico_driver::SDKWrapper pico;
+  pio_sm_config config;
+
+  PIO pio_array[] = {11, 13};
+  uint sm_array[] = {17, 23};
+  uint initial_pc_array[] = {3, 5};
+  int myReturnVals_array[32] = {1, 2, 3, 4, 5, 6, 7, 8};
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(pio_sm_init);
+
+  SET_RETURN_SEQ(pio_sm_init, myReturnVals_array,
+                 std::size(myReturnVals_array));
+
+  // Check wether return value is correct.
+  int index = 0;
+  for (auto &&pio : pio_array)
+    for (auto &&sm : sm_array)
+      for (auto &&initial_pc : initial_pc_array) {
+        ASSERT_EQ(pico.pio_sm_init(pio, sm, initial_pc, &config),
+                  myReturnVals_array[index]);
+        index++;
+      }
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(pio_sm_init_fake.call_count, 8);
+
+  // Check wether parameters are passed collectly.
+  index = 0;
+  for (auto &&pio : pio_array)
+    for (auto &&sm : sm_array)
+      for (auto &&initial_pc : initial_pc_array) {
+        // Check the data from test spy. Call order.
+        ASSERT_EQ(fff.call_history[index], (void *)pio_sm_init);
+        // Check the data from test spy. : Parameters.
+        ASSERT_EQ(pio_sm_init_fake.arg0_history[index], pio);
+        ASSERT_EQ(pio_sm_init_fake.arg1_history[index], sm);
+        ASSERT_EQ(pio_sm_init_fake.arg2_history[index], initial_pc);
+        ASSERT_EQ(pio_sm_init_fake.arg3_history[index], &config);
+        index++;
+      }
+}  // TEST(PicoWrapper, pio_sm_init)
