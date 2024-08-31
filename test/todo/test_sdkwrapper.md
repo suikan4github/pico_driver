@@ -1,8 +1,8 @@
 # test_SDKWrapper TDD
-- [] Implement SDKWrapper::pio_sm_set_enabled(). 
-- [] Create Test case pio_gpio_init.pio_sm_set_enabled() to fail. 
-- [] Make it success. 
-- [] Remove the duplication. 
+- [x] Implement SDKWrapper::pio_sm_set_enabled(). 
+- [x] Create Test case pio_gpio_init.pio_sm_set_enabled() to fail. 
+- [x] Make it success. 
+- [x] Remove the duplication. 
 
 - [x] Implement SDKWrapper::pio_sm_put(). 
 - [x] Create Test case pio_gpio_init.pio_sm_put() to fail. 

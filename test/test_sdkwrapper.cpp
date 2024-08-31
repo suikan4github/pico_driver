@@ -47,6 +47,8 @@ FAKE_VOID_FUNC(sm_config_set_in_shift, pio_sm_config *, bool, bool, uint);
 FAKE_VOID_FUNC(sm_config_set_out_shift, pio_sm_config *, bool, bool, uint);
 FAKE_VALUE_FUNC(int, pio_sm_init, PIO, uint, uint, const pio_sm_config *);
 FAKE_VOID_FUNC(pio_sm_put, PIO, uint, uint32_t);
+FAKE_VOID_FUNC(pio_sm_set_enabled, PIO, uint, bool);
+
 // The cpp file of the library to test.
 #include "../rpi_pico/samples/interrupt_sample/pico_driver/sdkwrapper.cpp"
 
@@ -801,3 +803,38 @@ TEST(PicoWrapper, pio_sm_put) {
         index++;
       }
 }  // TEST(PicoWrapper, pio_sm_put)
+
+TEST(PicoWrapper, pio_sm_set_enabled) {
+  ::pico_driver::SDKWrapper pico;
+  pio_sm_config config;
+
+  PIO pio_array[] = {1, 3};
+  uint sm_array[] = {5, 7};
+  bool enabled_array[] = {true, false};
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(pio_sm_set_enabled);
+
+  // Trial call.
+  for (auto &&pio : pio_array)
+    for (auto &&sm : sm_array)
+      for (auto &&enabled : enabled_array)
+        pico.pio_sm_set_enabled(pio, sm, enabled);
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(pio_sm_set_enabled_fake.call_count, 8);
+
+  // Check wether parameters are passed collectly.
+  int index = 0;
+  for (auto &&pio : pio_array)
+    for (auto &&sm : sm_array)
+      for (auto &&enabled : enabled_array) {
+        // Check the data from test spy. Call order.
+        ASSERT_EQ(fff.call_history[index], (void *)pio_sm_set_enabled);
+        // Check the data from test spy. : Parameters.
+        ASSERT_EQ(pio_sm_set_enabled_fake.arg0_history[index], pio);
+        ASSERT_EQ(pio_sm_set_enabled_fake.arg1_history[index], sm);
+        ASSERT_EQ(pio_sm_set_enabled_fake.arg2_history[index], enabled);
+        index++;
+      }
+}  // TEST(PicoWrapper, pio_sm_set_enabled)

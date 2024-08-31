@@ -315,6 +315,15 @@ class SDKWrapper {
    * that the system attempted to write to a full FIFO.
    */
   virtual void pio_sm_put(PIO pio, uint sm, uint32_t data);
+
+  /**
+   * @brief Enable or disable a PIO state machine.
+   *
+   * @param pio The PIO instance; e.g. pio0 or pio1
+   * @param sm State machine index (0..3)
+   * @param enabled true to enable the state machine; false to disable
+   */
+  virtual void pio_sm_set_enabled(PIO pio, uint sm, bool enabled);
 };
 
 #if __has_include(<gmock/gmock.h>)
@@ -358,6 +367,7 @@ class MockSDKWrapper : public SDKWrapper {
   MOCK_METHOD4(pio_sm_init, int(PIO pio, uint sm, uint initial_pc,
                                 const pio_sm_config *config));
   MOCK_METHOD3(pio_sm_put, void(PIO pio, uint sm, uint32_t data));
+  MOCK_METHOD3(pio_sm_set_enabled, void(PIO pio, uint sm, bool enabled));
 };
 #endif  // __has_include(<gmock/gmock.h>)
 };  // namespace pico_driver
