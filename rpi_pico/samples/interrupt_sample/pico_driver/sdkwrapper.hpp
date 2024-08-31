@@ -3,6 +3,7 @@
 
 #if __has_include("pico/stdlib.h")
 // For Pico
+#include "hardware/clocks.h"
 #include "hardware/i2c.h"
 #include "hardware/pio.h"
 #include "pico/stdlib.h"
@@ -14,6 +15,7 @@ typedef int gpio_function_t;
 typedef unsigned uint;
 typedef unsigned int PIO;
 typedef unsigned int pio_sm_config;
+typedef unsigned int clock_handle_t;
 #include <stdint.h>
 #include <stdlib.h>
 #endif
@@ -56,13 +58,24 @@ class SDKWrapper {
    */
   virtual void sleep_ms(uint32_t ms);
 
+  /**
+   * @brief Get the current frequency of the specified clock.
+   *
+   * @param clock Clock designation by clock_handle_t type.
+   * @return uint32_t Clock frequency in Hz
+   * @details
+   * Pass clock_sys to the clock parameter to get the system clock.
+   */
+  virtual uint32_t clock_get_hz(clock_handle_t clock);
+
   /* ***************************************************************************
    *                              GPIO
    * ***************************************************************************
    */
 
   /**
-   * @brief Initialise a GPIO for (enabled I/O and set func to GPIO_FUNC_SIO)
+   * @brief Initialise a GPIO for (enabled I/O and set func to
+   * GPIO_FUNC_SIO)
    * @param gpio GPIO number.
    * @details
    * Clear the output enable (i.e. set to input). Clear any output value.
@@ -257,6 +270,7 @@ class MockSDKWrapper : public SDKWrapper {
   MOCK_METHOD2(sm_config_set_in_pin_base, void(pio_sm_config *c, uint in_base));
   MOCK_METHOD2(sm_config_set_in_pin_count,
                void(pio_sm_config *c, uint in_count));
+  MOCK_METHOD1(clock_get_hz, uint32_t(clock_handle_t clock));
 };
 #endif  // __has_include(<gmock/gmock.h>)
 };  // namespace pico_driver

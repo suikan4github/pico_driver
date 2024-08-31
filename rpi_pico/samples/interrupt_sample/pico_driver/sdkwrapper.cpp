@@ -2,6 +2,10 @@
 
 void ::pico_driver::SDKWrapper::sleep_ms(uint32_t ms) { ::sleep_ms(ms); }
 
+uint32_t pico_driver::SDKWrapper::clock_get_hz(clock_handle_t clock) {
+  return ::clock_get_hz(clock);
+}
+
 bool pico_driver::SDKWrapper::stdio_init_all(void) {
   return ::stdio_init_all();
 }

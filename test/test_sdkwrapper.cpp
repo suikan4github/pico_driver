@@ -20,6 +20,7 @@ DEFINE_FFF_GLOBALS;
 // Create Test Spies
 FAKE_VALUE_FUNC(bool, stdio_init_all);
 FAKE_VOID_FUNC(sleep_ms, uint32_t);
+FAKE_VALUE_FUNC(uint32_t, clock_get_hz, clock_handle_t);
 
 FAKE_VOID_FUNC(gpio_init, uint);
 FAKE_VOID_FUNC(gpio_set_function, uint, gpio_function_t);
@@ -582,3 +583,36 @@ TEST(PicoWrapper, sm_config_set_in_pin_count) {
     index++;
   }
 }  // TEST(PicoWrapper, sm_config_set_in_pin_count)
+
+TEST(PicoWrapper, clock_get_hz) {
+  ::pico_driver::SDKWrapper pico;
+  clock_handle_t clock_handle_array[] = {11, 13};
+  uint32_t myReturnVals_array[] = {1, 2};
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(clock_get_hz);
+
+  SET_RETURN_SEQ(clock_get_hz, myReturnVals_array,
+                 std::size(myReturnVals_array));
+
+  // Check whether call matches.
+  uint index = 0;
+
+  for (auto &&clock_handle : clock_handle_array) {
+    ASSERT_EQ(pico.clock_get_hz(clock_handle), myReturnVals_array[index]);
+    index++;
+  }
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(clock_get_hz_fake.call_count, 2);
+
+  // Check wether parameters are passed collectly.
+  index = 0;
+  for (auto &&clock_handle : clock_handle_array) {
+    // Check the data from test spy. Call order.
+    ASSERT_EQ(fff.call_history[index], (void *)clock_get_hz);
+    // Check the data from test spy. : Parameters.
+    ASSERT_EQ(clock_get_hz_fake.arg0_history[index], clock_handle);
+    index++;
+  }
+}  // TEST(PicoWrapper, clock_get_hz)
