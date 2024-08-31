@@ -301,6 +301,20 @@ class SDKWrapper {
    */
   virtual int pio_sm_init(PIO pio, uint sm, uint initial_pc,
                           const pio_sm_config *config);
+
+  /**
+   * @brief Write a word of data to a state machine's TX FIFO
+   *
+   * @param pio The PIO instance; e.g. pio0 or pio1
+   * @param sm State machine index (0..3)
+   * @param data the 32 bit data value
+   * @details
+   * This is a raw FIFO access that does not check for fullness. If the FIFO is
+   * full, the FIFO contents and state are not affected by the write attempt.
+   * Hardware sets the TXOVER sticky flag for this FIFO in FDEBUG, to indicate
+   * that the system attempted to write to a full FIFO.
+   */
+  virtual void pio_sm_put(PIO pio, uint sm, uint32_t data);
 };
 
 #if __has_include(<gmock/gmock.h>)
@@ -343,6 +357,7 @@ class MockSDKWrapper : public SDKWrapper {
                     uint push_threshold));
   MOCK_METHOD4(pio_sm_init, int(PIO pio, uint sm, uint initial_pc,
                                 const pio_sm_config *config));
+  MOCK_METHOD3(pio_sm_put, void(PIO pio, uint sm, uint32_t data));
 };
 #endif  // __has_include(<gmock/gmock.h>)
 };  // namespace pico_driver

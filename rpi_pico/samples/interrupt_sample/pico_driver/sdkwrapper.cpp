@@ -34,6 +34,10 @@ int pico_driver::SDKWrapper::pio_sm_init(PIO pio, uint sm, uint initial_pc,
   return ::pio_sm_init(pio, sm, initial_pc, config);
 }
 
+void pico_driver::SDKWrapper::pio_sm_put(PIO pio, uint sm, uint32_t data) {
+  ::pio_sm_put(pio, sm, data);
+}
+
 void ::pico_driver::SDKWrapper::gpio_init(uint gpio) { ::gpio_init(gpio); }
 
 void pico_driver::SDKWrapper::gpio_set_function(uint gpio, gpio_function_t fn) {
