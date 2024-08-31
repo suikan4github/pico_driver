@@ -40,6 +40,7 @@ FAKE_VALUE_FUNC(int, pio_sm_set_consecutive_pindirs, PIO, uint, uint, uint,
 FAKE_VOID_FUNC(pio_gpio_init, PIO, uint);
 FAKE_VOID_FUNC(sm_config_set_out_pins, pio_sm_config *, uint, uint);
 FAKE_VOID_FUNC(sm_config_set_in_pin_base, pio_sm_config *, uint);
+FAKE_VOID_FUNC(sm_config_set_in_pin_count, pio_sm_config *, uint);
 
 // The cpp file of the library to test.
 #include "../rpi_pico/samples/interrupt_sample/pico_driver/sdkwrapper.cpp"
@@ -531,26 +532,53 @@ TEST(PicoWrapper, sm_config_set_out_pins) {
 
 TEST(PicoWrapper, sm_config_set_in_pin_base) {
   ::pico_driver::SDKWrapper pico;
-  PIO pio_array[] = {11, 13};
+  uint base_array[] = {11, 13};
   pio_sm_config config;
 
   FFF_RESET_HISTORY();
   RESET_FAKE(sm_config_set_in_pin_base);
 
   // Trial call.
-  for (auto &&pio : pio_array) pico.sm_config_set_in_pin_base(&config, pio);
+  for (auto &&base : base_array) pico.sm_config_set_in_pin_base(&config, base);
 
   // Check the data from test spy. How many time called?
   ASSERT_EQ(sm_config_set_in_pin_base_fake.call_count, 2);
 
   // Check wether parameters are passed collectly.
   int index = 0;
-  for (auto &&pio : pio_array) {
+  for (auto &&base : base_array) {
     // Check the data from test spy. Call order.
     ASSERT_EQ(fff.call_history[index], (void *)sm_config_set_in_pin_base);
     // Check the data from test spy. : Parameters.
     ASSERT_EQ(sm_config_set_in_pin_base_fake.arg0_history[index], &config);
-    ASSERT_EQ(sm_config_set_in_pin_base_fake.arg1_history[index], pio);
+    ASSERT_EQ(sm_config_set_in_pin_base_fake.arg1_history[index], base);
     index++;
   }
 }  // TEST(PicoWrapper, sm_config_set_in_pin_base)
+
+TEST(PicoWrapper, sm_config_set_in_pin_count) {
+  ::pico_driver::SDKWrapper pico;
+  PIO count_array[] = {11, 13};
+  pio_sm_config config;
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(sm_config_set_in_pin_base);
+
+  // Trial call.
+  for (auto &&count : count_array)
+    pico.sm_config_set_in_pin_count(&config, count);
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(sm_config_set_in_pin_count_fake.call_count, 2);
+
+  // Check wether parameters are passed collectly.
+  int index = 0;
+  for (auto &&count : count_array) {
+    // Check the data from test spy. Call order.
+    ASSERT_EQ(fff.call_history[index], (void *)sm_config_set_in_pin_count);
+    // Check the data from test spy. : Parameters.
+    ASSERT_EQ(sm_config_set_in_pin_count_fake.arg0_history[index], &config);
+    ASSERT_EQ(sm_config_set_in_pin_count_fake.arg1_history[index], count);
+    index++;
+  }
+}  // TEST(PicoWrapper, sm_config_set_in_pin_count)
