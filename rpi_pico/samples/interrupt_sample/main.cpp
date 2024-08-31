@@ -34,6 +34,7 @@ int main() {
   //     pico_enable_stdio_uart($ { PROJECT_NAME } 0)
   sdk.stdio_init_all();
 
+#if 0
   uint const count = 7;
   printf("%d\n", count);
   for (size_t i = 0; i < count; i++) {
@@ -41,47 +42,44 @@ int main() {
     printf("%d\n", count - i - 1);
   }
   printf("Go!\n");
+#endif
 
   ::pico_driver::I2CMaster i2c(sdk, *i2c1, i2c_clock, i2c_scl_pin, i2c_sda_pin);
   ::codec::Adau1361Lower codec_lower(i2c, adau1361_i2c_address);
   ::codec::Adau1361 codec(fs, mclock, codec_lower);
 
-  printf("CODEC Initialization.\n");
+  //  printf("CODEC Initialization.\n");
   // CODEC initializaiton.
   codec.Start();
   codec.Mute(codec::Adau1361::LineInput, false);        // unmute
   codec.Mute(codec::Adau1361::HeadphoneOutput, false);  // unmute
 
-  printf("I2S Initialization.\n");
+  //  printf("I2S Initialization.\n");
   // I2S Initialization.
   PIO i2s_pio = pio0;
   uint i2s_sm = 0;
   uint i2s_offset = pio_add_program(i2s_pio, &duplex_i2s_program);
   duplex_i2s_program_init(i2s_pio, i2s_sm, i2s_offset, I2S_GPIO_PIN_BASE);
 
-  printf("LED Initialization.\n");
+  //  printf("LED Initialization.\n");
   // Use RasPi Pico on-board LED.
   // 1=> Turn on, 0 => Turn pff.
   const uint LED_PIN = PICO_DEFAULT_LED_PIN;
   sdk.gpio_init(LED_PIN);
   sdk.gpio_set_dir(LED_PIN, true);
 
-  printf("System clock is  %d Hz.\n", clock_get_hz(clk_sys));
+  //  printf("System clock is  %d Hz.\n", clock_get_hz(clk_sys));
   float div = (clock_get_hz(clk_sys) / (48'000'000));
-  printf("Divsion factor is  %f .\n", div);
+  //  printf("Divsion factor is  %f .\n", div);
 
-  printf("Audio Transfering.\n");
-  bool led = false;
+  //  printf("Audio Transfering.\n");
   // Audio talk thorough
   while (true) {
     // Get Left/Right I2S samples from RX FIFO.
-    uint32_t left_sample = pio_sm_get_blocking(i2s_pio, i2s_sm);
-    uint32_t right_sample = pio_sm_get_blocking(i2s_pio, i2s_sm);
+    int32_t left_sample = (int32_t)pio_sm_get_blocking(i2s_pio, i2s_sm);
+    int32_t right_sample = (int32_t)pio_sm_get_blocking(i2s_pio, i2s_sm);
     // Put Left/Right I2S samples to TX FIFO.
     pio_sm_put(i2s_pio, i2s_sm, left_sample);
     pio_sm_put(i2s_pio, i2s_sm, right_sample);
-    // LED control
-    sdk.gpio_put(LED_PIN, led);
-    led != led;
   }
 }

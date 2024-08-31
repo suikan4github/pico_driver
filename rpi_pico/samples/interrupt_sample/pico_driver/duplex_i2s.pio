@@ -27,28 +27,27 @@
 .pio_version 0          ; only requires PIO version 0
 
 .program duplex_i2s
-	wait 0 pin 2        ; Waiting for 0 of WS (L ch). 
-	wait 1 pin 2        ; Capture rising edge of WS(Sync to the start of R ch). 
+	wait 1 pin 2        ; Waiting for 0 of WS (L ch). 
 	wait 0 pin 2        ; Capture falling edge of WS(Sync to the start of L ch). 
 	wait 0 pin 1        ; Waiting for 0 of BCLK(first half of bit slot 00). 
 	wait 1 pin 1        ; Capture rising edge of BCLK( Sync to the second half of bit slot 00).
-.wrap_target            ; Begining of stereo data transfer.
+.wrap_target                ; Begining of stereo data transfer.
                         ; Transfer Left ch
-	set x,31            ; Loop 31 times ( 32bit )
-left_loop:              ; Loop here
-        wait 0 pin 1    ; Capture falling edge of BCLK(Sync to the first half of BCLK ). 
-        out pins, 1     ; Output 1 bit to DAC. 
-        wait 1 pin 1    ; Capture riging edge of BCLK(Sync to the Sampling edge of BCLK). 
-        in pins, 1      ; Input 1 bit from ADC.
-	jmp x-- left_loop   ; loop 64 times. 
-                        ; Transfer left ch
-	set x,31            ; Loop 31 times ( 32bit )
-right_loop:             ; Loop here
-        wait 0 pin 1    ; Capture falling edge of BCLK(Sync to the first half of BCLK ). 
-        out pins, 1     ; Output 1 bit to DAC. 
-        wait 1 pin 1    ; Capture riging edge of BCLK(Sync to the Sampling edge of BCLK). 
-        in pins, 1      ; Input 1 bit from ADC.
-	jmp x-- right_loop  ; loop 64 times. 
+	set x,31            ; Loop 32 times ( 32bit transfer )
+left_loop:                  ; Loop here
+        wait 0 pin 1        ; Capture falling edge of BCLK(Sync to the first half of BCLK ). 
+        out pins, 1         ; Output 1 bit to DAC. 
+        wait 1 pin 1        ; Capture riging edge of BCLK(Sync to the Sampling edge of BCLK). 
+        in pins, 1          ; Input 1 bit from ADC.
+	jmp x-- left_loop   ; repeat until x == 0 with post decrement. 
+                        ; Transfer Right ch
+	set x,31            ; Loop 32 times ( 32bit transfer )
+right_loop:                 ; Loop here
+        wait 0 pin 1        ; Capture falling edge of BCLK(Sync to the first half of BCLK ). 
+        out pins, 1         ; Output 1 bit to DAC. 
+        wait 1 pin 1        ; Capture riging edge of BCLK(Sync to the Sampling edge of BCLK). 
+        in pins, 1          ; Input 1 bit from ADC.
+	jmp x-- right_loop  ; repeat until x == 0 with post decrement. 
 .wrap
 
 ; This program takes 4 cycles for the second half of a bit slot. 
