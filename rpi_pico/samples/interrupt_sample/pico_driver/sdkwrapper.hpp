@@ -268,6 +268,18 @@ class SDKWrapper {
    */
   virtual void sm_config_set_in_shift(pio_sm_config *c, bool shift_right,
                                       bool autopush, uint push_threshold);
+
+  /**
+   * @brief Setup 'out' shifting parameters in a state machine configuration.
+   *
+   * @param c Pointer to the configuration structure to modify.
+   * @param shift_right true to shift OSR to right, false to shift OSR to left.
+   * @param autopull whether autopull is enabled.
+   * @param push_threshold threshold in bits to shift out before
+   * auto/conditional re-pulling of the OSR
+   */
+  virtual void sm_config_set_out_shift(pio_sm_config *c, bool shift_right,
+                                       bool autopull, uint push_threshold);
 };
 
 #if __has_include(<gmock/gmock.h>)
@@ -304,6 +316,9 @@ class MockSDKWrapper : public SDKWrapper {
   MOCK_METHOD2(sm_config_set_clkdiv, void(pio_sm_config *c, float div));
   MOCK_METHOD4(sm_config_set_in_shift,
                void(pio_sm_config *c, bool shift_right, bool autopush,
+                    uint push_threshold));
+  MOCK_METHOD4(sm_config_set_out_shift,
+               void(pio_sm_config *c, bool shift_right, bool autopull,
                     uint push_threshold));
 };
 #endif  // __has_include(<gmock/gmock.h>)
