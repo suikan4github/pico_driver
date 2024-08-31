@@ -13,6 +13,7 @@ typedef int i2c_inst_t;
 typedef int gpio_function_t;
 typedef unsigned uint;
 typedef unsigned int PIO;
+typedef unsigned int pio_sm_config;
 #include <stdint.h>
 #include <stdlib.h>
 #endif
@@ -159,10 +160,50 @@ class SDKWrapper {
    * ***************************************************************************
    */
 
+  /**
+   * @brief Use a state machine to set the same pin direction for multiple
+   * consecutive pins for the PIO instance.
+   *
+   * @param pio The PIO instance; e.g. pio0 or pio1.
+   * @param sm State machine index (0..3) to use.
+   * @param pins_base the first pin to set a direction for.
+   * @param pin_count the count of consecutive pins to set the direction for.
+   * @param is_out the direction to set; true = out, false = inl
+   * @return int PICO_OK (0) on success, error code otherwise.
+   * @details
+   * This method repeatedly reconfigures the target state machine’s pin
+   * configuration and executes 'set' instructions to set the pin direction on
+   * consecutive pins, before restoring the state machine’s pin configuration to
+   * what it was.
+   *
+   * This method is provided as a convenience to set initial pin directions, and
+   * should not be used against a state machine that is enabled.
+   */
   virtual int pio_sm_set_consecutive_pindirs(PIO pio, uint sm, uint pins_base,
                                              uint pin_count, bool is_out);
-
+  /**
+   * @brief Setup the function select for a GPIO to use output from the given
+   * PIO instance.
+   *
+   * @param pio The PIO instance; e.g. pio0 or pio1.
+   * @param pin the GPIO pin whose function select to set.
+   * @details
+   * PIO appears as an alternate function in the GPIO muxing, just like an SPI
+   * or UART. This function configures that multiplexing to connect a given PIO
+   * instance to a GPIO. Note that this is not necessary for a state machine to
+   * be able to read the input value from a GPIO, but only for it to set the
+   * output value or output enable.
+   */
   virtual void pio_gpio_init(PIO pio, uint pin);
+  /**
+   * @brief  Set the 'out' pins in a state machine configuration.
+   * @param c Pointer to the configuration structure to modify.
+   * @param out_base 0-31 First pin to set as output.
+   * @param out_count  0-32 Number of pins to set.
+   * @details  'out' pins can overlap with the 'in', 'set' and 'sideset' pins
+   */
+  virtual void sm_config_set_out_pins(pio_sm_config *c, uint out_base,
+                                      uint out_count);
 };
 
 #if __has_include(<gmock/gmock.h>)
@@ -190,6 +231,8 @@ class MockSDKWrapper : public SDKWrapper {
                int(PIO pio, uint sm, uint pins_base, uint pin_count,
                    bool is_out));
   MOCK_METHOD2(pio_gpio_init, void(PIO pio, uint pin));
+  MOCK_METHOD3(sm_config_set_out_pins,
+               void(pio_sm_config *c, uint out_base, uint out_count));
 };
 #endif  // __has_include(<gmock/gmock.h>)
 };  // namespace pico_driver

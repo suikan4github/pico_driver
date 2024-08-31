@@ -57,3 +57,9 @@ int pico_driver::SDKWrapper::pio_sm_set_consecutive_pindirs(PIO pio, uint sm,
 void pico_driver::SDKWrapper::pio_gpio_init(PIO pio, uint pin) {
   ::pio_gpio_init(pio, pin);
 }
+
+void pico_driver::SDKWrapper::sm_config_set_out_pins(pio_sm_config* c,
+                                                     uint out_base,
+                                                     uint out_count) {
+  ::sm_config_set_out_pins(c, out_base, out_count);
+}

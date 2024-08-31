@@ -38,6 +38,7 @@ FAKE_VALUE_FUNC(int, i2c_write_blocking, i2c_inst_t *, uint8_t, const uint8_t *,
 FAKE_VALUE_FUNC(int, pio_sm_set_consecutive_pindirs, PIO, uint, uint, uint,
                 bool);
 FAKE_VOID_FUNC(pio_gpio_init, PIO, uint);
+FAKE_VOID_FUNC(sm_config_set_out_pins, pio_sm_config *, uint, uint);
 
 // The cpp file of the library to test.
 #include "../rpi_pico/samples/interrupt_sample/pico_driver/sdkwrapper.cpp"
@@ -472,7 +473,6 @@ TEST(PicoWrapper, pio_gpio_init) {
   ::pico_driver::SDKWrapper pico;
   PIO pio_array[] = {11, 13};
   uint pin_array[] = {3, 5};
-  int myReturnVals_array[4] = {1, 2, 3, 4};
 
   FFF_RESET_HISTORY();
   RESET_FAKE(pio_gpio_init);
@@ -496,3 +496,34 @@ TEST(PicoWrapper, pio_gpio_init) {
       index++;
     }
 }  // TEST(PicoWrapper, pio_gpio_init)
+
+TEST(PicoWrapper, sm_config_set_out_pins) {
+  ::pico_driver::SDKWrapper pico;
+  PIO pio_array[] = {11, 13};
+  uint length_array[] = {3, 5};
+  pio_sm_config config;
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(sm_config_set_out_pins);
+
+  // Trial call.
+  for (auto &&pio : pio_array)
+    for (auto &&length : length_array)
+      pico.sm_config_set_out_pins(&config, pio, legnth);
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(sm_config_set_out_pins_fake.call_count, 4);
+
+  // Check wether parameters are passed collectly.
+  int index = 0;
+  for (auto &&pio : pio_array)
+    for (auto &&length : length_array) {
+      // Check the data from test spy. Call order.
+      ASSERT_EQ(fff.call_history[index], (void *)sm_config_set_out_pins);
+      // Check the data from test spy. : Parameters.
+      ASSERT_EQ(sm_config_set_out_pins_fake.arg0_history[index], &config);
+      ASSERT_EQ(sm_config_set_out_pins_fake.arg1_history[index], pio);
+      ASSERT_EQ(sm_config_set_out_pins_fake.arg2_history[index], length);
+      index++;
+    }
+}  // TEST(PicoWrapper, sm_config_set_out_pins)
