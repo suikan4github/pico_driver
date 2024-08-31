@@ -10,6 +10,11 @@ bool pico_driver::SDKWrapper::stdio_init_all(void) {
   return ::stdio_init_all();
 }
 
+void pico_driver::SDKWrapper::sm_config_set_clkdiv(pio_sm_config* c,
+                                                   float div) {
+  ::sm_config_set_clkdiv(c, div);
+}
+
 void ::pico_driver::SDKWrapper::gpio_init(uint gpio) { ::gpio_init(gpio); }
 
 void pico_driver::SDKWrapper::gpio_set_function(uint gpio, gpio_function_t fn) {

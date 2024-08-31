@@ -42,6 +42,7 @@ FAKE_VOID_FUNC(pio_gpio_init, PIO, uint);
 FAKE_VOID_FUNC(sm_config_set_out_pins, pio_sm_config *, uint, uint);
 FAKE_VOID_FUNC(sm_config_set_in_pin_base, pio_sm_config *, uint);
 FAKE_VOID_FUNC(sm_config_set_in_pin_count, pio_sm_config *, uint);
+FAKE_VOID_FUNC(sm_config_set_clkdiv, pio_sm_config *, float);
 
 // The cpp file of the library to test.
 #include "../rpi_pico/samples/interrupt_sample/pico_driver/sdkwrapper.cpp"
@@ -616,3 +617,29 @@ TEST(PicoWrapper, clock_get_hz) {
     index++;
   }
 }  // TEST(PicoWrapper, clock_get_hz)
+
+TEST(PicoWrapper, sm_config_set_clkdiv) {
+  ::pico_driver::SDKWrapper pico;
+  float div_array[] = {11.0, 13.0};
+  pio_sm_config config;
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(sm_config_set_clkdiv);
+
+  // Trial call.
+  for (auto &&div : div_array) pico.sm_config_set_clkdiv(&config, div);
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(sm_config_set_clkdiv_fake.call_count, 2);
+
+  // Check wether parameters are passed collectly.
+  int index = 0;
+  for (auto &&div : div_array) {
+    // Check the data from test spy. Call order.
+    ASSERT_EQ(fff.call_history[index], (void *)sm_config_set_clkdiv);
+    // Check the data from test spy. : Parameters.
+    ASSERT_EQ(sm_config_set_clkdiv_fake.arg0_history[index], &config);
+    ASSERT_EQ(sm_config_set_clkdiv_fake.arg1_history[index], div);
+    index++;
+  }
+}  // TEST(PicoWrapper, sm_config_set_clkdiv)

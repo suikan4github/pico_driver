@@ -237,7 +237,25 @@ class SDKWrapper {
    * @details
    * 'in' pins can overlap with the 'out', 'set' and 'sideset' pins.
    */
+
   virtual void sm_config_set_in_pin_count(pio_sm_config *c, uint in_count);
+  /**
+   * @brief Set the state machine clock divider (from a floating point value)
+   * in a state machine configuration.
+   *
+   * @param c Pointer to the configuration structure to modify
+   * @param div The fractional divisor to be set. 1 for full speed. An integer
+   * clock divisor of n will cause the state machine to run 1 cycle in every n.
+   * Note that for small n, the jitter introduced by a fractional divider
+   * (e.g. 2.5) may be unacceptable although it will depend on the use case.
+   * @details
+   * The clock divider slows the state machine’s execution by masking the system
+   * clock on some cycles, in a repeating pattern, so that the state machine
+   * does not advance. Effectively this produces a slower clock for the state
+   * machine to run from, which can be used to generate e.g. a particular UART
+   * baud rate. See the datasheet for further detail.
+   */
+  virtual void sm_config_set_clkdiv(pio_sm_config *c, float div);
 };
 
 #if __has_include(<gmock/gmock.h>)
@@ -245,6 +263,7 @@ class MockSDKWrapper : public SDKWrapper {
  public:
   MOCK_METHOD0(stdio_init_all, bool(void));
   MOCK_METHOD1(sleep_ms, void(uint32_t ms));
+  MOCK_METHOD1(clock_get_hz, uint32_t(clock_handle_t clock));
 
   MOCK_METHOD2(gpio_set_function, void(uint gpio, gpio_function_t fn));
   MOCK_METHOD1(gpio_init, void(uint gpio));
@@ -270,7 +289,7 @@ class MockSDKWrapper : public SDKWrapper {
   MOCK_METHOD2(sm_config_set_in_pin_base, void(pio_sm_config *c, uint in_base));
   MOCK_METHOD2(sm_config_set_in_pin_count,
                void(pio_sm_config *c, uint in_count));
-  MOCK_METHOD1(clock_get_hz, uint32_t(clock_handle_t clock));
+  MOCK_METHOD2(sm_config_set_clkdiv, void(pio_sm_config *c, float div));
 };
 #endif  // __has_include(<gmock/gmock.h>)
 };  // namespace pico_driver

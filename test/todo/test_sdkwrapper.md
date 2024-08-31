@@ -24,10 +24,10 @@
 - [] Make it success. 
 - [] Remove the duplication. 
 
-- [] Implement SDKWrapper::sm_config_set_clkdiv(). 
-- [] Create Test case pio_gpio_init.sm_config_set_clkdiv() to fail. 
-- [] Make it success. 
-- [] Remove the duplication. 
+- [x] Implement SDKWrapper::sm_config_set_clkdiv(). 
+- [x] Create Test case pio_gpio_init.sm_config_set_clkdiv() to fail. 
+- [x] Make it success. 
+- [x] Remove the duplication. 
 
 - [x] Implement SDKWrapper::clock_get_hz(). 
 - [x] Create Test case pio_gpio_init.clock_get_hz() to fail. 
