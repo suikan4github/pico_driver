@@ -39,10 +39,10 @@
 - [] Make it success. 
 - [] Remove the duplication. 
 
-- [] Implement SDKWrapper::sm_config_set_in_pin_base(). 
-- [] Create Test case pio_gpio_init.sm_config_set_in_pin_base() to fail. 
-- [] Make it success. 
-- [] Remove the duplication. 
+- [x] Implement SDKWrapper::sm_config_set_in_pin_base(). 
+- [x] Create Test case pio_gpio_init.sm_config_set_in_pin_base() to fail. 
+- [x] Make it success. 
+- [x] Remove the duplication. 
 
 - [x] Implement SDKWrapper::sm_config_set_out_pins(). 
 - [x] Create Test case pio_gpio_init.sm_config_set_out_pins() to fail. 

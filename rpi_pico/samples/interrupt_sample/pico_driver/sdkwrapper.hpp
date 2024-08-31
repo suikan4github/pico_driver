@@ -195,6 +195,7 @@ class SDKWrapper {
    * output value or output enable.
    */
   virtual void pio_gpio_init(PIO pio, uint pin);
+
   /**
    * @brief  Set the 'out' pins in a state machine configuration.
    * @param c Pointer to the configuration structure to modify.
@@ -204,6 +205,16 @@ class SDKWrapper {
    */
   virtual void sm_config_set_out_pins(pio_sm_config *c, uint out_base,
                                       uint out_count);
+
+  /**
+   * @brief Set the base fpr the 'in' pins in a state machine configuration.
+   *
+   * @param c Pointer to the configuration structure to modify.
+   * @param in_base 0-31 First pin to use as input.
+   * @details
+   * 'in' pins can overlap with the 'out', 'set' and 'sideset' pins.
+   */
+  virtual void sm_config_set_in_pin_base(pio_sm_config *c, uint in_base);
 };
 
 #if __has_include(<gmock/gmock.h>)
@@ -233,6 +244,7 @@ class MockSDKWrapper : public SDKWrapper {
   MOCK_METHOD2(pio_gpio_init, void(PIO pio, uint pin));
   MOCK_METHOD3(sm_config_set_out_pins,
                void(pio_sm_config *c, uint out_base, uint out_count));
+  MOCK_METHOD2(sm_config_set_in_pin_base, void(pio_sm_config *c, uint in_base));
 };
 #endif  // __has_include(<gmock/gmock.h>)
 };  // namespace pico_driver

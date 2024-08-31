@@ -63,3 +63,8 @@ void pico_driver::SDKWrapper::sm_config_set_out_pins(pio_sm_config* c,
                                                      uint out_count) {
   ::sm_config_set_out_pins(c, out_base, out_count);
 }
+
+void pico_driver::SDKWrapper::sm_config_set_in_pin_base(pio_sm_config* c,
+                                                        uint in_base) {
+  ::sm_config_set_in_pin_base(c, in_base);
+}
