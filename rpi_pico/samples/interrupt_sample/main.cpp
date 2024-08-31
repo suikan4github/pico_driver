@@ -1,4 +1,5 @@
 // Include local definition
+#include <math.h>
 #include <stdio.h>
 
 #include "adau1361.hpp"
@@ -72,14 +73,35 @@ int main() {
   float div = (clock_get_hz(clk_sys) / (48'000'000));
   //  printf("Divsion factor is  %f .\n", div);
 
+  int32_t buf[48];
+  int index = 0;
+  for (auto &&sample : buf) {
+    buf[index] =
+        sinf(2 * M_PI * index * 440.0 / 48'000'000.0) * 0.7 * INT32_MAX;
+    index++;
+  }
+
   //  printf("Audio Transfering.\n");
   // Audio talk thorough
   while (true) {
+#if 0
+    int index = 0;
+    for (auto &&sample : buf) {
+      // Get Left/Right I2S samples from RX FIFO.
+      int32_t left_sample = (int32_t)pio_sm_get_blocking(i2s_pio, i2s_sm);
+      int32_t right_sample = (int32_t)pio_sm_get_blocking(i2s_pio, i2s_sm);
+      // Put Left/Right I2S samples to TX FIFO.
+      pio_sm_put(i2s_pio, i2s_sm, buf[index]);
+      pio_sm_put(i2s_pio, i2s_sm, buf[index]);
+      index++;
+  }
+#else
     // Get Left/Right I2S samples from RX FIFO.
     int32_t left_sample = (int32_t)pio_sm_get_blocking(i2s_pio, i2s_sm);
     int32_t right_sample = (int32_t)pio_sm_get_blocking(i2s_pio, i2s_sm);
     // Put Left/Right I2S samples to TX FIFO.
     pio_sm_put(i2s_pio, i2s_sm, left_sample);
     pio_sm_put(i2s_pio, i2s_sm, right_sample);
+#endif
   }
 }
