@@ -92,15 +92,15 @@ int main() {
       int32_t right_sample = (int32_t)pio_sm_get_blocking(i2s_pio, i2s_sm);
       // Put Left/Right I2S samples to TX FIFO.
       pio_sm_put(i2s_pio, i2s_sm, sample);
-      pio_sm_put(i2s_pio, i2s_sm, sample);
+      pio_sm_put(i2s_pio, i2s_sm, 0.0);
     }
 #else
     // Get Left/Right I2S samples from RX FIFO.
     int32_t left_sample = (int32_t)pio_sm_get_blocking(i2s_pio, i2s_sm);
     int32_t right_sample = (int32_t)pio_sm_get_blocking(i2s_pio, i2s_sm);
     // Put Left/Right I2S samples to TX FIFO.
-    pio_sm_put(i2s_pio, i2s_sm, left_sample);
-    pio_sm_put(i2s_pio, i2s_sm, right_sample);
+    pio_sm_put(i2s_pio, i2s_sm, left_sample / 2);
+    pio_sm_put(i2s_pio, i2s_sm, right_sample / 2);
 #endif
   }
 }

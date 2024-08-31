@@ -69,7 +69,8 @@ void duplex_i2s_program_init(PIO pio, uint sm, uint offset, uint pin_sdout) {
 #endif
   sdk.sm_config_set_clkdiv(&config, div);
 
-  // Shift configuration.
+#if 0
+  // Shift configuration : Auto push/pull. 
   // Input shift register.
   sdk.sm_config_set_in_shift(&config,
                              false,  // false to left shift.
@@ -80,7 +81,19 @@ void duplex_i2s_program_init(PIO pio, uint sm, uint offset, uint pin_sdout) {
                               false,  // false to left shift.
                               true,   // true to auto pull.
                               32);    // 32bit word.
-
+#else
+  // Shift configuration : No Auto push/pull.
+  // Input shift register.
+  sdk.sm_config_set_in_shift(&config,
+                             false,  // false to left shift.
+                             false,  // true to auto push.
+                             32);    // 32bit word.
+  // Output shift register.
+  sdk.sm_config_set_out_shift(&config,
+                              false,  // false to left shift.
+                              false,  // true to auto pull.
+                              32);    // 32bit word.
+#endif
   // Configure SM.
   sdk.pio_sm_init(pio, sm, offset, &config);
 
