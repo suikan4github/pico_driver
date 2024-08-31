@@ -52,15 +52,9 @@ int main() {
   //  printf("CODEC Initialization.\n");
   // CODEC initializaiton.
   codec.Start();
+  //  codec.SetGain(codec::Adau1361::HeadphoneOutput, -20.0, -20.0);
   codec.Mute(codec::Adau1361::LineInput, false);        // unmute
   codec.Mute(codec::Adau1361::HeadphoneOutput, false);  // unmute
-
-  //  printf("I2S Initialization.\n");
-  // I2S Initialization.
-  PIO i2s_pio = pio0;
-  uint i2s_sm = 0;
-  uint i2s_offset = pio_add_program(i2s_pio, &duplex_i2s_program);
-  duplex_i2s_program_init(i2s_pio, i2s_sm, i2s_offset, I2S_GPIO_PIN_BASE);
 
   //  printf("LED Initialization.\n");
   // Use RasPi Pico on-board LED.
@@ -81,20 +75,25 @@ int main() {
     index++;
   }
 
+  //  printf("I2S Initialization.\n");
+  // I2S Initialization.
+  PIO i2s_pio = pio0;
+  uint i2s_sm = 0;
+  uint i2s_offset = pio_add_program(i2s_pio, &duplex_i2s_program);
+  duplex_i2s_program_init(i2s_pio, i2s_sm, i2s_offset, I2S_GPIO_PIN_BASE);
+
   //  printf("Audio Transfering.\n");
   // Audio talk thorough
   while (true) {
 #if 0
-    int index = 0;
     for (auto &&sample : buf) {
       // Get Left/Right I2S samples from RX FIFO.
       int32_t left_sample = (int32_t)pio_sm_get_blocking(i2s_pio, i2s_sm);
       int32_t right_sample = (int32_t)pio_sm_get_blocking(i2s_pio, i2s_sm);
       // Put Left/Right I2S samples to TX FIFO.
-      pio_sm_put(i2s_pio, i2s_sm, buf[index]);
-      pio_sm_put(i2s_pio, i2s_sm, buf[index]);
-      index++;
-  }
+      pio_sm_put(i2s_pio, i2s_sm, sample);
+      pio_sm_put(i2s_pio, i2s_sm, sample);
+    }
 #else
     // Get Left/Right I2S samples from RX FIFO.
     int32_t left_sample = (int32_t)pio_sm_get_blocking(i2s_pio, i2s_sm);
