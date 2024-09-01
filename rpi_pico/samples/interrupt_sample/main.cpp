@@ -78,7 +78,11 @@ int main() {
     index++;
   }
 
-  sdk.sleep_ms(1000);
+#if 0
+  // Sleep to avoid the noise and L/R swap problem by background process.
+    sdk.sleep_ms(1000);
+#endif
+
   //  printf("I2S Initialization.\n");
   // I2S Initialization.
   PIO i2s_pio = pio0;
