@@ -23,6 +23,11 @@
 ; transfer. These sync loops guarantees the data integrity for 
 ; any timing of the program start.  
 ;
+; Pin mappings : 
+; - Out pin 0 : Signal Data out. 
+; - In pin 0 : Signal Data in. 
+; - In pin 1 : BCLK in.
+; - In pin 2 : WS. Configured as JMP pin. 
 
 .pio_version 0              ; only requires PIO version 0
 
@@ -38,13 +43,13 @@ sync1_loop:                 ; Loop to transfer left ch.
         wait 1 pin 1        ; Capture riging edge of BCLK(Sync to the Sampling edge of BCLK). 
         jmp pin sync0_loop  ; Exit loop if WS == 1
     jmp sync1_loop          ; repeat while WS == 0. 
-
-sync0_loop:                 ; We are fully sync with Right channel here.
+ 
+sync0_loop:                 ; We are fully sync with Right channel here. WS is 1 at here. 
         wait 0 pin 1        ; Capture falling edge of BCLK(Sync to the driving edge of BCLK). 
         wait 1 pin 1        ; Capture riging edge of BCLK(Sync to the Sampling edge of BCLK). 
     jmp pin sync0_loop      ; repeat while WS == 1.
-
-.wrap_target                ; Beginning of stereo data transfer.
+ 
+.wrap_target                ; Beginning of stereo data transfer. WS is 0 at here. 
                             ; Transfer Left ch
     pull noblock            ; We have OSR empty. Load left ch data. 
 
@@ -56,12 +61,12 @@ left_loop:                  ; Loop to transfer left ch.
         jmp pin left_exit   ; Exit loop if WS == 1
     jmp left_loop           ; repeat while WS == 0. 
 
-left_exit:                  ; Tearing off the shift registers. 
+left_exit:                  ; Tearing off the shift registers. WS is 1 at here. 
     push noblock            ; We have ISR full. Push ISR and ready for right data. 
 
                             ; Transfer right ch
     pull noblock            ; We have OSR empty. Load right ch data. 
-    
+
 right_loop:                 ; Loop to transfer right ch
         wait 0 pin 1        ; Capture falling edge of BCLK(Sync to the driving edge of BCLK). 
         out pins, 1         ; Output 1 bit to DAC. 

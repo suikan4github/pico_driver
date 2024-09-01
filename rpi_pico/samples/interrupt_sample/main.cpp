@@ -25,6 +25,7 @@ int main() {
    * 13 : WS
    */
   const unsigned int I2S_GPIO_PIN_BASE = 10;
+  const unsigned int I2S_GPIO_PIN_DEBUG = 15;
 
   ::pico_driver::SDKWrapper sdk;
 
@@ -62,6 +63,8 @@ int main() {
   const uint LED_PIN = PICO_DEFAULT_LED_PIN;
   sdk.gpio_init(LED_PIN);
   sdk.gpio_set_dir(LED_PIN, true);
+  sdk.gpio_init(I2S_GPIO_PIN_DEBUG);
+  sdk.gpio_set_dir(I2S_GPIO_PIN_DEBUG, true);
 
   //  printf("System clock is  %d Hz.\n", clock_get_hz(clk_sys));
   float div = (clock_get_hz(clk_sys) / (48'000'000));
@@ -75,6 +78,7 @@ int main() {
     index++;
   }
 
+  sdk.sleep_ms(1000);
   //  printf("I2S Initialization.\n");
   // I2S Initialization.
   PIO i2s_pio = pio0;
@@ -98,9 +102,11 @@ int main() {
     // Get Left/Right I2S samples from RX FIFO.
     int32_t left_sample = (int32_t)pio_sm_get_blocking(i2s_pio, i2s_sm);
     int32_t right_sample = (int32_t)pio_sm_get_blocking(i2s_pio, i2s_sm);
+    sdk.gpio_put(I2S_GPIO_PIN_DEBUG, true);
     // Put Left/Right I2S samples to TX FIFO.
     pio_sm_put(i2s_pio, i2s_sm, left_sample / 2);
     pio_sm_put(i2s_pio, i2s_sm, 0);
+    sdk.gpio_put(I2S_GPIO_PIN_DEBUG, false);
 #endif
   }
 }
