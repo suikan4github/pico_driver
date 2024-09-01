@@ -19,50 +19,58 @@
 ; falling edge of the WS is the last bit slot (00) of the previous 
 ; right channel. 
 ;
-; In the program below, we capture the falling edge of the WS as 
-; a begining of the left data, and skip the first bit slot. And then, 
-; start the left channel data transfer. 
+; In the program below, we have 3 sync loop before the actual data
+; transfer. These sync loops guarantees the data integrity for 
+; any timing of the program start.  
 ;
 
-.pio_version 0          ; only requires PIO version 0
+.pio_version 0              ; only requires PIO version 0
 
 .program duplex_i2s
-	wait 1 pin 2        ; Stay at 0 of WS (L ch). 
-	wait 0 pin 2        ; Capture falling edge of WS(Sync to the start of L ch). 
-	wait 0 pin 1        ; Stay at 0 of BCLK(first half of bit slot 00). 
-	wait 1 pin 1        ; Capture rising edge of BCLK( Sync to the second half of bit slot 00).
-        pull noblock        ; Pull next sample from FIFO to OSR
-.wrap_target                ; Begining of stereo data transfer.
+
+sync2_loop:                 ; Loop to transfer right ch
+        wait 0 pin 1        ; Capture falling edge of BCLK(Sync to the driving edge of BCLK). 
+        wait 1 pin 1        ; Capture riging edge of BCLK(Sync to the Sampling edge of BCLK). 
+    jmp pin sync2_loop      ; repeat while WS == 1.
+
+sync1_loop:                 ; Loop to transfer left ch. 
+        wait 0 pin 1        ; Capture falling edge of BCLK(Sync to the driving edge of BCLK). 
+        wait 1 pin 1        ; Capture riging edge of BCLK(Sync to the Sampling edge of BCLK). 
+        jmp pin sync0_loop  ; Exit loop if WS == 1
+    jmp sync1_loop          ; repeat while WS == 0. 
+
+sync0_loop:                 ; We are fully sync with Right channel here.
+        wait 0 pin 1        ; Capture falling edge of BCLK(Sync to the driving edge of BCLK). 
+        wait 1 pin 1        ; Capture riging edge of BCLK(Sync to the Sampling edge of BCLK). 
+    jmp pin sync0_loop      ; repeat while WS == 1.
+
+.wrap_target                ; Beginning of stereo data transfer.
                             ; Transfer Left ch
-	set x,30            ; Loop 31 times ( first 31bit transfer )
-left_loop:                  ; Loop here
-           wait 0 pin 1     ; Capture falling edge of BCLK(Sync to the first half of BCLK ). 
-           out pins, 1      ; Output 1 bit to DAC. 
-           wait 1 pin 1     ; Capture riging edge of BCLK(Sync to the Sampling edge of BCLK). 
-           in pins, 1       ; Input 1 bit from ADC.
-	jmp x-- left_loop   ; repeat until x == 0 with post decrement. 
-                            ; transfer last 1 bit
-        wait 0 pin 1        ; Capture falling edge of BCLK(Sync to the first half of BCLK ). 
+    pull noblock            ; We have OSR empty. Load left ch data. 
+
+left_loop:                  ; Loop to transfer left ch. 
+        wait 0 pin 1        ; Capture falling edge of BCLK(Sync to the driving edge of BCLK). 
         out pins, 1         ; Output 1 bit to DAC. 
-        pull noblock               ; Pull next sample from FIFO to OSR
         wait 1 pin 1        ; Capture riging edge of BCLK(Sync to the Sampling edge of BCLK). 
         in pins, 1          ; Input 1 bit from ADC.
-        push noblock               ; Push this sample from ISR to FIFO
-                            ; Transfer Right ch
-	set x,30            ; Loop 31 times ( first 31bit transfer )
-right_loop:                 ; Loop here
-           wait 0 pin 1     ; Capture falling edge of BCLK(Sync to the first half of BCLK ). 
-           out pins, 1      ; Output 1 bit to DAC. 
-           wait 1 pin 1     ; Capture riging edge of BCLK(Sync to the Sampling edge of BCLK). 
-           in pins, 1       ; Input 1 bit from ADC.
-	jmp x-- right_loop  ; repeat until x == 0 with post decrement. 
-                            ; transfer last 1 bit
-        wait 0 pin 1        ; Capture falling edge of BCLK(Sync to the first half of BCLK ). 
+        jmp pin left_exit   ; Exit loop if WS == 1
+    jmp left_loop           ; repeat while WS == 0. 
+
+left_exit:                  ; Tearing off the shift registers. 
+    push noblock            ; We have ISR full. Push ISR and ready for right data. 
+
+                            ; Transfer right ch
+    pull noblock            ; We have OSR empty. Load right ch data. 
+    
+right_loop:                 ; Loop to transfer right ch
+        wait 0 pin 1        ; Capture falling edge of BCLK(Sync to the driving edge of BCLK). 
         out pins, 1         ; Output 1 bit to DAC. 
-        pull noblock               ; Pull next sample from FIFO to OSR
         wait 1 pin 1        ; Capture riging edge of BCLK(Sync to the Sampling edge of BCLK). 
         in pins, 1          ; Input 1 bit from ADC.
-        push noblock               ; Push this sample from ISR to FIFO
+    jmp pin right_loop      ; repeat while WS == 1.
+
+                            ; Tearing off the shift register. 
+    push noblock            ; We have ISR full. Push ISR and ready for left data.
 .wrap
 
 ; This program takes 4 cycles for the second half of a bit slot. 

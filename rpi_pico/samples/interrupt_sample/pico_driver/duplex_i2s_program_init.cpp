@@ -56,7 +56,8 @@ void duplex_i2s_program_init(PIO pio, uint sm, uint offset, uint pin_sdout) {
   sdk.sm_config_set_in_pin_base(&config,
                                 pin_sdout + 1);  // PIN_SDIN.
   sdk.sm_config_set_in_pin_count(&config,
-                                 3);  // 3 pins for input.
+                                 3);              // 3 pins for input.
+  sm_config_set_jmp_pin(&config, pin_sdout + 3);  // WS
 
 // Set the PIO clock divider.
 // We need 48MHz clock for the duplex I2S PIO program ( Reed the comment
@@ -99,8 +100,15 @@ void duplex_i2s_program_init(PIO pio, uint sm, uint offset, uint pin_sdout) {
 
   // Placing dummy data in FIFO to avoid the underflow at first TX.
   // This must be done after calling pio_sm_init().
+  // We need 2 stereo samples.
+  // The first stereo sample is for the initial transfer. For this transfer,
+  // main program is waiting the received signal. So, we need to fill dummy.
+  // After the first data transfer, the main routine starts to process data.
+  // We need time for max 1 sample. Then, we need to fill another dummy.
   sdk.pio_sm_put(pio, sm, 0);  // Put left word for the first TX.
   sdk.pio_sm_put(pio, sm, 0);  // Put right word for the first TX.
+  sdk.pio_sm_put(pio, sm, 0);  // Put left word for the second TX.
+  sdk.pio_sm_put(pio, sm, 0);  // Put right word for the second TX.
 
   // Start the state machine.
   sdk.pio_sm_set_enabled(pio, sm, true);
