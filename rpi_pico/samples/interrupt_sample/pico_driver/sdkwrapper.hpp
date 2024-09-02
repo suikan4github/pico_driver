@@ -345,6 +345,16 @@ class SDKWrapper {
    * instruction
    */
   virtual void sm_config_set_jmp_pin(pio_sm_config *c, uint pin);
+
+  /**
+   * @brief Read a word of data from a state machine’s RX FIFO, blocking if the
+  FIFO is empty.
+   *
+   * @param pio The PIO instance; e.g. pio0 or pio1
+   * @param sm State machine index (0..3)
+   * @return uint32_t
+   */
+  virtual uint32_t pio_sm_get_blocking(PIO pio, uint sm);
 };
 
 #if __has_include(<gmock/gmock.h>)
@@ -391,6 +401,7 @@ class MockSDKWrapper : public SDKWrapper {
   MOCK_METHOD3(pio_sm_set_enabled, void(PIO pio, uint sm, bool enabled));
   MOCK_METHOD2(pio_add_program, int(PIO pio, const pio_program_t *program));
   MOCK_METHOD2(sm_config_set_jmp_pin, void(pio_sm_config *c, uint pin));
+  MOCK_METHOD2(pio_sm_get_blocking, uint32_t(PIO pio, uint sm));
 };
 #endif  // __has_include(<gmock/gmock.h>)
 };  // namespace pico_driver

@@ -1,4 +1,9 @@
 # test_SDKWrapper TDD
+- [x] Implement SDKWrapper::pio_sm_get_blocking(). 
+- [x] Create Test case pio_gpio_init.pio_sm_get_blocking() to fail. 
+- [x] Make it success. 
+- [x] Remove the duplication. 
+
 - [x] Implement SDKWrapper::pio_add_program(). 
 - [x] Create Test case pio_gpio_init.duplex_i2s_program_init() to fail. 
 - [x] Make it success. 

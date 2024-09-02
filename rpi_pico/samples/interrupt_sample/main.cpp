@@ -104,7 +104,7 @@ int main() {
     }
 #else
     // Get Left/Right I2S samples from RX FIFO.
-    int32_t left_sample = (int32_t)pio_sm_get_blocking(i2s_pio, i2s_sm);
+    int32_t left_sample = (int32_t)sdk.pio_sm_get_blocking(i2s_pio, i2s_sm);
     int32_t right_sample = (int32_t)pio_sm_get_blocking(i2s_pio, i2s_sm);
     sdk.gpio_put(I2S_GPIO_PIN_DEBUG, true);
     // Put Left/Right I2S samples to TX FIFO.

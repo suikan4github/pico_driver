@@ -93,6 +93,10 @@ void pico_driver::SDKWrapper::sm_config_set_jmp_pin(pio_sm_config* c,
   ::sm_config_set_jmp_pin(c, pin);
 }
 
+uint32_t pico_driver::SDKWrapper::pio_sm_get_blocking(PIO pio, uint sm) {
+  return ::pio_sm_get_blocking(pio, sm);
+}
+
 int pico_driver::SDKWrapper::pio_sm_set_consecutive_pindirs(PIO pio, uint sm,
                                                             uint pins_base,
                                                             uint pin_count,

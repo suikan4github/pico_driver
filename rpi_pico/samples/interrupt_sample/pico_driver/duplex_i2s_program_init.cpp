@@ -56,8 +56,8 @@ void duplex_i2s_program_init(PIO pio, uint sm, uint offset, uint pin_sdout) {
   sdk.sm_config_set_in_pin_base(&config,
                                 pin_sdout + 1);  // PIN_SDIN.
   sdk.sm_config_set_in_pin_count(&config,
-                                 2);              // 2 pins for input.
-  sm_config_set_jmp_pin(&config, pin_sdout + 3);  // WS
+                                 2);                  // 2 pins for input.
+  sdk.sm_config_set_jmp_pin(&config, pin_sdout + 3);  // WS
 
 // Set the PIO clock divider.
 // We need 96kHz stereo 32bit transfer. So the BCLCK is 96'000*2*32Hz.
