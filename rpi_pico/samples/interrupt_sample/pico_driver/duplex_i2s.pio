@@ -104,4 +104,4 @@ right_loop:                 ; Loop to transfer right ch
 ; we need 10 cycle. 
 ;
 ; For the 96kHz I2S stereo ( 32bit word), the BCLK is 6MHz. As a result, 
-; we need 60MHz for PIO clock. 
+; we need abut 60MHz (96kHz * 2 * 32 *10) for PIO clock. 

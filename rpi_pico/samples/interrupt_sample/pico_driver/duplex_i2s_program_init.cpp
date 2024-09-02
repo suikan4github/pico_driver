@@ -19,7 +19,7 @@
  * @li SDOUT as output (DAC)
  * @li SDIN as input (ADC)
  * @li BCLK as input
- * @li WS as input
+ * @li WS as JMP pin
  *
  * For example, assume the pin_sdout parameter is 5 (GPIO PIN 5). In this case
  * the SDOUT, SDIN, BCLK, and WS must be GPIO PIN 5, 6, 7 and 8, respectively.
@@ -30,11 +30,11 @@ void duplex_i2s_program_init(PIO pio, uint sm, uint offset, uint pin_sdout) {
 
   // PIO configuration. Set SDOUT as output. Set SDIN, BCLK and WS as input.
   sdk.pio_sm_set_consecutive_pindirs(pio, sm,
-                                     pin_sdout,  // PIN_SDOUT
+                                     pin_sdout,  // BASE GPIO pin number.
                                      1,          // 1 pin for output.
                                      true);      // true for output.
   sdk.pio_sm_set_consecutive_pindirs(pio, sm,
-                                     pin_sdout + 1,  // PIN_SDIN.
+                                     pin_sdout + 1,  // BASE GPIO pin number.
                                      3,              // 3 pins for input.
                                      false);         // false for input.
 
@@ -56,15 +56,17 @@ void duplex_i2s_program_init(PIO pio, uint sm, uint offset, uint pin_sdout) {
   sdk.sm_config_set_in_pin_base(&config,
                                 pin_sdout + 1);  // PIN_SDIN.
   sdk.sm_config_set_in_pin_count(&config,
-                                 3);              // 3 pins for input.
+                                 2);              // 2 pins for input.
   sm_config_set_jmp_pin(&config, pin_sdout + 3);  // WS
 
 // Set the PIO clock divider.
-// We need 48MHz clock for the duplex I2S PIO program ( Reed the comment
-// above ). To avoid the jitter, we calculate the division factor in
+// We need 96kHz stereo 32bit transfer. So the BCLCK is 96'000*2*32Hz.
+// The  clock for the duplex I2S PIO program must be 10 times or grather
+// ( See the comment in the duplex_i2s.pio ).
+// To avoid the jitter, we calculate the division factor in
 // integer.
-#if 0
-  float div = (sdk.clock_get_hz(clk_sys) / (48'000'000));
+#if 1
+  float div = (sdk.clock_get_hz(clk_sys) / (96'000 * 2 * 32 * 10));
 #else
   float div = 1;
 #endif

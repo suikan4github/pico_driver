@@ -16,7 +16,7 @@ int main() {
   const unsigned int i2c_scl_pin = 7;
   const unsigned int i2c_sda_pin = 6;
   const unsigned int mclock = 12'000'000;  // Hz
-  const unsigned int fs = 48'000;          // Hz
+  const unsigned int fs = 96'000;          // Hz
 
   /*
    * 10 : SDOUT
@@ -109,7 +109,7 @@ int main() {
     sdk.gpio_put(I2S_GPIO_PIN_DEBUG, true);
     // Put Left/Right I2S samples to TX FIFO.
     pio_sm_put(i2s_pio, i2s_sm, left_sample / 2);
-    pio_sm_put(i2s_pio, i2s_sm, 0);
+    pio_sm_put(i2s_pio, i2s_sm, right_sample / 2);
     sdk.gpio_put(I2S_GPIO_PIN_DEBUG, false);
 #endif
   }
