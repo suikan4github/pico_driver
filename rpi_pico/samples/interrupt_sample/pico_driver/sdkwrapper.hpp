@@ -16,6 +16,7 @@ typedef unsigned uint;
 typedef unsigned int PIO;
 typedef unsigned int pio_sm_config;
 typedef unsigned int clock_handle_t;
+typedef unsigned int pio_program_t;
 #include <stdint.h>
 #include <stdlib.h>
 #endif
@@ -324,6 +325,16 @@ class SDKWrapper {
    * @param enabled true to enable the state machine; false to disable
    */
   virtual void pio_sm_set_enabled(PIO pio, uint sm, bool enabled);
+  /**
+   * @brief  Attempt to load the program.
+   *
+   * @param pio The PIO instance; e.g. pio0 or pio1.
+   * @param program the program definition
+   * @return int. The instruction memory offset the program is loaded at, or
+   * negative for error (for backwards compatibility with prior SDK the error
+   * value is -1 i.e. PICO_ERROR_GENERIC)
+   */
+  virtual int pio_add_program(PIO pio, const pio_program_t *program);
 };
 
 #if __has_include(<gmock/gmock.h>)
@@ -368,6 +379,7 @@ class MockSDKWrapper : public SDKWrapper {
                                 const pio_sm_config *config));
   MOCK_METHOD3(pio_sm_put, void(PIO pio, uint sm, uint32_t data));
   MOCK_METHOD3(pio_sm_set_enabled, void(PIO pio, uint sm, bool enabled));
+  MOCK_METHOD2(pio_add_program, int(PIO pio, const pio_program_t *program));
 };
 #endif  // __has_include(<gmock/gmock.h>)
 };  // namespace pico_driver

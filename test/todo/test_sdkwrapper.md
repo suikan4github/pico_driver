@@ -1,4 +1,14 @@
 # test_SDKWrapper TDD
+- [x] Implement SDKWrapper::pio_add_program(). 
+- [x] Create Test case pio_gpio_init.duplex_i2s_program_init() to fail. 
+- [x] Make it success. 
+- [x] Remove the duplication. 
+
+- [] Implement SDKWrapper::sm_config_set_jmp_pin(). 
+- [] Create Test case pio_gpio_init.sm_config_set_jmp_pin() to fail. 
+- [] Make it success. 
+- [] Remove the duplication. 
+
 - [x] Implement SDKWrapper::pio_sm_set_enabled(). 
 - [x] Create Test case pio_gpio_init.pio_sm_set_enabled() to fail. 
 - [x] Make it success. 
