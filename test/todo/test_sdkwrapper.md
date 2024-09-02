@@ -4,10 +4,10 @@
 - [x] Make it success. 
 - [x] Remove the duplication. 
 
-- [] Implement SDKWrapper::pio_sm_unclaim(). 
-- [] Create Test ccase SDKWrapper.pio_sm_unclaim() to fail. 
-- [] Make it success. 
-- [] Remove the duplication. 
+- [x] Implement SDKWrapper::pio_sm_unclaim(). 
+- [x] Create Test ccase SDKWrapper.pio_sm_unclaim() to fail. 
+- [x] Make it success. 
+- [x] Remove the duplication. 
 
 - [] Implement SDKWrapper::pio_claim_unused_sm(). 
 - [] Create Test ccase SDKWrapper.pio_claim_unused_sm() to fail. 

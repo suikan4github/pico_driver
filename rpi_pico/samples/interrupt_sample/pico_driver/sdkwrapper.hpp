@@ -374,7 +374,7 @@ class SDKWrapper {
    * @param sm State machine index (0..3).
    */
 
-  // virtual void pio_sm_unclaim(PIO pio, uint sm);
+  virtual void pio_sm_unclaim(PIO pio, uint sm);
 
   /**
    * @brief Claim a free state machine on a PIO instance.
@@ -435,6 +435,7 @@ class MockSDKWrapper : public SDKWrapper {
   MOCK_METHOD2(sm_config_set_jmp_pin, void(pio_sm_config *c, uint pin));
   MOCK_METHOD2(pio_sm_get_blocking, uint32_t(PIO pio, uint sm));
   MOCK_METHOD2(pio_sm_claim, void(PIO pio, uint sm));
+  MOCK_METHOD2(pio_sm_unclaim, void(PIO pio, uint sm));
 };
 #endif  // __has_include(<gmock/gmock.h>)
 };  // namespace pico_driver

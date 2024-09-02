@@ -54,6 +54,7 @@ FAKE_VALUE_FUNC(int, pio_add_program, PIO, const pio_program_t *);
 FAKE_VOID_FUNC(sm_config_set_jmp_pin, pio_sm_config *, uint);
 FAKE_VALUE_FUNC(uint32_t, pio_sm_get_blocking, PIO, uint);
 FAKE_VOID_FUNC(pio_sm_claim, PIO, uint);
+FAKE_VOID_FUNC(pio_sm_unclaim, PIO, uint);
 // The cpp file of the library to test.
 #include "../rpi_pico/samples/interrupt_sample/pico_driver/sdkwrapper.cpp"
 
@@ -77,6 +78,9 @@ TEST(PicoWrapper, stdio_init_all) {
 
   // Check the data from test spy. : Parameters.
   ASSERT_EQ(pico.stdio_init_all(), myReturnVals[1]);
+
+  RESET_FAKE(stdio_init_all);
+
 }  // stdio_init_all
 
 TEST(PicoWrapper, sleep_ms) {
@@ -102,6 +106,8 @@ TEST(PicoWrapper, sleep_ms) {
     ASSERT_EQ(sleep_ms_fake.arg0_history[index], ms);
     index++;
   }
+
+  RESET_FAKE(sleep_ms);
 }
 
 TEST(PicoWrapper, gpio_init) {
@@ -127,6 +133,8 @@ TEST(PicoWrapper, gpio_init) {
     ASSERT_EQ(gpio_init_fake.arg0_history[index], gpio);
     index++;
   }
+
+  RESET_FAKE(gpio_init);
 }
 
 TEST(PicoWrapper, gpio_set_function) {
@@ -159,6 +167,9 @@ TEST(PicoWrapper, gpio_set_function) {
       index++;
     }
   }
+
+  RESET_FAKE(gpio_set_function);
+
 }  // gpio_set_function
 
 TEST(PicoWrapper, gpio_set_dir) {
@@ -191,6 +202,8 @@ TEST(PicoWrapper, gpio_set_dir) {
       index++;
     }
   }
+
+  RESET_FAKE(gpio_set_dir);
 }
 
 TEST(PicoWrapper, gpio_put) {
@@ -224,6 +237,8 @@ TEST(PicoWrapper, gpio_put) {
       index++;
     }
   }
+
+  RESET_FAKE(gpio_put);
 }
 
 TEST(PicoWrapper, gpio_get) {
@@ -248,6 +263,8 @@ TEST(PicoWrapper, gpio_get) {
 
   // Check the data from test spy. : Parameters.
   ASSERT_EQ(pico.gpio_get(gpio), myReturnVals[1]);
+
+  RESET_FAKE(gpio_get);
 }
 
 TEST(PicoWrapper, gpio_pull_up) {
@@ -255,7 +272,7 @@ TEST(PicoWrapper, gpio_pull_up) {
   uint gpio = 17;
 
   FFF_RESET_HISTORY();
-  RESET_FAKE(gpio_init);
+  RESET_FAKE(gpio_pull_up);
 
   pico.gpio_pull_up(gpio);
 
@@ -277,6 +294,8 @@ TEST(PicoWrapper, gpio_pull_up) {
 
   // Check the data from test spy. : Parameters.
   ASSERT_EQ(gpio_pull_up_fake.arg0_history[0], gpio);
+
+  RESET_FAKE(gpio_pull_up);
 }
 
 // FAKE_VALUE_FUNC(uint, i2c_init, i2c_inst_t *, uint);
@@ -307,6 +326,8 @@ TEST(PicoWrapper, i2c_init) {
   ASSERT_EQ(i2c_init_fake.arg1_history[0], baud[0]);
   ASSERT_EQ(i2c_init_fake.arg0_history[1], &i2c);
   ASSERT_EQ(i2c_init_fake.arg1_history[1], baud[1]);
+
+  RESET_FAKE(i2c_init);
 }
 
 // FAKE_VOID_FUNC(i2c_deinit, i2c_inst_t *);
@@ -329,6 +350,8 @@ TEST(PicoWrapper, i2c_deinit) {
 
   // Check the data from test spy. : Parameters.
   ASSERT_EQ(i2c_deinit_fake.arg0_history[0], &i2c);
+
+  RESET_FAKE(i2c_deinit);
 }
 
 // FAKE_VALUE_FUNC(int, i2c_read_blocking, i2c_inst_t *, uint8_t, uint8_t *,
@@ -382,6 +405,8 @@ TEST(PicoWrapper, i2c_read_blocking) {
       }
     }
   }
+
+  RESET_FAKE(i2c_read_blocking);
 }
 
 // FAKE_VALUE_FUNC(int, i2c_write_blocking, i2c_inst_t *, uint8_t,
@@ -435,6 +460,8 @@ TEST(PicoWrapper, i2c_write_blocking) {
       }
     }
   }
+
+  RESET_FAKE(i2c_write_blocking);
 }
 
 TEST(PicoWrapper, pio_sm_set_consecutive_pindirs) {
@@ -493,6 +520,8 @@ TEST(PicoWrapper, pio_sm_set_consecutive_pindirs) {
                       is_out);
             index++;
           }
+
+  RESET_FAKE(pio_sm_set_consecutive_pindirs);
 }  // TEST(PicoWrapper, pio_sm_set_consecutive_pindirs)
 
 TEST(PicoWrapper, pio_gpio_init) {
@@ -522,6 +551,8 @@ TEST(PicoWrapper, pio_gpio_init) {
       ASSERT_EQ(pio_gpio_init_fake.arg1_history[index], pin);
       index++;
     }
+
+  RESET_FAKE(pio_gpio_init);
 }  // TEST(PicoWrapper, pio_gpio_init)
 
 TEST(PicoWrapper, sm_config_set_out_pins) {
@@ -554,6 +585,8 @@ TEST(PicoWrapper, sm_config_set_out_pins) {
       ASSERT_EQ(sm_config_set_out_pins_fake.arg2_history[index], length);
       index++;
     }
+
+  RESET_FAKE(sm_config_set_out_pins);
 }  // TEST(PicoWrapper, sm_config_set_out_pins)
 
 TEST(PicoWrapper, sm_config_set_in_pin_base) {
@@ -581,6 +614,8 @@ TEST(PicoWrapper, sm_config_set_in_pin_base) {
     ASSERT_EQ(sm_config_set_in_pin_base_fake.arg1_history[index], base);
     index++;
   }
+
+  RESET_FAKE(sm_config_set_in_pin_base);
 }  // TEST(PicoWrapper, sm_config_set_in_pin_base)
 
 TEST(PicoWrapper, sm_config_set_in_pin_count) {
@@ -609,6 +644,8 @@ TEST(PicoWrapper, sm_config_set_in_pin_count) {
     ASSERT_EQ(sm_config_set_in_pin_count_fake.arg1_history[index], count);
     index++;
   }
+
+  RESET_FAKE(sm_config_set_in_pin_base);
 }  // TEST(PicoWrapper, sm_config_set_in_pin_count)
 
 TEST(PicoWrapper, clock_get_hz) {
@@ -643,6 +680,8 @@ TEST(PicoWrapper, clock_get_hz) {
     ASSERT_EQ(clock_get_hz_fake.arg0_history[index], clock_handle);
     index++;
   }
+
+  RESET_FAKE(clock_get_hz);
 }  // TEST(PicoWrapper, clock_get_hz)
 
 TEST(PicoWrapper, sm_config_set_clkdiv) {
@@ -670,6 +709,8 @@ TEST(PicoWrapper, sm_config_set_clkdiv) {
     ASSERT_EQ(sm_config_set_clkdiv_fake.arg1_history[index], div);
     index++;
   }
+
+  RESET_FAKE(sm_config_set_clkdiv);
 }  // TEST(PicoWrapper, sm_config_set_clkdiv)
 
 TEST(PicoWrapper, sm_config_set_in_shift) {
@@ -709,6 +750,8 @@ TEST(PicoWrapper, sm_config_set_in_shift) {
                   push_threshold);
         index++;
       }
+
+  RESET_FAKE(sm_config_set_in_shift);
 }  // TEST(PicoWrapper, sm_config_set_in_shift)
 
 TEST(PicoWrapper, sm_config_set_out_shift) {
@@ -749,6 +792,8 @@ TEST(PicoWrapper, sm_config_set_out_shift) {
                   push_threshold);
         index++;
       }
+
+  RESET_FAKE(sm_config_set_out_shift);
 }  // TEST(PicoWrapper, sm_config_set_out_shift)
 
 TEST(PicoWrapper, pio_sm_init) {
@@ -794,6 +839,8 @@ TEST(PicoWrapper, pio_sm_init) {
         ASSERT_EQ(pio_sm_init_fake.arg3_history[index], &config);
         index++;
       }
+
+  RESET_FAKE(pio_sm_init);
 }  // TEST(PicoWrapper, pio_sm_init)
 
 TEST(PicoWrapper, pio_sm_put) {
@@ -829,6 +876,8 @@ TEST(PicoWrapper, pio_sm_put) {
         ASSERT_EQ(pio_sm_put_fake.arg2_history[index], data);
         index++;
       }
+
+  RESET_FAKE(pio_sm_put);
 }  // TEST(PicoWrapper, pio_sm_put)
 
 TEST(PicoWrapper, pio_sm_set_enabled) {
@@ -865,6 +914,8 @@ TEST(PicoWrapper, pio_sm_set_enabled) {
         ASSERT_EQ(pio_sm_set_enabled_fake.arg2_history[index], enabled);
         index++;
       }
+
+  RESET_FAKE(pio_sm_set_enabled);
 }  // TEST(PicoWrapper, pio_sm_set_enabled)
 
 TEST(PicoWrapper, pio_add_program) {
@@ -902,6 +953,8 @@ TEST(PicoWrapper, pio_add_program) {
     ASSERT_EQ(pio_add_program_fake.arg1_history[index], &dummy_program);
     index++;
   }
+
+  RESET_FAKE(pio_add_program);
 }  // TEST(PicoWrapper, pio_add_program)
 
 TEST(PicoWrapper, sm_config_set_jmp_pin) {
@@ -929,6 +982,8 @@ TEST(PicoWrapper, sm_config_set_jmp_pin) {
     ASSERT_EQ(sm_config_set_jmp_pin_fake.arg1_history[index], pin);
     index++;
   }
+
+  RESET_FAKE(sm_config_set_jmp_pin);
 }  // TEST(PicoWrapper, sm_config_set_jmp_pin)
 
 TEST(PicoWrapper, pio_sm_get_blocking) {
@@ -968,6 +1023,8 @@ TEST(PicoWrapper, pio_sm_get_blocking) {
       ASSERT_EQ(pio_sm_get_blocking_fake.arg1_history[index], sm);
       index++;
     }
+
+  RESET_FAKE(pio_sm_get_blocking);
 }  // TEST(PicoWrapper, pio_sm_get_blocking)
 
 TEST(PicoWrapper, pio_sm_claim) {
@@ -999,4 +1056,41 @@ TEST(PicoWrapper, pio_sm_claim) {
       ASSERT_EQ(pio_sm_claim_fake.arg1_history[index], sm);
       index++;
     }
+
+  RESET_FAKE(pio_sm_claim);
+
 }  // TEST(PicoWrapper, pio_sm_claim)
+
+TEST(PicoWrapper, pio_sm_unclaim) {
+  std::random_device rng;
+  ::pico_driver::SDKWrapper pico;
+  pio_sm_config config;
+
+  PIO pio_array[] = {rng(), rng()};
+  uint sm_array[] = {rng(), rng()};
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(pio_sm_unclaim);
+
+  // Trial call.
+  for (auto &&pio : pio_array)
+    for (auto &&sm : sm_array) pico.pio_sm_unclaim(pio, sm);
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(pio_sm_unclaim_fake.call_count, 4);
+
+  // Check wether parameters are passed collectly.
+  int index = 0;
+  for (auto &&pio : pio_array)
+    for (auto &&sm : sm_array) {
+      // Check the data from test spy. Call order.
+      ASSERT_EQ(fff.call_history[index], (void *)pio_sm_unclaim);
+      // Check the data from test spy. : Parameters.
+      ASSERT_EQ(pio_sm_unclaim_fake.arg0_history[index], pio);
+      ASSERT_EQ(pio_sm_unclaim_fake.arg1_history[index], sm);
+      index++;
+    }
+
+  RESET_FAKE(pio_sm_unclaim);
+
+}  // TEST(PicoWrapper, pio_sm_unclaim)
