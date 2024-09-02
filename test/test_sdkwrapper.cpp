@@ -6,6 +6,8 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
+#include <random>
+
 #include "fff.h"
 
 // Include for test
@@ -49,6 +51,7 @@ FAKE_VALUE_FUNC(int, pio_sm_init, PIO, uint, uint, const pio_sm_config *);
 FAKE_VOID_FUNC(pio_sm_put, PIO, uint, uint32_t);
 FAKE_VOID_FUNC(pio_sm_set_enabled, PIO, uint, bool);
 FAKE_VALUE_FUNC(int, pio_add_program, PIO, const pio_program_t *);
+FAKE_VOID_FUNC(sm_config_set_jmp_pin, pio_sm_config *, uint)
 
 // The cpp file of the library to test.
 #include "../rpi_pico/samples/interrupt_sample/pico_driver/sdkwrapper.cpp"
@@ -76,8 +79,9 @@ TEST(PicoWrapper, stdio_init_all) {
 }  // stdio_init_all
 
 TEST(PicoWrapper, sleep_ms) {
+  std::random_device rng;
   ::pico_driver::SDKWrapper pico;
-  uint ms_array[] = {17, 11};
+  uint ms_array[] = {rng(), rng()};
 
   FFF_RESET_HISTORY();
   RESET_FAKE(sleep_ms);
@@ -100,8 +104,9 @@ TEST(PicoWrapper, sleep_ms) {
 }
 
 TEST(PicoWrapper, gpio_init) {
+  std::random_device rng;
   ::pico_driver::SDKWrapper pico;
-  uint gpioarray[] = {17, 11};
+  uint gpioarray[] = {rng(), rng()};
 
   FFF_RESET_HISTORY();
   RESET_FAKE(gpio_init);
@@ -124,9 +129,10 @@ TEST(PicoWrapper, gpio_init) {
 }
 
 TEST(PicoWrapper, gpio_set_function) {
+  std::random_device rng;
   ::pico_driver::SDKWrapper pico;
-  uint gpioarray[] = {17, 11};
-  int functionarray[] = {7, 13};
+  uint gpioarray[] = {rng(), rng()};
+  int functionarray[] = {static_cast<int>(rng()), static_cast<int>(rng())};
 
   FFF_RESET_HISTORY();
   RESET_FAKE(gpio_set_function);
@@ -155,8 +161,9 @@ TEST(PicoWrapper, gpio_set_function) {
 }  // gpio_set_function
 
 TEST(PicoWrapper, gpio_set_dir) {
+  std::random_device rng;
   ::pico_driver::SDKWrapper pico;
-  uint gpioarray[] = {17, 11};
+  uint gpioarray[] = {rng(), rng()};
   bool dirarray[] = {true, false};
 
   FFF_RESET_HISTORY();
@@ -186,8 +193,9 @@ TEST(PicoWrapper, gpio_set_dir) {
 }
 
 TEST(PicoWrapper, gpio_put) {
+  std::random_device rng;
   ::pico_driver::SDKWrapper pico;
-  uint gpioarray[] = {17, 11};
+  uint gpioarray[] = {rng(), rng()};
   bool valuearray[] = {true, false};
 
   FFF_RESET_HISTORY();
@@ -272,14 +280,15 @@ TEST(PicoWrapper, gpio_pull_up) {
 
 // FAKE_VALUE_FUNC(uint, i2c_init, i2c_inst_t *, uint);
 TEST(PicoWrapper, i2c_init) {
+  std::random_device rng;
   ::pico_driver::SDKWrapper pico;
   i2c_inst_t i2c = 17;
-  const uint baud[] = {3, 100000};
+  const uint baud[] = {rng(), rng()};
 
   FFF_RESET_HISTORY();
   RESET_FAKE(i2c_init);
 
-  uint myReturnVals[] = {1, 2};
+  uint myReturnVals[] = {rng(), rng()};
   SET_RETURN_SEQ(i2c_init, myReturnVals, sizeof(myReturnVals) / sizeof(bool));
 
   ASSERT_EQ(pico.i2c_init(&i2c, baud[0]), myReturnVals[0]);
@@ -301,9 +310,10 @@ TEST(PicoWrapper, i2c_init) {
 
 // FAKE_VOID_FUNC(i2c_deinit, i2c_inst_t *);
 TEST(PicoWrapper, i2c_deinit) {
+  std::random_device rng;
   ::pico_driver::SDKWrapper pico;
   i2c_inst_t i2c = 17;
-  const uint baud[] = {3, 100000};
+  const uint baud[] = {rng(), rng()};
 
   FFF_RESET_HISTORY();
   RESET_FAKE(i2c_deinit);
@@ -323,11 +333,13 @@ TEST(PicoWrapper, i2c_deinit) {
 // FAKE_VALUE_FUNC(int, i2c_read_blocking, i2c_inst_t *, uint8_t, uint8_t *,
 //                  size_t, bool);
 TEST(PicoWrapper, i2c_read_blocking) {
+  std::random_device rng;
   ::pico_driver::SDKWrapper pico;
   i2c_inst_t i2c = 17;
   uint8_t buf[10];
-  uint8_t addrs_array[] = {3, 5};
-  size_t bufsize_array[2] = {2, 7};
+  uint8_t addrs_array[] = {static_cast<uint8_t>(rng()),
+                           static_cast<uint8_t>(rng())};
+  size_t bufsize_array[2] = {rng(), rng()};
   bool nostop_array[2] = {true, false};
   int myReturnVals_array[8] = {1, 2, 3, 4, 5, 6, 7, 8};
 
@@ -374,11 +386,13 @@ TEST(PicoWrapper, i2c_read_blocking) {
 // FAKE_VALUE_FUNC(int, i2c_write_blocking, i2c_inst_t *, uint8_t,
 // const uint8_t *,  size_t, bool);
 TEST(PicoWrapper, i2c_write_blocking) {
+  std::random_device rng;
   ::pico_driver::SDKWrapper pico;
   i2c_inst_t i2c = 17;
   uint8_t buf[10];
-  uint8_t addrs_array[] = {3, 5};
-  size_t bufsize_array[2] = {2, 7};
+  uint8_t addrs_array[] = {static_cast<uint8_t>(rng()),
+                           static_cast<uint8_t>(rng())};
+  size_t bufsize_array[2] = {rng(), rng()};
   bool nostop_array[2] = {true, false};
   int myReturnVals_array[8] = {1, 2, 3, 4, 5, 6, 7, 8};
 
@@ -423,11 +437,12 @@ TEST(PicoWrapper, i2c_write_blocking) {
 }
 
 TEST(PicoWrapper, pio_sm_set_consecutive_pindirs) {
+  std::random_device rng;
   ::pico_driver::SDKWrapper pico;
-  PIO pio_array[] = {11, 13};
-  uint sm_array[] = {17, 23};
-  uint pins_base_array[] = {3, 5};
-  uint pin_count_array[] = {2, 7};
+  PIO pio_array[] = {rng(), rng()};
+  uint sm_array[] = {rng(), rng()};
+  uint pins_base_array[] = {rng(), rng()};
+  uint pin_count_array[] = {rng(), rng()};
   bool is_out_array[2] = {true, false};
   int myReturnVals_array[32] = {1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8,
                                 1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8};
@@ -480,9 +495,10 @@ TEST(PicoWrapper, pio_sm_set_consecutive_pindirs) {
 }  // TEST(PicoWrapper, pio_sm_set_consecutive_pindirs)
 
 TEST(PicoWrapper, pio_gpio_init) {
+  std::random_device rng;
   ::pico_driver::SDKWrapper pico;
-  PIO pio_array[] = {11, 13};
-  uint pin_array[] = {3, 5};
+  PIO pio_array[] = {rng(), rng()};
+  uint pin_array[] = {rng(), rng()};
 
   FFF_RESET_HISTORY();
   RESET_FAKE(pio_gpio_init);
@@ -508,9 +524,10 @@ TEST(PicoWrapper, pio_gpio_init) {
 }  // TEST(PicoWrapper, pio_gpio_init)
 
 TEST(PicoWrapper, sm_config_set_out_pins) {
+  std::random_device rng;
   ::pico_driver::SDKWrapper pico;
-  PIO pio_array[] = {11, 13};
-  uint length_array[] = {3, 5};
+  PIO pio_array[] = {rng(), rng()};
+  uint length_array[] = {rng(), rng()};
   pio_sm_config config;
 
   FFF_RESET_HISTORY();
@@ -539,8 +556,9 @@ TEST(PicoWrapper, sm_config_set_out_pins) {
 }  // TEST(PicoWrapper, sm_config_set_out_pins)
 
 TEST(PicoWrapper, sm_config_set_in_pin_base) {
+  std::random_device rng;
   ::pico_driver::SDKWrapper pico;
-  uint base_array[] = {11, 13};
+  uint base_array[] = {rng(), rng()};
   pio_sm_config config;
 
   FFF_RESET_HISTORY();
@@ -565,8 +583,9 @@ TEST(PicoWrapper, sm_config_set_in_pin_base) {
 }  // TEST(PicoWrapper, sm_config_set_in_pin_base)
 
 TEST(PicoWrapper, sm_config_set_in_pin_count) {
+  std::random_device rng;
   ::pico_driver::SDKWrapper pico;
-  PIO count_array[] = {11, 13};
+  PIO count_array[] = {rng(), rng()};
   pio_sm_config config;
 
   FFF_RESET_HISTORY();
@@ -592,9 +611,10 @@ TEST(PicoWrapper, sm_config_set_in_pin_count) {
 }  // TEST(PicoWrapper, sm_config_set_in_pin_count)
 
 TEST(PicoWrapper, clock_get_hz) {
+  std::random_device rng;
   ::pico_driver::SDKWrapper pico;
-  clock_handle_t clock_handle_array[] = {11, 13};
-  uint32_t myReturnVals_array[] = {1, 2};
+  clock_handle_t clock_handle_array[] = {rng(), rng()};
+  uint32_t myReturnVals_array[] = {rng(), rng()};
 
   FFF_RESET_HISTORY();
   RESET_FAKE(clock_get_hz);
@@ -625,8 +645,9 @@ TEST(PicoWrapper, clock_get_hz) {
 }  // TEST(PicoWrapper, clock_get_hz)
 
 TEST(PicoWrapper, sm_config_set_clkdiv) {
+  std::random_device rng;
   ::pico_driver::SDKWrapper pico;
-  float div_array[] = {11.0, 13.0};
+  float div_array[] = {static_cast<float>(rng()), static_cast<float>(rng())};
   pio_sm_config config;
 
   FFF_RESET_HISTORY();
@@ -651,12 +672,13 @@ TEST(PicoWrapper, sm_config_set_clkdiv) {
 }  // TEST(PicoWrapper, sm_config_set_clkdiv)
 
 TEST(PicoWrapper, sm_config_set_in_shift) {
+  std::random_device rng;
   ::pico_driver::SDKWrapper pico;
   pio_sm_config config;
 
   bool shift_right_array[] = {true, false};
   bool autopush_array[] = {true, false};
-  uint push_threshold_array[] = {3, 5};
+  uint push_threshold_array[] = {rng(), rng()};
 
   FFF_RESET_HISTORY();
   RESET_FAKE(sm_config_set_in_shift);
@@ -689,12 +711,13 @@ TEST(PicoWrapper, sm_config_set_in_shift) {
 }  // TEST(PicoWrapper, sm_config_set_in_shift)
 
 TEST(PicoWrapper, sm_config_set_out_shift) {
+  std::random_device rng;
   ::pico_driver::SDKWrapper pico;
   pio_sm_config config;
 
   bool shift_right_array[] = {false, true};
   bool autopull_array[] = {false, true};
-  uint push_threshold_array[] = {5, 3};
+  uint push_threshold_array[] = {rng(), rng()};
 
   FFF_RESET_HISTORY();
   RESET_FAKE(sm_config_set_out_shift);
@@ -728,12 +751,13 @@ TEST(PicoWrapper, sm_config_set_out_shift) {
 }  // TEST(PicoWrapper, sm_config_set_out_shift)
 
 TEST(PicoWrapper, pio_sm_init) {
+  std::random_device rng;
   ::pico_driver::SDKWrapper pico;
   pio_sm_config config;
 
-  PIO pio_array[] = {11, 13};
-  uint sm_array[] = {17, 23};
-  uint initial_pc_array[] = {3, 5};
+  PIO pio_array[] = {rng(), rng()};
+  uint sm_array[] = {rng(), rng()};
+  uint initial_pc_array[] = {rng(), rng()};
   int myReturnVals_array[32] = {1, 2, 3, 4, 5, 6, 7, 8};
 
   FFF_RESET_HISTORY();
@@ -772,11 +796,12 @@ TEST(PicoWrapper, pio_sm_init) {
 }  // TEST(PicoWrapper, pio_sm_init)
 
 TEST(PicoWrapper, pio_sm_put) {
+  std::random_device rng;
   ::pico_driver::SDKWrapper pico;
   pio_sm_config config;
 
-  PIO pio_array[] = {1, 3};
-  uint sm_array[] = {5, 7};
+  PIO pio_array[] = {rng(), rng()};
+  uint sm_array[] = {rng(), rng()};
   uint32_t data_array[] = {11, 13};
 
   FFF_RESET_HISTORY();
@@ -806,11 +831,12 @@ TEST(PicoWrapper, pio_sm_put) {
 }  // TEST(PicoWrapper, pio_sm_put)
 
 TEST(PicoWrapper, pio_sm_set_enabled) {
+  std::random_device rng;
   ::pico_driver::SDKWrapper pico;
   pio_sm_config config;
 
-  PIO pio_array[] = {1, 3};
-  uint sm_array[] = {5, 7};
+  PIO pio_array[] = {rng(), rng()};
+  uint sm_array[] = {rng(), rng()};
   bool enabled_array[] = {true, false};
 
   FFF_RESET_HISTORY();
@@ -841,9 +867,10 @@ TEST(PicoWrapper, pio_sm_set_enabled) {
 }  // TEST(PicoWrapper, pio_sm_set_enabled)
 
 TEST(PicoWrapper, pio_add_program) {
+  std::random_device rng;
   ::pico_driver::SDKWrapper pico;
 
-  PIO pio_array[] = {11, 13};
+  PIO pio_array[] = {rng(), rng()};
   pio_program_t dummy_program;
   int myReturnVals_array[32] = {1, 2};
 
@@ -875,3 +902,30 @@ TEST(PicoWrapper, pio_add_program) {
     index++;
   }
 }  // TEST(PicoWrapper, pio_add_program)
+
+TEST(PicoWrapper, sm_config_set_jmp_pin) {
+  std::random_device rng;
+  ::pico_driver::SDKWrapper pico;
+  PIO pin_array[] = {rng(), rng()};
+  pio_sm_config config;
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(sm_config_set_jmp_pin);
+
+  // Trial call.
+  for (auto &&count : pin_array) pico.sm_config_set_jmp_pin(&config, count);
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(sm_config_set_jmp_pin_fake.call_count, 2);
+
+  // Check wether parameters are passed collectly.
+  int index = 0;
+  for (auto &&pin : pin_array) {
+    // Check the data from test spy. Call order.
+    ASSERT_EQ(fff.call_history[index], (void *)sm_config_set_jmp_pin);
+    // Check the data from test spy. : Parameters.
+    ASSERT_EQ(sm_config_set_jmp_pin_fake.arg0_history[index], &config);
+    ASSERT_EQ(sm_config_set_jmp_pin_fake.arg1_history[index], pin);
+    index++;
+  }
+}  // TEST(PicoWrapper, sm_config_set_jmp_pin)

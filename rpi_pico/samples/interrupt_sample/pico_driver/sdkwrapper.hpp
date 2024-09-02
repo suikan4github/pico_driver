@@ -181,17 +181,18 @@ class SDKWrapper {
    * @param pio The PIO instance; e.g. pio0 or pio1.
    * @param sm State machine index (0..3) to use.
    * @param pins_base the first pin to set a direction for.
-   * @param pin_count the count of consecutive pins to set the direction for.
+   * @param pin_count the count of consecutive pins to set the direction
+   * for.
    * @param is_out the direction to set; true = out, false = inl
    * @return int PICO_OK (0) on success, error code otherwise.
    * @details
    * This method repeatedly reconfigures the target state machine’s pin
-   * configuration and executes 'set' instructions to set the pin direction on
-   * consecutive pins, before restoring the state machine’s pin configuration to
-   * what it was.
+   * configuration and executes 'set' instructions to set the pin direction
+   * on consecutive pins, before restoring the state machine’s pin
+   * configuration to what it was.
    *
-   * This method is provided as a convenience to set initial pin directions, and
-   * should not be used against a state machine that is enabled.
+   * This method is provided as a convenience to set initial pin directions,
+   * and should not be used against a state machine that is enabled.
    */
   virtual int pio_sm_set_consecutive_pindirs(PIO pio, uint sm, uint pins_base,
                                              uint pin_count, bool is_out);
@@ -335,6 +336,15 @@ class SDKWrapper {
    * value is -1 i.e. PICO_ERROR_GENERIC)
    */
   virtual int pio_add_program(PIO pio, const pio_program_t *program);
+
+  /**
+   * @brief Set the 'jmp' pin in a state machine configuration.
+   *
+   * @param c Pointer to the configuration structure to modify
+   * @param pin The raw GPIO pin number to use as the source for a jmp pin
+   * instruction
+   */
+  virtual void sm_config_set_jmp_pin(pio_sm_config *c, uint pin);
 };
 
 #if __has_include(<gmock/gmock.h>)
@@ -380,6 +390,7 @@ class MockSDKWrapper : public SDKWrapper {
   MOCK_METHOD3(pio_sm_put, void(PIO pio, uint sm, uint32_t data));
   MOCK_METHOD3(pio_sm_set_enabled, void(PIO pio, uint sm, bool enabled));
   MOCK_METHOD2(pio_add_program, int(PIO pio, const pio_program_t *program));
+  MOCK_METHOD2(sm_config_set_jmp_pin, void(pio_sm_config *c, uint pin));
 };
 #endif  // __has_include(<gmock/gmock.h>)
 };  // namespace pico_driver

@@ -87,7 +87,7 @@ int main() {
   // I2S Initialization.
   PIO i2s_pio = pio0;
   uint i2s_sm = 0;
-  uint i2s_offset = pio_add_program(i2s_pio, &duplex_i2s_program);
+  uint i2s_offset = sdk.pio_add_program(i2s_pio, &duplex_i2s_program);
   ::duplex_i2s_program_init(i2s_pio, i2s_sm, i2s_offset, I2S_GPIO_PIN_BASE);
 
   //  printf("Audio Transfering.\n");

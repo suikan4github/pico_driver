@@ -88,6 +88,11 @@ int ::pico_driver::SDKWrapper::i2c_write_blocking(i2c_inst_t* i2c, uint8_t addr,
   return ::i2c_write_blocking(i2c, addr, src, len, nostop);
 }
 
+void pico_driver::SDKWrapper::sm_config_set_jmp_pin(pio_sm_config* c,
+                                                    uint pin) {
+  ::sm_config_set_jmp_pin(c, pin);
+}
+
 int pico_driver::SDKWrapper::pio_sm_set_consecutive_pindirs(PIO pio, uint sm,
                                                             uint pins_base,
                                                             uint pin_count,
