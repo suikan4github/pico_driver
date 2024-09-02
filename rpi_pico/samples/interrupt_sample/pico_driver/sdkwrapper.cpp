@@ -105,6 +105,10 @@ void pico_driver::SDKWrapper::pio_sm_unclaim(PIO pio, uint sm) {
   ::pio_sm_unclaim(pio, sm);
 }
 
+int pico_driver::SDKWrapper::pio_claim_unused_sm(PIO pio, bool required) {
+  return ::pio_claim_unused_sm(pio, required);
+}
+
 int pico_driver::SDKWrapper::pio_sm_set_consecutive_pindirs(PIO pio, uint sm,
                                                             uint pins_base,
                                                             uint pin_count,

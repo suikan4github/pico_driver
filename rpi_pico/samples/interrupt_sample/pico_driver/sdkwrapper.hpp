@@ -386,7 +386,7 @@ class SDKWrapper {
    * were free (for backwards compatibility with prior SDK the error value is
    * -1 i.e. PICO_ERROR_GENERIC)
    */
-  // virtual int pio_claim_unused_sm(PIO pio, bool required);
+  virtual int pio_claim_unused_sm(PIO pio, bool required);
 };
 
 #if __has_include(<gmock/gmock.h>)
@@ -436,6 +436,7 @@ class MockSDKWrapper : public SDKWrapper {
   MOCK_METHOD2(pio_sm_get_blocking, uint32_t(PIO pio, uint sm));
   MOCK_METHOD2(pio_sm_claim, void(PIO pio, uint sm));
   MOCK_METHOD2(pio_sm_unclaim, void(PIO pio, uint sm));
+  MOCK_METHOD2(pio_claim_unused_sm, int(PIO pio, bool required));
 };
 #endif  // __has_include(<gmock/gmock.h>)
 };  // namespace pico_driver

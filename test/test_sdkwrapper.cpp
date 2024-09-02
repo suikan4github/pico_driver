@@ -55,6 +55,7 @@ FAKE_VOID_FUNC(sm_config_set_jmp_pin, pio_sm_config *, uint);
 FAKE_VALUE_FUNC(uint32_t, pio_sm_get_blocking, PIO, uint);
 FAKE_VOID_FUNC(pio_sm_claim, PIO, uint);
 FAKE_VOID_FUNC(pio_sm_unclaim, PIO, uint);
+FAKE_VALUE_FUNC(int, pio_claim_unused_sm, PIO, bool);
 // The cpp file of the library to test.
 #include "../rpi_pico/samples/interrupt_sample/pico_driver/sdkwrapper.cpp"
 
@@ -64,11 +65,11 @@ TEST(PicoWrapper, stdio_init_all) {
   FFF_RESET_HISTORY();
   RESET_FAKE(stdio_init_all);
 
-  bool myReturnVals[] = {true, false};
-  SET_RETURN_SEQ(stdio_init_all, myReturnVals,
-                 sizeof(myReturnVals) / sizeof(bool));
+  bool return_vals[] = {true, false};
+  SET_RETURN_SEQ(stdio_init_all, return_vals,
+                 sizeof(return_vals) / sizeof(bool));
 
-  ASSERT_EQ(pico.stdio_init_all(), myReturnVals[0]);
+  ASSERT_EQ(pico.stdio_init_all(), return_vals[0]);
 
   // Check the data from test spy. How many time called?
   ASSERT_EQ(stdio_init_all_fake.call_count, 1);
@@ -77,7 +78,7 @@ TEST(PicoWrapper, stdio_init_all) {
   ASSERT_EQ(fff.call_history[0], (void *)stdio_init_all);
 
   // Check the data from test spy. : Parameters.
-  ASSERT_EQ(pico.stdio_init_all(), myReturnVals[1]);
+  ASSERT_EQ(pico.stdio_init_all(), return_vals[1]);
 
   RESET_FAKE(stdio_init_all);
 
@@ -248,10 +249,10 @@ TEST(PicoWrapper, gpio_get) {
   FFF_RESET_HISTORY();
   RESET_FAKE(gpio_get);
 
-  bool myReturnVals[] = {true, false};
-  SET_RETURN_SEQ(gpio_get, myReturnVals, sizeof(myReturnVals) / sizeof(bool));
+  bool return_vals[] = {true, false};
+  SET_RETURN_SEQ(gpio_get, return_vals, sizeof(return_vals) / sizeof(bool));
 
-  ASSERT_EQ(pico.gpio_get(gpio), myReturnVals[0]);
+  ASSERT_EQ(pico.gpio_get(gpio), return_vals[0]);
 
   // Check the data from test spy. How many time called?
   ASSERT_EQ(gpio_get_fake.call_count, 1);
@@ -262,7 +263,7 @@ TEST(PicoWrapper, gpio_get) {
   gpio = 11;
 
   // Check the data from test spy. : Parameters.
-  ASSERT_EQ(pico.gpio_get(gpio), myReturnVals[1]);
+  ASSERT_EQ(pico.gpio_get(gpio), return_vals[1]);
 
   RESET_FAKE(gpio_get);
 }
@@ -308,11 +309,11 @@ TEST(PicoWrapper, i2c_init) {
   FFF_RESET_HISTORY();
   RESET_FAKE(i2c_init);
 
-  uint myReturnVals[] = {rng(), rng()};
-  SET_RETURN_SEQ(i2c_init, myReturnVals, sizeof(myReturnVals) / sizeof(bool));
+  uint return_vals[] = {rng(), rng()};
+  SET_RETURN_SEQ(i2c_init, return_vals, sizeof(return_vals) / sizeof(bool));
 
-  ASSERT_EQ(pico.i2c_init(&i2c, baud[0]), myReturnVals[0]);
-  ASSERT_EQ(pico.i2c_init(&i2c, baud[1]), myReturnVals[1]);
+  ASSERT_EQ(pico.i2c_init(&i2c, baud[0]), return_vals[0]);
+  ASSERT_EQ(pico.i2c_init(&i2c, baud[1]), return_vals[1]);
 
   // Check the data from test spy. How many time called?
   ASSERT_EQ(i2c_init_fake.call_count, 2);
@@ -365,13 +366,13 @@ TEST(PicoWrapper, i2c_read_blocking) {
                            static_cast<uint8_t>(rng())};
   size_t bufsize_array[2] = {rng(), rng()};
   bool nostop_array[2] = {true, false};
-  int myReturnVals_array[8] = {1, 2, 3, 4, 5, 6, 7, 8};
+  int return_vals_array[8] = {1, 2, 3, 4, 5, 6, 7, 8};
 
   FFF_RESET_HISTORY();
   RESET_FAKE(i2c_read_blocking);
 
-  SET_RETURN_SEQ(i2c_read_blocking, myReturnVals_array,
-                 std::size(myReturnVals_array));
+  SET_RETURN_SEQ(i2c_read_blocking, return_vals_array,
+                 std::size(return_vals_array));
 
   // Check wether return value is correct.
   int index = 0;
@@ -379,7 +380,7 @@ TEST(PicoWrapper, i2c_read_blocking) {
     for (auto &&bufsize : bufsize_array) {
       for (auto &&nostop : nostop_array) {
         ASSERT_EQ(pico.i2c_read_blocking(&i2c, addrs, buf, bufsize, nostop),
-                  myReturnVals_array[index]);
+                  return_vals_array[index]);
         index++;
       }
     }
@@ -420,13 +421,13 @@ TEST(PicoWrapper, i2c_write_blocking) {
                            static_cast<uint8_t>(rng())};
   size_t bufsize_array[2] = {rng(), rng()};
   bool nostop_array[2] = {true, false};
-  int myReturnVals_array[8] = {1, 2, 3, 4, 5, 6, 7, 8};
+  int return_vals_array[8] = {1, 2, 3, 4, 5, 6, 7, 8};
 
   FFF_RESET_HISTORY();
   RESET_FAKE(i2c_write_blocking);
 
-  SET_RETURN_SEQ(i2c_write_blocking, myReturnVals_array,
-                 std::size(myReturnVals_array));
+  SET_RETURN_SEQ(i2c_write_blocking, return_vals_array,
+                 std::size(return_vals_array));
 
   // Check wether return value is correct.
   int index = 0;
@@ -434,7 +435,7 @@ TEST(PicoWrapper, i2c_write_blocking) {
     for (auto &&bufsize : bufsize_array) {
       for (auto &&nostop : nostop_array) {
         ASSERT_EQ(pico.i2c_write_blocking(&i2c, addrs, buf, bufsize, nostop),
-                  myReturnVals_array[index]);
+                  return_vals_array[index]);
         index++;
       }
     }
@@ -472,14 +473,14 @@ TEST(PicoWrapper, pio_sm_set_consecutive_pindirs) {
   uint pins_base_array[] = {rng(), rng()};
   uint pin_count_array[] = {rng(), rng()};
   bool is_out_array[2] = {true, false};
-  int myReturnVals_array[32] = {1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8,
-                                1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8};
+  int return_vals_array[32] = {1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8,
+                               1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8};
 
   FFF_RESET_HISTORY();
   RESET_FAKE(pio_sm_set_consecutive_pindirs);
 
-  SET_RETURN_SEQ(pio_sm_set_consecutive_pindirs, myReturnVals_array,
-                 std::size(myReturnVals_array));
+  SET_RETURN_SEQ(pio_sm_set_consecutive_pindirs, return_vals_array,
+                 std::size(return_vals_array));
 
   // Check wether return value is correct.
   int index = 0;
@@ -490,7 +491,7 @@ TEST(PicoWrapper, pio_sm_set_consecutive_pindirs) {
           for (auto &&is_out : is_out_array) {
             ASSERT_EQ(pico.pio_sm_set_consecutive_pindirs(pio, sm, pins,
                                                           pin_count, is_out),
-                      myReturnVals_array[index]);
+                      return_vals_array[index]);
             index++;
           }
 
@@ -652,19 +653,18 @@ TEST(PicoWrapper, clock_get_hz) {
   std::random_device rng;
   ::pico_driver::SDKWrapper pico;
   clock_handle_t clock_handle_array[] = {rng(), rng()};
-  uint32_t myReturnVals_array[] = {rng(), rng()};
+  uint32_t return_vals_array[] = {rng(), rng()};
 
   FFF_RESET_HISTORY();
   RESET_FAKE(clock_get_hz);
 
-  SET_RETURN_SEQ(clock_get_hz, myReturnVals_array,
-                 std::size(myReturnVals_array));
+  SET_RETURN_SEQ(clock_get_hz, return_vals_array, std::size(return_vals_array));
 
   // Check whether call matches.
   uint index = 0;
 
   for (auto &&clock_handle : clock_handle_array) {
-    ASSERT_EQ(pico.clock_get_hz(clock_handle), myReturnVals_array[index]);
+    ASSERT_EQ(pico.clock_get_hz(clock_handle), return_vals_array[index]);
     index++;
   }
 
@@ -804,13 +804,12 @@ TEST(PicoWrapper, pio_sm_init) {
   PIO pio_array[] = {rng(), rng()};
   uint sm_array[] = {rng(), rng()};
   uint initial_pc_array[] = {rng(), rng()};
-  int myReturnVals_array[32] = {1, 2, 3, 4, 5, 6, 7, 8};
+  int return_vals_array[32] = {1, 2, 3, 4, 5, 6, 7, 8};
 
   FFF_RESET_HISTORY();
   RESET_FAKE(pio_sm_init);
 
-  SET_RETURN_SEQ(pio_sm_init, myReturnVals_array,
-                 std::size(myReturnVals_array));
+  SET_RETURN_SEQ(pio_sm_init, return_vals_array, std::size(return_vals_array));
 
   // Check wether return value is correct.
   int index = 0;
@@ -818,7 +817,7 @@ TEST(PicoWrapper, pio_sm_init) {
     for (auto &&sm : sm_array)
       for (auto &&initial_pc : initial_pc_array) {
         ASSERT_EQ(pico.pio_sm_init(pio, sm, initial_pc, &config),
-                  myReturnVals_array[index]);
+                  return_vals_array[index]);
         index++;
       }
 
@@ -924,19 +923,19 @@ TEST(PicoWrapper, pio_add_program) {
 
   PIO pio_array[] = {rng(), rng()};
   pio_program_t dummy_program;
-  int myReturnVals_array[32] = {1, 2};
+  int return_vals_array[32] = {1, 2};
 
   FFF_RESET_HISTORY();
   RESET_FAKE(pio_add_program);
 
-  SET_RETURN_SEQ(pio_add_program, myReturnVals_array,
-                 std::size(myReturnVals_array));
+  SET_RETURN_SEQ(pio_add_program, return_vals_array,
+                 std::size(return_vals_array));
 
   // Check wether return value is correct.
   int index = 0;
   for (auto &&pio : pio_array) {
     ASSERT_EQ(pico.pio_add_program(pio, &dummy_program),
-              myReturnVals_array[index]);
+              return_vals_array[index]);
     index++;
   }
 
@@ -993,19 +992,19 @@ TEST(PicoWrapper, pio_sm_get_blocking) {
 
   PIO pio_array[] = {rng(), rng()};
   uint sm_array[] = {rng(), rng()};
-  uint32_t myReturnVals_array[] = {1, 2, 3, 4};
+  uint32_t return_vals_array[] = {1, 2, 3, 4};
 
   FFF_RESET_HISTORY();
   RESET_FAKE(pio_sm_get_blocking);
 
-  SET_RETURN_SEQ(pio_sm_get_blocking, myReturnVals_array,
-                 std::size(myReturnVals_array));
+  SET_RETURN_SEQ(pio_sm_get_blocking, return_vals_array,
+                 std::size(return_vals_array));
 
   // Check wether return value is correct.
   int index = 0;
   for (auto &&pio : pio_array)
     for (auto &&sm : sm_array) {
-      ASSERT_EQ(pico.pio_sm_get_blocking(pio, sm), myReturnVals_array[index]);
+      ASSERT_EQ(pico.pio_sm_get_blocking(pio, sm), return_vals_array[index]);
       index++;
     }
 
@@ -1094,3 +1093,43 @@ TEST(PicoWrapper, pio_sm_unclaim) {
   RESET_FAKE(pio_sm_unclaim);
 
 }  // TEST(PicoWrapper, pio_sm_unclaim)
+
+TEST(PicoWrapper, pio_claim_unused_sm) {
+  std::random_device rng;
+  ::pico_driver::SDKWrapper pico;
+  PIO pio_array[] = {rng(), rng()};
+  bool required_array[2] = {true, false};
+  int return_vals_array[] = {1, 2, 3, 4};
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(pio_claim_unused_sm);
+
+  SET_RETURN_SEQ(pio_claim_unused_sm, return_vals_array,
+                 std::size(return_vals_array));
+
+  // Check wether return value is correct.
+  int index = 0;
+  for (auto &&pio : pio_array)
+    for (auto &&required : required_array) {
+      ASSERT_EQ(pico.pio_claim_unused_sm(pio, required),
+                return_vals_array[index]);
+      index++;
+    }
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(pio_claim_unused_sm_fake.call_count, 4);
+
+  // Check wether parameters are passed collectly.
+  index = 0;
+  for (auto &&pio : pio_array)
+    for (auto &&required : required_array) {
+      // Check the data from test spy. Call order.
+      ASSERT_EQ(fff.call_history[index], (void *)pio_claim_unused_sm);
+      // Check the data from test spy. : Parameters.
+      ASSERT_EQ(pio_claim_unused_sm_fake.arg0_history[index], pio);
+      ASSERT_EQ(pio_claim_unused_sm_fake.arg1_history[index], required);
+      index++;
+    }
+
+  RESET_FAKE(pio_claim_unused_sm);
+}  // TEST(PicoWrapper, pio_claim_unused_sm)
