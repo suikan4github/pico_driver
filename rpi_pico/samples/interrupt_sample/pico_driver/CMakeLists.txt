@@ -23,7 +23,7 @@ else()  # Is target RasPi Pico?
                                 adau1361.cpp
                                 adau1361lower.cpp
                                 i2cmaster.cpp
-                                duplex_i2s_program_init.cpp)
+                                duplex_slave_i2s_program_init.cpp)
                 target_include_directories(driver INTERFACE .)
                 target_link_libraries(driver INTERFACE pico_stdlib)
         # To buid for RasPi SDK, this library should be interface
@@ -33,5 +33,5 @@ else()  # Is target RasPi Pico?
         # To allow it, we need CMake 3.13 or later. 
 
         # Generate 
-        pico_generate_pio_header(driver ${CMAKE_CURRENT_LIST_DIR}/duplex_i2s.pio)
+        pico_generate_pio_header(driver ${CMAKE_CURRENT_LIST_DIR}/duplex_slave_i2s.pio)
 endif()

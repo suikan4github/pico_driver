@@ -4,8 +4,8 @@
 
 #include "adau1361.hpp"
 #include "adau1361lower.hpp"
-#include "duplex_i2s.pio.h"
-#include "duplex_i2s_program_init.hpp"
+#include "duplex_slave_i2s.pio.h"
+#include "duplex_slave_i2s_program_init.hpp"
 #include "hardware/pio.h"
 #include "i2cmaster.hpp"
 #include "sdkwrapper.hpp"
@@ -87,8 +87,9 @@ int main() {
   // I2S Initialization.
   PIO i2s_pio = pio0;
   uint i2s_sm = 0;
-  uint i2s_offset = sdk.pio_add_program(i2s_pio, &duplex_i2s_program);
-  ::duplex_i2s_program_init(i2s_pio, i2s_sm, i2s_offset, I2S_GPIO_PIN_BASE);
+  uint i2s_offset = sdk.pio_add_program(i2s_pio, &duplex_slave_i2s_program);
+  ::duplex_slave_i2s_program_init(i2s_pio, i2s_sm, i2s_offset,
+                                  I2S_GPIO_PIN_BASE);
 
   //  printf("Audio Transfering.\n");
   // Audio talk thorough
