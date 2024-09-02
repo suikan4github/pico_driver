@@ -355,6 +355,38 @@ class SDKWrapper {
    * @return uint32_t
    */
   virtual uint32_t pio_sm_get_blocking(PIO pio, uint sm);
+
+  /**
+   * @brief  Mark a state machine as used.
+   *
+   * @param pio The PIO instance; e.g. pio0 or pio1.
+   * @param sm State machine index (0..3).
+   * @details
+   * Method for cooperative claiming of hardware. Will cause a panic if the
+   * state machine is already claimed. Use of this method by libraries detects
+   * accidental configurations that would fail in unpredictable ways.
+   */
+  virtual void pio_sm_claim(PIO pio, uint sm);
+  /**
+   * @brief  Mark a state machine as no longer used.
+   *
+   * @param pio The PIO instance; e.g. pio0 or pio1.
+   * @param sm State machine index (0..3).
+   */
+
+  // virtual void pio_sm_unclaim(PIO pio, uint sm);
+
+  /**
+   * @brief Claim a free state machine on a PIO instance.
+   *
+   * @param pio The PIO instance; e.g. pio0 or pio1
+   * @param required if true the function will panic if none are available
+   * @return int :
+   * The state machine index or negative if required was false, and none
+   * were free (for backwards compatibility with prior SDK the error value is
+   * -1 i.e. PICO_ERROR_GENERIC)
+   */
+  // virtual int pio_claim_unused_sm(PIO pio, bool required);
 };
 
 #if __has_include(<gmock/gmock.h>)
@@ -402,6 +434,7 @@ class MockSDKWrapper : public SDKWrapper {
   MOCK_METHOD2(pio_add_program, int(PIO pio, const pio_program_t *program));
   MOCK_METHOD2(sm_config_set_jmp_pin, void(pio_sm_config *c, uint pin));
   MOCK_METHOD2(pio_sm_get_blocking, uint32_t(PIO pio, uint sm));
+  MOCK_METHOD2(pio_sm_claim, void(PIO pio, uint sm));
 };
 #endif  // __has_include(<gmock/gmock.h>)
 };  // namespace pico_driver
