@@ -56,6 +56,7 @@ FAKE_VALUE_FUNC(uint32_t, pio_sm_get_blocking, PIO, uint);
 FAKE_VOID_FUNC(pio_sm_claim, PIO, uint);
 FAKE_VOID_FUNC(pio_sm_unclaim, PIO, uint);
 FAKE_VALUE_FUNC(int, pio_claim_unused_sm, PIO, bool);
+FAKE_VALUE_FUNC(bool, pio_sm_is_claimed, PIO, uint);
 // The cpp file of the library to test.
 #include "../rpi_pico/samples/interrupt_sample/pico_driver/sdkwrapper.cpp"
 
@@ -1133,3 +1134,42 @@ TEST(PicoWrapper, pio_claim_unused_sm) {
 
   RESET_FAKE(pio_claim_unused_sm);
 }  // TEST(PicoWrapper, pio_claim_unused_sm)
+
+TEST(PicoWrapper, pio_sm_is_claimed) {
+  std::random_device rng;
+  ::pico_driver::SDKWrapper pico;
+  PIO pio_array[] = {rng(), rng()};
+  uint sm_array[2] = {rng(), rng()};
+  bool return_vals_array[] = {true, false, false, true};
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(pio_sm_is_claimed);
+
+  SET_RETURN_SEQ(pio_sm_is_claimed, return_vals_array,
+                 std::size(return_vals_array));
+
+  // Check wether return value is correct.
+  int index = 0;
+  for (auto &&pio : pio_array)
+    for (auto &&sm : sm_array) {
+      ASSERT_EQ(pico.pio_sm_is_claimed(pio, sm), return_vals_array[index]);
+      index++;
+    }
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(pio_sm_is_claimed_fake.call_count, 4);
+
+  // Check wether parameters are passed collectly.
+  index = 0;
+  for (auto &&pio : pio_array)
+    for (auto &&sm : sm_array) {
+      // Check the data from test spy. Call order.
+      ASSERT_EQ(fff.call_history[index], (void *)pio_sm_is_claimed);
+      // Check the data from test spy. : Parameters.
+      ASSERT_EQ(pio_sm_is_claimed_fake.arg0_history[index], pio);
+      ASSERT_EQ(pio_sm_is_claimed_fake.arg1_history[index], sm);
+      index++;
+    }
+
+  RESET_FAKE(pio_sm_is_claimed);
+}  // TEST(PicoWrapper, pio_sm_is_claimed)

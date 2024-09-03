@@ -1,4 +1,9 @@
 # test_SDKWrapper TDD
+- [x] Implement SDKWrapper::pio_sm_is_claimed(). 
+- [x] Create Test case SDKWrapper.pio_sm_is_claimed() to fail. 
+- [x] Make it success. 
+- [x] Remove the duplication. 
+
 - [x] Implement SDKWrapper::pio_sm_claim(). 
 - [x] Create Test case SDKWrapper.pio_sm_claim() to fail. 
 - [x] Make it success. 

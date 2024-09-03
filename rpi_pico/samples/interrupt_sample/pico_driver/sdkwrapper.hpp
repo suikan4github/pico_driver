@@ -387,6 +387,16 @@ class SDKWrapper {
    * -1 i.e. PICO_ERROR_GENERIC)
    */
   virtual int pio_claim_unused_sm(PIO pio, bool required);
+
+  /**
+   * @brief Determine if a PIO state machine is claimed.
+   *
+   * @param pio The PIO instance; e.g. pio0 or pio1
+   * @param sm State machine index (0..3)
+   * @return true if claimed.
+   * @return false if otherwise.
+   */
+  virtual bool pio_sm_is_claimed(PIO pio, uint sm);
 };
 
 #if __has_include(<gmock/gmock.h>)
@@ -437,6 +447,7 @@ class MockSDKWrapper : public SDKWrapper {
   MOCK_METHOD2(pio_sm_claim, void(PIO pio, uint sm));
   MOCK_METHOD2(pio_sm_unclaim, void(PIO pio, uint sm));
   MOCK_METHOD2(pio_claim_unused_sm, int(PIO pio, bool required));
+  MOCK_METHOD2(pio_sm_is_claimed, bool(PIO pio, uint sm));
 };
 #endif  // __has_include(<gmock/gmock.h>)
 };  // namespace pico_driver
