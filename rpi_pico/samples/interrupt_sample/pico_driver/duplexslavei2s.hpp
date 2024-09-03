@@ -10,14 +10,14 @@ class DuplexSlaveI2S {
  private:
   ::pico_driver::SDKWrapper &sdk_;
   PIO pio_;
-  const uint32_t sm_;  // State machine ( 0..3 )
+  const uint32_t sm_;    // State machine ( 0..3 )
+  const uint pin_base_;  // first GPIO pin number of the I2S signal.
 
  public:
   DuplexSlaveI2S(/* args */) = delete;
-  DuplexSlaveI2S(::pico_driver::SDKWrapper &sdk, PIO pio)
-      : sdk_(sdk), pio_(pio), sm_(sdk_.pio_claim_unused_sm(pio_)) {};
-  DuplexSlaveI2S(::pico_driver::SDKWrapper &sdk, PIO pio, uint32_t sm)
-      : sdk_(sdk), pio_(pio), sm_(sm) {};
+  DuplexSlaveI2S(::pico_driver::SDKWrapper &sdk, PIO pio, uint pin_base);
+  DuplexSlaveI2S(::pico_driver::SDKWrapper &sdk, PIO pio, uint32_t sm,
+                 uint pin_base);
 
   /**
    * @brief Disable the state machine in use.
@@ -31,9 +31,14 @@ class DuplexSlaveI2S {
   virtual void Stop();
 };
 
-DuplexSlaveI2S::DuplexSlaveI2S(/* args */) {}
-
-DuplexSlaveI2S::~DuplexSlaveI2S() {}
+#if __has_include(<gmock/gmock.h>)
+class MockDuplexSlaveI2S : public SDKWrapper {
+ public:
+  MOCK_METHOD0(uint32_t, GetStateMachine());
+  MOCK_METHOD0(Start, void());
+  MOCK_METHOD0(Stop, void());
+};
+#endif
 
 }  // namespace pico_driver
 
