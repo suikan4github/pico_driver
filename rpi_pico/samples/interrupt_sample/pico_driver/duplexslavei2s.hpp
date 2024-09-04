@@ -1,7 +1,12 @@
 #ifndef _DUPLEXSLAVEI2S_HPP_
 #define _DUPLEXSLAVEI2S_HPP_
 
+#if __has_include(<hardware/pio.h>)
 #include "hardware/pio.h"
+#else
+// Alternate definition for unit test.
+#endif  //__has_include(<hardware/i2c.h>)
+
 #include "sdkwrapper.hpp"
 
 namespace pico_driver {
@@ -32,11 +37,11 @@ class DuplexSlaveI2S {
 };
 
 #if __has_include(<gmock/gmock.h>)
-class MockDuplexSlaveI2S : public SDKWrapper {
+class MockDuplexSlaveI2S : public DuplexSlaveI2S {
  public:
-  MOCK_METHOD0(uint32_t, GetStateMachine());
-  MOCK_METHOD0(Start, void());
-  MOCK_METHOD0(Stop, void());
+  MOCK_METHOD0(GetStateMachine, uint32_t(void));
+  MOCK_METHOD0(Start, void(void));
+  MOCK_METHOD0(Stop, void(void));
 };
 #endif
 

@@ -7,7 +7,7 @@ cmake_minimum_required(VERSION 3.13)
 
 if((${WIN32}) OR (${UNIX})) # Is Target Windows or Unix? 
         add_library(driver  
-#                       picowrapper.cpp
+                        duplexslavei2s.cpp
                         adau1361.cpp
                         adau1361lower.cpp
                         i2cmaster.cpp)
