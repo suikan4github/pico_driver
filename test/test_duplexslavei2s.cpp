@@ -32,11 +32,16 @@ TEST_F(DuplexSlaveI2STest, Constructor4) {
 // Test 3 parameters constructor.
 TEST_F(DuplexSlaveI2STest, Constructor3) {
   using ::testing::_;
+  using ::testing::Return;
+  const uint ret_val = 3;
 
   EXPECT_CALL(sdk_, pio_sm_claim(_, _)).Times(0);
-  EXPECT_CALL(sdk_, pio_claim_unused_sm(pio_, true));
+  EXPECT_CALL(sdk_, pio_claim_unused_sm(pio_, true)).WillOnce(Return(ret_val));
 
   i2s_ = new ::pico_driver::DuplexSlaveI2S(sdk_, pio_, pin_base_);
+
+  // must be muched with Internally Registered SM.
+  EXPECT_EQ(ret_val, i2s_->GetStateMachine());
 
   delete (i2s_);
 
