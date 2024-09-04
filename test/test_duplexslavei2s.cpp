@@ -56,7 +56,6 @@ TEST_F(DuplexSlaveI2STest, Destructor) {
   std::random_device rng;
   using ::testing::_;
   using ::testing::Return;
-  const uint ret_val = rng();
 
   i2s_ = new ::pico_driver::DuplexSlaveI2S(sdk_, pio_, sm_, pin_base_);
 
@@ -73,7 +72,6 @@ TEST_F(DuplexSlaveI2STest, Destructor_stopped) {
   using ::testing::_;
   using ::testing::InSequence;
   using ::testing::Return;
-  const uint ret_val = rng();
 
   i2s_ = new ::pico_driver::DuplexSlaveI2S(sdk_, pio_, sm_, pin_base_);
 
@@ -90,3 +88,17 @@ TEST_F(DuplexSlaveI2STest, Destructor_stopped) {
   delete (i2s_);
 
 }  // TEST_F(DuplexSlaveI2STest, Destructor_stopped)
+
+TEST_F(DuplexSlaveI2STest, Stop) {
+  std::random_device rng;
+
+  i2s_ = new ::pico_driver::DuplexSlaveI2S(sdk_, pio_, sm_, pin_base_);
+
+  EXPECT_CALL(sdk_, pio_sm_unclaim(pio_, sm_));
+
+  // Stop state machine.
+  i2s_->Stop();
+
+  delete (i2s_);
+
+}  // TEST_F(DuplexSlaveI2STest, Stop)
