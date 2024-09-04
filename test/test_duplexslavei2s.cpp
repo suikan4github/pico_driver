@@ -102,3 +102,15 @@ TEST_F(DuplexSlaveI2STest, Stop) {
   delete (i2s_);
 
 }  // TEST_F(DuplexSlaveI2STest, Stop)
+
+TEST_F(DuplexSlaveI2STest, GetStateMachine) {
+  std::random_device rng;
+
+  i2s_ = new ::pico_driver::DuplexSlaveI2S(sdk_, pio_, sm_, pin_base_);
+
+  // Must match the given state machine from constructor explicitlly.
+  EXPECT_EQ(i2s_->GetStateMachine(), sm_);
+
+  delete (i2s_);
+
+}  // TEST_F(DuplexSlaveI2STest, GetStateMachine)

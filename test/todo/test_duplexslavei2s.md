@@ -10,9 +10,9 @@
 - [] Remove the duplication. 
 
 - [x] Implement DuplexSlaveI2S::Stop(). 
-- [] Create Test case SDKWrapper.Stop() to fail. 
-- [] Make it success. 
-- [] Remove the duplication. 
+- [x] Create Test case SDKWrapper.Stop() to fail. 
+- [x] Make it success. 
+- [x] Remove the duplication. 
 
 - [x] Implement DuplexSlaveI2S::Constructor3(). 
 - [x] Create Test case SDKWrapper.Constructor3() to fail. 
