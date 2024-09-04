@@ -25,6 +25,9 @@ TEST_F(DuplexSlaveI2STest, Constructor4) {
 
   i2s_ = new ::pico_driver::DuplexSlaveI2S(sdk_, pio_, sm_, pin_base_);
 
+  // must be muched with Externally given SM.
+  EXPECT_EQ(sm_, i2s_->GetStateMachine());
+
   delete (i2s_);
 
 }  // TEST_F(DuplexSlaveI2STest, Constructor)
