@@ -30,7 +30,7 @@
 - [x] Remove the duplication. 
 
 - [x] Implement DuplexSlaveI2S::Destructor_stopped(). 
-- [] Create Test case SDKWrapper.Destructor_stopped() to fail. 
-- [] Make it success. 
-- [] Remove the duplication. 
+- [x] Create Test case SDKWrapper.Destructor_stopped() to fail. 
+- [x] Make it success. 
+- [x] Remove the duplication. 
 

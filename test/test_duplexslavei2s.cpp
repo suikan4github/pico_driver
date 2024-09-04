@@ -66,3 +66,27 @@ TEST_F(DuplexSlaveI2STest, Destructor) {
   delete (i2s_);
 
 }  // TEST_F(DuplexSlaveI2STest, Destructor)
+
+// Test Destructor with stopped state machine
+TEST_F(DuplexSlaveI2STest, Destructor_stopped) {
+  std::random_device rng;
+  using ::testing::_;
+  using ::testing::InSequence;
+  using ::testing::Return;
+  const uint ret_val = rng();
+
+  i2s_ = new ::pico_driver::DuplexSlaveI2S(sdk_, pio_, sm_, pin_base_);
+
+  {
+    InSequence dummy;
+    EXPECT_CALL(sdk_, pio_sm_unclaim(pio_, sm_));
+
+    // Stop state machine.
+    i2s_->Stop();
+
+    EXPECT_CALL(sdk_, pio_sm_is_claimed(pio_, sm_)).WillOnce(Return(false));
+    EXPECT_CALL(sdk_, pio_sm_unclaim(_, _)).Times(0);
+  }
+  delete (i2s_);
+
+}  // TEST_F(DuplexSlaveI2STest, Destructor_stopped)
