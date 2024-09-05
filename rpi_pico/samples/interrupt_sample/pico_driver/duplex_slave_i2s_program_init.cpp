@@ -56,8 +56,14 @@ void duplex_slave_i2s_program_init(PIO pio, uint sm, uint offset,
                              1);         // 1 pin for output.
   sdk.sm_config_set_in_pin_base(&config,
                                 pin_sdout + 1);  // PIN_SDIN.
+#if 0
+  // The sm_config_set_in_pin_count() has bug in SDK version 2.0.0.
+  // See https://github.com/raspberrypi/pico-sdk/issues/1878 for details. 
+  // Actually, without this API call, program works in both RP2040 and RP2350. 
+  // So, remove this code from the release version. 
   sdk.sm_config_set_in_pin_count(&config,
                                  2);                  // 2 pins for input.
+#endif
   sdk.sm_config_set_jmp_pin(&config, pin_sdout + 3);  // WS
 
 // Set the PIO clock divider.
