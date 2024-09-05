@@ -66,32 +66,15 @@ void duplex_slave_i2s_program_init(PIO pio, uint sm, uint offset,
 #endif
   sdk.sm_config_set_jmp_pin(&config, pin_sdout + 3);  // WS
 
-// Set the PIO clock divider.
-// We need 96kHz stereo 32bit transfer. So the BCLCK is 96'000*2*32Hz.
-// The  clock for the duplex I2S PIO program must be 10 times or grather
-// ( See the comment in the duplex_i2s.pio ).
-// To avoid the jitter, we calculate the division factor in
-// integer.
-#if 1
+  // Set the PIO clock divider.
+  // We need 96kHz stereo 32bit transfer. So the BCLCK is 96'000*2*32Hz.
+  // The  clock for the duplex I2S PIO program must be 10 times or grather
+  // ( See the comment in the duplex_i2s.pio ).
+  // To avoid the jitter, we calculate the division factor in
+  // integer.
   float div = (sdk.clock_get_hz(clk_sys) / (96'000 * 2 * 32 * 10));
-#else
-  float div = 1;
-#endif
   sdk.sm_config_set_clkdiv(&config, div);
 
-#if 0
-  // Shift configuration : Auto push/pull. 
-  // Input shift register.
-  sdk.sm_config_set_in_shift(&config,
-                             false,  // false to left shift.
-                             true,   // true to auto push.
-                             32);    // 32bit word.
-  // Output shift register.
-  sdk.sm_config_set_out_shift(&config,
-                              false,  // false to left shift.
-                              true,   // true to auto pull.
-                              32);    // 32bit word.
-#else
   // Shift configuration : No Auto push/pull.
   // Input shift register.
   sdk.sm_config_set_in_shift(&config,
@@ -103,7 +86,6 @@ void duplex_slave_i2s_program_init(PIO pio, uint sm, uint offset,
                               false,  // false to left shift.
                               false,  // true to auto pull.
                               32);    // 32bit word.
-#endif
   // Configure SM.
   sdk.pio_sm_init(pio, sm, offset, &config);
 
