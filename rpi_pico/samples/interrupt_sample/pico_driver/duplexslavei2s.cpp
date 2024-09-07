@@ -25,7 +25,7 @@ pico_driver::DuplexSlaveI2S::DuplexSlaveI2S(::pico_driver::SDKWrapper &sdk,
 }
 
 pico_driver::DuplexSlaveI2S::~DuplexSlaveI2S() {
-  if (sdk_.pio_sm_is_claimed(pio_, sm_)) sdk_.pio_sm_unclaim(pio_, sm_);
+  sdk_.pio_sm_unclaim(pio_, sm_);
 }
 
 uint32_t pico_driver::DuplexSlaveI2S::GetStateMachine() { return sm_; }

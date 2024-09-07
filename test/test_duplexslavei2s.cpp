@@ -30,8 +30,7 @@ TEST_F(DuplexSlaveI2STest, Constructor4) {
   EXPECT_EQ(sm_, i2s_->GetStateMachine());
 
   // We can ignore these call inside destructor
-  EXPECT_CALL(sdk_, pio_sm_is_claimed(pio_, sm_)).WillOnce(Return(false));
-  EXPECT_CALL(sdk_, pio_sm_unclaim(_, _)).Times(0);
+  EXPECT_CALL(sdk_, pio_sm_unclaim(_, _));
 
   delete (i2s_);
 
@@ -51,7 +50,6 @@ TEST_F(DuplexSlaveI2STest, Constructor3) {
   // must be muched with Internally Registered SM.
   EXPECT_EQ(ret_val, i2s_->GetStateMachine());
 
-  EXPECT_CALL(sdk_, pio_sm_is_claimed(pio_, ret_val)).WillOnce(Return(true));
   EXPECT_CALL(sdk_, pio_sm_unclaim(pio_, ret_val));
 
   delete (i2s_);
@@ -70,7 +68,6 @@ TEST_F(DuplexSlaveI2STest, Destructor) {
 
   i2s_ = new ::pico_driver::DuplexSlaveI2S(sdk_, pio_, sm_, pin_base_);
 
-  EXPECT_CALL(sdk_, pio_sm_is_claimed(pio_, sm_)).WillOnce(Return(true));
   EXPECT_CALL(sdk_, pio_sm_unclaim(pio_, sm_));
 
   delete (i2s_);
@@ -98,7 +95,6 @@ TEST_F(DuplexSlaveI2STest, Destructor_stopped) {
     // Stop state machine.
     i2s_->Stop();
 
-    EXPECT_CALL(sdk_, pio_sm_is_claimed(pio_, sm_)).WillOnce(Return(true));
     EXPECT_CALL(sdk_, pio_sm_unclaim(_, _));
   }
   delete (i2s_);
@@ -122,7 +118,6 @@ TEST_F(DuplexSlaveI2STest, Stop) {
   i2s_->Stop();
 
   // We can ignore these call inside destructor
-  EXPECT_CALL(sdk_, pio_sm_is_claimed(pio_, sm_)).WillOnce(Return(true));
   EXPECT_CALL(sdk_, pio_sm_unclaim(_, _));
 
   delete (i2s_);
@@ -143,7 +138,6 @@ TEST_F(DuplexSlaveI2STest, GetStateMachine) {
   EXPECT_EQ(i2s_->GetStateMachine(), sm_);
 
   // We can ignore these call inside destructor
-  EXPECT_CALL(sdk_, pio_sm_is_claimed(pio_, sm_)).WillOnce(Return(true));
   EXPECT_CALL(sdk_, pio_sm_unclaim(_, _));
 
   delete (i2s_);
@@ -210,8 +204,7 @@ TEST_F(DuplexSlaveI2STest, Start) {
   i2s_->Start();
 
   // We can ignore these call inside destructor
-  EXPECT_CALL(sdk_, pio_sm_is_claimed(pio_, sm_)).WillOnce(Return(false));
-  EXPECT_CALL(sdk_, pio_sm_unclaim(_, _)).Times(0);
+  EXPECT_CALL(sdk_, pio_sm_unclaim(_, _));
 
   delete (i2s_);
 
