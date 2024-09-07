@@ -97,8 +97,8 @@ int main() {
   while (true) {
     // Get Left/Right I2S samples from RX FIFO.
     // Wait until the FIFO is ready.
-    int32_t left_sample = (int32_t)sdk.pio_sm_get_blocking(i2s_pio, i2s_sm);
-    int32_t right_sample = (int32_t)sdk.pio_sm_get_blocking(i2s_pio, i2s_sm);
+    int32_t left_sample = i2s.GetFIFOBlocking();
+    int32_t right_sample = i2s.GetFIFOBlocking();
     // Signaling the start of processing to the external pin.
     // We have to complete the processing within 1 sample time.
     sdk.gpio_put(I2S_GPIO_PIN_DEBUG, true);
@@ -118,8 +118,8 @@ int main() {
 #endif
 
     // Put Left/Right I2S samples to TX FIFO.
-    sdk.pio_sm_put(i2s_pio, i2s_sm, left_sample);
-    sdk.pio_sm_put(i2s_pio, i2s_sm, right_sample);
+    i2s.PutFIFOBlocking(left_sample);
+    i2s.PutFIFOBlocking(right_sample);
     // Signaling the end of processing to the external pin.
     sdk.gpio_put(I2S_GPIO_PIN_DEBUG, false);
   }
