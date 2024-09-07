@@ -16,7 +16,14 @@ TEST(I2CMaster, Constructor) {
 
   using ::testing::_;
 
+  EXPECT_CALL(sdk, i2c_init(&i2c_inst, freq));
+  EXPECT_CALL(sdk, gpio_set_function(scl_pin, GPIO_FUNC_I2C));
+  EXPECT_CALL(sdk, gpio_set_function(sda_pin, GPIO_FUNC_I2C));
+  EXPECT_CALL(sdk, gpio_pull_up(scl_pin));
+  EXPECT_CALL(sdk, gpio_pull_up(sda_pin));
+
   ::pico_driver::I2CMaster i2c(sdk, i2c_inst, freq, scl_pin, sda_pin);
+
   // We can ignore these call inside destructor
   EXPECT_CALL(sdk, i2c_deinit(_));
 
@@ -32,6 +39,12 @@ TEST(I2CMaster, Destructor) {
   uint scl_pin = 18;
 
   using ::testing::_;
+
+  EXPECT_CALL(sdk, i2c_init(&i2c_inst, freq));
+  EXPECT_CALL(sdk, gpio_set_function(scl_pin, GPIO_FUNC_I2C));
+  EXPECT_CALL(sdk, gpio_set_function(sda_pin, GPIO_FUNC_I2C));
+  EXPECT_CALL(sdk, gpio_pull_up(scl_pin));
+  EXPECT_CALL(sdk, gpio_pull_up(sda_pin));
 
   ::pico_driver::I2CMaster i2c(sdk, i2c_inst, freq, scl_pin, sda_pin);
 
@@ -49,6 +62,11 @@ TEST(I2CMaster, ReadBlocking) {
   int return_value = 11;
 
   using ::testing::_;
+
+  // We can ignore these call inside constructor
+  EXPECT_CALL(sdk, i2c_init(&i2c_inst, _));
+  EXPECT_CALL(sdk, gpio_set_function(_, GPIO_FUNC_I2C)).Times(2);
+  EXPECT_CALL(sdk, gpio_pull_up(_)).Times(2);
 
   ::pico_driver::I2CMaster i2c(sdk, i2c_inst, 100 * 1000, 17, 23);
 
@@ -76,6 +94,11 @@ TEST(I2CMaster, WriteBlocking) {
 
   using ::testing::_;
 
+  // We can ignore these call inside constructor
+  EXPECT_CALL(sdk, i2c_init(&i2c_inst, _));
+  EXPECT_CALL(sdk, gpio_set_function(_, GPIO_FUNC_I2C)).Times(2);
+  EXPECT_CALL(sdk, gpio_pull_up(_)).Times(2);
+
   ::pico_driver::I2CMaster i2c(sdk, i2c_inst, 100 * 1000, 17, 23);
 
   EXPECT_CALL(sdk,
@@ -100,6 +123,11 @@ TEST(I2CMaster, IsDeviceExisting) {
   int return_value[] = {-1, 1};
 
   using ::testing::_;
+
+  // We can ignore these call inside constructor
+  EXPECT_CALL(sdk, i2c_init(&i2c_inst, _));
+  EXPECT_CALL(sdk, gpio_set_function(_, GPIO_FUNC_I2C)).Times(2);
+  EXPECT_CALL(sdk, gpio_pull_up(_)).Times(2);
 
   ::pico_driver::I2CMaster i2c(sdk, i2c_inst, 100 * 1000, 17, 23);
 
