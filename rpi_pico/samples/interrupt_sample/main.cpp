@@ -8,8 +8,6 @@
 
 #include "adau1361.hpp"
 #include "adau1361lower.hpp"
-#include "duplex_slave_i2s.pio.h"
-#include "duplex_slave_i2s_program_init.hpp"
 #include "duplexslavei2s.hpp"
 #include "hardware/pio.h"
 #include "i2cmaster.hpp"
@@ -22,7 +20,7 @@ int main() {
   const unsigned int i2c_scl_pin = 7;
   const unsigned int i2c_sda_pin = 6;
   const unsigned int mclock = 12'000'000;  // Hz
-  const unsigned int fs = 96'000;          // Hz
+  const unsigned int fs = 48'000;          // Hz
 
   /*
    * Pin usage of I2S. These pins must be consecutive.
