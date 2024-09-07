@@ -93,7 +93,7 @@ TEST_F(DuplexSlaveI2STest, Destructor_stopped) {
   {
     InSequence dummy;
 
-    EXPECT_CALL(sdk_, pio_sm_set_enabled(pio_, sm_, true));
+    EXPECT_CALL(sdk_, pio_sm_set_enabled(pio_, sm_, false));
 
     // Stop state machine.
     i2s_->Stop();
@@ -116,7 +116,7 @@ TEST_F(DuplexSlaveI2STest, Stop) {
 
   i2s_ = new ::pico_driver::DuplexSlaveI2S(sdk_, pio_, sm_, pin_base_);
 
-  EXPECT_CALL(sdk_, pio_sm_set_enabled(pio_, sm_, true));
+  EXPECT_CALL(sdk_, pio_sm_set_enabled(pio_, sm_, false));
 
   // Stop state machine.
   i2s_->Stop();
