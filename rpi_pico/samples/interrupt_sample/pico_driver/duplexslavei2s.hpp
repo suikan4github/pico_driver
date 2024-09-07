@@ -33,9 +33,11 @@ class DuplexSlaveI2S {
    */
   ~DuplexSlaveI2S();
 
-  virtual uint32_t GetStateMachine();
   virtual void Start();
   virtual void Stop();
+  virtual uint32_t GetStateMachine();
+  virtual int32_t GetFIFOBlocking();
+  virtual void PutFIFOBlocking(int32_t value);
 };
 
 #if __has_include(<gmock/gmock.h>)
@@ -44,6 +46,8 @@ class MockDuplexSlaveI2S : public DuplexSlaveI2S {
   MOCK_METHOD0(GetStateMachine, uint32_t(void));
   MOCK_METHOD0(Start, void(void));
   MOCK_METHOD0(Stop, void(void));
+  MOCK_METHOD1(PutFIFOBlocking, void(int32_t value));
+  MOCK_METHOD0(GetFIFOBlocking, int32_t());
 };
 #endif
 

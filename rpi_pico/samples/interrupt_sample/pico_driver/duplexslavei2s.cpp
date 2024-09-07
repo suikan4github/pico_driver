@@ -30,6 +30,14 @@ pico_driver::DuplexSlaveI2S::~DuplexSlaveI2S() {
 
 uint32_t pico_driver::DuplexSlaveI2S::GetStateMachine() { return sm_; }
 
+int32_t pico_driver::DuplexSlaveI2S::GetFIFOBlocking() {
+  return sdk_.pio_sm_get_blocking(pio_, sm_);
+}
+
+void pico_driver::DuplexSlaveI2S::PutFIFOBlocking(int32_t value) {
+  sdk_.pio_sm_put_blocking(pio_, sm_, value);
+}
+
 void pico_driver::DuplexSlaveI2S::Start() {
   // Assign these pins for PIO by GPIO mux.
   sdk_.pio_gpio_init(pio_, pin_base_);

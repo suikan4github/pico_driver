@@ -211,3 +211,49 @@ TEST_F(DuplexSlaveI2STest, Start) {
   delete (i2s_);
 
 }  // TEST_F(DuplexSlaveI2STest, Start)
+
+TEST_F(DuplexSlaveI2STest, GetFIFOBlocking) {
+  std::random_device rng;
+  int32_t ret_val = rng();
+  using ::testing::_;
+  using ::testing::Return;
+
+  // We can ignore these call in consturctor.
+  EXPECT_CALL(sdk_, pio_sm_claim(pio_, sm_));
+
+  i2s_ = new ::pico_driver::DuplexSlaveI2S(sdk_, pio_, sm_, pin_base_);
+
+  EXPECT_CALL(sdk_, pio_sm_get_blocking(pio_, sm_)).WillOnce(Return(ret_val));
+
+  // Must match the given state machine from constructor explicitlly.
+  EXPECT_EQ(i2s_->GetFIFOBlocking(), ret_val);
+
+  // We can ignore these call inside destructor
+  EXPECT_CALL(sdk_, pio_sm_unclaim(_, _));
+
+  delete (i2s_);
+
+}  // TEST_F(DuplexSlaveI2STest, GetFIFOBlocking)
+
+TEST_F(DuplexSlaveI2STest, PutFIFOBlocking) {
+  std::random_device rng;
+  int32_t value = rng();
+  using ::testing::_;
+  using ::testing::Return;
+
+  // We can ignore these call in consturctor.
+  EXPECT_CALL(sdk_, pio_sm_claim(pio_, sm_));
+
+  i2s_ = new ::pico_driver::DuplexSlaveI2S(sdk_, pio_, sm_, pin_base_);
+
+  EXPECT_CALL(sdk_, pio_sm_put_blocking(pio_, sm_, value));
+
+  // Must match the given state machine from constructor explicitlly.
+  i2s_->PutFIFOBlocking(value);
+
+  // We can ignore these call inside destructor
+  EXPECT_CALL(sdk_, pio_sm_unclaim(_, _));
+
+  delete (i2s_);
+
+}  // TEST_F(DuplexSlaveI2STest, PutFIFOBlocking)
