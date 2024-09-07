@@ -115,5 +115,10 @@ void pico_driver::DuplexSlaveI2S::Start() {
 }
 
 void pico_driver::DuplexSlaveI2S::Stop() {
+  // Stop state machine.
   sdk_.pio_sm_set_enabled(pio_, sm_, false);
+  // Clean up FIFO for the next processing.
+  sdk_.pio_sm_clear_fifos(pio_, sm_);
+  // We don't unclaim the state machine.
+  // The SM will be unclaimed by destructor.
 }
