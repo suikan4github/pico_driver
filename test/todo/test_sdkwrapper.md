@@ -1,4 +1,15 @@
 # test_SDKWrapper TDD
+- [x] Implement SDKWrapper::pio_sm_put_blocking(). 
+- [x] Create Test case SDKWrapper.pio_sm_put_blocking() to fail. 
+- [x] Make it success. 
+- [x] Remove the duplication. 
+
+- [x] Implement SDKWrapper::pio_sm_put(). 
+- [] Create Test case SDKWrapper.pio_sm_put() to fail. 
+- [] Make it success. 
+- [] Remove the duplication. 
+
+
 - [x] Implement SDKWrapper::pio_sm_clear_fifos(). 
 - [x] Create Test case SDKWrapper.pio_sm_clear_fifos() to fail. 
 - [x] Make it success. 

@@ -319,6 +319,16 @@ class SDKWrapper {
   virtual void pio_sm_put(PIO pio, uint sm, uint32_t data);
 
   /**
+   * @brief Write a word of data to a state machine's TX FIFO, blocking if the
+   * FIFO is full hardware_pio.
+   *
+   * \param pio The PIO instance; e.g.  pio0 or pio1
+   * \param sm State machine index (0..3)
+   * \param data the 32 bit data value
+   */
+  virtual void pio_sm_put_blocking(PIO pio, uint sm, uint32_t data);
+
+  /**
    * @brief Enable or disable a PIO state machine.
    *
    * @param pio The PIO instance; e.g. pio0 or pio1
@@ -345,6 +355,23 @@ class SDKWrapper {
    * instruction
    */
   virtual void sm_config_set_jmp_pin(pio_sm_config *c, uint pin);
+
+  /**
+   *  @brief Read a word of data from a state machine's RX FIFO
+   *
+   * @param pio The PIO instance; e.g. pio0 or pio1
+   * @param sm State machine index (0..3)
+   * @return uint32_t Data from FIFO.
+   * @details
+   * This is a raw FIFO access that does not check for emptiness. If the FIFO is
+   * empty, the hardware ignores the attempt to read from the FIFO (the FIFO
+   * remains in an empty state following the read) and the sticky RXUNDER flag
+   * for this FIFO is set in FDEBUG to indicate that the system tried to read
+   * from this FIFO when empty. The data returned by this function is undefined
+   * when the FIFO is empty.
+   *
+   */
+  virtual uint32_t pio_sm_get(PIO pio, uint sm);
 
   /**
    * @brief Read a word of data from a state machine’s RX FIFO, blocking if the
@@ -448,9 +475,11 @@ class MockSDKWrapper : public SDKWrapper {
   MOCK_METHOD4(pio_sm_init, int(PIO pio, uint sm, uint initial_pc,
                                 const pio_sm_config *config));
   MOCK_METHOD3(pio_sm_put, void(PIO pio, uint sm, uint32_t data));
+  MOCK_METHOD3(pio_sm_put_blocking, void(PIO pio, uint sm, uint32_t data));
   MOCK_METHOD3(pio_sm_set_enabled, void(PIO pio, uint sm, bool enabled));
   MOCK_METHOD2(pio_add_program, int(PIO pio, const pio_program_t *program));
   MOCK_METHOD2(sm_config_set_jmp_pin, void(pio_sm_config *c, uint pin));
+  MOCK_METHOD2(pio_sm_get, uint32_t(PIO pio, uint sm));
   MOCK_METHOD2(pio_sm_get_blocking, uint32_t(PIO pio, uint sm));
   MOCK_METHOD2(pio_sm_claim, void(PIO pio, uint sm));
   MOCK_METHOD2(pio_sm_unclaim, void(PIO pio, uint sm));

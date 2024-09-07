@@ -38,6 +38,11 @@ void pico_driver::SDKWrapper::pio_sm_put(PIO pio, uint sm, uint32_t data) {
   ::pio_sm_put(pio, sm, data);
 }
 
+void pico_driver::SDKWrapper::pio_sm_put_blocking(PIO pio, uint sm,
+                                                  uint32_t data) {
+  ::pio_sm_put_blocking(pio, sm, data);
+}
+
 void pico_driver::SDKWrapper::pio_sm_set_enabled(PIO pio, uint sm,
                                                  bool enabled) {
   ::pio_sm_set_enabled(pio, sm, enabled);
@@ -91,6 +96,10 @@ int ::pico_driver::SDKWrapper::i2c_write_blocking(i2c_inst_t* i2c, uint8_t addr,
 void pico_driver::SDKWrapper::sm_config_set_jmp_pin(pio_sm_config* c,
                                                     uint pin) {
   ::sm_config_set_jmp_pin(c, pin);
+}
+
+uint32_t pico_driver::SDKWrapper::pio_sm_get(PIO pio, uint sm) {
+  return ::pio_sm_get(pio, sm);
 }
 
 uint32_t pico_driver::SDKWrapper::pio_sm_get_blocking(PIO pio, uint sm) {

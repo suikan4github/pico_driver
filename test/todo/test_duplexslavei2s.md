@@ -1,4 +1,15 @@
 # test_DuplexSlaveI2S TDD
+- [] Implement DuplexSlaveI2S::PutFIFOBlocking(). 
+- [] Create Test case SDKWrapper.PUtFIFOBlocking() to fail. 
+- [] Make it success. 
+- [] Remove the duplication. 
+
+- [] Implement DuplexSlaveI2S::GetFIFOBlocking(). 
+- [] Create Test case SDKWrapper.GetFIFOBlocking() to fail. 
+- [] Make it success. 
+- [] Remove the duplication. 
+
+
 - [x] Implement DuplexSlaveI2S::GetStateMachine(). 
 - [x] Create Test case SDKWrapper.GetStateMachine() to fail. 
 - [x] Make it success. 

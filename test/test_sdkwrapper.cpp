@@ -49,10 +49,12 @@ FAKE_VOID_FUNC(sm_config_set_in_shift, pio_sm_config *, bool, bool, uint);
 FAKE_VOID_FUNC(sm_config_set_out_shift, pio_sm_config *, bool, bool, uint);
 FAKE_VALUE_FUNC(int, pio_sm_init, PIO, uint, uint, const pio_sm_config *);
 FAKE_VOID_FUNC(pio_sm_put, PIO, uint, uint32_t);
+FAKE_VOID_FUNC(pio_sm_put_blocking, PIO, uint, uint32_t);
+FAKE_VALUE_FUNC(uint32_t, pio_sm_get, PIO, uint);
+FAKE_VALUE_FUNC(uint32_t, pio_sm_get_blocking, PIO, uint);
 FAKE_VOID_FUNC(pio_sm_set_enabled, PIO, uint, bool);
 FAKE_VALUE_FUNC(int, pio_add_program, PIO, const pio_program_t *);
 FAKE_VOID_FUNC(sm_config_set_jmp_pin, pio_sm_config *, uint);
-FAKE_VALUE_FUNC(uint32_t, pio_sm_get_blocking, PIO, uint);
 FAKE_VOID_FUNC(pio_sm_claim, PIO, uint);
 FAKE_VOID_FUNC(pio_sm_unclaim, PIO, uint);
 FAKE_VALUE_FUNC(int, pio_claim_unused_sm, PIO, bool);
@@ -882,6 +884,43 @@ TEST(PicoWrapper, pio_sm_put) {
   RESET_FAKE(pio_sm_put);
 }  // TEST(PicoWrapper, pio_sm_put)
 
+TEST(PicoWrapper, pio_sm_put_blocking) {
+  std::random_device rng;
+  ::pico_driver::SDKWrapper pico;
+  pio_sm_config config;
+
+  PIO pio_array[] = {rng(), rng()};
+  uint sm_array[] = {rng(), rng()};
+  uint32_t data_array[] = {11, 13};
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(pio_sm_put_blocking);
+
+  // Trial call.
+  for (auto &&pio : pio_array)
+    for (auto &&sm : sm_array)
+      for (auto &&data : data_array) pico.pio_sm_put_blocking(pio, sm, data);
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(pio_sm_put_blocking_fake.call_count, 8);
+
+  // Check wether parameters are passed collectly.
+  int index = 0;
+  for (auto &&pio : pio_array)
+    for (auto &&sm : sm_array)
+      for (auto &&data : data_array) {
+        // Check the data from test spy. Call order.
+        ASSERT_EQ(fff.call_history[index], (void *)pio_sm_put_blocking);
+        // Check the data from test spy. : Parameters.
+        ASSERT_EQ(pio_sm_put_blocking_fake.arg0_history[index], pio);
+        ASSERT_EQ(pio_sm_put_blocking_fake.arg1_history[index], sm);
+        ASSERT_EQ(pio_sm_put_blocking_fake.arg2_history[index], data);
+        index++;
+      }
+
+  RESET_FAKE(pio_sm_put_blocking);
+}  // TEST(PicoWrapper, pio_sm_put_blocking)
+
 TEST(PicoWrapper, pio_sm_set_enabled) {
   std::random_device rng;
   ::pico_driver::SDKWrapper pico;
@@ -988,6 +1027,46 @@ TEST(PicoWrapper, sm_config_set_jmp_pin) {
   RESET_FAKE(sm_config_set_jmp_pin);
 }  // TEST(PicoWrapper, sm_config_set_jmp_pin)
 
+TEST(PicoWrapper, pio_sm_get) {
+  std::random_device rng;
+  ::pico_driver::SDKWrapper pico;
+  pio_sm_config config;
+
+  PIO pio_array[] = {rng(), rng()};
+  uint sm_array[] = {rng(), rng()};
+  uint32_t return_vals_array[] = {1, 2, 3, 4};
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(pio_sm_get);
+
+  SET_RETURN_SEQ(pio_sm_get, return_vals_array, std::size(return_vals_array));
+
+  // Check wether return value is correct.
+  int index = 0;
+  for (auto &&pio : pio_array)
+    for (auto &&sm : sm_array) {
+      ASSERT_EQ(pico.pio_sm_get(pio, sm), return_vals_array[index]);
+      index++;
+    }
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(pio_sm_get_fake.call_count, 4);
+
+  // Check wether parameters are passed collectly.
+  index = 0;
+  for (auto &&pio : pio_array)
+    for (auto &&sm : sm_array) {
+      // Check the data from test spy. Call order.
+      ASSERT_EQ(fff.call_history[index], (void *)pio_sm_get);
+      // Check the data from test spy. : Parameters.
+      ASSERT_EQ(pio_sm_get_fake.arg0_history[index], pio);
+      ASSERT_EQ(pio_sm_get_fake.arg1_history[index], sm);
+      index++;
+    }
+
+  RESET_FAKE(pio_sm_get);
+}  // TEST(PicoWrapper, pio_sm_get)
+
 TEST(PicoWrapper, pio_sm_get_blocking) {
   std::random_device rng;
   ::pico_driver::SDKWrapper pico;
@@ -1028,7 +1107,6 @@ TEST(PicoWrapper, pio_sm_get_blocking) {
 
   RESET_FAKE(pio_sm_get_blocking);
 }  // TEST(PicoWrapper, pio_sm_get_blocking)
-
 TEST(PicoWrapper, pio_sm_claim) {
   std::random_device rng;
   ::pico_driver::SDKWrapper pico;
