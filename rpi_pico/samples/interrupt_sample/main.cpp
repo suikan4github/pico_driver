@@ -10,6 +10,7 @@
 #include "adau1361lower.hpp"
 #include "duplex_slave_i2s.pio.h"
 #include "duplex_slave_i2s_program_init.hpp"
+#include "duplexslavei2s.hpp"
 #include "hardware/pio.h"
 #include "i2cmaster.hpp"
 #include "pico/binary_info.h"
@@ -89,9 +90,14 @@ int main() {
   // We have to wait for the RX FIFO ASAP.
   PIO i2s_pio = pio0;
   uint i2s_sm = 0;
+#if 0
   uint i2s_offset = sdk.pio_add_program(i2s_pio, &duplex_slave_i2s_program);
   ::duplex_slave_i2s_program_init(i2s_pio, i2s_sm, i2s_offset,
                                   I2S_GPIO_PIN_BASE);
+#else
+  ::pico_driver::DuplexSlaveI2S i2s(sdk, i2s_pio, I2S_GPIO_PIN_BASE);
+  i2s.Start();
+#endif
 
   // Audio talk thorough
   while (true) {

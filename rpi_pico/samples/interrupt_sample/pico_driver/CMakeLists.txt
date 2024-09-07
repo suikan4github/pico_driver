@@ -23,6 +23,7 @@ else()  # Is target RasPi Pico?
                                 adau1361.cpp
                                 adau1361lower.cpp
                                 i2cmaster.cpp
+                                duplexslavei2s.cpp
                                 duplex_slave_i2s_program_init.cpp)
                 target_include_directories(driver INTERFACE .)
                 target_link_libraries(driver INTERFACE pico_stdlib)
