@@ -397,6 +397,14 @@ class SDKWrapper {
    * @return false if otherwise.
    */
   virtual bool pio_sm_is_claimed(PIO pio, uint sm);
+
+  /**
+   * @brief Clear a state machine's TX and RX FIFOs
+   *
+   * @param pio The PIO instance; e.g. \ref pio0 or \ref pio1
+   * @param sm State machine index (0..3)
+   */
+  virtual void pio_sm_clear_fifos(PIO pio, uint sm);
 };
 
 #if __has_include(<gmock/gmock.h>)
@@ -448,6 +456,7 @@ class MockSDKWrapper : public SDKWrapper {
   MOCK_METHOD2(pio_sm_unclaim, void(PIO pio, uint sm));
   MOCK_METHOD2(pio_claim_unused_sm, int(PIO pio, bool required));
   MOCK_METHOD2(pio_sm_is_claimed, bool(PIO pio, uint sm));
+  MOCK_METHOD2(pio_sm_clear_fifos, void(PIO pio, uint sm));
 };
 #endif  // __has_include(<gmock/gmock.h>)
 };  // namespace pico_driver
