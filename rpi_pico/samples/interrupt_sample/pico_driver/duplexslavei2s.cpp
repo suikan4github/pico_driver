@@ -111,4 +111,6 @@ void pico_driver::DuplexSlaveI2S::Start() {
   sdk_.pio_sm_set_enabled(pio_, sm_, true);
 }
 
-void pico_driver::DuplexSlaveI2S::Stop() { sdk_.pio_sm_unclaim(pio_, sm_); }
+void pico_driver::DuplexSlaveI2S::Stop() {
+  sdk_.pio_sm_set_enabled(pio_, sm_, true);
+}

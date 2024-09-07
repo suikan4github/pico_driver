@@ -64,6 +64,10 @@ TEST_F(DuplexSlaveI2STest, Destructor) {
   using ::testing::_;
   using ::testing::Return;
 
+  // We can ignore these call in consturctor.
+  EXPECT_CALL(sdk_, pio_sm_claim(pio_, sm_));
+  EXPECT_CALL(sdk_, pio_claim_unused_sm(_, _)).Times(0);
+
   i2s_ = new ::pico_driver::DuplexSlaveI2S(sdk_, pio_, sm_, pin_base_);
 
   EXPECT_CALL(sdk_, pio_sm_is_claimed(pio_, sm_)).WillOnce(Return(true));
@@ -80,17 +84,22 @@ TEST_F(DuplexSlaveI2STest, Destructor_stopped) {
   using ::testing::InSequence;
   using ::testing::Return;
 
+  // We can ignore these call in consturctor.
+  EXPECT_CALL(sdk_, pio_sm_claim(pio_, sm_));
+  EXPECT_CALL(sdk_, pio_claim_unused_sm(_, _)).Times(0);
+
   i2s_ = new ::pico_driver::DuplexSlaveI2S(sdk_, pio_, sm_, pin_base_);
 
   {
     InSequence dummy;
-    EXPECT_CALL(sdk_, pio_sm_unclaim(pio_, sm_));
+
+    EXPECT_CALL(sdk_, pio_sm_set_enabled(pio_, sm_, true));
 
     // Stop state machine.
     i2s_->Stop();
 
-    EXPECT_CALL(sdk_, pio_sm_is_claimed(pio_, sm_)).WillOnce(Return(false));
-    EXPECT_CALL(sdk_, pio_sm_unclaim(_, _)).Times(0);
+    EXPECT_CALL(sdk_, pio_sm_is_claimed(pio_, sm_)).WillOnce(Return(true));
+    EXPECT_CALL(sdk_, pio_sm_unclaim(_, _));
   }
   delete (i2s_);
 
@@ -99,6 +108,7 @@ TEST_F(DuplexSlaveI2STest, Destructor_stopped) {
 TEST_F(DuplexSlaveI2STest, Stop) {
   std::random_device rng;
   using ::testing::_;
+  using ::testing::Return;
 
   // We can ignore these call in consturctor.
   EXPECT_CALL(sdk_, pio_sm_claim(pio_, sm_));
@@ -106,10 +116,14 @@ TEST_F(DuplexSlaveI2STest, Stop) {
 
   i2s_ = new ::pico_driver::DuplexSlaveI2S(sdk_, pio_, sm_, pin_base_);
 
-  EXPECT_CALL(sdk_, pio_sm_unclaim(pio_, sm_));
+  EXPECT_CALL(sdk_, pio_sm_set_enabled(pio_, sm_, true));
 
   // Stop state machine.
   i2s_->Stop();
+
+  // We can ignore these call inside destructor
+  EXPECT_CALL(sdk_, pio_sm_is_claimed(pio_, sm_)).WillOnce(Return(true));
+  EXPECT_CALL(sdk_, pio_sm_unclaim(_, _));
 
   delete (i2s_);
 
@@ -129,8 +143,8 @@ TEST_F(DuplexSlaveI2STest, GetStateMachine) {
   EXPECT_EQ(i2s_->GetStateMachine(), sm_);
 
   // We can ignore these call inside destructor
-  EXPECT_CALL(sdk_, pio_sm_is_claimed(pio_, sm_)).WillOnce(Return(false));
-  EXPECT_CALL(sdk_, pio_sm_unclaim(_, _)).Times(0);
+  EXPECT_CALL(sdk_, pio_sm_is_claimed(pio_, sm_)).WillOnce(Return(true));
+  EXPECT_CALL(sdk_, pio_sm_unclaim(_, _));
 
   delete (i2s_);
 
