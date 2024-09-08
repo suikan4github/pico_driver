@@ -1,8 +1,10 @@
 /**
  * @file adau1361.hpp
  *
- * @date 2018/05/11
- * @author: Seiichi "Suikan" Horie
+ * @brief ADAU1361A CODEC Control.
+ * @date 2024/Sep/08
+ * @author Seiichi Horie
+ * @copyright Copyright 2024 Seiichi Horie
  */
 
 #ifndef MURASAKI_TP_ADAU1361_HPP_
@@ -11,16 +13,40 @@
 #include <i2cmasterinterface.hpp>
 
 #include "adau1361lower.hpp"
+/**
+ * \brief Audio CODEC Namespace.
+ */
 namespace codec {
 
+/**
+ * \brief Analog Device ADAU1361A audio codec control class.
+ * \details
+ * Control the ADAU1361A through the lower level controller class.
+ * This lower level controller class is given through the adau1361_lower
+ * parameter of the constructor.
+ *
+ */
 class Adau1361 {
  public:
-  enum CodecChannel { LineInput, AuxInput, LineOutput, HeadphoneOutput };
+  /**
+   * @brief Signal path definition.
+   * @details
+   * This type specify the CODEC input / output channel to change the gain and
+   * mute.
+   * @sa SetGain() and Mute().
+   */
+  enum CodecChannel {
+    LineInput,       ///< Physical input channel as line in audio.
+    AuxInput,        ///< Physical input channel as aux in audio.
+    LineOutput,      ///< Physical output channel as line out audio.
+    HeadphoneOutput  ///< Physical output channel as head phone out audio.
+  };
 
   /**
    * \brief constructor.
    * \param fs Sampling frequency[Hz]
    * @param master_clock Input master clock frequency to the MCLK pin[Hz]
+   * @param adau1361_lower Helper object.
    * \details
    *   initialize the internal variables.
    *   This constructor assumes the codec receive a master clock from outside.
@@ -51,10 +77,10 @@ class Adau1361 {
    *   @li 12288000
    *   @li 24576000
    *
-   *   Note : Due to the limitation of the MCLOCK of hardware and PLL,
+   *   Note : Due to the limitation of the MCLK of hardware and PLL,
    *   only 8, 12, 13, 14.4, 12.288, 19.2MHz are tested
    *
-   *   The analog signals are routed as following :
+   *   The analog signals are routed to the physical pins as following :
    *   @li Line In  : LINN/RINN single ended.
    *   @li Aux In : LAUX/RAUX input
    *   @li LINE out : LOUTP/ROUTP single ended
@@ -69,14 +95,16 @@ class Adau1361 {
    *   This method starts the ADAU1361 AD/DA conversion and I2S communication.
    *
    *   The line in is configured to use the Single-End negative input. This is
-   * funny but ADAU1361 datasheet specifies to do it. The positive in and diff
+   * funny but ADAU1361 data sheet specifies to do it. The positive in and diff
    * in are killed. All biases are set as "normal".
    *
-   *   The CODEC is configured as master mode. That mean, bclk and WS are
+   *   The CODEC is configured as master mode. That mean, BCLK and WS are
    * given from ADAU1361 to the micro processor.
    *
    *   At initial state, ADAU1361 is set as :
-   *   @li All input and output channels are set as 0.0dB and muted.
+   *
+   * @li All input and output channels are set as 0.0dB.
+   * @li All input and output channels are muted.
    */
   virtual void Start(void);
   /**
@@ -93,7 +121,7 @@ class Adau1361 {
   /**
    * @brief Mute the specific channel.
    * @param channel Channel to mute on / off
-   * @param mute On if true, off if false.
+   * @param mute Mute-on if true. Mute-off if false.
    */
   virtual void Mute(CodecChannel channel, bool mute = true);
 

@@ -28,7 +28,7 @@ void ::codec::Adau1361Lower::SendCommandTable(const uint8_t table[][3],
   for (int i = 0; i < rows; i++) SendCommand(table[i], 3);
 }
 
-bool ::codec::Adau1361Lower::IsI2CDeivceExisting() {
+bool ::codec::Adau1361Lower::IsI2CDeviceExisting() {
   return (i2c_.IsDeviceExisting(device_addr_));
 }
 

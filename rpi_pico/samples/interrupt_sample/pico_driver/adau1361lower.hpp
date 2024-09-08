@@ -1,8 +1,10 @@
 /**
- * @file adau1361.hpp
+ * @file adau1361lower.hpp
  *
- * @date 2018/05/11
- * @author: Seiichi "Suikan" Horie
+ * @brief Lower class for the ADAU1361.
+ * @date 2024/Sep/08
+ * @author Seiichi Horie
+ * @copyright Copyright 2024 Seiichi Horie
  */
 
 #ifndef _ADAU1361LOWER_HPP_
@@ -13,9 +15,11 @@
 namespace codec {
 
 /**
- * @brief lower part of the ADAU1361 CODEC.
+ * @brief lower part of the Adau1361 CODEC controller class.
  * @details
- * To initialize codec, follow the sequence
+ * This class is helper class for the Adau1361 class.
+ *
+ * To initialize codec, follow the sequence from the Adau1361 class.
  * @li InitializeCore()
  * @li DisablePLL()
  * @li ConfigurePll()
@@ -30,6 +34,13 @@ namespace codec {
  */
 class Adau1361Lower {
  public:
+  /**
+   * @brief Construct a new object
+   *
+   * @param controller I2C master controller.
+   * @param i2c_device_addr ADAU1361A 7bits I2C device address. Refer device
+   * deta sheet for details.
+   */
   Adau1361Lower(::pico_driver::I2CMasterInterface& controller,
                 unsigned int i2c_device_addr)
       : i2c_(controller), device_addr_(i2c_device_addr) {};
@@ -39,10 +50,10 @@ class Adau1361Lower {
    *  Service function for the ADAu1361 board implementer.
    *
    * \brief send one command to ADAU1361.
-   * \param command command data array. It have to have register addess of
+   * \param command Command data array. It have to have register address of
    * ADAU1361 in first two bytes.
-   * \param size number of bytes in the command,
-   * including the regsiter address.
+   * \param size Number of bytes in the command,
+   * including the register address.
    * \details Send one complete command to
    * ADAU3161 by I2C. In the typical case, the command length is 3.
    * \li command[0] : USB of the register address. 0x40.
@@ -51,16 +62,17 @@ class Adau1361Lower {
    */
   virtual void SendCommand(const uint8_t command[], int size);
   /**
-   * \brief send one command to ADAU1361.
-   * \param table command table. All commands are stored in one row. Each row
-   * has only 1 byte data after reg address.
-   * \param rows number of the rows in
-   * the table.
-   * \details Service function for the ADAu1361 board implementer.
+   * \brief Send multiple commands to ADAU1361.
+   * \param table Command table. All commands are stored in one row. Each row
+   * has only 1 byte data after reg address. In other words, each row has 3
+   * bytes length.
+   * \param rows Number of the rows in the table.
+   * \details Service
+   * function for the ADAu1361 board implementer.
    *
    * Send a list of command to ADAU1361. All commands has 3 bytes length.
    * That mean, after two byte register address, only 1 byte data pay load is
-   * allowed. Commadns are sent by I2C
+   * allowed. Commands are sent by I2C
    */
   virtual void SendCommandTable(const uint8_t table[][3], int rows);
 
@@ -68,7 +80,7 @@ class Adau1361Lower {
    * \brief Check whether I2C device exist or not.
    * \return true if device exist. false if not exist.
    */
-  virtual bool IsI2CDeivceExisting();
+  virtual bool IsI2CDeviceExisting();
 
   /**
    * @brief Reset the core for fresh procedure.
@@ -78,7 +90,7 @@ class Adau1361Lower {
   virtual void InitializeCore();
 
   /**
-   * @brief stop PLL to re-proguram.
+   * @brief stop PLL to re-program.
    * @details
    * Must call after InitializeCore().
    */
@@ -97,7 +109,7 @@ class Adau1361Lower {
   /**
    * @brief Initialize the PLL with given fs and master clock.
    * @param fs Sampling Frequency [Hz].
-   * @param master_clock Master Clock innput to the CODEC [Hz].
+   * @param master_clock Master Clock input to the CODEC [Hz].
    * @details
    * At first, initialize the PLL based on the given fst and master clock.
    * Then, setup the Converter sampling rate.
@@ -108,6 +120,7 @@ class Adau1361Lower {
 
   /**
    * @brief Initialize the SRC with given fs clock.
+   * @param fs Sampling frequency in Hz.
    * @details
    * Must call after EnableCore().
    */
@@ -144,9 +157,10 @@ class Adau1361Lower {
   /**
    * \brief Set the line input gain and enable the relevant mixer.
    * \param left_gain Gain by dB. [6 .. -12],  The gain value outside of the
-   * acceptable range will be saturated. \param right_gain Gain by dB. [6 ..
+   * acceptable range will be saturated.
+   * \param right_gain Gain by dB. [6 ..
    * -12], The gain value outside of the acceptable range will be saturated.
-   * \param mute set true to mute
+   * \param mute True if mute-on, false if mute-off
    * \details
    *   This gain control function uses the single-end
    * negative input only. Other input signal of the line in like positive
@@ -160,9 +174,10 @@ class Adau1361Lower {
   /**
    * \brief Set the aux input gain and enable the relevant mixer.
    * \param left_gain Gain by dB. [6 .. -12], The gain value outside of the
-   * acceptable range will be saturated. \param right_gain Gain by dB. [6 ..
+   * acceptable range will be saturated.
+   * \param right_gain Gain by dB. [6 ..
    * -12], The gain value outside of the acceptable range will be saturated.
-   * \param mute set true to mute
+   * \param mute True if mute-on, false if mute-off
    * \details
    *   Other input lines are not killed. To kill it, user have to mute them
    * explicitly.
@@ -173,9 +188,10 @@ class Adau1361Lower {
   /**
    * \brief Set the line output gain and enable the relevant mixer.
    * \param left_gain Gain by dB. [6 .. -12], The gain value outside of the
-   * acceptable range will be saturated. \param right_gain Gain by dB. [6 ..
+   * acceptable range will be saturated.
+   * \param right_gain Gain by dB. [6 ..
    * -12], The gain value outside of the acceptable range will be saturated.
-   * \param mute set true to mute
+   * \param mute True if mute-on, false if mute-off
    * \details
    *   Other output lines are not killed. To kill it, user have to mute them
    * explicitly.
@@ -187,9 +203,10 @@ class Adau1361Lower {
   /**
    * \brief Set the headphone output gain and enable the relevant mixer.
    * \param left_gain Gain by dB. [6 .. -12], The gain value outside of the
-   * acceptable range will be saturated. \param right_gain Gain by dB. [6 ..
+   * acceptable range will be saturated.
+   * \param right_gain Gain by dB. [6 ..
    * -12], The gain value outside of the acceptable range will be saturated.
-   * \param mute set true to mute
+   * \param mute True if mute-on, false if mute-off
    * \details
    *   Other out line like line in are not killed. To kill it, user have to
    * mute them explicitly.
@@ -210,7 +227,7 @@ class MockAdau1361Lower : public Adau1361Lower {
       : Adau1361Lower(controller, 31) {};
   MOCK_METHOD2(SendCommand, void(const uint8_t command[], int size));
   MOCK_METHOD2(SendCommandTable, void(const uint8_t table[][3], int rows));
-  MOCK_METHOD0(IsI2CDeivceExisting, bool());
+  MOCK_METHOD0(IsI2CDeviceExisting, bool());
   MOCK_METHOD0(InitializeCore, void());
   MOCK_METHOD0(DisablePLL, void());
   MOCK_METHOD0(WaitPllLock, void());

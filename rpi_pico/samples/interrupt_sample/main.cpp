@@ -26,7 +26,7 @@ int main() {
 
   /*
    * Pin usage of I2S. These pins must be consecutive.
-   * The usage is defined by its relatvie position.
+   * The usage is defined by its relative position.
    *
    * 10 : SDOUT
    * 11 : SDIN
@@ -40,7 +40,7 @@ int main() {
 
   // Init USB-Serial port by 9600bps, 1stop bit, 8bit.
   // add following lines to CMakeLists.txt
-  // to enable usb-seial and disable serial.
+  // to enable usb-serial and disable serial.
   //     pico_enable_stdio_usb($ { PROJECT_NAME } 1)
   //     pico_enable_stdio_uart($ { PROJECT_NAME } 0)
   sdk.stdio_init_all();
@@ -57,7 +57,7 @@ int main() {
   bi_decl(bi_1pin_with_name(I2S_GPIO_PIN_DEBUG, "DEBUG OUT"));
 
 #ifdef I2S_DEBUG
-  // Delay cound down to connect the serial termail for debugging.
+  // Delay count down to connect the serial terminal for debugging.
   uint const count = 7;
   printf("%d\n", count);
   for (size_t i = 0; i < count; i++) {
@@ -77,7 +77,7 @@ int main() {
   const uint LED_PIN = PICO_DEFAULT_LED_PIN;
   sdk.gpio_init(LED_PIN);
   sdk.gpio_set_dir(LED_PIN, true);
-  // Debug pin to watch the processing time by oscillo scope.
+  // Debug pin to watch the processing time by oscilloscope.
   // This pin is "H" during the audio processing.
   sdk.gpio_init(I2S_GPIO_PIN_DEBUG);
   sdk.gpio_set_dir(I2S_GPIO_PIN_DEBUG, true);

@@ -38,7 +38,7 @@ void ::codec::Adau1361::Start(void) {
 
   // Check if target device exist.
   // send no payload. Just enquire address.
-  assert(adau1361_lower_.IsI2CDeivceExisting());
+  assert(adau1361_lower_.IsI2CDeviceExisting());
 
   // then, start of configuration as register address order
   adau1361_lower_.InitializeCore();

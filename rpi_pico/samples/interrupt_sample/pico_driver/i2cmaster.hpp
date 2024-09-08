@@ -1,9 +1,11 @@
 /**
  * @file i2cmaster.hpp
  *
+ * @brief I2C Master Controller.
  * @date 2024/Aug/16
- * @author: Seiichi  Horie
+ * @author Seiichi  Horie
  * @brief I2C master Implementation.
+ * @copyright COPYRIGHT 2024 Seiichi Horie
  */
 
 #ifndef _I2CMASTER_HPP_
@@ -18,7 +20,7 @@
 typedef int i2c_inst_t;
 #define PICO_ERROR_GENERIC -1
 #define GPIO_FUNC_I2C 11
-#endif  //__has_include(<hardware/i2c.h>)
+#endif  // __has_include(<hardware/i2c.h>)
 
 #include "i2cmasterinterface.hpp"
 #include "sdkwrapper.hpp"
@@ -30,7 +32,7 @@ class I2CMaster : public I2CMasterInterface {
    * @brief Initialize the given I2C port and setup the pins.
    * @param sdk Object of the SDKWrapper class.
    * @param i2c i2c_inst_t type &. *I2C0 or *I2C1
-   * @param clock_freq normaly 100000 or 400000[Hz].
+   * @param clock_freq Usually 100,000 or 400,000[Hz].
    * @param scl_pin GPIO pin #
    * @param sda_pin GPIO pin #
    * @details

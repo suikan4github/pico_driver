@@ -1,9 +1,12 @@
 /**
  * @file i2cmasterinterface.hpp
  *
+ * @details Interface type to allow the GoogleTest without depending to RasPi
+ * code.
  * @date 2024/Aug/16
- * @author: Seiichi  Horie
+ * @author Seiichi  Horie
  * @brief I2C master Interface.
+ * @copyright COPYRIGHT 2024 Seiichi Horie
  */
 
 #ifndef _I2CMASTERINTERFACE_HPP_
@@ -17,7 +20,10 @@ typedef unsigned uint;
 #endif
 
 namespace pico_driver {
-
+/**
+ * @brief Interface type to allow the GoogleTest without depending to RasPi
+ *
+ */
 class I2CMasterInterface {
  public:
   virtual ~I2CMasterInterface() {}

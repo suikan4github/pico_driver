@@ -1,3 +1,11 @@
+/**
+ * @file sdkwrapper.hpp
+ * @brief SDK wrapper class.
+ * @date 2024/Sep/08
+ * @author Seiichi Horie
+ * @copyright Copyright 2024 Seiichi Horie
+ */
+
 #ifndef __DRIVER_PICOWRAPPER_HPP__
 #define __DRIVER_PICOWRAPPER_HPP__
 
@@ -20,14 +28,20 @@ typedef unsigned int pio_program_t;
 #include <stdint.h>
 #include <stdlib.h>
 #endif
+
+/**
+ * @brief Collection of the RP2040/RP2350 control.
+ *
+ */
 namespace pico_driver {
 /**
  * @brief Wrapper class for the RasPi Pico SDK functions.
  * @details
- * We need following line in the CMakeLitst.txt
- * @code
- *         target_link_libraries(${PROJECT_NAME} pico_stdlib hardware_i2c)
- * @endcode
+ * The member function declaration follow the SDK APIs. Also, the doxygen
+ * comments are copied from the RasPi Pico SDK source code.
+ *
+ * This wrapper class is convenient for the dependency injection to allow
+ * the unit test.
  */
 class SDKWrapper {
  public:
@@ -44,7 +58,7 @@ class SDKWrapper {
    * true if at least one output was successfully initialized, false otherwise.
    * @details
    * Call this method once you have set up your clocks
-   * to enable the stdio support for UART, USB, semihosting,
+   * to enable the stdio support for UART, USB, semi-hosting,
    * and RTT based on the presence of the respective libraries in the binary.
    *
    * When stdio_usb is configured, this method can be optionally made to block,
@@ -99,7 +113,7 @@ class SDKWrapper {
   /**
    * @brief Drive a single GPIO high/low.
    * @param gpio GPIO number.
-   * @param bool If false clear the GPIO, otherwise set it.
+   * @param value If false clear the GPIO, otherwise set it.
    */
   virtual void gpio_put(uint gpio, bool value);
 
@@ -428,7 +442,7 @@ class SDKWrapper {
   /**
    * @brief Clear a state machine's TX and RX FIFOs
    *
-   * @param pio The PIO instance; e.g. \ref pio0 or \ref pio1
+   * @param pio The PIO instance; e.g.  pio0 or pio1
    * @param sm State machine index (0..3)
    */
   virtual void pio_sm_clear_fifos(PIO pio, uint sm);
