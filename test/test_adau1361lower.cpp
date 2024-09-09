@@ -30,8 +30,7 @@ TEST_F(Adau1361LowerTest, SendCommand) {
   uint8_t cmd[7];
 
   // nostop parameter must be false. That mean, stop condition of I2C.
-  EXPECT_CALL(i2c_,
-              WriteBlocking(device_address_, cmd, sizeof(cmd), false));
+  EXPECT_CALL(i2c_, WriteBlocking(device_address_, cmd, sizeof(cmd), false));
   codec_lower_->SendCommand(cmd, sizeof(cmd));
 }
 
@@ -81,8 +80,8 @@ TEST_F(Adau1361LowerTest, IsI2CDeviceExist) {
         .WillOnce(Return(false));
     EXPECT_CALL(i2c_, IsDeviceExisting(device_address_)).WillOnce(Return(true));
   }
-  EXPECT_FALSE(codec_lower_->IsI2CDeivceExisting());
-  EXPECT_TRUE(codec_lower_->IsI2CDeivceExisting());
+  EXPECT_FALSE(codec_lower_->IsI2CDeviceExisting());
+  EXPECT_TRUE(codec_lower_->IsI2CDeviceExisting());
 }
 
 TEST_F(Adau1361LowerTest, WaitPllLock) {
@@ -107,9 +106,9 @@ TEST_F(Adau1361LowerTest, WaitPllLock) {
     // The write command give only 2 byte length register address.
     EXPECT_CALL(i2c_,
                 WriteBlocking(device_address_,  // Arg 0 : I2C Address.
-                                   NotNull(),  // Arg 1 : Data buffer address.
-                                   2,  // Arg 2 : Data buffer length to send.
-                                   true))  // Arg 3 : true to repeated start.
+                              NotNull(),        // Arg 1 : Data buffer address.
+                              2,      // Arg 2 : Data buffer length to send.
+                              true))  // Arg 3 : true to repeated start.
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(lock_status_address)))
@@ -135,9 +134,9 @@ TEST_F(Adau1361LowerTest, WaitPllLock) {
     // The write command give only 2 byte length register address.
     EXPECT_CALL(i2c_,
                 WriteBlocking(device_address_,  // Arg 0 : I2C Address.
-                                   NotNull(),  // Arg 1 : Data buffer address.
-                                   2,  // Arg 2 : Data buffer length to send.
-                                   true))  // Arg 3 : true to repeated start.
+                              NotNull(),        // Arg 1 : Data buffer address.
+                              2,      // Arg 2 : Data buffer length to send.
+                              true))  // Arg 3 : true to repeated start.
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(lock_status_address)))
@@ -180,9 +179,9 @@ TEST_F(Adau1361LowerTest, InititializeCore) {
 
   EXPECT_CALL(i2c_,
               WriteBlocking(device_address_,  // Arg 0 : I2C Address.
-                                 NotNull(),  // Arg 1 : Data buffer address.
-                                 3,       // Arg 2 : Data buffer length to send.
-                                 false))  // Arg 3 : false to stop.
+                            NotNull(),        // Arg 1 : Data buffer address.
+                            3,       // Arg 2 : Data buffer length to send.
+                            false))  // Arg 3 : false to stop.
       .With(Args<1,  // parameter position of the array : 0 origin.
                  2>  // parameter position of the size : 0 origin.
             (ElementsAreArray(init_core)));
@@ -209,9 +208,9 @@ TEST_F(Adau1361LowerTest, DisablePLL) {
 
   EXPECT_CALL(i2c_,
               WriteBlocking(device_address_,  // Arg 0 : I2C Address.
-                                 NotNull(),  // Arg 1 : Data buffer address.
-                                 8,       // Arg 2 : Data buffer length to send.
-                                 false))  // Arg 3 : false to stop.
+                            NotNull(),        // Arg 1 : Data buffer address.
+                            8,       // Arg 2 : Data buffer length to send.
+                            false))  // Arg 3 : false to stop.
       .With(Args<1,  // parameter position of the array : 0 origin.
                  2>  // parameter position of the size : 0 origin.
             (ElementsAreArray(disable_pll)));
@@ -1051,12 +1050,12 @@ TEST_F(Adau1361LowerTest, SetLineInputGain_mute) {
     uint8_t ltxbuf1[3] = {0x40, 0x0a, 0x01};
 
     // Expectation of mute
-    EXPECT_CALL(i2c_,
-                WriteBlocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : false to stop.
+    EXPECT_CALL(
+        i2c_,
+        WriteBlocking(device_address_,  // Arg 0 : I2C Address.
+                      NotNull(),        // Arg 1 : Data buffer address.
+                      sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
+                      false))           // Arg 3 : false to stop.
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(ltxbuf1)))
@@ -1067,12 +1066,12 @@ TEST_F(Adau1361LowerTest, SetLineInputGain_mute) {
     uint8_t rtxbuf1[3] = {0x40, 0x0c, 0x01};
 
     // Expectation of mute.
-    EXPECT_CALL(i2c_,
-                WriteBlocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : false to stop.
+    EXPECT_CALL(
+        i2c_,
+        WriteBlocking(device_address_,  // Arg 0 : I2C Address.
+                      NotNull(),        // Arg 1 : Data buffer address.
+                      sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
+                      false))           // Arg 3 : false to stop.
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(rtxbuf1)))
@@ -1101,12 +1100,12 @@ TEST_F(Adau1361LowerTest, SetLineInputGain_overgain) {
                           0x0f};  // in the case of gain=6dB, bit 3:1 are 111.
 
     //  expectation of gain setting.
-    EXPECT_CALL(i2c_,
-                WriteBlocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : false to stop.
+    EXPECT_CALL(
+        i2c_,
+        WriteBlocking(device_address_,  // Arg 0 : I2C Address.
+                      NotNull(),        // Arg 1 : Data buffer address.
+                      sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
+                      false))           // Arg 3 : false to stop.
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(ltxbuf1)))
@@ -1117,12 +1116,12 @@ TEST_F(Adau1361LowerTest, SetLineInputGain_overgain) {
                           0x0f};  // in the case of gain=6dB, bit 3:1 are 111
 
     //  expectation of gain setting.
-    EXPECT_CALL(i2c_,
-                WriteBlocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : false to stop.
+    EXPECT_CALL(
+        i2c_,
+        WriteBlocking(device_address_,  // Arg 0 : I2C Address.
+                      NotNull(),        // Arg 1 : Data buffer address.
+                      sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
+                      false))           // Arg 3 : false to stop.
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(rtxbuf1)))
@@ -1152,12 +1151,12 @@ TEST_F(Adau1361LowerTest, SetLineInputGain_undergain) {
     // Set the address to read.
 
     //  expectation of -12dB.
-    EXPECT_CALL(i2c_,
-                WriteBlocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : false to stop.
+    EXPECT_CALL(
+        i2c_,
+        WriteBlocking(device_address_,  // Arg 0 : I2C Address.
+                      NotNull(),        // Arg 1 : Data buffer address.
+                      sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
+                      false))           // Arg 3 : false to stop.
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(ltxbuf1)))
@@ -1168,12 +1167,12 @@ TEST_F(Adau1361LowerTest, SetLineInputGain_undergain) {
                           0x03};  // in the case of gain=-12dB, bit 3:1 are 001
 
     //  expectation of -12dB.
-    EXPECT_CALL(i2c_,
-                WriteBlocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : false to stop.
+    EXPECT_CALL(
+        i2c_,
+        WriteBlocking(device_address_,  // Arg 0 : I2C Address.
+                      NotNull(),        // Arg 1 : Data buffer address.
+                      sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
+                      false))           // Arg 3 : false to stop.
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(rtxbuf1)))
@@ -1202,12 +1201,12 @@ TEST_F(Adau1361LowerTest, SetLineInputGain_appropriate_gain) {
                           0x0B};  // in the case of gain=0dB, bit 3:1 are 101
 
     // expectation of appropriate gain.
-    EXPECT_CALL(i2c_,
-                WriteBlocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : false to stop.
+    EXPECT_CALL(
+        i2c_,
+        WriteBlocking(device_address_,  // Arg 0 : I2C Address.
+                      NotNull(),        // Arg 1 : Data buffer address.
+                      sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
+                      false))           // Arg 3 : false to stop.
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(ltxbuf1)))
@@ -1219,12 +1218,12 @@ TEST_F(Adau1361LowerTest, SetLineInputGain_appropriate_gain) {
     // Set the address to read.
 
     // expectation of appropriate gain.
-    EXPECT_CALL(i2c_,
-                WriteBlocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : false to stop.
+    EXPECT_CALL(
+        i2c_,
+        WriteBlocking(device_address_,  // Arg 0 : I2C Address.
+                      NotNull(),        // Arg 1 : Data buffer address.
+                      sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
+                      false))           // Arg 3 : false to stop.
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(rtxbuf1)))
@@ -1256,12 +1255,12 @@ TEST_F(Adau1361LowerTest, SetLineOutputGain_mute) {
 
     //  expectation of mute.
     ltxbuf1[2] = (0x39 << 2) | 0x00;  // given 0dB, mute, line
-    EXPECT_CALL(i2c_,
-                WriteBlocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : false to stop.
+    EXPECT_CALL(
+        i2c_,
+        WriteBlocking(device_address_,  // Arg 0 : I2C Address.
+                      NotNull(),        // Arg 1 : Data buffer address.
+                      sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
+                      false))           // Arg 3 : false to stop.
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(ltxbuf1)))
@@ -1272,12 +1271,12 @@ TEST_F(Adau1361LowerTest, SetLineOutputGain_mute) {
 
     //  expectation of mute.
     rtxbuf1[2] = (0x39 << 2) | 0x00;  // given 0dB, mute, line
-    EXPECT_CALL(i2c_,
-                WriteBlocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : false to stop.
+    EXPECT_CALL(
+        i2c_,
+        WriteBlocking(device_address_,  // Arg 0 : I2C Address.
+                      NotNull(),        // Arg 1 : Data buffer address.
+                      sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
+                      false))           // Arg 3 : false to stop.
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(rtxbuf1)))
@@ -1304,12 +1303,12 @@ TEST_F(Adau1361LowerTest, SetLineOutputGain_overgain) {
 
     //  expectation of mute.
     ltxbuf1[2] = (0x3F << 2) | 0x02;  // 6dB is 111111, unmute, line
-    EXPECT_CALL(i2c_,
-                WriteBlocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : false to stop.
+    EXPECT_CALL(
+        i2c_,
+        WriteBlocking(device_address_,  // Arg 0 : I2C Address.
+                      NotNull(),        // Arg 1 : Data buffer address.
+                      sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
+                      false))           // Arg 3 : false to stop.
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(ltxbuf1)))
@@ -1320,12 +1319,12 @@ TEST_F(Adau1361LowerTest, SetLineOutputGain_overgain) {
 
     //  expectation of mute.
     rtxbuf1[2] = (0x3F << 2) | 0x02;  // 6dB is 1111, unmute, line
-    EXPECT_CALL(i2c_,
-                WriteBlocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : false to stop.
+    EXPECT_CALL(
+        i2c_,
+        WriteBlocking(device_address_,  // Arg 0 : I2C Address.
+                      NotNull(),        // Arg 1 : Data buffer address.
+                      sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
+                      false))           // Arg 3 : false to stop.
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(rtxbuf1)))
@@ -1352,12 +1351,12 @@ TEST_F(Adau1361LowerTest, SetLineOutputGain_undergain) {
 
     //  expectation of mute.
     ltxbuf1[2] = (0x00 << 2) | 0x02;  // -57dB is 0000, unmute, line
-    EXPECT_CALL(i2c_,
-                WriteBlocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : false to stop.
+    EXPECT_CALL(
+        i2c_,
+        WriteBlocking(device_address_,  // Arg 0 : I2C Address.
+                      NotNull(),        // Arg 1 : Data buffer address.
+                      sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
+                      false))           // Arg 3 : false to stop.
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(ltxbuf1)))
@@ -1368,12 +1367,12 @@ TEST_F(Adau1361LowerTest, SetLineOutputGain_undergain) {
 
     //  expectation of mute.
     rtxbuf1[2] = (0x00 << 2) | 0x02;  // -57dB is 0000, unmute, line
-    EXPECT_CALL(i2c_,
-                WriteBlocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : false to stop.
+    EXPECT_CALL(
+        i2c_,
+        WriteBlocking(device_address_,  // Arg 0 : I2C Address.
+                      NotNull(),        // Arg 1 : Data buffer address.
+                      sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
+                      false))           // Arg 3 : false to stop.
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(rtxbuf1)))
@@ -1401,12 +1400,12 @@ TEST_F(Adau1361LowerTest, SetLineOutputGain_appropriate_gain) {
 
     //  expectation of mute.
     ltxbuf1[2] = (0x3b << 2) | 0x02;  // 2dB is 110011, unmute, line
-    EXPECT_CALL(i2c_,
-                WriteBlocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : false to stop.
+    EXPECT_CALL(
+        i2c_,
+        WriteBlocking(device_address_,  // Arg 0 : I2C Address.
+                      NotNull(),        // Arg 1 : Data buffer address.
+                      sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
+                      false))           // Arg 3 : false to stop.
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(ltxbuf1)))
@@ -1417,12 +1416,12 @@ TEST_F(Adau1361LowerTest, SetLineOutputGain_appropriate_gain) {
 
     //  expectation of mute.
     rtxbuf1[2] = (0x34 << 2) | 0x02;  // -57dB is 000000, unmute, line
-    EXPECT_CALL(i2c_,
-                WriteBlocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : false to stop.
+    EXPECT_CALL(
+        i2c_,
+        WriteBlocking(device_address_,  // Arg 0 : I2C Address.
+                      NotNull(),        // Arg 1 : Data buffer address.
+                      sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
+                      false))           // Arg 3 : false to stop.
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(rtxbuf1)))
@@ -1454,12 +1453,12 @@ TEST_F(Adau1361LowerTest, SetAuxInputGain_mute) {
     uint8_t ltxbuf1[3] = {0x40, 0x0b, 0x00};  // R5 : 0 if muted.
 
     //  expectation of mute.
-    EXPECT_CALL(i2c_,
-                WriteBlocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : false to stop.
+    EXPECT_CALL(
+        i2c_,
+        WriteBlocking(device_address_,  // Arg 0 : I2C Address.
+                      NotNull(),        // Arg 1 : Data buffer address.
+                      sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
+                      false))           // Arg 3 : false to stop.
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(ltxbuf1)))
@@ -1469,12 +1468,12 @@ TEST_F(Adau1361LowerTest, SetAuxInputGain_mute) {
     uint8_t rtxbuf1[3] = {0x40, 0x0d, 0x00};  // R7 : 0 if muted.
 
     //  expectation of mute.
-    EXPECT_CALL(i2c_,
-                WriteBlocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : false to stop.
+    EXPECT_CALL(
+        i2c_,
+        WriteBlocking(device_address_,  // Arg 0 : I2C Address.
+                      NotNull(),        // Arg 1 : Data buffer address.
+                      sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
+                      false))           // Arg 3 : false to stop.
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(rtxbuf1)))
@@ -1500,12 +1499,12 @@ TEST_F(Adau1361LowerTest, SetAuxInputGain_overgain) {
     uint8_t ltxbuf1[3] = {0x40, 0x0b, 0x07};  // R5 : 111 if 6dB.
 
     //  expectation of 6db.
-    EXPECT_CALL(i2c_,
-                WriteBlocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : false to stop.
+    EXPECT_CALL(
+        i2c_,
+        WriteBlocking(device_address_,  // Arg 0 : I2C Address.
+                      NotNull(),        // Arg 1 : Data buffer address.
+                      sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
+                      false))           // Arg 3 : false to stop.
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(ltxbuf1)))
@@ -1515,12 +1514,12 @@ TEST_F(Adau1361LowerTest, SetAuxInputGain_overgain) {
     uint8_t rtxbuf1[3] = {0x40, 0x0d, 0x07};  // R7 : 111 if 6dB.
 
     //  expectation of 6db.
-    EXPECT_CALL(i2c_,
-                WriteBlocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : false to stop.
+    EXPECT_CALL(
+        i2c_,
+        WriteBlocking(device_address_,  // Arg 0 : I2C Address.
+                      NotNull(),        // Arg 1 : Data buffer address.
+                      sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
+                      false))           // Arg 3 : false to stop.
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(rtxbuf1)))
@@ -1546,12 +1545,12 @@ TEST_F(Adau1361LowerTest, SetAuxInputGain_undergain) {
     uint8_t ltxbuf1[3] = {0x40, 0x0b, 0x01};  // R5 : 001 if -12dB.
 
     //  expectation of -12dB.
-    EXPECT_CALL(i2c_,
-                WriteBlocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : false to stop.
+    EXPECT_CALL(
+        i2c_,
+        WriteBlocking(device_address_,  // Arg 0 : I2C Address.
+                      NotNull(),        // Arg 1 : Data buffer address.
+                      sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
+                      false))           // Arg 3 : false to stop.
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(ltxbuf1)))
@@ -1561,12 +1560,12 @@ TEST_F(Adau1361LowerTest, SetAuxInputGain_undergain) {
     uint8_t rtxbuf1[3] = {0x40, 0x0d, 0x01};  // R7 : 001 if -12dB.
 
     //  expectation of -12dB.
-    EXPECT_CALL(i2c_,
-                WriteBlocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : false to stop.
+    EXPECT_CALL(
+        i2c_,
+        WriteBlocking(device_address_,  // Arg 0 : I2C Address.
+                      NotNull(),        // Arg 1 : Data buffer address.
+                      sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
+                      false))           // Arg 3 : false to stop.
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(rtxbuf1)))
@@ -1592,12 +1591,12 @@ TEST_F(Adau1361LowerTest, SetAuxInputGain_appropriate_gain) {
     uint8_t ltxbuf1[3] = {0x40, 0x0b, 0x05};  // R5 : 101 if 0dB.
 
     //  expectation of mute.
-    EXPECT_CALL(i2c_,
-                WriteBlocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : false to stop.
+    EXPECT_CALL(
+        i2c_,
+        WriteBlocking(device_address_,  // Arg 0 : I2C Address.
+                      NotNull(),        // Arg 1 : Data buffer address.
+                      sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
+                      false))           // Arg 3 : false to stop.
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(ltxbuf1)))
@@ -1607,12 +1606,12 @@ TEST_F(Adau1361LowerTest, SetAuxInputGain_appropriate_gain) {
     uint8_t rtxbuf1[3] = {0x40, 0x0d, 0x03};  // R7 : 011 if -6dB.
 
     //  expectation of mute.
-    EXPECT_CALL(i2c_,
-                WriteBlocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : false to stop.
+    EXPECT_CALL(
+        i2c_,
+        WriteBlocking(device_address_,  // Arg 0 : I2C Address.
+                      NotNull(),        // Arg 1 : Data buffer address.
+                      sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
+                      false))           // Arg 3 : false to stop.
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(rtxbuf1)))
@@ -1645,12 +1644,12 @@ TEST_F(Adau1361LowerTest, SetHpOutputGain_mute) {
                           0xe5};  // R29 : 11001,0,1 ( muted, headphone)
 
     //  expectation of mute.
-    EXPECT_CALL(i2c_,
-                WriteBlocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : false to stop.
+    EXPECT_CALL(
+        i2c_,
+        WriteBlocking(device_address_,  // Arg 0 : I2C Address.
+                      NotNull(),        // Arg 1 : Data buffer address.
+                      sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
+                      false))           // Arg 3 : false to stop.
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(ltxbuf1)))
@@ -1661,12 +1660,12 @@ TEST_F(Adau1361LowerTest, SetHpOutputGain_mute) {
                           0xe5};  // R30 : 11001,0,1 ( muted, headphone)
 
     //  expectation of mute.
-    EXPECT_CALL(i2c_,
-                WriteBlocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : false to stop.
+    EXPECT_CALL(
+        i2c_,
+        WriteBlocking(device_address_,  // Arg 0 : I2C Address.
+                      NotNull(),        // Arg 1 : Data buffer address.
+                      sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
+                      false))           // Arg 3 : false to stop.
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(rtxbuf1)))
@@ -1693,12 +1692,12 @@ TEST_F(Adau1361LowerTest, SetHpOutputGain_overgain) {
                           0xff};  // R29 : 6dB is 111111, unmute, line
 
     //  expectation of 6dB.
-    EXPECT_CALL(i2c_,
-                WriteBlocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : false to stop.
+    EXPECT_CALL(
+        i2c_,
+        WriteBlocking(device_address_,  // Arg 0 : I2C Address.
+                      NotNull(),        // Arg 1 : Data buffer address.
+                      sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
+                      false))           // Arg 3 : false to stop.
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(ltxbuf1)))
@@ -1708,12 +1707,12 @@ TEST_F(Adau1361LowerTest, SetHpOutputGain_overgain) {
     uint8_t rtxbuf1[3] = {0x40, 0x24, 0xff};  // R30 : 6dB is 1111, unmute, line
 
     //  expectation of 6dB.
-    EXPECT_CALL(i2c_,
-                WriteBlocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : false to stop.
+    EXPECT_CALL(
+        i2c_,
+        WriteBlocking(device_address_,  // Arg 0 : I2C Address.
+                      NotNull(),        // Arg 1 : Data buffer address.
+                      sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
+                      false))           // Arg 3 : false to stop.
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(rtxbuf1)))
@@ -1740,12 +1739,12 @@ TEST_F(Adau1361LowerTest, SetHpOutputGain_undergain) {
                           0x03};  // R29 : -57dB is 0000, unmute, line
 
     //  expectation of -57.
-    EXPECT_CALL(i2c_,
-                WriteBlocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : false to stop.
+    EXPECT_CALL(
+        i2c_,
+        WriteBlocking(device_address_,  // Arg 0 : I2C Address.
+                      NotNull(),        // Arg 1 : Data buffer address.
+                      sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
+                      false))           // Arg 3 : false to stop.
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(ltxbuf1)))
@@ -1756,12 +1755,12 @@ TEST_F(Adau1361LowerTest, SetHpOutputGain_undergain) {
                           0x03};  // R30 :  -57dB is 0000, unmute, line
 
     //  expectation of -57dB.
-    EXPECT_CALL(i2c_,
-                WriteBlocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : false to stop.
+    EXPECT_CALL(
+        i2c_,
+        WriteBlocking(device_address_,  // Arg 0 : I2C Address.
+                      NotNull(),        // Arg 1 : Data buffer address.
+                      sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
+                      false))           // Arg 3 : false to stop.
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(rtxbuf1)))
@@ -1789,12 +1788,12 @@ TEST_F(Adau1361LowerTest, SetHpOutputGain_appropriate_gain) {
                           0xef};  // R29 : 2dB is 111011, unmute, line
 
     //  expectation of mute.
-    EXPECT_CALL(i2c_,
-                WriteBlocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : false to stop.
+    EXPECT_CALL(
+        i2c_,
+        WriteBlocking(device_address_,  // Arg 0 : I2C Address.
+                      NotNull(),        // Arg 1 : Data buffer address.
+                      sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
+                      false))           // Arg 3 : false to stop.
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(ltxbuf1)))
@@ -1805,12 +1804,12 @@ TEST_F(Adau1361LowerTest, SetHpOutputGain_appropriate_gain) {
                           0xd3};  // R30 : -5dB is 110100, unmute, line
 
     //  expectation of mute.
-    EXPECT_CALL(i2c_,
-                WriteBlocking(
-                    device_address_,  // Arg 0 : I2C Address.
-                    NotNull(),        // Arg 1 : Data buffer address.
-                    sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
-                    false))           // Arg 3 : false to stop.
+    EXPECT_CALL(
+        i2c_,
+        WriteBlocking(device_address_,  // Arg 0 : I2C Address.
+                      NotNull(),        // Arg 1 : Data buffer address.
+                      sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
+                      false))           // Arg 3 : false to stop.
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(rtxbuf1)))
@@ -1844,12 +1843,12 @@ TEST_F(Adau1361LowerTest, ConfigureSRC_22050) {
   using ::testing::NotNull;
   using ::testing::Return;
 
-  EXPECT_CALL(i2c_,
-              WriteBlocking(
-                  device_address_,     // Arg 0 : I2C Address.
-                  NotNull(),           // Arg 1 : Data buffer address.
-                  sizeof(config_src),  // Arg 2 : Data buffer length to send.
-                  false))              // Arg 3 : false to stop.
+  EXPECT_CALL(
+      i2c_,
+      WriteBlocking(device_address_,     // Arg 0 : I2C Address.
+                    NotNull(),           // Arg 1 : Data buffer address.
+                    sizeof(config_src),  // Arg 2 : Data buffer length to send.
+                    false))              // Arg 3 : false to stop.
       .With(Args<1,  // parameter position of the array : 0 origin.
                  2>  // parameter position of the size : 0 origin.
             (ElementsAreArray(config_src)))
@@ -1869,12 +1868,12 @@ TEST_F(Adau1361LowerTest, ConfigureSRC_24000) {
   using ::testing::NotNull;
   using ::testing::Return;
 
-  EXPECT_CALL(i2c_,
-              WriteBlocking(
-                  device_address_,     // Arg 0 : I2C Address.
-                  NotNull(),           // Arg 1 : Data buffer address.
-                  sizeof(config_src),  // Arg 2 : Data buffer length to send.
-                  false))              // Arg 3 : false to stop.
+  EXPECT_CALL(
+      i2c_,
+      WriteBlocking(device_address_,     // Arg 0 : I2C Address.
+                    NotNull(),           // Arg 1 : Data buffer address.
+                    sizeof(config_src),  // Arg 2 : Data buffer length to send.
+                    false))              // Arg 3 : false to stop.
       .With(Args<1,  // parameter position of the array : 0 origin.
                  2>  // parameter position of the size : 0 origin.
             (ElementsAreArray(config_src)))
@@ -1894,12 +1893,12 @@ TEST_F(Adau1361LowerTest, ConfigureSRC_32000) {
   using ::testing::NotNull;
   using ::testing::Return;
 
-  EXPECT_CALL(i2c_,
-              WriteBlocking(
-                  device_address_,     // Arg 0 : I2C Address.
-                  NotNull(),           // Arg 1 : Data buffer address.
-                  sizeof(config_src),  // Arg 2 : Data buffer length to send.
-                  false))              // Arg 3 : false to stop.
+  EXPECT_CALL(
+      i2c_,
+      WriteBlocking(device_address_,     // Arg 0 : I2C Address.
+                    NotNull(),           // Arg 1 : Data buffer address.
+                    sizeof(config_src),  // Arg 2 : Data buffer length to send.
+                    false))              // Arg 3 : false to stop.
       .With(Args<1,  // parameter position of the array : 0 origin.
                  2>  // parameter position of the size : 0 origin.
             (ElementsAreArray(config_src)))
@@ -1919,12 +1918,12 @@ TEST_F(Adau1361LowerTest, ConfigureSRC_44100) {
   using ::testing::NotNull;
   using ::testing::Return;
 
-  EXPECT_CALL(i2c_,
-              WriteBlocking(
-                  device_address_,     // Arg 0 : I2C Address.
-                  NotNull(),           // Arg 1 : Data buffer address.
-                  sizeof(config_src),  // Arg 2 : Data buffer length to send.
-                  false))              // Arg 3 : false to stop.
+  EXPECT_CALL(
+      i2c_,
+      WriteBlocking(device_address_,     // Arg 0 : I2C Address.
+                    NotNull(),           // Arg 1 : Data buffer address.
+                    sizeof(config_src),  // Arg 2 : Data buffer length to send.
+                    false))              // Arg 3 : false to stop.
       .With(Args<1,  // parameter position of the array : 0 origin.
                  2>  // parameter position of the size : 0 origin.
             (ElementsAreArray(config_src)))
@@ -1944,12 +1943,12 @@ TEST_F(Adau1361LowerTest, ConfigureSRC_48000) {
   using ::testing::NotNull;
   using ::testing::Return;
 
-  EXPECT_CALL(i2c_,
-              WriteBlocking(
-                  device_address_,     // Arg 0 : I2C Address.
-                  NotNull(),           // Arg 1 : Data buffer address.
-                  sizeof(config_src),  // Arg 2 : Data buffer length to send.
-                  false))              // Arg 3 : false to stop.
+  EXPECT_CALL(
+      i2c_,
+      WriteBlocking(device_address_,     // Arg 0 : I2C Address.
+                    NotNull(),           // Arg 1 : Data buffer address.
+                    sizeof(config_src),  // Arg 2 : Data buffer length to send.
+                    false))              // Arg 3 : false to stop.
       .With(Args<1,  // parameter position of the array : 0 origin.
                  2>  // parameter position of the size : 0 origin.
             (ElementsAreArray(config_src)))
@@ -1969,12 +1968,12 @@ TEST_F(Adau1361LowerTest, ConfigureSRC_88200) {
   using ::testing::NotNull;
   using ::testing::Return;
 
-  EXPECT_CALL(i2c_,
-              WriteBlocking(
-                  device_address_,     // Arg 0 : I2C Address.
-                  NotNull(),           // Arg 1 : Data buffer address.
-                  sizeof(config_src),  // Arg 2 : Data buffer length to send.
-                  false))              // Arg 3 : false to stop.
+  EXPECT_CALL(
+      i2c_,
+      WriteBlocking(device_address_,     // Arg 0 : I2C Address.
+                    NotNull(),           // Arg 1 : Data buffer address.
+                    sizeof(config_src),  // Arg 2 : Data buffer length to send.
+                    false))              // Arg 3 : false to stop.
       .With(Args<1,  // parameter position of the array : 0 origin.
                  2>  // parameter position of the size : 0 origin.
             (ElementsAreArray(config_src)))
@@ -1994,12 +1993,12 @@ TEST_F(Adau1361LowerTest, ConfigureSRC_96000) {
   using ::testing::NotNull;
   using ::testing::Return;
 
-  EXPECT_CALL(i2c_,
-              WriteBlocking(
-                  device_address_,     // Arg 0 : I2C Address.
-                  NotNull(),           // Arg 1 : Data buffer address.
-                  sizeof(config_src),  // Arg 2 : Data buffer length to send.
-                  false))              // Arg 3 : false to stop.
+  EXPECT_CALL(
+      i2c_,
+      WriteBlocking(device_address_,     // Arg 0 : I2C Address.
+                    NotNull(),           // Arg 1 : Data buffer address.
+                    sizeof(config_src),  // Arg 2 : Data buffer length to send.
+                    false))              // Arg 3 : false to stop.
       .With(Args<1,  // parameter position of the array : 0 origin.
                  2>  // parameter position of the size : 0 origin.
             (ElementsAreArray(config_src)))
@@ -2028,9 +2027,9 @@ TEST_F(Adau1361LowerTest, EnableCore) {
 
   EXPECT_CALL(i2c_,
               WriteBlocking(device_address_,  // Arg 0 : I2C Address.
-                                 NotNull(),  // Arg 1 : Data buffer address.
-                                 3,       // Arg 2 : Data buffer length to send.
-                                 false))  // Arg 3 : false to stop.
+                            NotNull(),        // Arg 1 : Data buffer address.
+                            3,       // Arg 2 : Data buffer length to send.
+                            false))  // Arg 3 : false to stop.
       .With(Args<1,  // parameter position of the array : 0 origin.
                  2>  // parameter position of the size : 0 origin.
             (ElementsAreArray(config_core)));
@@ -2102,9 +2101,9 @@ TEST_F(Adau1361LowerTest, InitializeRegisters) {
     for (int i = 0; i < sizeof(config_Adau1361) / 3; i++)
       EXPECT_CALL(i2c_,
                   WriteBlocking(device_address_,  // Arg 0 : I2C Address.
-                                     NotNull(),  // Arg 1 : Data buffer address.
-                                     3,  // Arg 2 : Data buffer length to send.
-                                     false))  // Arg 3 : false to stop.
+                                NotNull(),  // Arg 1 : Data buffer address.
+                                3,       // Arg 2 : Data buffer length to send.
+                                false))  // Arg 3 : false to stop.
           .With(Args<1,  // parameter position of the array : 0 origin.
                      2>  // parameter position of the size : 0 origin.
                 (ElementsAreArray(config_Adau1361[i])));
@@ -2150,9 +2149,9 @@ TEST_F(Adau1361LowerTest, ConfigureSignalPath) {
     for (int i = 0; i < sizeof(config_UMB_ADAU1361A) / 3; i++)
       EXPECT_CALL(i2c_,
                   WriteBlocking(device_address_,  // Arg 0 : I2C Address.
-                                     NotNull(),  // Arg 1 : Data buffer address.
-                                     3,  // Arg 2 : Data buffer length to send.
-                                     false))  // Arg 3 : false to stop.
+                                NotNull(),  // Arg 1 : Data buffer address.
+                                3,       // Arg 2 : Data buffer length to send.
+                                false))  // Arg 3 : false to stop.
           .With(Args<1,  // parameter position of the array : 0 origin.
                      2>  // parameter position of the size : 0 origin.
                 (ElementsAreArray(config_UMB_ADAU1361A[i])));

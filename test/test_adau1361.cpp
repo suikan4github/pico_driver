@@ -222,7 +222,7 @@ TEST_F(Adau1361Test, Start) {
   {
     InSequence dummy;
 
-    EXPECT_CALL(*codec_lower_, IsI2CDeivceExisting()).WillOnce(Return(true));
+    EXPECT_CALL(*codec_lower_, IsI2CDeviceExisting()).WillOnce(Return(true));
     EXPECT_CALL(*codec_lower_, InitializeCore());
     EXPECT_CALL(*codec_lower_, DisablePLL());
     EXPECT_CALL(*codec_lower_, ConfigurePll(fs_, master_clk_));
