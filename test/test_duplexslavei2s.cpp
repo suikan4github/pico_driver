@@ -26,7 +26,7 @@ TEST_F(DuplexSlaveI2STest, Constructor4) {
 
   i2s_ = new ::pico_driver::DuplexSlaveI2S(sdk_, pio_, sm_, pin_base_);
 
-  // must be muched with Externally given SM.
+  // must be matched with Externally given SM.
   EXPECT_EQ(sm_, i2s_->GetStateMachine());
 
   // We can ignore these call inside destructor
@@ -47,7 +47,7 @@ TEST_F(DuplexSlaveI2STest, Constructor3) {
 
   i2s_ = new ::pico_driver::DuplexSlaveI2S(sdk_, pio_, pin_base_);
 
-  // must be muched with Internally Registered SM.
+  // must be matched with Internally Registered SM.
   EXPECT_EQ(ret_val, i2s_->GetStateMachine());
 
   EXPECT_CALL(sdk_, pio_sm_unclaim(pio_, ret_val));
@@ -62,7 +62,7 @@ TEST_F(DuplexSlaveI2STest, Destructor) {
   using ::testing::_;
   using ::testing::Return;
 
-  // We can ignore these call in consturctor.
+  // We can ignore these call in constructor.
   EXPECT_CALL(sdk_, pio_sm_claim(pio_, sm_));
   EXPECT_CALL(sdk_, pio_claim_unused_sm(_, _)).Times(0);
 
@@ -81,7 +81,7 @@ TEST_F(DuplexSlaveI2STest, Destructor_stopped) {
   using ::testing::InSequence;
   using ::testing::Return;
 
-  // We can ignore these call in consturctor.
+  // We can ignore these call in constructor.
   EXPECT_CALL(sdk_, pio_sm_claim(pio_, sm_));
   EXPECT_CALL(sdk_, pio_claim_unused_sm(_, _)).Times(0);
 
@@ -107,7 +107,7 @@ TEST_F(DuplexSlaveI2STest, Stop) {
   using ::testing::_;
   using ::testing::Return;
 
-  // We can ignore these call in consturctor.
+  // We can ignore these call in cconstructor.
   EXPECT_CALL(sdk_, pio_sm_claim(pio_, sm_));
   EXPECT_CALL(sdk_, pio_claim_unused_sm(_, _)).Times(0);
 
@@ -131,7 +131,7 @@ TEST_F(DuplexSlaveI2STest, GetStateMachine) {
   using ::testing::_;
   using ::testing::Return;
 
-  // We can ignore these call in consturctor.
+  // We can ignore these call in cconstructor.
   EXPECT_CALL(sdk_, pio_sm_claim(pio_, sm_));
 
   i2s_ = new ::pico_driver::DuplexSlaveI2S(sdk_, pio_, sm_, pin_base_);
@@ -154,7 +154,7 @@ TEST_F(DuplexSlaveI2STest, Start) {
   std::random_device rng;
   unsigned instruction_offset = rng();
 
-  // We can ignore these call in consturctor.
+  // We can ignore these call in cconstructor.
   EXPECT_CALL(sdk_, pio_sm_claim(pio_, sm_));
 
   i2s_ = new ::pico_driver::DuplexSlaveI2S(sdk_, pio_, sm_, pin_base_);
@@ -218,7 +218,7 @@ TEST_F(DuplexSlaveI2STest, GetFIFOBlocking) {
   using ::testing::_;
   using ::testing::Return;
 
-  // We can ignore these call in consturctor.
+  // We can ignore these call in cconstructor.
   EXPECT_CALL(sdk_, pio_sm_claim(pio_, sm_));
 
   i2s_ = new ::pico_driver::DuplexSlaveI2S(sdk_, pio_, sm_, pin_base_);
@@ -241,7 +241,7 @@ TEST_F(DuplexSlaveI2STest, PutFIFOBlocking) {
   using ::testing::_;
   using ::testing::Return;
 
-  // We can ignore these call in consturctor.
+  // We can ignore these call in cconstructor.
   EXPECT_CALL(sdk_, pio_sm_claim(pio_, sm_));
 
   i2s_ = new ::pico_driver::DuplexSlaveI2S(sdk_, pio_, sm_, pin_base_);
