@@ -107,7 +107,7 @@ TEST_F(DuplexSlaveI2STest, Stop) {
   using ::testing::_;
   using ::testing::Return;
 
-  // We can ignore these call in cconstructor.
+  // We can ignore these call in constructor.
   EXPECT_CALL(sdk_, pio_sm_claim(pio_, sm_));
   EXPECT_CALL(sdk_, pio_claim_unused_sm(_, _)).Times(0);
 
@@ -131,12 +131,12 @@ TEST_F(DuplexSlaveI2STest, GetStateMachine) {
   using ::testing::_;
   using ::testing::Return;
 
-  // We can ignore these call in cconstructor.
+  // We can ignore these call in constructor.
   EXPECT_CALL(sdk_, pio_sm_claim(pio_, sm_));
 
   i2s_ = new ::pico_driver::DuplexSlaveI2S(sdk_, pio_, sm_, pin_base_);
 
-  // Must match the given state machine from constructor explicitlly.
+  // Must match the given state machine from constructor explicitly.
   EXPECT_EQ(i2s_->GetStateMachine(), sm_);
 
   // We can ignore these call inside destructor
@@ -154,7 +154,7 @@ TEST_F(DuplexSlaveI2STest, Start) {
   std::random_device rng;
   unsigned instruction_offset = rng();
 
-  // We can ignore these call in cconstructor.
+  // We can ignore these call in constructor.
   EXPECT_CALL(sdk_, pio_sm_claim(pio_, sm_));
 
   i2s_ = new ::pico_driver::DuplexSlaveI2S(sdk_, pio_, sm_, pin_base_);
@@ -218,14 +218,14 @@ TEST_F(DuplexSlaveI2STest, GetFIFOBlocking) {
   using ::testing::_;
   using ::testing::Return;
 
-  // We can ignore these call in cconstructor.
+  // We can ignore these call in constructor.
   EXPECT_CALL(sdk_, pio_sm_claim(pio_, sm_));
 
   i2s_ = new ::pico_driver::DuplexSlaveI2S(sdk_, pio_, sm_, pin_base_);
 
   EXPECT_CALL(sdk_, pio_sm_get_blocking(pio_, sm_)).WillOnce(Return(ret_val));
 
-  // Must match the given state machine from constructor explicitlly.
+  // Must match the given state machine from constructor explicitly.
   EXPECT_EQ(i2s_->GetFIFOBlocking(), ret_val);
 
   // We can ignore these call inside destructor
@@ -241,14 +241,14 @@ TEST_F(DuplexSlaveI2STest, PutFIFOBlocking) {
   using ::testing::_;
   using ::testing::Return;
 
-  // We can ignore these call in cconstructor.
+  // We can ignore these call in constructor.
   EXPECT_CALL(sdk_, pio_sm_claim(pio_, sm_));
 
   i2s_ = new ::pico_driver::DuplexSlaveI2S(sdk_, pio_, sm_, pin_base_);
 
   EXPECT_CALL(sdk_, pio_sm_put_blocking(pio_, sm_, value));
 
-  // Must match the given state machine from constructor explicitlly.
+  // Must match the given state machine from constructor explicitly.
   i2s_->PutFIFOBlocking(value);
 
   // We can ignore these call inside destructor
