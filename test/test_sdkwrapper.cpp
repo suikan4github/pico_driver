@@ -17,7 +17,7 @@
 DEFINE_FFF_GLOBALS;
 
 // The header file of the library to test.
-#include "../rpi_pico/pico_driver/sdk/sdkwrapper.hpp"
+#include "../src/sdk/sdkwrapper.hpp"
 
 // Create Test Spies
 FAKE_VALUE_FUNC(bool, stdio_init_all);
@@ -62,7 +62,7 @@ FAKE_VALUE_FUNC(bool, pio_sm_is_claimed, PIO, uint);
 FAKE_VOID_FUNC(pio_sm_clear_fifos, PIO, uint);
 
 // The cpp file of the library to test.
-#include "../rpi_pico/pico_driver/sdk/sdkwrapper.cpp"
+#include "../src/sdk/sdkwrapper.cpp"
 
 TEST(PicoWrapper, stdio_init_all) {
   ::pico_driver::SDKWrapper pico;
