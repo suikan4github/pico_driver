@@ -13,10 +13,7 @@
 #include <i2cmasterinterface.hpp>
 
 #include "adau1361lower.hpp"
-/**
- * \brief Audio CODEC Namespace.
- */
-namespace codec {
+namespace pico_driver {
 
 /**
  * \brief Analog Device ADAU1361A audio codec control class.
@@ -144,6 +141,6 @@ class Adau1361 {
   bool line_output_mute_;
   bool hp_output_mute_;  // headphone
 };
-}  // namespace codec
+}  // namespace pico_driver
 
 #endif /* MURASAKI_TP_ADAU1361_HPP_ */

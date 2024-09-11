@@ -69,8 +69,8 @@ int main() {
 
   // Prepare the Audio CODEC.
   ::pico_driver::I2CMaster i2c(sdk, *i2c1, i2c_clock, i2c_scl_pin, i2c_sda_pin);
-  ::codec::Adau1361Lower codec_lower(i2c, adau1361_i2c_address);
-  ::codec::Adau1361 codec(fs, mclock, codec_lower);
+  ::pico_driver::Adau1361Lower codec_lower(i2c, adau1361_i2c_address);
+  ::pico_driver::Adau1361 codec(fs, mclock, codec_lower);
 
   // Use RasPi Pico on-board LED.
   // 1=> Turn on, 0 => Turn pff.
@@ -85,8 +85,8 @@ int main() {
   // CODEC initialization and run.
   codec.Start();
   // Un mute the codec to enable the sound. Default gain is 0dB.
-  codec.Mute(codec::Adau1361::LineInput, false);        // unmute
-  codec.Mute(codec::Adau1361::HeadphoneOutput, false);  // unmute
+  codec.Mute(pico_driver::Adau1361::LineInput, false);        // unmute
+  codec.Mute(pico_driver::Adau1361::HeadphoneOutput, false);  // unmute
 
   // I2S Initialization. We run the I2S PIO program from here.
   // We have to wait for the RX FIFO ASAP.

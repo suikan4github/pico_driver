@@ -12,7 +12,7 @@
 
 #include "i2cmaster.hpp"
 
-namespace codec {
+namespace pico_driver {
 
 /**
  * @brief lower part of the Adau1361 CODEC controller class.
@@ -246,6 +246,6 @@ class MockAdau1361Lower : public Adau1361Lower {
                void(float left_gain, float right_gain, bool mute));
 };
 #endif  //  __has_include(<gmock/gmock>)
-}  // namespace codec
+}  // namespace pico_driver
 
 #endif /* _ADAU1361LOWER_HPP_ */
