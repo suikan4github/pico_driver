@@ -19,6 +19,10 @@
 typedef unsigned uint;
 #endif
 
+#if __has_include(<gmock/gmock.h>)
+#include <gmock/gmock.h>
+#endif
+
 namespace pico_driver {
 /**
  * @brief Interface type to allow the GoogleTest without depending to RasPi
@@ -62,7 +66,7 @@ class I2CMasterInterface {
   virtual bool IsDeviceExisting(uint8_t addr) = 0;
 };
 
-#ifdef MOCK_METHOD0
+#if __has_include(<gmock/gmock.h>)
 
 class MockI2CMasterInterface : public I2CMasterInterface {
  public:
@@ -73,7 +77,7 @@ class MockI2CMasterInterface : public I2CMasterInterface {
   MOCK_METHOD1(IsDeviceExisting, bool(uint8_t addr));
 };
 
-#endif  // MOCK_METHOD0
+#endif  // __has_include(<gmock/gmock.h>)
 }  // namespace pico_driver
 
 #endif /* _I2CMASTERINTERFACE_HPP_ */

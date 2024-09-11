@@ -12,6 +12,10 @@
 
 #include "i2cmaster.hpp"
 
+#if __has_include(<gmock/gmock.h>)
+#include <gmock/gmock.h>
+#endif
+
 namespace pico_driver {
 
 /**
@@ -219,7 +223,8 @@ class Adau1361Lower {
   const unsigned int device_addr_;
 };
 
-#ifdef MOCK_METHOD0
+// #ifdef MOCK_METHOD0
+#if __has_include(<gmock/gmock.h>)
 
 class MockAdau1361Lower : public Adau1361Lower {
  public:
@@ -245,7 +250,7 @@ class MockAdau1361Lower : public Adau1361Lower {
   MOCK_METHOD3(SetHpOutputGain,
                void(float left_gain, float right_gain, bool mute));
 };
-#endif  //  MOCK_METHOD0
+#endif  //  __has_include(<gmock/gmock.h>)
 
 }  // namespace pico_driver
 

@@ -29,6 +29,10 @@ typedef unsigned int pio_program_t;
 #include <stdlib.h>
 #endif
 
+#if __has_include(<gmock/gmock.h>)
+#include <gmock/gmock.h>
+#endif
+
 /**
  * @brief Collection of the RP2040/RP2350 control.
  *
@@ -448,7 +452,7 @@ class SDKWrapper {
   virtual void pio_sm_clear_fifos(PIO pio, uint sm);
 };
 
-#ifdef MOCK_METHOD0
+#if __has_include(<gmock/gmock.h>)
 
 class MockSDKWrapper : public SDKWrapper {
  public:
@@ -502,7 +506,7 @@ class MockSDKWrapper : public SDKWrapper {
   MOCK_METHOD2(pio_sm_is_claimed, bool(PIO pio, uint sm));
   MOCK_METHOD2(pio_sm_clear_fifos, void(PIO pio, uint sm));
 };
-#endif  // BUILD_PICO_LIB
+#endif  // __has_include(<gmock/gmock.h>)
 };  // namespace pico_driver
 
 #endif  // __DRIVER_PICOWRAPPER_HPP__

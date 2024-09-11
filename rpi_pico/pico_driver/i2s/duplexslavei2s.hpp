@@ -9,6 +9,10 @@
 #define clk_sys 51
 #endif  //__has_include(<hardware/i2c.h>)
 
+#if __has_include(<gmock/gmock.h>)
+#include <gmock/gmock.h>
+#endif
+
 #include "sdkwrapper.hpp"
 
 namespace pico_driver {
@@ -126,7 +130,7 @@ class DuplexSlaveI2S {
   virtual void PutFIFOBlocking(int32_t value);
 };
 
-#ifdef MOCK_METHOD0
+#if __has_include(<gmock/gmock.h>)
 
 class MockDuplexSlaveI2S : public DuplexSlaveI2S {
  public:
@@ -136,7 +140,7 @@ class MockDuplexSlaveI2S : public DuplexSlaveI2S {
   MOCK_METHOD1(PutFIFOBlocking, void(int32_t value));
   MOCK_METHOD0(GetFIFOBlocking, int32_t());
 };
-#endif  // MOCK_METHOD0
+#endif  // __has_include(<gmock/gmock.h>)
 
 }  // namespace pico_driver
 
