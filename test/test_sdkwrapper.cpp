@@ -17,7 +17,7 @@
 DEFINE_FFF_GLOBALS;
 
 // The header file of the library to test.
-#include "../rpi_pico/samples/interrupt_sample/pico_driver/sdkwrapper.hpp"
+#include "../rpi_pico/pico_driver/sdk/sdkwrapper.hpp"
 
 // Create Test Spies
 FAKE_VALUE_FUNC(bool, stdio_init_all);
@@ -62,7 +62,7 @@ FAKE_VALUE_FUNC(bool, pio_sm_is_claimed, PIO, uint);
 FAKE_VOID_FUNC(pio_sm_clear_fifos, PIO, uint);
 
 // The cpp file of the library to test.
-#include "../rpi_pico/samples/interrupt_sample/pico_driver/sdkwrapper.cpp"
+#include "../rpi_pico/pico_driver/sdk/sdkwrapper.cpp"
 
 TEST(PicoWrapper, stdio_init_all) {
   ::pico_driver::SDKWrapper pico;
@@ -315,7 +315,8 @@ TEST(PicoWrapper, i2c_init) {
   RESET_FAKE(i2c_init);
 
   uint return_vals[] = {rng(), rng()};
-  SET_RETURN_SEQ(i2c_init, return_vals, sizeof(return_vals) / sizeof(bool));
+  SET_RETURN_SEQ(i2c_init, return_vals,
+                 sizeof(return_vals) / sizeof(return_vals[0]));
 
   ASSERT_EQ(pico.i2c_init(&i2c, baud[0]), return_vals[0]);
   ASSERT_EQ(pico.i2c_init(&i2c, baud[1]), return_vals[1]);

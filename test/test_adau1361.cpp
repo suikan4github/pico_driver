@@ -8,8 +8,8 @@
 class Adau1361Test : public ::testing::Test {
  protected:
   virtual void SetUp() {
-    codec_lower_ = new ::codec::MockAdau1361Lower(i2c_);
-    codec_ = new ::codec::Adau1361(fs_, master_clk_, *codec_lower_);
+    codec_lower_ = new ::pico_driver::MockAdau1361Lower(i2c_);
+    codec_ = new ::pico_driver::Adau1361(fs_, master_clk_, *codec_lower_);
   }
 
   virtual void TearDown() {
@@ -20,8 +20,8 @@ class Adau1361Test : public ::testing::Test {
   uint fs_ = 48000;
   uint master_clk_ = 12000000;
   ::pico_driver::MockI2CMasterInterface i2c_;
-  ::codec::MockAdau1361Lower *codec_lower_;
-  ::codec::Adau1361 *codec_;
+  ::pico_driver::MockAdau1361Lower *codec_lower_;
+  ::pico_driver::Adau1361 *codec_;
 };
 
 // -----------------------------------------------------------------
@@ -47,9 +47,9 @@ TEST_F(Adau1361Test, SetGain_LineInput) {
   EXPECT_CALL(*codec_lower_, SetHpOutputGain(_, _, _)).Times(0);
 
   // Test run.
-  codec_->SetGain(::codec::Adau1361::LineInput, 2.0, 3.0);
-  codec_->Mute(::codec::Adau1361::LineInput, false);
-  codec_->SetGain(::codec::Adau1361::LineInput, 3.0, 2.0);
+  codec_->SetGain(::pico_driver::Adau1361::LineInput, 2.0, 3.0);
+  codec_->Mute(::pico_driver::Adau1361::LineInput, false);
+  codec_->SetGain(::pico_driver::Adau1361::LineInput, 3.0, 2.0);
 
 }  // SetGain_LineInput
 
@@ -69,9 +69,9 @@ TEST_F(Adau1361Test, SetGain_LineOutput) {
   EXPECT_CALL(*codec_lower_, SetHpOutputGain(_, _, _)).Times(0);
 
   // Test run
-  codec_->SetGain(::codec::Adau1361::LineOutput, 2.0, 3.0);
-  codec_->Mute(::codec::Adau1361::LineOutput, false);
-  codec_->SetGain(::codec::Adau1361::LineOutput, 3.0, 2.0);
+  codec_->SetGain(::pico_driver::Adau1361::LineOutput, 2.0, 3.0);
+  codec_->Mute(::pico_driver::Adau1361::LineOutput, false);
+  codec_->SetGain(::pico_driver::Adau1361::LineOutput, 3.0, 2.0);
 }  // SetGain_LineOutput
 
 TEST_F(Adau1361Test, SetGain_AuxInput) {
@@ -90,9 +90,9 @@ TEST_F(Adau1361Test, SetGain_AuxInput) {
   EXPECT_CALL(*codec_lower_, SetHpOutputGain(_, _, _)).Times(0);
 
   // Test run
-  codec_->SetGain(::codec::Adau1361::AuxInput, 2.0, 3.0);
-  codec_->Mute(::codec::Adau1361::AuxInput, false);
-  codec_->SetGain(::codec::Adau1361::AuxInput, 3.0, 2.0);
+  codec_->SetGain(::pico_driver::Adau1361::AuxInput, 2.0, 3.0);
+  codec_->Mute(::pico_driver::Adau1361::AuxInput, false);
+  codec_->SetGain(::pico_driver::Adau1361::AuxInput, 3.0, 2.0);
 }  // SetGain_AuxInput
 
 TEST_F(Adau1361Test, SetGain_HeadhphoneOutput) {
@@ -111,9 +111,9 @@ TEST_F(Adau1361Test, SetGain_HeadhphoneOutput) {
   EXPECT_CALL(*codec_lower_, SetAuxInputGain(_, _, _)).Times(0);
 
   // Test run
-  codec_->SetGain(::codec::Adau1361::HeadphoneOutput, 2.0, 3.0);
-  codec_->Mute(::codec::Adau1361::HeadphoneOutput, false);
-  codec_->SetGain(::codec::Adau1361::HeadphoneOutput, 3.0, 2.0);
+  codec_->SetGain(::pico_driver::Adau1361::HeadphoneOutput, 2.0, 3.0);
+  codec_->Mute(::pico_driver::Adau1361::HeadphoneOutput, false);
+  codec_->SetGain(::pico_driver::Adau1361::HeadphoneOutput, 3.0, 2.0);
 }  // SetGain_HeadhphoneOutput
 
 // -----------------------------------------------------------------
@@ -139,9 +139,9 @@ TEST_F(Adau1361Test, Mute_LineInput) {
   EXPECT_CALL(*codec_lower_, SetHpOutputGain(_, _, _)).Times(0);
 
   // Test run.
-  codec_->Mute(::codec::Adau1361::LineInput, false);
-  codec_->SetGain(::codec::Adau1361::LineInput, 2.0, 3.0);
-  codec_->Mute(::codec::Adau1361::LineInput, true);
+  codec_->Mute(::pico_driver::Adau1361::LineInput, false);
+  codec_->SetGain(::pico_driver::Adau1361::LineInput, 2.0, 3.0);
+  codec_->Mute(::pico_driver::Adau1361::LineInput, true);
 
 }  // Mute_LineInput
 
@@ -161,9 +161,9 @@ TEST_F(Adau1361Test, Mute_LineOutput) {
   EXPECT_CALL(*codec_lower_, SetHpOutputGain(_, _, _)).Times(0);
 
   // Test run
-  codec_->Mute(::codec::Adau1361::LineOutput, true);
-  codec_->SetGain(::codec::Adau1361::LineOutput, 2.0, 3.0);
-  codec_->Mute(::codec::Adau1361::LineOutput, false);
+  codec_->Mute(::pico_driver::Adau1361::LineOutput, true);
+  codec_->SetGain(::pico_driver::Adau1361::LineOutput, 2.0, 3.0);
+  codec_->Mute(::pico_driver::Adau1361::LineOutput, false);
 }  // Mute_LineOutput
 
 TEST_F(Adau1361Test, Mute_AuxInput) {
@@ -182,9 +182,9 @@ TEST_F(Adau1361Test, Mute_AuxInput) {
   EXPECT_CALL(*codec_lower_, SetHpOutputGain(_, _, _)).Times(0);
 
   // Test run
-  codec_->Mute(::codec::Adau1361::AuxInput, false);
-  codec_->SetGain(::codec::Adau1361::AuxInput, 2.0, 3.0);
-  codec_->Mute(::codec::Adau1361::AuxInput);
+  codec_->Mute(::pico_driver::Adau1361::AuxInput, false);
+  codec_->SetGain(::pico_driver::Adau1361::AuxInput, 2.0, 3.0);
+  codec_->Mute(::pico_driver::Adau1361::AuxInput);
 }  // Mute_AuxInput
 
 TEST_F(Adau1361Test, Mute_HeadhphoneOutput) {
@@ -203,9 +203,9 @@ TEST_F(Adau1361Test, Mute_HeadhphoneOutput) {
   EXPECT_CALL(*codec_lower_, SetAuxInputGain(_, _, _)).Times(0);
 
   // Test run
-  codec_->Mute(::codec::Adau1361::HeadphoneOutput, false);
-  codec_->SetGain(::codec::Adau1361::HeadphoneOutput, 2.0, 3.0);
-  codec_->Mute(::codec::Adau1361::HeadphoneOutput, true);
+  codec_->Mute(::pico_driver::Adau1361::HeadphoneOutput, false);
+  codec_->SetGain(::pico_driver::Adau1361::HeadphoneOutput, 2.0, 3.0);
+  codec_->Mute(::pico_driver::Adau1361::HeadphoneOutput, true);
 }  // Mute_HeadhphoneOutput
 
 // -----------------------------------------------------------------

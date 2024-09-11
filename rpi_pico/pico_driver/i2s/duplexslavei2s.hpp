@@ -126,7 +126,8 @@ class DuplexSlaveI2S {
   virtual void PutFIFOBlocking(int32_t value);
 };
 
-#if __has_include(<gmock/gmock.h>)
+#ifdef MOCK_METHOD0
+
 class MockDuplexSlaveI2S : public DuplexSlaveI2S {
  public:
   MOCK_METHOD0(GetStateMachine, uint32_t(void));
@@ -135,7 +136,7 @@ class MockDuplexSlaveI2S : public DuplexSlaveI2S {
   MOCK_METHOD1(PutFIFOBlocking, void(int32_t value));
   MOCK_METHOD0(GetFIFOBlocking, int32_t());
 };
-#endif
+#endif  // MOCK_METHOD0
 
 }  // namespace pico_driver
 

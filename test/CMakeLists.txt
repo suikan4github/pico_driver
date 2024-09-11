@@ -2,6 +2,7 @@
 cmake_minimum_required(VERSION 3.14)
 
 
+
 file(GLOB SOURCES CMAKE_CONFIGURE_DEPENDS "./*.cpp")
 
 # Add the executable for the testcase which is using googletest
@@ -10,7 +11,7 @@ add_executable(${PROJECT_NAME} ${SOURCES})
     # Add the library under test.
     target_link_libraries(${PROJECT_NAME}  
                             GTest::gmock_main
-                            driver  
+                            pico_driver  
                             )
 
 include(GoogleTest)

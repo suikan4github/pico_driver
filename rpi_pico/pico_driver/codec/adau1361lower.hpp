@@ -219,7 +219,7 @@ class Adau1361Lower {
   const unsigned int device_addr_;
 };
 
-#if __has_include(<gmock/gmock.h>)
+#ifdef MOCK_METHOD0
 
 class MockAdau1361Lower : public Adau1361Lower {
  public:
@@ -245,7 +245,8 @@ class MockAdau1361Lower : public Adau1361Lower {
   MOCK_METHOD3(SetHpOutputGain,
                void(float left_gain, float right_gain, bool mute));
 };
-#endif  //  __has_include(<gmock/gmock>)
+#endif  //  MOCK_METHOD0
+
 }  // namespace pico_driver
 
 #endif /* _ADAU1361LOWER_HPP_ */

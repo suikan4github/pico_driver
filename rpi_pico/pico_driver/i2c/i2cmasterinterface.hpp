@@ -62,7 +62,7 @@ class I2CMasterInterface {
   virtual bool IsDeviceExisting(uint8_t addr) = 0;
 };
 
-#if __has_include(<gmock/gmock.h>)
+#ifdef MOCK_METHOD0
 
 class MockI2CMasterInterface : public I2CMasterInterface {
  public:
@@ -73,7 +73,7 @@ class MockI2CMasterInterface : public I2CMasterInterface {
   MOCK_METHOD1(IsDeviceExisting, bool(uint8_t addr));
 };
 
-#endif  //  __has_include(<gmock/gmock>)
+#endif  // MOCK_METHOD0
 }  // namespace pico_driver
 
 #endif /* _I2CMASTERINTERFACE_HPP_ */

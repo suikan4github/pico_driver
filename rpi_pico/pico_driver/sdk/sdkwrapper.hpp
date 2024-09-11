@@ -20,7 +20,7 @@
 // Alternative include and definition for Unix/Win32
 typedef int i2c_inst_t;
 typedef int gpio_function_t;
-typedef unsigned uint;
+typedef unsigned int uint;
 typedef unsigned int PIO;
 typedef unsigned int pio_sm_config;
 typedef unsigned int clock_handle_t;
@@ -448,7 +448,8 @@ class SDKWrapper {
   virtual void pio_sm_clear_fifos(PIO pio, uint sm);
 };
 
-#if __has_include(<gmock/gmock.h>)
+#ifdef MOCK_METHOD0
+
 class MockSDKWrapper : public SDKWrapper {
  public:
   MOCK_METHOD0(stdio_init_all, bool(void));
@@ -501,7 +502,7 @@ class MockSDKWrapper : public SDKWrapper {
   MOCK_METHOD2(pio_sm_is_claimed, bool(PIO pio, uint sm));
   MOCK_METHOD2(pio_sm_clear_fifos, void(PIO pio, uint sm));
 };
-#endif  // __has_include(<gmock/gmock.h>)
+#endif  // BUILD_PICO_LIB
 };  // namespace pico_driver
 
 #endif  // __DRIVER_PICOWRAPPER_HPP__

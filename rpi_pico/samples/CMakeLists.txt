@@ -1,3 +1,2 @@
 
 add_subdirectory(talkthrough_sample)
-add_subdirectory(pico_driver)

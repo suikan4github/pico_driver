@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.13)
 # local library for hardeware driver
 
 if((${WIN32}) OR (${UNIX})) # Is Target Windows or Unix? 
-        # do notihing here
+        target_include_directories(pico_driver PUBLIC .)
 
 else()  # Is target RasPi Pico? 
 
