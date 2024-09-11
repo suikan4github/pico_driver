@@ -82,7 +82,7 @@ int main() {
   sdk.gpio_init(I2S_GPIO_PIN_DEBUG);
   sdk.gpio_set_dir(I2S_GPIO_PIN_DEBUG, true);
 
-  // CODEC initializaiton and run.
+  // CODEC initialization and run.
   codec.Start();
   // Un mute the codec to enable the sound. Default gain is 0dB.
   codec.Mute(codec::Adau1361::LineInput, false);        // unmute
