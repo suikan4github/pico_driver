@@ -18,15 +18,14 @@
 
 #else
 // Alternative include and definition for Unix/Win32
+#include <stdint.h>
+#include <stdlib.h>
 typedef int i2c_inst_t;
 typedef int gpio_function_t;
-typedef unsigned int uint;
 typedef unsigned int PIO;
 typedef unsigned int pio_sm_config;
 typedef unsigned int clock_handle_t;
 typedef unsigned int pio_program_t;
-#include <stdint.h>
-#include <stdlib.h>
 #endif
 
 #if __has_include(<gmock/gmock.h>)
