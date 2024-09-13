@@ -1,16 +1,14 @@
 cmake_minimum_required(VERSION 3.13)
 
-# local library for hardeware driver
+# Common declaration for both UNIX/Win and bare metal.
+target_include_directories(pico_driver INTERFACE .)
 
-if((${WIN32}) OR (${UNIX})) # Is Target Windows or Unix? 
-        target_include_directories(pico_driver PUBLIC .)
-
-else()  # Is target RasPi Pico? 
+# Bare metal specific declaration. 
+if(NOT (${WIN32}) AND NOT (${UNIX})) # Is target bare metal?   
 
         target_sources(pico_driver INTERFACE 
                         sdkwrapper.cpp
         )
-        target_include_directories(pico_driver INTERFACE .)
         # This is tricky part. 
         # We need this pico_stdlib to pull in the include path of
         # pico SDK, when we build the driver library. 
