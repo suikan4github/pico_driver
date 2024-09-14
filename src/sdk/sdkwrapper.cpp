@@ -73,7 +73,10 @@ void ::pico_driver::SDKWrapper::gpio_pull_up(uint gpio) {
   ::gpio_pull_up(gpio);
 }
 
-uint ::pico_driver::SDKWrapper::i2c_init(i2c_inst_t* i2c, uint baudrate) {
+// To avoid the ill formed program, the global :: scope resolution operator
+// is removed in the following line.
+// See also https://cplusplus.github.io/CWG/issues/1828.html
+uint pico_driver::SDKWrapper::i2c_init(i2c_inst_t* i2c, uint baudrate) {
   return ::i2c_init(i2c, baudrate);
 }
 
