@@ -34,7 +34,7 @@
 .program duplex_slave_i2s   ; Program entry point. 
 
                             ; The following 3 loops avoid the trouble from the timing problem. 
-                            ; The beginning of the PIO state machine program is not synchronised
+                            ; The beginning of the PIO state machine program is not synchronized
                             ; with the running I2S master signal.
                             ; As a result, the PIO program may start :
                             ; - At the middle of Left ch. 
@@ -42,27 +42,27 @@
                             ; - At the boundary of left and right ch.
                             ; These timing may cause the LR swap or noise issue. Also other
                             ; unknown issue may cause. 
-                            ; To avoid thise trouble, the following 3 loops guarantee the 
+                            ; To avoid this trouble, the following 3 loops guarantee the 
                             ; data transfer start from the precisely beginning of left ch.  
 
 sync2_loop:                 ; Loop to wait for left ch
         wait 0 pin 1        ; Capture falling edge of BCLK(Sync to the driving edge of BCLK). 
-        wait 1 pin 1        ; Capture riging edge of BCLK(Sync to the Sampling edge of BCLK). 
+        wait 1 pin 1        ; Capture rising edge of BCLK(Sync to the Sampling edge of BCLK). 
     jmp pin sync2_loop      ; repeat while WS == 1.
 
 sync1_loop:                 ; Loop to wait for right ch. 
         wait 0 pin 1        ; Capture falling edge of BCLK(Sync to the driving edge of BCLK). 
-        wait 1 pin 1        ; Capture riging edge of BCLK(Sync to the Sampling edge of BCLK). 
+        wait 1 pin 1        ; Capture rising edge of BCLK(Sync to the Sampling edge of BCLK). 
         jmp pin sync0_loop  ; Exit loop if WS == 1
     jmp sync1_loop          ; repeat while WS == 0. 
  
 sync0_loop:                 ; We are fully sync with Right channel here. 
         wait 0 pin 1        ; Capture falling edge of BCLK(Sync to the driving edge of BCLK). 
-        wait 1 pin 1        ; Capture riging edge of BCLK(Sync to the Sampling edge of BCLK). 
+        wait 1 pin 1        ; Capture rising edge of BCLK(Sync to the Sampling edge of BCLK). 
     jmp pin sync0_loop      ; repeat while WS == 1.
  
 
-                            ; In the following transfer loop, the pull instrunctions are 
+                            ; In the following transfer loop, the pull instructions are 
                             ; blocking operation. This allows small under under flow from the 
                             ; main program.  n the other words, delay of the TX data is 
                             ; allowed ( alternatively, we may have some noise) and transfer 
@@ -77,7 +77,7 @@ sync0_loop:                 ; We are fully sync with Right channel here.
 left_loop:                  ; Loop to transfer left ch. 
         wait 0 pin 1        ; Capture falling edge of BCLK(Sync to the driving edge of BCLK). 
         out pins, 1         ; Output 1 bit to DAC. 
-        wait 1 pin 1        ; Capture riging edge of BCLK(Sync to the Sampling edge of BCLK). 
+        wait 1 pin 1        ; Capture rising edge of BCLK(Sync to the Sampling edge of BCLK). 
         in pins, 1          ; Input 1 bit from ADC.
         jmp pin left_exit   ; Exit loop if WS == 1
     jmp left_loop           ; repeat while WS == 0. 
@@ -91,7 +91,7 @@ left_exit:                  ; Tearing off the shift registers. WS is 1 at here.
 right_loop:                 ; Loop to transfer right ch
         wait 0 pin 1        ; Capture falling edge of BCLK(Sync to the driving edge of BCLK). 
         out pins, 1         ; Output 1 bit to DAC. 
-        wait 1 pin 1        ; Capture riging edge of BCLK(Sync to the Sampling edge of BCLK). 
+        wait 1 pin 1        ; Capture rising edge of BCLK(Sync to the Sampling edge of BCLK). 
         in pins, 1          ; Input 1 bit from ADC.
     jmp pin right_loop      ; repeat while WS == 1.
 
