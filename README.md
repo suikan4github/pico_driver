@@ -1,23 +1,30 @@
-# duplex-i2s-pico
-An experimental Duplex I2S implementation on PIO and its example applications. 
+# PICO DRIVER
+A Collection of the Raspberry Pi [Pico](https://www.raspberrypi.com/products/raspberry-pi-pico/)/[Pico2](https://www.raspberrypi.com/products/raspberry-pi-pico-2/) classes. Also, the [SDK API](https://www.raspberrypi.com/documentation/pico-sdk/hardware.html#group_sm_config_1gaed7a6e7dc4f1979c7c62e4773df8c79b) wrapper class is provided. 
 
 ## Details
-This is an experimental project for the Raspberry Pi Pico I2S implementation. This project targets : 
-- Supports Duplex I2S in Slave mode. 
-- Only 32bit data on I2S is supported. 
-- Supports both RP2040 and RP2350.
-- Unit test by [GoogleTest](https://google.github.io/googletest/) and [fff](https://github.com/meekrosoft/fff).
-- Possible to build on Ubuntu Desktop or WSL. 
+This class collection ( or class library ) encapsule the certain data inside class. And it also allows you to use the depenency-injection inside your project. So, you can test your code with [Google Test](https://github.com/google/googletest) before testing on the target hardware. 
+
+These classes are provided in this version. 
+- ::pico_driver::SDKWrapper
+- ::pico_driver::I2CMaster
+- ::pico_driver::DuplexSlaveI2S
+- ::pico_driver::
+
 
 ## How to obtain this project
 
-The newest copy of this project is found in the [GitHub repository](https://github.com/suikan4github/duplex-i2s-pico). 
+The newest copy of this project is found in the [GitHub repository](https://github.com/suikan4github/pico_driver). 
+
+## How to obtain the sample programs
+
+The newest copy of the sample program project is found in the [GitHub repository](https://github.com/suikan4github/pico_driver-sample). 
 
 
-## Building sample
+## Building the test program
 All the sample and I2S driver code are under rpi directory. 
 
 See the [rpi/BUILD.md](rpi/BUILD.md)
+
 ## Installing tool
 To build the samples or test, you need to install the build tools on Ubuntu : 
 
