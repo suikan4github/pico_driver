@@ -30,7 +30,7 @@ class I2CMaster : public I2CMasterInterface {
  public:
   /**
    * @brief Initialize the given I2C port and setup the pins.
-   * @param sdk Object of the SDKWrapper class.
+   * @param sdk Object of the SdkWrapper class.
    * @param i2c i2c_inst_t type &. *I2C0 or *I2C1
    * @param clock_freq Usually 100,000 or 400,000[Hz].
    * @param scl_pin GPIO pin #
@@ -40,7 +40,7 @@ class I2CMaster : public I2CMasterInterface {
    * it by sdk.i2c_init().
    * And then, set given pins to I2C function, and pull them up.
    */
-  I2CMaster(SDKWrapper &sdk, i2c_inst_t &i2c, uint clock_freq, uint scl_pin,
+  I2CMaster(SdkWrapper &sdk, i2c_inst_t &i2c, uint clock_freq, uint scl_pin,
             uint sda_pin);
   I2CMaster() = delete;
   /**
@@ -86,7 +86,7 @@ class I2CMaster : public I2CMasterInterface {
 
  private:
   i2c_inst_t &i2c_;
-  SDKWrapper &sdk_;
+  SdkWrapper &sdk_;
 };
 };  // namespace pico_driver
 

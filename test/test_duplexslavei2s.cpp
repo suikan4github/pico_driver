@@ -9,7 +9,7 @@
 class DuplexSlaveI2STest : public ::testing::Test {
  protected:
   std::random_device rng;
-  ::pico_driver::MockSDKWrapper sdk_;
+  ::pico_driver::MockSdkWrapper sdk_;
   PIO pio_ = rng();
   uint32_t sm_ = rng();
   uint pin_base_ = rng();

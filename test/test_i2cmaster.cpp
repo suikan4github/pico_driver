@@ -7,7 +7,7 @@ using testing::Return;
 
 // Constructor test
 TEST(I2CMaster, Constructor) {
-  ::pico_driver::MockSDKWrapper sdk;
+  ::pico_driver::MockSdkWrapper sdk;
   i2c_inst_t i2c_inst;
 
   uint freq = 100 * 1000;
@@ -31,7 +31,7 @@ TEST(I2CMaster, Constructor) {
 
 // Destructor test
 TEST(I2CMaster, Destructor) {
-  ::pico_driver::MockSDKWrapper sdk;
+  ::pico_driver::MockSdkWrapper sdk;
   i2c_inst_t i2c_inst;
 
   uint freq = 100 * 1000;
@@ -53,7 +53,7 @@ TEST(I2CMaster, Destructor) {
 }  // Destructor
 
 TEST(I2CMaster, ReadBlocking) {
-  ::pico_driver::MockSDKWrapper sdk;
+  ::pico_driver::MockSdkWrapper sdk;
   i2c_inst_t i2c_inst;
 
   uint8_t addr = 3;
@@ -84,7 +84,7 @@ TEST(I2CMaster, ReadBlocking) {
 }  // ReadBlocking
 
 TEST(I2CMaster, WriteBlocking) {
-  ::pico_driver::MockSDKWrapper sdk;
+  ::pico_driver::MockSdkWrapper sdk;
   i2c_inst_t i2c_inst;
 
   uint8_t addr = 3;
@@ -115,7 +115,7 @@ TEST(I2CMaster, WriteBlocking) {
 }  // WriteBlocking
 
 TEST(I2CMaster, IsDeviceExisting) {
-  ::pico_driver::MockSDKWrapper sdk;
+  ::pico_driver::MockSdkWrapper sdk;
   i2c_inst_t i2c_inst;
 
   uint8_t addr[] = {17, 23};

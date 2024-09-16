@@ -49,7 +49,7 @@ namespace pico_driver {
  */
 class DuplexSlaveI2S {
  private:
-  ::pico_driver::SDKWrapper &sdk_;
+  ::pico_driver::SdkWrapper &sdk_;
   PIO pio_;
   const uint32_t sm_;    // State machine ( 0..3 )
   const uint pin_base_;  // first GPIO pin number of the I2S signal.
@@ -67,7 +67,7 @@ class DuplexSlaveI2S {
    * Internally, the state machine will be allocate from the unused one.
    *
    */
-  DuplexSlaveI2S(::pico_driver::SDKWrapper &sdk, PIO pio, uint pin_base);
+  DuplexSlaveI2S(::pico_driver::SdkWrapper &sdk, PIO pio, uint pin_base);
   /**
    * @brief Construct a new Duplex Slave I 2 S object
    *
@@ -77,7 +77,7 @@ class DuplexSlaveI2S {
    * @param pin_base The GPIO pin number of SDOUT signal.
    * @details
    */
-  DuplexSlaveI2S(::pico_driver::SDKWrapper &sdk, PIO pio, uint32_t sm,
+  DuplexSlaveI2S(::pico_driver::SdkWrapper &sdk, PIO pio, uint32_t sm,
                  uint pin_base);
 
   /**

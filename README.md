@@ -5,7 +5,7 @@ A Collection of the Raspberry Pi [Pico](https://www.raspberrypi.com/products/ras
 This class collection ( or class library ) encapsule the certain data inside class. And it also allows you to use the depenency-injection inside your project. So, you can test your code with [Google Test](https://github.com/google/googletest) before testing on the target hardware. 
 
 These classes are provided in this version. 
-- ::pico_driver::SDKWrapper
+- ::pico_driver::SdkWrapper
 - ::pico_driver::I2CMaster
 - ::pico_driver::DuplexSlaveI2S
 - ::pico_driver::

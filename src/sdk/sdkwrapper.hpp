@@ -46,9 +46,9 @@ namespace pico_driver {
  * This wrapper class is convenient for the dependency injection to allow
  * the unit test.
  */
-class SDKWrapper {
+class SdkWrapper {
  public:
-  virtual ~SDKWrapper() {}
+  virtual ~SdkWrapper() {}
   /* ***************************************************************************
    *                              House Keeping
    * ***************************************************************************
@@ -453,7 +453,7 @@ class SDKWrapper {
 
 #if __has_include(<gmock/gmock.h>)
 
-class MockSDKWrapper : public SDKWrapper {
+class MockSdkWrapper : public SdkWrapper {
  public:
   MOCK_METHOD0(stdio_init_all, bool(void));
   MOCK_METHOD1(sleep_ms, void(uint32_t ms));

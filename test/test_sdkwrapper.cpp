@@ -65,7 +65,7 @@ FAKE_VOID_FUNC(pio_sm_clear_fifos, PIO, uint);
 #include "../src/sdk/sdkwrapper.cpp"
 
 TEST(PicoWrapper, stdio_init_all) {
-  ::pico_driver::SDKWrapper pico;
+  ::pico_driver::SdkWrapper pico;
 
   FFF_RESET_HISTORY();
   RESET_FAKE(stdio_init_all);
@@ -91,7 +91,7 @@ TEST(PicoWrapper, stdio_init_all) {
 
 TEST(PicoWrapper, sleep_ms) {
   std::random_device rng;
-  ::pico_driver::SDKWrapper pico;
+  ::pico_driver::SdkWrapper pico;
   uint ms_array[] = {rng(), rng()};
 
   FFF_RESET_HISTORY();
@@ -118,7 +118,7 @@ TEST(PicoWrapper, sleep_ms) {
 
 TEST(PicoWrapper, gpio_init) {
   std::random_device rng;
-  ::pico_driver::SDKWrapper pico;
+  ::pico_driver::SdkWrapper pico;
   uint gpioarray[] = {rng(), rng()};
 
   FFF_RESET_HISTORY();
@@ -145,7 +145,7 @@ TEST(PicoWrapper, gpio_init) {
 
 TEST(PicoWrapper, gpio_set_function) {
   std::random_device rng;
-  ::pico_driver::SDKWrapper pico;
+  ::pico_driver::SdkWrapper pico;
   uint gpioarray[] = {rng(), rng()};
   int functionarray[] = {static_cast<int>(rng()), static_cast<int>(rng())};
 
@@ -180,7 +180,7 @@ TEST(PicoWrapper, gpio_set_function) {
 
 TEST(PicoWrapper, gpio_set_dir) {
   std::random_device rng;
-  ::pico_driver::SDKWrapper pico;
+  ::pico_driver::SdkWrapper pico;
   uint gpioarray[] = {rng(), rng()};
   bool dirarray[] = {true, false};
 
@@ -214,7 +214,7 @@ TEST(PicoWrapper, gpio_set_dir) {
 
 TEST(PicoWrapper, gpio_put) {
   std::random_device rng;
-  ::pico_driver::SDKWrapper pico;
+  ::pico_driver::SdkWrapper pico;
   uint gpioarray[] = {rng(), rng()};
   bool valuearray[] = {true, false};
 
@@ -248,7 +248,7 @@ TEST(PicoWrapper, gpio_put) {
 }
 
 TEST(PicoWrapper, gpio_get) {
-  ::pico_driver::SDKWrapper pico;
+  ::pico_driver::SdkWrapper pico;
   uint gpio = 17;
 
   FFF_RESET_HISTORY();
@@ -274,7 +274,7 @@ TEST(PicoWrapper, gpio_get) {
 }
 
 TEST(PicoWrapper, gpio_pull_up) {
-  ::pico_driver::SDKWrapper pico;
+  ::pico_driver::SdkWrapper pico;
   uint gpio = 17;
 
   FFF_RESET_HISTORY();
@@ -307,7 +307,7 @@ TEST(PicoWrapper, gpio_pull_up) {
 // FAKE_VALUE_FUNC(uint, i2c_init, i2c_inst_t *, uint);
 TEST(PicoWrapper, i2c_init) {
   std::random_device rng;
-  ::pico_driver::SDKWrapper pico;
+  ::pico_driver::SdkWrapper pico;
   i2c_inst_t i2c = 17;
   const uint baud[] = {rng(), rng()};
 
@@ -340,7 +340,7 @@ TEST(PicoWrapper, i2c_init) {
 // FAKE_VOID_FUNC(i2c_deinit, i2c_inst_t *);
 TEST(PicoWrapper, i2c_deinit) {
   std::random_device rng;
-  ::pico_driver::SDKWrapper pico;
+  ::pico_driver::SdkWrapper pico;
   i2c_inst_t i2c = 17;
   const uint baud[] = {rng(), rng()};
 
@@ -365,7 +365,7 @@ TEST(PicoWrapper, i2c_deinit) {
 //                  size_t, bool);
 TEST(PicoWrapper, i2c_read_blocking) {
   std::random_device rng;
-  ::pico_driver::SDKWrapper pico;
+  ::pico_driver::SdkWrapper pico;
   i2c_inst_t i2c = 17;
   uint8_t buf[10];
   uint8_t addrs_array[] = {static_cast<uint8_t>(rng()),
@@ -420,7 +420,7 @@ TEST(PicoWrapper, i2c_read_blocking) {
 // const uint8_t *,  size_t, bool);
 TEST(PicoWrapper, i2c_write_blocking) {
   std::random_device rng;
-  ::pico_driver::SDKWrapper pico;
+  ::pico_driver::SdkWrapper pico;
   i2c_inst_t i2c = 17;
   uint8_t buf[10];
   uint8_t addrs_array[] = {static_cast<uint8_t>(rng()),
@@ -473,7 +473,7 @@ TEST(PicoWrapper, i2c_write_blocking) {
 
 TEST(PicoWrapper, pio_sm_set_consecutive_pindirs) {
   std::random_device rng;
-  ::pico_driver::SDKWrapper pico;
+  ::pico_driver::SdkWrapper pico;
   PIO pio_array[] = {rng(), rng()};
   uint sm_array[] = {rng(), rng()};
   uint pins_base_array[] = {rng(), rng()};
@@ -533,7 +533,7 @@ TEST(PicoWrapper, pio_sm_set_consecutive_pindirs) {
 
 TEST(PicoWrapper, pio_gpio_init) {
   std::random_device rng;
-  ::pico_driver::SDKWrapper pico;
+  ::pico_driver::SdkWrapper pico;
   PIO pio_array[] = {rng(), rng()};
   uint pin_array[] = {rng(), rng()};
 
@@ -564,7 +564,7 @@ TEST(PicoWrapper, pio_gpio_init) {
 
 TEST(PicoWrapper, sm_config_set_out_pins) {
   std::random_device rng;
-  ::pico_driver::SDKWrapper pico;
+  ::pico_driver::SdkWrapper pico;
   PIO pio_array[] = {rng(), rng()};
   uint length_array[] = {rng(), rng()};
   pio_sm_config config;
@@ -598,7 +598,7 @@ TEST(PicoWrapper, sm_config_set_out_pins) {
 
 TEST(PicoWrapper, sm_config_set_in_pin_base) {
   std::random_device rng;
-  ::pico_driver::SDKWrapper pico;
+  ::pico_driver::SdkWrapper pico;
   uint base_array[] = {rng(), rng()};
   pio_sm_config config;
 
@@ -627,7 +627,7 @@ TEST(PicoWrapper, sm_config_set_in_pin_base) {
 
 TEST(PicoWrapper, sm_config_set_in_pin_count) {
   std::random_device rng;
-  ::pico_driver::SDKWrapper pico;
+  ::pico_driver::SdkWrapper pico;
   PIO count_array[] = {rng(), rng()};
   pio_sm_config config;
 
@@ -657,7 +657,7 @@ TEST(PicoWrapper, sm_config_set_in_pin_count) {
 
 TEST(PicoWrapper, clock_get_hz) {
   std::random_device rng;
-  ::pico_driver::SDKWrapper pico;
+  ::pico_driver::SdkWrapper pico;
   clock_handle_t clock_handle_array[] = {rng(), rng()};
   uint32_t return_vals_array[] = {rng(), rng()};
 
@@ -692,7 +692,7 @@ TEST(PicoWrapper, clock_get_hz) {
 
 TEST(PicoWrapper, sm_config_set_clkdiv) {
   std::random_device rng;
-  ::pico_driver::SDKWrapper pico;
+  ::pico_driver::SdkWrapper pico;
   float div_array[] = {static_cast<float>(rng()), static_cast<float>(rng())};
   pio_sm_config config;
 
@@ -721,7 +721,7 @@ TEST(PicoWrapper, sm_config_set_clkdiv) {
 
 TEST(PicoWrapper, sm_config_set_in_shift) {
   std::random_device rng;
-  ::pico_driver::SDKWrapper pico;
+  ::pico_driver::SdkWrapper pico;
   pio_sm_config config;
 
   bool shift_right_array[] = {true, false};
@@ -762,7 +762,7 @@ TEST(PicoWrapper, sm_config_set_in_shift) {
 
 TEST(PicoWrapper, sm_config_set_out_shift) {
   std::random_device rng;
-  ::pico_driver::SDKWrapper pico;
+  ::pico_driver::SdkWrapper pico;
   pio_sm_config config;
 
   bool shift_right_array[] = {false, true};
@@ -804,7 +804,7 @@ TEST(PicoWrapper, sm_config_set_out_shift) {
 
 TEST(PicoWrapper, pio_sm_init) {
   std::random_device rng;
-  ::pico_driver::SDKWrapper pico;
+  ::pico_driver::SdkWrapper pico;
   pio_sm_config config;
 
   PIO pio_array[] = {rng(), rng()};
@@ -850,7 +850,7 @@ TEST(PicoWrapper, pio_sm_init) {
 
 TEST(PicoWrapper, pio_sm_put) {
   std::random_device rng;
-  ::pico_driver::SDKWrapper pico;
+  ::pico_driver::SdkWrapper pico;
   pio_sm_config config;
 
   PIO pio_array[] = {rng(), rng()};
@@ -887,7 +887,7 @@ TEST(PicoWrapper, pio_sm_put) {
 
 TEST(PicoWrapper, pio_sm_put_blocking) {
   std::random_device rng;
-  ::pico_driver::SDKWrapper pico;
+  ::pico_driver::SdkWrapper pico;
   pio_sm_config config;
 
   PIO pio_array[] = {rng(), rng()};
@@ -924,7 +924,7 @@ TEST(PicoWrapper, pio_sm_put_blocking) {
 
 TEST(PicoWrapper, pio_sm_set_enabled) {
   std::random_device rng;
-  ::pico_driver::SDKWrapper pico;
+  ::pico_driver::SdkWrapper pico;
   pio_sm_config config;
 
   PIO pio_array[] = {rng(), rng()};
@@ -962,7 +962,7 @@ TEST(PicoWrapper, pio_sm_set_enabled) {
 
 TEST(PicoWrapper, pio_add_program) {
   std::random_device rng;
-  ::pico_driver::SDKWrapper pico;
+  ::pico_driver::SdkWrapper pico;
 
   PIO pio_array[] = {rng(), rng()};
   pio_program_t dummy_program;
@@ -1001,7 +1001,7 @@ TEST(PicoWrapper, pio_add_program) {
 
 TEST(PicoWrapper, sm_config_set_jmp_pin) {
   std::random_device rng;
-  ::pico_driver::SDKWrapper pico;
+  ::pico_driver::SdkWrapper pico;
   PIO pin_array[] = {rng(), rng()};
   pio_sm_config config;
 
@@ -1030,7 +1030,7 @@ TEST(PicoWrapper, sm_config_set_jmp_pin) {
 
 TEST(PicoWrapper, pio_sm_get) {
   std::random_device rng;
-  ::pico_driver::SDKWrapper pico;
+  ::pico_driver::SdkWrapper pico;
   pio_sm_config config;
 
   PIO pio_array[] = {rng(), rng()};
@@ -1070,7 +1070,7 @@ TEST(PicoWrapper, pio_sm_get) {
 
 TEST(PicoWrapper, pio_sm_get_blocking) {
   std::random_device rng;
-  ::pico_driver::SDKWrapper pico;
+  ::pico_driver::SdkWrapper pico;
   pio_sm_config config;
 
   PIO pio_array[] = {rng(), rng()};
@@ -1110,7 +1110,7 @@ TEST(PicoWrapper, pio_sm_get_blocking) {
 }  // TEST(PicoWrapper, pio_sm_get_blocking)
 TEST(PicoWrapper, pio_sm_claim) {
   std::random_device rng;
-  ::pico_driver::SDKWrapper pico;
+  ::pico_driver::SdkWrapper pico;
   pio_sm_config config;
 
   PIO pio_array[] = {rng(), rng()};
@@ -1144,7 +1144,7 @@ TEST(PicoWrapper, pio_sm_claim) {
 
 TEST(PicoWrapper, pio_sm_unclaim) {
   std::random_device rng;
-  ::pico_driver::SDKWrapper pico;
+  ::pico_driver::SdkWrapper pico;
   pio_sm_config config;
 
   PIO pio_array[] = {rng(), rng()};
@@ -1178,7 +1178,7 @@ TEST(PicoWrapper, pio_sm_unclaim) {
 
 TEST(PicoWrapper, pio_claim_unused_sm) {
   std::random_device rng;
-  ::pico_driver::SDKWrapper pico;
+  ::pico_driver::SdkWrapper pico;
   PIO pio_array[] = {rng(), rng()};
   bool required_array[2] = {true, false};
   int return_vals_array[] = {1, 2, 3, 4};
@@ -1218,7 +1218,7 @@ TEST(PicoWrapper, pio_claim_unused_sm) {
 
 TEST(PicoWrapper, pio_sm_is_claimed) {
   std::random_device rng;
-  ::pico_driver::SDKWrapper pico;
+  ::pico_driver::SdkWrapper pico;
   PIO pio_array[] = {rng(), rng()};
   uint sm_array[2] = {rng(), rng()};
   bool return_vals_array[] = {true, false, false, true};
@@ -1257,7 +1257,7 @@ TEST(PicoWrapper, pio_sm_is_claimed) {
 
 TEST(PicoWrapper, pio_sm_clear_fifos) {
   std::random_device rng;
-  ::pico_driver::SDKWrapper pico;
+  ::pico_driver::SdkWrapper pico;
   pio_sm_config config;
 
   PIO pio_array[] = {rng(), rng()};

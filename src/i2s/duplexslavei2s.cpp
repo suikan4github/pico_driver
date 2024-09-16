@@ -10,7 +10,7 @@ extern "C" {
 static pio_program_t duplex_slave_i2s_program;
 #endif  // __has_include(<hardware/pio.h>)
 
-pico_driver::DuplexSlaveI2S::DuplexSlaveI2S(::pico_driver::SDKWrapper &sdk,
+pico_driver::DuplexSlaveI2S::DuplexSlaveI2S(::pico_driver::SdkWrapper &sdk,
                                             PIO pio, uint pin_base)
     : sdk_(sdk),
       pio_(pio),
@@ -18,7 +18,7 @@ pico_driver::DuplexSlaveI2S::DuplexSlaveI2S(::pico_driver::SDKWrapper &sdk,
           pio_, true)),  // true mean required. assert if no room.
       pin_base_(pin_base) {}
 
-pico_driver::DuplexSlaveI2S::DuplexSlaveI2S(::pico_driver::SDKWrapper &sdk,
+pico_driver::DuplexSlaveI2S::DuplexSlaveI2S(::pico_driver::SdkWrapper &sdk,
                                             PIO pio, uint32_t sm, uint pin_base)
     : sdk_(sdk), pio_(pio), sm_(sm), pin_base_(pin_base) {
   sdk_.pio_sm_claim(pio_, sm_);
