@@ -156,7 +156,7 @@ class Adau1361Lower {
    *
    * Need to call after InitializeRegisters().
    */
-  virtual void ConfigureSignalPath();
+  virtual void ConfigureSignalPath() = 0;
 
   /**
    * \brief Set the line input gain and enable the relevant mixer.
