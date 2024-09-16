@@ -26,7 +26,7 @@ typedef int i2c_inst_t;
 #include "sdkwrapper.hpp"
 
 namespace pico_driver {
-class I2CMaster : public I2CMasterInterface {
+class I2cMaster : public I2cMasterInterface {
  public:
   /**
    * @brief Initialize the given I2C port and setup the pins.
@@ -40,13 +40,13 @@ class I2CMaster : public I2CMasterInterface {
    * it by sdk.i2c_init().
    * And then, set given pins to I2C function, and pull them up.
    */
-  I2CMaster(SdkWrapper &sdk, i2c_inst_t &i2c, uint clock_freq, uint scl_pin,
+  I2cMaster(SdkWrapper &sdk, i2c_inst_t &i2c, uint clock_freq, uint scl_pin,
             uint sda_pin);
-  I2CMaster() = delete;
+  I2cMaster() = delete;
   /**
    * @brief deinit the I2C by sdk.i2c_deinit();
    */
-  virtual ~I2CMaster();
+  virtual ~I2cMaster();
   /**
    * @brief Attempt to read specified number of bytes from address,
    * blocking.

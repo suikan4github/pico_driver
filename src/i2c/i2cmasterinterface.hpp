@@ -28,9 +28,9 @@ namespace pico_driver {
  * @brief Interface type to allow the GoogleTest without depending to RasPi
  *
  */
-class I2CMasterInterface {
+class I2cMasterInterface {
  public:
-  virtual ~I2CMasterInterface() {}
+  virtual ~I2cMasterInterface() {}
   /**
    * @brief Attempt to read specified number of bytes from address, blocking.
    * @param addr 7-bit address of device to read from
@@ -68,7 +68,7 @@ class I2CMasterInterface {
 
 #if __has_include(<gmock/gmock.h>)
 
-class MockI2CMasterInterface : public I2CMasterInterface {
+class MockI2cMasterInterface : public I2cMasterInterface {
  public:
   MOCK_METHOD4(ReadBlocking,
                int(uint8_t addr, uint8_t *dst, size_t len, bool nostop));

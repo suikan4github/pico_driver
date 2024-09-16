@@ -31,7 +31,7 @@ class UmbAdau1361Lower : public Adau1361Lower {
    * @param i2c_device_addr ADAU1361A 7bits I2C device address. Refer device
    * deta sheet for details.
    */
-  UmbAdau1361Lower(::pico_driver::I2CMasterInterface& controller,
+  UmbAdau1361Lower(::pico_driver::I2cMasterInterface& controller,
                    unsigned int i2c_device_addr)
       : Adau1361Lower(controller, i2c_device_addr) {}
   UmbAdau1361Lower() = delete;

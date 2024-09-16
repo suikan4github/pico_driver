@@ -19,7 +19,7 @@ class Adau1361Test : public ::testing::Test {
 
   uint fs_ = 48000;
   uint master_clk_ = 12000000;
-  ::pico_driver::MockI2CMasterInterface i2c_;
+  ::pico_driver::MockI2cMasterInterface i2c_;
   ::pico_driver::MockAdau1361Lower *codec_lower_;
   ::pico_driver::Adau1361 *codec_;
 };

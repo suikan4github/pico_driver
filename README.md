@@ -6,7 +6,7 @@ This class collection ( or class library ) encapsule the certain data inside cla
 
 These classes are provided in this version. 
 - ::pico_driver::SdkWrapper
-- ::pico_driver::I2CMaster
+- ::pico_driver::I2cMaster
 - ::pico_driver::DuplexSlaveI2S
 - ::pico_driver::
 
