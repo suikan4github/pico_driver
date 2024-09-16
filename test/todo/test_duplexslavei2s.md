@@ -1,46 +1,46 @@
-# test_DuplexSlaveI2S TDD
-- [x] Implement DuplexSlaveI2S::PutFIFOBlocking(). 
-- [x] Create Test case DuplexSlaveI2S.PUtFIFOBlocking() to fail. 
+# test_DuplexSlaveI2s TDD
+- [x] Implement DuplexSlaveI2s::PutFIFOBlocking(). 
+- [x] Create Test case DuplexSlaveI2s.PUtFIFOBlocking() to fail. 
 - [x] Make it success. 
 - [x] Remove the duplication. 
 
-- [x] Implement DuplexSlaveI2S::GetFIFOBlocking(). 
-- [x] Create Test case DuplexSlaveI2S.GetFIFOBlocking() to fail. 
+- [x] Implement DuplexSlaveI2s::GetFIFOBlocking(). 
+- [x] Create Test case DuplexSlaveI2s.GetFIFOBlocking() to fail. 
 - [x] Make it success. 
 - [x] Remove the duplication. 
 
 
-- [x] Implement DuplexSlaveI2S::GetStateMachine(). 
+- [x] Implement DuplexSlaveI2s::GetStateMachine(). 
 - [x] Create Test case SdkWrapper.GetStateMachine() to fail. 
 - [x] Make it success. 
 - [x] Remove the duplication. 
 
-- [x] Implement DuplexSlaveI2S::Start(). 
+- [x] Implement DuplexSlaveI2s::Start(). 
 - [x] Create Test case SdkWrapper.Start() to fail. 
 - [x] Make it success. 
 - [x] Remove the duplication. 
 
-- [x] Implement DuplexSlaveI2S::Stop(). 
+- [x] Implement DuplexSlaveI2s::Stop(). 
 - [x] Create Test case SdkWrapper.Stop() to fail. 
 - [x] Make it success. 
 - [x] Remove the duplication. 
 
-- [x] Implement DuplexSlaveI2S::Constructor3(). 
+- [x] Implement DuplexSlaveI2s::Constructor3(). 
 - [x] Create Test case SdkWrapper.Constructor3() to fail. 
 - [x] Make it success. 
 - [x] Remove the duplication. 
 
-- [4] Implement DuplexSlaveI2S::Constructor4(). 
+- [4] Implement DuplexSlaveI2s::Constructor4(). 
 - [x] Create Test case SdkWrapper.Constructor4() to fail. 
 - [x] Make it success. 
 - [x] Remove the duplication. 
 
-- [x] Implement DuplexSlaveI2S::Destructor(). 
+- [x] Implement DuplexSlaveI2s::Destructor(). 
 - [x] Create Test case SdkWrapper.Destructor() to fail. 
 - [x] Make it success. 
 - [x] Remove the duplication. 
 
-- [x] Implement DuplexSlaveI2S::Destructor_stopped(). 
+- [x] Implement DuplexSlaveI2s::Destructor_stopped(). 
 - [x] Create Test case SdkWrapper.Destructor_stopped() to fail. 
 - [x] Make it success. 
 - [x] Remove the duplication. 

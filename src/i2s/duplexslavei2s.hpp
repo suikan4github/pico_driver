@@ -47,7 +47,7 @@ namespace pico_driver {
  * This class assumes polling based data transfer instead of interrupt / DMA
  * based data transfer.
  */
-class DuplexSlaveI2S {
+class DuplexSlaveI2s {
  private:
   ::pico_driver::SdkWrapper &sdk_;
   PIO pio_;
@@ -55,7 +55,7 @@ class DuplexSlaveI2S {
   const uint pin_base_;  // first GPIO pin number of the I2S signal.
 
  public:
-  DuplexSlaveI2S(/* args */) = delete;
+  DuplexSlaveI2s(/* args */) = delete;
   /**
    * @brief Construct a new Duplex Slave I 2 S object
    *
@@ -67,7 +67,7 @@ class DuplexSlaveI2S {
    * Internally, the state machine will be allocate from the unused one.
    *
    */
-  DuplexSlaveI2S(::pico_driver::SdkWrapper &sdk, PIO pio, uint pin_base);
+  DuplexSlaveI2s(::pico_driver::SdkWrapper &sdk, PIO pio, uint pin_base);
   /**
    * @brief Construct a new Duplex Slave I 2 S object
    *
@@ -77,13 +77,13 @@ class DuplexSlaveI2S {
    * @param pin_base The GPIO pin number of SDOUT signal.
    * @details
    */
-  DuplexSlaveI2S(::pico_driver::SdkWrapper &sdk, PIO pio, uint32_t sm,
+  DuplexSlaveI2s(::pico_driver::SdkWrapper &sdk, PIO pio, uint32_t sm,
                  uint pin_base);
 
   /**
    * @brief Stop the state machine and make FIFO empty.
    */
-  ~DuplexSlaveI2S();
+  ~DuplexSlaveI2s();
 
   /**
    * @brief Initialize the I2S port, and run.
@@ -132,7 +132,7 @@ class DuplexSlaveI2S {
 
 #if __has_include(<gmock/gmock.h>)
 
-class MockDuplexSlaveI2S : public DuplexSlaveI2S {
+class MockDuplexSlaveI2s : public DuplexSlaveI2s {
  public:
   MOCK_METHOD0(GetStateMachine, uint32_t(void));
   MOCK_METHOD0(Start, void(void));

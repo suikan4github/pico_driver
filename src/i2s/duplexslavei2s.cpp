@@ -10,7 +10,7 @@ extern "C" {
 static pio_program_t duplex_slave_i2s_program;
 #endif  // __has_include(<hardware/pio.h>)
 
-pico_driver::DuplexSlaveI2S::DuplexSlaveI2S(::pico_driver::SdkWrapper &sdk,
+pico_driver::DuplexSlaveI2s::DuplexSlaveI2s(::pico_driver::SdkWrapper &sdk,
                                             PIO pio, uint pin_base)
     : sdk_(sdk),
       pio_(pio),
@@ -18,27 +18,27 @@ pico_driver::DuplexSlaveI2S::DuplexSlaveI2S(::pico_driver::SdkWrapper &sdk,
           pio_, true)),  // true mean required. assert if no room.
       pin_base_(pin_base) {}
 
-pico_driver::DuplexSlaveI2S::DuplexSlaveI2S(::pico_driver::SdkWrapper &sdk,
+pico_driver::DuplexSlaveI2s::DuplexSlaveI2s(::pico_driver::SdkWrapper &sdk,
                                             PIO pio, uint32_t sm, uint pin_base)
     : sdk_(sdk), pio_(pio), sm_(sm), pin_base_(pin_base) {
   sdk_.pio_sm_claim(pio_, sm_);
 }
 
-pico_driver::DuplexSlaveI2S::~DuplexSlaveI2S() {
+pico_driver::DuplexSlaveI2s::~DuplexSlaveI2s() {
   sdk_.pio_sm_unclaim(pio_, sm_);
 }
 
-uint32_t pico_driver::DuplexSlaveI2S::GetStateMachine() { return sm_; }
+uint32_t pico_driver::DuplexSlaveI2s::GetStateMachine() { return sm_; }
 
-int32_t pico_driver::DuplexSlaveI2S::GetFIFOBlocking() {
+int32_t pico_driver::DuplexSlaveI2s::GetFIFOBlocking() {
   return sdk_.pio_sm_get_blocking(pio_, sm_);
 }
 
-void pico_driver::DuplexSlaveI2S::PutFIFOBlocking(int32_t value) {
+void pico_driver::DuplexSlaveI2s::PutFIFOBlocking(int32_t value) {
   sdk_.pio_sm_put_blocking(pio_, sm_, value);
 }
 
-void pico_driver::DuplexSlaveI2S::Start() {
+void pico_driver::DuplexSlaveI2s::Start() {
   // Assign these pins for PIO by GPIO mux.
   sdk_.pio_gpio_init(pio_, pin_base_);
   sdk_.pio_gpio_init(pio_, pin_base_ + 1);
@@ -122,7 +122,7 @@ void pico_driver::DuplexSlaveI2S::Start() {
   sdk_.pio_sm_set_enabled(pio_, sm_, true);
 }
 
-void pico_driver::DuplexSlaveI2S::Stop() {
+void pico_driver::DuplexSlaveI2s::Stop() {
   // Stop state machine.
   sdk_.pio_sm_set_enabled(pio_, sm_, false);
   // Clean up FIFO for the next processing.
