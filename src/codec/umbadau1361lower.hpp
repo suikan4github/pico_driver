@@ -7,8 +7,8 @@
  * @copyright Copyright 2024 Seiichi Horie
  */
 
-#ifndef _UMBADAU1361LOWER_HPP_
-#define _UMBADAU1361LOWER_HPP_
+#ifndef PICO_DRIVER_SRC_CODEC_UMBADAU1361LOWER_HPP_
+#define PICO_DRIVER_SRC_CODEC_UMBADAU1361LOWER_HPP_
 
 #include "adau1361lower.hpp"
 #include "i2cmaster.hpp"
@@ -18,9 +18,11 @@ namespace pico_driver {
 /**
  * @brief lower part of the Adau1361 CODEC controller class.
  * @details
- * This class is helper class for the Adau1361 class.
+ * This is dedicated class for UMB-ADAU1361-A board.
+ * All signal routings are configured for this board.
  *
- * Note, all volumes are muted.
+ * http://dsps.shop-pro.jp/?pid=82798273
+ *
  */
 class UmbAdau1361Lower : public Adau1361Lower {
  public:
@@ -49,4 +51,4 @@ class UmbAdau1361Lower : public Adau1361Lower {
 
 }  // namespace pico_driver
 
-#endif /* _UMBADAU1361LOWER_HPP_ */
+#endif /* PICO_DRIVER_SRC_CODEC_UMBADAU1361LOWER_HPP_ */

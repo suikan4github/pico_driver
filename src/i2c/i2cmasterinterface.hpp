@@ -9,8 +9,8 @@
  * @copyright COPYRIGHT 2024 Seiichi Horie
  */
 
-#ifndef _I2CMASTERINTERFACE_HPP_
-#define _I2CMASTERINTERFACE_HPP_
+#ifndef PICO_DRIVER_SRC_I2C_I2CMASATERINTERFACE_HPP_
+#define PICO_DRIVER_SRC_I2C_I2CMASATERINTERFACE_HPP_
 
 #include <stdint.h>
 #include <stdlib.h>
@@ -80,4 +80,4 @@ class MockI2cMasterInterface : public I2cMasterInterface {
 #endif  // __has_include(<gmock/gmock.h>)
 }  // namespace pico_driver
 
-#endif /* _I2CMASTERINTERFACE_HPP_ */
+#endif /* PICO_DRIVER_SRC_I2C_I2CMASATERINTERFACE_HPP_ */

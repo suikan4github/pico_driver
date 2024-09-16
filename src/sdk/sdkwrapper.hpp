@@ -6,8 +6,8 @@
  * @copyright Copyright 2024 Seiichi Horie
  */
 
-#ifndef __DRIVER_PICOWRAPPER_HPP__
-#define __DRIVER_PICOWRAPPER_HPP__
+#ifndef PICO_DRIVER_SRC_SDK_SDKWRAPPER_HPP_
+#define PICO_DRIVER_SRC_SDK_SDKWRAPPER_HPP_
 
 #if __has_include("pico/stdlib.h")
 // For Pico
@@ -508,4 +508,4 @@ class MockSdkWrapper : public SdkWrapper {
 #endif  // __has_include(<gmock/gmock.h>)
 };  // namespace pico_driver
 
-#endif  // __DRIVER_PICOWRAPPER_HPP__
+#endif  // PICO_DRIVER_SRC_SDK_SDKWRAPPER_HPP_

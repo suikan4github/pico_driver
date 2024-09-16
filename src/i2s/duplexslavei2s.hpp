@@ -1,5 +1,5 @@
-#ifndef _DUPLEXSLAVEI2S_HPP_
-#define _DUPLEXSLAVEI2S_HPP_
+#ifndef PICO_DRIVER_SRC_I2S_DUPLEXSLAVEI2S_HPP_
+#define PICO_DRIVER_SRC_I2S_DUPLEXSLAVEI2S_HPP_
 
 #if __has_include(<hardware/pio.h>)
 #include "hardware/pio.h"
@@ -144,4 +144,4 @@ class MockDuplexSlaveI2s : public DuplexSlaveI2s {
 
 }  // namespace pico_driver
 
-#endif  // _DUPLEXSLAVEI2S_HPP_
+#endif  // PICO_DRIVER_SRC_I2S_DUPLEXSLAVEI2S_HPP_

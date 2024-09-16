@@ -7,8 +7,8 @@
  * @copyright Copyright 2024 Seiichi Horie
  */
 
-#ifndef MURASAKI_TP_ADAU1361_HPP_
-#define MURASAKI_TP_ADAU1361_HPP_
+#ifndef PICO_DRIVER_SRC_CODEC_ADAU1361_HPP_
+#define PICO_DRIVER_SRC_CODEC_ADAU1361_HPP_
 
 #include <i2cmasterinterface.hpp>
 
@@ -143,4 +143,4 @@ class Adau1361 {
 };
 }  // namespace pico_driver
 
-#endif /* MURASAKI_TP_ADAU1361_HPP_ */
+#endif /* PICO_DRIVER_SRC_CODEC_ADAU1361_HPP_ */

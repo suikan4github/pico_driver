@@ -7,8 +7,8 @@
  * @copyright Copyright 2024 Seiichi Horie
  */
 
-#ifndef _ADAU1361LOWER_HPP_
-#define _ADAU1361LOWER_HPP_
+#ifndef PICO_DRIVER_SRC_CODEC_ADAU1361LOWER_HPP_
+#define PICO_DRIVER_SRC_CODEC_ADAU1361LOWER_HPP_
 
 #include "i2cmaster.hpp"
 
@@ -254,4 +254,4 @@ class MockAdau1361Lower : public Adau1361Lower {
 
 }  // namespace pico_driver
 
-#endif /* _ADAU1361LOWER_HPP_ */
+#endif /* PICO_DRIVER_SRC_CODEC_ADAU1361LOWER_HPP_ */

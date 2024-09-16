@@ -8,8 +8,8 @@
  * @copyright COPYRIGHT 2024 Seiichi Horie
  */
 
-#ifndef _I2CMASTER_HPP_
-#define _I2CMASTER_HPP_
+#ifndef PICO_DRIVER_SRC_I2C_I2CMASATER_HPP_
+#define PICO_DRIVER_SRC_I2C_I2CMASATER_HPP_
 
 #include <stdint.h>
 
@@ -90,4 +90,4 @@ class I2cMaster : public I2cMasterInterface {
 };
 };  // namespace pico_driver
 
-#endif /* _I2CMASTER_HPP_ */
+#endif /* PICO_DRIVER_SRC_I2C_I2CMASATER_HPP_ */
