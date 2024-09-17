@@ -26,6 +26,9 @@ typedef unsigned int PIO;
 typedef unsigned int pio_sm_config;
 typedef unsigned int clock_handle_t;
 typedef unsigned int pio_program_t;
+#ifdef _MSC_VER
+typedef unsigned int uint;
+#endif
 #endif
 
 #if __has_include(<gmock/gmock.h>)
