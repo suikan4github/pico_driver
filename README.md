@@ -5,10 +5,13 @@ A Collection of the Raspberry Pi [Pico](https://www.raspberrypi.com/products/ras
 This class collection ( or class library ) encapsule the certain data inside class. And it also allows you to use the depenency-injection inside your project. So, you can test your code with [Google Test](https://github.com/google/googletest) before testing on the target hardware. 
 
 These classes are provided in this version. 
-- ::pico_driver::SdkWrapper
-- ::pico_driver::I2cMaster
-- ::pico_driver::DuplexSlaveI2s
-- ::pico_driver::
+
+| class                           | Description |
+|---------------------------------|----------------------------- |
+| ::pico_driver::SdkWrapper       | Wrapper class of Pico SDK    |
+| ::pico_driver::I2cMaster        | I2C Master controller        |
+| ::pico_driver::DuplexSlaveI2s   | Polling based PIO I2S driver |
+| ::pico_driver::Adau1361         | Audio CODEC driver           |
 
 
 ## How to obtain this project
@@ -20,13 +23,9 @@ The newest copy of this project is found in the [GitHub repository](https://gith
 The newest copy of the sample program project is found in the [GitHub repository](https://github.com/suikan4github/pico_driver-sample). 
 
 
-## Building the test program
-All the sample and I2S driver code are under rpi directory. 
-
-See the [rpi/BUILD.md](rpi/BUILD.md)
-
 ## Installing tool
-To build the samples or test, you need to install the build tools on Ubuntu : 
+To build the samples or test, you need to install the build tools. 
+The installation of Ubuntu is : 
 
 ```sh
 apt-get -y update
@@ -50,5 +49,11 @@ cmake -DCMAKE_BUILD_TYPE:STRING=Debug \
     -G Ninja
 cmake --build build --config Debug --target all --
 ```
+
+## Building document
+```sh
+doxygen
+```
+
 ## License.
 This project is provided under [MIT License](LICENSE). 
