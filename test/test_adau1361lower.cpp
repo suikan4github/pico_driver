@@ -999,8 +999,10 @@ TEST_F(Adau1361LowerDeathTest, ConfigurePll_48_wrong_master_clock) {
     const unsigned int mclock = 123;
     const unsigned int fs = 48000;
     // check the assertion for bad mclock.
+#ifndef NDEBUG
     ASSERT_DEATH(codec_lower_->ConfigurePll(fs, mclock),
                  "Wrong Master Clock with Fs 48kHz Series");
+#endif
   }
 }  // ConfigurePll_48_wrong_master_clock
 
@@ -1014,8 +1016,10 @@ TEST_F(Adau1361LowerDeathTest, ConfigurePll_441_wrong_master_clock) {
   {
     const unsigned int mclock = 123;
     const unsigned int fs = 44100;
+#ifndef NDEBUG
     ASSERT_DEATH(codec_lower_->ConfigurePll(fs, mclock),
                  "Wrong Master Clock with Fs 44.1kHz Series");
+#endif
   }
 }  // ConfigurePll_441_wrong_master_clock
 
@@ -1031,7 +1035,9 @@ TEST_F(Adau1361LowerDeathTest, ConfigurePll_wrong_fs) {
     const unsigned int mclock = 8000000;
     const unsigned int fs = 192000;
     // check the assertion for bad mclock.
+#ifndef NDEBUG
     ASSERT_DEATH(codec_lower_->ConfigurePll(fs, mclock), "Bad Fs");
+#endif
   }
 }  // ConfigurePll_wrong_fs
 
@@ -1838,7 +1844,9 @@ TEST_F(Adau1361LowerTest, SetHpOutputGain_appropriate_gain) {
 TEST_F(Adau1361LowerDeathTest, ConfigureSRC_wrong_fs) {
   const unsigned int fs = 192000;  // not supported by ADAU1361
   // check the assertion for bad mclock.
+#ifndef NDEBUG
   ASSERT_DEATH(codec_lower_->ConfigureSRC(fs), "Bad Fs");
+#endif
 }  // ConfigureSRC_wrong_fs
 
 // Validation test for fs 22050 Hz.

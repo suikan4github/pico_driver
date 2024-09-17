@@ -221,8 +221,12 @@ TEST_F(Adau1361Test, Start) {
   // Check required function call order.
   {
     InSequence dummy;
-
+#ifndef NDEBUG
+    // This call is inside assertion. So, will not called with Release build.
     EXPECT_CALL(*codec_lower_, IsI2CDeviceExisting()).WillOnce(Return(true));
+#else
+    EXPECT_CALL(*codec_lower_, IsI2CDeviceExisting()).Times(0);
+#endif
     EXPECT_CALL(*codec_lower_, InitializeCore());
     EXPECT_CALL(*codec_lower_, DisablePLL());
     EXPECT_CALL(*codec_lower_, ConfigurePll(fs_, master_clk_));
