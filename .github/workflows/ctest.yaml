@@ -38,12 +38,29 @@ jobs:
       # Checks-out repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4.1.7
 
-      # Runs commands using the runners shell
-      - name: Configuration
+      # Configuration for GCC
+      - name: Configuration for gcc
+        if:  matrix.compiler == 'gcc'
         run: |
           mkdir build
           cd build
-          cmake .. 
+          cmake ..  -DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc
+
+      # Configuration for Clang
+      - name: Configuration for clang
+        if:  matrix.compiler == 'clang'
+        run: |
+          mkdir build
+          cd build
+          cmake ..  -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang
+
+      # Configuration for MSVC
+      - name: Configuration for msvc
+        if:  matrix.compiler == 'msvc'
+        run: |
+          mkdir build
+          cd build
+          cmake ..  -DCMAKE_CXX_COMPILER=cl.exe -DCMAKE_C_COMPILER=cl.exe
 
       # Build for Linux
       - name: Build for Linux
