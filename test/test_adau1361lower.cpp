@@ -108,7 +108,7 @@ TEST_F(Adau1361LowerTest, WaitPllLock) {
   {
     InSequence dummy;
 
-    //  we test unlocked status. Funciton must not return.
+    //  we test unlocked status. Function must not return.
 
     // nostop parameter must be true. That mean repeated start of I2C.
     // The write command give only 2 byte length register address.
@@ -120,7 +120,7 @@ TEST_F(Adau1361LowerTest, WaitPllLock) {
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(lock_status_address)))
-        .WillOnce(Return(2));  // 2 is the transfered data length
+        .WillOnce(Return(2));  // 2 is the transferred data length
 
     // nostop parameter must be false. That mean, stop condition of I2C.
     // This will check the status register of ADAU1361A. These status
@@ -129,14 +129,14 @@ TEST_F(Adau1361LowerTest, WaitPllLock) {
                 ReadBlocking(device_address_,  // Arg 0 : I2C Address
                              NotNull(),        // Arg 1 : Data buffer address
                              6,                // Arg 2 : Data buffer length
-                             false))           // Arg 3 : fasle to stop I2C.
+                             false))           // Arg 3 : false to stop I2C.
         .WillOnce(DoAll(
             SetArrayArgument<1>  // parameter position of the array : 0 origin.
             (status_notlocked,   // pointer to the beginning of the data.
              status_notlocked + 6),  // pointer to the end of the data + 1.
-            Return(3)));             // 6 is the transfered data length.
+            Return(3)));             // 6 is the transferred data length.
 
-    // we test the locked status. The funciton must return.
+    // From here, we test the PLL lock status.
 
     // nostop parameter must be true. That mean repeated start of I2C.
     // The write command give only 2 byte length register address.
@@ -148,7 +148,7 @@ TEST_F(Adau1361LowerTest, WaitPllLock) {
         .With(Args<1,  // parameter position of the array : 0 origin.
                    2>  // parameter position of the size : 0 origin.
               (ElementsAreArray(lock_status_address)))
-        .WillOnce(Return(2));  // 2 is the transfered data length
+        .WillOnce(Return(2));  // 2 is the transferred data length
 
     // nostop parameter must be false. That mean, stop condition of I2C.
     // This will check the status register of ADAU1361A. These status
@@ -157,12 +157,12 @@ TEST_F(Adau1361LowerTest, WaitPllLock) {
                 ReadBlocking(device_address_,  // Arg 0 : I2C Address
                              NotNull(),        // Arg 1 : Data buffer address
                              6,                // Arg 2 : Data buffer length
-                             false))           // Arg 3 : fasle to stop I2C.
+                             false))           // Arg 3 : false to stop I2C.
         .WillOnce(DoAll(
             SetArrayArgument<1>   // parameter position of the array : 0 origin.
             (status_locked,       // pointer to the beginning of the data.
              status_locked + 6),  // pointer to the end of the data + 1.
-            Return(3)));          // 6 is the transfered data length.
+            Return(3)));          // 6 is the transferred data length.
   }
 
   codec_lower_->WaitPllLock();
@@ -170,11 +170,11 @@ TEST_F(Adau1361LowerTest, WaitPllLock) {
 
 // -----------------------------------------------------------------
 //
-//                          InititializeCore()
+//                          InitializeCore()
 //
 // -----------------------------------------------------------------
 
-TEST_F(Adau1361LowerTest, InititializeCore) {
+TEST_F(Adau1361LowerTest, InitializeCore) {
   // Core clock setting
   const uint8_t init_core[] = {
       0x40, 0x00, 0x00};  // R0:Clock control. Core clock disabled. PLL off.
@@ -194,7 +194,7 @@ TEST_F(Adau1361LowerTest, InititializeCore) {
                  2>  // parameter position of the size : 0 origin.
             (ElementsAreArray(init_core)));
   codec_lower_->InitializeCore();
-}  // InititializeCore
+}  // InitializeCore
 
 // -----------------------------------------------------------------
 //
@@ -2081,14 +2081,14 @@ TEST_F(Adau1361LowerTest, InitializeRegisters) {
       {0x40, 0x18, 0x00},  // R18: Converter 1
       {0x40, 0x19, 0x10},  // R19:ADC Control.
       {0x40, 0x1a, 0x00},  // R20: Left digital volume
-      {0x40, 0x1b, 0x00},  // R21: Rignt digital volume
+      {0x40, 0x1b, 0x00},  // R21: Right digital volume
       {0x40, 0x1c, 0x00},  // R22: Play Mixer Left 0
       {0x40, 0x1d, 0x00},  // R23: Play Mixer Left 1
       {0x40, 0x1e, 0x00},  // R24: Play Mixer Right 0
       {0x40, 0x1f, 0x00},  // R25: Play Mixer Right 1
       {0x40, 0x20, 0x00},  // R26: Play L/R mixer left
       {0x40, 0x21, 0x00},  // R27: Play L/R mixer right
-      {0x40, 0x22, 0x00},  // R28: Play L/R mixer monot
+      {0x40, 0x22, 0x00},  // R28: Play L/R mixer mono
       {0x40, 0x23, 0x02},  // R29: Play HP Left vol : Mute, Line out mode
       {0x40, 0x24, 0x02},  // R30: Play HP Right vol : Mute, Line out Mode
       {0x40, 0x25, 0x02},  // R31: Line output Left vol : Mute, Line out mode
@@ -2099,7 +2099,7 @@ TEST_F(Adau1361LowerTest, InitializeRegisters) {
       {0x40, 0x2a, 0x00},  // R36: DAC Control 0
       {0x40, 0x2b, 0x00},  // R37: DAC Control 1
       {0x40, 0x2c, 0x00},  // R38: DAC control 2
-      {0x40, 0x2d, 0xaa},  // R39: Seial port Pad
+      {0x40, 0x2d, 0xaa},  // R39: Serial port Pad
       {0x40, 0x2f, 0xaa},  // R40: Control Pad 1
       {0x40, 0x30, 0x00},  // R41: Control Pad 2
       {0x40, 0x31, 0x08},  // R42: Jack detect
