@@ -42,6 +42,7 @@ jobs:
       - name: Configuration for gcc
         if:  matrix.compiler == 'gcc'
         run: |
+          echo ${{matrix.os}}, ${{matrix.compiler}}
           mkdir build
           cd build
           cmake ..  -DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc
@@ -50,6 +51,7 @@ jobs:
       - name: Configuration for clang
         if:  matrix.compiler == 'clang'
         run: |
+          echo ${{matrix.os}}, ${{matrix.compiler}}
           mkdir build
           cd build
           cmake ..  -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang
@@ -58,6 +60,7 @@ jobs:
       - name: Configuration for msvc
         if:  matrix.compiler == 'msvc'
         run: |
+          echo ${{matrix.os}}, ${{matrix.compiler}}
           mkdir build
           cd build
           cmake ..  -DCMAKE_CXX_COMPILER=cl.exe -DCMAKE_C_COMPILER=cl.exe
