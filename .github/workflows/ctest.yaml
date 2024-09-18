@@ -63,7 +63,7 @@ jobs:
           echo ${{matrix.os}}, ${{matrix.compiler}}
           mkdir build
           cd build
-          cmake ..  -DCMAKE_CXX_COMPILER=cl.exe -DCMAKE_C_COMPILER=cl.exe
+          cmake ..  -DCMAKE_CXX_COMPILER=cl -DCMAKE_C_COMPILER=cl
 
       # Build for Linux
       - name: Build for Linux
