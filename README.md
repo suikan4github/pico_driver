@@ -51,6 +51,9 @@ cmake --build build --config Debug --target all --
 ```
 
 ## Building document
+An API document are provided by HTML files. 
+To obtain it, run doxygen at the project root ( where this README.md exists).
+
 ```sh
 doxygen
 ```
