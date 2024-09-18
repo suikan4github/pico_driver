@@ -27,9 +27,6 @@ jobs:
           - {os: windows-latest, compiler: gcc}
           - {os: windows-latest, compiler: clang}
 
-    # Test on specified OS
-    runs-on: ${{ matrix.os }}
-
     # Configure - Build - Test
     steps:
       # Checks-out repository under $GITHUB_WORKSPACE, so your job can access it
