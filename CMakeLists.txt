@@ -1,6 +1,5 @@
 # To use FetchContent, we need CMake 3.14 or newer. 
-# To use DOWNLOAD_EXTRACT_TIMESTAMP feature, we need CMake 3.24 or later. 
-cmake_minimum_required(VERSION 3.24)
+cmake_minimum_required(VERSION 3.14)
 
   # GoogleTest requires at least C++14
   # To use std::size() and __has_include, we need c++17
@@ -27,8 +26,8 @@ if((${WIN32}) OR (${UNIX})) # Is Target Windows or Unix?
   include(FetchContent)
   FetchContent_Declare(
     googletest
-    DOWNLOAD_EXTRACT_TIMESTAMP NEW
-    URL https://github.com/google/googletest/archive/refs/tags/v1.14.0.zip
+  	GIT_REPOSITORY "https://github.com/google/googletest.git"
+  	GIT_TAG "v1.15.2"
     )
   # For Windows: Prevent overriding the parent project's compiler/linker settings
   set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
