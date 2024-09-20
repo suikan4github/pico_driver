@@ -70,13 +70,11 @@ class GpioBasic {
    */
   virtual void PullDown();
 
-#if 0
-
   /**
    * @brief Disable pulls on This GPIO.
    */
   virtual void DisablePulls();
-#endif
+
  private:
   SdkWrapper &sdk_;
   const uint pin_;
@@ -91,6 +89,7 @@ class MockGpioBasic : public SdkWrapper {
   MOCK_METHOD0(Get, bool(void));
   MOCK_METHOD0(PullUp, void(void));
   MOCK_METHOD0(PullDown, void(void));
+  MOCK_METHOD0(DisablePulls, void(void));
 };  // MockGpioBasic
 
 #endif  //  __has_include(<gmock/gmock.h>)

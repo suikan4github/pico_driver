@@ -20,3 +20,5 @@ bool pico_driver::GpioBasic::Get() { return sdk_.gpio_get(pin_); }
 void pico_driver::GpioBasic::PullUp() { sdk_.gpio_pull_up(pin_); }
 
 void pico_driver::GpioBasic::PullDown() { sdk_.gpio_pull_down(pin_); }
+
+void pico_driver::GpioBasic::DisablePulls() { sdk_.gpio_disable_pulls(pin_); }

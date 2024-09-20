@@ -109,3 +109,8 @@ TEST_F(GpioBasicTest, PullDown) {
   EXPECT_CALL(sdk_, gpio_pull_down(gpio_pin_));
   gpio_under_test_->PullDown();
 }  // TEST_F(GpioBasicTest, PullDown)
+
+TEST_F(GpioBasicTest, DisablePulls) {
+  EXPECT_CALL(sdk_, gpio_disable_pulls(gpio_pin_));
+  gpio_under_test_->DisablePulls();
+}  // TEST_F(GpioBasicTest, DisablePulls)
