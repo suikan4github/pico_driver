@@ -37,13 +37,13 @@ class GpioBasic {
    * @brief deinit the I2C by sdk.i2c_deinit();
    */
   virtual ~GpioBasic();
-#if 0
   /**
    * @brief Set a single GPIO direction.
    * @param out true for out, false for in.
    */
   virtual void SetDir(bool out);
 
+#if 0
   /**
    * @brief Enable GPIO input.
    * @param enabled true to enable input on This GPIO.
@@ -81,6 +81,14 @@ class GpioBasic {
   SdkWrapper &sdk_;
   const uint pin_;
 };
+#if __has_include(<gmock/gmock.h>)
+
+class MockGpioBasic : public SdkWrapper {
+ public:
+  MOCK_METHOD1(SetDir, void(bool));
+};  // MockGpioBasic
+
+#endif  //  __has_include(<gmock/gmock.h>)
 };  // namespace pico_driver
 
 #endif /* PICO_DRIVER_SRC_GPIO_GPIOBASIC_HPP_ */

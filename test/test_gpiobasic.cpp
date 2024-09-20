@@ -54,4 +54,14 @@ TEST(GpioBasic, ConstructorDeconstructor) {
 //
 // -----------------------------------------------------------------
 
+TEST_F(GpioBasicTest, SetDir) {
+  using ::testing::InSequence;
+  {
+    InSequence dummy;
+    EXPECT_CALL(sdk_, gpio_set_dir(gpio_pin_, true));
+    EXPECT_CALL(sdk_, gpio_set_dir(gpio_pin_, false));
+  }
+  gpio_under_test_->SetDir(true);
+  gpio_under_test_->SetDir(false);
+}  // TEST_F(GpioBasicTest, SetDir)
 TEST_F(GpioBasicTest, foo) {}  // TEST_F(GpioBasicTest, foo)
