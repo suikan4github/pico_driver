@@ -12,3 +12,5 @@ void pico_driver::GpioBasic::SetDir(bool out) { sdk_.gpio_set_dir(pin_, out); }
 void pico_driver::GpioBasic::SetInputEnabled(bool enabled) {
   sdk_.gpio_set_input_enabled(pin_, enabled);
 }
+
+void pico_driver::GpioBasic::Put(bool value) { sdk_.gpio_put(pin_, value); }

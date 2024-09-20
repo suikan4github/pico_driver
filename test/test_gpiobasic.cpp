@@ -74,6 +74,17 @@ TEST_F(GpioBasicTest, SetInputEnabled) {
   }
   gpio_under_test_->SetInputEnabled(true);
   gpio_under_test_->SetInputEnabled(false);
-}  // TEST_F(GpioBasicTest, SetDir)
+}  // TEST_F(GpioBasicTest, SetInputEnabled)
+
+TEST_F(GpioBasicTest, Put) {
+  using ::testing::InSequence;
+  {
+    InSequence dummy;
+    EXPECT_CALL(sdk_, gpio_put(gpio_pin_, true));
+    EXPECT_CALL(sdk_, gpio_put(gpio_pin_, false));
+  }
+  gpio_under_test_->Put(true);
+  gpio_under_test_->Put(false);
+}  // TEST_F(GpioBasicTest, Put)
 
 TEST_F(GpioBasicTest, foo) {}  // TEST_F(GpioBasicTest, foo)
