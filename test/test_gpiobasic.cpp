@@ -104,3 +104,8 @@ TEST_F(GpioBasicTest, PullUp) {
   EXPECT_CALL(sdk_, gpio_pull_up(gpio_pin_));
   gpio_under_test_->PullUp();
 }  // TEST_F(GpioBasicTest, PullUp)
+
+TEST_F(GpioBasicTest, PullDown) {
+  EXPECT_CALL(sdk_, gpio_pull_down(gpio_pin_));
+  gpio_under_test_->PullDown();
+}  // TEST_F(GpioBasicTest, PullDown)

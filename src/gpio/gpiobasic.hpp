@@ -65,12 +65,12 @@ class GpioBasic {
    */
   virtual void PullUp();
 
-#if 0
-
   /**
    * @brief Set This GPIO to be pulled down.
    */
   virtual void PullDown();
+
+#if 0
 
   /**
    * @brief Disable pulls on This GPIO.
@@ -90,6 +90,7 @@ class MockGpioBasic : public SdkWrapper {
   MOCK_METHOD1(Put, void(bool));
   MOCK_METHOD0(Get, bool(void));
   MOCK_METHOD0(PullUp, void(void));
+  MOCK_METHOD0(PullDown, void(void));
 };  // MockGpioBasic
 
 #endif  //  __has_include(<gmock/gmock.h>)
