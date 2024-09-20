@@ -55,6 +55,11 @@ class GpioBasic {
    */
   virtual void Put(bool value);
 
+  /**
+   * @brief Get state of a single This GPIO.
+   * @returns Current state of the GPIO. 0 for low, non-zero for high
+   */
+  virtual bool Get();
 #if 0
   /**
    * @brief Get state of a single This GPIO.
@@ -88,6 +93,7 @@ class MockGpioBasic : public SdkWrapper {
   MOCK_METHOD1(SetDir, void(bool));
   MOCK_METHOD1(SetInputEnabled, void(bool));
   MOCK_METHOD1(Put, void(bool));
+  MOCK_METHOD0(Put, bool(void));
 };  // MockGpioBasic
 
 #endif  //  __has_include(<gmock/gmock.h>)

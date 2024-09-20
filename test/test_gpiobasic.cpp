@@ -87,4 +87,15 @@ TEST_F(GpioBasicTest, Put) {
   gpio_under_test_->Put(false);
 }  // TEST_F(GpioBasicTest, Put)
 
-TEST_F(GpioBasicTest, foo) {}  // TEST_F(GpioBasicTest, foo)
+TEST_F(GpioBasicTest, Get) {
+  using ::testing::InSequence;
+  using ::testing::Return;
+  {
+    InSequence dummy;
+    EXPECT_CALL(sdk_, gpio_get(gpio_pin_)).WillOnce(Return(true));
+    EXPECT_CALL(sdk_, gpio_get(gpio_pin_)).WillOnce(Return(false));
+  }
+
+  EXPECT_TRUE(gpio_under_test_->Get());
+  EXPECT_FALSE(gpio_under_test_->Get());
+}  // TEST_F(GpioBasicTest, Get)
