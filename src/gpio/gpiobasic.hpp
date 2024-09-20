@@ -61,11 +61,6 @@ class GpioBasic {
    */
   virtual bool Get();
 #if 0
-  /**
-   * @brief Get state of a single This GPIO.
-   * @returns Current state of the GPIO. 0 for low, non-zero for high
-   */
-  virtual bool Get();
 
   /**
    * @brief Set This GPIO to be pulled up.
