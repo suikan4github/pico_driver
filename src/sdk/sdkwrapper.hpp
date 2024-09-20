@@ -104,6 +104,13 @@ class SdkWrapper {
   virtual void gpio_init(uint gpio);
 
   /**
+   * @brief Resets a GPIO back to the NULL function, i.e. disables it.
+   * @param gpio GPIO number.
+   * @details
+   */
+  virtual void gpio_deinit(uint gpio);
+
+  /**
    * @brief Select GPIO function.
    * @param gpio GPIO number
    * @param fn Which GPIO function select to use from list gpio_function.
@@ -483,6 +490,7 @@ class MockSdkWrapper : public SdkWrapper {
 
   MOCK_METHOD2(gpio_set_function, void(uint gpio, gpio_function_t fn));
   MOCK_METHOD1(gpio_init, void(uint gpio));
+  MOCK_METHOD1(gpio_deinit, void(uint gpio));
   MOCK_METHOD2(gpio_set_dir, void(uint gpio, bool out));
   MOCK_METHOD2(gpio_set_input_enabled, void(uint gpio, bool enabled));
   MOCK_METHOD2(gpio_put, void(uint gpio, bool value));

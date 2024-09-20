@@ -25,6 +25,7 @@ FAKE_VOID_FUNC(sleep_ms, uint32_t);
 FAKE_VALUE_FUNC(uint32_t, clock_get_hz, clock_handle_t);
 
 FAKE_VOID_FUNC(gpio_init, uint);
+FAKE_VOID_FUNC(gpio_deinit, uint);
 FAKE_VOID_FUNC(gpio_set_function, uint, gpio_function_t);
 FAKE_VOID_FUNC(gpio_set_dir, uint, bool);
 FAKE_VOID_FUNC(gpio_set_input_enabled, uint, bool);
@@ -144,7 +145,34 @@ TEST(PicoWrapper, gpio_init) {
   }
 
   RESET_FAKE(gpio_init);
-}
+}  // TEST(PicoWrapper, gpio_init)
+
+TEST(PicoWrapper, gpio_deinit) {
+  std::random_device rng;
+  ::pico_driver::SdkWrapper pico;
+  uint gpioarray[] = {rng(), rng()};
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(gpio_deinit);
+
+  for (auto &&gpio : gpioarray) {
+    pico.gpio_deinit(gpio);
+  }
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(gpio_deinit_fake.call_count, std::size(gpioarray));
+
+  int index = 0;
+  for (auto &&gpio : gpioarray) {
+    // Check the data from test spy. Call order.
+    ASSERT_EQ(fff.call_history[index], (void *)gpio_deinit);
+    // Check the data from test spy. : Parameters.
+    ASSERT_EQ(gpio_deinit_fake.arg0_history[index], gpio);
+    index++;
+  }
+
+  RESET_FAKE(gpio_deinit);
+}  // TEST(PicoWrapper, gpio_deinit)
 
 TEST(PicoWrapper, gpio_set_function) {
   std::random_device rng;

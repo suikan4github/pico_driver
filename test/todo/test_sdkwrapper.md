@@ -1,5 +1,11 @@
 # test_SdkWrapper TDD
 
+## SdkWrapper::gpio_deinit()
+- [x] Implement member function . 
+- [x] Create test case to fail. 
+- [x] Make it success. 
+- [x] Remove the duplication. 
+
 ## SdkWrapper::gpio_set_input_enabled()
 - [x] Implement member function . 
 - [x] Create test case to fail. 

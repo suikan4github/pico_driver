@@ -55,6 +55,8 @@ int pico_driver::SdkWrapper::pio_add_program(PIO pio,
 
 void ::pico_driver::SdkWrapper::gpio_init(uint gpio) { ::gpio_init(gpio); }
 
+void pico_driver::SdkWrapper::gpio_deinit(uint gpio) { ::gpio_deinit(gpio); }
+
 void pico_driver::SdkWrapper::gpio_set_function(uint gpio, gpio_function_t fn) {
   ::gpio_set_function(gpio, fn);
 }
