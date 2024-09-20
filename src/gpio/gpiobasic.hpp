@@ -43,13 +43,13 @@ class GpioBasic {
    */
   virtual void SetDir(bool out);
 
-#if 0
   /**
    * @brief Enable GPIO input.
    * @param enabled true to enable input on This GPIO.
    */
   virtual void SetInputEnabled(bool enabled);
 
+#if 0
   /**
    * @brief Drive a single GPIO high/low.
    * @param value If false clear the GPIO, otherwise set it.
@@ -86,6 +86,7 @@ class GpioBasic {
 class MockGpioBasic : public SdkWrapper {
  public:
   MOCK_METHOD1(SetDir, void(bool));
+  MOCK_METHOD1(SetInputEnabled, void(bool));
 };  // MockGpioBasic
 
 #endif  //  __has_include(<gmock/gmock.h>)

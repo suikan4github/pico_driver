@@ -64,4 +64,16 @@ TEST_F(GpioBasicTest, SetDir) {
   gpio_under_test_->SetDir(true);
   gpio_under_test_->SetDir(false);
 }  // TEST_F(GpioBasicTest, SetDir)
+
+TEST_F(GpioBasicTest, SetInputEnabled) {
+  using ::testing::InSequence;
+  {
+    InSequence dummy;
+    EXPECT_CALL(sdk_, gpio_set_input_enabled(gpio_pin_, true));
+    EXPECT_CALL(sdk_, gpio_set_input_enabled(gpio_pin_, false));
+  }
+  gpio_under_test_->SetInputEnabled(true);
+  gpio_under_test_->SetInputEnabled(false);
+}  // TEST_F(GpioBasicTest, SetDir)
+
 TEST_F(GpioBasicTest, foo) {}  // TEST_F(GpioBasicTest, foo)
