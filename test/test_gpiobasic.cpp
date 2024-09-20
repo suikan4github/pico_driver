@@ -99,3 +99,8 @@ TEST_F(GpioBasicTest, Get) {
   EXPECT_TRUE(gpio_under_test_->Get());
   EXPECT_FALSE(gpio_under_test_->Get());
 }  // TEST_F(GpioBasicTest, Get)
+
+TEST_F(GpioBasicTest, PullUp) {
+  EXPECT_CALL(sdk_, gpio_pull_up(gpio_pin_));
+  gpio_under_test_->PullUp();
+}  // TEST_F(GpioBasicTest, PullUp)

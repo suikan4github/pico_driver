@@ -16,3 +16,5 @@ void pico_driver::GpioBasic::SetInputEnabled(bool enabled) {
 void pico_driver::GpioBasic::Put(bool value) { sdk_.gpio_put(pin_, value); }
 
 bool pico_driver::GpioBasic::Get() { return sdk_.gpio_get(pin_); }
+
+void pico_driver::GpioBasic::PullUp() { sdk_.gpio_pull_up(pin_); }

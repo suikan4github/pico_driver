@@ -1,5 +1,11 @@
 # test_gpiobasic TDD
 
+## GpioBasic::PullUp
+- [x] Implement member function . 
+- [x] Create test case to fail. 
+- [x] Make it success. 
+- [x] Remove the duplication. 
+
 ## GpioBasic::Get
 - [x] Implement member function . 
 - [x] Create test case to fail. 
