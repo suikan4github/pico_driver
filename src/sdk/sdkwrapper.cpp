@@ -63,6 +63,10 @@ void ::pico_driver::SdkWrapper::gpio_set_dir(uint gpio, bool out) {
   ::gpio_set_dir(gpio, out);
 }
 
+void pico_driver::SdkWrapper::gpio_set_input_enabled(uint gpio, bool enabled) {
+  ::gpio_set_input_enabled(gpio, enabled);
+}
+
 void ::pico_driver::SdkWrapper::gpio_put(uint gpio, bool value) {
   ::gpio_put(gpio, value);
 }
@@ -71,6 +75,14 @@ bool ::pico_driver::SdkWrapper::gpio_get(uint gpio) { return ::gpio_get(gpio); }
 
 void ::pico_driver::SdkWrapper::gpio_pull_up(uint gpio) {
   ::gpio_pull_up(gpio);
+}
+
+void pico_driver::SdkWrapper::gpio_pull_down(uint gpio) {
+  ::gpio_pull_down(gpio);
+}
+
+void pico_driver::SdkWrapper::gpio_disable_pulls(uint gpio) {
+  ::gpio_disable_pulls(gpio);
 }
 
 // To avoid the ill formed program, the global :: scope resolution operator

@@ -27,9 +27,12 @@ FAKE_VALUE_FUNC(uint32_t, clock_get_hz, clock_handle_t);
 FAKE_VOID_FUNC(gpio_init, uint);
 FAKE_VOID_FUNC(gpio_set_function, uint, gpio_function_t);
 FAKE_VOID_FUNC(gpio_set_dir, uint, bool);
+FAKE_VOID_FUNC(gpio_set_input_enabled, uint, bool);
 FAKE_VOID_FUNC(gpio_put, uint, bool);
 FAKE_VALUE_FUNC(bool, gpio_get, uint);
 FAKE_VOID_FUNC(gpio_pull_up, uint);
+FAKE_VOID_FUNC(gpio_pull_down, uint);
+FAKE_VOID_FUNC(gpio_disable_pulls, uint);
 FAKE_VALUE_FUNC(uint, i2c_init, i2c_inst_t *, uint);
 
 FAKE_VOID_FUNC(i2c_deinit, i2c_inst_t *);
@@ -210,7 +213,41 @@ TEST(PicoWrapper, gpio_set_dir) {
   }
 
   RESET_FAKE(gpio_set_dir);
-}
+}  // TEST(PicoWrapper, gpio_set_dir)
+
+TEST(PicoWrapper, gpio_set_input_enabled) {
+  std::random_device rng;
+  ::pico_driver::SdkWrapper pico;
+  uint gpioarray[] = {rng(), rng()};
+  bool dirarray[] = {true, false};
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(gpio_set_input_enabled);
+
+  for (auto &&gpio : gpioarray) {
+    for (auto &&dir : dirarray) {
+      pico.gpio_set_input_enabled(gpio, dir);
+    }
+  }
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(gpio_set_input_enabled_fake.call_count,
+            std::size(gpioarray) * std::size(dirarray));
+
+  uint index = 0;
+  for (auto &&gpio : gpioarray) {
+    for (auto &&dir : dirarray) {
+      // Check the data from test spy. Call order.
+      ASSERT_EQ(fff.call_history[index], (void *)gpio_set_input_enabled);
+      // Check the data from test spy. : Parameters.
+      ASSERT_EQ(gpio_set_input_enabled_fake.arg0_history[index], gpio);
+      ASSERT_EQ(gpio_set_input_enabled_fake.arg1_history[index], dir);
+      index++;
+    }
+  }
+
+  RESET_FAKE(gpio_set_input_enabled);
+}  // TEST(PicoWrapper, gpio_set_input_enabled)
 
 TEST(PicoWrapper, gpio_put) {
   std::random_device rng;
@@ -302,7 +339,69 @@ TEST(PicoWrapper, gpio_pull_up) {
   ASSERT_EQ(gpio_pull_up_fake.arg0_history[0], gpio);
 
   RESET_FAKE(gpio_pull_up);
-}
+}  // TEST(PicoWrapper, gpio_pull_up)
+
+TEST(PicoWrapper, gpio_pull_down) {
+  ::pico_driver::SdkWrapper pico;
+  uint gpio = 17;
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(gpio_pull_down);
+
+  pico.gpio_pull_down(gpio);
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(gpio_pull_down_fake.call_count, 1);
+
+  // Check the data from test spy. Call order.
+  ASSERT_EQ(fff.call_history[0], (void *)gpio_pull_down);
+
+  // Check the data from test spy. : Parameters.
+  ASSERT_EQ(gpio_pull_down_fake.arg0_history[0], gpio);
+
+  // Try another parameter
+  FFF_RESET_HISTORY();
+  RESET_FAKE(gpio_pull_down);
+
+  gpio = 11;
+  pico.gpio_pull_down(gpio);
+
+  // Check the data from test spy. : Parameters.
+  ASSERT_EQ(gpio_pull_down_fake.arg0_history[0], gpio);
+
+  RESET_FAKE(gpio_pull_down);
+}  // TEST(PicoWrapper, gpio_pull_down)
+
+TEST(PicoWrapper, gpio_disable_pulls) {
+  ::pico_driver::SdkWrapper pico;
+  uint gpio = 17;
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(gpio_disable_pulls);
+
+  pico.gpio_disable_pulls(gpio);
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(gpio_disable_pulls_fake.call_count, 1);
+
+  // Check the data from test spy. Call order.
+  ASSERT_EQ(fff.call_history[0], (void *)gpio_disable_pulls);
+
+  // Check the data from test spy. : Parameters.
+  ASSERT_EQ(gpio_disable_pulls_fake.arg0_history[0], gpio);
+
+  // Try another parameter
+  FFF_RESET_HISTORY();
+  RESET_FAKE(gpio_disable_pulls);
+
+  gpio = 11;
+  pico.gpio_disable_pulls(gpio);
+
+  // Check the data from test spy. : Parameters.
+  ASSERT_EQ(gpio_disable_pulls_fake.arg0_history[0], gpio);
+
+  RESET_FAKE(gpio_disable_pulls);
+}  // TEST(PicoWrapper, gpio_disable_pulls)
 
 // FAKE_VALUE_FUNC(uint, i2c_init, i2c_inst_t *, uint);
 TEST(PicoWrapper, i2c_init) {

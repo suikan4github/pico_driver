@@ -117,6 +117,13 @@ class SdkWrapper {
   virtual void gpio_set_dir(uint gpio, bool out);
 
   /**
+   * @brief Enable GPIO input.
+   * @param gpio GPIO number.
+   * @param enabled true to enable input on specified GPIO.
+   */
+  virtual void gpio_set_input_enabled(uint gpio, bool enabled);
+
+  /**
    * @brief Drive a single GPIO high/low.
    * @param gpio GPIO number.
    * @param value If false clear the GPIO, otherwise set it.
@@ -135,6 +142,18 @@ class SdkWrapper {
    * @param gpio GPIO number.
    */
   virtual void gpio_pull_up(uint gpio);
+
+  /**
+   * @brief Set specified GPIO to be pulled down.
+   * @param gpio GPIO number.
+   */
+  virtual void gpio_pull_down(uint gpio);
+
+  /**
+   * @brief Disable pulls on specified GPIO.
+   * @param gpio GPIO number.
+   */
+  virtual void gpio_disable_pulls(uint gpio);
 
   /* ***************************************************************************
    *                              I2C
@@ -465,9 +484,12 @@ class MockSdkWrapper : public SdkWrapper {
   MOCK_METHOD2(gpio_set_function, void(uint gpio, gpio_function_t fn));
   MOCK_METHOD1(gpio_init, void(uint gpio));
   MOCK_METHOD2(gpio_set_dir, void(uint gpio, bool out));
+  MOCK_METHOD2(gpio_set_input_enabled, void(uint gpio, bool enabled));
   MOCK_METHOD2(gpio_put, void(uint gpio, bool value));
   MOCK_METHOD1(gpio_get, bool(uint gpio));
   MOCK_METHOD1(gpio_pull_up, void(uint gpio));
+  MOCK_METHOD1(gpio_pull_down, void(uint gpio));
+  MOCK_METHOD1(gpio_disable_pulls, void(uint gpio));
 
   MOCK_METHOD2(i2c_init, uint(i2c_inst_t *i2c, uint baudrate));
   MOCK_METHOD1(i2c_deinit, void(i2c_inst_t *i2c));

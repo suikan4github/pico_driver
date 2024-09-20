@@ -1,4 +1,25 @@
 # test_SdkWrapper TDD
+
+## SdkWrapper::gpio_set_input_enabled()
+- [x] Implement member function . 
+- [x] Create test case to fail. 
+- [x] Make it success. 
+- [x] Remove the duplication. 
+
+## SdkWrapper::gpio_disable_pulls()
+- [x] Implement member function . 
+- [x] Create test case to fail. 
+- [x] Make it success. 
+- [x] Remove the duplication. 
+
+## SdkWrapper::gpio_pull_down()
+- [x] Implement member function . 
+- [x] Create test case to fail. 
+- [x] Make it success. 
+- [x] Remove the duplication. 
+
+## Old test
+
 - [x] Implement SdkWrapper::pio_sm_put_blocking(). 
 - [x] Create Test case SdkWrapper.pio_sm_put_blocking() to fail. 
 - [x] Make it success. 
