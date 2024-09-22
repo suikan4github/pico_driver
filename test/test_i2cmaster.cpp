@@ -7,7 +7,7 @@ using testing::Return;
 
 // Constructor test
 TEST(I2cMaster, Constructor) {
-  ::pico_driver::MockSdkWrapper sdk;
+  ::rpp_driver::MockSdkWrapper sdk;
   i2c_inst_t i2c_inst;
 
   uint freq = 100 * 1000;
@@ -22,7 +22,7 @@ TEST(I2cMaster, Constructor) {
   EXPECT_CALL(sdk, gpio_pull_up(scl_pin));
   EXPECT_CALL(sdk, gpio_pull_up(sda_pin));
 
-  ::pico_driver::I2cMaster i2c(sdk, i2c_inst, freq, scl_pin, sda_pin);
+  ::rpp_driver::I2cMaster i2c(sdk, i2c_inst, freq, scl_pin, sda_pin);
 
   // We can ignore these call inside destructor
   EXPECT_CALL(sdk, i2c_deinit(_));
@@ -31,7 +31,7 @@ TEST(I2cMaster, Constructor) {
 
 // Destructor test
 TEST(I2cMaster, Destructor) {
-  ::pico_driver::MockSdkWrapper sdk;
+  ::rpp_driver::MockSdkWrapper sdk;
   i2c_inst_t i2c_inst;
 
   uint freq = 100 * 1000;
@@ -46,14 +46,14 @@ TEST(I2cMaster, Destructor) {
   EXPECT_CALL(sdk, gpio_pull_up(scl_pin));
   EXPECT_CALL(sdk, gpio_pull_up(sda_pin));
 
-  ::pico_driver::I2cMaster i2c(sdk, i2c_inst, freq, scl_pin, sda_pin);
+  ::rpp_driver::I2cMaster i2c(sdk, i2c_inst, freq, scl_pin, sda_pin);
 
   EXPECT_CALL(sdk, i2c_deinit(&i2c_inst));
 
 }  // Destructor
 
 TEST(I2cMaster, ReadBlocking) {
-  ::pico_driver::MockSdkWrapper sdk;
+  ::rpp_driver::MockSdkWrapper sdk;
   i2c_inst_t i2c_inst;
 
   uint8_t addr = 3;
@@ -68,7 +68,7 @@ TEST(I2cMaster, ReadBlocking) {
   EXPECT_CALL(sdk, gpio_set_function(_, GPIO_FUNC_I2C)).Times(2);
   EXPECT_CALL(sdk, gpio_pull_up(_)).Times(2);
 
-  ::pico_driver::I2cMaster i2c(sdk, i2c_inst, 100 * 1000, 17, 23);
+  ::rpp_driver::I2cMaster i2c(sdk, i2c_inst, 100 * 1000, 17, 23);
 
   EXPECT_CALL(sdk, i2c_read_blocking(&i2c_inst, addr, buf, sizeof(buf), nostop))
       .WillOnce(Return(return_value));
@@ -84,7 +84,7 @@ TEST(I2cMaster, ReadBlocking) {
 }  // ReadBlocking
 
 TEST(I2cMaster, WriteBlocking) {
-  ::pico_driver::MockSdkWrapper sdk;
+  ::rpp_driver::MockSdkWrapper sdk;
   i2c_inst_t i2c_inst;
 
   uint8_t addr = 3;
@@ -99,7 +99,7 @@ TEST(I2cMaster, WriteBlocking) {
   EXPECT_CALL(sdk, gpio_set_function(_, GPIO_FUNC_I2C)).Times(2);
   EXPECT_CALL(sdk, gpio_pull_up(_)).Times(2);
 
-  ::pico_driver::I2cMaster i2c(sdk, i2c_inst, 100 * 1000, 17, 23);
+  ::rpp_driver::I2cMaster i2c(sdk, i2c_inst, 100 * 1000, 17, 23);
 
   EXPECT_CALL(sdk,
               i2c_write_blocking(&i2c_inst, addr, buf, sizeof(buf), nostop))
@@ -115,7 +115,7 @@ TEST(I2cMaster, WriteBlocking) {
 }  // WriteBlocking
 
 TEST(I2cMaster, IsDeviceExisting) {
-  ::pico_driver::MockSdkWrapper sdk;
+  ::rpp_driver::MockSdkWrapper sdk;
   i2c_inst_t i2c_inst;
 
   uint8_t addr[] = {17, 23};
@@ -129,7 +129,7 @@ TEST(I2cMaster, IsDeviceExisting) {
   EXPECT_CALL(sdk, gpio_set_function(_, GPIO_FUNC_I2C)).Times(2);
   EXPECT_CALL(sdk, gpio_pull_up(_)).Times(2);
 
-  ::pico_driver::I2cMaster i2c(sdk, i2c_inst, 100 * 1000, 17, 23);
+  ::rpp_driver::I2cMaster i2c(sdk, i2c_inst, 100 * 1000, 17, 23);
 
   EXPECT_CALL(sdk, i2c_read_blocking(_, addr[0], _, 1, nostop))
       .WillOnce(Return(return_value[0]));

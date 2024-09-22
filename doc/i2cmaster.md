@@ -1,1 +1,1 @@
-# ::pico_driver::I2cMaster Class
+# ::rpp_driver::I2cMaster Class

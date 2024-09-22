@@ -21,7 +21,7 @@
 
 #include "sdkwrapper.hpp"
 
-namespace pico_driver {
+namespace rpp_driver {
 class GpioBasic {
  public:
   /**
@@ -93,6 +93,6 @@ class MockGpioBasic : public SdkWrapper {
 };  // MockGpioBasic
 
 #endif  //  __has_include(<gmock/gmock.h>)
-};  // namespace pico_driver
+};  // namespace rpp_driver
 
 #endif /* PICO_DRIVER_SRC_GPIO_GPIOBASIC_HPP_ */

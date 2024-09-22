@@ -8,15 +8,15 @@
 
 class GpioBasicTest : public ::testing::Test {
  protected:
-  ::pico_driver::MockSdkWrapper sdk_;
+  ::rpp_driver::MockSdkWrapper sdk_;
   unsigned int gpio_pin_;  // GPIO pin number.
-  ::pico_driver::GpioBasic* gpio_under_test_;
+  ::rpp_driver::GpioBasic* gpio_under_test_;
 
   virtual void SetUp() {
     std::random_device rng;
     gpio_pin_ = rng();
     EXPECT_CALL(sdk_, gpio_init(gpio_pin_)).Times(1);
-    gpio_under_test_ = new ::pico_driver::GpioBasic(sdk_, gpio_pin_);
+    gpio_under_test_ = new ::rpp_driver::GpioBasic(sdk_, gpio_pin_);
   }
 
   virtual void TearDown() {
@@ -32,7 +32,7 @@ class GpioBasicTest : public ::testing::Test {
 // -----------------------------------------------------------------
 
 TEST(GpioBasic, ConstructorDeconstructor) {
-  ::pico_driver::MockSdkWrapper sdk;
+  ::rpp_driver::MockSdkWrapper sdk;
   std::random_device rng;
 
   const unsigned int pin = rng();  // GPIO pin number.
@@ -44,7 +44,7 @@ TEST(GpioBasic, ConstructorDeconstructor) {
     EXPECT_CALL(sdk, gpio_deinit(pin));
   }
 
-  ::pico_driver::GpioBasic* gpio = new ::pico_driver::GpioBasic(sdk, pin);
+  ::rpp_driver::GpioBasic* gpio = new ::rpp_driver::GpioBasic(sdk, pin);
   delete (gpio);
 }  // TEST(GpioBasic, ConstructorDeconstructor)
 

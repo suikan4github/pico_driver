@@ -23,7 +23,7 @@ typedef unsigned uint;
 #include <gmock/gmock.h>
 #endif
 
-namespace pico_driver {
+namespace rpp_driver {
 /**
  * @brief Interface type to allow the GoogleTest without depending to RasPi
  *
@@ -78,6 +78,6 @@ class MockI2cMasterInterface : public I2cMasterInterface {
 };
 
 #endif  // __has_include(<gmock/gmock.h>)
-}  // namespace pico_driver
+}  // namespace rpp_driver
 
 #endif /* PICO_DRIVER_SRC_I2C_I2CMASATERINTERFACE_HPP_ */

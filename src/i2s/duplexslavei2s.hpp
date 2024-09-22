@@ -15,7 +15,7 @@
 
 #include "sdkwrapper.hpp"
 
-namespace pico_driver {
+namespace rpp_driver {
 /**
  * @brief Duplex Slave I2S controller class.
  * @details
@@ -49,7 +49,7 @@ namespace pico_driver {
  */
 class DuplexSlaveI2s {
  private:
-  ::pico_driver::SdkWrapper &sdk_;
+  ::rpp_driver::SdkWrapper &sdk_;
   PIO pio_;
   const uint32_t sm_;    // State machine ( 0..3 )
   const uint pin_base_;  // first GPIO pin number of the I2S signal.
@@ -67,7 +67,7 @@ class DuplexSlaveI2s {
    * Internally, the state machine will be allocate from the unused one.
    *
    */
-  DuplexSlaveI2s(::pico_driver::SdkWrapper &sdk, PIO pio, uint pin_base);
+  DuplexSlaveI2s(::rpp_driver::SdkWrapper &sdk, PIO pio, uint pin_base);
   /**
    * @brief Construct a new Duplex Slave I 2 S object
    *
@@ -77,7 +77,7 @@ class DuplexSlaveI2s {
    * @param pin_base The GPIO pin number of SDOUT signal.
    * @details
    */
-  DuplexSlaveI2s(::pico_driver::SdkWrapper &sdk, PIO pio, uint32_t sm,
+  DuplexSlaveI2s(::rpp_driver::SdkWrapper &sdk, PIO pio, uint32_t sm,
                  uint pin_base);
 
   /**
@@ -142,6 +142,6 @@ class MockDuplexSlaveI2s : public DuplexSlaveI2s {
 };
 #endif  // __has_include(<gmock/gmock.h>)
 
-}  // namespace pico_driver
+}  // namespace rpp_driver
 
 #endif  // PICO_DRIVER_SRC_I2S_DUPLEXSLAVEI2S_HPP_

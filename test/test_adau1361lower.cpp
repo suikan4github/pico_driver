@@ -5,11 +5,11 @@
 #include "i2cmasterinterface.hpp"
 
 // Class under test. Provide a dummy member function for test.
-class CutAdau1361Lower : public ::pico_driver::Adau1361Lower {
+class CutAdau1361Lower : public ::rpp_driver::Adau1361Lower {
  public:
-  CutAdau1361Lower(::pico_driver::I2cMasterInterface& controller,
+  CutAdau1361Lower(::rpp_driver::I2cMasterInterface& controller,
                    unsigned int i2c_device_addr)
-      : ::pico_driver::Adau1361Lower(controller, i2c_device_addr) {};
+      : ::rpp_driver::Adau1361Lower(controller, i2c_device_addr) {};
   virtual void ConfigureSignalPath() {};
 };
 class Adau1361LowerTest : public ::testing::Test {
@@ -22,8 +22,8 @@ class Adau1361LowerTest : public ::testing::Test {
   virtual void TearDown() { delete codec_lower_; }
 
   unsigned int device_address_;  // 7bit I2C address
-  ::pico_driver::MockI2cMasterInterface i2c_;
-  ::pico_driver::Adau1361Lower* codec_lower_;
+  ::rpp_driver::MockI2cMasterInterface i2c_;
+  ::rpp_driver::Adau1361Lower* codec_lower_;
 };
 
 typedef Adau1361LowerTest Adau1361LowerDeathTest;

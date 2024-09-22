@@ -4,7 +4,7 @@
 
 #include <algorithm>
 
-void ::pico_driver::UmbAdau1361Lower::ConfigureSignalPath() {
+void ::rpp_driver::UmbAdau1361Lower::ConfigureSignalPath() {
   // Set certain signal pass. If it
   // doen't fit to your system,
   // override it by

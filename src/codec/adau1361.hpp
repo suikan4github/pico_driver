@@ -13,7 +13,7 @@
 #include <i2cmasterinterface.hpp>
 
 #include "adau1361lower.hpp"
-namespace pico_driver {
+namespace rpp_driver {
 
 /**
  * \brief Analog Device ADAU1361A audio codec control class.
@@ -141,6 +141,6 @@ class Adau1361 {
   bool line_output_mute_;
   bool hp_output_mute_;  // headphone
 };
-}  // namespace pico_driver
+}  // namespace rpp_driver
 
 #endif /* PICO_DRIVER_SRC_CODEC_ADAU1361_HPP_ */

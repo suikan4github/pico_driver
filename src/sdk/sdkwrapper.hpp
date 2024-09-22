@@ -39,7 +39,7 @@ typedef unsigned int uint;
  * @brief Collection of the RP2040/RP2350 control.
  *
  */
-namespace pico_driver {
+namespace rpp_driver {
 /**
  * @brief Wrapper class for the RasPi Pico SDK functions.
  * @details
@@ -539,6 +539,6 @@ class MockSdkWrapper : public SdkWrapper {
   MOCK_METHOD2(pio_sm_clear_fifos, void(PIO pio, uint sm));
 };
 #endif  // __has_include(<gmock/gmock.h>)
-};  // namespace pico_driver
+};  // namespace rpp_driver
 
 #endif  // PICO_DRIVER_SRC_SDK_SDKWRAPPER_HPP_

@@ -16,7 +16,7 @@
 #include <gmock/gmock.h>
 #endif
 
-namespace pico_driver {
+namespace rpp_driver {
 
 /**
  * @brief lower part of the Adau1361 CODEC controller class.
@@ -45,7 +45,7 @@ class Adau1361Lower {
    * @param i2c_device_addr ADAU1361A 7bits I2C device address. Refer device
    * deta sheet for details.
    */
-  Adau1361Lower(::pico_driver::I2cMasterInterface& controller,
+  Adau1361Lower(::rpp_driver::I2cMasterInterface& controller,
                 unsigned int i2c_device_addr)
       : i2c_(controller), device_addr_(i2c_device_addr) {};
   Adau1361Lower() = delete;
@@ -219,7 +219,7 @@ class Adau1361Lower {
                                bool mute = false);
 
  protected:
-  ::pico_driver::I2cMasterInterface& i2c_;
+  ::rpp_driver::I2cMasterInterface& i2c_;
   const unsigned int device_addr_;
 };
 
@@ -228,7 +228,7 @@ class Adau1361Lower {
 
 class MockAdau1361Lower : public Adau1361Lower {
  public:
-  explicit MockAdau1361Lower(::pico_driver::I2cMasterInterface& controller)
+  explicit MockAdau1361Lower(::rpp_driver::I2cMasterInterface& controller)
       : Adau1361Lower(controller, 31) {};
   MOCK_METHOD2(SendCommand, void(const uint8_t command[], int size));
   MOCK_METHOD2(SendCommandTable, void(const uint8_t table[][3], int rows));
@@ -252,6 +252,6 @@ class MockAdau1361Lower : public Adau1361Lower {
 };
 #endif  //  __has_include(<gmock/gmock.h>)
 
-}  // namespace pico_driver
+}  // namespace rpp_driver
 
 #endif /* PICO_DRIVER_SRC_CODEC_ADAU1361LOWER_HPP_ */

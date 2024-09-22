@@ -8,20 +8,20 @@ These classes are provided in this version.
 
 | class                                                  | Description |
 |---------------------------------                       |----------------------------- |
-| ::pico_driver::[SdkWrapper](doc/sdkwrapper.md)         | Wrapper class of Pico SDK    |
-| ::pico_driver::[GpioBasic](doc/gpiobasic.md)           | Basic GPIO controller        |
-| ::pico_driver::[I2cMaster](doc/i2cmaster.md)           | I2C Master controller        |
-| ::pico_driver::[DuplexSlaveI2s](doc/duplexslavei2s.md) | Polling based PIO I2S driver |
-| ::pico_driver::[Adau1361](doc/adau1361.md)             | Audio CODEC driver           |
+| ::rpp_driver::[SdkWrapper](doc/sdkwrapper.md)         | Wrapper class of Pico SDK    |
+| ::rpp_driver::[GpioBasic](doc/gpiobasic.md)           | Basic GPIO controller        |
+| ::rpp_driver::[I2cMaster](doc/i2cmaster.md)           | I2C Master controller        |
+| ::rpp_driver::[DuplexSlaveI2s](doc/duplexslavei2s.md) | Polling based PIO I2S driver |
+| ::rpp_driver::[Adau1361](doc/adau1361.md)             | Audio CODEC driver           |
 
 
 ## How to obtain this project
 
-The newest copy of this project is found in the [GitHub repository](https://github.com/suikan4github/pico_driver). 
+The newest copy of this project is found in the [GitHub repository](https://github.com/suikan4github/rpp_driver). 
 
 ## How to obtain the sample programs
 
-The newest copy of the sample program project is found in the [GitHub repository](https://github.com/suikan4github/pico_driver-sample). 
+The newest copy of the sample program project is found in the [GitHub repository](https://github.com/suikan4github/rpp_driver-sample). 
 
 
 ## Installing tool

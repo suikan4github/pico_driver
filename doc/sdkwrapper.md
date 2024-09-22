@@ -1,1 +1,1 @@
-# ::pico_driver::SdkWrapper class
+# ::rpp_driver::SdkWrapper class

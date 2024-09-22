@@ -8,14 +8,14 @@ class UmbAdau1361LowerTest : public ::testing::Test {
  protected:
   virtual void SetUp() {
     device_address_ = 17;  // 7bit I2C address
-    codec_lower_ = new ::pico_driver::UmbAdau1361Lower(i2c_, device_address_);
+    codec_lower_ = new ::rpp_driver::UmbAdau1361Lower(i2c_, device_address_);
   }
 
   virtual void TearDown() { delete codec_lower_; }
 
   unsigned int device_address_;  // 7bit I2C address
-  ::pico_driver::MockI2cMasterInterface i2c_;
-  ::pico_driver::Adau1361Lower *codec_lower_;
+  ::rpp_driver::MockI2cMasterInterface i2c_;
+  ::rpp_driver::Adau1361Lower *codec_lower_;
 };
 
 // -----------------------------------------------------------------

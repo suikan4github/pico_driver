@@ -11,7 +11,7 @@ add_executable(${PROJECT_NAME} ${SOURCES})
     # Add the library under test.
     target_link_libraries(${PROJECT_NAME}  
                             GTest::gmock_main
-                            pico_driver  
+                            rpp_driver  
                             )
 
 include(GoogleTest)
