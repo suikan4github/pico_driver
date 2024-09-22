@@ -1,4 +1,4 @@
-# PICO DRIVER
+# Raspberry Pi Pico Driver class collection
 A Collection of the Raspberry Pi [Pico](https://www.raspberrypi.com/products/raspberry-pi-pico/)/[Pico2](https://www.raspberrypi.com/products/raspberry-pi-pico-2/) classes. Also, the [SDK API](https://www.raspberrypi.com/documentation/pico-sdk/hardware.html#group_sm_config_1gaed7a6e7dc4f1979c7c62e4773df8c79b) wrapper class is provided. 
 
 ## Details
@@ -34,21 +34,14 @@ apt-get -y install build-essential cmake ninja-build git doxygen
 apt-get -y install gcc-arm-none-eabi libnewlib-arm-none-eabi
 ```
 
-## Building test
+## Building tests
 The sample program and I2S drivers are tested by GoogleTest and fff. Follow the procedure to build the test. 
 
 From the repository root ( where this README.md stays), run the following commands. 
 ```sh
 mkdir build
-cmake -DCMAKE_BUILD_TYPE:STRING=Debug \
-    -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE \
-    -DCMAKE_C_COMPILER:FILEPATH=/usr/bin/gcc \
-    -DCMAKE_CXX_COMPILER:FILEPATH=/usr/bin/g++ \
-    --no-warn-unused-cli \
-    -S . \
-    -B build \
-    -G Ninja
-cmake --build build --config Debug --target all --
+cmake -B build -S . -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ 
+cmake --build build --config Debug --target all
 ```
 
 ## Building document
