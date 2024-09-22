@@ -9,6 +9,7 @@ These classes are provided in this version.
 | class                                                  | Description |
 |---------------------------------                       |----------------------------- |
 | ::pico_driver::[SdkWrapper](doc/sdkwrapper.md)         | Wrapper class of Pico SDK    |
+| ::pico_driver::[GpioBasic](doc/gpiobasic.md)           | Basic GPIO controller        |
 | ::pico_driver::[I2cMaster](doc/i2cmaster.md)           | I2C Master controller        |
 | ::pico_driver::[DuplexSlaveI2s](doc/duplexslavei2s.md) | Polling based PIO I2S driver |
 | ::pico_driver::[Adau1361](doc/adau1361.md)             | Audio CODEC driver           |
