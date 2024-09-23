@@ -39,8 +39,8 @@ namespace rpp_driver {
  * To start and stop the I2S transfer, call the Start() and the Stop() member
  * functions respectively.
  *
- * The audio sample in and out are through the GetFIFOBlocking() and the
- * PutFIFOBlocking() member function, respectively. These are blocking function.
+ * The audio sample in and out are through the GetFifoBlocking() and the
+ * PutFifoBlocking() member function, respectively. These are blocking function.
  * That mean, program will wait until the data is ready, or FIFO has room for
  * data.
  *
@@ -118,7 +118,7 @@ class DuplexSlaveI2s {
    * This function is blocking. That mean, program will wait until the data has
    * been received.
    */
-  virtual int32_t GetFIFOBlocking();
+  virtual int32_t GetFifoBlocking();
   /**
    * @brief Put one audio data to TX FIFO.
    *
@@ -127,7 +127,7 @@ class DuplexSlaveI2s {
    * must be put and then, right data.
    *
    */
-  virtual void PutFIFOBlocking(int32_t value);
+  virtual void PutFifoBlocking(int32_t value);
 };
 
 #if __has_include(<gmock/gmock.h>)
@@ -137,8 +137,8 @@ class MockDuplexSlaveI2s : public DuplexSlaveI2s {
   MOCK_METHOD0(GetStateMachine, uint32_t(void));
   MOCK_METHOD0(Start, void(void));
   MOCK_METHOD0(Stop, void(void));
-  MOCK_METHOD1(PutFIFOBlocking, void(int32_t value));
-  MOCK_METHOD0(GetFIFOBlocking, int32_t());
+  MOCK_METHOD1(PutFifoBlocking, void(int32_t value));
+  MOCK_METHOD0(GetFifoBlocking, int32_t());
 };
 #endif  // __has_include(<gmock/gmock.h>)
 

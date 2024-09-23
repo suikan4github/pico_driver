@@ -30,11 +30,11 @@ rpp_driver::DuplexSlaveI2s::~DuplexSlaveI2s() {
 
 uint32_t rpp_driver::DuplexSlaveI2s::GetStateMachine() { return sm_; }
 
-int32_t rpp_driver::DuplexSlaveI2s::GetFIFOBlocking() {
+int32_t rpp_driver::DuplexSlaveI2s::GetFifoBlocking() {
   return sdk_.pio_sm_get_blocking(pio_, sm_);
 }
 
-void rpp_driver::DuplexSlaveI2s::PutFIFOBlocking(int32_t value) {
+void rpp_driver::DuplexSlaveI2s::PutFifoBlocking(int32_t value) {
   sdk_.pio_sm_put_blocking(pio_, sm_, value);
 }
 

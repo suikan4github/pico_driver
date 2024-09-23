@@ -1,11 +1,11 @@
 # test_DuplexSlaveI2s TDD
-- [x] Implement DuplexSlaveI2s::PutFIFOBlocking(). 
+- [x] Implement DuplexSlaveI2s::PutFifoBlocking(). 
 - [x] Create Test case DuplexSlaveI2s.PUtFIFOBlocking() to fail. 
 - [x] Make it success. 
 - [x] Remove the duplication. 
 
-- [x] Implement DuplexSlaveI2s::GetFIFOBlocking(). 
-- [x] Create Test case DuplexSlaveI2s.GetFIFOBlocking() to fail. 
+- [x] Implement DuplexSlaveI2s::GetFifoBlocking(). 
+- [x] Create Test case DuplexSlaveI2s.GetFifoBlocking() to fail. 
 - [x] Make it success. 
 - [x] Remove the duplication. 
 
