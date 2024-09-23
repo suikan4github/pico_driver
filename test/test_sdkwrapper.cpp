@@ -8,7 +8,7 @@
 
 #include <random>
 
-#include "fff.h"
+#include "fff/fff.h"
 
 // Include for test
 #include <stdint.h>
