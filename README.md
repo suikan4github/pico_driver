@@ -1,7 +1,7 @@
 # Raspberry Pi Pico Driver class collection
 A Collection of the Raspberry Pi [Pico](https://www.raspberrypi.com/products/raspberry-pi-pico/)/[Pico2](https://www.raspberrypi.com/products/raspberry-pi-pico-2/) classes. Also, the [SDK API](https://www.raspberrypi.com/documentation/pico-sdk/hardware.html#group_sm_config_1gaed7a6e7dc4f1979c7c62e4773df8c79b) wrapper class is provided. 
 
-## Details
+# Details
 This class collection ( or class library ) encapsule the certain data inside class. And it also allows you to use the dependency-injection inside your project. So, you can test your code with [Google Test](https://github.com/google/googletest) before testing on the target hardware. 
 
 These classes are provided in this version. 
@@ -23,7 +23,11 @@ The newest copy of this project is found in the [GitHub repository](https://gith
 
 The newest copy of the sample program project is found in the [GitHub repository](https://github.com/suikan4github/rpp_driver-sample). 
 
+## Sample codes
+You can obtain sample applications from [rpp-driver_sample](https://github.com/suikan4github/rpp_driver-sample) repository.
 
+
+# Tools and building
 ## Installing tool
 To build the samples or test, you need to install the build tools. 
 The installation of Ubuntu is : 
@@ -54,5 +58,5 @@ doxygen
 
 The documentation will be generated under html subdirectory. 
 
-## License.
+# License
 This project is provided under [MIT License](LICENSE). 
