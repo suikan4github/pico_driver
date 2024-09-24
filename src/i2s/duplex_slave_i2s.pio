@@ -31,7 +31,7 @@
 
 .pio_version 0              ; only requires PIO version 0
 
-.program duplex_slave_i2s   ; Program entry point. 
+.program i2s_slave_duplex   ; Program entry point. 
 
                             ; The following 3 loops avoid the trouble from the timing problem. 
                             ; The beginning of the PIO state machine program is not synchronized

@@ -5,7 +5,7 @@
 #include "hardware/pio.h"
 #else
 // Alternate definition for unit test.
-#define duplex_slave_i2s_program_get_default_config(config) 1
+#define i2s_slave_duplex_program_get_default_config(config) 1
 #define clk_sys 51
 #endif  //__has_include(<hardware/i2c.h>)
 

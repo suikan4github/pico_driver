@@ -8,5 +8,5 @@ target_include_directories(rpp_driver INTERFACE .)
 # Bare metal specific declaration. 
 if(NOT (${WIN32}) AND NOT(${UNIX})) # Is Target bare metal? 
         # Generate PIO program. 
-        pico_generate_pio_header(rpp_driver ${CMAKE_CURRENT_LIST_DIR}/duplex_slave_i2s.pio)
+        pico_generate_pio_header(rpp_driver ${CMAKE_CURRENT_LIST_DIR}/i2s_slave_duplex.pio)
 endif()
