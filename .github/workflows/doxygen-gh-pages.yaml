@@ -3,6 +3,7 @@
 # The project needs to configure to upload the gh-pages branch. 
 # Refer https://github.com/DenverCoder1/doxygen-github-pages-action
 
+# PAT is allowed only to the "Contents"
 name: Doxygen GitHub Pages Deploy Action
 
 on:
@@ -12,7 +13,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy:
+  Deploy-Pages:
+    needs: CTest 
     runs-on: ubuntu-latest
     steps:
       - uses: DenverCoder1/doxygen-github-pages-action@v2.0.0
