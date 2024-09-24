@@ -7,7 +7,7 @@
 name: Doxygen GitHub Pages Deploy Action
 
 on:
-  workflow-call:
+  workflow_call:
   push:
     branches:
       - develop
