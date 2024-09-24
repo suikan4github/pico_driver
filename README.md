@@ -13,7 +13,7 @@ These classes are provided in this version.
 | ::rpp_driver::[SdkWrapper](docs/sdkwrapper.md)         | Wrapper class of Pico SDK    |
 | ::rpp_driver::[GpioBasic](docs/gpiobasic.md)           | Basic GPIO controller        |
 | ::rpp_driver::[I2cMaster](docs/i2cmaster.md)           | I2C Master controller        |
-| ::rpp_driver::[I2sSlaveDuplex](docs/duplexslavei2s.md) | Polling based PIO I2S driver |
+| ::rpp_driver::[I2sSlaveDuplex](docs/i2sslaveduplex.md) | Polling based PIO I2S driver |
 | ::rpp_driver::[Adau1361](docs/adau1361.md)             | Audio CODEC driver           |
 
 
