@@ -6,25 +6,25 @@
 #include "duplexslavei2s.hpp"
 #include "sdkwrapper.hpp"
 
-class DuplexSlaveI2sTest : public ::testing::Test {
+class I2sSlaveDuplexTest : public ::testing::Test {
  protected:
   std::random_device rng;
   ::rpp_driver::MockSdkWrapper sdk_;
   PIO pio_ = rng();
   uint32_t sm_ = rng();
   uint pin_base_ = rng();
-  ::rpp_driver::DuplexSlaveI2s *i2s_;
+  ::rpp_driver::I2sSlaveDuplex *i2s_;
 };
 
 // Test 4 parameters constructor.
-TEST_F(DuplexSlaveI2sTest, Constructor4) {
+TEST_F(I2sSlaveDuplexTest, Constructor4) {
   using ::testing::_;
   using ::testing::Return;
 
   EXPECT_CALL(sdk_, pio_sm_claim(pio_, sm_));
   EXPECT_CALL(sdk_, pio_claim_unused_sm(_, _)).Times(0);
 
-  i2s_ = new ::rpp_driver::DuplexSlaveI2s(sdk_, pio_, sm_, pin_base_);
+  i2s_ = new ::rpp_driver::I2sSlaveDuplex(sdk_, pio_, sm_, pin_base_);
 
   // must be matched with Externally given SM.
   EXPECT_EQ(sm_, i2s_->GetStateMachine());
@@ -34,10 +34,10 @@ TEST_F(DuplexSlaveI2sTest, Constructor4) {
 
   delete (i2s_);
 
-}  // TEST_F(DuplexSlaveI2sTest, Constructor4)
+}  // TEST_F(I2sSlaveDuplexTest, Constructor4)
 
 // Test 3 parameters constructor.
-TEST_F(DuplexSlaveI2sTest, Constructor3) {
+TEST_F(I2sSlaveDuplexTest, Constructor3) {
   std::random_device rng;
   using ::testing::_;
   using ::testing::Return;
@@ -45,7 +45,7 @@ TEST_F(DuplexSlaveI2sTest, Constructor3) {
 
   EXPECT_CALL(sdk_, pio_claim_unused_sm(pio_, true)).WillOnce(Return(ret_val));
 
-  i2s_ = new ::rpp_driver::DuplexSlaveI2s(sdk_, pio_, pin_base_);
+  i2s_ = new ::rpp_driver::I2sSlaveDuplex(sdk_, pio_, pin_base_);
 
   // must be matched with Internally Registered SM.
   EXPECT_EQ(ret_val, i2s_->GetStateMachine());
@@ -54,10 +54,10 @@ TEST_F(DuplexSlaveI2sTest, Constructor3) {
 
   delete (i2s_);
 
-}  // TEST_F(DuplexSlaveI2sTest, Constructor3)
+}  // TEST_F(I2sSlaveDuplexTest, Constructor3)
 
 // Test Destructor
-TEST_F(DuplexSlaveI2sTest, Destructor) {
+TEST_F(I2sSlaveDuplexTest, Destructor) {
   std::random_device rng;
   using ::testing::_;
   using ::testing::Return;
@@ -66,16 +66,16 @@ TEST_F(DuplexSlaveI2sTest, Destructor) {
   EXPECT_CALL(sdk_, pio_sm_claim(pio_, sm_));
   EXPECT_CALL(sdk_, pio_claim_unused_sm(_, _)).Times(0);
 
-  i2s_ = new ::rpp_driver::DuplexSlaveI2s(sdk_, pio_, sm_, pin_base_);
+  i2s_ = new ::rpp_driver::I2sSlaveDuplex(sdk_, pio_, sm_, pin_base_);
 
   EXPECT_CALL(sdk_, pio_sm_unclaim(pio_, sm_));
 
   delete (i2s_);
 
-}  // TEST_F(DuplexSlaveI2sTest, Destructor)
+}  // TEST_F(I2sSlaveDuplexTest, Destructor)
 
 // Test Destructor with stopped state machine
-TEST_F(DuplexSlaveI2sTest, Destructor_stopped) {
+TEST_F(I2sSlaveDuplexTest, Destructor_stopped) {
   std::random_device rng;
   using ::testing::_;
   using ::testing::InSequence;
@@ -85,7 +85,7 @@ TEST_F(DuplexSlaveI2sTest, Destructor_stopped) {
   EXPECT_CALL(sdk_, pio_sm_claim(pio_, sm_));
   EXPECT_CALL(sdk_, pio_claim_unused_sm(_, _)).Times(0);
 
-  i2s_ = new ::rpp_driver::DuplexSlaveI2s(sdk_, pio_, sm_, pin_base_);
+  i2s_ = new ::rpp_driver::I2sSlaveDuplex(sdk_, pio_, sm_, pin_base_);
 
   {
     InSequence dummy;
@@ -100,9 +100,9 @@ TEST_F(DuplexSlaveI2sTest, Destructor_stopped) {
   }
   delete (i2s_);
 
-}  // TEST_F(DuplexSlaveI2sTest, Destructor_stopped)
+}  // TEST_F(I2sSlaveDuplexTest, Destructor_stopped)
 
-TEST_F(DuplexSlaveI2sTest, Stop) {
+TEST_F(I2sSlaveDuplexTest, Stop) {
   std::random_device rng;
   using ::testing::_;
   using ::testing::Return;
@@ -111,7 +111,7 @@ TEST_F(DuplexSlaveI2sTest, Stop) {
   EXPECT_CALL(sdk_, pio_sm_claim(pio_, sm_));
   EXPECT_CALL(sdk_, pio_claim_unused_sm(_, _)).Times(0);
 
-  i2s_ = new ::rpp_driver::DuplexSlaveI2s(sdk_, pio_, sm_, pin_base_);
+  i2s_ = new ::rpp_driver::I2sSlaveDuplex(sdk_, pio_, sm_, pin_base_);
 
   EXPECT_CALL(sdk_, pio_sm_set_enabled(pio_, sm_, false));
   EXPECT_CALL(sdk_, pio_sm_clear_fifos(pio_, sm_));
@@ -124,9 +124,9 @@ TEST_F(DuplexSlaveI2sTest, Stop) {
 
   delete (i2s_);
 
-}  // TEST_F(DuplexSlaveI2sTest, Stop)
+}  // TEST_F(I2sSlaveDuplexTest, Stop)
 
-TEST_F(DuplexSlaveI2sTest, GetStateMachine) {
+TEST_F(I2sSlaveDuplexTest, GetStateMachine) {
   std::random_device rng;
   using ::testing::_;
   using ::testing::Return;
@@ -134,7 +134,7 @@ TEST_F(DuplexSlaveI2sTest, GetStateMachine) {
   // We can ignore these call in constructor.
   EXPECT_CALL(sdk_, pio_sm_claim(pio_, sm_));
 
-  i2s_ = new ::rpp_driver::DuplexSlaveI2s(sdk_, pio_, sm_, pin_base_);
+  i2s_ = new ::rpp_driver::I2sSlaveDuplex(sdk_, pio_, sm_, pin_base_);
 
   // Must match the given state machine from constructor explicitly.
   EXPECT_EQ(i2s_->GetStateMachine(), sm_);
@@ -144,9 +144,9 @@ TEST_F(DuplexSlaveI2sTest, GetStateMachine) {
 
   delete (i2s_);
 
-}  // TEST_F(DuplexSlaveI2sTest, GetStateMachine)
+}  // TEST_F(I2sSlaveDuplexTest, GetStateMachine)
 
-TEST_F(DuplexSlaveI2sTest, Start) {
+TEST_F(I2sSlaveDuplexTest, Start) {
   using ::testing::_;
   using ::testing::InSequence;
   using ::testing::Return;
@@ -157,7 +157,7 @@ TEST_F(DuplexSlaveI2sTest, Start) {
   // We can ignore these call in constructor.
   EXPECT_CALL(sdk_, pio_sm_claim(pio_, sm_));
 
-  i2s_ = new ::rpp_driver::DuplexSlaveI2s(sdk_, pio_, sm_, pin_base_);
+  i2s_ = new ::rpp_driver::I2sSlaveDuplex(sdk_, pio_, sm_, pin_base_);
 
   {
     InSequence dummy;
@@ -210,9 +210,9 @@ TEST_F(DuplexSlaveI2sTest, Start) {
 
   delete (i2s_);
 
-}  // TEST_F(DuplexSlaveI2sTest, Start)
+}  // TEST_F(I2sSlaveDuplexTest, Start)
 
-TEST_F(DuplexSlaveI2sTest, GetFifoBlocking) {
+TEST_F(I2sSlaveDuplexTest, GetFifoBlocking) {
   std::random_device rng;
   int32_t ret_val = rng();
   using ::testing::_;
@@ -221,7 +221,7 @@ TEST_F(DuplexSlaveI2sTest, GetFifoBlocking) {
   // We can ignore these call in constructor.
   EXPECT_CALL(sdk_, pio_sm_claim(pio_, sm_));
 
-  i2s_ = new ::rpp_driver::DuplexSlaveI2s(sdk_, pio_, sm_, pin_base_);
+  i2s_ = new ::rpp_driver::I2sSlaveDuplex(sdk_, pio_, sm_, pin_base_);
 
   EXPECT_CALL(sdk_, pio_sm_get_blocking(pio_, sm_)).WillOnce(Return(ret_val));
 
@@ -233,9 +233,9 @@ TEST_F(DuplexSlaveI2sTest, GetFifoBlocking) {
 
   delete (i2s_);
 
-}  // TEST_F(DuplexSlaveI2sTest, GetFifoBlocking)
+}  // TEST_F(I2sSlaveDuplexTest, GetFifoBlocking)
 
-TEST_F(DuplexSlaveI2sTest, PutFifoBlocking) {
+TEST_F(I2sSlaveDuplexTest, PutFifoBlocking) {
   std::random_device rng;
   int32_t value = rng();
   using ::testing::_;
@@ -244,7 +244,7 @@ TEST_F(DuplexSlaveI2sTest, PutFifoBlocking) {
   // We can ignore these call in constructor.
   EXPECT_CALL(sdk_, pio_sm_claim(pio_, sm_));
 
-  i2s_ = new ::rpp_driver::DuplexSlaveI2s(sdk_, pio_, sm_, pin_base_);
+  i2s_ = new ::rpp_driver::I2sSlaveDuplex(sdk_, pio_, sm_, pin_base_);
 
   EXPECT_CALL(sdk_, pio_sm_put_blocking(pio_, sm_, value));
 
@@ -256,4 +256,4 @@ TEST_F(DuplexSlaveI2sTest, PutFifoBlocking) {
 
   delete (i2s_);
 
-}  // TEST_F(DuplexSlaveI2sTest, PutFifoBlocking)
+}  // TEST_F(I2sSlaveDuplexTest, PutFifoBlocking)

@@ -10,7 +10,7 @@ extern "C" {
 static pio_program_t duplex_slave_i2s_program;
 #endif  // __has_include(<hardware/pio.h>)
 
-rpp_driver::DuplexSlaveI2s::DuplexSlaveI2s(::rpp_driver::SdkWrapper &sdk,
+rpp_driver::I2sSlaveDuplex::I2sSlaveDuplex(::rpp_driver::SdkWrapper &sdk,
                                            PIO pio, uint pin_base)
     : sdk_(sdk),
       pio_(pio),
@@ -18,27 +18,27 @@ rpp_driver::DuplexSlaveI2s::DuplexSlaveI2s(::rpp_driver::SdkWrapper &sdk,
           pio_, true)),  // true mean required. assert if no room.
       pin_base_(pin_base) {}
 
-rpp_driver::DuplexSlaveI2s::DuplexSlaveI2s(::rpp_driver::SdkWrapper &sdk,
+rpp_driver::I2sSlaveDuplex::I2sSlaveDuplex(::rpp_driver::SdkWrapper &sdk,
                                            PIO pio, uint32_t sm, uint pin_base)
     : sdk_(sdk), pio_(pio), sm_(sm), pin_base_(pin_base) {
   sdk_.pio_sm_claim(pio_, sm_);
 }
 
-rpp_driver::DuplexSlaveI2s::~DuplexSlaveI2s() {
+rpp_driver::I2sSlaveDuplex::~I2sSlaveDuplex() {
   sdk_.pio_sm_unclaim(pio_, sm_);
 }
 
-uint32_t rpp_driver::DuplexSlaveI2s::GetStateMachine() { return sm_; }
+uint32_t rpp_driver::I2sSlaveDuplex::GetStateMachine() { return sm_; }
 
-int32_t rpp_driver::DuplexSlaveI2s::GetFifoBlocking() {
+int32_t rpp_driver::I2sSlaveDuplex::GetFifoBlocking() {
   return sdk_.pio_sm_get_blocking(pio_, sm_);
 }
 
-void rpp_driver::DuplexSlaveI2s::PutFifoBlocking(int32_t value) {
+void rpp_driver::I2sSlaveDuplex::PutFifoBlocking(int32_t value) {
   sdk_.pio_sm_put_blocking(pio_, sm_, value);
 }
 
-void rpp_driver::DuplexSlaveI2s::Start() {
+void rpp_driver::I2sSlaveDuplex::Start() {
   // Assign these pins for PIO by GPIO mux.
   sdk_.pio_gpio_init(pio_, pin_base_);
   sdk_.pio_gpio_init(pio_, pin_base_ + 1);
@@ -122,7 +122,7 @@ void rpp_driver::DuplexSlaveI2s::Start() {
   sdk_.pio_sm_set_enabled(pio_, sm_, true);
 }
 
-void rpp_driver::DuplexSlaveI2s::Stop() {
+void rpp_driver::I2sSlaveDuplex::Stop() {
   // Stop state machine.
   sdk_.pio_sm_set_enabled(pio_, sm_, false);
   // Clean up FIFO for the next processing.
