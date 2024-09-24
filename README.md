@@ -1,20 +1,20 @@
 # Raspberry Pi Pico Driver class collection
-A Collection of the Raspberry Pi [Pico](https://www.raspberrypi.com/products/raspberry-pi-pico/)/[Pico2](https://www.raspberrypi.com/products/raspberry-pi-pico-2/) classes. Also, the [SDK API](https://www.raspberrypi.com/documentation/pico-sdk/hardware.html#group_sm_config_1gaed7a6e7dc4f1979c7c62e4773df8c79b) wrapper class is provided. 
+A Collection of the Raspberry Pi [Pico](https://www.raspberrypi.com/products/raspberry-pi-pico/)/[Pico2](https://www.raspberrypi.com/products/raspberry-pi-pico-2/) classes. Also, a [SDK API](https://www.raspberrypi.com/documentation/pico-sdk/hardware.html#group_sm_config_1gaed7a6e7dc4f1979c7c62e4773df8c79b) wrapper class is provided. 
 
-[HTML documentation](https://suikan4github.github.io/rpp_driver/) is available. 
+An online [HTML documentation](https://suikan4github.github.io/rpp_driver/) is available for the details.  
 
 # Details
 This class collection ( or class library ) encapsule the certain data inside class. And it also allows you to use the dependency-injection inside your project. So, you can test your code with [Google Test](https://github.com/google/googletest) before testing on the target hardware. 
 
 These classes are provided in this version. 
 
-| class                                                  | Description |
-|---------------------------------                       |----------------------------- |
-| ::rpp_driver::[SdkWrapper](docs/sdkwrapper.md)         | Wrapper class of Pico SDK    |
-| ::rpp_driver::[GpioBasic](docs/gpiobasic.md)           | Basic GPIO controller        |
-| ::rpp_driver::[I2cMaster](docs/i2cmaster.md)           | I2C Master controller        |
-| ::rpp_driver::[I2sSlaveDuplex](docs/i2sslaveduplex.md) | Polling based PIO I2S driver |
-| ::rpp_driver::[Adau1361](docs/adau1361.md)             | Audio CODEC driver           |
+| class                             | Description |
+|---------------------------------  |----------------------------- |
+| ::rpp_driver::SdkWrapper          | Wrapper class of Pico SDK    |
+| ::rpp_driver::GpioBasic           | Basic GPIO controller        |
+| ::rpp_driver::I2cMaster           | I2C Master controller        |
+| ::rpp_driver::I2sSlaveDuplex      | Polling based PIO I2S driver |
+| ::rpp_driver::Adau1361            | Audio CODEC driver           |
 
 
 ## How to obtain this project
