@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: DenverCoder1/doxygen-github-pages-action@v2.0.0
         with:
-          github_token: ${{ secrets.DOXYGEN_GH_PAGE }}
+          github_token:  ${{ secrets.DOXYGEN_GH_PAGE }}
           branch: gh-pages
           folder: docs/html
           config_file: Doxyfile
