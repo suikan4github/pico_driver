@@ -25,7 +25,6 @@ namespace rpp_driver {
 /**
  * @brief Basic GPIO driver class.
  * @details
- * This class provide very basic operation of GPIO.
  */
 class GpioBasic {
  public:
