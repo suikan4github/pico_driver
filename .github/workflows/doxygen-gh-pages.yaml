@@ -1,0 +1,22 @@
+# Generate doxygen file into docs/html directory. 
+# Then, push it to the gh-pages contents. 
+# The project needs to configure to upload the gh-pages branch. 
+
+name: Doxygen GitHub Pages Deploy Action
+
+on:
+  push:
+    branches:
+      - develop
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: DenverCoder1/doxygen-github-pages-action@v1.3.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
+          folder: docs/html
+          config_file: Doxyfile
