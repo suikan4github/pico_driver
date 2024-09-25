@@ -8,13 +8,14 @@ This class collection ( or class library ) encapsule the certain data inside cla
 
 These classes are provided in this version. 
 
-| class                             | Description |
-|---------------------------------  |----------------------------- |
-| ::rpp_driver::SdkWrapper          | Wrapper class of Pico SDK    |
-| ::rpp_driver::GpioBasic           | Basic GPIO controller        |
-| ::rpp_driver::I2cMaster           | I2C Master controller        |
-| ::rpp_driver::I2sSlaveDuplex      | Polling based PIO I2S driver |
-| ::rpp_driver::Adau1361            | Audio CODEC driver           |
+| Class                           | Header file          | Description |
+|---------------------------------|----                  |----------------------------- |
+| ::rpp_driver::SdkWrapper        | sdkwrapper.hpp       | Wrapper class of Pico SDK    |
+| ::rpp_driver::GpioBasic         | gpiobasic.hpp        | Basic GPIO controller        |
+| ::rpp_driver::I2cMaster         | i2cmaster.hpp        | I2C Master controller        |
+| ::rpp_driver::I2sSlaveDuplex    | i2sslaveduplex.hpp   | Polling based PIO I2S driver |
+| ::rpp_driver::Adau1361          | adau1361.hpp         | Audio CODEC driver           |
+| ::rpp_driver::UmbAdau1361Lower  | umbadau1361lower.hpp | CODEC lower driver dedicated to UMB-ADAU1361-A board |
 
 
 ## How to obtain this project
@@ -62,7 +63,7 @@ cmake --build build --config Debug --target all
 ```
 
 ## Building document
-An API document are provided by HTML files. 
+An API document is provided as HTML files. 
 To obtain it, run doxygen at the project root ( where the README.md exists).
 
 ```sh
@@ -70,6 +71,24 @@ doxygen
 ```
 
 The documentation will be generated under the docs/html/ subdirectory. 
+
+# Integration to your RasPi Pico project
+To use the rpp_driver, as a first step, you need to add following lines into your CMakeLists.txt. 
+
+```
+add_subdirectory(rpp_driver)
+```
+
+```
+target_link_libraries(${PROJECT_NAME}  pico_stdlib 
+                                        hardware_i2c
+                                        hardware_pio
+                                        rpp_driver)
+```
+
+Note : Whichever you use PIO/I2C or not, you need to link these libraries. 
+
+By linking library, the include path for the include files are set automatically. 
 
 # License
 This project is provided under [MIT License](LICENSE). 
