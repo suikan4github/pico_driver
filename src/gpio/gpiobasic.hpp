@@ -49,7 +49,7 @@ class GpioBasic {
 
   /**
    * @brief Enable GPIO input.
-   * @param enabled true to enable input on This GPIO.
+   * @param enabled true to enable input on this GPIO.
    */
   virtual void SetInputEnabled(bool enabled);
 
@@ -60,22 +60,33 @@ class GpioBasic {
   virtual void Put(bool value);
 
   /**
-   * @brief Get state of a single This GPIO.
-   * @returns Current state of the GPIO. 0 for low, non-zero for high
+   * @brief Get state of a single GPIO.
+   * @returns Current state of this GPIO. 0 for low, non-zero for high
    */
   virtual bool Get();
+
   /**
-   * @brief Set This GPIO to be pulled up.
+   * @brief Toggle the output level of this GPIO.
+   * @details
+   * If the current level is "H", set it to "L".
+   * If the current level is "L", set it to "H".
+   */
+  virtual void Toggle();
+
+  /**
+   * @brief Set this GPIO to be pulled up.
+   * @
    */
   virtual void PullUp();
 
   /**
-   * @brief Set This GPIO to be pulled down.
+   * @brief Set this GPIO to be pulled down.
    */
   virtual void PullDown();
 
   /**
-   * @brief Disable pulls on This GPIO.
+   * @brief Unset pulls on this GPIO.
+   *
    */
   virtual void DisablePulls();
 
@@ -91,6 +102,7 @@ class MockGpioBasic : public SdkWrapper {
   MOCK_METHOD1(SetInputEnabled, void(bool));
   MOCK_METHOD1(Put, void(bool));
   MOCK_METHOD0(Get, bool(void));
+  MOCK_METHOD0(Toggle, void(void));
   MOCK_METHOD0(PullUp, void(void));
   MOCK_METHOD0(PullDown, void(void));
   MOCK_METHOD0(DisablePulls, void(void));

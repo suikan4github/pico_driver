@@ -17,6 +17,8 @@ void rpp_driver::GpioBasic::Put(bool value) { sdk_.gpio_put(pin_, value); }
 
 bool rpp_driver::GpioBasic::Get() { return sdk_.gpio_get(pin_); }
 
+void rpp_driver::GpioBasic::Toggle() { Put(!Get()); }
+
 void rpp_driver::GpioBasic::PullUp() { sdk_.gpio_pull_up(pin_); }
 
 void rpp_driver::GpioBasic::PullDown() { sdk_.gpio_pull_down(pin_); }

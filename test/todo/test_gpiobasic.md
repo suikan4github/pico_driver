@@ -6,6 +6,12 @@
 - [x] Make it success. 
 - [x] Remove the duplication. 
 
+## GpioBasic::DisablePulls
+- [x] Implement member function . 
+- [x] Create test case to fail. 
+- [x] Make it success. 
+- [x] Remove the duplication. 
+
 ## GpioBasic::PullDown
 - [x] Implement member function . 
 - [x] Create test case to fail. 

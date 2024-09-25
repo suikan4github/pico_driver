@@ -50,7 +50,7 @@ TEST(GpioBasic, ConstructorDeconstructor) {
 
 // -----------------------------------------------------------------
 //
-//                          Constructor and Deconstructor ()
+//                          Member functions.
 //
 // -----------------------------------------------------------------
 
@@ -86,6 +86,20 @@ TEST_F(GpioBasicTest, Put) {
   gpio_under_test_->Put(true);
   gpio_under_test_->Put(false);
 }  // TEST_F(GpioBasicTest, Put)
+
+TEST_F(GpioBasicTest, Toggle) {
+  using ::testing::InSequence;
+  using ::testing::Return;
+  {
+    InSequence dummy;
+    EXPECT_CALL(sdk_, gpio_get(gpio_pin_)).WillOnce(Return(true));
+    EXPECT_CALL(sdk_, gpio_put(gpio_pin_, false));
+    EXPECT_CALL(sdk_, gpio_get(gpio_pin_)).WillOnce(Return(false));
+    EXPECT_CALL(sdk_, gpio_put(gpio_pin_, true));
+  }
+  gpio_under_test_->Toggle();
+  gpio_under_test_->Toggle();
+}  // TEST_F(GpioBasicTest, Toggle)
 
 TEST_F(GpioBasicTest, Get) {
   using ::testing::InSequence;
