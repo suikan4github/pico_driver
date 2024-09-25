@@ -21,9 +21,19 @@ These classes are provided in this version.
 
 The newest copy of this project is found in the [GitHub repository](https://github.com/suikan4github/rpp_driver). 
 
+Run the following command to obtain this project from CLI:
+```sh
+git clone --recursive https://github.com/suikan4github/rpp_driver.git
+```
+
 ## How to obtain the sample programs
 
 The newest copy of the sample program project is found in the [GitHub repository](https://github.com/suikan4github/rpp_driver-sample). 
+
+Run the following command to obtain the sample from CLI:
+```sh
+git clone --recursive https://github.com/suikan4github/rpp_driver-sample.git
+```
 
 ## Sample codes
 You can obtain sample applications from [rpp-driver_sample](https://github.com/suikan4github/rpp_driver-sample) repository.
@@ -38,10 +48,11 @@ The installation of Ubuntu is :
 apt-get -y update
 apt-get -y install build-essential cmake ninja-build git doxygen
 apt-get -y install gcc-arm-none-eabi libnewlib-arm-none-eabi
+apt-get -y install doxygen graphviz
 ```
 
-## Building tests
-The sample program and I2S drivers are tested by GoogleTest and fff. Follow the procedure to build the test. 
+## Building the tests
+The driver classes are tested by GoogleTest and fff. Follow the procedure to build the tests. 
 
 From the repository root ( where this README.md stays), run the following commands. 
 ```sh
@@ -52,13 +63,16 @@ cmake --build build --config Debug --target all
 
 ## Building document
 An API document are provided by HTML files. 
-To obtain it, run doxygen at the project root ( where this README.md exists).
+To obtain it, run doxygen at the project root ( where the README.md exists).
 
 ```sh
 doxygen
 ```
 
-The documentation will be generated under html subdirectory. 
+The documentation will be generated under the docs/html/ subdirectory. 
 
 # License
 This project is provided under [MIT License](LICENSE). 
+
+# Copyright
+@author Seiichi Horie
