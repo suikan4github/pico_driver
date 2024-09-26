@@ -46,8 +46,7 @@ class Adau1361Lower {
    * deta sheet for details.
    */
   Adau1361Lower(::rpp_driver::I2cMasterInterface& controller,
-                unsigned int i2c_device_addr)
-      : i2c_(controller), device_addr_(i2c_device_addr) {};
+                unsigned int i2c_device_addr);
   Adau1361Lower() = delete;
   virtual ~Adau1361Lower() {}
   /**
@@ -225,7 +224,7 @@ class Adau1361Lower {
 class MockAdau1361Lower : public Adau1361Lower {
  public:
   explicit MockAdau1361Lower(::rpp_driver::I2cMasterInterface& controller)
-      : Adau1361Lower(controller, 31) {};
+      : Adau1361Lower(controller, 0x3A) {};
   MOCK_METHOD2(SendCommand, void(const uint8_t command[], int size));
   MOCK_METHOD2(SendCommandTable, void(const uint8_t table[][3], int rows));
   MOCK_METHOD0(IsI2CDeviceExisting, bool());

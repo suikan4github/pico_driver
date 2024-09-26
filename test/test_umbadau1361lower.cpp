@@ -7,7 +7,7 @@
 class UmbAdau1361LowerTest : public ::testing::Test {
  protected:
   virtual void SetUp() {
-    device_address_ = 17;  // 7bit I2C address
+    device_address_ = 0x39;  // 7bit I2C address
     codec_lower_ = new ::rpp_driver::UmbAdau1361Lower(i2c_, device_address_);
   }
 

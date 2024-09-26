@@ -1,5 +1,13 @@
 #test_i2cmaster TDD
 
+## Adau1361Lower::Constructor
+- [x] Add assertion to the I2C address. 
+- [x] Create death test to fail. 
+- [x] Make it success. 
+- [x] Remove the duplication. 
+
+## Old test
+
 - [x] Create Adau1361LowerTest.ConfigureSingalPath()to fail.
 - [x] Make it success.
 - [x] Remove the duplication.

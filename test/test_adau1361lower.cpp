@@ -12,10 +12,11 @@ class CutAdau1361Lower : public ::rpp_driver::Adau1361Lower {
       : ::rpp_driver::Adau1361Lower(controller, i2c_device_addr) {};
   virtual void ConfigureSignalPath() {};
 };
+
 class Adau1361LowerTest : public ::testing::Test {
  protected:
   virtual void SetUp() {
-    device_address_ = 31;  // 7bit I2C address
+    device_address_ = 0x38;  // 7bit I2C address
     codec_lower_ = new ::CutAdau1361Lower(i2c_, device_address_);
   }
 
@@ -27,6 +28,40 @@ class Adau1361LowerTest : public ::testing::Test {
 };
 
 typedef Adau1361LowerTest Adau1361LowerDeathTest;
+
+// -----------------------------------------------------------------
+//
+//                          Constructor Death Test
+//
+// -----------------------------------------------------------------
+
+TEST(Adau1361LowerConstructorDeathTest, lower_address) {
+  unsigned int device_address;  // 7bit I2C address
+  ::rpp_driver::MockI2cMasterInterface i2c;
+  ::rpp_driver::Adau1361Lower* codec_lower;
+
+  device_address = 0x37;  // 7bit I2C address
+  // check the assertion for bad I2C address for Analog Device ADAU1361.
+  // See data sheet for details.
+#ifndef NDEBUG
+  ASSERT_DEATH(codec_lower = new ::CutAdau1361Lower(i2c, device_address);
+               , "ADAU1361 I2C Address must be higher than 0x37.");
+#endif
+}
+
+TEST(Adau1361LowerConstructorDeathTest, higher_address) {
+  unsigned int device_address;  // 7bit I2C address
+  ::rpp_driver::MockI2cMasterInterface i2c;
+  ::rpp_driver::Adau1361Lower* codec_lower;
+
+  device_address = 0x3C;  // 7bit I2C address
+  // check the assertion for bad I2C address for Analog Device ADAU1361.
+  // See data sheet for details.
+#ifndef NDEBUG
+  ASSERT_DEATH(codec_lower = new ::CutAdau1361Lower(i2c, device_address);
+               , "ADAU1361 I2C Address must be lower than 0x3C.");
+#endif
+}
 
 // -----------------------------------------------------------------
 //

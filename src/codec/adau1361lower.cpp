@@ -4,6 +4,15 @@
 
 #include <algorithm>
 
+rpp_driver::Adau1361Lower::Adau1361Lower(
+    ::rpp_driver::I2cMasterInterface& controller, unsigned int i2c_device_addr)
+    : i2c_(controller), device_addr_(i2c_device_addr) {
+  assert((0x3C > device_addr_) &&
+         "ADAU1361 I2C Address must be lower than 0x3C.");
+  assert((device_addr_ > 0x37) &&
+         "ADAU1361 I2C Address must be higher than 0x37.");
+}
+
 /*
  *  Send single command
  *  table : command table :
