@@ -26,6 +26,17 @@ typedef int i2c_inst_t;
 #include "sdkwrapper.hpp"
 
 namespace rpp_driver {
+/**
+ * @brief I2C Master controller class.
+ * @details
+ * This class provides a set of easy to use member function to control the I2C
+ * master controller. Everything operation in this class is polling based and
+ * blocking.
+ *
+ * The ReadBlocking() and WriteBlocking() functions has nostop parameter. To use
+ * the restart condition, set this parameter to true.
+ *
+ */
 class I2cMaster : public I2cMasterInterface {
  public:
   /**
