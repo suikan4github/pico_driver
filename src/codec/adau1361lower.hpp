@@ -23,7 +23,15 @@ namespace rpp_driver {
  * @details
  * This class is helper class for the Adau1361 class.
  *
- * To initialize codec, follow the sequence from the Adau1361 class.
+ * The ConfigureSignalPath() member function is a pure virtual
+ * method. This function is depend on the signal routing of
+ * the CODEC and it is depend on the circuit board.
+ * User must derive a subclass of this class to implement
+ * that function for his/her board.
+ *
+ * As an example of sub-class, UmbAdau1361Lower class is provided.
+ *
+ * To initialize codec, follow the sequence. This is done by the Adau1361 class.
  * @li InitializeCore()
  * @li DisablePLL()
  * @li ConfigurePll()
@@ -33,8 +41,10 @@ namespace rpp_driver {
  * @li InitializeRegisters()
  * @li ConfigureSignalPath()
  *
- * After these initialization, the ADC, DAC, Mixer and ISC are alive.
- * Note, all volumes are muted.
+ * After these initialization, the ADC, DAC, Mixer
+ * and signals by the I2S protocols are alive.
+ * All volumes are muted.
+ *
  */
 class Adau1361Lower {
  public:

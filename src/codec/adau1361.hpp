@@ -18,10 +18,28 @@ namespace rpp_driver {
 /**
  * \brief Analog Device ADAU1361A audio codec control class.
  * \details
- * Control the ADAU1361A through the lower level controller class.
- * This lower level controller class is given through the adau1361_lower
- * parameter of the constructor.
+ * Control the ADAU1361A through the lower level controller class
+ * for example UmbAdau1361Lower.
+ * Such the lower level controller variable is passed through the
+ * adau1361_lower parameter of the constructor.
  *
+ * The following is an example code to create an Adau1361 variable.
+ * ```
+  ::rpp_driver::I2cMaster i2c(sdk,          // Inject SDK Dependency.
+                              *i2c1,        // I2C controller to use.
+                              kI2cClock,    // I2C Clock [Hz]
+                              kI2cScl_pin,  // GPIO pin for SCL
+                              kI2cSdaPin);  // GPIO pin # for SDA
+
+  ::rpp_driver::UmbAdau1361Lower codec_lower(
+      i2c,                   // Inject I2C controller dependency.
+      kAdau1361I2cAddress);  // I2C address of UMB-ADAU1361-A
+
+  ::rpp_driver::Adau1361 codec(
+      kFs,           // Sampling frequency[Hz].
+      kMClock,       // Master clock of UMB-ADAU1361-A[Hz].
+      codec_lower);  // Inject Codec lower part dependency.
+ * ```
  */
 class Adau1361 {
  public:
