@@ -19,11 +19,11 @@ namespace rpp_driver {
 /**
  * @brief Duplex Slave I2S controller class.
  * @details
- * This class support the duplex communication of the I2S on the PIO port of the
- * RP2040/2350 SoC MCU.
+ * This class supports the duplex communication of the I2S on the PIO port of
+ * the RP2040/2350 SoC MCU.
  *
  * The timing signal (BCLK and WS) of the I2S must be provided from the external
- * device. This class support up to 192kHz Fs if the MCU system clock is higher
+ * device. This class supports up to 192kHz Fs if the MCU system clock is higher
  * than 120MHz.
  *
  * The I2S pins can be mapped on the GPIO. This mapping is based on the
@@ -36,16 +36,24 @@ namespace rpp_driver {
  * -# BCLK
  * -# WS
  *
+ * For example, let's assume SDTOUT is GPIO 15. Then, SDIN, BCLK and WS are
+ * GPIO 16, 17 and 18 respectively.
+ *
  * To start and stop the I2S transfer, call the Start() and the Stop() member
  * functions respectively.
  *
  * The audio sample in and out are through the GetFifoBlocking() and the
- * PutFifoBlocking() member function, respectively. These are blocking function.
- * That mean, program will wait until the data is ready, or FIFO has room for
- * data.
+ * PutFifoBlocking() member functions, respectively. These are blocking
+ * function. That mean, program will wait until the data is ready, or FIFO has
+ * room for data.
  *
  * This class assumes polling based data transfer instead of interrupt / DMA
  * based data transfer.
+ *
+ * Typically, program process the signal obtained from GetFifoBLock() and
+ * output to PutFifoBLock(). To provide the high quality processing,
+ * The first GetFifoBlocking() call should be as soon as possible, after
+ * calling start() function.
  */
 class I2sSlaveDuplex {
  private:

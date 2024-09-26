@@ -48,6 +48,8 @@ namespace rpp_driver {
  *
  * This wrapper class is convenient for the dependency injection to allow
  * the unit test.
+ *
+ * The mock of this class is declared in the same file with this class.
  */
 class SdkWrapper {
  public:

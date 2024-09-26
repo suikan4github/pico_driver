@@ -25,6 +25,9 @@ namespace rpp_driver {
 /**
  * @brief Basic GPIO driver class.
  * @details
+ * This class provides the handy way to control GPIO. To use
+ * this class, pass a GPIO pin# through the constructor.
+ * So, this class initialize that pin in the constructor.
  */
 class GpioBasic {
  public:
