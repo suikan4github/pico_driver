@@ -173,8 +173,7 @@ class Adau1361Lower {
    *   Other input line like aux are not killed. To kill it, user have to mute
    * them explicitly.
    */
-  virtual void SetLineInputGain(float left_gain, float right_gain,
-                                bool mute = false);
+  virtual void SetLineInputGain(float left_gain, float right_gain, bool mute);
   /**
    * \brief Set the aux input gain and enable the relevant mixer.
    * \param left_gain Gain by dB. [6 .. -12], The gain value outside of the
@@ -186,8 +185,7 @@ class Adau1361Lower {
    *   Other input lines are not killed. To kill it, user have to mute them
    * explicitly.
    */
-  virtual void SetAuxInputGain(float left_gain, float right_gain,
-                               bool mute = false);
+  virtual void SetAuxInputGain(float left_gain, float right_gain, bool mute);
 
   /**
    * \brief Set the line output gain and enable the relevant mixer.
@@ -201,8 +199,7 @@ class Adau1361Lower {
    * explicitly.
    *
    */
-  virtual void SetLineOutputGain(float left_gain, float right_gain,
-                                 bool mute = false);
+  virtual void SetLineOutputGain(float left_gain, float right_gain, bool mute);
 
   /**
    * \brief Set the headphone output gain and enable the relevant mixer.
@@ -215,8 +212,7 @@ class Adau1361Lower {
    *   Other out line like line in are not killed. To kill it, user have to
    * mute them explicitly.
    */
-  virtual void SetHpOutputGain(float left_gain, float right_gain,
-                               bool mute = false);
+  virtual void SetHpOutputGain(float left_gain, float right_gain, bool mute);
 
  protected:
   ::rpp_driver::I2cMasterInterface& i2c_;
