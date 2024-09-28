@@ -33,6 +33,9 @@ namespace rpp_driver {
  * master controller. Everything operation in this class is polling based and
  * blocking.
  *
+ * The constructor and destructor initializes and finalize the given I2C
+ * controller, respectively.
+ *
  * The ReadBlocking() and WriteBlocking() functions has nostop parameter. To use
  * the restart condition, set this parameter to true.
  *
@@ -48,14 +51,14 @@ class I2cMaster : public I2cMasterInterface {
    * @param sda_pin GPIO pin #
    * @details
    * Receive the uninitialized I2C hardware by parameter i2c, and initialize
-   * it by sdk.i2c_init().
+   * it by ::rpp_driver::i2c_init().
    * And then, set given pins to I2C function, and pull them up.
    */
   I2cMaster(SdkWrapper &sdk, i2c_inst_t &i2c, uint clock_freq, uint scl_pin,
             uint sda_pin);
   I2cMaster() = delete;
   /**
-   * @brief deinit the I2C by sdk.i2c_deinit();
+   * @brief deinit the I2C by ::rpp_driver::i2c_deinit();
    */
   virtual ~I2cMaster();
   /**

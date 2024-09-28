@@ -65,7 +65,7 @@ class I2sSlaveDuplex {
  public:
   I2sSlaveDuplex(/* args */) = delete;
   /**
-   * @brief Construct a new Duplex Slave I 2 S object
+   * @brief Construct a new Duplex Slave I2S object
    *
    * @param sdk SDK wrapper class injection.
    * @param pio PIO to use.
@@ -74,22 +74,28 @@ class I2sSlaveDuplex {
    * The state machine number is not specified in this constructor.
    * Internally, the state machine will be allocate from the unused one.
    *
+   * This constructor just registers the given parameters and allocated state
+   * machine to the internal parameters. And then, claim the state machine. No
+   * other processing will be done.
    */
   I2sSlaveDuplex(::rpp_driver::SdkWrapper &sdk, PIO pio, uint pin_base);
   /**
-   * @brief Construct a new Duplex Slave I 2 S object
+   * @brief Construct a new Duplex Slave I2S object
    *
    * @param sdk SDK wrapper class injection.
    * @param pio PIO to use.
    * @param sm State machine to use.
    * @param pin_base The GPIO pin number of SDOUT signal.
    * @details
+   * This constructor just registers the given parameters to the internal
+   * parameters. And then, claim the state machine. No other processing will be
+   * done.
    */
   I2sSlaveDuplex(::rpp_driver::SdkWrapper &sdk, PIO pio, uint32_t sm,
                  uint pin_base);
 
   /**
-   * @brief Stop the state machine and make FIFO empty.
+   * @brief Unclaim the state machine. No actual processing.
    */
   ~I2sSlaveDuplex();
 

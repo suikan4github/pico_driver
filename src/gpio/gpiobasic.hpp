@@ -27,7 +27,8 @@ namespace rpp_driver {
  * @details
  * This class provides the handy way to control GPIO. To use
  * this class, pass a GPIO pin# through the constructor.
- * So, this class initialize that pin in the constructor.
+ * So, this class initialize and deinitialize that pin in the constructor and
+ * destructor, respectively.
  */
 class GpioBasic {
  public:
@@ -36,12 +37,12 @@ class GpioBasic {
    * @param pin GPIO pin number.
    * @details
    * Receive the GPIO pin.
-   * And then, init it as GPIO.
+   * And then, init it by ::rpp_driver::gpio_init().
    */
   GpioBasic(SdkWrapper &sdk, uint pin);
   GpioBasic() = delete;
   /**
-   * @brief deinit the I2C by sdk.i2c_deinit();
+   * @brief deinit the GPIO by ::rpp_driver::gpio_deinit();
    */
   virtual ~GpioBasic();
   /**

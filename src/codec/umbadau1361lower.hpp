@@ -18,10 +18,9 @@ namespace rpp_driver {
 /**
  * @brief lower part of the Adau1361 CODEC controller class.
  * @details
- * This is dedicated class for UMB-ADAU1361-A board.
- * All signal routings are configured for this board.
- *
- * http://dsps.shop-pro.jp/?pid=82798273
+ * This is dedicated class for
+ * [UMB-ADAU1361-A](http://dsps.shop-pro.jp/?pid=82798273) board. All signal
+ * routings are configured for this board.
  *
  */
 class UmbAdau1361Lower : public Adau1361Lower {

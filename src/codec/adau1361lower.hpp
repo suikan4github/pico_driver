@@ -27,9 +27,8 @@ namespace rpp_driver {
  * method. This function is depend on the signal routing of
  * the CODEC and it is depend on the circuit board.
  * User must derive a subclass of this class to implement
- * that function for his/her board.
- *
- * As an example of sub-class, UmbAdau1361Lower class is provided.
+ * that function for his/her board. As an example of sub-class, UmbAdau1361Lower
+ * class is provided.
  *
  * To initialize codec, follow the sequence. This is done by the Adau1361 class.
  * @li InitializeCore()
