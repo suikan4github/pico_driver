@@ -13,5 +13,5 @@ History of the project development
 ## [v1.0.0] 2024-09-28
 最初のリリース。
 
-[Unreleased]: https://github.com/suikan4github/PaleALE/compare/v1.0.0...develop
-[v1.0.0]: https://github.com/suikan4github/PaleALE/compare/v0.0.0...v1.0.0
+[Unreleased]: https://github.com/suikan4github/rpp_driver/compare/v1.0.0...develop
+[v1.0.0]: https://github.com/suikan4github/rpp_driver/compare/v0.0.0...v1.0.0
