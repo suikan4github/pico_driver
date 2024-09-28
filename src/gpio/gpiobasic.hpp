@@ -34,15 +34,16 @@ class GpioBasic {
  public:
   /**
    * @brief Initialize the given GPIO pin and setup the pins.
+   * @param sdk Sdk wrapper to inject the dependency.
    * @param pin GPIO pin number.
    * @details
    * Receive the GPIO pin.
-   * And then, init it by ::rpp_driver::gpio_init().
+   * And then, init it by SdkWrapper::gpio_init().
    */
   GpioBasic(SdkWrapper &sdk, uint pin);
   GpioBasic() = delete;
   /**
-   * @brief deinit the GPIO by ::rpp_driver::gpio_deinit();
+   * @brief deinit the GPIO by SdkWrapper::gpio_deinit();
    */
   virtual ~GpioBasic();
   /**

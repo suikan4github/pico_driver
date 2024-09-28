@@ -20,11 +20,17 @@
 // Alternative include and definition for Unix/Win32
 #include <stdint.h>
 #include <stdlib.h>
+/// @brief Alternate definition for Google Test build.
 typedef int i2c_inst_t;
+/// @brief Alternate definition for Google Test build.
 typedef int gpio_function_t;
+/// @brief Alternate definition for Google Test build.
 typedef unsigned int PIO;
+/// @brief Alternate definition for Google Test build.
 typedef unsigned int pio_sm_config;
+/// @brief Alternate definition for Google Test build.
 typedef unsigned int clock_handle_t;
+/// @brief Alternate definition for Google Test build.
 typedef unsigned int pio_program_t;
 #ifdef _MSC_VER
 typedef unsigned int uint;
