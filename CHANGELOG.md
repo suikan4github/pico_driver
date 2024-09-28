@@ -7,6 +7,7 @@ History of the project development
 ### Deprecated
 ### Removed
 ### Fixed
+- [Issue #3](https://github.com/suikan4github/rpp_driver/issues/3) Doxygen warning message. 
 ### Security
 ### Known Issue
 
