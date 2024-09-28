@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['_7eduplexslavei2s_0',['~DuplexSlaveI2s',['../classrpp__driver_1_1DuplexSlaveI2s.html#a525780f9ee0b298ed4ccbcdad0ffbd19',1,'rpp_driver::DuplexSlaveI2s']]],
-  ['_7egpiobasic_1',['~GpioBasic',['../classrpp__driver_1_1GpioBasic.html#ac259d09d3332f9e0786dc9d520bb671c',1,'rpp_driver::GpioBasic']]],
-  ['_7ei2cmaster_2',['~I2cMaster',['../classrpp__driver_1_1I2cMaster.html#a4692d6cd2adf7a9d2be0c993daf12f02',1,'rpp_driver::I2cMaster']]]
+  ['waitplllock_0',['WaitPllLock',['../classrpp__driver_1_1Adau1361Lower.html#a3780665b4fca53d1a3041ae87e6fbec2',1,'rpp_driver::Adau1361Lower']]],
+  ['writeblocking_1',['WriteBlocking',['../classrpp__driver_1_1I2cMaster.html#a5a3f041e049af4f91887c5f4767680a7',1,'rpp_driver::I2cMaster::WriteBlocking()'],['../classrpp__driver_1_1I2cMasterInterface.html#a2dc0fd87e72757a12589b0f014f0b6f0',1,'rpp_driver::I2cMasterInterface::WriteBlocking()']]]
 ];

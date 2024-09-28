@@ -91,7 +91,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a37f7e209e466a1346a218ba7ad8b7c5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac259d09d3332f9e0786dc9d520bb671c"><td class="memItemLeft" align="right" valign="top"><a id="ac259d09d3332f9e0786dc9d520bb671c" name="ac259d09d3332f9e0786dc9d520bb671c"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~GpioBasic</b> ()</td></tr>
-<tr class="memdesc:ac259d09d3332f9e0786dc9d520bb671c"><td class="mdescLeft">&#160;</td><td class="mdescRight">deinit the I2C by sdk.i2c_deinit(); <br /></td></tr>
+<tr class="memdesc:ac259d09d3332f9e0786dc9d520bb671c"><td class="mdescLeft">&#160;</td><td class="mdescRight">deinit the GPIO by ::rpp_driver::gpio_deinit(); <br /></td></tr>
 <tr class="separator:ac259d09d3332f9e0786dc9d520bb671c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad3ef905dbbc90885b0f9eca803fef20"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrpp__driver_1_1GpioBasic.html#aad3ef905dbbc90885b0f9eca803fef20">SetDir</a> (bool out)</td></tr>
 <tr class="memdesc:aad3ef905dbbc90885b0f9eca803fef20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a single GPIO direction.  <br /></td></tr>
@@ -103,24 +103,26 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~GpioBasic</b> ()<
 <tr class="memdesc:ae3c7f17f1b7b3332b9a8c4f628ae70ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Drive a single GPIO high/low.  <br /></td></tr>
 <tr class="separator:ae3c7f17f1b7b3332b9a8c4f628ae70ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1ea255d1dcc36731e5a4121f0c0ae49"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrpp__driver_1_1GpioBasic.html#af1ea255d1dcc36731e5a4121f0c0ae49">Get</a> ()</td></tr>
-<tr class="memdesc:af1ea255d1dcc36731e5a4121f0c0ae49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get state of a single This GPIO.  <br /></td></tr>
+<tr class="memdesc:af1ea255d1dcc36731e5a4121f0c0ae49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get state of a single GPIO.  <br /></td></tr>
 <tr class="separator:af1ea255d1dcc36731e5a4121f0c0ae49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaeb950f18a6ba789d352fe53692a2dca"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrpp__driver_1_1GpioBasic.html#aaeb950f18a6ba789d352fe53692a2dca">Toggle</a> ()</td></tr>
+<tr class="memdesc:aaeb950f18a6ba789d352fe53692a2dca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Toggle the output level of this GPIO.  <br /></td></tr>
+<tr class="separator:aaeb950f18a6ba789d352fe53692a2dca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a535e73d3c46e99f28e35c2cde31610c5"><td class="memItemLeft" align="right" valign="top"><a id="a535e73d3c46e99f28e35c2cde31610c5" name="a535e73d3c46e99f28e35c2cde31610c5"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>PullUp</b> ()</td></tr>
-<tr class="memdesc:a535e73d3c46e99f28e35c2cde31610c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set This GPIO to be pulled up. <br /></td></tr>
+<tr class="memdesc:a535e73d3c46e99f28e35c2cde31610c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set this GPIO to be pulled up. . <br /></td></tr>
 <tr class="separator:a535e73d3c46e99f28e35c2cde31610c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac867b6a791856655ac67e411b3d8c545"><td class="memItemLeft" align="right" valign="top"><a id="ac867b6a791856655ac67e411b3d8c545" name="ac867b6a791856655ac67e411b3d8c545"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>PullDown</b> ()</td></tr>
-<tr class="memdesc:ac867b6a791856655ac67e411b3d8c545"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set This GPIO to be pulled down. <br /></td></tr>
+<tr class="memdesc:ac867b6a791856655ac67e411b3d8c545"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set this GPIO to be pulled down. <br /></td></tr>
 <tr class="separator:ac867b6a791856655ac67e411b3d8c545"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a17242a4638a7605b7e5f93ad1ac3aaad"><td class="memItemLeft" align="right" valign="top"><a id="a17242a4638a7605b7e5f93ad1ac3aaad" name="a17242a4638a7605b7e5f93ad1ac3aaad"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>DisablePulls</b> ()</td></tr>
-<tr class="memdesc:a17242a4638a7605b7e5f93ad1ac3aaad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable pulls on This GPIO. <br /></td></tr>
+<tr class="memitem:a17242a4638a7605b7e5f93ad1ac3aaad"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrpp__driver_1_1GpioBasic.html#a17242a4638a7605b7e5f93ad1ac3aaad">DisablePulls</a> ()</td></tr>
+<tr class="memdesc:a17242a4638a7605b7e5f93ad1ac3aaad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unset pulls on this GPIO.  <br /></td></tr>
 <tr class="separator:a17242a4638a7605b7e5f93ad1ac3aaad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Basic GPIO driver class. </p>
-<p>This class provide very basic operation of GPIO. </p>
+<p>This class provides the handy way to control GPIO. To use this class, pass a GPIO pin# through the constructor. So, this class initialize and deinitialize that pin in the constructor and destructor, respectively. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a37f7e209e466a1346a218ba7ad8b7c5f" name="a37f7e209e466a1346a218ba7ad8b7c5f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a37f7e209e466a1346a218ba7ad8b7c5f">&#9670;&#160;</a></span>GpioBasic()</h2>
@@ -155,11 +157,38 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>DisablePulls<
   </table>
   </dd>
 </dl>
-<p>Receive the GPIO pin. And then, init it as GPIO. </p>
+<p>Receive the GPIO pin. And then, init it by ::rpp_driver::gpio_init(). </p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a17242a4638a7605b7e5f93ad1ac3aaad" name="a17242a4638a7605b7e5f93ad1ac3aaad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17242a4638a7605b7e5f93ad1ac3aaad">&#9670;&#160;</a></span>DisablePulls()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void rpp_driver::GpioBasic::DisablePulls </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Unset pulls on this GPIO. </p>
+
+</div>
+</div>
 <a id="af1ea255d1dcc36731e5a4121f0c0ae49" name="af1ea255d1dcc36731e5a4121f0c0ae49"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af1ea255d1dcc36731e5a4121f0c0ae49">&#9670;&#160;</a></span>Get()</h2>
 
@@ -183,8 +212,8 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>DisablePulls<
 </table>
 </div><div class="memdoc">
 
-<p>Get state of a single This GPIO. </p>
-<dl class="section return"><dt>Returns</dt><dd>Current state of the GPIO. 0 for low, non-zero for high </dd></dl>
+<p>Get state of a single GPIO. </p>
+<dl class="section return"><dt>Returns</dt><dd>Current state of this GPIO. 0 for low, non-zero for high </dd></dl>
 
 </div>
 </div>
@@ -283,10 +312,38 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>DisablePulls<
 <p>Enable GPIO input. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">enabled</td><td>true to enable input on This GPIO. </td></tr>
+    <tr><td class="paramname">enabled</td><td>true to enable input on this GPIO. </td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="aaeb950f18a6ba789d352fe53692a2dca" name="aaeb950f18a6ba789d352fe53692a2dca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaeb950f18a6ba789d352fe53692a2dca">&#9670;&#160;</a></span>Toggle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void rpp_driver::GpioBasic::Toggle </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Toggle the output level of this GPIO. </p>
+<p>If the current level is "H", set it to "L". If the current level is "L", set it to "H". </p>
 
 </div>
 </div>

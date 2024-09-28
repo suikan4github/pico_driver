@@ -1,8 +1,8 @@
 var searchData=
 [
   ['get_0',['Get',['../classrpp__driver_1_1GpioBasic.html#af1ea255d1dcc36731e5a4121f0c0ae49',1,'rpp_driver::GpioBasic']]],
-  ['getfifoblocking_1',['GetFifoBlocking',['../classrpp__driver_1_1DuplexSlaveI2s.html#af3d58baaac410914ac20e04a87304f53',1,'rpp_driver::DuplexSlaveI2s']]],
-  ['getstatemachine_2',['GetStateMachine',['../classrpp__driver_1_1DuplexSlaveI2s.html#aba17087b541419ffb47f8d98900ab9a3',1,'rpp_driver::DuplexSlaveI2s']]],
+  ['getfifoblocking_1',['GetFifoBlocking',['../classrpp__driver_1_1I2sSlaveDuplex.html#aea6e82c5ab9506491e060f019c2c4cbb',1,'rpp_driver::I2sSlaveDuplex']]],
+  ['getstatemachine_2',['GetStateMachine',['../classrpp__driver_1_1I2sSlaveDuplex.html#a8dfdbe43cce231e08fd16357f50e9433',1,'rpp_driver::I2sSlaveDuplex']]],
   ['gpio_5fdeinit_3',['gpio_deinit',['../classrpp__driver_1_1SdkWrapper.html#aebc9f2ef8cddbf5982cdca73e7948b80',1,'rpp_driver::SdkWrapper']]],
   ['gpio_5fdisable_5fpulls_4',['gpio_disable_pulls',['../classrpp__driver_1_1SdkWrapper.html#ad0a665aa44a480626db930a5436a4e25',1,'rpp_driver::SdkWrapper']]],
   ['gpio_5fget_5',['gpio_get',['../classrpp__driver_1_1SdkWrapper.html#a73be6df80cd4e0cdf5694c9815526dd7',1,'rpp_driver::SdkWrapper']]],

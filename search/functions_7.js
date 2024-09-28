@@ -17,5 +17,5 @@ var searchData=
   ['pulldown_14',['PullDown',['../classrpp__driver_1_1GpioBasic.html#ac867b6a791856655ac67e411b3d8c545',1,'rpp_driver::GpioBasic']]],
   ['pullup_15',['PullUp',['../classrpp__driver_1_1GpioBasic.html#a535e73d3c46e99f28e35c2cde31610c5',1,'rpp_driver::GpioBasic']]],
   ['put_16',['Put',['../classrpp__driver_1_1GpioBasic.html#ae3c7f17f1b7b3332b9a8c4f628ae70ab',1,'rpp_driver::GpioBasic']]],
-  ['putfifoblocking_17',['PutFifoBlocking',['../classrpp__driver_1_1DuplexSlaveI2s.html#a7cbc1d57e4a17f67bf6a9a70551d5c11',1,'rpp_driver::DuplexSlaveI2s']]]
+  ['putfifoblocking_17',['PutFifoBlocking',['../classrpp__driver_1_1I2sSlaveDuplex.html#adcd67704b2019c92ff56d1e183dc0ffa',1,'rpp_driver::I2sSlaveDuplex']]]
 ];

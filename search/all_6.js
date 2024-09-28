@@ -8,8 +8,9 @@ var searchData=
   ['i2cmaster_2ehpp_5',['i2cmaster.hpp',['../i2cmaster_8hpp.html',1,'']]],
   ['i2cmasterinterface_6',['I2cMasterInterface',['../classrpp__driver_1_1I2cMasterInterface.html',1,'rpp_driver']]],
   ['i2cmasterinterface_2ehpp_7',['i2cmasterinterface.hpp',['../i2cmasterinterface_8hpp.html',1,'']]],
-  ['initializecore_8',['InitializeCore',['../classrpp__driver_1_1Adau1361Lower.html#a1388254607bd7ee97f85ce5a593a3cf5',1,'rpp_driver::Adau1361Lower']]],
-  ['initializeregisters_9',['InitializeRegisters',['../classrpp__driver_1_1Adau1361Lower.html#a76f7d9d729e7c6732846ec1e8c1160a8',1,'rpp_driver::Adau1361Lower']]],
-  ['isdeviceexisting_10',['IsDeviceExisting',['../classrpp__driver_1_1I2cMaster.html#a22c937b592209db1de55b81df21d7a6f',1,'rpp_driver::I2cMaster::IsDeviceExisting()'],['../classrpp__driver_1_1I2cMasterInterface.html#a06dbf42cfbf32a8a278275dcda0c9389',1,'rpp_driver::I2cMasterInterface::IsDeviceExisting()']]],
-  ['isi2cdeviceexisting_11',['IsI2CDeviceExisting',['../classrpp__driver_1_1Adau1361Lower.html#a872f9b99042796c533c72b749929c064',1,'rpp_driver::Adau1361Lower']]]
+  ['i2sslaveduplex_8',['I2sSlaveDuplex',['../classrpp__driver_1_1I2sSlaveDuplex.html#a651e7f5c0d28dce810e8a13cf148d4b1',1,'rpp_driver::I2sSlaveDuplex::I2sSlaveDuplex(::rpp_driver::SdkWrapper &amp;sdk, PIO pio, uint pin_base)'],['../classrpp__driver_1_1I2sSlaveDuplex.html#a5e339ea483a3a2bd116c000d137b0493',1,'rpp_driver::I2sSlaveDuplex::I2sSlaveDuplex(::rpp_driver::SdkWrapper &amp;sdk, PIO pio, uint32_t sm, uint pin_base)'],['../classrpp__driver_1_1I2sSlaveDuplex.html',1,'rpp_driver::I2sSlaveDuplex']]],
+  ['initializecore_9',['InitializeCore',['../classrpp__driver_1_1Adau1361Lower.html#a1388254607bd7ee97f85ce5a593a3cf5',1,'rpp_driver::Adau1361Lower']]],
+  ['initializeregisters_10',['InitializeRegisters',['../classrpp__driver_1_1Adau1361Lower.html#a76f7d9d729e7c6732846ec1e8c1160a8',1,'rpp_driver::Adau1361Lower']]],
+  ['isdeviceexisting_11',['IsDeviceExisting',['../classrpp__driver_1_1I2cMaster.html#a22c937b592209db1de55b81df21d7a6f',1,'rpp_driver::I2cMaster::IsDeviceExisting()'],['../classrpp__driver_1_1I2cMasterInterface.html#a06dbf42cfbf32a8a278275dcda0c9389',1,'rpp_driver::I2cMasterInterface::IsDeviceExisting()']]],
+  ['isi2cdeviceexisting_12',['IsI2CDeviceExisting',['../classrpp__driver_1_1Adau1361Lower.html#a872f9b99042796c533c72b749929c064',1,'rpp_driver::Adau1361Lower']]]
 ];

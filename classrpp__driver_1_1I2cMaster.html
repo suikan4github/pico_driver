@@ -78,12 +78,17 @@ $(function() {
   <div class="headertitle"><div class="title">rpp_driver::I2cMaster Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>I2C Master controller class.  
+ <a href="classrpp__driver_1_1I2cMaster.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="i2cmaster_8hpp_source.html">i2cmaster.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for rpp_driver::I2cMaster:</div>
 <div class="dyncontent">
 <div class="center"><img src="classrpp__driver_1_1I2cMaster__inherit__graph.png" border="0" usemap="#arpp__driver_1_1I2cMaster_inherit__map" alt="Inheritance graph"/></div>
 <map name="arpp__driver_1_1I2cMaster_inherit__map" id="arpp__driver_1_1I2cMaster_inherit__map">
-<area shape="rect" title=" " alt="" coords="35,79,195,104"/>
+<area shape="rect" title="I2C Master controller class." alt="" coords="35,79,195,104"/>
 <area shape="rect" href="classrpp__driver_1_1I2cMasterInterface.html" title="Interface type to allow the GoogleTest without depending to RasPi." alt="" coords="5,5,224,31"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
@@ -92,7 +97,7 @@ Collaboration diagram for rpp_driver::I2cMaster:</div>
 <div class="dyncontent">
 <div class="center"><img src="classrpp__driver_1_1I2cMaster__coll__graph.png" border="0" usemap="#arpp__driver_1_1I2cMaster_coll__map" alt="Collaboration graph"/></div>
 <map name="arpp__driver_1_1I2cMaster_coll__map" id="arpp__driver_1_1I2cMaster_coll__map">
-<area shape="rect" title=" " alt="" coords="35,79,195,104"/>
+<area shape="rect" title="I2C Master controller class." alt="" coords="35,79,195,104"/>
 <area shape="rect" href="classrpp__driver_1_1I2cMasterInterface.html" title="Interface type to allow the GoogleTest without depending to RasPi." alt="" coords="5,5,224,31"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
@@ -104,7 +109,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a66c0a249587e7193280e56747b18fe41"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4692d6cd2adf7a9d2be0c993daf12f02"><td class="memItemLeft" align="right" valign="top"><a id="a4692d6cd2adf7a9d2be0c993daf12f02" name="a4692d6cd2adf7a9d2be0c993daf12f02"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~I2cMaster</b> ()</td></tr>
-<tr class="memdesc:a4692d6cd2adf7a9d2be0c993daf12f02"><td class="mdescLeft">&#160;</td><td class="mdescRight">deinit the I2C by sdk.i2c_deinit(); <br /></td></tr>
+<tr class="memdesc:a4692d6cd2adf7a9d2be0c993daf12f02"><td class="mdescLeft">&#160;</td><td class="mdescRight">deinit the I2C by ::rpp_driver::i2c_deinit(); <br /></td></tr>
 <tr class="separator:a4692d6cd2adf7a9d2be0c993daf12f02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c756b741f86e06f0377f1f874ca4d7b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrpp__driver_1_1I2cMaster.html#a3c756b741f86e06f0377f1f874ca4d7b">ReadBlocking</a> (uint8_t addr, uint8_t *dst, size_t len, bool nostop) override</td></tr>
 <tr class="memdesc:a3c756b741f86e06f0377f1f874ca4d7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempt to read specified number of bytes from address, blocking.  <br /></td></tr>
@@ -125,7 +130,12 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~I2cMaster</b> ()<
 <tr class="memdesc:a06dbf42cfbf32a8a278275dcda0c9389"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check wether device at specified I2C address exists or not.  <br /></td></tr>
 <tr class="separator:a06dbf42cfbf32a8a278275dcda0c9389"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>I2C Master controller class. </p>
+<p>This class provides a set of easy to use member function to control the I2C master controller. Everything operation in this class is polling based and blocking.</p>
+<p>The constructor and destructor initializes and finalize the given I2C controller, respectively.</p>
+<p>The <a class="el" href="classrpp__driver_1_1I2cMaster.html#a3c756b741f86e06f0377f1f874ca4d7b" title="Attempt to read specified number of bytes from address, blocking.">ReadBlocking()</a> and <a class="el" href="classrpp__driver_1_1I2cMaster.html#a5a3f041e049af4f91887c5f4767680a7" title="Attempt to write specified number of bytes to address, blocking.">WriteBlocking()</a> functions has nostop parameter. To use the restart condition, set this parameter to true. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a66c0a249587e7193280e56747b18fe41" name="a66c0a249587e7193280e56747b18fe41"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a66c0a249587e7193280e56747b18fe41">&#9670;&#160;</a></span>I2cMaster()</h2>
 
@@ -181,7 +191,7 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~I2cMaster</b> ()<
   </table>
   </dd>
 </dl>
-<p>Receive the uninitialized I2C hardware by parameter i2c, and initialize it by sdk.i2c_init(). And then, set given pins to I2C function, and pull them up. </p>
+<p>Receive the uninitialized I2C hardware by parameter i2c, and initialize it by ::rpp_driver::i2c_init(). And then, set given pins to I2C function, and pull them up. </p>
 
 </div>
 </div>
