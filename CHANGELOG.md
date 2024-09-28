@@ -10,8 +10,8 @@ History of the project development
 ### Security
 ### Known Issue
 
-## [v1.0.0] 2024-09-28
-First release. 
+## [v0.9.0] 2024-09-28
+Pre-release version. 
 
-[Unreleased]: https://github.com/suikan4github/rpp_driver/compare/v1.0.0...develop
-[v1.0.0]: https://github.com/suikan4github/rpp_driver/compare/v0.0.0...v1.0.0
+[Unreleased]: https://github.com/suikan4github/rpp_driver/compare/v0.9.0...develop
+[v0.9.0]: https://github.com/suikan4github/rpp_driver/compare/v0.0.0...v0.9.0
