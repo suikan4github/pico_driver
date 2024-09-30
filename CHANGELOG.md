@@ -4,7 +4,8 @@ History of the project development
 ## [Unreleased] yyyy-mm-zz
 ### Added
 ### Changed
-- [Issue #4](https://github.com/suikan4github/rpp_driver/issues/4) Doxygen warning  Add gcov support for x86 build. 
+- [Issue #4](https://github.com/suikan4github/rpp_driver/issues/4) Add gcov support for x86 build. 
+- [Issue #5](https://github.com/suikan4github/rpp_driver/issues/5) Migrate action from hand-made to marketplace.
 ### Deprecated
 ### Removed
 ### Fixed
