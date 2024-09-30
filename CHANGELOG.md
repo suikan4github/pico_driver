@@ -4,6 +4,7 @@ History of the project development
 ## [Unreleased] yyyy-mm-zz
 ### Added
 ### Changed
+- [Issue #4](https://github.com/suikan4github/rpp_driver/issues/4) Doxygen warning  Add gcov support for x86 build. 
 ### Deprecated
 ### Removed
 ### Fixed
