@@ -13,6 +13,8 @@ add_executable(${PROJECT_NAME} ${SOURCES})
                             GTest::gmock_main
                             rpp_driver  
                             )
+    target_link_options(${PROJECT_NAME}
+                            PRIVATE --coverage)
 
 include(GoogleTest)
 gtest_discover_tests(${PROJECT_NAME})
