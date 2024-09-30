@@ -69,6 +69,7 @@ jobs:
         uses: threeal/ctest-action@v1.1.0
 
       - name: Check Test Coverage
+        if:  ${{matrix.compiler == 'gcc' && matrix.build == 'Debug'}}
         uses: threeal/gcovr-action@v1.1.0
         with:
           coveralls-send: true
