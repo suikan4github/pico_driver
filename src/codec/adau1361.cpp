@@ -5,6 +5,10 @@
  *      Author: Seiichi "Suikan" Horie
  */
 
+// GCC/Clang : Promote the switch-enum warning to error.
+// MSVC : ignored.
+#pragma GCC diagnostic error "-Wswitch-enum"
+
 #include "adau1361.hpp"
 
 #include <assert.h>
@@ -94,9 +98,6 @@ void ::rpp_driver::Adau1361::SetGain(CodecChannel channel, float left_gain,
       adau1361_lower_.SetHpOutputGain(hp_output_left_gain_,
                                       hp_output_right_gain_, hp_output_mute_);
       break;
-    default:
-      assert(false);
-      break;
   }
   CODEC_SYSLOG("Leave.")
 }
@@ -129,9 +130,6 @@ void ::rpp_driver::Adau1361::Mute(CodecChannel channel, bool mute) {
       hp_output_mute_ = mute;
       adau1361_lower_.SetHpOutputGain(hp_output_left_gain_,
                                       hp_output_right_gain_, hp_output_mute_);
-      break;
-    default:
-      assert(false);
       break;
   }
   CODEC_SYSLOG("Leave.")
