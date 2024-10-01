@@ -6,6 +6,8 @@ History of the project development
 ### Changed
 - [Issue #4](https://github.com/suikan4github/rpp_driver/issues/4) Add gcov support for x86 build. 
 - [Issue #5](https://github.com/suikan4github/rpp_driver/issues/5) Migrate action from hand-made to marketplace.
+- [Issue #8](https://github.com/suikan4github/rpp_driver/issues/8)  Remove duplicated assertions in the adau1361lower.cpp.
+
 ### Deprecated
 ### Removed
 ### Fixed
