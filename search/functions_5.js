@@ -1,7 +1,7 @@
 var searchData=
 [
   ['i2c_5fdeinit_0',['i2c_deinit',['../classrpp__driver_1_1SdkWrapper.html#a50e8e56d2c6c9c2fed24b5db4c8013ce',1,'rpp_driver::SdkWrapper']]],
-  ['i2c_5finit_1',['i2c_init',['../classrpp__driver_1_1SdkWrapper.html#a78164f23f0117a48f3fe3560a4a8e143',1,'rpp_driver::SdkWrapper']]],
+  ['i2c_5finit_1',['i2c_init',['../classrpp__driver_1_1SdkWrapper.html#a7c74dc117f1ad5e003754d3517770095',1,'rpp_driver::SdkWrapper']]],
   ['i2c_5fread_5fblocking_2',['i2c_read_blocking',['../classrpp__driver_1_1SdkWrapper.html#a78b739149779e45191f79e5b8e19d7d7',1,'rpp_driver::SdkWrapper']]],
   ['i2c_5fwrite_5fblocking_3',['i2c_write_blocking',['../classrpp__driver_1_1SdkWrapper.html#aeaa2af2b1c01d8d4a0b57af89f67c892',1,'rpp_driver::SdkWrapper']]],
   ['i2cmaster_4',['I2cMaster',['../classrpp__driver_1_1I2cMaster.html#a66c0a249587e7193280e56747b18fe41',1,'rpp_driver::I2cMaster']]],

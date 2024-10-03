@@ -5,9 +5,12 @@ var indexSectionsWithContent =
   2: "r",
   3: "agisu",
   4: "acdegimprstuw~",
-  5: "c",
-  6: "ahl",
-  7: "r"
+  5: "di",
+  6: "cgipu",
+  7: "c",
+  8: "ahl",
+  9: "gp",
+  10: "r"
 };
 
 var indexSectionNames =
@@ -17,9 +20,12 @@ var indexSectionNames =
   2: "namespaces",
   3: "files",
   4: "functions",
-  5: "enums",
-  6: "enumvalues",
-  7: "pages"
+  5: "variables",
+  6: "typedefs",
+  7: "enums",
+  8: "enumvalues",
+  9: "defines",
+  10: "pages"
 };
 
 var indexSectionLabels =
@@ -29,8 +35,11 @@ var indexSectionLabels =
   2: "Namespaces",
   3: "Files",
   4: "Functions",
-  5: "Enumerations",
-  6: "Enumerator",
-  7: "Pages"
+  5: "Variables",
+  6: "Typedefs",
+  7: "Enumerations",
+  8: "Enumerator",
+  9: "Macros",
+  10: "Pages"
 };
 

@@ -104,13 +104,13 @@ Collaboration diagram for rpp_driver::I2cMaster:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a66c0a249587e7193280e56747b18fe41"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrpp__driver_1_1I2cMaster.html#a66c0a249587e7193280e56747b18fe41">I2cMaster</a> (<a class="el" href="classrpp__driver_1_1SdkWrapper.html">SdkWrapper</a> &amp;sdk, i2c_inst_t &amp;i2c, uint clock_freq, uint scl_pin, uint sda_pin)</td></tr>
+<tr class="memitem:a66c0a249587e7193280e56747b18fe41"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrpp__driver_1_1I2cMaster.html#a66c0a249587e7193280e56747b18fe41">I2cMaster</a> (<a class="el" href="classrpp__driver_1_1SdkWrapper.html">SdkWrapper</a> &amp;sdk, <a class="el" href="i2cmaster_8hpp.html#af33dfd74d7dac6bb417983efce85fcf8">i2c_inst_t</a> &amp;i2c, <a class="el" href="i2cmasterinterface_8hpp.html#a4d3943ddea65db7163a58e6c7e8df95a">uint</a> clock_freq, <a class="el" href="i2cmasterinterface_8hpp.html#a4d3943ddea65db7163a58e6c7e8df95a">uint</a> scl_pin, <a class="el" href="i2cmasterinterface_8hpp.html#a4d3943ddea65db7163a58e6c7e8df95a">uint</a> sda_pin)</td></tr>
 <tr class="memdesc:a66c0a249587e7193280e56747b18fe41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the given I2C port and setup the pins.  <br /></td></tr>
 <tr class="separator:a66c0a249587e7193280e56747b18fe41"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4692d6cd2adf7a9d2be0c993daf12f02"><td class="memItemLeft" align="right" valign="top"><a id="a4692d6cd2adf7a9d2be0c993daf12f02" name="a4692d6cd2adf7a9d2be0c993daf12f02"></a>
+<tr class="memitem:ac2b60dfbfa2f9a89085cf2aff709a432"><td class="memItemLeft" align="right" valign="top"><a id="ac2b60dfbfa2f9a89085cf2aff709a432" name="ac2b60dfbfa2f9a89085cf2aff709a432"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~I2cMaster</b> ()</td></tr>
-<tr class="memdesc:a4692d6cd2adf7a9d2be0c993daf12f02"><td class="mdescLeft">&#160;</td><td class="mdescRight">deinit the I2C by ::rpp_driver::i2c_deinit(); <br /></td></tr>
-<tr class="separator:a4692d6cd2adf7a9d2be0c993daf12f02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:ac2b60dfbfa2f9a89085cf2aff709a432"><td class="mdescLeft">&#160;</td><td class="mdescRight">deinit the I2C by <a class="el" href="classrpp__driver_1_1SdkWrapper.html#a50e8e56d2c6c9c2fed24b5db4c8013ce" title="Disable the I2C HW block.">SdkWrapper::i2c_deinit()</a>; <br /></td></tr>
+<tr class="separator:ac2b60dfbfa2f9a89085cf2aff709a432"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c756b741f86e06f0377f1f874ca4d7b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrpp__driver_1_1I2cMaster.html#a3c756b741f86e06f0377f1f874ca4d7b">ReadBlocking</a> (uint8_t addr, uint8_t *dst, size_t len, bool nostop) override</td></tr>
 <tr class="memdesc:a3c756b741f86e06f0377f1f874ca4d7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempt to read specified number of bytes from address, blocking.  <br /></td></tr>
 <tr class="separator:a3c756b741f86e06f0377f1f874ca4d7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -151,25 +151,25 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~I2cMaster</b> ()<
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">i2c_inst_t &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="i2cmaster_8hpp.html#af33dfd74d7dac6bb417983efce85fcf8">i2c_inst_t</a> &amp;&#160;</td>
           <td class="paramname"><em>i2c</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint&#160;</td>
+          <td class="paramtype"><a class="el" href="i2cmasterinterface_8hpp.html#a4d3943ddea65db7163a58e6c7e8df95a">uint</a>&#160;</td>
           <td class="paramname"><em>clock_freq</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint&#160;</td>
+          <td class="paramtype"><a class="el" href="i2cmasterinterface_8hpp.html#a4d3943ddea65db7163a58e6c7e8df95a">uint</a>&#160;</td>
           <td class="paramname"><em>scl_pin</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint&#160;</td>
+          <td class="paramtype"><a class="el" href="i2cmasterinterface_8hpp.html#a4d3943ddea65db7163a58e6c7e8df95a">uint</a>&#160;</td>
           <td class="paramname"><em>sda_pin</em>&#160;</td>
         </tr>
         <tr>
@@ -191,7 +191,7 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~I2cMaster</b> ()<
   </table>
   </dd>
 </dl>
-<p>Receive the uninitialized I2C hardware by parameter i2c, and initialize it by ::rpp_driver::i2c_init(). And then, set given pins to I2C function, and pull them up. </p>
+<p>Receive the uninitialized I2C hardware by parameter i2c, and initialize it by <a class="el" href="classrpp__driver_1_1SdkWrapper.html#a7c74dc117f1ad5e003754d3517770095" title="Initialise the I2C HW block.">SdkWrapper::i2c_init()</a>. And then, set given pins to I2C function, and pull them up. </p>
 
 </div>
 </div>
@@ -357,9 +357,8 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~I2cMaster</b> ()<
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/i2c/<a class="el" href="i2cmaster_8hpp_source.html">i2cmaster.hpp</a></li>
-<li>src/i2c/i2cmaster.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
