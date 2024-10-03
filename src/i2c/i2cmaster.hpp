@@ -16,9 +16,12 @@
 #if __has_include(<hardware/i2c.h>)
 #include "hardware/i2c.h"
 #else
-// Alternate definition for unit test.
+/// Alternate definition for unit test.
 typedef int i2c_inst_t;
+/// Alternate definition of the return value on error for Google Test build.
 #define PICO_ERROR_GENERIC -1
+/// Alternate definition of the return value on error for I2C function number
+/// for GPIO.
 #define GPIO_FUNC_I2C 11
 #endif  // __has_include(<hardware/i2c.h>)
 
@@ -51,14 +54,14 @@ class I2cMaster : public I2cMasterInterface {
    * @param sda_pin GPIO pin #
    * @details
    * Receive the uninitialized I2C hardware by parameter i2c, and initialize
-   * it by ::rpp_driver::i2c_init().
+   * it by SdkWrapper::i2c_init().
    * And then, set given pins to I2C function, and pull them up.
    */
   I2cMaster(SdkWrapper &sdk, i2c_inst_t &i2c, uint clock_freq, uint scl_pin,
             uint sda_pin);
   I2cMaster() = delete;
   /**
-   * @brief deinit the I2C by ::rpp_driver::i2c_deinit();
+   * @brief deinit the I2C by SdkWrapper::i2c_deinit();
    */
   virtual ~I2cMaster();
   /**

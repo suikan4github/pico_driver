@@ -223,7 +223,9 @@ class Adau1361Lower {
   virtual void SetHpOutputGain(float left_gain, float right_gain, bool mute);
 
  protected:
+  /// @brief Internal variable to hold the I2C controller variable.
   ::rpp_driver::I2cMasterInterface& i2c_;
+  /// @brief Internal variable to hold the I2C device address.
   const unsigned int device_addr_;
 };
 

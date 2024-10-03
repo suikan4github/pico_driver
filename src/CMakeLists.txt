@@ -5,6 +5,14 @@ cmake_minimum_required(VERSION 3.13)
 
 add_library(rpp_driver INTERFACE)
 
+# Win/Unix specific option. 
+if((${WIN32}) OR (${UNIX}))    
+        target_compile_options(rpp_driver
+                                    INTERFACE
+                                    --coverage
+                                    )
+endif()
+
 add_subdirectory(codec)
 add_subdirectory(i2c)
 add_subdirectory(gpio)

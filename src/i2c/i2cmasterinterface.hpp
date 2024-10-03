@@ -16,6 +16,7 @@
 #include <stdlib.h>
 
 #if !__has_include(<hardware/i2c.h>)
+/// @brief  Alternate definition of the uint for Google Test build.
 typedef unsigned uint;
 #endif
 

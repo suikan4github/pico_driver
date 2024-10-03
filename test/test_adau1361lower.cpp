@@ -1068,10 +1068,11 @@ TEST_F(Adau1361LowerDeathTest, ConfigurePll_wrong_fs) {
   // Test 27MHz master clock for Fs 48kHz series.
   {
     const unsigned int mclock = 8000000;
-    const unsigned int fs = 192000;
-    // check the assertion for bad mclock.
+    const unsigned int fs = 192000;  // FS 192kHz is not allowed.
+                                     // check the assertion for bad mclock.
 #ifndef NDEBUG
-    ASSERT_DEATH(codec_lower_->ConfigurePll(fs, mclock), "Bad Fs");
+    ASSERT_DEATH(codec_lower_->ConfigurePll(fs, mclock),
+                 "Wrong Fs");  // Have to assert.
 #endif
   }
 }  // ConfigurePll_wrong_fs
