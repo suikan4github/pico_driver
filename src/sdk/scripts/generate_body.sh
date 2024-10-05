@@ -10,12 +10,15 @@ MODULE_PREFIX=$1
 MODULE_NAME=$2
 MODULE="$MODULE_PREFIX"_"$MODULE_NAME"
 
+# Composit the source file path in the Raspberry Pi Pico SDK from the module prefix and module name. 
+# We assume PICO_SDK_PATH is correctly set. 
 TARGET="${PICO_SDK_PATH%/}/src/rp2_common/${MODULE_PREFIX}_${MODULE_NAME}/include/${MODULE_PREFIX}/${MODULE_NAME}.h"
 
+# Scratch pad files. 
 TEMPSRC=$(mktemp).h
 TEMPLIST=$(mktemp).h
 
-# We gather the prototype without ";" in the $TEMPLIST
+# We gather the prototype without ";" into the $TEMPLIST
 # 1. clang-format formats the input file. Prevent line feed at the middle of the line. 
 # 2. ctags extracts the function definition line only. 
 # 3. sed removes the funcion implementation after "{".
@@ -48,7 +51,7 @@ awk -v module="$MODULE" -f gen_apistub.awk < "$TEMPLIST"  > apistub.cpp
 awk  -f gen_impl.awk < "$TEMPLIST"  > sdkwrapper.cpp
 
 
-
+# Remove the scratch pad files. 
 trap 'rm -f "$TEMPSRC"' EXIT
 trap 'rm -f "$TEMPLIST"' EXIT
 
