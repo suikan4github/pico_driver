@@ -42,10 +42,10 @@ cp "$TEMPLIST"  debug.hpp
 sed -e 's/^/virtual /' < "$TEMPLIST" | sed -e 's/$/;/' > sdkwrapper.hpp
 
 # Generate the API stub
-awk -v module="$MODULE" -f apistub.awk < "$TEMPLIST"  > apistub.cpp
+awk -v module="$MODULE" -f gen_apistub.awk < "$TEMPLIST"  > apistub.cpp
 
 # Generate the class implementation
-awk  -f implementation.awk < "$TEMPLIST"  > sdkwrapper.cpp
+awk  -f gen_impl.awk < "$TEMPLIST"  > sdkwrapper.cpp
 
 
 
