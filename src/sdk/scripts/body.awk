@@ -1,1 +1,0 @@
-{ TMP=$1; $1=""; print TMP, "rpp_driver::SdkWrapper::", $0; print "{"; print "assert( false & \"Error message.\");"; print "}" }
