@@ -26,7 +26,7 @@ TEMPLIST=$(mktemp).h
 # 5. grep removes the lien with "__unused" which is not relevant to user. 
 # 6. awk removes the information fields from line. 
 # 7. sed removes attribute and modifire of the function header. 
-# 8. sed sed give space after "(" and before ")" for easy lexical analysis.
+# 8. sed sed give space before/after "(" and before ")" for easy lexical analysis.
 clang-format "$TARGET" --style="{ColumnLimit: 9999}" > "$TEMPSRC"
 ctags -x --c++-kinds=pf "$TEMPSRC"|\
 sed s/{.*$// | \
@@ -34,7 +34,7 @@ sed s/\;.*$// |\
 grep -v "__unused" |\
 awk '{$1="";$2="";$3="";$4="";print $0}'|\
 sed s/__attribute__\(\(always_inline\)\)//|sed s/static// | sed s/inline// | \
-sed -e 's/(/( /' | sed -e 's/)/ )/' \
+sed -e 's/(/ ( /' | sed -e 's/)/ )/' \
 > "$TEMPLIST"
 
 # for debug out.
@@ -44,12 +44,14 @@ cp "$TEMPLIST"  debug.hpp
 # add "virtual" and ";" to be a right function prototype. 
 sed -e 's/^/virtual /' < "$TEMPLIST" | sed -e 's/$/;/' > sdkwrapper.hpp
 
-# Generate the API stub
-awk -v module="$MODULE" -f gen_apistub.awk < "$TEMPLIST"  > apistub.cpp
-
 # Generate the class implementation
 awk  -f gen_impl.awk < "$TEMPLIST"  > sdkwrapper.cpp
 
+# Generate the API stub
+awk -v module="$MODULE" -f gen_apistub.awk < "$TEMPLIST"  > apistub.cpp
+
+# Generate the mock declaration
+awk  -f gen_mock.awk < "$TEMPLIST"  > mocksdkwrapper.hpp
 
 # Remove the scratch pad files. 
 trap 'rm -f "$TEMPSRC"' EXIT
