@@ -7,6 +7,7 @@ echo "" > sdkwrapper.cpp
 echo "" > mocksdkwrapper.hpp
 echo "" > fffsdkwrapper.hpp
 echo "" > apistub.c
+echo "" > debug.hpp
 
 # read FILE
 while read -r module name

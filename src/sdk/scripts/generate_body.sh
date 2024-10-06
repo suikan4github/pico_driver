@@ -39,8 +39,10 @@ sed -e 's/\(^.*\) +*\*\(.*(\)/\1\* \2/' | \
 sed -e 's/enum /enum_/' \
 > "$TEMPLIST"
 
+
+
 # for debug out.
-cp "$TEMPLIST"  debug.hpp
+cat "$TEMPLIST" >> debug.hpp
 
 # Generate the class delcaration. 
 # add "virtual" and ";" to be a right function prototype. 

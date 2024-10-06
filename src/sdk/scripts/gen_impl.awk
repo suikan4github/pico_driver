@@ -17,7 +17,7 @@
         print "return";
     } 
 # We call the C funciotn which has same name with the member function. 
-    print FUNCNAME $3;
+    print "::" FUNCNAME $3;
 # We don't need the "(" at the begining of line. 
     $3="";
 # We don't need the ")" at the end of line. 
