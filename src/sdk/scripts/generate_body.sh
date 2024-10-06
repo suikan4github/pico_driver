@@ -33,9 +33,10 @@ sed s/{.*$// | \
 sed s/\;.*$// |\
 grep -v "__unused" |\
 awk '{$1="";$2="";$3="";$4="";print $0}'|\
-sed s/__attribute__\(\(always_inline\)\)//|sed s/static// | sed s/inline// | \
+sed s/__attribute__\(\(always_inline\)\)//|sed s/static// | sed s/inline// | sed s/extern// | \
 sed -e 's/(/ ( /' | sed -e 's/)/ )/' | \
-sed -e 's/\(^.*\) +*\*\(.*(\)/\1\* \2/' \
+sed -e 's/\(^.*\) +*\*\(.*(\)/\1\* \2/' | \
+sed -e 's/enum /enum_/' \
 > "$TEMPLIST"
 
 # for debug out.
@@ -43,19 +44,19 @@ cp "$TEMPLIST"  debug.hpp
 
 # Generate the class delcaration. 
 # add "virtual" and ";" to be a right function prototype. 
-sed -e 's/^/virtual /' < "$TEMPLIST" | sed -e 's/$/;/' > sdkwrapper.hpp
+sed -e 's/^/virtual /' < "$TEMPLIST" | sed -e 's/$/;/' | sed -e 's/enum_/enum /' >> sdkwrapper.hpp
 
 # Generate the class implementation
-awk  -f gen_impl.awk < "$TEMPLIST"  > sdkwrapper.cpp
+awk  -f gen_impl.awk < "$TEMPLIST" | sed -e 's/enum_/enum /' > sdkwrapper.cpp
 
 # Generate the API stub
-awk -v module="$MODULE" -f gen_apistub.awk < "$TEMPLIST"  > apistub.cpp
+awk -v module="$MODULE" -f gen_apistub.awk < "$TEMPLIST" | sed -e 's/enum_/enum /' >> apistub.c
 
 # Generate the mock declaration
-awk  -f gen_mock.awk < "$TEMPLIST"  > mocksdkwrapper.hpp
+awk  -f gen_mock.awk < "$TEMPLIST" | sed -e 's/enum_/enum /' >> mocksdkwrapper.hpp
 
 # Generate the fff declaration
-awk  -f gen_fff.awk < "$TEMPLIST"  > fffsdkwrapper.hpp
+awk  -f gen_fff.awk < "$TEMPLIST" | sed -e 's/enum_/enum /' >> fffsdkwrapper.hpp
 
 # Remove the scratch pad files. 
 trap 'rm -f "$TEMPSRC"' EXIT
