@@ -34,7 +34,8 @@ sed s/\;.*$// |\
 grep -v "__unused" |\
 awk '{$1="";$2="";$3="";$4="";print $0}'|\
 sed s/__attribute__\(\(always_inline\)\)//|sed s/static// | sed s/inline// | \
-sed -e 's/(/ ( /' | sed -e 's/)/ )/' \
+sed -e 's/(/ ( /' | sed -e 's/)/ )/' | \
+sed -e 's/\(^.*\) +*\*\(.*(\)/\1\* \2/' \
 > "$TEMPLIST"
 
 # for debug out.
@@ -52,6 +53,9 @@ awk -v module="$MODULE" -f gen_apistub.awk < "$TEMPLIST"  > apistub.cpp
 
 # Generate the mock declaration
 awk  -f gen_mock.awk < "$TEMPLIST"  > mocksdkwrapper.hpp
+
+# Generate the fff declaration
+awk  -f gen_fff.awk < "$TEMPLIST"  > fffsdkwrapper.hpp
 
 # Remove the scratch pad files. 
 trap 'rm -f "$TEMPSRC"' EXIT
