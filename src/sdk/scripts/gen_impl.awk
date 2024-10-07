@@ -7,6 +7,12 @@
     $1=""; 
     $2 = "";
 # $0 :   dma_channel_hw_t *channel )
+
+# print out comment for the ease of read .
+    print "// --------------------------------------------------";
+# print out the function prototype for the SDK API.
+    print "extern \"C\" " RETTYPE,  FUNCNAME, $0 ";"; 
+
 # print out the function head. 
     print RETTYPE, "rpp_driver::SdkWrapper::", FUNCNAME, $0; 
 # print out the start of function body. 
