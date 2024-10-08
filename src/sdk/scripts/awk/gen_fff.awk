@@ -19,7 +19,7 @@ else
 # Remove the pointer identifyer and other modifier. 
 gsub(" \\*", "* ");
 for( i=NF; i>0; i--){
-    if (($i == "volatile" ) || ($i == "const") )
+    if (($i == "volatile" ) )
         $i = "";
 };
 

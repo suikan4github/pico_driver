@@ -26,17 +26,20 @@ TEMPLIST=$(mktemp).h
 # 5. grep removes the lien with "__unused" which is not relevant to user. 
 # 6. awk removes the information fields from line. 
 # 7. sed removes attribute and modifire of the function header. 
-# 8. sed sed give space before/after "(" and before ")" for easy lexical analysis.
+# 8. sed give space before/after "(" and before ")" for easy lexical analysis.
+# 9. sed concatenate enum to the following word to handle the type as 1 field in the awk.
+# 10. sed concatenate concat to the following word to handle the type as 1 field in the awk.
 clang-format "$TARGET" --style="{ColumnLimit: 9999}" > "$TEMPSRC"
 ctags -x --c++-kinds=pf "$TEMPSRC"|\
-sed s/{.*$// | \
+sed -e 's/{.*$//' | \
 sed s/\;.*$// |\
 grep -v "__unused" |\
 awk '{$1="";$2="";$3="";$4="";print $0}'|\
 sed s/__attribute__\(\(always_inline\)\)//|sed s/static// | sed s/inline// | sed s/extern// | \
 sed -e 's/(/ ( /' | sed -e 's/)/ )/' | \
 sed -e 's/\(^.*\) +*\*\(.*(\)/\1\* \2/' | \
-sed -e 's/enum /enum_/' \
+sed -e 's/enum /enum_/' | \
+sed -e 's/const /const_/' \
 > "$TEMPLIST"
 
 
@@ -49,19 +52,19 @@ echo "#include <../../${MODULE_PREFIX}_${MODULE_NAME}/include/${MODULE_PREFIX}/$
 
 # Generate the class delcaration. 
 # add "virtual" and ";" to be a right function prototype. 
-sed -e 's/^/virtual /' < "$TEMPLIST" | sed -e 's/$/;/' | sed -e 's/enum_/enum /' >> output/sdkwrapper.hpp
+sed -e 's/^/virtual /' < "$TEMPLIST" | sed -e 's/$/;/' | sed -e 's/enum_/enum /'  | sed -e 's/const_/const /' >> output/sdkwrapper.hpp
 
 # Generate the class implementation
-awk  -f awk/gen_impl.awk < "$TEMPLIST" | sed -e 's/enum_/enum /' >> output/sdkwrapper.cpp
+awk  -f awk/gen_impl.awk < "$TEMPLIST" | sed -e 's/enum_/enum /'  | sed -e 's/const_/const /' >> output/sdkwrapper.cpp
 
 # Generate the API stub
-awk -v module="$MODULE" -f awk/gen_apistub.awk < "$TEMPLIST" | sed -e 's/enum_/enum /' >> output/apistub.c
+awk -v module="$MODULE" -f awk/gen_apistub.awk < "$TEMPLIST" | sed -e 's/enum_/enum /'  | sed -e 's/const_/const /' >> output/apistub.c
 
 # Generate the mock declaration
-awk  -f awk/gen_mock.awk < "$TEMPLIST" | sed -e 's/enum_/enum /' >> output/mocksdkwrapper.hpp
+awk  -f awk/gen_mock.awk < "$TEMPLIST" | sed -e 's/enum_/enum /'  | sed -e 's/const_/const /' >> output/mocksdkwrapper.hpp
 
 # Generate the fff declaration
-awk  -f awk/gen_fff.awk < "$TEMPLIST" | sed -e 's/enum_/enum /' >> output/fffsdkwrapper.hpp
+awk  -f awk/gen_fff.awk < "$TEMPLIST" | sed -e 's/enum_/enum /'  | sed -e 's/const_/const /' >> output/fffsdkwrapper.hpp
 
 # Remove the scratch pad files. 
 trap 'rm -f "$TEMPSRC"' EXIT

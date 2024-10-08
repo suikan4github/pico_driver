@@ -31,7 +31,7 @@
 # Remove the pointer identifyer and other modifier. 
     gsub("*", "");
     for( i=NF; i>0; i--){
-        if (($i == "volatile" ) || ($i == "const") || ($i == "enum"))
+        if (($i == "volatile" ) )
             $i = "";
     };
 # $0 :   dma_channel_hw_t channel )
