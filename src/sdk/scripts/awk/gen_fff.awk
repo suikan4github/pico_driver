@@ -31,6 +31,7 @@ numparam=split($0, parameters);
 # out put the sequcen of the type. 
 for (i=1; i<=numparam; i+=2)
 {
+    if (parameters[i] != "void")
     print "," parameters[i];
 }
 

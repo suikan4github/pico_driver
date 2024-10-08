@@ -17,7 +17,7 @@ enum gpio_drive_strength { c, d };
 /// @brief Alternate definition for Google Test build.
 enum gpio_slew_rate { e, f };
 /// @brief Alternate definition for Google Test build.
-enum pio_mov_status_type;
+enum pio_mov_status_type { g, h };
 
 /// @brief Alternate definition for Google Test build.
 typedef int gpio_irq_callback_t;
