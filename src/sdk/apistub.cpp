@@ -1,231 +1,288 @@
+#if __has_include("pico/stdlib.h")
+// For Pico
 #include "pico_sdk_headers.h"
-// --------------------------------------------------
-extern "C" void i2c_deinit(i2c_inst_t *i2c);
-__attribute__((weak)) void i2c_deinit(i2c_inst_t *i2c) {
+#else
+// Alternative include and definition for Unix/Win32
+#include <stdint.h>
+#include <stdlib.h>
+/// @brief Alternate definition for Google Test build.
+enum pio_fifo_join { a, b };
+/// @brief Alternate definition for Google Test build.
+enum gpio_drive_strength { c, d };
+/// @brief Alternate definition for Google Test build.
+enum gpio_slew_rate { e, f };
+/// @brief Alternate definition for Google Test build.
+enum pio_mov_status_type { g, h };
+
+/// @brief Alternate definition for Google Test build.
+typedef int stdio_driver_t;
+/// @brief Alternate definition for Google Test build.
+typedef int alarm_id_t;
+/// @brief Alternate definition for Google Test build.
+typedef int alarm_pool_t;
+/// @brief Alternate definition for Google Test build.
+typedef int alarm_pool_timer_t;
+/// @brief Alternate definition for Google Test build.
+typedef int repeating_timer_t;
+/// @brief Alternate definition for Google Test build.
+typedef int alarm_callback_t;
+/// @brief Alternate definition for Google Test build.
+typedef int repeating_timer_callback_t;
+/// @brief Alternate definition for Google Test build.
+typedef int gpio_irq_callback_t;
+/// @brief Alternate definition for Google Test build.
+typedef int irq_handler_t;
+/// @brief Alternate definition for Google Test build.
+typedef int resus_callback_t;
+/// @brief Alternate definition for Google Test build.
+typedef int pio_interrupt_source_t;
+/// @brief Alternate definition for Google Test build.
+typedef int absolute_time_t;
+/// @brief Alternate definition for Google Test build.
+typedef int i2c_inst_t;
+/// @brief Alternate definition for Google Test build.
+typedef int i2c_hw_t;
+/// @brief Alternate definition for Google Test build.
+typedef int gpio_function_t;
+/// @brief Alternate definition for Google Test build.
+typedef unsigned int PIO;
+/// @brief Alternate definition for Google Test build.
+typedef unsigned int pio_sm_config;
+/// @brief Alternate definition for Google Test build.
+typedef unsigned int clock_handle_t;
+/// @brief Alternate definition for Google Test build.
+typedef unsigned int pio_program_t;
+#ifdef _MSC_VER
+typedef unsigned int uint;
+#endif
+#endif
+#include <assert.h>  // --------------------------------------------------
+extern "C" void i2c_deinit(i2c_inst_t* i2c);
+__attribute__((weak)) void i2c_deinit(i2c_inst_t* i2c) {
   assert(false &&
          "Error : The hardware_i2c library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" uint i2c_get_dreq(i2c_inst_t *i2c, bool is_tx);
-__attribute__((weak)) uint i2c_get_dreq(i2c_inst_t *i2c, bool is_tx) {
+extern "C" uint i2c_get_dreq(i2c_inst_t* i2c, bool is_tx);
+__attribute__((weak)) uint i2c_get_dreq(i2c_inst_t* i2c, bool is_tx) {
   assert(false &&
          "Error : The hardware_i2c library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" i2c_hw_t *i2c_get_hw(i2c_inst_t *i2c);
-__attribute__((weak)) i2c_hw_t *i2c_get_hw(i2c_inst_t *i2c) {
+extern "C" i2c_hw_t* i2c_get_hw(i2c_inst_t* i2c);
+__attribute__((weak)) i2c_hw_t* i2c_get_hw(i2c_inst_t* i2c) {
   assert(false &&
          "Error : The hardware_i2c library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" uint i2c_get_index(i2c_inst_t *i2c);
-__attribute__((weak)) uint i2c_get_index(i2c_inst_t *i2c) {
+extern "C" uint i2c_get_index(i2c_inst_t* i2c);
+__attribute__((weak)) uint i2c_get_index(i2c_inst_t* i2c) {
   assert(false &&
          "Error : The hardware_i2c library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" i2c_inst_t *i2c_get_instance(uint num);
-__attribute__((weak)) i2c_inst_t *i2c_get_instance(uint num) {
+extern "C" i2c_inst_t* i2c_get_instance(uint num);
+__attribute__((weak)) i2c_inst_t* i2c_get_instance(uint num) {
   assert(false &&
          "Error : The hardware_i2c library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" size_t i2c_get_read_available(i2c_inst_t *i2c);
-__attribute__((weak)) size_t i2c_get_read_available(i2c_inst_t *i2c) {
+extern "C" size_t i2c_get_read_available(i2c_inst_t* i2c);
+__attribute__((weak)) size_t i2c_get_read_available(i2c_inst_t* i2c) {
   assert(false &&
          "Error : The hardware_i2c library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" size_t i2c_get_write_available(i2c_inst_t *i2c);
-__attribute__((weak)) size_t i2c_get_write_available(i2c_inst_t *i2c) {
+extern "C" size_t i2c_get_write_available(i2c_inst_t* i2c);
+__attribute__((weak)) size_t i2c_get_write_available(i2c_inst_t* i2c) {
   assert(false &&
          "Error : The hardware_i2c library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" uint i2c_init(i2c_inst_t *i2c, uint baudrate);
-__attribute__((weak)) uint i2c_init(i2c_inst_t *i2c, uint baudrate) {
+extern "C" uint i2c_init(i2c_inst_t* i2c, uint baudrate);
+__attribute__((weak)) uint i2c_init(i2c_inst_t* i2c, uint baudrate) {
   assert(false &&
          "Error : The hardware_i2c library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" int i2c_read_blocking(i2c_inst_t *i2c, uint8_t addr, uint8_t *dst,
+extern "C" int i2c_read_blocking(i2c_inst_t* i2c, uint8_t addr, uint8_t* dst,
                                  size_t len, bool nostop);
-__attribute__((weak)) int i2c_read_blocking(i2c_inst_t *i2c, uint8_t addr,
-                                            uint8_t *dst, size_t len,
+__attribute__((weak)) int i2c_read_blocking(i2c_inst_t* i2c, uint8_t addr,
+                                            uint8_t* dst, size_t len,
                                             bool nostop) {
   assert(false &&
          "Error : The hardware_i2c library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" int i2c_read_blocking_until(i2c_inst_t *i2c, uint8_t addr,
-                                       uint8_t *dst, size_t len, bool nostop,
+extern "C" int i2c_read_blocking_until(i2c_inst_t* i2c, uint8_t addr,
+                                       uint8_t* dst, size_t len, bool nostop,
                                        absolute_time_t until);
-__attribute__((weak)) int i2c_read_blocking_until(i2c_inst_t *i2c, uint8_t addr,
-                                                  uint8_t *dst, size_t len,
+__attribute__((weak)) int i2c_read_blocking_until(i2c_inst_t* i2c, uint8_t addr,
+                                                  uint8_t* dst, size_t len,
                                                   bool nostop,
                                                   absolute_time_t until) {
   assert(false &&
          "Error : The hardware_i2c library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" uint8_t i2c_read_byte_raw(i2c_inst_t *i2c);
-__attribute__((weak)) uint8_t i2c_read_byte_raw(i2c_inst_t *i2c) {
+extern "C" uint8_t i2c_read_byte_raw(i2c_inst_t* i2c);
+__attribute__((weak)) uint8_t i2c_read_byte_raw(i2c_inst_t* i2c) {
   assert(false &&
          "Error : The hardware_i2c library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" void i2c_read_raw_blocking(i2c_inst_t *i2c, uint8_t *dst,
+extern "C" void i2c_read_raw_blocking(i2c_inst_t* i2c, uint8_t* dst,
                                       size_t len);
-__attribute__((weak)) void i2c_read_raw_blocking(i2c_inst_t *i2c, uint8_t *dst,
+__attribute__((weak)) void i2c_read_raw_blocking(i2c_inst_t* i2c, uint8_t* dst,
                                                  size_t len) {
   assert(false &&
          "Error : The hardware_i2c library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" int i2c_read_timeout_per_char_us(i2c_inst_t *i2c, uint8_t addr,
-                                            uint8_t *dst, size_t len,
+extern "C" int i2c_read_timeout_per_char_us(i2c_inst_t* i2c, uint8_t addr,
+                                            uint8_t* dst, size_t len,
                                             bool nostop,
                                             uint timeout_per_char_us);
 __attribute__((weak)) int i2c_read_timeout_per_char_us(
-    i2c_inst_t *i2c, uint8_t addr, uint8_t *dst, size_t len, bool nostop,
+    i2c_inst_t* i2c, uint8_t addr, uint8_t* dst, size_t len, bool nostop,
     uint timeout_per_char_us) {
   assert(false &&
          "Error : The hardware_i2c library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" int i2c_read_timeout_us(i2c_inst_t *i2c, uint8_t addr, uint8_t *dst,
+extern "C" int i2c_read_timeout_us(i2c_inst_t* i2c, uint8_t addr, uint8_t* dst,
                                    size_t len, bool nostop, uint timeout_us);
-__attribute__((weak)) int i2c_read_timeout_us(i2c_inst_t *i2c, uint8_t addr,
-                                              uint8_t *dst, size_t len,
+__attribute__((weak)) int i2c_read_timeout_us(i2c_inst_t* i2c, uint8_t addr,
+                                              uint8_t* dst, size_t len,
                                               bool nostop, uint timeout_us) {
   assert(false &&
          "Error : The hardware_i2c library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" uint i2c_set_baudrate(i2c_inst_t *i2c, uint baudrate);
-__attribute__((weak)) uint i2c_set_baudrate(i2c_inst_t *i2c, uint baudrate) {
+extern "C" uint i2c_set_baudrate(i2c_inst_t* i2c, uint baudrate);
+__attribute__((weak)) uint i2c_set_baudrate(i2c_inst_t* i2c, uint baudrate) {
   assert(false &&
          "Error : The hardware_i2c library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" void i2c_set_slave_mode(i2c_inst_t *i2c, bool slave, uint8_t addr);
-__attribute__((weak)) void i2c_set_slave_mode(i2c_inst_t *i2c, bool slave,
+extern "C" void i2c_set_slave_mode(i2c_inst_t* i2c, bool slave, uint8_t addr);
+__attribute__((weak)) void i2c_set_slave_mode(i2c_inst_t* i2c, bool slave,
                                               uint8_t addr) {
   assert(false &&
          "Error : The hardware_i2c library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" int i2c_write_blocking(i2c_inst_t *i2c, uint8_t addr,
-                                  const uint8_t *src, size_t len, bool nostop);
-__attribute__((weak)) int i2c_write_blocking(i2c_inst_t *i2c, uint8_t addr,
-                                             const uint8_t *src, size_t len,
+extern "C" int i2c_write_blocking(i2c_inst_t* i2c, uint8_t addr,
+                                  const uint8_t* src, size_t len, bool nostop);
+__attribute__((weak)) int i2c_write_blocking(i2c_inst_t* i2c, uint8_t addr,
+                                             const uint8_t* src, size_t len,
                                              bool nostop) {
   assert(false &&
          "Error : The hardware_i2c library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" int i2c_write_blocking_until(i2c_inst_t *i2c, uint8_t addr,
-                                        const uint8_t *src, size_t len,
+extern "C" int i2c_write_blocking_until(i2c_inst_t* i2c, uint8_t addr,
+                                        const uint8_t* src, size_t len,
                                         bool nostop, absolute_time_t until);
-__attribute__((weak)) int i2c_write_blocking_until(i2c_inst_t *i2c,
+__attribute__((weak)) int i2c_write_blocking_until(i2c_inst_t* i2c,
                                                    uint8_t addr,
-                                                   const uint8_t *src,
+                                                   const uint8_t* src,
                                                    size_t len, bool nostop,
                                                    absolute_time_t until) {
   assert(false &&
          "Error : The hardware_i2c library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" void i2c_write_byte_raw(i2c_inst_t *i2c, uint8_t value);
-__attribute__((weak)) void i2c_write_byte_raw(i2c_inst_t *i2c, uint8_t value) {
+extern "C" void i2c_write_byte_raw(i2c_inst_t* i2c, uint8_t value);
+__attribute__((weak)) void i2c_write_byte_raw(i2c_inst_t* i2c, uint8_t value) {
   assert(false &&
          "Error : The hardware_i2c library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" void i2c_write_raw_blocking(i2c_inst_t *i2c, const uint8_t *src,
+extern "C" void i2c_write_raw_blocking(i2c_inst_t* i2c, const uint8_t* src,
                                        size_t len);
-__attribute__((weak)) void i2c_write_raw_blocking(i2c_inst_t *i2c,
-                                                  const uint8_t *src,
+__attribute__((weak)) void i2c_write_raw_blocking(i2c_inst_t* i2c,
+                                                  const uint8_t* src,
                                                   size_t len) {
   assert(false &&
          "Error : The hardware_i2c library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" int i2c_write_timeout_per_char_us(i2c_inst_t *i2c, uint8_t addr,
-                                             const uint8_t *src, size_t len,
+extern "C" int i2c_write_timeout_per_char_us(i2c_inst_t* i2c, uint8_t addr,
+                                             const uint8_t* src, size_t len,
                                              bool nostop,
                                              uint timeout_per_char_us);
 __attribute__((weak)) int i2c_write_timeout_per_char_us(
-    i2c_inst_t *i2c, uint8_t addr, const uint8_t *src, size_t len, bool nostop,
+    i2c_inst_t* i2c, uint8_t addr, const uint8_t* src, size_t len, bool nostop,
     uint timeout_per_char_us) {
   assert(false &&
          "Error : The hardware_i2c library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" int i2c_write_timeout_us(i2c_inst_t *i2c, uint8_t addr,
-                                    const uint8_t *src, size_t len, bool nostop,
+extern "C" int i2c_write_timeout_us(i2c_inst_t* i2c, uint8_t addr,
+                                    const uint8_t* src, size_t len, bool nostop,
                                     uint timeout_us);
-__attribute__((weak)) int i2c_write_timeout_us(i2c_inst_t *i2c, uint8_t addr,
-                                               const uint8_t *src, size_t len,
+__attribute__((weak)) int i2c_write_timeout_us(i2c_inst_t* i2c, uint8_t addr,
+                                               const uint8_t* src, size_t len,
                                                bool nostop, uint timeout_us) {
   assert(false &&
          "Error : The hardware_i2c library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" int pio_add_program(PIO pio, const pio_program_t *program);
+extern "C" int pio_add_program(PIO pio, const pio_program_t* program);
 __attribute__((weak)) int pio_add_program(PIO pio,
-                                          const pio_program_t *program) {
+                                          const pio_program_t* program) {
   assert(false &&
          "Error : The hardware_pio library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" int pio_add_program_at_offset(PIO pio, const pio_program_t *program,
+extern "C" int pio_add_program_at_offset(PIO pio, const pio_program_t* program,
                                          uint offset);
 __attribute__((weak)) int pio_add_program_at_offset(
-    PIO pio, const pio_program_t *program, uint offset) {
+    PIO pio, const pio_program_t* program, uint offset) {
   assert(false &&
          "Error : The hardware_pio library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" void pio_calculate_clkdiv_from_float(float div, uint16_t *div_int,
-                                                uint8_t *div_frac);
+extern "C" void pio_calculate_clkdiv_from_float(float div, uint16_t* div_int,
+                                                uint8_t* div_frac);
 __attribute__((weak)) void pio_calculate_clkdiv_from_float(float div,
-                                                           uint16_t *div_int,
-                                                           uint8_t *div_frac) {
+                                                           uint16_t* div_int,
+                                                           uint8_t* div_frac) {
   assert(false &&
          "Error : The hardware_pio library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" bool pio_can_add_program(PIO pio, const pio_program_t *program);
+extern "C" bool pio_can_add_program(PIO pio, const pio_program_t* program);
 __attribute__((weak)) bool pio_can_add_program(PIO pio,
-                                               const pio_program_t *program) {
+                                               const pio_program_t* program) {
   assert(false &&
          "Error : The hardware_pio library is missing in the link phase.");
 }
 // --------------------------------------------------
 extern "C" bool pio_can_add_program_at_offset(PIO pio,
-                                              const pio_program_t *program,
+                                              const pio_program_t* program,
                                               uint offset);
 __attribute__((weak)) bool pio_can_add_program_at_offset(
-    PIO pio, const pio_program_t *program, uint offset) {
+    PIO pio, const pio_program_t* program, uint offset) {
   assert(false &&
          "Error : The hardware_pio library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" bool pio_claim_free_sm_and_add_program(const pio_program_t *program,
-                                                  PIO *pio, uint *sm,
-                                                  uint *offset);
+extern "C" bool pio_claim_free_sm_and_add_program(const pio_program_t* program,
+                                                  PIO* pio, uint* sm,
+                                                  uint* offset);
 __attribute__((weak)) bool pio_claim_free_sm_and_add_program(
-    const pio_program_t *program, PIO *pio, uint *sm, uint *offset) {
+    const pio_program_t* program, PIO* pio, uint* sm, uint* offset) {
   assert(false &&
          "Error : The hardware_pio library is missing in the link phase.");
 }
 // --------------------------------------------------
 extern "C" bool pio_claim_free_sm_and_add_program_for_gpio_range(
-    const pio_program_t *program, PIO *pio, uint *sm, uint *offset,
+    const pio_program_t* program, PIO* pio, uint* sm, uint* offset,
     uint gpio_base, uint gpio_count, bool set_gpio_base);
 __attribute__((weak)) bool pio_claim_free_sm_and_add_program_for_gpio_range(
-    const pio_program_t *program, PIO *pio, uint *sm, uint *offset,
+    const pio_program_t* program, PIO* pio, uint* sm, uint* offset,
     uint gpio_base, uint gpio_count, bool set_gpio_base) {
   assert(false &&
          "Error : The hardware_pio library is missing in the link phase.");
@@ -356,20 +413,20 @@ __attribute__((weak)) bool pio_interrupt_get(PIO pio, uint pio_interrupt_num) {
          "Error : The hardware_pio library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" void pio_remove_program(PIO pio, const pio_program_t *program,
+extern "C" void pio_remove_program(PIO pio, const pio_program_t* program,
                                    uint loaded_offset);
 __attribute__((weak)) void pio_remove_program(PIO pio,
-                                              const pio_program_t *program,
+                                              const pio_program_t* program,
                                               uint loaded_offset) {
   assert(false &&
          "Error : The hardware_pio library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" void pio_remove_program_and_unclaim_sm(const pio_program_t *program,
+extern "C" void pio_remove_program_and_unclaim_sm(const pio_program_t* program,
                                                   PIO pio, uint sm,
                                                   uint offset);
 __attribute__((weak)) void pio_remove_program_and_unclaim_sm(
-    const pio_program_t *program, PIO pio, uint sm, uint offset) {
+    const pio_program_t* program, PIO pio, uint sm, uint offset) {
   assert(false &&
          "Error : The hardware_pio library is missing in the link phase.");
 }
@@ -525,9 +582,9 @@ __attribute__((weak)) uint pio_sm_get_tx_fifo_level(PIO pio, uint sm) {
 }
 // --------------------------------------------------
 extern "C" int pio_sm_init(PIO pio, uint sm, uint initial_pc,
-                           const pio_sm_config *config);
+                           const pio_sm_config* config);
 __attribute__((weak)) int pio_sm_init(PIO pio, uint sm, uint initial_pc,
-                                      const pio_sm_config *config) {
+                                      const pio_sm_config* config) {
   assert(false &&
          "Error : The hardware_pio library is missing in the link phase.");
 }
@@ -602,9 +659,9 @@ __attribute__((weak)) void pio_sm_set_clkdiv_int_frac(PIO pio, uint sm,
          "Error : The hardware_pio library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" int pio_sm_set_config(PIO pio, uint sm, const pio_sm_config *config);
+extern "C" int pio_sm_set_config(PIO pio, uint sm, const pio_sm_config* config);
 __attribute__((weak)) int pio_sm_set_config(PIO pio, uint sm,
-                                            const pio_sm_config *config) {
+                                            const pio_sm_config* config) {
   assert(false &&
          "Error : The hardware_pio library is missing in the link phase.");
 }
@@ -699,54 +756,54 @@ __attribute__((weak)) void pio_sm_unclaim(PIO pio, uint sm) {
          "Error : The hardware_pio library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_clkdiv(pio_sm_config *c, float div);
-__attribute__((weak)) void sm_config_set_clkdiv(pio_sm_config *c, float div) {
+extern "C" void sm_config_set_clkdiv(pio_sm_config* c, float div);
+__attribute__((weak)) void sm_config_set_clkdiv(pio_sm_config* c, float div) {
   assert(false &&
          "Error : The hardware_pio library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_clkdiv_int_frac(pio_sm_config *c,
+extern "C" void sm_config_set_clkdiv_int_frac(pio_sm_config* c,
                                               uint16_t div_int,
                                               uint8_t div_frac);
-__attribute__((weak)) void sm_config_set_clkdiv_int_frac(pio_sm_config *c,
+__attribute__((weak)) void sm_config_set_clkdiv_int_frac(pio_sm_config* c,
                                                          uint16_t div_int,
                                                          uint8_t div_frac) {
   assert(false &&
          "Error : The hardware_pio library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_fifo_join(pio_sm_config *c,
+extern "C" void sm_config_set_fifo_join(pio_sm_config* c,
                                         enum pio_fifo_join join);
-__attribute__((weak)) void sm_config_set_fifo_join(pio_sm_config *c,
+__attribute__((weak)) void sm_config_set_fifo_join(pio_sm_config* c,
                                                    enum pio_fifo_join join) {
   assert(false &&
          "Error : The hardware_pio library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_in_pin_base(pio_sm_config *c, uint in_base);
-__attribute__((weak)) void sm_config_set_in_pin_base(pio_sm_config *c,
+extern "C" void sm_config_set_in_pin_base(pio_sm_config* c, uint in_base);
+__attribute__((weak)) void sm_config_set_in_pin_base(pio_sm_config* c,
                                                      uint in_base) {
   assert(false &&
          "Error : The hardware_pio library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_in_pin_count(pio_sm_config *c, uint in_count);
-__attribute__((weak)) void sm_config_set_in_pin_count(pio_sm_config *c,
+extern "C" void sm_config_set_in_pin_count(pio_sm_config* c, uint in_count);
+__attribute__((weak)) void sm_config_set_in_pin_count(pio_sm_config* c,
                                                       uint in_count) {
   assert(false &&
          "Error : The hardware_pio library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_in_pins(pio_sm_config *c, uint in_base);
-__attribute__((weak)) void sm_config_set_in_pins(pio_sm_config *c,
+extern "C" void sm_config_set_in_pins(pio_sm_config* c, uint in_base);
+__attribute__((weak)) void sm_config_set_in_pins(pio_sm_config* c,
                                                  uint in_base) {
   assert(false &&
          "Error : The hardware_pio library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_in_shift(pio_sm_config *c, bool shift_right,
+extern "C" void sm_config_set_in_shift(pio_sm_config* c, bool shift_right,
                                        bool autopush, uint push_threshold);
-__attribute__((weak)) void sm_config_set_in_shift(pio_sm_config *c,
+__attribute__((weak)) void sm_config_set_in_shift(pio_sm_config* c,
                                                   bool shift_right,
                                                   bool autopush,
                                                   uint push_threshold) {
@@ -754,47 +811,47 @@ __attribute__((weak)) void sm_config_set_in_shift(pio_sm_config *c,
          "Error : The hardware_pio library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_jmp_pin(pio_sm_config *c, uint pin);
-__attribute__((weak)) void sm_config_set_jmp_pin(pio_sm_config *c, uint pin) {
+extern "C" void sm_config_set_jmp_pin(pio_sm_config* c, uint pin);
+__attribute__((weak)) void sm_config_set_jmp_pin(pio_sm_config* c, uint pin) {
   assert(false &&
          "Error : The hardware_pio library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_mov_status(pio_sm_config *c,
+extern "C" void sm_config_set_mov_status(pio_sm_config* c,
                                          enum pio_mov_status_type status_sel,
                                          uint status_n);
 __attribute__((weak)) void sm_config_set_mov_status(
-    pio_sm_config *c, enum pio_mov_status_type status_sel, uint status_n) {
+    pio_sm_config* c, enum pio_mov_status_type status_sel, uint status_n) {
   assert(false &&
          "Error : The hardware_pio library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_out_pin_base(pio_sm_config *c, uint out_base);
-__attribute__((weak)) void sm_config_set_out_pin_base(pio_sm_config *c,
+extern "C" void sm_config_set_out_pin_base(pio_sm_config* c, uint out_base);
+__attribute__((weak)) void sm_config_set_out_pin_base(pio_sm_config* c,
                                                       uint out_base) {
   assert(false &&
          "Error : The hardware_pio library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_out_pin_count(pio_sm_config *c, uint out_count);
-__attribute__((weak)) void sm_config_set_out_pin_count(pio_sm_config *c,
+extern "C" void sm_config_set_out_pin_count(pio_sm_config* c, uint out_count);
+__attribute__((weak)) void sm_config_set_out_pin_count(pio_sm_config* c,
                                                        uint out_count) {
   assert(false &&
          "Error : The hardware_pio library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_out_pins(pio_sm_config *c, uint out_base,
+extern "C" void sm_config_set_out_pins(pio_sm_config* c, uint out_base,
                                        uint out_count);
-__attribute__((weak)) void sm_config_set_out_pins(pio_sm_config *c,
+__attribute__((weak)) void sm_config_set_out_pins(pio_sm_config* c,
                                                   uint out_base,
                                                   uint out_count) {
   assert(false &&
          "Error : The hardware_pio library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_out_shift(pio_sm_config *c, bool shift_right,
+extern "C" void sm_config_set_out_shift(pio_sm_config* c, bool shift_right,
                                         bool autopull, uint pull_threshold);
-__attribute__((weak)) void sm_config_set_out_shift(pio_sm_config *c,
+__attribute__((weak)) void sm_config_set_out_shift(pio_sm_config* c,
                                                    bool shift_right,
                                                    bool autopull,
                                                    uint pull_threshold) {
@@ -802,10 +859,10 @@ __attribute__((weak)) void sm_config_set_out_shift(pio_sm_config *c,
          "Error : The hardware_pio library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_out_special(pio_sm_config *c, bool sticky,
+extern "C" void sm_config_set_out_special(pio_sm_config* c, bool sticky,
                                           bool has_enable_pin,
                                           uint enable_pin_index);
-__attribute__((weak)) void sm_config_set_out_special(pio_sm_config *c,
+__attribute__((weak)) void sm_config_set_out_special(pio_sm_config* c,
                                                      bool sticky,
                                                      bool has_enable_pin,
                                                      uint enable_pin_index) {
@@ -813,56 +870,56 @@ __attribute__((weak)) void sm_config_set_out_special(pio_sm_config *c,
          "Error : The hardware_pio library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_set_pin_base(pio_sm_config *c, uint set_base);
-__attribute__((weak)) void sm_config_set_set_pin_base(pio_sm_config *c,
+extern "C" void sm_config_set_set_pin_base(pio_sm_config* c, uint set_base);
+__attribute__((weak)) void sm_config_set_set_pin_base(pio_sm_config* c,
                                                       uint set_base) {
   assert(false &&
          "Error : The hardware_pio library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_set_pin_count(pio_sm_config *c, uint set_count);
-__attribute__((weak)) void sm_config_set_set_pin_count(pio_sm_config *c,
+extern "C" void sm_config_set_set_pin_count(pio_sm_config* c, uint set_count);
+__attribute__((weak)) void sm_config_set_set_pin_count(pio_sm_config* c,
                                                        uint set_count) {
   assert(false &&
          "Error : The hardware_pio library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_set_pins(pio_sm_config *c, uint set_base,
+extern "C" void sm_config_set_set_pins(pio_sm_config* c, uint set_base,
                                        uint set_count);
-__attribute__((weak)) void sm_config_set_set_pins(pio_sm_config *c,
+__attribute__((weak)) void sm_config_set_set_pins(pio_sm_config* c,
                                                   uint set_base,
                                                   uint set_count) {
   assert(false &&
          "Error : The hardware_pio library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_sideset(pio_sm_config *c, uint bit_count,
+extern "C" void sm_config_set_sideset(pio_sm_config* c, uint bit_count,
                                       bool optional, bool pindirs);
-__attribute__((weak)) void sm_config_set_sideset(pio_sm_config *c,
+__attribute__((weak)) void sm_config_set_sideset(pio_sm_config* c,
                                                  uint bit_count, bool optional,
                                                  bool pindirs) {
   assert(false &&
          "Error : The hardware_pio library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_sideset_pin_base(pio_sm_config *c,
+extern "C" void sm_config_set_sideset_pin_base(pio_sm_config* c,
                                                uint sideset_base);
-__attribute__((weak)) void sm_config_set_sideset_pin_base(pio_sm_config *c,
+__attribute__((weak)) void sm_config_set_sideset_pin_base(pio_sm_config* c,
                                                           uint sideset_base) {
   assert(false &&
          "Error : The hardware_pio library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_sideset_pins(pio_sm_config *c, uint sideset_base);
-__attribute__((weak)) void sm_config_set_sideset_pins(pio_sm_config *c,
+extern "C" void sm_config_set_sideset_pins(pio_sm_config* c, uint sideset_base);
+__attribute__((weak)) void sm_config_set_sideset_pins(pio_sm_config* c,
                                                       uint sideset_base) {
   assert(false &&
          "Error : The hardware_pio library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_wrap(pio_sm_config *c, uint wrap_target,
+extern "C" void sm_config_set_wrap(pio_sm_config* c, uint wrap_target,
                                    uint wrap);
-__attribute__((weak)) void sm_config_set_wrap(pio_sm_config *c,
+__attribute__((weak)) void sm_config_set_wrap(pio_sm_config* c,
                                               uint wrap_target, uint wrap) {
   assert(false &&
          "Error : The hardware_pio library is missing in the link phase.");
@@ -1332,22 +1389,22 @@ __attribute__((weak)) void gpio_xor_mask_n(uint n, uint32_t mask) {
          "Error : The hardware_gpio library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" bool check_sys_clock_hz(uint32_t freq_hz, uint *vco_freq_out,
-                                   uint *post_div1_out, uint *post_div2_out);
+extern "C" bool check_sys_clock_hz(uint32_t freq_hz, uint* vco_freq_out,
+                                   uint* post_div1_out, uint* post_div2_out);
 __attribute__((weak)) bool check_sys_clock_hz(uint32_t freq_hz,
-                                              uint *vco_freq_out,
-                                              uint *post_div1_out,
-                                              uint *post_div2_out) {
+                                              uint* vco_freq_out,
+                                              uint* post_div1_out,
+                                              uint* post_div2_out) {
   assert(false &&
          "Error : The hardware_clocks library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" bool check_sys_clock_khz(uint32_t freq_khz, uint *vco_freq_out,
-                                    uint *post_div1_out, uint *post_div2_out);
+extern "C" bool check_sys_clock_khz(uint32_t freq_khz, uint* vco_freq_out,
+                                    uint* post_div1_out, uint* post_div2_out);
 __attribute__((weak)) bool check_sys_clock_khz(uint32_t freq_khz,
-                                               uint *vco_freq_out,
-                                               uint *post_div1_out,
-                                               uint *post_div2_out) {
+                                               uint* vco_freq_out,
+                                               uint* post_div1_out,
+                                               uint* post_div2_out) {
   assert(false &&
          "Error : The hardware_clocks library is missing in the link phase.");
 }
@@ -1489,31 +1546,31 @@ __attribute__((weak)) absolute_time_t absolute_time_min(absolute_time_t a,
 }
 // --------------------------------------------------
 extern "C" alarm_id_t add_alarm_at(absolute_time_t time,
-                                   alarm_callback_t callback, void *user_data,
+                                   alarm_callback_t callback, void* user_data,
                                    bool fire_if_past);
 __attribute__((weak)) alarm_id_t add_alarm_at(absolute_time_t time,
                                               alarm_callback_t callback,
-                                              void *user_data,
+                                              void* user_data,
                                               bool fire_if_past) {
   assert(false &&
          "Error : The pico_time library is missing in the link phase.");
 }
 // --------------------------------------------------
 extern "C" alarm_id_t add_alarm_in_ms(uint32_t ms, alarm_callback_t callback,
-                                      void *user_data, bool fire_if_past);
+                                      void* user_data, bool fire_if_past);
 __attribute__((weak)) alarm_id_t add_alarm_in_ms(uint32_t ms,
                                                  alarm_callback_t callback,
-                                                 void *user_data,
+                                                 void* user_data,
                                                  bool fire_if_past) {
   assert(false &&
          "Error : The pico_time library is missing in the link phase.");
 }
 // --------------------------------------------------
 extern "C" alarm_id_t add_alarm_in_us(uint64_t us, alarm_callback_t callback,
-                                      void *user_data, bool fire_if_past);
+                                      void* user_data, bool fire_if_past);
 __attribute__((weak)) alarm_id_t add_alarm_in_us(uint64_t us,
                                                  alarm_callback_t callback,
-                                                 void *user_data,
+                                                 void* user_data,
                                                  bool fire_if_past) {
   assert(false &&
          "Error : The pico_time library is missing in the link phase.");
@@ -1521,158 +1578,158 @@ __attribute__((weak)) alarm_id_t add_alarm_in_us(uint64_t us,
 // --------------------------------------------------
 extern "C" bool add_repeating_timer_ms(int32_t delay_ms,
                                        repeating_timer_callback_t callback,
-                                       void *user_data, repeating_timer_t *out);
+                                       void* user_data, repeating_timer_t* out);
 __attribute__((weak)) bool add_repeating_timer_ms(
-    int32_t delay_ms, repeating_timer_callback_t callback, void *user_data,
-    repeating_timer_t *out) {
+    int32_t delay_ms, repeating_timer_callback_t callback, void* user_data,
+    repeating_timer_t* out) {
   assert(false &&
          "Error : The pico_time library is missing in the link phase.");
 }
 // --------------------------------------------------
 extern "C" bool add_repeating_timer_us(int64_t delay_us,
                                        repeating_timer_callback_t callback,
-                                       void *user_data, repeating_timer_t *out);
+                                       void* user_data, repeating_timer_t* out);
 __attribute__((weak)) bool add_repeating_timer_us(
-    int64_t delay_us, repeating_timer_callback_t callback, void *user_data,
-    repeating_timer_t *out) {
+    int64_t delay_us, repeating_timer_callback_t callback, void* user_data,
+    repeating_timer_t* out) {
   assert(false &&
          "Error : The pico_time library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" alarm_id_t alarm_pool_add_alarm_at(alarm_pool_t *pool,
+extern "C" alarm_id_t alarm_pool_add_alarm_at(alarm_pool_t* pool,
                                               absolute_time_t time,
                                               alarm_callback_t callback,
-                                              void *user_data,
+                                              void* user_data,
                                               bool fire_if_past);
 __attribute__((weak)) alarm_id_t alarm_pool_add_alarm_at(
-    alarm_pool_t *pool, absolute_time_t time, alarm_callback_t callback,
-    void *user_data, bool fire_if_past) {
+    alarm_pool_t* pool, absolute_time_t time, alarm_callback_t callback,
+    void* user_data, bool fire_if_past) {
   assert(false &&
          "Error : The pico_time library is missing in the link phase.");
 }
 // --------------------------------------------------
 extern "C" alarm_id_t alarm_pool_add_alarm_at_force_in_context(
-    alarm_pool_t *pool, absolute_time_t time, alarm_callback_t callback,
-    void *user_data);
+    alarm_pool_t* pool, absolute_time_t time, alarm_callback_t callback,
+    void* user_data);
 __attribute__((weak)) alarm_id_t alarm_pool_add_alarm_at_force_in_context(
-    alarm_pool_t *pool, absolute_time_t time, alarm_callback_t callback,
-    void *user_data) {
+    alarm_pool_t* pool, absolute_time_t time, alarm_callback_t callback,
+    void* user_data) {
   assert(false &&
          "Error : The pico_time library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" alarm_id_t alarm_pool_add_alarm_in_ms(alarm_pool_t *pool,
+extern "C" alarm_id_t alarm_pool_add_alarm_in_ms(alarm_pool_t* pool,
                                                  uint32_t ms,
                                                  alarm_callback_t callback,
-                                                 void *user_data,
+                                                 void* user_data,
                                                  bool fire_if_past);
 __attribute__((weak)) alarm_id_t alarm_pool_add_alarm_in_ms(
-    alarm_pool_t *pool, uint32_t ms, alarm_callback_t callback, void *user_data,
+    alarm_pool_t* pool, uint32_t ms, alarm_callback_t callback, void* user_data,
     bool fire_if_past) {
   assert(false &&
          "Error : The pico_time library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" alarm_id_t alarm_pool_add_alarm_in_us(alarm_pool_t *pool,
+extern "C" alarm_id_t alarm_pool_add_alarm_in_us(alarm_pool_t* pool,
                                                  uint64_t us,
                                                  alarm_callback_t callback,
-                                                 void *user_data,
+                                                 void* user_data,
                                                  bool fire_if_past);
 __attribute__((weak)) alarm_id_t alarm_pool_add_alarm_in_us(
-    alarm_pool_t *pool, uint64_t us, alarm_callback_t callback, void *user_data,
+    alarm_pool_t* pool, uint64_t us, alarm_callback_t callback, void* user_data,
     bool fire_if_past) {
   assert(false &&
          "Error : The pico_time library is missing in the link phase.");
 }
 // --------------------------------------------------
 extern "C" bool alarm_pool_add_repeating_timer_ms(
-    alarm_pool_t *pool, int32_t delay_ms, repeating_timer_callback_t callback,
-    void *user_data, repeating_timer_t *out);
+    alarm_pool_t* pool, int32_t delay_ms, repeating_timer_callback_t callback,
+    void* user_data, repeating_timer_t* out);
 __attribute__((weak)) bool alarm_pool_add_repeating_timer_ms(
-    alarm_pool_t *pool, int32_t delay_ms, repeating_timer_callback_t callback,
-    void *user_data, repeating_timer_t *out) {
+    alarm_pool_t* pool, int32_t delay_ms, repeating_timer_callback_t callback,
+    void* user_data, repeating_timer_t* out) {
   assert(false &&
          "Error : The pico_time library is missing in the link phase.");
 }
 // --------------------------------------------------
 extern "C" bool alarm_pool_add_repeating_timer_us(
-    alarm_pool_t *pool, int64_t delay_us, repeating_timer_callback_t callback,
-    void *user_data, repeating_timer_t *out);
+    alarm_pool_t* pool, int64_t delay_us, repeating_timer_callback_t callback,
+    void* user_data, repeating_timer_t* out);
 __attribute__((weak)) bool alarm_pool_add_repeating_timer_us(
-    alarm_pool_t *pool, int64_t delay_us, repeating_timer_callback_t callback,
-    void *user_data, repeating_timer_t *out) {
+    alarm_pool_t* pool, int64_t delay_us, repeating_timer_callback_t callback,
+    void* user_data, repeating_timer_t* out) {
   assert(false &&
          "Error : The pico_time library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" bool alarm_pool_cancel_alarm(alarm_pool_t *pool,
+extern "C" bool alarm_pool_cancel_alarm(alarm_pool_t* pool,
                                         alarm_id_t alarm_id);
-__attribute__((weak)) bool alarm_pool_cancel_alarm(alarm_pool_t *pool,
+__attribute__((weak)) bool alarm_pool_cancel_alarm(alarm_pool_t* pool,
                                                    alarm_id_t alarm_id) {
   assert(false &&
          "Error : The pico_time library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" uint alarm_pool_core_num(alarm_pool_t *pool);
-__attribute__((weak)) uint alarm_pool_core_num(alarm_pool_t *pool) {
+extern "C" uint alarm_pool_core_num(alarm_pool_t* pool);
+__attribute__((weak)) uint alarm_pool_core_num(alarm_pool_t* pool) {
   assert(false &&
          "Error : The pico_time library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" alarm_pool_t *alarm_pool_create(uint timer_alarm_num,
+extern "C" alarm_pool_t* alarm_pool_create(uint timer_alarm_num,
                                            uint max_timers);
-__attribute__((weak)) alarm_pool_t *alarm_pool_create(uint timer_alarm_num,
+__attribute__((weak)) alarm_pool_t* alarm_pool_create(uint timer_alarm_num,
                                                       uint max_timers) {
   assert(false &&
          "Error : The pico_time library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" alarm_pool_t *alarm_pool_create_on_timer(alarm_pool_timer_t *timer,
+extern "C" alarm_pool_t* alarm_pool_create_on_timer(alarm_pool_timer_t* timer,
                                                     uint timer_alarm_num,
                                                     uint max_timers);
-__attribute__((weak)) alarm_pool_t *alarm_pool_create_on_timer(
-    alarm_pool_timer_t *timer, uint timer_alarm_num, uint max_timers) {
+__attribute__((weak)) alarm_pool_t* alarm_pool_create_on_timer(
+    alarm_pool_timer_t* timer, uint timer_alarm_num, uint max_timers) {
   assert(false &&
          "Error : The pico_time library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" alarm_pool_t *alarm_pool_create_on_timer_with_unused_hardware_alarm(
-    alarm_pool_timer_t *timer, uint max_timers);
-__attribute__((weak)) alarm_pool_t *
-alarm_pool_create_on_timer_with_unused_hardware_alarm(alarm_pool_timer_t *timer,
+extern "C" alarm_pool_t* alarm_pool_create_on_timer_with_unused_hardware_alarm(
+    alarm_pool_timer_t* timer, uint max_timers);
+__attribute__((weak)) alarm_pool_t*
+alarm_pool_create_on_timer_with_unused_hardware_alarm(alarm_pool_timer_t* timer,
                                                       uint max_timers) {
   assert(false &&
          "Error : The pico_time library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" alarm_pool_t *alarm_pool_create_with_unused_hardware_alarm(
+extern "C" alarm_pool_t* alarm_pool_create_with_unused_hardware_alarm(
     uint max_timers);
-__attribute__((weak)) alarm_pool_t *
+__attribute__((weak)) alarm_pool_t*
 alarm_pool_create_with_unused_hardware_alarm(uint max_timers) {
   assert(false &&
          "Error : The pico_time library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" void alarm_pool_destroy(alarm_pool_t *pool);
-__attribute__((weak)) void alarm_pool_destroy(alarm_pool_t *pool) {
+extern "C" void alarm_pool_destroy(alarm_pool_t* pool);
+__attribute__((weak)) void alarm_pool_destroy(alarm_pool_t* pool) {
   assert(false &&
          "Error : The pico_time library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" alarm_pool_t *alarm_pool_get_default(void);
-__attribute__((weak)) alarm_pool_t *alarm_pool_get_default(void) {
+extern "C" alarm_pool_t* alarm_pool_get_default(void);
+__attribute__((weak)) alarm_pool_t* alarm_pool_get_default(void) {
   assert(false &&
          "Error : The pico_time library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" alarm_pool_timer_t *alarm_pool_get_default_timer(void);
-__attribute__((weak)) alarm_pool_timer_t *alarm_pool_get_default_timer(void) {
+extern "C" alarm_pool_timer_t* alarm_pool_get_default_timer(void);
+__attribute__((weak)) alarm_pool_timer_t* alarm_pool_get_default_timer(void) {
   assert(false &&
          "Error : The pico_time library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" uint alarm_pool_hardware_alarm_num(alarm_pool_t *pool);
-__attribute__((weak)) uint alarm_pool_hardware_alarm_num(alarm_pool_t *pool) {
+extern "C" uint alarm_pool_hardware_alarm_num(alarm_pool_t* pool);
+__attribute__((weak)) uint alarm_pool_hardware_alarm_num(alarm_pool_t* pool) {
   assert(false &&
          "Error : The pico_time library is missing in the link phase.");
 }
@@ -1683,30 +1740,30 @@ __attribute__((weak)) void alarm_pool_init_default(void) {
          "Error : The pico_time library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" int32_t alarm_pool_remaining_alarm_time_ms(alarm_pool_t *pool,
+extern "C" int32_t alarm_pool_remaining_alarm_time_ms(alarm_pool_t* pool,
                                                       alarm_id_t alarm_id);
 __attribute__((weak)) int32_t
-alarm_pool_remaining_alarm_time_ms(alarm_pool_t *pool, alarm_id_t alarm_id) {
+alarm_pool_remaining_alarm_time_ms(alarm_pool_t* pool, alarm_id_t alarm_id) {
   assert(false &&
          "Error : The pico_time library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" int64_t alarm_pool_remaining_alarm_time_us(alarm_pool_t *pool,
+extern "C" int64_t alarm_pool_remaining_alarm_time_us(alarm_pool_t* pool,
                                                       alarm_id_t alarm_id);
 __attribute__((weak)) int64_t
-alarm_pool_remaining_alarm_time_us(alarm_pool_t *pool, alarm_id_t alarm_id) {
+alarm_pool_remaining_alarm_time_us(alarm_pool_t* pool, alarm_id_t alarm_id) {
   assert(false &&
          "Error : The pico_time library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" uint alarm_pool_timer_alarm_num(alarm_pool_t *pool);
-__attribute__((weak)) uint alarm_pool_timer_alarm_num(alarm_pool_t *pool) {
+extern "C" uint alarm_pool_timer_alarm_num(alarm_pool_t* pool);
+__attribute__((weak)) uint alarm_pool_timer_alarm_num(alarm_pool_t* pool) {
   assert(false &&
          "Error : The pico_time library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" alarm_pool_timer_t *alarm_pool_timer_for_timer_num(uint timer_num);
-__attribute__((weak)) alarm_pool_timer_t *alarm_pool_timer_for_timer_num(
+extern "C" alarm_pool_timer_t* alarm_pool_timer_for_timer_num(uint timer_num);
+__attribute__((weak)) alarm_pool_timer_t* alarm_pool_timer_for_timer_num(
     uint timer_num) {
   assert(false &&
          "Error : The pico_time library is missing in the link phase.");
@@ -1725,8 +1782,8 @@ __attribute__((weak)) bool cancel_alarm(alarm_id_t alarm_id) {
          "Error : The pico_time library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" bool cancel_repeating_timer(repeating_timer_t *timer);
-__attribute__((weak)) bool cancel_repeating_timer(repeating_timer_t *timer) {
+extern "C" bool cancel_repeating_timer(repeating_timer_t* timer);
+__attribute__((weak)) bool cancel_repeating_timer(repeating_timer_t* timer) {
   assert(false &&
          "Error : The pico_time library is missing in the link phase.");
 }
@@ -1835,8 +1892,8 @@ __attribute__((weak)) int putchar_raw(int c) {
          "Error : The pico_stdio library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" int puts_raw(const char *s);
-__attribute__((weak)) int puts_raw(const char *s) {
+extern "C" int puts_raw(const char* s);
+__attribute__((weak)) int puts_raw(const char* s) {
   assert(false &&
          "Error : The pico_stdio library is missing in the link phase.");
 }
@@ -1847,8 +1904,8 @@ __attribute__((weak)) bool stdio_deinit_all(void) {
          "Error : The pico_stdio library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" void stdio_filter_driver(stdio_driver_t *driver);
-__attribute__((weak)) void stdio_filter_driver(stdio_driver_t *driver) {
+extern "C" void stdio_filter_driver(stdio_driver_t* driver);
+__attribute__((weak)) void stdio_filter_driver(stdio_driver_t* driver) {
   assert(false &&
          "Error : The pico_stdio library is missing in the link phase.");
 }
@@ -1859,21 +1916,9 @@ __attribute__((weak)) void stdio_flush(void) {
          "Error : The pico_stdio library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" int stdio_get_until(char *buf, int len, absolute_time_t until);
-__attribute__((weak)) int stdio_get_until(char *buf, int len,
+extern "C" int stdio_get_until(char* buf, int len, absolute_time_t until);
+__attribute__((weak)) int stdio_get_until(char* buf, int len,
                                           absolute_time_t until) {
-  assert(false &&
-         "Error : The pico_stdio library is missing in the link phase.");
-}
-// --------------------------------------------------
-extern "C" int stdio_getchar(void);
-__attribute__((weak)) int stdio_getchar(void) {
-  assert(false &&
-         "Error : The pico_stdio library is missing in the link phase.");
-}
-// --------------------------------------------------
-extern "C" int stdio_getchar_timeout_us(uint32_t timeout_us);
-__attribute__((weak)) int stdio_getchar_timeout_us(uint32_t timeout_us) {
   assert(false &&
          "Error : The pico_stdio library is missing in the link phase.");
 }
@@ -1884,70 +1929,25 @@ __attribute__((weak)) bool stdio_init_all(void) {
          "Error : The pico_stdio library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" int __printflike(1, 0) stdio_printf(const char *format, ...);
-__attribute__((weak)) int __printflike(1, 0)
-    stdio_printf(const char *format, ...) {
-  assert(false &&
-         "Error : The pico_stdio library is missing in the link phase.");
-}
-// --------------------------------------------------
-extern "C" int stdio_put_string(const char *s, int len, bool newline,
+extern "C" int stdio_put_string(const char* s, int len, bool newline,
                                 bool cr_translation);
-__attribute__((weak)) int stdio_put_string(const char *s, int len, bool newline,
+__attribute__((weak)) int stdio_put_string(const char* s, int len, bool newline,
                                            bool cr_translation) {
   assert(false &&
          "Error : The pico_stdio library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" int stdio_putchar(int);
-__attribute__((weak)) int stdio_putchar(int) {
-  assert(false &&
-         "Error : The pico_stdio library is missing in the link phase.");
-}
-// --------------------------------------------------
-extern "C" int stdio_putchar_raw(int c);
-__attribute__((weak)) int stdio_putchar_raw(int c) {
-  assert(false &&
-         "Error : The pico_stdio library is missing in the link phase.");
-}
-// --------------------------------------------------
-extern "C" int stdio_puts(const char *s);
-__attribute__((weak)) int stdio_puts(const char *s) {
-  assert(false &&
-         "Error : The pico_stdio library is missing in the link phase.");
-}
-// --------------------------------------------------
-extern "C" int stdio_puts_raw(const char *s);
-__attribute__((weak)) int stdio_puts_raw(const char *s) {
-  assert(false &&
-         "Error : The pico_stdio library is missing in the link phase.");
-}
-// --------------------------------------------------
-extern "C" void stdio_set_chars_available_callback(void (*fn)(void *),
-                                                   void *param);
-__attribute__((weak)) void stdio_set_chars_available_callback(
-    void (*fn)(void *), void *param) {
-  assert(false &&
-         "Error : The pico_stdio library is missing in the link phase.");
-}
-// --------------------------------------------------
-extern "C" void stdio_set_driver_enabled(stdio_driver_t *driver, bool enabled);
-__attribute__((weak)) void stdio_set_driver_enabled(stdio_driver_t *driver,
+extern "C" void stdio_set_driver_enabled(stdio_driver_t* driver, bool enabled);
+__attribute__((weak)) void stdio_set_driver_enabled(stdio_driver_t* driver,
                                                     bool enabled) {
   assert(false &&
          "Error : The pico_stdio library is missing in the link phase.");
 }
 // --------------------------------------------------
-extern "C" void stdio_set_translate_crlf(stdio_driver_t *driver,
+extern "C" void stdio_set_translate_crlf(stdio_driver_t* driver,
                                          bool translate);
-__attribute__((weak)) void stdio_set_translate_crlf(stdio_driver_t *driver,
+__attribute__((weak)) void stdio_set_translate_crlf(stdio_driver_t* driver,
                                                     bool translate) {
-  assert(false &&
-         "Error : The pico_stdio library is missing in the link phase.");
-}
-// --------------------------------------------------
-extern "C" int stdio_vprintf(const char *format, va_list va);
-__attribute__((weak)) int stdio_vprintf(const char *format, va_list va) {
   assert(false &&
          "Error : The pico_stdio library is missing in the link phase.");
 }

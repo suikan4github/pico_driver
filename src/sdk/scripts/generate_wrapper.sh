@@ -5,7 +5,7 @@ FILE="api_dirs.txt"
 cp blocks/sdkwrapper_preumble.hpp output/sdkwrapper.hpp
 cp blocks/sdkwrapper_preumble.cpp output/sdkwrapper.cpp
 cp blocks/mocksdkwrapper_preumble.hpp output/mocksdkwrapper.hpp
-cp blocks/apistub_preumble.c  output/apistub.c
+cp blocks/apistub_preumble.cpp  output/apistub.cpp
 echo "" > output/fffsdkwrapper.hpp
 echo "" > output/pico_sdk_headers.h
 echo "" > debug.hpp

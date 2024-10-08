@@ -2,61 +2,61 @@
 
 class MockSdkWrapper : public SdkWrapper {
  public:
-  MOCK_METHOD1(i2c_deinit, void(i2c_inst_t *i2c));
-  MOCK_METHOD2(i2c_get_dreq, uint(i2c_inst_t *i2c, bool is_tx));
-  MOCK_METHOD1(i2c_get_hw, i2c_hw_t *(i2c_inst_t *i2c));
-  MOCK_METHOD1(i2c_get_index, uint(i2c_inst_t *i2c));
-  MOCK_METHOD1(i2c_get_instance, i2c_inst_t *(uint num));
-  MOCK_METHOD1(i2c_get_read_available, size_t(i2c_inst_t *i2c));
-  MOCK_METHOD1(i2c_get_write_available, size_t(i2c_inst_t *i2c));
-  MOCK_METHOD2(i2c_init, uint(i2c_inst_t *i2c, uint baudrate));
-  MOCK_METHOD5(i2c_read_blocking, int(i2c_inst_t *i2c, uint8_t addr,
-                                      uint8_t *dst, size_t len, bool nostop));
+  MOCK_METHOD1(i2c_deinit, void(i2c_inst_t* i2c));
+  MOCK_METHOD2(i2c_get_dreq, uint(i2c_inst_t* i2c, bool is_tx));
+  MOCK_METHOD1(i2c_get_hw, i2c_hw_t*(i2c_inst_t* i2c));
+  MOCK_METHOD1(i2c_get_index, uint(i2c_inst_t* i2c));
+  MOCK_METHOD1(i2c_get_instance, i2c_inst_t*(uint num));
+  MOCK_METHOD1(i2c_get_read_available, size_t(i2c_inst_t* i2c));
+  MOCK_METHOD1(i2c_get_write_available, size_t(i2c_inst_t* i2c));
+  MOCK_METHOD2(i2c_init, uint(i2c_inst_t* i2c, uint baudrate));
+  MOCK_METHOD5(i2c_read_blocking, int(i2c_inst_t* i2c, uint8_t addr,
+                                      uint8_t* dst, size_t len, bool nostop));
   MOCK_METHOD6(i2c_read_blocking_until,
-               int(i2c_inst_t *i2c, uint8_t addr, uint8_t *dst, size_t len,
+               int(i2c_inst_t* i2c, uint8_t addr, uint8_t* dst, size_t len,
                    bool nostop, absolute_time_t until));
-  MOCK_METHOD1(i2c_read_byte_raw, uint8_t(i2c_inst_t *i2c));
+  MOCK_METHOD1(i2c_read_byte_raw, uint8_t(i2c_inst_t* i2c));
   MOCK_METHOD3(i2c_read_raw_blocking,
-               void(i2c_inst_t *i2c, uint8_t *dst, size_t len));
+               void(i2c_inst_t* i2c, uint8_t* dst, size_t len));
   MOCK_METHOD6(i2c_read_timeout_per_char_us,
-               int(i2c_inst_t *i2c, uint8_t addr, uint8_t *dst, size_t len,
+               int(i2c_inst_t* i2c, uint8_t addr, uint8_t* dst, size_t len,
                    bool nostop, uint timeout_per_char_us));
   MOCK_METHOD6(i2c_read_timeout_us,
-               int(i2c_inst_t *i2c, uint8_t addr, uint8_t *dst, size_t len,
+               int(i2c_inst_t* i2c, uint8_t addr, uint8_t* dst, size_t len,
                    bool nostop, uint timeout_us));
-  MOCK_METHOD2(i2c_set_baudrate, uint(i2c_inst_t *i2c, uint baudrate));
+  MOCK_METHOD2(i2c_set_baudrate, uint(i2c_inst_t* i2c, uint baudrate));
   MOCK_METHOD3(i2c_set_slave_mode,
-               void(i2c_inst_t *i2c, bool slave, uint8_t addr));
+               void(i2c_inst_t* i2c, bool slave, uint8_t addr));
   MOCK_METHOD5(i2c_write_blocking,
-               int(i2c_inst_t *i2c, uint8_t addr, const uint8_t *src,
+               int(i2c_inst_t* i2c, uint8_t addr, const uint8_t* src,
                    size_t len, bool nostop));
   MOCK_METHOD6(i2c_write_blocking_until,
-               int(i2c_inst_t *i2c, uint8_t addr, const uint8_t *src,
+               int(i2c_inst_t* i2c, uint8_t addr, const uint8_t* src,
                    size_t len, bool nostop, absolute_time_t until));
-  MOCK_METHOD2(i2c_write_byte_raw, void(i2c_inst_t *i2c, uint8_t value));
+  MOCK_METHOD2(i2c_write_byte_raw, void(i2c_inst_t* i2c, uint8_t value));
   MOCK_METHOD3(i2c_write_raw_blocking,
-               void(i2c_inst_t *i2c, const uint8_t *src, size_t len));
+               void(i2c_inst_t* i2c, const uint8_t* src, size_t len));
   MOCK_METHOD6(i2c_write_timeout_per_char_us,
-               int(i2c_inst_t *i2c, uint8_t addr, const uint8_t *src,
+               int(i2c_inst_t* i2c, uint8_t addr, const uint8_t* src,
                    size_t len, bool nostop, uint timeout_per_char_us));
   MOCK_METHOD6(i2c_write_timeout_us,
-               int(i2c_inst_t *i2c, uint8_t addr, const uint8_t *src,
+               int(i2c_inst_t* i2c, uint8_t addr, const uint8_t* src,
                    size_t len, bool nostop, uint timeout_us));
-  MOCK_METHOD2(pio_add_program, int(PIO pio, const pio_program_t *program));
+  MOCK_METHOD2(pio_add_program, int(PIO pio, const pio_program_t* program));
   MOCK_METHOD3(pio_add_program_at_offset,
-               int(PIO pio, const pio_program_t *program, uint offset));
+               int(PIO pio, const pio_program_t* program, uint offset));
   MOCK_METHOD3(pio_calculate_clkdiv_from_float,
-               void(float div, uint16_t *div_int, uint8_t *div_frac));
+               void(float div, uint16_t* div_int, uint8_t* div_frac));
   MOCK_METHOD2(pio_can_add_program,
-               bool(PIO pio, const pio_program_t *program));
+               bool(PIO pio, const pio_program_t* program));
   MOCK_METHOD3(pio_can_add_program_at_offset,
-               bool(PIO pio, const pio_program_t *program, uint offset));
+               bool(PIO pio, const pio_program_t* program, uint offset));
   MOCK_METHOD4(pio_claim_free_sm_and_add_program,
-               bool(const pio_program_t *program, PIO *pio, uint *sm,
-                    uint *offset));
+               bool(const pio_program_t* program, PIO* pio, uint* sm,
+                    uint* offset));
   MOCK_METHOD7(pio_claim_free_sm_and_add_program_for_gpio_range,
-               bool(const pio_program_t *program, PIO *pio, uint *sm,
-                    uint *offset, uint gpio_base, uint gpio_count,
+               bool(const pio_program_t* program, PIO* pio, uint* sm,
+                    uint* offset, uint gpio_base, uint gpio_count,
                     bool set_gpio_base));
   MOCK_METHOD2(pio_claim_sm_mask, void(PIO pio, uint sm_mask));
   MOCK_METHOD2(pio_claim_unused_sm, int(PIO pio, bool required));
@@ -69,7 +69,7 @@ class MockSdkWrapper : public SdkWrapper {
   MOCK_METHOD4(pio_enable_sm_multi_mask_in_sync,
                void(PIO pio, uint32_t mask_prev, uint32_t mask,
                     uint32_t mask_next));
-  MOCK_METHOD0(pio_get_default_sm_config, pio_sm_config(void));
+  MOCK_METHOD0(pio_get_default_sm_config, pio_sm_config());
   MOCK_METHOD3(pio_get_dreq, uint(PIO pio, uint sm, bool is_tx));
   MOCK_METHOD1(pio_get_funcsel, uint(PIO pio));
   MOCK_METHOD1(pio_get_gpio_base, uint(PIO pio));
@@ -84,9 +84,9 @@ class MockSdkWrapper : public SdkWrapper {
   MOCK_METHOD2(pio_interrupt_clear, void(PIO pio, uint pio_interrupt_num));
   MOCK_METHOD2(pio_interrupt_get, bool(PIO pio, uint pio_interrupt_num));
   MOCK_METHOD3(pio_remove_program,
-               void(PIO pio, const pio_program_t *program, uint loaded_offset));
+               void(PIO pio, const pio_program_t* program, uint loaded_offset));
   MOCK_METHOD4(pio_remove_program_and_unclaim_sm,
-               void(const pio_program_t *program, PIO pio, uint sm,
+               void(const pio_program_t* program, PIO pio, uint sm,
                     uint offset));
   MOCK_METHOD2(pio_restart_sm_mask, void(PIO pio, uint32_t mask));
   MOCK_METHOD2(pio_set_gpio_base, int(PIO pio, uint gpio_base));
@@ -121,7 +121,7 @@ class MockSdkWrapper : public SdkWrapper {
   MOCK_METHOD2(pio_sm_get_rx_fifo_level, uint(PIO pio, uint sm));
   MOCK_METHOD2(pio_sm_get_tx_fifo_level, uint(PIO pio, uint sm));
   MOCK_METHOD4(pio_sm_init, int(PIO pio, uint sm, uint initial_pc,
-                                const pio_sm_config *config));
+                                const pio_sm_config* config));
   MOCK_METHOD2(pio_sm_is_claimed, bool(PIO pio, uint sm));
   MOCK_METHOD2(pio_sm_is_exec_stalled, bool(PIO pio, uint sm));
   MOCK_METHOD2(pio_sm_is_rx_fifo_empty, bool(PIO pio, uint sm));
@@ -135,7 +135,7 @@ class MockSdkWrapper : public SdkWrapper {
   MOCK_METHOD4(pio_sm_set_clkdiv_int_frac,
                void(PIO pio, uint sm, uint16_t div_int, uint8_t div_frac));
   MOCK_METHOD3(pio_sm_set_config,
-               int(PIO pio, uint sm, const pio_sm_config *config));
+               int(PIO pio, uint sm, const pio_sm_config* config));
   MOCK_METHOD5(pio_sm_set_consecutive_pindirs,
                int(PIO pio, uint sm, uint pins_base, uint pin_count,
                    bool is_out));
@@ -156,48 +156,48 @@ class MockSdkWrapper : public SdkWrapper {
   MOCK_METHOD4(pio_sm_set_wrap,
                void(PIO pio, uint sm, uint wrap_target, uint wrap));
   MOCK_METHOD2(pio_sm_unclaim, void(PIO pio, uint sm));
-  MOCK_METHOD2(sm_config_set_clkdiv, void(pio_sm_config *c, float div));
+  MOCK_METHOD2(sm_config_set_clkdiv, void(pio_sm_config* c, float div));
   MOCK_METHOD3(sm_config_set_clkdiv_int_frac,
-               void(pio_sm_config *c, uint16_t div_int, uint8_t div_frac));
+               void(pio_sm_config* c, uint16_t div_int, uint8_t div_frac));
   MOCK_METHOD2(sm_config_set_fifo_join,
-               void(pio_sm_config *c, enum pio_fifo_join join));
-  MOCK_METHOD2(sm_config_set_in_pin_base, void(pio_sm_config *c, uint in_base));
+               void(pio_sm_config* c, enum pio_fifo_join join));
+  MOCK_METHOD2(sm_config_set_in_pin_base, void(pio_sm_config* c, uint in_base));
   MOCK_METHOD2(sm_config_set_in_pin_count,
-               void(pio_sm_config *c, uint in_count));
-  MOCK_METHOD2(sm_config_set_in_pins, void(pio_sm_config *c, uint in_base));
+               void(pio_sm_config* c, uint in_count));
+  MOCK_METHOD2(sm_config_set_in_pins, void(pio_sm_config* c, uint in_base));
   MOCK_METHOD4(sm_config_set_in_shift,
-               void(pio_sm_config *c, bool shift_right, bool autopush,
+               void(pio_sm_config* c, bool shift_right, bool autopush,
                     uint push_threshold));
-  MOCK_METHOD2(sm_config_set_jmp_pin, void(pio_sm_config *c, uint pin));
+  MOCK_METHOD2(sm_config_set_jmp_pin, void(pio_sm_config* c, uint pin));
   MOCK_METHOD3(sm_config_set_mov_status,
-               void(pio_sm_config *c, enum pio_mov_status_type status_sel,
+               void(pio_sm_config* c, enum pio_mov_status_type status_sel,
                     uint status_n));
   MOCK_METHOD2(sm_config_set_out_pin_base,
-               void(pio_sm_config *c, uint out_base));
+               void(pio_sm_config* c, uint out_base));
   MOCK_METHOD2(sm_config_set_out_pin_count,
-               void(pio_sm_config *c, uint out_count));
+               void(pio_sm_config* c, uint out_count));
   MOCK_METHOD3(sm_config_set_out_pins,
-               void(pio_sm_config *c, uint out_base, uint out_count));
+               void(pio_sm_config* c, uint out_base, uint out_count));
   MOCK_METHOD4(sm_config_set_out_shift,
-               void(pio_sm_config *c, bool shift_right, bool autopull,
+               void(pio_sm_config* c, bool shift_right, bool autopull,
                     uint pull_threshold));
   MOCK_METHOD4(sm_config_set_out_special,
-               void(pio_sm_config *c, bool sticky, bool has_enable_pin,
+               void(pio_sm_config* c, bool sticky, bool has_enable_pin,
                     uint enable_pin_index));
   MOCK_METHOD2(sm_config_set_set_pin_base,
-               void(pio_sm_config *c, uint set_base));
+               void(pio_sm_config* c, uint set_base));
   MOCK_METHOD2(sm_config_set_set_pin_count,
-               void(pio_sm_config *c, uint set_count));
+               void(pio_sm_config* c, uint set_count));
   MOCK_METHOD3(sm_config_set_set_pins,
-               void(pio_sm_config *c, uint set_base, uint set_count));
-  MOCK_METHOD4(sm_config_set_sideset, void(pio_sm_config *c, uint bit_count,
+               void(pio_sm_config* c, uint set_base, uint set_count));
+  MOCK_METHOD4(sm_config_set_sideset, void(pio_sm_config* c, uint bit_count,
                                            bool optional, bool pindirs));
   MOCK_METHOD2(sm_config_set_sideset_pin_base,
-               void(pio_sm_config *c, uint sideset_base));
+               void(pio_sm_config* c, uint sideset_base));
   MOCK_METHOD2(sm_config_set_sideset_pins,
-               void(pio_sm_config *c, uint sideset_base));
+               void(pio_sm_config* c, uint sideset_base));
   MOCK_METHOD3(sm_config_set_wrap,
-               void(pio_sm_config *c, uint wrap_target, uint wrap));
+               void(pio_sm_config* c, uint wrap_target, uint wrap));
   MOCK_METHOD2(gpio_acknowledge_irq, void(uint gpio, uint32_t event_mask));
   MOCK_METHOD2(gpio_add_raw_irq_handler,
                void(uint gpio, irq_handler_t handler));
@@ -217,12 +217,12 @@ class MockSdkWrapper : public SdkWrapper {
   MOCK_METHOD1(gpio_clr_mask, void(uint32_t mask));
   MOCK_METHOD1(gpio_clr_mask64, void(uint64_t mask));
   MOCK_METHOD2(gpio_clr_mask_n, void(uint n, uint32_t mask));
-  MOCK_METHOD0(gpio_debug_pins_init, void(void));
+  MOCK_METHOD0(gpio_debug_pins_init, void());
   MOCK_METHOD1(gpio_deinit, void(uint gpio));
   MOCK_METHOD1(gpio_disable_pulls, void(uint gpio));
   MOCK_METHOD1(gpio_get, bool(uint gpio));
-  MOCK_METHOD0(gpio_get_all, uint32_t(void));
-  MOCK_METHOD0(gpio_get_all64, uint64_t(void));
+  MOCK_METHOD0(gpio_get_all, uint32_t());
+  MOCK_METHOD0(gpio_get_all64, uint64_t());
   MOCK_METHOD1(gpio_get_dir, uint(uint gpio));
   MOCK_METHOD1(gpio_get_drive_strength, enum gpio_drive_strength(uint gpio));
   MOCK_METHOD1(gpio_get_function, gpio_function_t(uint gpio));
@@ -289,11 +289,11 @@ class MockSdkWrapper : public SdkWrapper {
   MOCK_METHOD1(gpio_xor_mask64, void(uint64_t mask));
   MOCK_METHOD2(gpio_xor_mask_n, void(uint n, uint32_t mask));
   MOCK_METHOD4(check_sys_clock_hz,
-               bool(uint32_t freq_hz, uint *vco_freq_out, uint *post_div1_out,
-                    uint *post_div2_out));
+               bool(uint32_t freq_hz, uint* vco_freq_out, uint* post_div1_out,
+                    uint* post_div2_out));
   MOCK_METHOD4(check_sys_clock_khz,
-               bool(uint32_t freq_khz, uint *vco_freq_out, uint *post_div1_out,
-                    uint *post_div2_out));
+               bool(uint32_t freq_khz, uint* vco_freq_out, uint* post_div1_out,
+                    uint* post_div2_out));
   MOCK_METHOD5(clock_configure,
                bool(clock_handle_t clock, uint32_t src, uint32_t auxsrc,
                     uint32_t src_freq, uint32_t freq));
@@ -314,7 +314,7 @@ class MockSdkWrapper : public SdkWrapper {
   MOCK_METHOD1(clocks_enable_resus, void(resus_callback_t resus_callback));
   MOCK_METHOD1(frequency_count_khz, uint32_t(uint src));
   MOCK_METHOD1(frequency_count_mhz, float(uint src));
-  MOCK_METHOD0(set_sys_clock_48mhz, void(void));
+  MOCK_METHOD0(set_sys_clock_48mhz, void());
   MOCK_METHOD2(set_sys_clock_hz, bool(uint32_t freq_hz, bool required));
   MOCK_METHOD2(set_sys_clock_khz, bool(uint32_t freq_khz, bool required));
   MOCK_METHOD3(set_sys_clock_pll,
@@ -325,82 +325,82 @@ class MockSdkWrapper : public SdkWrapper {
                absolute_time_t(absolute_time_t a, absolute_time_t b));
   MOCK_METHOD4(add_alarm_at,
                alarm_id_t(absolute_time_t time, alarm_callback_t callback,
-                          void *user_data, bool fire_if_past));
+                          void* user_data, bool fire_if_past));
   MOCK_METHOD4(add_alarm_in_ms,
                alarm_id_t(uint32_t ms, alarm_callback_t callback,
-                          void *user_data, bool fire_if_past));
+                          void* user_data, bool fire_if_past));
   MOCK_METHOD4(add_alarm_in_us,
                alarm_id_t(uint64_t us, alarm_callback_t callback,
-                          void *user_data, bool fire_if_past));
+                          void* user_data, bool fire_if_past));
   MOCK_METHOD4(add_repeating_timer_ms,
                bool(int32_t delay_ms, repeating_timer_callback_t callback,
-                    void *user_data, repeating_timer_t *out));
+                    void* user_data, repeating_timer_t* out));
   MOCK_METHOD4(add_repeating_timer_us,
                bool(int64_t delay_us, repeating_timer_callback_t callback,
-                    void *user_data, repeating_timer_t *out));
+                    void* user_data, repeating_timer_t* out));
   MOCK_METHOD5(alarm_pool_add_alarm_at,
-               alarm_id_t(alarm_pool_t *pool, absolute_time_t time,
-                          alarm_callback_t callback, void *user_data,
+               alarm_id_t(alarm_pool_t* pool, absolute_time_t time,
+                          alarm_callback_t callback, void* user_data,
                           bool fire_if_past));
   MOCK_METHOD4(alarm_pool_add_alarm_at_force_in_context,
-               alarm_id_t(alarm_pool_t *pool, absolute_time_t time,
-                          alarm_callback_t callback, void *user_data));
+               alarm_id_t(alarm_pool_t* pool, absolute_time_t time,
+                          alarm_callback_t callback, void* user_data));
   MOCK_METHOD5(alarm_pool_add_alarm_in_ms,
-               alarm_id_t(alarm_pool_t *pool, uint32_t ms,
-                          alarm_callback_t callback, void *user_data,
+               alarm_id_t(alarm_pool_t* pool, uint32_t ms,
+                          alarm_callback_t callback, void* user_data,
                           bool fire_if_past));
   MOCK_METHOD5(alarm_pool_add_alarm_in_us,
-               alarm_id_t(alarm_pool_t *pool, uint64_t us,
-                          alarm_callback_t callback, void *user_data,
+               alarm_id_t(alarm_pool_t* pool, uint64_t us,
+                          alarm_callback_t callback, void* user_data,
                           bool fire_if_past));
   MOCK_METHOD5(alarm_pool_add_repeating_timer_ms,
-               bool(alarm_pool_t *pool, int32_t delay_ms,
-                    repeating_timer_callback_t callback, void *user_data,
-                    repeating_timer_t *out));
+               bool(alarm_pool_t* pool, int32_t delay_ms,
+                    repeating_timer_callback_t callback, void* user_data,
+                    repeating_timer_t* out));
   MOCK_METHOD5(alarm_pool_add_repeating_timer_us,
-               bool(alarm_pool_t *pool, int64_t delay_us,
-                    repeating_timer_callback_t callback, void *user_data,
-                    repeating_timer_t *out));
+               bool(alarm_pool_t* pool, int64_t delay_us,
+                    repeating_timer_callback_t callback, void* user_data,
+                    repeating_timer_t* out));
   MOCK_METHOD2(alarm_pool_cancel_alarm,
-               bool(alarm_pool_t *pool, alarm_id_t alarm_id));
-  MOCK_METHOD1(alarm_pool_core_num, uint(alarm_pool_t *pool));
+               bool(alarm_pool_t* pool, alarm_id_t alarm_id));
+  MOCK_METHOD1(alarm_pool_core_num, uint(alarm_pool_t* pool));
   MOCK_METHOD2(alarm_pool_create,
-               alarm_pool_t *(uint timer_alarm_num, uint max_timers));
+               alarm_pool_t*(uint timer_alarm_num, uint max_timers));
   MOCK_METHOD3(alarm_pool_create_on_timer,
-               alarm_pool_t *(alarm_pool_timer_t *timer, uint timer_alarm_num,
-                              uint max_timers));
+               alarm_pool_t*(alarm_pool_timer_t* timer, uint timer_alarm_num,
+                             uint max_timers));
   MOCK_METHOD2(alarm_pool_create_on_timer_with_unused_hardware_alarm,
-               alarm_pool_t *(alarm_pool_timer_t *timer, uint max_timers));
+               alarm_pool_t*(alarm_pool_timer_t* timer, uint max_timers));
   MOCK_METHOD1(alarm_pool_create_with_unused_hardware_alarm,
-               alarm_pool_t *(uint max_timers));
-  MOCK_METHOD1(alarm_pool_destroy, void(alarm_pool_t *pool));
-  MOCK_METHOD0(alarm_pool_get_default, alarm_pool_t *(void));
-  MOCK_METHOD0(alarm_pool_get_default_timer, alarm_pool_timer_t *(void));
-  MOCK_METHOD1(alarm_pool_hardware_alarm_num, uint(alarm_pool_t *pool));
-  MOCK_METHOD0(alarm_pool_init_default, void(void));
+               alarm_pool_t*(uint max_timers));
+  MOCK_METHOD1(alarm_pool_destroy, void(alarm_pool_t* pool));
+  MOCK_METHOD0(alarm_pool_get_default, alarm_pool_t*());
+  MOCK_METHOD0(alarm_pool_get_default_timer, alarm_pool_timer_t*());
+  MOCK_METHOD1(alarm_pool_hardware_alarm_num, uint(alarm_pool_t* pool));
+  MOCK_METHOD0(alarm_pool_init_default, void());
   MOCK_METHOD2(alarm_pool_remaining_alarm_time_ms,
-               int32_t(alarm_pool_t *pool, alarm_id_t alarm_id));
+               int32_t(alarm_pool_t* pool, alarm_id_t alarm_id));
   MOCK_METHOD2(alarm_pool_remaining_alarm_time_us,
-               int64_t(alarm_pool_t *pool, alarm_id_t alarm_id));
-  MOCK_METHOD1(alarm_pool_timer_alarm_num, uint(alarm_pool_t *pool));
+               int64_t(alarm_pool_t* pool, alarm_id_t alarm_id));
+  MOCK_METHOD1(alarm_pool_timer_alarm_num, uint(alarm_pool_t* pool));
   MOCK_METHOD1(alarm_pool_timer_for_timer_num,
-               alarm_pool_timer_t *(uint timer_num));
+               alarm_pool_timer_t*(uint timer_num));
   MOCK_METHOD1(best_effort_wfe_or_timeout,
                bool(absolute_time_t timeout_timestamp));
   MOCK_METHOD1(cancel_alarm, bool(alarm_id_t alarm_id));
-  MOCK_METHOD1(cancel_repeating_timer, bool(repeating_timer_t *timer));
+  MOCK_METHOD1(cancel_repeating_timer, bool(repeating_timer_t* timer));
   MOCK_METHOD2(delayed_by_ms,
                absolute_time_t(const absolute_time_t t, uint32_t ms));
   MOCK_METHOD2(delayed_by_us,
                absolute_time_t(const absolute_time_t t, uint64_t us));
-  MOCK_METHOD0(get_absolute_time, absolute_time_t(void));
+  MOCK_METHOD0(get_absolute_time, absolute_time_t());
   MOCK_METHOD1(is_at_the_end_of_time, bool(absolute_time_t t));
   MOCK_METHOD1(is_nil_time, bool(absolute_time_t t));
   MOCK_METHOD1(make_timeout_time_ms, absolute_time_t(uint32_t ms));
   MOCK_METHOD1(make_timeout_time_us, absolute_time_t(uint64_t us));
   MOCK_METHOD1(remaining_alarm_time_ms, int32_t(alarm_id_t alarm_id));
   MOCK_METHOD1(remaining_alarm_time_us, int64_t(alarm_id_t alarm_id));
-  MOCK_METHOD0(runtime_init_default_alarm_pool, void(void));
+  MOCK_METHOD0(runtime_init_default_alarm_pool, void());
   MOCK_METHOD1(sleep_ms, void(uint32_t ms));
   MOCK_METHOD1(sleep_until, void(absolute_time_t target));
   MOCK_METHOD1(sleep_us, void(uint64_t us));
@@ -408,28 +408,18 @@ class MockSdkWrapper : public SdkWrapper {
   MOCK_METHOD1(us_to_ms, uint32_t(uint64_t us));
   MOCK_METHOD1(getchar_timeout_us, int(uint32_t timeout_us));
   MOCK_METHOD1(putchar_raw, int(int c));
-  MOCK_METHOD1(puts_raw, int(const char *s));
-  MOCK_METHOD0(stdio_deinit_all, bool(void));
-  MOCK_METHOD1(stdio_filter_driver, void(stdio_driver_t *driver));
-  MOCK_METHOD0(stdio_flush, void(void));
-  MOCK_METHOD3(stdio_get_until, int(char *buf, int len, absolute_time_t until));
-  MOCK_METHOD0(stdio_getchar, int(void));
-  MOCK_METHOD1(stdio_getchar_timeout_us, int(uint32_t timeout_us));
-  MOCK_METHOD0(stdio_init_all, bool(void));
-  MOCK_METHOD2 .5(__printflike, int(1, 0) stdio_printf(const char *format, ));
+  MOCK_METHOD1(puts_raw, int(const char* s));
+  MOCK_METHOD0(stdio_deinit_all, bool());
+  MOCK_METHOD1(stdio_filter_driver, void(stdio_driver_t* driver));
+  MOCK_METHOD0(stdio_flush, void());
+  MOCK_METHOD3(stdio_get_until, int(char* buf, int len, absolute_time_t until));
+  MOCK_METHOD0(stdio_init_all, bool());
   MOCK_METHOD4(stdio_put_string,
-               int(const char *s, int len, bool newline, bool cr_translation));
-  MOCK_METHOD0 .5(stdio_putchar, int(int));
-  MOCK_METHOD1(stdio_putchar_raw, int(int c));
-  MOCK_METHOD1(stdio_puts, int(const char *s));
-  MOCK_METHOD1(stdio_puts_raw, int(const char *s));
-  MOCK_METHOD0(stdio_set_chars_available_callback,
-               void(void (*fn)(void *), void));
+               int(const char* s, int len, bool newline, bool cr_translation));
   MOCK_METHOD2(stdio_set_driver_enabled,
-               void(stdio_driver_t *driver, bool enabled));
+               void(stdio_driver_t* driver, bool enabled));
   MOCK_METHOD2(stdio_set_translate_crlf,
-               void(stdio_driver_t *driver, bool translate));
-  MOCK_METHOD2(stdio_vprintf, int(const char *format, va_list va));
+               void(stdio_driver_t* driver, bool translate));
 }  // class MockSdkWrapper : public SdkWrapper
 ;
 #endif  // __has_include(<gmock/gmock.h>)

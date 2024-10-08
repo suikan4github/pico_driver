@@ -1,204 +1,204 @@
 
 #include "sdkwrapper.hpp"
 // --------------------------------------------------
-extern "C" void i2c_deinit(i2c_inst_t *i2c);
-void rpp_driver::SdkWrapper::i2c_deinit(i2c_inst_t *i2c) { ::i2c_deinit(i2c); }
+extern "C" void i2c_deinit(i2c_inst_t* i2c);
+void rpp_driver::SdkWrapper::i2c_deinit(i2c_inst_t* i2c) { ::i2c_deinit(i2c); }
 // --------------------------------------------------
-extern "C" uint i2c_get_dreq(i2c_inst_t *i2c, bool is_tx);
-uint rpp_driver::SdkWrapper::i2c_get_dreq(i2c_inst_t *i2c, bool is_tx) {
+extern "C" uint i2c_get_dreq(i2c_inst_t* i2c, bool is_tx);
+uint rpp_driver::SdkWrapper::i2c_get_dreq(i2c_inst_t* i2c, bool is_tx) {
   return ::i2c_get_dreq(i2c, is_tx);
 }
 // --------------------------------------------------
-extern "C" i2c_hw_t *i2c_get_hw(i2c_inst_t *i2c);
-i2c_hw_t *rpp_driver::SdkWrapper::i2c_get_hw(i2c_inst_t *i2c) {
+extern "C" i2c_hw_t* i2c_get_hw(i2c_inst_t* i2c);
+i2c_hw_t* rpp_driver::SdkWrapper::i2c_get_hw(i2c_inst_t* i2c) {
   return ::i2c_get_hw(i2c);
 }
 // --------------------------------------------------
-extern "C" uint i2c_get_index(i2c_inst_t *i2c);
-uint rpp_driver::SdkWrapper::i2c_get_index(i2c_inst_t *i2c) {
+extern "C" uint i2c_get_index(i2c_inst_t* i2c);
+uint rpp_driver::SdkWrapper::i2c_get_index(i2c_inst_t* i2c) {
   return ::i2c_get_index(i2c);
 }
 // --------------------------------------------------
-extern "C" i2c_inst_t *i2c_get_instance(uint num);
-i2c_inst_t *rpp_driver::SdkWrapper::i2c_get_instance(uint num) {
+extern "C" i2c_inst_t* i2c_get_instance(uint num);
+i2c_inst_t* rpp_driver::SdkWrapper::i2c_get_instance(uint num) {
   return ::i2c_get_instance(num);
 }
 // --------------------------------------------------
-extern "C" size_t i2c_get_read_available(i2c_inst_t *i2c);
-size_t rpp_driver::SdkWrapper::i2c_get_read_available(i2c_inst_t *i2c) {
+extern "C" size_t i2c_get_read_available(i2c_inst_t* i2c);
+size_t rpp_driver::SdkWrapper::i2c_get_read_available(i2c_inst_t* i2c) {
   return ::i2c_get_read_available(i2c);
 }
 // --------------------------------------------------
-extern "C" size_t i2c_get_write_available(i2c_inst_t *i2c);
-size_t rpp_driver::SdkWrapper::i2c_get_write_available(i2c_inst_t *i2c) {
+extern "C" size_t i2c_get_write_available(i2c_inst_t* i2c);
+size_t rpp_driver::SdkWrapper::i2c_get_write_available(i2c_inst_t* i2c) {
   return ::i2c_get_write_available(i2c);
 }
 // --------------------------------------------------
-extern "C" uint i2c_init(i2c_inst_t *i2c, uint baudrate);
-uint rpp_driver::SdkWrapper::i2c_init(i2c_inst_t *i2c, uint baudrate) {
+extern "C" uint i2c_init(i2c_inst_t* i2c, uint baudrate);
+uint rpp_driver::SdkWrapper::i2c_init(i2c_inst_t* i2c, uint baudrate) {
   return ::i2c_init(i2c, baudrate);
 }
 // --------------------------------------------------
-extern "C" int i2c_read_blocking(i2c_inst_t *i2c, uint8_t addr, uint8_t *dst,
+extern "C" int i2c_read_blocking(i2c_inst_t* i2c, uint8_t addr, uint8_t* dst,
                                  size_t len, bool nostop);
-int rpp_driver::SdkWrapper::i2c_read_blocking(i2c_inst_t *i2c, uint8_t addr,
-                                              uint8_t *dst, size_t len,
+int rpp_driver::SdkWrapper::i2c_read_blocking(i2c_inst_t* i2c, uint8_t addr,
+                                              uint8_t* dst, size_t len,
                                               bool nostop) {
   return ::i2c_read_blocking(i2c, addr, dst, len, nostop);
 }
 // --------------------------------------------------
-extern "C" int i2c_read_blocking_until(i2c_inst_t *i2c, uint8_t addr,
-                                       uint8_t *dst, size_t len, bool nostop,
+extern "C" int i2c_read_blocking_until(i2c_inst_t* i2c, uint8_t addr,
+                                       uint8_t* dst, size_t len, bool nostop,
                                        absolute_time_t until);
-int rpp_driver::SdkWrapper::i2c_read_blocking_until(i2c_inst_t *i2c,
-                                                    uint8_t addr, uint8_t *dst,
+int rpp_driver::SdkWrapper::i2c_read_blocking_until(i2c_inst_t* i2c,
+                                                    uint8_t addr, uint8_t* dst,
                                                     size_t len, bool nostop,
                                                     absolute_time_t until) {
   return ::i2c_read_blocking_until(i2c, addr, dst, len, nostop, until);
 }
 // --------------------------------------------------
-extern "C" uint8_t i2c_read_byte_raw(i2c_inst_t *i2c);
-uint8_t rpp_driver::SdkWrapper::i2c_read_byte_raw(i2c_inst_t *i2c) {
+extern "C" uint8_t i2c_read_byte_raw(i2c_inst_t* i2c);
+uint8_t rpp_driver::SdkWrapper::i2c_read_byte_raw(i2c_inst_t* i2c) {
   return ::i2c_read_byte_raw(i2c);
 }
 // --------------------------------------------------
-extern "C" void i2c_read_raw_blocking(i2c_inst_t *i2c, uint8_t *dst,
+extern "C" void i2c_read_raw_blocking(i2c_inst_t* i2c, uint8_t* dst,
                                       size_t len);
-void rpp_driver::SdkWrapper::i2c_read_raw_blocking(i2c_inst_t *i2c,
-                                                   uint8_t *dst, size_t len) {
+void rpp_driver::SdkWrapper::i2c_read_raw_blocking(i2c_inst_t* i2c,
+                                                   uint8_t* dst, size_t len) {
   ::i2c_read_raw_blocking(i2c, dst, len);
 }
 // --------------------------------------------------
-extern "C" int i2c_read_timeout_per_char_us(i2c_inst_t *i2c, uint8_t addr,
-                                            uint8_t *dst, size_t len,
+extern "C" int i2c_read_timeout_per_char_us(i2c_inst_t* i2c, uint8_t addr,
+                                            uint8_t* dst, size_t len,
                                             bool nostop,
                                             uint timeout_per_char_us);
 int rpp_driver::SdkWrapper::i2c_read_timeout_per_char_us(
-    i2c_inst_t *i2c, uint8_t addr, uint8_t *dst, size_t len, bool nostop,
+    i2c_inst_t* i2c, uint8_t addr, uint8_t* dst, size_t len, bool nostop,
     uint timeout_per_char_us) {
   return ::i2c_read_timeout_per_char_us(i2c, addr, dst, len, nostop,
                                         timeout_per_char_us);
 }
 // --------------------------------------------------
-extern "C" int i2c_read_timeout_us(i2c_inst_t *i2c, uint8_t addr, uint8_t *dst,
+extern "C" int i2c_read_timeout_us(i2c_inst_t* i2c, uint8_t addr, uint8_t* dst,
                                    size_t len, bool nostop, uint timeout_us);
-int rpp_driver::SdkWrapper::i2c_read_timeout_us(i2c_inst_t *i2c, uint8_t addr,
-                                                uint8_t *dst, size_t len,
+int rpp_driver::SdkWrapper::i2c_read_timeout_us(i2c_inst_t* i2c, uint8_t addr,
+                                                uint8_t* dst, size_t len,
                                                 bool nostop, uint timeout_us) {
   return ::i2c_read_timeout_us(i2c, addr, dst, len, nostop, timeout_us);
 }
 // --------------------------------------------------
-extern "C" uint i2c_set_baudrate(i2c_inst_t *i2c, uint baudrate);
-uint rpp_driver::SdkWrapper::i2c_set_baudrate(i2c_inst_t *i2c, uint baudrate) {
+extern "C" uint i2c_set_baudrate(i2c_inst_t* i2c, uint baudrate);
+uint rpp_driver::SdkWrapper::i2c_set_baudrate(i2c_inst_t* i2c, uint baudrate) {
   return ::i2c_set_baudrate(i2c, baudrate);
 }
 // --------------------------------------------------
-extern "C" void i2c_set_slave_mode(i2c_inst_t *i2c, bool slave, uint8_t addr);
-void rpp_driver::SdkWrapper::i2c_set_slave_mode(i2c_inst_t *i2c, bool slave,
+extern "C" void i2c_set_slave_mode(i2c_inst_t* i2c, bool slave, uint8_t addr);
+void rpp_driver::SdkWrapper::i2c_set_slave_mode(i2c_inst_t* i2c, bool slave,
                                                 uint8_t addr) {
   ::i2c_set_slave_mode(i2c, slave, addr);
 }
 // --------------------------------------------------
-extern "C" int i2c_write_blocking(i2c_inst_t *i2c, uint8_t addr,
-                                  const uint8_t *src, size_t len, bool nostop);
-int rpp_driver::SdkWrapper::i2c_write_blocking(i2c_inst_t *i2c, uint8_t addr,
-                                               const uint8_t *src, size_t len,
+extern "C" int i2c_write_blocking(i2c_inst_t* i2c, uint8_t addr,
+                                  const uint8_t* src, size_t len, bool nostop);
+int rpp_driver::SdkWrapper::i2c_write_blocking(i2c_inst_t* i2c, uint8_t addr,
+                                               const uint8_t* src, size_t len,
                                                bool nostop) {
   return ::i2c_write_blocking(i2c, addr, src, len, nostop);
 }
 // --------------------------------------------------
-extern "C" int i2c_write_blocking_until(i2c_inst_t *i2c, uint8_t addr,
-                                        const uint8_t *src, size_t len,
+extern "C" int i2c_write_blocking_until(i2c_inst_t* i2c, uint8_t addr,
+                                        const uint8_t* src, size_t len,
                                         bool nostop, absolute_time_t until);
-int rpp_driver::SdkWrapper::i2c_write_blocking_until(i2c_inst_t *i2c,
+int rpp_driver::SdkWrapper::i2c_write_blocking_until(i2c_inst_t* i2c,
                                                      uint8_t addr,
-                                                     const uint8_t *src,
+                                                     const uint8_t* src,
                                                      size_t len, bool nostop,
                                                      absolute_time_t until) {
   return ::i2c_write_blocking_until(i2c, addr, src, len, nostop, until);
 }
 // --------------------------------------------------
-extern "C" void i2c_write_byte_raw(i2c_inst_t *i2c, uint8_t value);
-void rpp_driver::SdkWrapper::i2c_write_byte_raw(i2c_inst_t *i2c,
+extern "C" void i2c_write_byte_raw(i2c_inst_t* i2c, uint8_t value);
+void rpp_driver::SdkWrapper::i2c_write_byte_raw(i2c_inst_t* i2c,
                                                 uint8_t value) {
   ::i2c_write_byte_raw(i2c, value);
 }
 // --------------------------------------------------
-extern "C" void i2c_write_raw_blocking(i2c_inst_t *i2c, const uint8_t *src,
+extern "C" void i2c_write_raw_blocking(i2c_inst_t* i2c, const uint8_t* src,
                                        size_t len);
-void rpp_driver::SdkWrapper::i2c_write_raw_blocking(i2c_inst_t *i2c,
-                                                    const uint8_t *src,
+void rpp_driver::SdkWrapper::i2c_write_raw_blocking(i2c_inst_t* i2c,
+                                                    const uint8_t* src,
                                                     size_t len) {
   ::i2c_write_raw_blocking(i2c, src, len);
 }
 // --------------------------------------------------
-extern "C" int i2c_write_timeout_per_char_us(i2c_inst_t *i2c, uint8_t addr,
-                                             const uint8_t *src, size_t len,
+extern "C" int i2c_write_timeout_per_char_us(i2c_inst_t* i2c, uint8_t addr,
+                                             const uint8_t* src, size_t len,
                                              bool nostop,
                                              uint timeout_per_char_us);
 int rpp_driver::SdkWrapper::i2c_write_timeout_per_char_us(
-    i2c_inst_t *i2c, uint8_t addr, const uint8_t *src, size_t len, bool nostop,
+    i2c_inst_t* i2c, uint8_t addr, const uint8_t* src, size_t len, bool nostop,
     uint timeout_per_char_us) {
   return ::i2c_write_timeout_per_char_us(i2c, addr, src, len, nostop,
                                          timeout_per_char_us);
 }
 // --------------------------------------------------
-extern "C" int i2c_write_timeout_us(i2c_inst_t *i2c, uint8_t addr,
-                                    const uint8_t *src, size_t len, bool nostop,
+extern "C" int i2c_write_timeout_us(i2c_inst_t* i2c, uint8_t addr,
+                                    const uint8_t* src, size_t len, bool nostop,
                                     uint timeout_us);
-int rpp_driver::SdkWrapper::i2c_write_timeout_us(i2c_inst_t *i2c, uint8_t addr,
-                                                 const uint8_t *src, size_t len,
+int rpp_driver::SdkWrapper::i2c_write_timeout_us(i2c_inst_t* i2c, uint8_t addr,
+                                                 const uint8_t* src, size_t len,
                                                  bool nostop, uint timeout_us) {
   return ::i2c_write_timeout_us(i2c, addr, src, len, nostop, timeout_us);
 }
 // --------------------------------------------------
-extern "C" int pio_add_program(PIO pio, const pio_program_t *program);
+extern "C" int pio_add_program(PIO pio, const pio_program_t* program);
 int rpp_driver::SdkWrapper::pio_add_program(PIO pio,
-                                            const pio_program_t *program) {
+                                            const pio_program_t* program) {
   return ::pio_add_program(pio, program);
 }
 // --------------------------------------------------
-extern "C" int pio_add_program_at_offset(PIO pio, const pio_program_t *program,
+extern "C" int pio_add_program_at_offset(PIO pio, const pio_program_t* program,
                                          uint offset);
 int rpp_driver::SdkWrapper::pio_add_program_at_offset(
-    PIO pio, const pio_program_t *program, uint offset) {
+    PIO pio, const pio_program_t* program, uint offset) {
   return ::pio_add_program_at_offset(pio, program, offset);
 }
 // --------------------------------------------------
-extern "C" void pio_calculate_clkdiv_from_float(float div, uint16_t *div_int,
-                                                uint8_t *div_frac);
+extern "C" void pio_calculate_clkdiv_from_float(float div, uint16_t* div_int,
+                                                uint8_t* div_frac);
 void rpp_driver::SdkWrapper::pio_calculate_clkdiv_from_float(
-    float div, uint16_t *div_int, uint8_t *div_frac) {
+    float div, uint16_t* div_int, uint8_t* div_frac) {
   ::pio_calculate_clkdiv_from_float(div, div_int, div_frac);
 }
 // --------------------------------------------------
-extern "C" bool pio_can_add_program(PIO pio, const pio_program_t *program);
+extern "C" bool pio_can_add_program(PIO pio, const pio_program_t* program);
 bool rpp_driver::SdkWrapper::pio_can_add_program(PIO pio,
-                                                 const pio_program_t *program) {
+                                                 const pio_program_t* program) {
   return ::pio_can_add_program(pio, program);
 }
 // --------------------------------------------------
 extern "C" bool pio_can_add_program_at_offset(PIO pio,
-                                              const pio_program_t *program,
+                                              const pio_program_t* program,
                                               uint offset);
 bool rpp_driver::SdkWrapper::pio_can_add_program_at_offset(
-    PIO pio, const pio_program_t *program, uint offset) {
+    PIO pio, const pio_program_t* program, uint offset) {
   return ::pio_can_add_program_at_offset(pio, program, offset);
 }
 // --------------------------------------------------
-extern "C" bool pio_claim_free_sm_and_add_program(const pio_program_t *program,
-                                                  PIO *pio, uint *sm,
-                                                  uint *offset);
+extern "C" bool pio_claim_free_sm_and_add_program(const pio_program_t* program,
+                                                  PIO* pio, uint* sm,
+                                                  uint* offset);
 bool rpp_driver::SdkWrapper::pio_claim_free_sm_and_add_program(
-    const pio_program_t *program, PIO *pio, uint *sm, uint *offset) {
+    const pio_program_t* program, PIO* pio, uint* sm, uint* offset) {
   return ::pio_claim_free_sm_and_add_program(program, pio, sm, offset);
 }
 // --------------------------------------------------
 extern "C" bool pio_claim_free_sm_and_add_program_for_gpio_range(
-    const pio_program_t *program, PIO *pio, uint *sm, uint *offset,
+    const pio_program_t* program, PIO* pio, uint* sm, uint* offset,
     uint gpio_base, uint gpio_count, bool set_gpio_base);
 bool rpp_driver::SdkWrapper::pio_claim_free_sm_and_add_program_for_gpio_range(
-    const pio_program_t *program, PIO *pio, uint *sm, uint *offset,
+    const pio_program_t* program, PIO* pio, uint* sm, uint* offset,
     uint gpio_base, uint gpio_count, bool set_gpio_base) {
   return ::pio_claim_free_sm_and_add_program_for_gpio_range(
       program, pio, sm, offset, gpio_base, gpio_count, set_gpio_base);
@@ -313,19 +313,19 @@ bool rpp_driver::SdkWrapper::pio_interrupt_get(PIO pio,
   return ::pio_interrupt_get(pio, pio_interrupt_num);
 }
 // --------------------------------------------------
-extern "C" void pio_remove_program(PIO pio, const pio_program_t *program,
+extern "C" void pio_remove_program(PIO pio, const pio_program_t* program,
                                    uint loaded_offset);
 void rpp_driver::SdkWrapper::pio_remove_program(PIO pio,
-                                                const pio_program_t *program,
+                                                const pio_program_t* program,
                                                 uint loaded_offset) {
   ::pio_remove_program(pio, program, loaded_offset);
 }
 // --------------------------------------------------
-extern "C" void pio_remove_program_and_unclaim_sm(const pio_program_t *program,
+extern "C" void pio_remove_program_and_unclaim_sm(const pio_program_t* program,
                                                   PIO pio, uint sm,
                                                   uint offset);
 void rpp_driver::SdkWrapper::pio_remove_program_and_unclaim_sm(
-    const pio_program_t *program, PIO pio, uint sm, uint offset) {
+    const pio_program_t* program, PIO pio, uint sm, uint offset) {
   ::pio_remove_program_and_unclaim_sm(program, pio, sm, offset);
 }
 // --------------------------------------------------
@@ -459,9 +459,9 @@ uint rpp_driver::SdkWrapper::pio_sm_get_tx_fifo_level(PIO pio, uint sm) {
 }
 // --------------------------------------------------
 extern "C" int pio_sm_init(PIO pio, uint sm, uint initial_pc,
-                           const pio_sm_config *config);
+                           const pio_sm_config* config);
 int rpp_driver::SdkWrapper::pio_sm_init(PIO pio, uint sm, uint initial_pc,
-                                        const pio_sm_config *config) {
+                                        const pio_sm_config* config) {
   return ::pio_sm_init(pio, sm, initial_pc, config);
 }
 // --------------------------------------------------
@@ -524,9 +524,9 @@ void rpp_driver::SdkWrapper::pio_sm_set_clkdiv_int_frac(PIO pio, uint sm,
   ::pio_sm_set_clkdiv_int_frac(pio, sm, div_int, div_frac);
 }
 // --------------------------------------------------
-extern "C" int pio_sm_set_config(PIO pio, uint sm, const pio_sm_config *config);
+extern "C" int pio_sm_set_config(PIO pio, uint sm, const pio_sm_config* config);
 int rpp_driver::SdkWrapper::pio_sm_set_config(PIO pio, uint sm,
-                                              const pio_sm_config *config) {
+                                              const pio_sm_config* config) {
   return ::pio_sm_set_config(pio, sm, config);
 }
 // --------------------------------------------------
@@ -613,151 +613,151 @@ void rpp_driver::SdkWrapper::pio_sm_unclaim(PIO pio, uint sm) {
   ::pio_sm_unclaim(pio, sm);
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_clkdiv(pio_sm_config *c, float div);
-void rpp_driver::SdkWrapper::sm_config_set_clkdiv(pio_sm_config *c, float div) {
+extern "C" void sm_config_set_clkdiv(pio_sm_config* c, float div);
+void rpp_driver::SdkWrapper::sm_config_set_clkdiv(pio_sm_config* c, float div) {
   ::sm_config_set_clkdiv(c, div);
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_clkdiv_int_frac(pio_sm_config *c,
+extern "C" void sm_config_set_clkdiv_int_frac(pio_sm_config* c,
                                               uint16_t div_int,
                                               uint8_t div_frac);
-void rpp_driver::SdkWrapper::sm_config_set_clkdiv_int_frac(pio_sm_config *c,
+void rpp_driver::SdkWrapper::sm_config_set_clkdiv_int_frac(pio_sm_config* c,
                                                            uint16_t div_int,
                                                            uint8_t div_frac) {
   ::sm_config_set_clkdiv_int_frac(c, div_int, div_frac);
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_fifo_join(pio_sm_config *c,
+extern "C" void sm_config_set_fifo_join(pio_sm_config* c,
                                         enum pio_fifo_join join);
-void rpp_driver::SdkWrapper::sm_config_set_fifo_join(pio_sm_config *c,
+void rpp_driver::SdkWrapper::sm_config_set_fifo_join(pio_sm_config* c,
                                                      enum pio_fifo_join join) {
   ::sm_config_set_fifo_join(c, join);
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_in_pin_base(pio_sm_config *c, uint in_base);
-void rpp_driver::SdkWrapper::sm_config_set_in_pin_base(pio_sm_config *c,
+extern "C" void sm_config_set_in_pin_base(pio_sm_config* c, uint in_base);
+void rpp_driver::SdkWrapper::sm_config_set_in_pin_base(pio_sm_config* c,
                                                        uint in_base) {
   ::sm_config_set_in_pin_base(c, in_base);
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_in_pin_count(pio_sm_config *c, uint in_count);
-void rpp_driver::SdkWrapper::sm_config_set_in_pin_count(pio_sm_config *c,
+extern "C" void sm_config_set_in_pin_count(pio_sm_config* c, uint in_count);
+void rpp_driver::SdkWrapper::sm_config_set_in_pin_count(pio_sm_config* c,
                                                         uint in_count) {
   ::sm_config_set_in_pin_count(c, in_count);
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_in_pins(pio_sm_config *c, uint in_base);
-void rpp_driver::SdkWrapper::sm_config_set_in_pins(pio_sm_config *c,
+extern "C" void sm_config_set_in_pins(pio_sm_config* c, uint in_base);
+void rpp_driver::SdkWrapper::sm_config_set_in_pins(pio_sm_config* c,
                                                    uint in_base) {
   ::sm_config_set_in_pins(c, in_base);
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_in_shift(pio_sm_config *c, bool shift_right,
+extern "C" void sm_config_set_in_shift(pio_sm_config* c, bool shift_right,
                                        bool autopush, uint push_threshold);
-void rpp_driver::SdkWrapper::sm_config_set_in_shift(pio_sm_config *c,
+void rpp_driver::SdkWrapper::sm_config_set_in_shift(pio_sm_config* c,
                                                     bool shift_right,
                                                     bool autopush,
                                                     uint push_threshold) {
   ::sm_config_set_in_shift(c, shift_right, autopush, push_threshold);
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_jmp_pin(pio_sm_config *c, uint pin);
-void rpp_driver::SdkWrapper::sm_config_set_jmp_pin(pio_sm_config *c, uint pin) {
+extern "C" void sm_config_set_jmp_pin(pio_sm_config* c, uint pin);
+void rpp_driver::SdkWrapper::sm_config_set_jmp_pin(pio_sm_config* c, uint pin) {
   ::sm_config_set_jmp_pin(c, pin);
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_mov_status(pio_sm_config *c,
+extern "C" void sm_config_set_mov_status(pio_sm_config* c,
                                          enum pio_mov_status_type status_sel,
                                          uint status_n);
 void rpp_driver::SdkWrapper::sm_config_set_mov_status(
-    pio_sm_config *c, enum pio_mov_status_type status_sel, uint status_n) {
+    pio_sm_config* c, enum pio_mov_status_type status_sel, uint status_n) {
   ::sm_config_set_mov_status(c, status_sel, status_n);
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_out_pin_base(pio_sm_config *c, uint out_base);
-void rpp_driver::SdkWrapper::sm_config_set_out_pin_base(pio_sm_config *c,
+extern "C" void sm_config_set_out_pin_base(pio_sm_config* c, uint out_base);
+void rpp_driver::SdkWrapper::sm_config_set_out_pin_base(pio_sm_config* c,
                                                         uint out_base) {
   ::sm_config_set_out_pin_base(c, out_base);
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_out_pin_count(pio_sm_config *c, uint out_count);
-void rpp_driver::SdkWrapper::sm_config_set_out_pin_count(pio_sm_config *c,
+extern "C" void sm_config_set_out_pin_count(pio_sm_config* c, uint out_count);
+void rpp_driver::SdkWrapper::sm_config_set_out_pin_count(pio_sm_config* c,
                                                          uint out_count) {
   ::sm_config_set_out_pin_count(c, out_count);
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_out_pins(pio_sm_config *c, uint out_base,
+extern "C" void sm_config_set_out_pins(pio_sm_config* c, uint out_base,
                                        uint out_count);
-void rpp_driver::SdkWrapper::sm_config_set_out_pins(pio_sm_config *c,
+void rpp_driver::SdkWrapper::sm_config_set_out_pins(pio_sm_config* c,
                                                     uint out_base,
                                                     uint out_count) {
   ::sm_config_set_out_pins(c, out_base, out_count);
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_out_shift(pio_sm_config *c, bool shift_right,
+extern "C" void sm_config_set_out_shift(pio_sm_config* c, bool shift_right,
                                         bool autopull, uint pull_threshold);
-void rpp_driver::SdkWrapper::sm_config_set_out_shift(pio_sm_config *c,
+void rpp_driver::SdkWrapper::sm_config_set_out_shift(pio_sm_config* c,
                                                      bool shift_right,
                                                      bool autopull,
                                                      uint pull_threshold) {
   ::sm_config_set_out_shift(c, shift_right, autopull, pull_threshold);
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_out_special(pio_sm_config *c, bool sticky,
+extern "C" void sm_config_set_out_special(pio_sm_config* c, bool sticky,
                                           bool has_enable_pin,
                                           uint enable_pin_index);
-void rpp_driver::SdkWrapper::sm_config_set_out_special(pio_sm_config *c,
+void rpp_driver::SdkWrapper::sm_config_set_out_special(pio_sm_config* c,
                                                        bool sticky,
                                                        bool has_enable_pin,
                                                        uint enable_pin_index) {
   ::sm_config_set_out_special(c, sticky, has_enable_pin, enable_pin_index);
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_set_pin_base(pio_sm_config *c, uint set_base);
-void rpp_driver::SdkWrapper::sm_config_set_set_pin_base(pio_sm_config *c,
+extern "C" void sm_config_set_set_pin_base(pio_sm_config* c, uint set_base);
+void rpp_driver::SdkWrapper::sm_config_set_set_pin_base(pio_sm_config* c,
                                                         uint set_base) {
   ::sm_config_set_set_pin_base(c, set_base);
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_set_pin_count(pio_sm_config *c, uint set_count);
-void rpp_driver::SdkWrapper::sm_config_set_set_pin_count(pio_sm_config *c,
+extern "C" void sm_config_set_set_pin_count(pio_sm_config* c, uint set_count);
+void rpp_driver::SdkWrapper::sm_config_set_set_pin_count(pio_sm_config* c,
                                                          uint set_count) {
   ::sm_config_set_set_pin_count(c, set_count);
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_set_pins(pio_sm_config *c, uint set_base,
+extern "C" void sm_config_set_set_pins(pio_sm_config* c, uint set_base,
                                        uint set_count);
-void rpp_driver::SdkWrapper::sm_config_set_set_pins(pio_sm_config *c,
+void rpp_driver::SdkWrapper::sm_config_set_set_pins(pio_sm_config* c,
                                                     uint set_base,
                                                     uint set_count) {
   ::sm_config_set_set_pins(c, set_base, set_count);
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_sideset(pio_sm_config *c, uint bit_count,
+extern "C" void sm_config_set_sideset(pio_sm_config* c, uint bit_count,
                                       bool optional, bool pindirs);
-void rpp_driver::SdkWrapper::sm_config_set_sideset(pio_sm_config *c,
+void rpp_driver::SdkWrapper::sm_config_set_sideset(pio_sm_config* c,
                                                    uint bit_count,
                                                    bool optional,
                                                    bool pindirs) {
   ::sm_config_set_sideset(c, bit_count, optional, pindirs);
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_sideset_pin_base(pio_sm_config *c,
+extern "C" void sm_config_set_sideset_pin_base(pio_sm_config* c,
                                                uint sideset_base);
-void rpp_driver::SdkWrapper::sm_config_set_sideset_pin_base(pio_sm_config *c,
+void rpp_driver::SdkWrapper::sm_config_set_sideset_pin_base(pio_sm_config* c,
                                                             uint sideset_base) {
   ::sm_config_set_sideset_pin_base(c, sideset_base);
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_sideset_pins(pio_sm_config *c, uint sideset_base);
-void rpp_driver::SdkWrapper::sm_config_set_sideset_pins(pio_sm_config *c,
+extern "C" void sm_config_set_sideset_pins(pio_sm_config* c, uint sideset_base);
+void rpp_driver::SdkWrapper::sm_config_set_sideset_pins(pio_sm_config* c,
                                                         uint sideset_base) {
   ::sm_config_set_sideset_pins(c, sideset_base);
 }
 // --------------------------------------------------
-extern "C" void sm_config_set_wrap(pio_sm_config *c, uint wrap_target,
+extern "C" void sm_config_set_wrap(pio_sm_config* c, uint wrap_target,
                                    uint wrap);
-void rpp_driver::SdkWrapper::sm_config_set_wrap(pio_sm_config *c,
+void rpp_driver::SdkWrapper::sm_config_set_wrap(pio_sm_config* c,
                                                 uint wrap_target, uint wrap) {
   ::sm_config_set_wrap(c, wrap_target, wrap);
 }
@@ -1150,22 +1150,22 @@ void rpp_driver::SdkWrapper::gpio_xor_mask_n(uint n, uint32_t mask) {
   ::gpio_xor_mask_n(n, mask);
 }
 // --------------------------------------------------
-extern "C" bool check_sys_clock_hz(uint32_t freq_hz, uint *vco_freq_out,
-                                   uint *post_div1_out, uint *post_div2_out);
+extern "C" bool check_sys_clock_hz(uint32_t freq_hz, uint* vco_freq_out,
+                                   uint* post_div1_out, uint* post_div2_out);
 bool rpp_driver::SdkWrapper::check_sys_clock_hz(uint32_t freq_hz,
-                                                uint *vco_freq_out,
-                                                uint *post_div1_out,
-                                                uint *post_div2_out) {
+                                                uint* vco_freq_out,
+                                                uint* post_div1_out,
+                                                uint* post_div2_out) {
   return ::check_sys_clock_hz(freq_hz, vco_freq_out, post_div1_out,
                               post_div2_out);
 }
 // --------------------------------------------------
-extern "C" bool check_sys_clock_khz(uint32_t freq_khz, uint *vco_freq_out,
-                                    uint *post_div1_out, uint *post_div2_out);
+extern "C" bool check_sys_clock_khz(uint32_t freq_khz, uint* vco_freq_out,
+                                    uint* post_div1_out, uint* post_div2_out);
 bool rpp_driver::SdkWrapper::check_sys_clock_khz(uint32_t freq_khz,
-                                                 uint *vco_freq_out,
-                                                 uint *post_div1_out,
-                                                 uint *post_div2_out) {
+                                                 uint* vco_freq_out,
+                                                 uint* post_div1_out,
+                                                 uint* post_div2_out) {
   return ::check_sys_clock_khz(freq_khz, vco_freq_out, post_div1_out,
                                post_div2_out);
 }
@@ -1290,178 +1290,178 @@ absolute_time_t rpp_driver::SdkWrapper::absolute_time_min(absolute_time_t a,
 }
 // --------------------------------------------------
 extern "C" alarm_id_t add_alarm_at(absolute_time_t time,
-                                   alarm_callback_t callback, void *user_data,
+                                   alarm_callback_t callback, void* user_data,
                                    bool fire_if_past);
 alarm_id_t rpp_driver::SdkWrapper::add_alarm_at(absolute_time_t time,
                                                 alarm_callback_t callback,
-                                                void *user_data,
+                                                void* user_data,
                                                 bool fire_if_past) {
   return ::add_alarm_at(time, callback, user_data, fire_if_past);
 }
 // --------------------------------------------------
 extern "C" alarm_id_t add_alarm_in_ms(uint32_t ms, alarm_callback_t callback,
-                                      void *user_data, bool fire_if_past);
+                                      void* user_data, bool fire_if_past);
 alarm_id_t rpp_driver::SdkWrapper::add_alarm_in_ms(uint32_t ms,
                                                    alarm_callback_t callback,
-                                                   void *user_data,
+                                                   void* user_data,
                                                    bool fire_if_past) {
   return ::add_alarm_in_ms(ms, callback, user_data, fire_if_past);
 }
 // --------------------------------------------------
 extern "C" alarm_id_t add_alarm_in_us(uint64_t us, alarm_callback_t callback,
-                                      void *user_data, bool fire_if_past);
+                                      void* user_data, bool fire_if_past);
 alarm_id_t rpp_driver::SdkWrapper::add_alarm_in_us(uint64_t us,
                                                    alarm_callback_t callback,
-                                                   void *user_data,
+                                                   void* user_data,
                                                    bool fire_if_past) {
   return ::add_alarm_in_us(us, callback, user_data, fire_if_past);
 }
 // --------------------------------------------------
 extern "C" bool add_repeating_timer_ms(int32_t delay_ms,
                                        repeating_timer_callback_t callback,
-                                       void *user_data, repeating_timer_t *out);
+                                       void* user_data, repeating_timer_t* out);
 bool rpp_driver::SdkWrapper::add_repeating_timer_ms(
-    int32_t delay_ms, repeating_timer_callback_t callback, void *user_data,
-    repeating_timer_t *out) {
+    int32_t delay_ms, repeating_timer_callback_t callback, void* user_data,
+    repeating_timer_t* out) {
   return ::add_repeating_timer_ms(delay_ms, callback, user_data, out);
 }
 // --------------------------------------------------
 extern "C" bool add_repeating_timer_us(int64_t delay_us,
                                        repeating_timer_callback_t callback,
-                                       void *user_data, repeating_timer_t *out);
+                                       void* user_data, repeating_timer_t* out);
 bool rpp_driver::SdkWrapper::add_repeating_timer_us(
-    int64_t delay_us, repeating_timer_callback_t callback, void *user_data,
-    repeating_timer_t *out) {
+    int64_t delay_us, repeating_timer_callback_t callback, void* user_data,
+    repeating_timer_t* out) {
   return ::add_repeating_timer_us(delay_us, callback, user_data, out);
 }
 // --------------------------------------------------
-extern "C" alarm_id_t alarm_pool_add_alarm_at(alarm_pool_t *pool,
+extern "C" alarm_id_t alarm_pool_add_alarm_at(alarm_pool_t* pool,
                                               absolute_time_t time,
                                               alarm_callback_t callback,
-                                              void *user_data,
+                                              void* user_data,
                                               bool fire_if_past);
 alarm_id_t rpp_driver::SdkWrapper::alarm_pool_add_alarm_at(
-    alarm_pool_t *pool, absolute_time_t time, alarm_callback_t callback,
-    void *user_data, bool fire_if_past) {
+    alarm_pool_t* pool, absolute_time_t time, alarm_callback_t callback,
+    void* user_data, bool fire_if_past) {
   return ::alarm_pool_add_alarm_at(pool, time, callback, user_data,
                                    fire_if_past);
 }
 // --------------------------------------------------
 extern "C" alarm_id_t alarm_pool_add_alarm_at_force_in_context(
-    alarm_pool_t *pool, absolute_time_t time, alarm_callback_t callback,
-    void *user_data);
+    alarm_pool_t* pool, absolute_time_t time, alarm_callback_t callback,
+    void* user_data);
 alarm_id_t rpp_driver::SdkWrapper::alarm_pool_add_alarm_at_force_in_context(
-    alarm_pool_t *pool, absolute_time_t time, alarm_callback_t callback,
-    void *user_data) {
+    alarm_pool_t* pool, absolute_time_t time, alarm_callback_t callback,
+    void* user_data) {
   return ::alarm_pool_add_alarm_at_force_in_context(pool, time, callback,
                                                     user_data);
 }
 // --------------------------------------------------
-extern "C" alarm_id_t alarm_pool_add_alarm_in_ms(alarm_pool_t *pool,
+extern "C" alarm_id_t alarm_pool_add_alarm_in_ms(alarm_pool_t* pool,
                                                  uint32_t ms,
                                                  alarm_callback_t callback,
-                                                 void *user_data,
+                                                 void* user_data,
                                                  bool fire_if_past);
 alarm_id_t rpp_driver::SdkWrapper::alarm_pool_add_alarm_in_ms(
-    alarm_pool_t *pool, uint32_t ms, alarm_callback_t callback, void *user_data,
+    alarm_pool_t* pool, uint32_t ms, alarm_callback_t callback, void* user_data,
     bool fire_if_past) {
   return ::alarm_pool_add_alarm_in_ms(pool, ms, callback, user_data,
                                       fire_if_past);
 }
 // --------------------------------------------------
-extern "C" alarm_id_t alarm_pool_add_alarm_in_us(alarm_pool_t *pool,
+extern "C" alarm_id_t alarm_pool_add_alarm_in_us(alarm_pool_t* pool,
                                                  uint64_t us,
                                                  alarm_callback_t callback,
-                                                 void *user_data,
+                                                 void* user_data,
                                                  bool fire_if_past);
 alarm_id_t rpp_driver::SdkWrapper::alarm_pool_add_alarm_in_us(
-    alarm_pool_t *pool, uint64_t us, alarm_callback_t callback, void *user_data,
+    alarm_pool_t* pool, uint64_t us, alarm_callback_t callback, void* user_data,
     bool fire_if_past) {
   return ::alarm_pool_add_alarm_in_us(pool, us, callback, user_data,
                                       fire_if_past);
 }
 // --------------------------------------------------
 extern "C" bool alarm_pool_add_repeating_timer_ms(
-    alarm_pool_t *pool, int32_t delay_ms, repeating_timer_callback_t callback,
-    void *user_data, repeating_timer_t *out);
+    alarm_pool_t* pool, int32_t delay_ms, repeating_timer_callback_t callback,
+    void* user_data, repeating_timer_t* out);
 bool rpp_driver::SdkWrapper::alarm_pool_add_repeating_timer_ms(
-    alarm_pool_t *pool, int32_t delay_ms, repeating_timer_callback_t callback,
-    void *user_data, repeating_timer_t *out) {
+    alarm_pool_t* pool, int32_t delay_ms, repeating_timer_callback_t callback,
+    void* user_data, repeating_timer_t* out) {
   return ::alarm_pool_add_repeating_timer_ms(pool, delay_ms, callback,
                                              user_data, out);
 }
 // --------------------------------------------------
 extern "C" bool alarm_pool_add_repeating_timer_us(
-    alarm_pool_t *pool, int64_t delay_us, repeating_timer_callback_t callback,
-    void *user_data, repeating_timer_t *out);
+    alarm_pool_t* pool, int64_t delay_us, repeating_timer_callback_t callback,
+    void* user_data, repeating_timer_t* out);
 bool rpp_driver::SdkWrapper::alarm_pool_add_repeating_timer_us(
-    alarm_pool_t *pool, int64_t delay_us, repeating_timer_callback_t callback,
-    void *user_data, repeating_timer_t *out) {
+    alarm_pool_t* pool, int64_t delay_us, repeating_timer_callback_t callback,
+    void* user_data, repeating_timer_t* out) {
   return ::alarm_pool_add_repeating_timer_us(pool, delay_us, callback,
                                              user_data, out);
 }
 // --------------------------------------------------
-extern "C" bool alarm_pool_cancel_alarm(alarm_pool_t *pool,
+extern "C" bool alarm_pool_cancel_alarm(alarm_pool_t* pool,
                                         alarm_id_t alarm_id);
-bool rpp_driver::SdkWrapper::alarm_pool_cancel_alarm(alarm_pool_t *pool,
+bool rpp_driver::SdkWrapper::alarm_pool_cancel_alarm(alarm_pool_t* pool,
                                                      alarm_id_t alarm_id) {
   return ::alarm_pool_cancel_alarm(pool, alarm_id);
 }
 // --------------------------------------------------
-extern "C" uint alarm_pool_core_num(alarm_pool_t *pool);
-uint rpp_driver::SdkWrapper::alarm_pool_core_num(alarm_pool_t *pool) {
+extern "C" uint alarm_pool_core_num(alarm_pool_t* pool);
+uint rpp_driver::SdkWrapper::alarm_pool_core_num(alarm_pool_t* pool) {
   return ::alarm_pool_core_num(pool);
 }
 // --------------------------------------------------
-extern "C" alarm_pool_t *alarm_pool_create(uint timer_alarm_num,
+extern "C" alarm_pool_t* alarm_pool_create(uint timer_alarm_num,
                                            uint max_timers);
-alarm_pool_t *rpp_driver::SdkWrapper::alarm_pool_create(uint timer_alarm_num,
+alarm_pool_t* rpp_driver::SdkWrapper::alarm_pool_create(uint timer_alarm_num,
                                                         uint max_timers) {
   return ::alarm_pool_create(timer_alarm_num, max_timers);
 }
 // --------------------------------------------------
-extern "C" alarm_pool_t *alarm_pool_create_on_timer(alarm_pool_timer_t *timer,
+extern "C" alarm_pool_t* alarm_pool_create_on_timer(alarm_pool_timer_t* timer,
                                                     uint timer_alarm_num,
                                                     uint max_timers);
-alarm_pool_t *rpp_driver::SdkWrapper::alarm_pool_create_on_timer(
-    alarm_pool_timer_t *timer, uint timer_alarm_num, uint max_timers) {
+alarm_pool_t* rpp_driver::SdkWrapper::alarm_pool_create_on_timer(
+    alarm_pool_timer_t* timer, uint timer_alarm_num, uint max_timers) {
   return ::alarm_pool_create_on_timer(timer, timer_alarm_num, max_timers);
 }
 // --------------------------------------------------
-extern "C" alarm_pool_t *alarm_pool_create_on_timer_with_unused_hardware_alarm(
-    alarm_pool_timer_t *timer, uint max_timers);
-alarm_pool_t *
+extern "C" alarm_pool_t* alarm_pool_create_on_timer_with_unused_hardware_alarm(
+    alarm_pool_timer_t* timer, uint max_timers);
+alarm_pool_t*
 rpp_driver::SdkWrapper::alarm_pool_create_on_timer_with_unused_hardware_alarm(
-    alarm_pool_timer_t *timer, uint max_timers) {
+    alarm_pool_timer_t* timer, uint max_timers) {
   return ::alarm_pool_create_on_timer_with_unused_hardware_alarm(timer,
                                                                  max_timers);
 }
 // --------------------------------------------------
-extern "C" alarm_pool_t *alarm_pool_create_with_unused_hardware_alarm(
+extern "C" alarm_pool_t* alarm_pool_create_with_unused_hardware_alarm(
     uint max_timers);
-alarm_pool_t *
+alarm_pool_t*
 rpp_driver::SdkWrapper::alarm_pool_create_with_unused_hardware_alarm(
     uint max_timers) {
   return ::alarm_pool_create_with_unused_hardware_alarm(max_timers);
 }
 // --------------------------------------------------
-extern "C" void alarm_pool_destroy(alarm_pool_t *pool);
-void rpp_driver::SdkWrapper::alarm_pool_destroy(alarm_pool_t *pool) {
+extern "C" void alarm_pool_destroy(alarm_pool_t* pool);
+void rpp_driver::SdkWrapper::alarm_pool_destroy(alarm_pool_t* pool) {
   ::alarm_pool_destroy(pool);
 }
 // --------------------------------------------------
-extern "C" alarm_pool_t *alarm_pool_get_default(void);
-alarm_pool_t *rpp_driver::SdkWrapper::alarm_pool_get_default(void) {
+extern "C" alarm_pool_t* alarm_pool_get_default(void);
+alarm_pool_t* rpp_driver::SdkWrapper::alarm_pool_get_default(void) {
   return ::alarm_pool_get_default();
 }
 // --------------------------------------------------
-extern "C" alarm_pool_timer_t *alarm_pool_get_default_timer(void);
-alarm_pool_timer_t *rpp_driver::SdkWrapper::alarm_pool_get_default_timer(void) {
+extern "C" alarm_pool_timer_t* alarm_pool_get_default_timer(void);
+alarm_pool_timer_t* rpp_driver::SdkWrapper::alarm_pool_get_default_timer(void) {
   return ::alarm_pool_get_default_timer();
 }
 // --------------------------------------------------
-extern "C" uint alarm_pool_hardware_alarm_num(alarm_pool_t *pool);
-uint rpp_driver::SdkWrapper::alarm_pool_hardware_alarm_num(alarm_pool_t *pool) {
+extern "C" uint alarm_pool_hardware_alarm_num(alarm_pool_t* pool);
+uint rpp_driver::SdkWrapper::alarm_pool_hardware_alarm_num(alarm_pool_t* pool) {
   return ::alarm_pool_hardware_alarm_num(pool);
 }
 // --------------------------------------------------
@@ -1470,27 +1470,27 @@ void rpp_driver::SdkWrapper::alarm_pool_init_default(void) {
   ::alarm_pool_init_default();
 }
 // --------------------------------------------------
-extern "C" int32_t alarm_pool_remaining_alarm_time_ms(alarm_pool_t *pool,
+extern "C" int32_t alarm_pool_remaining_alarm_time_ms(alarm_pool_t* pool,
                                                       alarm_id_t alarm_id);
 int32_t rpp_driver::SdkWrapper::alarm_pool_remaining_alarm_time_ms(
-    alarm_pool_t *pool, alarm_id_t alarm_id) {
+    alarm_pool_t* pool, alarm_id_t alarm_id) {
   return ::alarm_pool_remaining_alarm_time_ms(pool, alarm_id);
 }
 // --------------------------------------------------
-extern "C" int64_t alarm_pool_remaining_alarm_time_us(alarm_pool_t *pool,
+extern "C" int64_t alarm_pool_remaining_alarm_time_us(alarm_pool_t* pool,
                                                       alarm_id_t alarm_id);
 int64_t rpp_driver::SdkWrapper::alarm_pool_remaining_alarm_time_us(
-    alarm_pool_t *pool, alarm_id_t alarm_id) {
+    alarm_pool_t* pool, alarm_id_t alarm_id) {
   return ::alarm_pool_remaining_alarm_time_us(pool, alarm_id);
 }
 // --------------------------------------------------
-extern "C" uint alarm_pool_timer_alarm_num(alarm_pool_t *pool);
-uint rpp_driver::SdkWrapper::alarm_pool_timer_alarm_num(alarm_pool_t *pool) {
+extern "C" uint alarm_pool_timer_alarm_num(alarm_pool_t* pool);
+uint rpp_driver::SdkWrapper::alarm_pool_timer_alarm_num(alarm_pool_t* pool) {
   return ::alarm_pool_timer_alarm_num(pool);
 }
 // --------------------------------------------------
-extern "C" alarm_pool_timer_t *alarm_pool_timer_for_timer_num(uint timer_num);
-alarm_pool_timer_t *rpp_driver::SdkWrapper::alarm_pool_timer_for_timer_num(
+extern "C" alarm_pool_timer_t* alarm_pool_timer_for_timer_num(uint timer_num);
+alarm_pool_timer_t* rpp_driver::SdkWrapper::alarm_pool_timer_for_timer_num(
     uint timer_num) {
   return ::alarm_pool_timer_for_timer_num(timer_num);
 }
@@ -1506,8 +1506,8 @@ bool rpp_driver::SdkWrapper::cancel_alarm(alarm_id_t alarm_id) {
   return ::cancel_alarm(alarm_id);
 }
 // --------------------------------------------------
-extern "C" bool cancel_repeating_timer(repeating_timer_t *timer);
-bool rpp_driver::SdkWrapper::cancel_repeating_timer(repeating_timer_t *timer) {
+extern "C" bool cancel_repeating_timer(repeating_timer_t* timer);
+bool rpp_driver::SdkWrapper::cancel_repeating_timer(repeating_timer_t* timer) {
   return ::cancel_repeating_timer(timer);
 }
 // --------------------------------------------------
@@ -1592,96 +1592,48 @@ int rpp_driver::SdkWrapper::getchar_timeout_us(uint32_t timeout_us) {
 extern "C" int putchar_raw(int c);
 int rpp_driver::SdkWrapper::putchar_raw(int c) { return ::putchar_raw(c); }
 // --------------------------------------------------
-extern "C" int puts_raw(const char *s);
-int rpp_driver::SdkWrapper::puts_raw(const char *s) { return ::puts_raw(s); }
+extern "C" int puts_raw(const char* s);
+int rpp_driver::SdkWrapper::puts_raw(const char* s) { return ::puts_raw(s); }
 // --------------------------------------------------
 extern "C" bool stdio_deinit_all(void);
 bool rpp_driver::SdkWrapper::stdio_deinit_all(void) {
   return ::stdio_deinit_all();
 }
 // --------------------------------------------------
-extern "C" void stdio_filter_driver(stdio_driver_t *driver);
-void rpp_driver::SdkWrapper::stdio_filter_driver(stdio_driver_t *driver) {
+extern "C" void stdio_filter_driver(stdio_driver_t* driver);
+void rpp_driver::SdkWrapper::stdio_filter_driver(stdio_driver_t* driver) {
   ::stdio_filter_driver(driver);
 }
 // --------------------------------------------------
 extern "C" void stdio_flush(void);
 void rpp_driver::SdkWrapper::stdio_flush(void) { ::stdio_flush(); }
 // --------------------------------------------------
-extern "C" int stdio_get_until(char *buf, int len, absolute_time_t until);
-int rpp_driver::SdkWrapper::stdio_get_until(char *buf, int len,
+extern "C" int stdio_get_until(char* buf, int len, absolute_time_t until);
+int rpp_driver::SdkWrapper::stdio_get_until(char* buf, int len,
                                             absolute_time_t until) {
   return ::stdio_get_until(buf, len, until);
-}
-// --------------------------------------------------
-extern "C" int stdio_getchar(void);
-int rpp_driver::SdkWrapper::stdio_getchar(void) { return ::stdio_getchar(); }
-// --------------------------------------------------
-extern "C" int stdio_getchar_timeout_us(uint32_t timeout_us);
-int rpp_driver::SdkWrapper::stdio_getchar_timeout_us(uint32_t timeout_us) {
-  return ::stdio_getchar_timeout_us(timeout_us);
 }
 // --------------------------------------------------
 extern "C" bool stdio_init_all(void);
 bool rpp_driver::SdkWrapper::stdio_init_all(void) { return ::stdio_init_all(); }
 // --------------------------------------------------
-extern "C" int __printflike(1, 0) stdio_printf(const char *format, ...);
-int rpp_driver::SdkWrapper::__printflike(1, 0)
-    stdio_printf(const char *format, ...) {
-return
-::__printflike(
-0
-stdio_printf(const char
-);
-}
-// --------------------------------------------------
-extern "C" int stdio_put_string(const char *s, int len, bool newline,
+extern "C" int stdio_put_string(const char* s, int len, bool newline,
                                 bool cr_translation);
-int rpp_driver::SdkWrapper::stdio_put_string(const char *s, int len,
+int rpp_driver::SdkWrapper::stdio_put_string(const char* s, int len,
                                              bool newline,
                                              bool cr_translation) {
   return ::stdio_put_string(s, len, newline, cr_translation);
 }
 // --------------------------------------------------
-extern "C" int stdio_putchar(int);
-int rpp_driver::SdkWrapper::stdio_putchar(int) { return ::stdio_putchar(); }
-// --------------------------------------------------
-extern "C" int stdio_putchar_raw(int c);
-int rpp_driver::SdkWrapper::stdio_putchar_raw(int c) {
-  return ::stdio_putchar_raw(c);
-}
-// --------------------------------------------------
-extern "C" int stdio_puts(const char *s);
-int rpp_driver::SdkWrapper::stdio_puts(const char *s) {
-  return ::stdio_puts(s);
-}
-// --------------------------------------------------
-extern "C" int stdio_puts_raw(const char *s);
-int rpp_driver::SdkWrapper::stdio_puts_raw(const char *s) {
-  return ::stdio_puts_raw(s);
-}
-// --------------------------------------------------
-extern "C" void stdio_set_chars_available_callback(void (*fn)(void *),
-                                                   void *param);
-void rpp_driver::SdkWrapper::stdio_set_chars_available_callback(
-    void (*fn)(void *), void *param) {
-  ::stdio_set_chars_available_callback((fn), );
-}
-// --------------------------------------------------
-extern "C" void stdio_set_driver_enabled(stdio_driver_t *driver, bool enabled);
-void rpp_driver::SdkWrapper::stdio_set_driver_enabled(stdio_driver_t *driver,
+extern "C" void stdio_set_driver_enabled(stdio_driver_t* driver, bool enabled);
+void rpp_driver::SdkWrapper::stdio_set_driver_enabled(stdio_driver_t* driver,
                                                       bool enabled) {
   ::stdio_set_driver_enabled(driver, enabled);
 }
 // --------------------------------------------------
-extern "C" void stdio_set_translate_crlf(stdio_driver_t *driver,
+extern "C" void stdio_set_translate_crlf(stdio_driver_t* driver,
                                          bool translate);
-void rpp_driver::SdkWrapper::stdio_set_translate_crlf(stdio_driver_t *driver,
+void rpp_driver::SdkWrapper::stdio_set_translate_crlf(stdio_driver_t* driver,
                                                       bool translate) {
   ::stdio_set_translate_crlf(driver, translate);
-}
-// --------------------------------------------------
-extern "C" int stdio_vprintf(const char *format, va_list va);
-int rpp_driver::SdkWrapper::stdio_vprintf(const char *format, va_list va) {
-  return ::stdio_vprintf(format, va);
 }

@@ -18,10 +18,52 @@ DEFINE_FFF_GLOBALS;
 
 // The header file of the library to test.
 #include "../src/sdk/sdkwrapper.hpp"
-
-// Create Test Spies
 extern "C" {
-#include "fffsdkwrapper.hpp"
+// Create Test Spies
+FAKE_VALUE_FUNC(bool, stdio_init_all);
+FAKE_VOID_FUNC(sleep_ms, uint32_t);
+FAKE_VALUE_FUNC(uint32_t, clock_get_hz, clock_handle_t);
+
+FAKE_VOID_FUNC(gpio_init, uint);
+FAKE_VOID_FUNC(gpio_deinit, uint);
+FAKE_VOID_FUNC(gpio_set_function, uint, gpio_function_t);
+FAKE_VOID_FUNC(gpio_set_dir, uint, bool);
+FAKE_VOID_FUNC(gpio_set_input_enabled, uint, bool);
+FAKE_VOID_FUNC(gpio_put, uint, bool);
+FAKE_VALUE_FUNC(bool, gpio_get, uint);
+FAKE_VOID_FUNC(gpio_pull_up, uint);
+FAKE_VOID_FUNC(gpio_pull_down, uint);
+FAKE_VOID_FUNC(gpio_disable_pulls, uint);
+FAKE_VALUE_FUNC(uint, i2c_init, i2c_inst_t *, uint);
+
+FAKE_VOID_FUNC(i2c_deinit, i2c_inst_t *);
+FAKE_VALUE_FUNC(int, i2c_read_blocking, i2c_inst_t *, uint8_t, uint8_t *,
+                size_t, bool);
+FAKE_VALUE_FUNC(int, i2c_write_blocking, i2c_inst_t *, uint8_t, const uint8_t *,
+                size_t, bool);
+
+FAKE_VALUE_FUNC(int, pio_sm_set_consecutive_pindirs, PIO, uint, uint, uint,
+                bool);
+FAKE_VOID_FUNC(pio_gpio_init, PIO, uint);
+FAKE_VOID_FUNC(sm_config_set_out_pins, pio_sm_config *, uint, uint);
+FAKE_VOID_FUNC(sm_config_set_in_pin_base, pio_sm_config *, uint);
+FAKE_VOID_FUNC(sm_config_set_in_pin_count, pio_sm_config *, uint);
+FAKE_VOID_FUNC(sm_config_set_clkdiv, pio_sm_config *, float);
+FAKE_VOID_FUNC(sm_config_set_in_shift, pio_sm_config *, bool, bool, uint);
+FAKE_VOID_FUNC(sm_config_set_out_shift, pio_sm_config *, bool, bool, uint);
+FAKE_VALUE_FUNC(int, pio_sm_init, PIO, uint, uint, const pio_sm_config *);
+FAKE_VOID_FUNC(pio_sm_put, PIO, uint, uint32_t);
+FAKE_VOID_FUNC(pio_sm_put_blocking, PIO, uint, uint32_t);
+FAKE_VALUE_FUNC(uint32_t, pio_sm_get, PIO, uint);
+FAKE_VALUE_FUNC(uint32_t, pio_sm_get_blocking, PIO, uint);
+FAKE_VOID_FUNC(pio_sm_set_enabled, PIO, uint, bool);
+FAKE_VALUE_FUNC(int, pio_add_program, PIO, const pio_program_t *);
+FAKE_VOID_FUNC(sm_config_set_jmp_pin, pio_sm_config *, uint);
+FAKE_VOID_FUNC(pio_sm_claim, PIO, uint);
+FAKE_VOID_FUNC(pio_sm_unclaim, PIO, uint);
+FAKE_VALUE_FUNC(int, pio_claim_unused_sm, PIO, bool);
+FAKE_VALUE_FUNC(bool, pio_sm_is_claimed, PIO, uint);
+FAKE_VOID_FUNC(pio_sm_clear_fifos, PIO, uint);
 }
 // The cpp file of the library to test.
 #include "../src/sdk/sdkwrapper.cpp"
