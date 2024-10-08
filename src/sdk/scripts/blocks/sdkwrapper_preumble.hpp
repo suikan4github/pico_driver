@@ -20,6 +20,18 @@ enum gpio_slew_rate { e, f };
 enum pio_mov_status_type { g, h };
 
 /// @brief Alternate definition for Google Test build.
+typedef int alarm_id_t;
+/// @brief Alternate definition for Google Test build.
+typedef int alarm_pool_t;
+/// @brief Alternate definition for Google Test build.
+typedef int alarm_pool_timer_t;
+/// @brief Alternate definition for Google Test build.
+typedef int repeating_timer_t;
+/// @brief Alternate definition for Google Test build.
+typedef int alarm_callback_t;
+/// @brief Alternate definition for Google Test build.
+typedef int repeating_timer_callback_t;
+/// @brief Alternate definition for Google Test build.
 typedef int gpio_irq_callback_t;
 /// @brief Alternate definition for Google Test build.
 typedef int irq_handler_t;

@@ -14,6 +14,14 @@ MODULE="$MODULE_PREFIX"_"$MODULE_NAME"
 # We assume PICO_SDK_PATH is correctly set. 
 TARGET="${PICO_SDK_PATH%/}/src/rp2_common/${MODULE_PREFIX}_${MODULE_NAME}/include/${MODULE_PREFIX}/${MODULE_NAME}.h"
 
+# If the file is not in the rp2_common, set it should be in common
+if [ ! -e "$TARGET" ]; then
+  TARGET="${PICO_SDK_PATH%/}/src/common/${MODULE_PREFIX}_${MODULE_NAME}/include/${MODULE_PREFIX}/${MODULE_NAME}.h"
+fi
+
+# for monitoring
+echo "Target : $TARGET"
+
 # Scratch pad files. 
 TEMPSRC=$(mktemp).h
 TEMPLIST=$(mktemp).h

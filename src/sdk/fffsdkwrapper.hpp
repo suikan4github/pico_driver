@@ -235,3 +235,70 @@ FAKE_VOID_FUNC(set_sys_clock_48mhz);
 FAKE_VALUE_FUNC(bool, set_sys_clock_hz, uint32_t, bool);
 FAKE_VALUE_FUNC(bool, set_sys_clock_khz, uint32_t, bool);
 FAKE_VOID_FUNC(set_sys_clock_pll, uint32_t, uint, uint);
+FAKE_VALUE_FUNC(int64_t, absolute_time_diff_us, absolute_time_t,
+                absolute_time_t);
+FAKE_VALUE_FUNC(absolute_time_t, absolute_time_min, absolute_time_t,
+                absolute_time_t);
+FAKE_VALUE_FUNC(alarm_id_t, add_alarm_at, absolute_time_t, alarm_callback_t,
+                void*, bool);
+FAKE_VALUE_FUNC(alarm_id_t, add_alarm_in_ms, uint32_t, alarm_callback_t, void*,
+                bool);
+FAKE_VALUE_FUNC(alarm_id_t, add_alarm_in_us, uint64_t, alarm_callback_t, void*,
+                bool);
+FAKE_VALUE_FUNC(bool, add_repeating_timer_ms, int32_t,
+                repeating_timer_callback_t, void*, repeating_timer_t*);
+FAKE_VALUE_FUNC(bool, add_repeating_timer_us, int64_t,
+                repeating_timer_callback_t, void*, repeating_timer_t*);
+FAKE_VALUE_FUNC(alarm_id_t, alarm_pool_add_alarm_at, alarm_pool_t*,
+                absolute_time_t, alarm_callback_t, void*, bool);
+FAKE_VALUE_FUNC(alarm_id_t, alarm_pool_add_alarm_at_force_in_context,
+                alarm_pool_t*, absolute_time_t, alarm_callback_t, void*);
+FAKE_VALUE_FUNC(alarm_id_t, alarm_pool_add_alarm_in_ms, alarm_pool_t*, uint32_t,
+                alarm_callback_t, void*, bool);
+FAKE_VALUE_FUNC(alarm_id_t, alarm_pool_add_alarm_in_us, alarm_pool_t*, uint64_t,
+                alarm_callback_t, void*, bool);
+FAKE_VALUE_FUNC(bool, alarm_pool_add_repeating_timer_ms, alarm_pool_t*, int32_t,
+                repeating_timer_callback_t, void*, repeating_timer_t*);
+FAKE_VALUE_FUNC(bool, alarm_pool_add_repeating_timer_us, alarm_pool_t*, int64_t,
+                repeating_timer_callback_t, void*, repeating_timer_t*);
+FAKE_VALUE_FUNC(bool, alarm_pool_cancel_alarm, alarm_pool_t*, alarm_id_t);
+FAKE_VALUE_FUNC(uint, alarm_pool_core_num, alarm_pool_t*);
+FAKE_VALUE_FUNC(alarm_pool_t*, alarm_pool_create, uint, uint);
+FAKE_VALUE_FUNC(alarm_pool_t*, alarm_pool_create_on_timer, alarm_pool_timer_t*,
+                uint, uint);
+FAKE_VALUE_FUNC(alarm_pool_t*,
+                alarm_pool_create_on_timer_with_unused_hardware_alarm,
+                alarm_pool_timer_t*, uint);
+FAKE_VALUE_FUNC(alarm_pool_t*, alarm_pool_create_with_unused_hardware_alarm,
+                uint);
+FAKE_VOID_FUNC(alarm_pool_destroy, alarm_pool_t*);
+FAKE_VALUE_FUNC(alarm_pool_t*, alarm_pool_get_default);
+FAKE_VALUE_FUNC(alarm_pool_timer_t*, alarm_pool_get_default_timer);
+FAKE_VALUE_FUNC(uint, alarm_pool_hardware_alarm_num, alarm_pool_t*);
+FAKE_VOID_FUNC(alarm_pool_init_default);
+FAKE_VALUE_FUNC(int32_t, alarm_pool_remaining_alarm_time_ms, alarm_pool_t*,
+                alarm_id_t);
+FAKE_VALUE_FUNC(int64_t, alarm_pool_remaining_alarm_time_us, alarm_pool_t*,
+                alarm_id_t);
+FAKE_VALUE_FUNC(uint, alarm_pool_timer_alarm_num, alarm_pool_t*);
+FAKE_VALUE_FUNC(alarm_pool_timer_t*, alarm_pool_timer_for_timer_num, uint);
+FAKE_VALUE_FUNC(bool, best_effort_wfe_or_timeout, absolute_time_t);
+FAKE_VALUE_FUNC(bool, cancel_alarm, alarm_id_t);
+FAKE_VALUE_FUNC(bool, cancel_repeating_timer, repeating_timer_t*);
+FAKE_VALUE_FUNC(absolute_time_t, delayed_by_ms, const absolute_time_t,
+                uint32_t);
+FAKE_VALUE_FUNC(absolute_time_t, delayed_by_us, const absolute_time_t,
+                uint64_t);
+FAKE_VALUE_FUNC(absolute_time_t, get_absolute_time);
+FAKE_VALUE_FUNC(bool, is_at_the_end_of_time, absolute_time_t);
+FAKE_VALUE_FUNC(bool, is_nil_time, absolute_time_t);
+FAKE_VALUE_FUNC(absolute_time_t, make_timeout_time_ms, uint32_t);
+FAKE_VALUE_FUNC(absolute_time_t, make_timeout_time_us, uint64_t);
+FAKE_VALUE_FUNC(int32_t, remaining_alarm_time_ms, alarm_id_t);
+FAKE_VALUE_FUNC(int64_t, remaining_alarm_time_us, alarm_id_t);
+FAKE_VOID_FUNC(runtime_init_default_alarm_pool);
+FAKE_VOID_FUNC(sleep_ms, uint32_t);
+FAKE_VOID_FUNC(sleep_until, absolute_time_t);
+FAKE_VOID_FUNC(sleep_us, uint64_t);
+FAKE_VALUE_FUNC(uint32_t, to_ms_since_boot, absolute_time_t);
+FAKE_VALUE_FUNC(uint32_t, us_to_ms, uint64_t);

@@ -20,6 +20,18 @@ enum gpio_slew_rate { e, f };
 enum pio_mov_status_type { g, h };
 
 /// @brief Alternate definition for Google Test build.
+typedef int alarm_id_t;
+/// @brief Alternate definition for Google Test build.
+typedef int alarm_pool_t;
+/// @brief Alternate definition for Google Test build.
+typedef int alarm_pool_timer_t;
+/// @brief Alternate definition for Google Test build.
+typedef int repeating_timer_t;
+/// @brief Alternate definition for Google Test build.
+typedef int alarm_callback_t;
+/// @brief Alternate definition for Google Test build.
+typedef int repeating_timer_callback_t;
+/// @brief Alternate definition for Google Test build.
 typedef int gpio_irq_callback_t;
 /// @brief Alternate definition for Google Test build.
 typedef int irq_handler_t;
@@ -365,6 +377,85 @@ class SdkWrapper {
   virtual bool set_sys_clock_khz(uint32_t freq_khz, bool required);
   virtual void set_sys_clock_pll(uint32_t vco_freq, uint post_div1,
                                  uint post_div2);
+  virtual int64_t absolute_time_diff_us(absolute_time_t from,
+                                        absolute_time_t to);
+  virtual absolute_time_t absolute_time_min(absolute_time_t a,
+                                            absolute_time_t b);
+  virtual alarm_id_t add_alarm_at(absolute_time_t time,
+                                  alarm_callback_t callback, void *user_data,
+                                  bool fire_if_past);
+  virtual alarm_id_t add_alarm_in_ms(uint32_t ms, alarm_callback_t callback,
+                                     void *user_data, bool fire_if_past);
+  virtual alarm_id_t add_alarm_in_us(uint64_t us, alarm_callback_t callback,
+                                     void *user_data, bool fire_if_past);
+  virtual bool add_repeating_timer_ms(int32_t delay_ms,
+                                      repeating_timer_callback_t callback,
+                                      void *user_data, repeating_timer_t *out);
+  virtual bool add_repeating_timer_us(int64_t delay_us,
+                                      repeating_timer_callback_t callback,
+                                      void *user_data, repeating_timer_t *out);
+  virtual alarm_id_t alarm_pool_add_alarm_at(alarm_pool_t *pool,
+                                             absolute_time_t time,
+                                             alarm_callback_t callback,
+                                             void *user_data,
+                                             bool fire_if_past);
+  virtual alarm_id_t alarm_pool_add_alarm_at_force_in_context(
+      alarm_pool_t *pool, absolute_time_t time, alarm_callback_t callback,
+      void *user_data);
+  virtual alarm_id_t alarm_pool_add_alarm_in_ms(alarm_pool_t *pool, uint32_t ms,
+                                                alarm_callback_t callback,
+                                                void *user_data,
+                                                bool fire_if_past);
+  virtual alarm_id_t alarm_pool_add_alarm_in_us(alarm_pool_t *pool, uint64_t us,
+                                                alarm_callback_t callback,
+                                                void *user_data,
+                                                bool fire_if_past);
+  virtual bool alarm_pool_add_repeating_timer_ms(
+      alarm_pool_t *pool, int32_t delay_ms, repeating_timer_callback_t callback,
+      void *user_data, repeating_timer_t *out);
+  virtual bool alarm_pool_add_repeating_timer_us(
+      alarm_pool_t *pool, int64_t delay_us, repeating_timer_callback_t callback,
+      void *user_data, repeating_timer_t *out);
+  virtual bool alarm_pool_cancel_alarm(alarm_pool_t *pool, alarm_id_t alarm_id);
+  virtual uint alarm_pool_core_num(alarm_pool_t *pool);
+  virtual alarm_pool_t *alarm_pool_create(uint timer_alarm_num,
+                                          uint max_timers);
+  virtual alarm_pool_t *alarm_pool_create_on_timer(alarm_pool_timer_t *timer,
+                                                   uint timer_alarm_num,
+                                                   uint max_timers);
+  virtual alarm_pool_t *alarm_pool_create_on_timer_with_unused_hardware_alarm(
+      alarm_pool_timer_t *timer, uint max_timers);
+  virtual alarm_pool_t *alarm_pool_create_with_unused_hardware_alarm(
+      uint max_timers);
+  virtual void alarm_pool_destroy(alarm_pool_t *pool);
+  virtual alarm_pool_t *alarm_pool_get_default(void);
+  virtual alarm_pool_timer_t *alarm_pool_get_default_timer(void);
+  virtual uint alarm_pool_hardware_alarm_num(alarm_pool_t *pool);
+  virtual void alarm_pool_init_default(void);
+  virtual int32_t alarm_pool_remaining_alarm_time_ms(alarm_pool_t *pool,
+                                                     alarm_id_t alarm_id);
+  virtual int64_t alarm_pool_remaining_alarm_time_us(alarm_pool_t *pool,
+                                                     alarm_id_t alarm_id);
+  virtual uint alarm_pool_timer_alarm_num(alarm_pool_t *pool);
+  virtual alarm_pool_timer_t *alarm_pool_timer_for_timer_num(uint timer_num);
+  virtual bool best_effort_wfe_or_timeout(absolute_time_t timeout_timestamp);
+  virtual bool cancel_alarm(alarm_id_t alarm_id);
+  virtual bool cancel_repeating_timer(repeating_timer_t *timer);
+  virtual absolute_time_t delayed_by_ms(const absolute_time_t t, uint32_t ms);
+  virtual absolute_time_t delayed_by_us(const absolute_time_t t, uint64_t us);
+  virtual absolute_time_t get_absolute_time(void);
+  virtual bool is_at_the_end_of_time(absolute_time_t t);
+  virtual bool is_nil_time(absolute_time_t t);
+  virtual absolute_time_t make_timeout_time_ms(uint32_t ms);
+  virtual absolute_time_t make_timeout_time_us(uint64_t us);
+  virtual int32_t remaining_alarm_time_ms(alarm_id_t alarm_id);
+  virtual int64_t remaining_alarm_time_us(alarm_id_t alarm_id);
+  virtual void runtime_init_default_alarm_pool(void);
+  virtual void sleep_ms(uint32_t ms);
+  virtual void sleep_until(absolute_time_t target);
+  virtual void sleep_us(uint64_t us);
+  virtual uint32_t to_ms_since_boot(absolute_time_t t);
+  virtual uint32_t us_to_ms(uint64_t us);
 
 };  // class SdkWrapper
 

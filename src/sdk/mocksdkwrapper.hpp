@@ -319,6 +319,93 @@ class MockSdkWrapper : public SdkWrapper {
   MOCK_METHOD2(set_sys_clock_khz, bool(uint32_t freq_khz, bool required));
   MOCK_METHOD3(set_sys_clock_pll,
                void(uint32_t vco_freq, uint post_div1, uint post_div2));
+  MOCK_METHOD2(absolute_time_diff_us,
+               int64_t(absolute_time_t from, absolute_time_t to));
+  MOCK_METHOD2(absolute_time_min,
+               absolute_time_t(absolute_time_t a, absolute_time_t b));
+  MOCK_METHOD4(add_alarm_at,
+               alarm_id_t(absolute_time_t time, alarm_callback_t callback,
+                          void *user_data, bool fire_if_past));
+  MOCK_METHOD4(add_alarm_in_ms,
+               alarm_id_t(uint32_t ms, alarm_callback_t callback,
+                          void *user_data, bool fire_if_past));
+  MOCK_METHOD4(add_alarm_in_us,
+               alarm_id_t(uint64_t us, alarm_callback_t callback,
+                          void *user_data, bool fire_if_past));
+  MOCK_METHOD4(add_repeating_timer_ms,
+               bool(int32_t delay_ms, repeating_timer_callback_t callback,
+                    void *user_data, repeating_timer_t *out));
+  MOCK_METHOD4(add_repeating_timer_us,
+               bool(int64_t delay_us, repeating_timer_callback_t callback,
+                    void *user_data, repeating_timer_t *out));
+  MOCK_METHOD5(alarm_pool_add_alarm_at,
+               alarm_id_t(alarm_pool_t *pool, absolute_time_t time,
+                          alarm_callback_t callback, void *user_data,
+                          bool fire_if_past));
+  MOCK_METHOD4(alarm_pool_add_alarm_at_force_in_context,
+               alarm_id_t(alarm_pool_t *pool, absolute_time_t time,
+                          alarm_callback_t callback, void *user_data));
+  MOCK_METHOD5(alarm_pool_add_alarm_in_ms,
+               alarm_id_t(alarm_pool_t *pool, uint32_t ms,
+                          alarm_callback_t callback, void *user_data,
+                          bool fire_if_past));
+  MOCK_METHOD5(alarm_pool_add_alarm_in_us,
+               alarm_id_t(alarm_pool_t *pool, uint64_t us,
+                          alarm_callback_t callback, void *user_data,
+                          bool fire_if_past));
+  MOCK_METHOD5(alarm_pool_add_repeating_timer_ms,
+               bool(alarm_pool_t *pool, int32_t delay_ms,
+                    repeating_timer_callback_t callback, void *user_data,
+                    repeating_timer_t *out));
+  MOCK_METHOD5(alarm_pool_add_repeating_timer_us,
+               bool(alarm_pool_t *pool, int64_t delay_us,
+                    repeating_timer_callback_t callback, void *user_data,
+                    repeating_timer_t *out));
+  MOCK_METHOD2(alarm_pool_cancel_alarm,
+               bool(alarm_pool_t *pool, alarm_id_t alarm_id));
+  MOCK_METHOD1(alarm_pool_core_num, uint(alarm_pool_t *pool));
+  MOCK_METHOD2(alarm_pool_create,
+               alarm_pool_t *(uint timer_alarm_num, uint max_timers));
+  MOCK_METHOD3(alarm_pool_create_on_timer,
+               alarm_pool_t *(alarm_pool_timer_t *timer, uint timer_alarm_num,
+                              uint max_timers));
+  MOCK_METHOD2(alarm_pool_create_on_timer_with_unused_hardware_alarm,
+               alarm_pool_t *(alarm_pool_timer_t *timer, uint max_timers));
+  MOCK_METHOD1(alarm_pool_create_with_unused_hardware_alarm,
+               alarm_pool_t *(uint max_timers));
+  MOCK_METHOD1(alarm_pool_destroy, void(alarm_pool_t *pool));
+  MOCK_METHOD0(alarm_pool_get_default, alarm_pool_t *(void));
+  MOCK_METHOD0(alarm_pool_get_default_timer, alarm_pool_timer_t *(void));
+  MOCK_METHOD1(alarm_pool_hardware_alarm_num, uint(alarm_pool_t *pool));
+  MOCK_METHOD0(alarm_pool_init_default, void(void));
+  MOCK_METHOD2(alarm_pool_remaining_alarm_time_ms,
+               int32_t(alarm_pool_t *pool, alarm_id_t alarm_id));
+  MOCK_METHOD2(alarm_pool_remaining_alarm_time_us,
+               int64_t(alarm_pool_t *pool, alarm_id_t alarm_id));
+  MOCK_METHOD1(alarm_pool_timer_alarm_num, uint(alarm_pool_t *pool));
+  MOCK_METHOD1(alarm_pool_timer_for_timer_num,
+               alarm_pool_timer_t *(uint timer_num));
+  MOCK_METHOD1(best_effort_wfe_or_timeout,
+               bool(absolute_time_t timeout_timestamp));
+  MOCK_METHOD1(cancel_alarm, bool(alarm_id_t alarm_id));
+  MOCK_METHOD1(cancel_repeating_timer, bool(repeating_timer_t *timer));
+  MOCK_METHOD2(delayed_by_ms,
+               absolute_time_t(const absolute_time_t t, uint32_t ms));
+  MOCK_METHOD2(delayed_by_us,
+               absolute_time_t(const absolute_time_t t, uint64_t us));
+  MOCK_METHOD0(get_absolute_time, absolute_time_t(void));
+  MOCK_METHOD1(is_at_the_end_of_time, bool(absolute_time_t t));
+  MOCK_METHOD1(is_nil_time, bool(absolute_time_t t));
+  MOCK_METHOD1(make_timeout_time_ms, absolute_time_t(uint32_t ms));
+  MOCK_METHOD1(make_timeout_time_us, absolute_time_t(uint64_t us));
+  MOCK_METHOD1(remaining_alarm_time_ms, int32_t(alarm_id_t alarm_id));
+  MOCK_METHOD1(remaining_alarm_time_us, int64_t(alarm_id_t alarm_id));
+  MOCK_METHOD0(runtime_init_default_alarm_pool, void(void));
+  MOCK_METHOD1(sleep_ms, void(uint32_t ms));
+  MOCK_METHOD1(sleep_until, void(absolute_time_t target));
+  MOCK_METHOD1(sleep_us, void(uint64_t us));
+  MOCK_METHOD1(to_ms_since_boot, uint32_t(absolute_time_t t));
+  MOCK_METHOD1(us_to_ms, uint32_t(uint64_t us));
 }  // class MockSdkWrapper : public SdkWrapper
 ;
 #endif  // __has_include(<gmock/gmock.h>)

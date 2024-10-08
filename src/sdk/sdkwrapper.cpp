@@ -1274,3 +1274,312 @@ void rpp_driver::SdkWrapper::set_sys_clock_pll(uint32_t vco_freq,
                                                uint post_div1, uint post_div2) {
   ::set_sys_clock_pll(vco_freq, post_div1, post_div2);
 }
+// --------------------------------------------------
+extern "C" int64_t absolute_time_diff_us(absolute_time_t from,
+                                         absolute_time_t to);
+int64_t rpp_driver::SdkWrapper::absolute_time_diff_us(absolute_time_t from,
+                                                      absolute_time_t to) {
+  return ::absolute_time_diff_us(from, to);
+}
+// --------------------------------------------------
+extern "C" absolute_time_t absolute_time_min(absolute_time_t a,
+                                             absolute_time_t b);
+absolute_time_t rpp_driver::SdkWrapper::absolute_time_min(absolute_time_t a,
+                                                          absolute_time_t b) {
+  return ::absolute_time_min(a, b);
+}
+// --------------------------------------------------
+extern "C" alarm_id_t add_alarm_at(absolute_time_t time,
+                                   alarm_callback_t callback, void *user_data,
+                                   bool fire_if_past);
+alarm_id_t rpp_driver::SdkWrapper::add_alarm_at(absolute_time_t time,
+                                                alarm_callback_t callback,
+                                                void *user_data,
+                                                bool fire_if_past) {
+  return ::add_alarm_at(time, callback, user_data, fire_if_past);
+}
+// --------------------------------------------------
+extern "C" alarm_id_t add_alarm_in_ms(uint32_t ms, alarm_callback_t callback,
+                                      void *user_data, bool fire_if_past);
+alarm_id_t rpp_driver::SdkWrapper::add_alarm_in_ms(uint32_t ms,
+                                                   alarm_callback_t callback,
+                                                   void *user_data,
+                                                   bool fire_if_past) {
+  return ::add_alarm_in_ms(ms, callback, user_data, fire_if_past);
+}
+// --------------------------------------------------
+extern "C" alarm_id_t add_alarm_in_us(uint64_t us, alarm_callback_t callback,
+                                      void *user_data, bool fire_if_past);
+alarm_id_t rpp_driver::SdkWrapper::add_alarm_in_us(uint64_t us,
+                                                   alarm_callback_t callback,
+                                                   void *user_data,
+                                                   bool fire_if_past) {
+  return ::add_alarm_in_us(us, callback, user_data, fire_if_past);
+}
+// --------------------------------------------------
+extern "C" bool add_repeating_timer_ms(int32_t delay_ms,
+                                       repeating_timer_callback_t callback,
+                                       void *user_data, repeating_timer_t *out);
+bool rpp_driver::SdkWrapper::add_repeating_timer_ms(
+    int32_t delay_ms, repeating_timer_callback_t callback, void *user_data,
+    repeating_timer_t *out) {
+  return ::add_repeating_timer_ms(delay_ms, callback, user_data, out);
+}
+// --------------------------------------------------
+extern "C" bool add_repeating_timer_us(int64_t delay_us,
+                                       repeating_timer_callback_t callback,
+                                       void *user_data, repeating_timer_t *out);
+bool rpp_driver::SdkWrapper::add_repeating_timer_us(
+    int64_t delay_us, repeating_timer_callback_t callback, void *user_data,
+    repeating_timer_t *out) {
+  return ::add_repeating_timer_us(delay_us, callback, user_data, out);
+}
+// --------------------------------------------------
+extern "C" alarm_id_t alarm_pool_add_alarm_at(alarm_pool_t *pool,
+                                              absolute_time_t time,
+                                              alarm_callback_t callback,
+                                              void *user_data,
+                                              bool fire_if_past);
+alarm_id_t rpp_driver::SdkWrapper::alarm_pool_add_alarm_at(
+    alarm_pool_t *pool, absolute_time_t time, alarm_callback_t callback,
+    void *user_data, bool fire_if_past) {
+  return ::alarm_pool_add_alarm_at(pool, time, callback, user_data,
+                                   fire_if_past);
+}
+// --------------------------------------------------
+extern "C" alarm_id_t alarm_pool_add_alarm_at_force_in_context(
+    alarm_pool_t *pool, absolute_time_t time, alarm_callback_t callback,
+    void *user_data);
+alarm_id_t rpp_driver::SdkWrapper::alarm_pool_add_alarm_at_force_in_context(
+    alarm_pool_t *pool, absolute_time_t time, alarm_callback_t callback,
+    void *user_data) {
+  return ::alarm_pool_add_alarm_at_force_in_context(pool, time, callback,
+                                                    user_data);
+}
+// --------------------------------------------------
+extern "C" alarm_id_t alarm_pool_add_alarm_in_ms(alarm_pool_t *pool,
+                                                 uint32_t ms,
+                                                 alarm_callback_t callback,
+                                                 void *user_data,
+                                                 bool fire_if_past);
+alarm_id_t rpp_driver::SdkWrapper::alarm_pool_add_alarm_in_ms(
+    alarm_pool_t *pool, uint32_t ms, alarm_callback_t callback, void *user_data,
+    bool fire_if_past) {
+  return ::alarm_pool_add_alarm_in_ms(pool, ms, callback, user_data,
+                                      fire_if_past);
+}
+// --------------------------------------------------
+extern "C" alarm_id_t alarm_pool_add_alarm_in_us(alarm_pool_t *pool,
+                                                 uint64_t us,
+                                                 alarm_callback_t callback,
+                                                 void *user_data,
+                                                 bool fire_if_past);
+alarm_id_t rpp_driver::SdkWrapper::alarm_pool_add_alarm_in_us(
+    alarm_pool_t *pool, uint64_t us, alarm_callback_t callback, void *user_data,
+    bool fire_if_past) {
+  return ::alarm_pool_add_alarm_in_us(pool, us, callback, user_data,
+                                      fire_if_past);
+}
+// --------------------------------------------------
+extern "C" bool alarm_pool_add_repeating_timer_ms(
+    alarm_pool_t *pool, int32_t delay_ms, repeating_timer_callback_t callback,
+    void *user_data, repeating_timer_t *out);
+bool rpp_driver::SdkWrapper::alarm_pool_add_repeating_timer_ms(
+    alarm_pool_t *pool, int32_t delay_ms, repeating_timer_callback_t callback,
+    void *user_data, repeating_timer_t *out) {
+  return ::alarm_pool_add_repeating_timer_ms(pool, delay_ms, callback,
+                                             user_data, out);
+}
+// --------------------------------------------------
+extern "C" bool alarm_pool_add_repeating_timer_us(
+    alarm_pool_t *pool, int64_t delay_us, repeating_timer_callback_t callback,
+    void *user_data, repeating_timer_t *out);
+bool rpp_driver::SdkWrapper::alarm_pool_add_repeating_timer_us(
+    alarm_pool_t *pool, int64_t delay_us, repeating_timer_callback_t callback,
+    void *user_data, repeating_timer_t *out) {
+  return ::alarm_pool_add_repeating_timer_us(pool, delay_us, callback,
+                                             user_data, out);
+}
+// --------------------------------------------------
+extern "C" bool alarm_pool_cancel_alarm(alarm_pool_t *pool,
+                                        alarm_id_t alarm_id);
+bool rpp_driver::SdkWrapper::alarm_pool_cancel_alarm(alarm_pool_t *pool,
+                                                     alarm_id_t alarm_id) {
+  return ::alarm_pool_cancel_alarm(pool, alarm_id);
+}
+// --------------------------------------------------
+extern "C" uint alarm_pool_core_num(alarm_pool_t *pool);
+uint rpp_driver::SdkWrapper::alarm_pool_core_num(alarm_pool_t *pool) {
+  return ::alarm_pool_core_num(pool);
+}
+// --------------------------------------------------
+extern "C" alarm_pool_t *alarm_pool_create(uint timer_alarm_num,
+                                           uint max_timers);
+alarm_pool_t *rpp_driver::SdkWrapper::alarm_pool_create(uint timer_alarm_num,
+                                                        uint max_timers) {
+  return ::alarm_pool_create(timer_alarm_num, max_timers);
+}
+// --------------------------------------------------
+extern "C" alarm_pool_t *alarm_pool_create_on_timer(alarm_pool_timer_t *timer,
+                                                    uint timer_alarm_num,
+                                                    uint max_timers);
+alarm_pool_t *rpp_driver::SdkWrapper::alarm_pool_create_on_timer(
+    alarm_pool_timer_t *timer, uint timer_alarm_num, uint max_timers) {
+  return ::alarm_pool_create_on_timer(timer, timer_alarm_num, max_timers);
+}
+// --------------------------------------------------
+extern "C" alarm_pool_t *alarm_pool_create_on_timer_with_unused_hardware_alarm(
+    alarm_pool_timer_t *timer, uint max_timers);
+alarm_pool_t *
+rpp_driver::SdkWrapper::alarm_pool_create_on_timer_with_unused_hardware_alarm(
+    alarm_pool_timer_t *timer, uint max_timers) {
+  return ::alarm_pool_create_on_timer_with_unused_hardware_alarm(timer,
+                                                                 max_timers);
+}
+// --------------------------------------------------
+extern "C" alarm_pool_t *alarm_pool_create_with_unused_hardware_alarm(
+    uint max_timers);
+alarm_pool_t *
+rpp_driver::SdkWrapper::alarm_pool_create_with_unused_hardware_alarm(
+    uint max_timers) {
+  return ::alarm_pool_create_with_unused_hardware_alarm(max_timers);
+}
+// --------------------------------------------------
+extern "C" void alarm_pool_destroy(alarm_pool_t *pool);
+void rpp_driver::SdkWrapper::alarm_pool_destroy(alarm_pool_t *pool) {
+  ::alarm_pool_destroy(pool);
+}
+// --------------------------------------------------
+extern "C" alarm_pool_t *alarm_pool_get_default(void);
+alarm_pool_t *rpp_driver::SdkWrapper::alarm_pool_get_default(void) {
+  return ::alarm_pool_get_default();
+}
+// --------------------------------------------------
+extern "C" alarm_pool_timer_t *alarm_pool_get_default_timer(void);
+alarm_pool_timer_t *rpp_driver::SdkWrapper::alarm_pool_get_default_timer(void) {
+  return ::alarm_pool_get_default_timer();
+}
+// --------------------------------------------------
+extern "C" uint alarm_pool_hardware_alarm_num(alarm_pool_t *pool);
+uint rpp_driver::SdkWrapper::alarm_pool_hardware_alarm_num(alarm_pool_t *pool) {
+  return ::alarm_pool_hardware_alarm_num(pool);
+}
+// --------------------------------------------------
+extern "C" void alarm_pool_init_default(void);
+void rpp_driver::SdkWrapper::alarm_pool_init_default(void) {
+  ::alarm_pool_init_default();
+}
+// --------------------------------------------------
+extern "C" int32_t alarm_pool_remaining_alarm_time_ms(alarm_pool_t *pool,
+                                                      alarm_id_t alarm_id);
+int32_t rpp_driver::SdkWrapper::alarm_pool_remaining_alarm_time_ms(
+    alarm_pool_t *pool, alarm_id_t alarm_id) {
+  return ::alarm_pool_remaining_alarm_time_ms(pool, alarm_id);
+}
+// --------------------------------------------------
+extern "C" int64_t alarm_pool_remaining_alarm_time_us(alarm_pool_t *pool,
+                                                      alarm_id_t alarm_id);
+int64_t rpp_driver::SdkWrapper::alarm_pool_remaining_alarm_time_us(
+    alarm_pool_t *pool, alarm_id_t alarm_id) {
+  return ::alarm_pool_remaining_alarm_time_us(pool, alarm_id);
+}
+// --------------------------------------------------
+extern "C" uint alarm_pool_timer_alarm_num(alarm_pool_t *pool);
+uint rpp_driver::SdkWrapper::alarm_pool_timer_alarm_num(alarm_pool_t *pool) {
+  return ::alarm_pool_timer_alarm_num(pool);
+}
+// --------------------------------------------------
+extern "C" alarm_pool_timer_t *alarm_pool_timer_for_timer_num(uint timer_num);
+alarm_pool_timer_t *rpp_driver::SdkWrapper::alarm_pool_timer_for_timer_num(
+    uint timer_num) {
+  return ::alarm_pool_timer_for_timer_num(timer_num);
+}
+// --------------------------------------------------
+extern "C" bool best_effort_wfe_or_timeout(absolute_time_t timeout_timestamp);
+bool rpp_driver::SdkWrapper::best_effort_wfe_or_timeout(
+    absolute_time_t timeout_timestamp) {
+  return ::best_effort_wfe_or_timeout(timeout_timestamp);
+}
+// --------------------------------------------------
+extern "C" bool cancel_alarm(alarm_id_t alarm_id);
+bool rpp_driver::SdkWrapper::cancel_alarm(alarm_id_t alarm_id) {
+  return ::cancel_alarm(alarm_id);
+}
+// --------------------------------------------------
+extern "C" bool cancel_repeating_timer(repeating_timer_t *timer);
+bool rpp_driver::SdkWrapper::cancel_repeating_timer(repeating_timer_t *timer) {
+  return ::cancel_repeating_timer(timer);
+}
+// --------------------------------------------------
+extern "C" absolute_time_t delayed_by_ms(const absolute_time_t t, uint32_t ms);
+absolute_time_t rpp_driver::SdkWrapper::delayed_by_ms(const absolute_time_t t,
+                                                      uint32_t ms) {
+  return ::delayed_by_ms(t, ms);
+}
+// --------------------------------------------------
+extern "C" absolute_time_t delayed_by_us(const absolute_time_t t, uint64_t us);
+absolute_time_t rpp_driver::SdkWrapper::delayed_by_us(const absolute_time_t t,
+                                                      uint64_t us) {
+  return ::delayed_by_us(t, us);
+}
+// --------------------------------------------------
+extern "C" absolute_time_t get_absolute_time(void);
+absolute_time_t rpp_driver::SdkWrapper::get_absolute_time(void) {
+  return ::get_absolute_time();
+}
+// --------------------------------------------------
+extern "C" bool is_at_the_end_of_time(absolute_time_t t);
+bool rpp_driver::SdkWrapper::is_at_the_end_of_time(absolute_time_t t) {
+  return ::is_at_the_end_of_time(t);
+}
+// --------------------------------------------------
+extern "C" bool is_nil_time(absolute_time_t t);
+bool rpp_driver::SdkWrapper::is_nil_time(absolute_time_t t) {
+  return ::is_nil_time(t);
+}
+// --------------------------------------------------
+extern "C" absolute_time_t make_timeout_time_ms(uint32_t ms);
+absolute_time_t rpp_driver::SdkWrapper::make_timeout_time_ms(uint32_t ms) {
+  return ::make_timeout_time_ms(ms);
+}
+// --------------------------------------------------
+extern "C" absolute_time_t make_timeout_time_us(uint64_t us);
+absolute_time_t rpp_driver::SdkWrapper::make_timeout_time_us(uint64_t us) {
+  return ::make_timeout_time_us(us);
+}
+// --------------------------------------------------
+extern "C" int32_t remaining_alarm_time_ms(alarm_id_t alarm_id);
+int32_t rpp_driver::SdkWrapper::remaining_alarm_time_ms(alarm_id_t alarm_id) {
+  return ::remaining_alarm_time_ms(alarm_id);
+}
+// --------------------------------------------------
+extern "C" int64_t remaining_alarm_time_us(alarm_id_t alarm_id);
+int64_t rpp_driver::SdkWrapper::remaining_alarm_time_us(alarm_id_t alarm_id) {
+  return ::remaining_alarm_time_us(alarm_id);
+}
+// --------------------------------------------------
+extern "C" void runtime_init_default_alarm_pool(void);
+void rpp_driver::SdkWrapper::runtime_init_default_alarm_pool(void) {
+  ::runtime_init_default_alarm_pool();
+}
+// --------------------------------------------------
+extern "C" void sleep_ms(uint32_t ms);
+void rpp_driver::SdkWrapper::sleep_ms(uint32_t ms) { ::sleep_ms(ms); }
+// --------------------------------------------------
+extern "C" void sleep_until(absolute_time_t target);
+void rpp_driver::SdkWrapper::sleep_until(absolute_time_t target) {
+  ::sleep_until(target);
+}
+// --------------------------------------------------
+extern "C" void sleep_us(uint64_t us);
+void rpp_driver::SdkWrapper::sleep_us(uint64_t us) { ::sleep_us(us); }
+// --------------------------------------------------
+extern "C" uint32_t to_ms_since_boot(absolute_time_t t);
+uint32_t rpp_driver::SdkWrapper::to_ms_since_boot(absolute_time_t t) {
+  return ::to_ms_since_boot(t);
+}
+// --------------------------------------------------
+extern "C" uint32_t us_to_ms(uint64_t us);
+uint32_t rpp_driver::SdkWrapper::us_to_ms(uint64_t us) {
+  return ::us_to_ms(us);
+}
