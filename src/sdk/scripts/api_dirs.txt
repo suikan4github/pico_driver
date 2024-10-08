@@ -3,3 +3,4 @@ hardware pio
 hardware gpio
 hardware clocks
 pico time
+pico stdio

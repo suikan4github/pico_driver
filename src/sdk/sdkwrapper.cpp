@@ -1583,3 +1583,105 @@ extern "C" uint32_t us_to_ms(uint64_t us);
 uint32_t rpp_driver::SdkWrapper::us_to_ms(uint64_t us) {
   return ::us_to_ms(us);
 }
+// --------------------------------------------------
+extern "C" int getchar_timeout_us(uint32_t timeout_us);
+int rpp_driver::SdkWrapper::getchar_timeout_us(uint32_t timeout_us) {
+  return ::getchar_timeout_us(timeout_us);
+}
+// --------------------------------------------------
+extern "C" int putchar_raw(int c);
+int rpp_driver::SdkWrapper::putchar_raw(int c) { return ::putchar_raw(c); }
+// --------------------------------------------------
+extern "C" int puts_raw(const char *s);
+int rpp_driver::SdkWrapper::puts_raw(const char *s) { return ::puts_raw(s); }
+// --------------------------------------------------
+extern "C" bool stdio_deinit_all(void);
+bool rpp_driver::SdkWrapper::stdio_deinit_all(void) {
+  return ::stdio_deinit_all();
+}
+// --------------------------------------------------
+extern "C" void stdio_filter_driver(stdio_driver_t *driver);
+void rpp_driver::SdkWrapper::stdio_filter_driver(stdio_driver_t *driver) {
+  ::stdio_filter_driver(driver);
+}
+// --------------------------------------------------
+extern "C" void stdio_flush(void);
+void rpp_driver::SdkWrapper::stdio_flush(void) { ::stdio_flush(); }
+// --------------------------------------------------
+extern "C" int stdio_get_until(char *buf, int len, absolute_time_t until);
+int rpp_driver::SdkWrapper::stdio_get_until(char *buf, int len,
+                                            absolute_time_t until) {
+  return ::stdio_get_until(buf, len, until);
+}
+// --------------------------------------------------
+extern "C" int stdio_getchar(void);
+int rpp_driver::SdkWrapper::stdio_getchar(void) { return ::stdio_getchar(); }
+// --------------------------------------------------
+extern "C" int stdio_getchar_timeout_us(uint32_t timeout_us);
+int rpp_driver::SdkWrapper::stdio_getchar_timeout_us(uint32_t timeout_us) {
+  return ::stdio_getchar_timeout_us(timeout_us);
+}
+// --------------------------------------------------
+extern "C" bool stdio_init_all(void);
+bool rpp_driver::SdkWrapper::stdio_init_all(void) { return ::stdio_init_all(); }
+// --------------------------------------------------
+extern "C" int __printflike(1, 0) stdio_printf(const char *format, ...);
+int rpp_driver::SdkWrapper::__printflike(1, 0)
+    stdio_printf(const char *format, ...) {
+return
+::__printflike(
+0
+stdio_printf(const char
+);
+}
+// --------------------------------------------------
+extern "C" int stdio_put_string(const char *s, int len, bool newline,
+                                bool cr_translation);
+int rpp_driver::SdkWrapper::stdio_put_string(const char *s, int len,
+                                             bool newline,
+                                             bool cr_translation) {
+  return ::stdio_put_string(s, len, newline, cr_translation);
+}
+// --------------------------------------------------
+extern "C" int stdio_putchar(int);
+int rpp_driver::SdkWrapper::stdio_putchar(int) { return ::stdio_putchar(); }
+// --------------------------------------------------
+extern "C" int stdio_putchar_raw(int c);
+int rpp_driver::SdkWrapper::stdio_putchar_raw(int c) {
+  return ::stdio_putchar_raw(c);
+}
+// --------------------------------------------------
+extern "C" int stdio_puts(const char *s);
+int rpp_driver::SdkWrapper::stdio_puts(const char *s) {
+  return ::stdio_puts(s);
+}
+// --------------------------------------------------
+extern "C" int stdio_puts_raw(const char *s);
+int rpp_driver::SdkWrapper::stdio_puts_raw(const char *s) {
+  return ::stdio_puts_raw(s);
+}
+// --------------------------------------------------
+extern "C" void stdio_set_chars_available_callback(void (*fn)(void *),
+                                                   void *param);
+void rpp_driver::SdkWrapper::stdio_set_chars_available_callback(
+    void (*fn)(void *), void *param) {
+  ::stdio_set_chars_available_callback((fn), );
+}
+// --------------------------------------------------
+extern "C" void stdio_set_driver_enabled(stdio_driver_t *driver, bool enabled);
+void rpp_driver::SdkWrapper::stdio_set_driver_enabled(stdio_driver_t *driver,
+                                                      bool enabled) {
+  ::stdio_set_driver_enabled(driver, enabled);
+}
+// --------------------------------------------------
+extern "C" void stdio_set_translate_crlf(stdio_driver_t *driver,
+                                         bool translate);
+void rpp_driver::SdkWrapper::stdio_set_translate_crlf(stdio_driver_t *driver,
+                                                      bool translate) {
+  ::stdio_set_translate_crlf(driver, translate);
+}
+// --------------------------------------------------
+extern "C" int stdio_vprintf(const char *format, va_list va);
+int rpp_driver::SdkWrapper::stdio_vprintf(const char *format, va_list va) {
+  return ::stdio_vprintf(format, va);
+}

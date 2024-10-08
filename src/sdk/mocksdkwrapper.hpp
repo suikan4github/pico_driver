@@ -406,6 +406,30 @@ class MockSdkWrapper : public SdkWrapper {
   MOCK_METHOD1(sleep_us, void(uint64_t us));
   MOCK_METHOD1(to_ms_since_boot, uint32_t(absolute_time_t t));
   MOCK_METHOD1(us_to_ms, uint32_t(uint64_t us));
+  MOCK_METHOD1(getchar_timeout_us, int(uint32_t timeout_us));
+  MOCK_METHOD1(putchar_raw, int(int c));
+  MOCK_METHOD1(puts_raw, int(const char *s));
+  MOCK_METHOD0(stdio_deinit_all, bool(void));
+  MOCK_METHOD1(stdio_filter_driver, void(stdio_driver_t *driver));
+  MOCK_METHOD0(stdio_flush, void(void));
+  MOCK_METHOD3(stdio_get_until, int(char *buf, int len, absolute_time_t until));
+  MOCK_METHOD0(stdio_getchar, int(void));
+  MOCK_METHOD1(stdio_getchar_timeout_us, int(uint32_t timeout_us));
+  MOCK_METHOD0(stdio_init_all, bool(void));
+  MOCK_METHOD2 .5(__printflike, int(1, 0) stdio_printf(const char *format, ));
+  MOCK_METHOD4(stdio_put_string,
+               int(const char *s, int len, bool newline, bool cr_translation));
+  MOCK_METHOD0 .5(stdio_putchar, int(int));
+  MOCK_METHOD1(stdio_putchar_raw, int(int c));
+  MOCK_METHOD1(stdio_puts, int(const char *s));
+  MOCK_METHOD1(stdio_puts_raw, int(const char *s));
+  MOCK_METHOD0(stdio_set_chars_available_callback,
+               void(void (*fn)(void *), void));
+  MOCK_METHOD2(stdio_set_driver_enabled,
+               void(stdio_driver_t *driver, bool enabled));
+  MOCK_METHOD2(stdio_set_translate_crlf,
+               void(stdio_driver_t *driver, bool translate));
+  MOCK_METHOD2(stdio_vprintf, int(const char *format, va_list va));
 }  // class MockSdkWrapper : public SdkWrapper
 ;
 #endif  // __has_include(<gmock/gmock.h>)

@@ -20,6 +20,8 @@ enum gpio_slew_rate { e, f };
 enum pio_mov_status_type { g, h };
 
 /// @brief Alternate definition for Google Test build.
+typedef int stdio_driver_t;
+/// @brief Alternate definition for Google Test build.
 typedef int alarm_id_t;
 /// @brief Alternate definition for Google Test build.
 typedef int alarm_pool_t;
@@ -456,6 +458,28 @@ class SdkWrapper {
   virtual void sleep_us(uint64_t us);
   virtual uint32_t to_ms_since_boot(absolute_time_t t);
   virtual uint32_t us_to_ms(uint64_t us);
+  virtual int getchar_timeout_us(uint32_t timeout_us);
+  virtual int putchar_raw(int c);
+  virtual int puts_raw(const char *s);
+  virtual bool stdio_deinit_all(void);
+  virtual void stdio_filter_driver(stdio_driver_t *driver);
+  virtual void stdio_flush(void);
+  virtual int stdio_get_until(char *buf, int len, absolute_time_t until);
+  virtual int stdio_getchar(void);
+  virtual int stdio_getchar_timeout_us(uint32_t timeout_us);
+  virtual bool stdio_init_all(void);
+  virtual int __printflike(1, 0) stdio_printf(const char *format, ...);
+  virtual int stdio_put_string(const char *s, int len, bool newline,
+                               bool cr_translation);
+  virtual int stdio_putchar(int);
+  virtual int stdio_putchar_raw(int c);
+  virtual int stdio_puts(const char *s);
+  virtual int stdio_puts_raw(const char *s);
+  virtual void stdio_set_chars_available_callback(void (*fn)(void *),
+                                                  void *param);
+  virtual void stdio_set_driver_enabled(stdio_driver_t *driver, bool enabled);
+  virtual void stdio_set_translate_crlf(stdio_driver_t *driver, bool translate);
+  virtual int stdio_vprintf(const char *format, va_list va);
 
 };  // class SdkWrapper
 

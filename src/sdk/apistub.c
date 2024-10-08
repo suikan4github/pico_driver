@@ -1822,3 +1822,132 @@ __attribute__((weak)) uint32_t us_to_ms(uint64_t us) {
   assert(false &&
          "Error : The pico_time library is missing in the link phase.");
 }
+// --------------------------------------------------
+extern "C" int getchar_timeout_us(uint32_t timeout_us);
+__attribute__((weak)) int getchar_timeout_us(uint32_t timeout_us) {
+  assert(false &&
+         "Error : The pico_stdio library is missing in the link phase.");
+}
+// --------------------------------------------------
+extern "C" int putchar_raw(int c);
+__attribute__((weak)) int putchar_raw(int c) {
+  assert(false &&
+         "Error : The pico_stdio library is missing in the link phase.");
+}
+// --------------------------------------------------
+extern "C" int puts_raw(const char *s);
+__attribute__((weak)) int puts_raw(const char *s) {
+  assert(false &&
+         "Error : The pico_stdio library is missing in the link phase.");
+}
+// --------------------------------------------------
+extern "C" bool stdio_deinit_all(void);
+__attribute__((weak)) bool stdio_deinit_all(void) {
+  assert(false &&
+         "Error : The pico_stdio library is missing in the link phase.");
+}
+// --------------------------------------------------
+extern "C" void stdio_filter_driver(stdio_driver_t *driver);
+__attribute__((weak)) void stdio_filter_driver(stdio_driver_t *driver) {
+  assert(false &&
+         "Error : The pico_stdio library is missing in the link phase.");
+}
+// --------------------------------------------------
+extern "C" void stdio_flush(void);
+__attribute__((weak)) void stdio_flush(void) {
+  assert(false &&
+         "Error : The pico_stdio library is missing in the link phase.");
+}
+// --------------------------------------------------
+extern "C" int stdio_get_until(char *buf, int len, absolute_time_t until);
+__attribute__((weak)) int stdio_get_until(char *buf, int len,
+                                          absolute_time_t until) {
+  assert(false &&
+         "Error : The pico_stdio library is missing in the link phase.");
+}
+// --------------------------------------------------
+extern "C" int stdio_getchar(void);
+__attribute__((weak)) int stdio_getchar(void) {
+  assert(false &&
+         "Error : The pico_stdio library is missing in the link phase.");
+}
+// --------------------------------------------------
+extern "C" int stdio_getchar_timeout_us(uint32_t timeout_us);
+__attribute__((weak)) int stdio_getchar_timeout_us(uint32_t timeout_us) {
+  assert(false &&
+         "Error : The pico_stdio library is missing in the link phase.");
+}
+// --------------------------------------------------
+extern "C" bool stdio_init_all(void);
+__attribute__((weak)) bool stdio_init_all(void) {
+  assert(false &&
+         "Error : The pico_stdio library is missing in the link phase.");
+}
+// --------------------------------------------------
+extern "C" int __printflike(1, 0) stdio_printf(const char *format, ...);
+__attribute__((weak)) int __printflike(1, 0)
+    stdio_printf(const char *format, ...) {
+  assert(false &&
+         "Error : The pico_stdio library is missing in the link phase.");
+}
+// --------------------------------------------------
+extern "C" int stdio_put_string(const char *s, int len, bool newline,
+                                bool cr_translation);
+__attribute__((weak)) int stdio_put_string(const char *s, int len, bool newline,
+                                           bool cr_translation) {
+  assert(false &&
+         "Error : The pico_stdio library is missing in the link phase.");
+}
+// --------------------------------------------------
+extern "C" int stdio_putchar(int);
+__attribute__((weak)) int stdio_putchar(int) {
+  assert(false &&
+         "Error : The pico_stdio library is missing in the link phase.");
+}
+// --------------------------------------------------
+extern "C" int stdio_putchar_raw(int c);
+__attribute__((weak)) int stdio_putchar_raw(int c) {
+  assert(false &&
+         "Error : The pico_stdio library is missing in the link phase.");
+}
+// --------------------------------------------------
+extern "C" int stdio_puts(const char *s);
+__attribute__((weak)) int stdio_puts(const char *s) {
+  assert(false &&
+         "Error : The pico_stdio library is missing in the link phase.");
+}
+// --------------------------------------------------
+extern "C" int stdio_puts_raw(const char *s);
+__attribute__((weak)) int stdio_puts_raw(const char *s) {
+  assert(false &&
+         "Error : The pico_stdio library is missing in the link phase.");
+}
+// --------------------------------------------------
+extern "C" void stdio_set_chars_available_callback(void (*fn)(void *),
+                                                   void *param);
+__attribute__((weak)) void stdio_set_chars_available_callback(
+    void (*fn)(void *), void *param) {
+  assert(false &&
+         "Error : The pico_stdio library is missing in the link phase.");
+}
+// --------------------------------------------------
+extern "C" void stdio_set_driver_enabled(stdio_driver_t *driver, bool enabled);
+__attribute__((weak)) void stdio_set_driver_enabled(stdio_driver_t *driver,
+                                                    bool enabled) {
+  assert(false &&
+         "Error : The pico_stdio library is missing in the link phase.");
+}
+// --------------------------------------------------
+extern "C" void stdio_set_translate_crlf(stdio_driver_t *driver,
+                                         bool translate);
+__attribute__((weak)) void stdio_set_translate_crlf(stdio_driver_t *driver,
+                                                    bool translate) {
+  assert(false &&
+         "Error : The pico_stdio library is missing in the link phase.");
+}
+// --------------------------------------------------
+extern "C" int stdio_vprintf(const char *format, va_list va);
+__attribute__((weak)) int stdio_vprintf(const char *format, va_list va) {
+  assert(false &&
+         "Error : The pico_stdio library is missing in the link phase.");
+}

@@ -302,3 +302,25 @@ FAKE_VOID_FUNC(sleep_until, absolute_time_t);
 FAKE_VOID_FUNC(sleep_us, uint64_t);
 FAKE_VALUE_FUNC(uint32_t, to_ms_since_boot, absolute_time_t);
 FAKE_VALUE_FUNC(uint32_t, us_to_ms, uint64_t);
+FAKE_VALUE_FUNC(int, getchar_timeout_us, uint32_t);
+FAKE_VALUE_FUNC(int, putchar_raw, int);
+FAKE_VALUE_FUNC(int, puts_raw, const char*);
+FAKE_VALUE_FUNC(bool, stdio_deinit_all);
+FAKE_VOID_FUNC(stdio_filter_driver, stdio_driver_t*);
+FAKE_VOID_FUNC(stdio_flush);
+FAKE_VALUE_FUNC(int, stdio_get_until, char*, int, absolute_time_t);
+FAKE_VALUE_FUNC(int, stdio_getchar);
+FAKE_VALUE_FUNC(int, stdio_getchar_timeout_us, uint32_t);
+FAKE_VALUE_FUNC(bool, stdio_init_all);
+FAKE_VALUE_FUNC(int, __printflike, 1, , )
+,format,
+);
+FAKE_VALUE_FUNC(int, stdio_put_string, const char*, int, bool, bool);
+FAKE_VALUE_FUNC(int, stdio_putchar, int);
+FAKE_VALUE_FUNC(int, stdio_putchar_raw, int);
+FAKE_VALUE_FUNC(int, stdio_puts, const char*);
+FAKE_VALUE_FUNC(int, stdio_puts_raw, const char*);
+FAKE_VOID_FUNC(stdio_set_chars_available_callback, )(void*);
+FAKE_VOID_FUNC(stdio_set_driver_enabled, stdio_driver_t*, bool);
+FAKE_VOID_FUNC(stdio_set_translate_crlf, stdio_driver_t*, bool);
+FAKE_VALUE_FUNC(int, stdio_vprintf, const char*, va_list);
