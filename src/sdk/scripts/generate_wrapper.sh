@@ -2,10 +2,10 @@
 
 FILE="api_dirs.txt"
 
-cp blocks/sdkwrapper_prefix.hpp output/sdkwrapper.hpp
-cp blocks/sdkwrapper_prefix.cpp output/sdkwrapper.cpp
-cp blocks/mocksdkwrapper_prefix.hpp output/mocksdkwrapper.hpp
-cp blocks/apistub_prefix.c  output/apistub.c
+cp blocks/sdkwrapper_preumble.hpp output/sdkwrapper.hpp
+cp blocks/sdkwrapper_preumble.cpp output/sdkwrapper.cpp
+cp blocks/mocksdkwrapper_preumble.hpp output/mocksdkwrapper.hpp
+cp blocks/apistub_preumble.c  output/apistub.c
 echo "" > output/fffsdkwrapper.hpp
 echo "" > output/pico_sdk_headers.h
 echo "" > debug.hpp
