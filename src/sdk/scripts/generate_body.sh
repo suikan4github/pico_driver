@@ -31,11 +31,11 @@ TEMPLIST=$(mktemp).h
 # 10. sed concatenate concat to the following word to handle the type as 1 field in the awk.
 clang-format "$TARGET" --style="{ColumnLimit: 9999}" > "$TEMPSRC"
 ctags -x --c++-kinds=pf "$TEMPSRC"|\
-sed -e 's/{.*$//' | \
-sed s/\;.*$// |\
+sed -e 's/{.*$//' |\
+sed -e 's/\;.*$//' |\
 grep -v "__unused" |\
 awk '{$1="";$2="";$3="";$4="";print $0}'|\
-sed s/__attribute__\(\(always_inline\)\)//|sed s/static// | sed s/inline// | sed s/extern// | \
+sed -e 's/__attribute__\(\(always_inline\)\)//'|sed -e 's/static//' | sed -e 's/inline//' | sed -e 's/extern//' | \
 sed -e 's/(/ ( /' | sed -e 's/)/ )/' | \
 sed -e 's/\(^.*\) +*\*\(.*(\)/\1\* \2/' | \
 sed -e 's/enum /enum_/' | \
