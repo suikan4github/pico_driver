@@ -1,3 +1,4 @@
 hardware i2c
 hardware pio
 hardware gpio
+hardware clocks

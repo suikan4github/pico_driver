@@ -44,21 +44,24 @@ sed -e 's/enum /enum_/' \
 # for debug out.
 cat "$TEMPLIST" >> debug.hpp
 
+# Gnerate include headers. 
+echo "#include <../../${MODULE_PREFIX}_${MODULE_NAME}/include/${MODULE_PREFIX}/${MODULE_NAME}.h>"  >> output/pico_sdk_headers.h
+
 # Generate the class delcaration. 
 # add "virtual" and ";" to be a right function prototype. 
-sed -e 's/^/virtual /' < "$TEMPLIST" | sed -e 's/$/;/' | sed -e 's/enum_/enum /' >> sdkwrapper.hpp
+sed -e 's/^/virtual /' < "$TEMPLIST" | sed -e 's/$/;/' | sed -e 's/enum_/enum /' >> output/sdkwrapper.hpp
 
 # Generate the class implementation
-awk  -f gen_impl.awk < "$TEMPLIST" | sed -e 's/enum_/enum /' > sdkwrapper.cpp
+awk  -f awk/gen_impl.awk < "$TEMPLIST" | sed -e 's/enum_/enum /' >> output/sdkwrapper.cpp
 
 # Generate the API stub
-awk -v module="$MODULE" -f gen_apistub.awk < "$TEMPLIST" | sed -e 's/enum_/enum /' >> apistub.c
+awk -v module="$MODULE" -f awk/gen_apistub.awk < "$TEMPLIST" | sed -e 's/enum_/enum /' >> output/apistub.c
 
 # Generate the mock declaration
-awk  -f gen_mock.awk < "$TEMPLIST" | sed -e 's/enum_/enum /' >> mocksdkwrapper.hpp
+awk  -f awk/gen_mock.awk < "$TEMPLIST" | sed -e 's/enum_/enum /' >> output/mocksdkwrapper.hpp
 
 # Generate the fff declaration
-awk  -f gen_fff.awk < "$TEMPLIST" | sed -e 's/enum_/enum /' >> fffsdkwrapper.hpp
+awk  -f awk/gen_fff.awk < "$TEMPLIST" | sed -e 's/enum_/enum /' >> output/fffsdkwrapper.hpp
 
 # Remove the scratch pad files. 
 trap 'rm -f "$TEMPSRC"' EXIT
