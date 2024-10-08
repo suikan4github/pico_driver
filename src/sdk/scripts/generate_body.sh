@@ -52,7 +52,7 @@ sed -e 's/enum /enum_/g' | \
 sed -e 's/const /const_/g' | \
 sed -e 's/void /void_/g' | sed -e 's/^ *void_/void /'| \
 sed -e 's/ *\*/\* /g' | \
-grep -v 'stdio_getchar' | grep -v 'stdio_putchar' | grep -v 'stdio_puts' |grep -v 'stdio_vprintf' | grep -v 'stdio_printf' | grep -v 'stdio_set_chars_available_callback'\
+grep -v 'stdio_getchar' | grep -v 'stdio_putchar' | grep -v 'stdio_puts' |grep -v 'stdio_vprintf' | grep -v 'stdio_printf' | grep -v 'stdio_set_chars_available_callback' \
 > "$TEMPLIST"
 
 
@@ -78,7 +78,7 @@ awk -v module="$MODULE" -f awk/gen_apistub.awk < "$TEMPLIST" | sed -e 's/enum_/e
 awk  -f awk/gen_mock.awk < "$TEMPLIST" | sed -e 's/enum_/enum /g'  | sed -e 's/const_/const /g' | sed -e 's/void_/void /g' >> output/mocksdkwrapper.hpp
 
 # Generate the fff declaration
-awk  -f awk/gen_fff.awk < "$TEMPLIST" | sed -e 's/enum_/enum /g'  | sed -e 's/const_/const /g' | sed -e 's/void_/void /g' >> output/fffsdkwrapper.hpp
+# awk  -f awk/gen_fff.awk < "$TEMPLIST" | sed -e 's/enum_/enum /g'  | sed -e 's/const_/const /g' | sed -e 's/void_/void /g' >> output/fffsdkwrapper.hpp
 
 # Remove the scratch pad files. 
 trap 'rm -f "$TEMPSRC"' EXIT

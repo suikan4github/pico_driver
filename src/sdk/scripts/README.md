@@ -20,8 +20,15 @@ generate_wrapper.sh
 | file                  | Description                                    |
 |---------------------  |-------------------------------------------     |
 | generate_wrapper.sh   | Top level of script.                           | 
-| generate_preamble.sh  | Generate preamble text for hpp and cpp files.  |
 | generate_body.sh      | Generate body text for hpp and cpp files.      |
-| generate_afterword.sh | Generate afterword text for hpp and cpp files. |
 | api_dirs.txt          | List of the source directories of API.         |
 
+# Skipped funcitions
+| Functions                           | Reason |
+|-----------                          | -------------------------------------- |
+| stdio_getchar                       | Alias. Might be no need to user.       |
+| stdio_putchar                       | Alias. Might be no need to user.       |
+| stdio_puts                          | Alias. Might be no need to user.       |
+| stdio_vprintf                       | Alias. Might be no need to user.       |
+| stdio_printf                        | Alias. Might be no need to user.       |
+| stdio_set_chars_available_callback  | Too difficult to handle automatically. |
