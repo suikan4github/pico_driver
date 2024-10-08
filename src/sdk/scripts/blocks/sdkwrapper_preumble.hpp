@@ -11,7 +11,28 @@
 #include <stdint.h>
 #include <stdlib.h>
 /// @brief Alternate definition for Google Test build.
+enum pio_fifo_join { a, b };
+/// @brief Alternate definition for Google Test build.
+enum gpio_drive_strength { c, d };
+/// @brief Alternate definition for Google Test build.
+enum gpio_slew_rate { e, f };
+/// @brief Alternate definition for Google Test build.
+enum pio_mov_status_type;
+
+/// @brief Alternate definition for Google Test build.
+typedef int gpio_irq_callback_t;
+/// @brief Alternate definition for Google Test build.
+typedef int irq_handler_t;
+/// @brief Alternate definition for Google Test build.
+typedef int resus_callback_t;
+/// @brief Alternate definition for Google Test build.
+typedef int pio_interrupt_source_t;
+/// @brief Alternate definition for Google Test build.
+typedef int absolute_time_t;
+/// @brief Alternate definition for Google Test build.
 typedef int i2c_inst_t;
+/// @brief Alternate definition for Google Test build.
+typedef int i2c_hw_t;
 /// @brief Alternate definition for Google Test build.
 typedef int gpio_function_t;
 /// @brief Alternate definition for Google Test build.
