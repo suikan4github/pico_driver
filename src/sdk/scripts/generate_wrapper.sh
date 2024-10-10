@@ -6,6 +6,7 @@ cp blocks/sdkwrapper_preumble.hpp output/sdkwrapper.hpp
 cp blocks/sdkwrapper_preumble.cpp output/sdkwrapper.cpp
 cp blocks/mocksdkwrapper_preumble.hpp output/mocksdkwrapper.hpp
 cp blocks/apistub_preumble.cpp  output/apistub.cpp
+cp blocks/pico_api_alternate_defs.hpp  output/pico_api_alternate_defs.hpp
 # echo "" > output/fffsdkwrapper.hpp
 echo "" > output/pico_sdk_headers.h
 echo "" > debug.hpp
