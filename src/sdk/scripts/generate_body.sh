@@ -72,7 +72,7 @@ sed -e 's/^/virtual /' < "$TEMPLIST" | sed -e 's/$/;/' | sed -e 's/enum_/enum /g
 awk  -f awk/gen_impl.awk < "$TEMPLIST" | sed -e 's/enum_/enum /g'  | sed -e 's/const_/const /g' | sed -e 's/void_/void /g' >> output/sdkwrapper.cpp
 
 # Generate the API stub
-awk -v module="$MODULE" -f awk/gen_apistub.awk < "$TEMPLIST" | sed -e 's/enum_/enum /g'  | sed -e 's/const_/const /g' | sed -e 's/void_/void /g' >> output/apistub.cpp
+awk -v module="$MODULE" -f awk/gen_apistub.awk < "$TEMPLIST" | sed -e 's/enum_/enum /g'  | sed -e 's/const_/const /g' | sed -e 's/void_/void /g' >> output/pico_sdk_apistub.cpp
 
 # Generate the mock declaration
 awk  -f awk/gen_mock.awk < "$TEMPLIST" | sed -e 's/enum_/enum /g'  | sed -e 's/const_/const /g' | sed -e 's/void_/void /g' >> output/mocksdkwrapper.hpp
