@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.13)
 
 # Common declaration for both UNIX/Win and bare metal.
 target_include_directories(rpp_driver INTERFACE .)
+target_sources(rpp_driver INTERFACE 
+                       pico_sdk_apistub.cpp
+        )
 
 # Bare metal specific declaration. 
 if(NOT (${WIN32}) AND NOT (${UNIX})) # Is target bare metal?   
