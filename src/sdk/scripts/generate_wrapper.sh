@@ -1,5 +1,13 @@
 #!/bin/sh
 
+[ "${PICO_SDK_PATH:+defined}" ] || {
+    echo 'Error : environment PICO_SDK_PATH is undefined or empty.'
+    exit 1
+}
+[ "${PICO_SDK_PATH:+defined}" ] && {
+    echo "PICO_SDK_PATH : ${PICO_SDK_PATH}"
+}
+
 FILE="api_dirs.txt"
 
 cp blocks/sdkwrapper_preumble.hpp output/sdkwrapper.hpp
