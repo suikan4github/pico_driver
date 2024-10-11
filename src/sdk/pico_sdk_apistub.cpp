@@ -10,6 +10,11 @@ typedef unsigned int uint;
 // Alternate API definitions for the Pico stub.
 // To avoid the redefinition error, The pico header must not be included.
 #include "pico_api_alternate_defs.hpp"
+
+#ifdef _MSC_VER
+// Suppress the C4716 error allowing not to return any value in function.
+#pragma warning(default : 4716)
+#endif  // _MSC_VER
 // --------------------------------------------------
 extern "C" void i2c_deinit(i2c_inst_t* i2c);
 #if defined(__GNUC__) || defined(__clang__)
