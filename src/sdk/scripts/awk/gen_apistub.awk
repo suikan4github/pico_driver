@@ -12,7 +12,7 @@
     # We need attribute weak to allow the Pico SDK lib function will override. 
     print "#if defined(__GNUC__) || defined(__clang__)"
     print "__attribute__((weak))", RETTYPE, FUNCNAME,$0;
-    print "#elif defined(_MSVC_VER)"
+    print "#elif defined(_MSC_VER)"
     print "#if defined(_M_IX86) // MSVC for x86"
     print "#pragma comment(linker, \"/alternatename:_" FUNCNAME "=__weak_" FUNCNAME"\")"
     print "#elif defined(_M_AMD64) // MSVC for AMD64"
