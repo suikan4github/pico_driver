@@ -1,7 +1,7 @@
 #!/bin/sh
 
 [ "${PICO_SDK_PATH:+defined}" ] || {
-    echo 'Error : environment PICO_SDK_PATH is undefined or empty.'
+    echo 'Error : environment variable PICO_SDK_PATH is undefined or empty.'
     exit 1
 }
 [ "${PICO_SDK_PATH:+defined}" ] && {
