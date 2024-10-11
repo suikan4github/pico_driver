@@ -8,6 +8,7 @@ History of the project development
 ### Deprecated
 ### Removed
 ### Fixed
+- [Issue #11](https://github.com/suikan4github/rpp_driver/issues/11) Fails to compile in MSVC. 
 ### Security
 ### Known Issue
 
