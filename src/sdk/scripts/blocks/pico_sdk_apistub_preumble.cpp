@@ -13,5 +13,5 @@ typedef unsigned int uint;
 
 #ifdef _MSC_VER
 // Suppress the C4716 error allowing not to return any value in function.
-#pragma warning(default : 4716)
+#pragma warning(disable : 4716)
 #endif  // _MSC_VER
