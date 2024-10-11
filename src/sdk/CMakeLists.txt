@@ -16,3 +16,7 @@ if(NOT (${WIN32}) AND NOT (${UNIX})) # Is target bare metal?
         )
 endif()
 
+# We need big object option for MSVC. 
+if (MSVC)
+        target_compile_options(rpp_driver INTERFACE /bigobj)
+endif()
