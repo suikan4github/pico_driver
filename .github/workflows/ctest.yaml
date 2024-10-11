@@ -22,6 +22,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest]
         build: [Release, Debug]
+        target: [x64, win32]
         compiler: [gcc, clang, msvc]
         exclude:
           - {os: ubuntu-latest, compiler: msvc}
@@ -58,18 +59,19 @@ jobs:
 
       # Configuration for MSVC
       - name: Configuration for and build msvc
-        if:  matrix.compiler == 'msvc'
+        if:  matrix.compiler == 'msvc' 
         uses: threeal/cmake-action@v2.0.0
         with: 
           c-compiler: cl
           cxx-compiler: cl
+          args : -A ${{ matrix.target }}
           build-args: --config ${{ matrix.build }} 
 
       - name: Test
         uses: threeal/ctest-action@v1.1.0
 
       - name: Check Test Coverage
-        if:  ${{matrix.compiler == 'gcc' && matrix.build == 'Debug'}}
+        if:  matrix.compiler == 'gcc' && matrix.build == 'Debug'
         uses: threeal/gcovr-action@v1.1.0
         with:
           coveralls-send: true
