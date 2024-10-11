@@ -26,6 +26,7 @@ jobs:
         compiler: [gcc, clang, msvc]
         exclude:
           - {os: ubuntu-latest, compiler: msvc}
+          - {os: ubuntu-latest, target: win32}
           - {os: windows-latest, compiler: gcc}
           - {os: windows-latest, compiler: clang}
 
