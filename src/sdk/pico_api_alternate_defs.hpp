@@ -1,3 +1,11 @@
+/*
+ * This file is not to be included from the user program.
+ *
+ * Some of the rpp_driver code include this file. The contents
+ * of this file is alternate type definition for Pico SDK.
+ * These types are declared inside pico SDK. So, x86 build cannot use.
+ */
+
 #ifndef PICO_API_ALTERNATE_DEFS_HPP__
 #define PICO_API_ALTERNATE_DEFS_HPP__
 

@@ -16,7 +16,7 @@ cp blocks/mocksdkwrapper_preumble.hpp output/mocksdkwrapper.hpp
 cp blocks/pico_sdk_apistub_preumble.cpp  output/pico_sdk_apistub.cpp
 cp blocks/pico_api_alternate_defs.hpp  output/pico_api_alternate_defs.hpp
 # echo "" > output/fffsdkwrapper.hpp
-echo "" > output/pico_sdk_headers.h
+cp blocks/pico_sdk_headers_preumble.hpp output/pico_sdk_headers.h
 echo "" > debug.hpp
 
 # read FILE
