@@ -1,3 +1,8 @@
+/**
+ * @file i2sslaveduplex.hpp
+ * @brief Duplex Slave I2S class.
+ * @copyright COPYRIGHT 2024 Seiichi Horie
+ */
 #ifndef PICO_DRIVER_SRC_I2S_DUPLEXSLAVEI2S_HPP_
 #define PICO_DRIVER_SRC_I2S_DUPLEXSLAVEI2S_HPP_
 
