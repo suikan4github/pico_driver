@@ -76,4 +76,9 @@ jobs:
         uses: threeal/gcovr-action@v1.1.0
         with:
           coveralls-send: true
-          excludes:  build/* test/* mocksdkwrapper.hpp pico_sdk_apistub.cpp
+          excludes:  |
+            build/* 
+            test/* 
+            src/sdk/mocksdkwrapper.hpp 
+            src/sdk/pico_sdk_apistub.cpp
+
