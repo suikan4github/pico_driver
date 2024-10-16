@@ -100,7 +100,7 @@ class GpioBasic {
   const uint pin_;
 };
 #if __has_include(<gmock/gmock.h>)
-
+// GCOVR_EXCL_START
 class MockGpioBasic : public SdkWrapper {
  public:
   MOCK_METHOD1(SetDir, void(bool));
@@ -112,7 +112,7 @@ class MockGpioBasic : public SdkWrapper {
   MOCK_METHOD0(PullDown, void(void));
   MOCK_METHOD0(DisablePulls, void(void));
 };  // MockGpioBasic
-
+// GCOVR_EXCL_STOP
 #endif  //  __has_include(<gmock/gmock.h>)
 };  // namespace rpp_driver
 

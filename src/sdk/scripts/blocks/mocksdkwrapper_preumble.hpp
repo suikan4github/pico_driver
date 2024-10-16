@@ -4,6 +4,6 @@
  */
 
 #if __has_include(<gmock/gmock.h>)
-
+// GCOVR_EXCL_START
 class MockSdkWrapper : public SdkWrapper {
  public:

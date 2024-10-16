@@ -4,7 +4,7 @@
  */
 
 #if __has_include(<gmock/gmock.h>)
-
+// GCOVR_EXCL_START
 class MockSdkWrapper : public SdkWrapper {
  public:
   MOCK_METHOD1(i2c_deinit, void(i2c_inst_t* i2c));
@@ -427,4 +427,5 @@ class MockSdkWrapper : public SdkWrapper {
                void(stdio_driver_t* driver, bool translate));
 }  // class MockSdkWrapper : public SdkWrapper
 ;
+// GCOVR_EXCL_STOP
 #endif  // __has_include(<gmock/gmock.h>)
