@@ -231,7 +231,7 @@ class Adau1361Lower {
 
 // #ifdef MOCK_METHOD0
 #if __has_include(<gmock/gmock.h>)
-
+// GCOVR_EXCL_START
 class MockAdau1361Lower : public Adau1361Lower {
  public:
   explicit MockAdau1361Lower(::rpp_driver::I2cMasterInterface& controller)
@@ -257,7 +257,7 @@ class MockAdau1361Lower : public Adau1361Lower {
                void(float left_gain, float right_gain, bool mute));
 };
 #endif  //  __has_include(<gmock/gmock.h>)
-
+// GCOVR_EXCL_STOP
 }  // namespace rpp_driver
 
 #endif /* PICO_DRIVER_SRC_CODEC_ADAU1361LOWER_HPP_ */

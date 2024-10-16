@@ -68,7 +68,7 @@ class I2cMasterInterface {
 };
 
 #if __has_include(<gmock/gmock.h>)
-
+// GCOVR_EXCL_START
 class MockI2cMasterInterface : public I2cMasterInterface {
  public:
   MOCK_METHOD4(ReadBlocking,
@@ -77,7 +77,7 @@ class MockI2cMasterInterface : public I2cMasterInterface {
                int(uint8_t addr, const uint8_t *src, size_t len, bool nostop));
   MOCK_METHOD1(IsDeviceExisting, bool(uint8_t addr));
 };
-
+// GCOVR_EXCL_STOP
 #endif  // __has_include(<gmock/gmock.h>)
 }  // namespace rpp_driver
 

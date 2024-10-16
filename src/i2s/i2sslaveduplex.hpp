@@ -150,7 +150,7 @@ class I2sSlaveDuplex {
 };
 
 #if __has_include(<gmock/gmock.h>)
-
+// GCOVR_EXCL_START
 class MockI2sSlaveDuplex : public I2sSlaveDuplex {
  public:
   MOCK_METHOD0(GetStateMachine, uint32_t(void));
@@ -160,7 +160,7 @@ class MockI2sSlaveDuplex : public I2sSlaveDuplex {
   MOCK_METHOD0(GetFifoBlocking, int32_t());
 };
 #endif  // __has_include(<gmock/gmock.h>)
-
+// GCOVR_EXCL_STOP
 }  // namespace rpp_driver
 
 #endif  // PICO_DRIVER_SRC_I2S_DUPLEXSLAVEI2S_HPP_
