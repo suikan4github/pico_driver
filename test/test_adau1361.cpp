@@ -232,7 +232,7 @@ TEST_F(Adau1361Test, Start) {
     EXPECT_CALL(*codec_lower_, ConfigurePll(fs_, master_clk_));
     EXPECT_CALL(*codec_lower_, WaitPllLock());
     EXPECT_CALL(*codec_lower_, EnableCore());
-    EXPECT_CALL(*codec_lower_, ConfigureSRC(fs_));
+    EXPECT_CALL(*codec_lower_, ConfigureSrc(fs_));
     EXPECT_CALL(*codec_lower_, InitializeRegisters());
     EXPECT_CALL(*codec_lower_, ConfigureSignalPath());
   }

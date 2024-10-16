@@ -1872,7 +1872,7 @@ TEST_F(Adau1361LowerTest, SetHpOutputGain_appropriate_gain) {
 
 // -----------------------------------------------------------------
 //
-//                          ConfigureSRC()
+//                          ConfigureSrc()
 //
 // -----------------------------------------------------------------
 
@@ -1881,7 +1881,7 @@ TEST_F(Adau1361LowerDeathTest, ConfigureSRC_wrong_fs) {
   const unsigned int fs = 192000;  // not supported by ADAU1361
   // check the assertion for bad mclock.
 #ifndef NDEBUG
-  ASSERT_DEATH(codec_lower_->ConfigureSRC(fs), "Bad Fs");
+  ASSERT_DEATH(codec_lower_->ConfigureSrc(fs), "Bad Fs");
 #endif
 }  // ConfigureSRC_wrong_fs
 
@@ -1907,7 +1907,7 @@ TEST_F(Adau1361LowerTest, ConfigureSRC_22050) {
       .WillOnce(Return(sizeof(config_src)));
 
   // right configuration of SRC.
-  codec_lower_->ConfigureSRC(fs);
+  codec_lower_->ConfigureSrc(fs);
 }  // ConfigureSRC_22050
 
 // Validation test for fs 24000 Hz.
@@ -1932,7 +1932,7 @@ TEST_F(Adau1361LowerTest, ConfigureSRC_24000) {
       .WillOnce(Return(sizeof(config_src)));
 
   // right configuration of SRC.
-  codec_lower_->ConfigureSRC(fs);
+  codec_lower_->ConfigureSrc(fs);
 }  // ConfigureSRC_24000
 
 // Validation test for fs 32000 Hz.
@@ -1957,7 +1957,7 @@ TEST_F(Adau1361LowerTest, ConfigureSRC_32000) {
       .WillOnce(Return(sizeof(config_src)));
 
   // right configuration of SRC.
-  codec_lower_->ConfigureSRC(fs);
+  codec_lower_->ConfigureSrc(fs);
 }  // ConfigureSRC_32000
 
 // Validation test for fs 44100 Hz.
@@ -1982,7 +1982,7 @@ TEST_F(Adau1361LowerTest, ConfigureSRC_44100) {
       .WillOnce(Return(sizeof(config_src)));
 
   // right configuration of SRC.
-  codec_lower_->ConfigureSRC(fs);
+  codec_lower_->ConfigureSrc(fs);
 }  // ConfigureSRC_44100
 
 // Validation test for fs 48000 Hz.
@@ -2007,7 +2007,7 @@ TEST_F(Adau1361LowerTest, ConfigureSRC_48000) {
       .WillOnce(Return(sizeof(config_src)));
 
   // right configuration of SRC.
-  codec_lower_->ConfigureSRC(fs);
+  codec_lower_->ConfigureSrc(fs);
 }  // ConfigureSRC_48000
 
 // Validation test for fs 88200 Hz.
@@ -2032,7 +2032,7 @@ TEST_F(Adau1361LowerTest, ConfigureSRC_88200) {
       .WillOnce(Return(sizeof(config_src)));
 
   // right configuration of SRC.
-  codec_lower_->ConfigureSRC(fs);
+  codec_lower_->ConfigureSrc(fs);
 }  // ConfigureSRC_88200
 
 // Validation test for fs 96000 Hz.
@@ -2057,12 +2057,12 @@ TEST_F(Adau1361LowerTest, ConfigureSRC_96000) {
       .WillOnce(Return(sizeof(config_src)));
 
   // right configuration of SRC.
-  codec_lower_->ConfigureSRC(fs);
+  codec_lower_->ConfigureSrc(fs);
 }  // ConfigureSRC_96000
 
 // -----------------------------------------------------------------
 //
-//                          ConfigureSRC()
+//                          ConfigureSrc()
 //
 // -----------------------------------------------------------------
 

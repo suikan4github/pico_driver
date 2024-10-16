@@ -36,7 +36,7 @@ namespace rpp_driver {
  * @li ConfigurePll()
  * @li WaitPllLock()
  * @li EnableCore()
- * @li ConfigureSRC()
+ * @li ConfigureSrc()
  * @li InitializeRegisters()
  * @li ConfigureSignalPath()
  *
@@ -136,7 +136,7 @@ class Adau1361Lower {
    * @details
    * Must call after EnableCore().
    */
-  virtual void ConfigureSRC(unsigned int fs);
+  virtual void ConfigureSrc(unsigned int fs);
 
   /**
    * @brief Initialize the core part of the ADAU1361A.
@@ -153,7 +153,7 @@ class Adau1361Lower {
    * Clock must working well before calling this routine.
    *
    * This function clean-up.
-   * Need to call after ConfigureSRC() and before InitializeSignalPath()
+   * Need to call after ConfigureSrc() and before InitializeSignalPath()
    */
   virtual void InitializeRegisters();
 
@@ -243,7 +243,7 @@ class MockAdau1361Lower : public Adau1361Lower {
   MOCK_METHOD0(DisablePLL, void());
   MOCK_METHOD0(WaitPllLock, void());
   MOCK_METHOD2(ConfigurePll, void(unsigned int fs, unsigned int master_clock));
-  MOCK_METHOD1(ConfigureSRC, void(unsigned int fs));
+  MOCK_METHOD1(ConfigureSrc, void(unsigned int fs));
   MOCK_METHOD0(EnableCore, void());
   MOCK_METHOD0(InitializeRegisters, void());
   MOCK_METHOD0(ConfigureSignalPath, void());

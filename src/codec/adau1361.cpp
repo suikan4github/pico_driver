@@ -55,7 +55,7 @@ void ::rpp_driver::Adau1361::Start(void) {
   // Enable core to start operation.
   adau1361_lower_.EnableCore();
   // Set SRC for the right FS.
-  adau1361_lower_.ConfigureSRC(fs_);
+  adau1361_lower_.ConfigureSrc(fs_);
   // Board independent register initialization.
   adau1361_lower_.InitializeRegisters();
   // Board dependent register initialization.
