@@ -512,10 +512,6 @@ void ::rpp_driver::Adau1361Lower::InitializeRegisters() {
 
 // Set the converter clock.
 void ::rpp_driver::Adau1361Lower::ConfigureSrc(unsigned int fs) {
-  assert((fs == 24000 || fs == 32000 || fs == 48000 || fs == 96000 ||
-          fs == 22050 || fs == 44100 || fs == 88200) &&
-         "Bad Fs");
-
   switch (fs) {
     case 22050:
     case 24000: {
@@ -549,7 +545,7 @@ void ::rpp_driver::Adau1361Lower::ConfigureSrc(unsigned int fs) {
       break;
     }
     default:
-      assert(false);
+      assert(false && "Bad Fs");
   }
 }
 
