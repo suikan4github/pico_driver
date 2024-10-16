@@ -153,6 +153,8 @@ class I2sSlaveDuplex {
 // GCOVR_EXCL_START
 class MockI2sSlaveDuplex : public I2sSlaveDuplex {
  public:
+  MockI2sSlaveDuplex(SdkWrapper &sdk)
+      : I2sSlaveDuplex(sdk, 0, 0) {}  //  // 0 is dummy. We don't care.
   MOCK_METHOD0(GetStateMachine, uint32_t(void));
   MOCK_METHOD0(Start, void(void));
   MOCK_METHOD0(Stop, void(void));
