@@ -101,8 +101,10 @@ class GpioBasic {
 };
 #if __has_include(<gmock/gmock.h>)
 // GCOVR_EXCL_START
-class MockGpioBasic : public SdkWrapper {
+class MockGpioBasic : public GpioBasic {
  public:
+  MockGpioBasic(SdkWrapper &sdk)
+      : GpioBasic(sdk, 0) {};  // 0 is dummy. We don't care.
   MOCK_METHOD1(SetDir, void(bool));
   MOCK_METHOD1(SetInputEnabled, void(bool));
   MOCK_METHOD1(Put, void(bool));
