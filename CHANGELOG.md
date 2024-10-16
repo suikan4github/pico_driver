@@ -8,7 +8,8 @@ The issue #16 changes its public member function. But it is referred internally 
 - [Issue #13](https://github.com/suikan4github/rpp_driver/issues/13)  Exclude Mock definition from the GCov coverage. 
 ### Changed
 - [Issue #10](https://github.com/suikan4github/rpp_driver/issues/10) Cover APIs of the Raspberry Pi Pico SDK.
-- [Issue #16](https://github.com/suikan4github/rpp_driver/issues/16)  Change the member function name from ConfigureSRC() to ConfigureSrc().
+- [Issue #15](https://github.com/suikan4github/rpp_driver/issues/15) Remove the redundant parameter check code from ConfigureSRC() 
+- [Issue #16](https://github.com/suikan4github/rpp_driver/issues/16) Change the member function name from ConfigureSRC() to ConfigureSrc().
 ### Deprecated
 ### Removed
 ### Fixed
