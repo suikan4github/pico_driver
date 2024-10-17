@@ -54,7 +54,7 @@ class Adau1361Lower {
    * @param i2c_device_addr ADAU1361A 7bits I2C device address. Refer device
    * deta sheet for details.
    */
-  Adau1361Lower(::rpp_driver::I2cMasterInterface& controller,
+  Adau1361Lower(::rpp_driver::I2cMaster& controller,
                 unsigned int i2c_device_addr);
   Adau1361Lower() = delete;
   virtual ~Adau1361Lower() {}
@@ -224,7 +224,7 @@ class Adau1361Lower {
 
  protected:
   /// @brief Internal variable to hold the I2C controller variable.
-  ::rpp_driver::I2cMasterInterface& i2c_;
+  ::rpp_driver::I2cMaster& i2c_;
   /// @brief Internal variable to hold the I2C device address.
   const unsigned int device_addr_;
 };
@@ -234,7 +234,7 @@ class Adau1361Lower {
 // GCOVR_EXCL_START
 class MockAdau1361Lower : public Adau1361Lower {
  public:
-  explicit MockAdau1361Lower(::rpp_driver::I2cMasterInterface& controller)
+  explicit MockAdau1361Lower(::rpp_driver::I2cMaster& controller)
       : Adau1361Lower(controller, 0x3A) {};
   MOCK_METHOD2(SendCommand, void(const uint8_t command[], int size));
   MOCK_METHOD2(SendCommandTable, void(const uint8_t table[][3], int rows));
