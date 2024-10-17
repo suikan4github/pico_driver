@@ -159,6 +159,24 @@ class Adau1361 {
   bool line_output_mute_;
   bool hp_output_mute_;  // headphone
 };
+
+#if __has_include(<gmock/gmock.h>)
+// GCOVR_EXCL_START
+class MockAdau1361 : public Adau1361 {
+ public:
+  MockAdau1361(Adau1361Lower& adau1361_lower)
+      : Adau1361(48'000, 12'000'000, adau1361_lower) {
+  }  // with dummy fs and dummy mclock
+
+  MOCK_METHOD0(Start, void(void));
+  MOCK_METHOD3(SetGain,
+               void(CodecChannel channel, float left_gain, float right_gain));
+  MOCK_METHOD2(Mute, void(CodecChannel channel, bool mute));
+  MOCK_METHOD1(Mute, void(CodecChannel channel));
+};
+// GCOVR_EXCL_STOP
+#endif  // __has_include(<gmock/gmock.h>)
+
 }  // namespace rpp_driver
 
 #endif /* PICO_DRIVER_SRC_CODEC_ADAU1361_HPP_ */
