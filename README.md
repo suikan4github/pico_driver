@@ -36,9 +36,6 @@ Run the following command to obtain the sample from CLI:
 git clone --recursive https://github.com/suikan4github/rpp_driver-sample.git
 ```
 
-## Sample codes
-You can obtain sample applications from [rpp-driver_sample](https://github.com/suikan4github/rpp_driver-sample) repository.
-
 
 # Tools and building
 ## Installing tool
