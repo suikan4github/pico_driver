@@ -8,14 +8,14 @@ This class collection ( or class library ) encapsule the certain data inside cla
 
 These classes are provided in this version. 
 
-| Class                           | Header file          | Description |
-|---------------------------------|----                  |----------------------------- |
-| ::rpp_driver::SdkWrapper        | sdkwrapper.hpp       | Wrapper class of Pico SDK    |
-| ::rpp_driver::GpioBasic         | gpiobasic.hpp        | Basic GPIO controller        |
-| ::rpp_driver::I2cMaster         | i2cmaster.hpp        | I2C Master controller        |
-| ::rpp_driver::I2sSlaveDuplex    | i2sslaveduplex.hpp   | Polling based PIO I2S driver |
-| ::rpp_driver::Adau1361          | adau1361.hpp         | Audio CODEC driver           |
-| ::rpp_driver::UmbAdau1361Lower  | umbadau1361lower.hpp | CODEC lower driver dedicated to UMB-ADAU1361-A board |
+| Class                           | Header file                | Description |
+|---------------------------------|----                        |----------------------------- |
+| ::rpp_driver::SdkWrapper        | sdk/sdkwrapper.hpp         | Wrapper class of Pico SDK    |
+| ::rpp_driver::GpioBasic         | gpio/gpiobasic.hpp         | Basic GPIO controller        |
+| ::rpp_driver::I2cMaster         | i2c/i2cmaster.hpp          | I2C Master controller        |
+| ::rpp_driver::I2sSlaveDuplex    | i2s/i2sslaveduplex.hpp     | Polling based PIO I2S driver |
+| ::rpp_driver::Adau1361          | codec/adau1361.hpp         | Audio CODEC driver           |
+| ::rpp_driver::UmbAdau1361Lower  | codec/umbadau1361lower.hpp | CODEC lower driver dedicated to UMB-ADAU1361-A board |
 
 
 ## How to obtain this project
