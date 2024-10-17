@@ -10,8 +10,8 @@
 #ifndef PICO_DRIVER_SRC_CODEC_UMBADAU1361LOWER_HPP_
 #define PICO_DRIVER_SRC_CODEC_UMBADAU1361LOWER_HPP_
 
-#include "adau1361lower.hpp"
-#include "i2cmaster.hpp"
+#include "codec/adau1361lower.hpp"
+#include "i2c/i2cmaster.hpp"
 
 namespace rpp_driver {
 

@@ -18,7 +18,7 @@
 #include <gmock/gmock.h>
 #endif
 
-#include "sdkwrapper.hpp"
+#include "sdk/sdkwrapper.hpp"
 
 namespace rpp_driver {
 /**

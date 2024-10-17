@@ -3,8 +3,8 @@
 
 #include <random>
 
-#include "i2sslaveduplex.hpp"
-#include "sdkwrapper.hpp"
+#include "i2s/i2sslaveduplex.hpp"
+#include "sdk/sdkwrapper.hpp"
 
 class I2sSlaveDuplexTest : public ::testing::Test {
  protected:

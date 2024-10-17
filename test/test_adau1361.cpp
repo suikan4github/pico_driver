@@ -1,9 +1,9 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include "adau1361.hpp"
-#include "i2cmasterinterface.hpp"
-#include "umbadau1361lower.hpp"
+#include "codec/adau1361.hpp"
+#include "codec/umbadau1361lower.hpp"
+#include "i2c/i2cmasterinterface.hpp"
 
 class Adau1361Test : public ::testing::Test {
  protected:

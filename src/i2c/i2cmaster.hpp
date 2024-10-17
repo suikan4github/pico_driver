@@ -25,8 +25,8 @@ typedef int i2c_inst_t;
 #define GPIO_FUNC_I2C 11
 #endif  // __has_include(<hardware/i2c.h>)
 
-#include "i2cmasterinterface.hpp"
-#include "sdkwrapper.hpp"
+#include "i2c/i2cmasterinterface.hpp"
+#include "sdk/sdkwrapper.hpp"
 
 namespace rpp_driver {
 /**

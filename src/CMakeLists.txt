@@ -4,6 +4,8 @@ cmake_minimum_required(VERSION 3.13)
 # These declaration works for both UNIX/Win and bare metal. 
 
 add_library(rpp_driver INTERFACE)
+        target_include_directories(rpp_driver INTERFACE .)
+
 
 # Win/Unix specific option. 
 if((${WIN32}) OR (${UNIX}))    

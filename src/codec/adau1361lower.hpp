@@ -10,7 +10,7 @@
 #ifndef PICO_DRIVER_SRC_CODEC_ADAU1361LOWER_HPP_
 #define PICO_DRIVER_SRC_CODEC_ADAU1361LOWER_HPP_
 
-#include "i2cmaster.hpp"
+#include "i2c/i2cmaster.hpp"
 
 #if __has_include(<gmock/gmock.h>)
 #include <gmock/gmock.h>

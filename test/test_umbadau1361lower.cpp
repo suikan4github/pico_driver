@@ -1,8 +1,8 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include "i2cmasterinterface.hpp"
-#include "umbadau1361lower.hpp"
+#include "codec/umbadau1361lower.hpp"
+#include "i2c/i2cmasterinterface.hpp"
 
 class UmbAdau1361LowerTest : public ::testing::Test {
  protected:

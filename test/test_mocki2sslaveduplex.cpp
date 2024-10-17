@@ -6,8 +6,8 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include "i2sslaveduplex.hpp"
-#include "sdkwrapper.hpp"
+#include "i2s/i2sslaveduplex.hpp"
+#include "sdk/sdkwrapper.hpp"
 
 using ::testing::_;
 class MockI2sSlaveDuplexTest : public ::testing::Test {

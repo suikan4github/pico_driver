@@ -6,8 +6,8 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include "adau1361.hpp"
-#include "sdkwrapper.hpp"
+#include "codec/adau1361.hpp"
+#include "sdk/sdkwrapper.hpp"
 
 using ::testing::_;
 class MockAdau1361Test : public ::testing::Test {

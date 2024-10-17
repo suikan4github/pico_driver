@@ -1,8 +1,8 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include "adau1361lower.hpp"
-#include "i2cmasterinterface.hpp"
+#include "codec/adau1361lower.hpp"
+#include "i2c/i2cmasterinterface.hpp"
 
 // Class under test. Provide a dummy member function for test.
 class CutAdau1361Lower : public ::rpp_driver::Adau1361Lower {
