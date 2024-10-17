@@ -4,6 +4,8 @@ History of the project development
 ## [Unreleased] yyyy-mm-zz
 The issue #16 changes its public member function. But it is referred internally from ::rpp_driver::Adau1361 class. Not called by user program. Then, the major version number is not needed to change. 
 
+The issue #12 removed public class I2cMasterInterface. But it is referred internal only for Unit test. So, the major version number is not needed to change. 
+
 ### Added
 - [Issue #13](https://github.com/suikan4github/rpp_driver/issues/13)  Exclude Mock definition from the GCov coverage. 
 ### Changed
@@ -11,6 +13,7 @@ The issue #16 changes its public member function. But it is referred internally 
 - [Issue #15](https://github.com/suikan4github/rpp_driver/issues/15) Remove the redundant parameter check code from ConfigureSRC() 
 - [Issue #16](https://github.com/suikan4github/rpp_driver/issues/16) Change the member function name from ConfigureSRC() to ConfigureSrc().
 ### Deprecated
+- [Issue #12](https://github.com/suikan4github/rpp_driver/issues/12)  Is I2cMasterInterface needed?  
 ### Removed
 ### Fixed
 - [Issue #11](https://github.com/suikan4github/rpp_driver/issues/11) Fails to compile in MSVC. 

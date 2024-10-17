@@ -13,7 +13,7 @@
 
 #include <assert.h>
 
-#include "i2c/i2cmasterinterface.hpp"
+#include "i2c/i2cmaster.hpp"
 
 // Macro for easy-to-read
 #define CODEC_SYSLOG(fmt, ...) \

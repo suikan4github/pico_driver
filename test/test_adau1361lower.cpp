@@ -2,12 +2,12 @@
 #include <gtest/gtest.h>
 
 #include "codec/adau1361lower.hpp"
-#include "i2c/i2cmasterinterface.hpp"
+#include "i2c/i2cmaster.hpp"
 
 // Class under test. Provide a dummy member function for test.
 class CutAdau1361Lower : public ::rpp_driver::Adau1361Lower {
  public:
-  CutAdau1361Lower(::rpp_driver::I2cMasterInterface& controller,
+  CutAdau1361Lower(::rpp_driver::I2cMaster& controller,
                    unsigned int i2c_device_addr)
       : ::rpp_driver::Adau1361Lower(controller, i2c_device_addr) {};
   virtual void ConfigureSignalPath() {};
@@ -16,14 +16,19 @@ class CutAdau1361Lower : public ::rpp_driver::Adau1361Lower {
 class Adau1361LowerTest : public ::testing::Test {
  protected:
   virtual void SetUp() {
+    i2c_ = new ::rpp_driver::MockI2cMaster(sdk_);
     device_address_ = 0x38;  // 7bit I2C address
-    codec_lower_ = new ::CutAdau1361Lower(i2c_, device_address_);
+    codec_lower_ = new ::CutAdau1361Lower(*i2c_, device_address_);
   }
 
-  virtual void TearDown() { delete codec_lower_; }
+  virtual void TearDown() {
+    delete codec_lower_;
+    delete i2c_;
+  }
 
   unsigned int device_address_;  // 7bit I2C address
-  ::rpp_driver::MockI2cMasterInterface i2c_;
+  ::rpp_driver::SdkWrapper sdk_;
+  ::rpp_driver::MockI2cMaster* i2c_;
   ::rpp_driver::Adau1361Lower* codec_lower_;
 };
 
@@ -37,30 +42,34 @@ typedef Adau1361LowerTest Adau1361LowerDeathTest;
 
 TEST(Adau1361LowerConstructorDeathTest, lower_address) {
   unsigned int device_address;  // 7bit I2C address
-  ::rpp_driver::MockI2cMasterInterface i2c;
+  ::rpp_driver::SdkWrapper sdk;
+  auto i2c = new ::rpp_driver::MockI2cMaster(sdk);
   ::rpp_driver::Adau1361Lower* codec_lower;
 
   device_address = 0x37;  // 7bit I2C address
   // check the assertion for bad I2C address for Analog Device ADAU1361.
   // See data sheet for details.
 #ifndef NDEBUG
-  ASSERT_DEATH(codec_lower = new ::CutAdau1361Lower(i2c, device_address);
+  ASSERT_DEATH(codec_lower = new ::CutAdau1361Lower(*i2c, device_address);
                , "ADAU1361 I2C Address must be higher than 0x37.");
 #endif
+  delete i2c;
 }
 
 TEST(Adau1361LowerConstructorDeathTest, higher_address) {
   unsigned int device_address;  // 7bit I2C address
-  ::rpp_driver::MockI2cMasterInterface i2c;
+  ::rpp_driver::SdkWrapper sdk;
+  auto i2c = new ::rpp_driver::MockI2cMaster(sdk);
   ::rpp_driver::Adau1361Lower* codec_lower;
 
   device_address = 0x3C;  // 7bit I2C address
   // check the assertion for bad I2C address for Analog Device ADAU1361.
   // See data sheet for details.
 #ifndef NDEBUG
-  ASSERT_DEATH(codec_lower = new ::CutAdau1361Lower(i2c, device_address);
+  ASSERT_DEATH(codec_lower = new ::CutAdau1361Lower(*i2c, device_address);
                , "ADAU1361 I2C Address must be lower than 0x3C.");
 #endif
+  delete i2c;
 }
 
 // -----------------------------------------------------------------
@@ -73,7 +82,7 @@ TEST_F(Adau1361LowerTest, SendCommand) {
   uint8_t cmd[7];
 
   // nostop parameter must be false. That mean, stop condition of I2C.
-  EXPECT_CALL(i2c_, WriteBlocking(device_address_, cmd, sizeof(cmd), false));
+  EXPECT_CALL(*i2c_, WriteBlocking(device_address_, cmd, sizeof(cmd), false));
   codec_lower_->SendCommand(cmd, sizeof(cmd));
 }
 
@@ -95,9 +104,9 @@ TEST_F(Adau1361LowerTest, SendCommandTable) {
   {
     InSequence dummy;
 
-    EXPECT_CALL(i2c_, WriteBlocking(device_address_, cmd[0], 3, false));
-    EXPECT_CALL(i2c_, WriteBlocking(device_address_, cmd[1], 3, false));
-    EXPECT_CALL(i2c_, WriteBlocking(device_address_, cmd[2], 3, false));
+    EXPECT_CALL(*i2c_, WriteBlocking(device_address_, cmd[0], 3, false));
+    EXPECT_CALL(*i2c_, WriteBlocking(device_address_, cmd[1], 3, false));
+    EXPECT_CALL(*i2c_, WriteBlocking(device_address_, cmd[2], 3, false));
   }
   codec_lower_->SendCommandTable(cmd, sizeof(cmd) / 3);
 }
@@ -119,9 +128,10 @@ TEST_F(Adau1361LowerTest, IsI2CDeviceExist) {
     InSequence dummy;
 
     // nostop parameter must be false. That mean, stop condition of I2C.
-    EXPECT_CALL(i2c_, IsDeviceExisting(device_address_))
+    EXPECT_CALL(*i2c_, IsDeviceExisting(device_address_))
         .WillOnce(Return(false));
-    EXPECT_CALL(i2c_, IsDeviceExisting(device_address_)).WillOnce(Return(true));
+    EXPECT_CALL(*i2c_, IsDeviceExisting(device_address_))
+        .WillOnce(Return(true));
   }
   EXPECT_FALSE(codec_lower_->IsI2CDeviceExisting());
   EXPECT_TRUE(codec_lower_->IsI2CDeviceExisting());
@@ -147,7 +157,7 @@ TEST_F(Adau1361LowerTest, WaitPllLock) {
 
     // nostop parameter must be true. That mean repeated start of I2C.
     // The write command give only 2 byte length register address.
-    EXPECT_CALL(i2c_,
+    EXPECT_CALL(*i2c_,
                 WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                               NotNull(),        // Arg 1 : Data buffer address.
                               2,      // Arg 2 : Data buffer length to send.
@@ -160,7 +170,7 @@ TEST_F(Adau1361LowerTest, WaitPllLock) {
     // nostop parameter must be false. That mean, stop condition of I2C.
     // This will check the status register of ADAU1361A. These status
     // registers must be read 6 byte at once.
-    EXPECT_CALL(i2c_,
+    EXPECT_CALL(*i2c_,
                 ReadBlocking(device_address_,  // Arg 0 : I2C Address
                              NotNull(),        // Arg 1 : Data buffer address
                              6,                // Arg 2 : Data buffer length
@@ -175,7 +185,7 @@ TEST_F(Adau1361LowerTest, WaitPllLock) {
 
     // nostop parameter must be true. That mean repeated start of I2C.
     // The write command give only 2 byte length register address.
-    EXPECT_CALL(i2c_,
+    EXPECT_CALL(*i2c_,
                 WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                               NotNull(),        // Arg 1 : Data buffer address.
                               2,      // Arg 2 : Data buffer length to send.
@@ -188,7 +198,7 @@ TEST_F(Adau1361LowerTest, WaitPllLock) {
     // nostop parameter must be false. That mean, stop condition of I2C.
     // This will check the status register of ADAU1361A. These status
     // registers must be read 6 byte at once.
-    EXPECT_CALL(i2c_,
+    EXPECT_CALL(*i2c_,
                 ReadBlocking(device_address_,  // Arg 0 : I2C Address
                              NotNull(),        // Arg 1 : Data buffer address
                              6,                // Arg 2 : Data buffer length
@@ -220,7 +230,7 @@ TEST_F(Adau1361LowerTest, InitializeCore) {
 
   //  we test initialization of core.
 
-  EXPECT_CALL(i2c_,
+  EXPECT_CALL(*i2c_,
               WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                             NotNull(),        // Arg 1 : Data buffer address.
                             3,       // Arg 2 : Data buffer length to send.
@@ -249,7 +259,7 @@ TEST_F(Adau1361LowerTest, DisablePLL) {
 
   //  we test initialization of core.
 
-  EXPECT_CALL(i2c_,
+  EXPECT_CALL(*i2c_,
               WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                             NotNull(),        // Arg 1 : Data buffer address.
                             8,       // Arg 2 : Data buffer length to send.
@@ -304,7 +314,7 @@ TEST_F(Adau1361LowerTest, ConfigurePll_48_08000) {
     const unsigned int mclock = 8000000;
     const unsigned int fs = 24000;
     uint8_t config_pll[] = {0x40, 0x02, 0x00, 0x7D, 0x00, 0x12, 0x31, 0x01};
-    EXPECT_CALL(i2c_,
+    EXPECT_CALL(*i2c_,
                 WriteBlocking(
                     device_address_,     // Arg 0 : I2C Address.
                     NotNull(),           // Arg 1 : Data buffer address.
@@ -334,7 +344,7 @@ TEST_F(Adau1361LowerTest, ConfigurePll_48_12000) {
     const unsigned int mclock = 12000000;
     const unsigned int fs = 48000;
     uint8_t config_pll[] = {0x40, 0x02, 0x00, 0x7D, 0x00, 0x0C, 0x21, 0x01};
-    EXPECT_CALL(i2c_,
+    EXPECT_CALL(*i2c_,
                 WriteBlocking(
                     device_address_,     // Arg 0 : I2C Address.
                     NotNull(),           // Arg 1 : Data buffer address.
@@ -364,7 +374,7 @@ TEST_F(Adau1361LowerTest, ConfigurePll_48_13000) {
     const unsigned int mclock = 13000000;
     const unsigned int fs = 32000;
     uint8_t config_pll[] = {0x40, 0x02, 0x06, 0x59, 0x04, 0xF5, 0x19, 0x01};
-    EXPECT_CALL(i2c_,
+    EXPECT_CALL(*i2c_,
                 WriteBlocking(
                     device_address_,     // Arg 0 : I2C Address.
                     NotNull(),           // Arg 1 : Data buffer address.
@@ -394,7 +404,7 @@ TEST_F(Adau1361LowerTest, ConfigurePll_48_14400) {
     const unsigned int mclock = 14400000;
     const unsigned int fs = 48000;
     uint8_t config_pll[] = {0x40, 0x02, 0x00, 0x4B, 0x00, 0x3E, 0x33, 0x01};
-    EXPECT_CALL(i2c_,
+    EXPECT_CALL(*i2c_,
                 WriteBlocking(
                     device_address_,     // Arg 0 : I2C Address.
                     NotNull(),           // Arg 1 : Data buffer address.
@@ -424,7 +434,7 @@ TEST_F(Adau1361LowerTest, ConfigurePll_48_19200) {
     const unsigned int mclock = 19200000;
     const unsigned int fs = 96000;
     uint8_t config_pll[] = {0x40, 0x02, 0x00, 0x19, 0x00, 0x03, 0x2B, 0x01};
-    EXPECT_CALL(i2c_,
+    EXPECT_CALL(*i2c_,
                 WriteBlocking(
                     device_address_,     // Arg 0 : I2C Address.
                     NotNull(),           // Arg 1 : Data buffer address.
@@ -455,7 +465,7 @@ TEST_F(Adau1361LowerTest, ConfigurePll_48_19680) {
     const unsigned int mclock = 19680000;
     const unsigned int fs = 48000;
     uint8_t config_pll[] = {0x40, 0x02, 0x00, 0xCD, 0x00, 0xCC, 0x23, 0x01};
-    EXPECT_CALL(i2c_,
+    EXPECT_CALL(*i2c_,
                 WriteBlocking(
                     device_address_,     // Arg 0 : I2C Address.
                     NotNull(),           // Arg 1 : Data buffer address.
@@ -485,7 +495,7 @@ TEST_F(Adau1361LowerTest, ConfigurePll_48_19800) {
     const unsigned int mclock = 19800000;
     const unsigned int fs = 48000;
     uint8_t config_pll[] = {0x40, 0x02, 0x03, 0x39, 0x03, 0x1C, 0x23, 0x01};
-    EXPECT_CALL(i2c_,
+    EXPECT_CALL(*i2c_,
                 WriteBlocking(
                     device_address_,     // Arg 0 : I2C Address.
                     NotNull(),           // Arg 1 : Data buffer address.
@@ -515,7 +525,7 @@ TEST_F(Adau1361LowerTest, ConfigurePll_48_24000) {
     const unsigned int mclock = 24000000;
     const unsigned int fs = 48000;
     uint8_t config_pll[] = {0x40, 0x02, 0x00, 0x7D, 0x00, 0x0C, 0x23, 0x01};
-    EXPECT_CALL(i2c_,
+    EXPECT_CALL(*i2c_,
                 WriteBlocking(
                     device_address_,     // Arg 0 : I2C Address.
                     NotNull(),           // Arg 1 : Data buffer address.
@@ -547,7 +557,7 @@ TEST_F(Adau1361LowerTest, ConfigurePll_48_26000) {
     const unsigned int mclock = 26000000;
     const unsigned int fs = 48000;
     uint8_t config_pll[] = {0x40, 0x02, 0x06, 0x59, 0x04, 0xF5, 0x1B, 0x01};
-    EXPECT_CALL(i2c_,
+    EXPECT_CALL(*i2c_,
                 WriteBlocking(
                     device_address_,     // Arg 0 : I2C Address.
                     NotNull(),           // Arg 1 : Data buffer address.
@@ -577,7 +587,7 @@ TEST_F(Adau1361LowerTest, ConfigurePll_48_27000) {
     const unsigned int mclock = 27000000;
     const unsigned int fs = 48000;
     uint8_t config_pll[] = {0x40, 0x02, 0x04, 0x65, 0x02, 0xD1, 0x1B, 0x01};
-    EXPECT_CALL(i2c_,
+    EXPECT_CALL(*i2c_,
                 WriteBlocking(
                     device_address_,     // Arg 0 : I2C Address.
                     NotNull(),           // Arg 1 : Data buffer address.
@@ -607,7 +617,7 @@ TEST_F(Adau1361LowerTest, ConfigurePll_48_12288) {
     const unsigned int mclock = 12288000;
     const unsigned int fs = 48000;
     uint8_t config_pll[] = {0x40, 0x02, 0x04, 0x65, 0x02, 0xD1, 0x20, 0x01};
-    EXPECT_CALL(i2c_,
+    EXPECT_CALL(*i2c_,
                 WriteBlocking(
                     device_address_,     // Arg 0 : I2C Address.
                     NotNull(),           // Arg 1 : Data buffer address.
@@ -637,7 +647,7 @@ TEST_F(Adau1361LowerTest, ConfigurePll_48_24576) {
     const unsigned int mclock = 24576000;
     const unsigned int fs = 48000;
     uint8_t config_pll[] = {0x40, 0x02, 0x04, 0x65, 0x02, 0xD1, 0x10, 0x01};
-    EXPECT_CALL(i2c_,
+    EXPECT_CALL(*i2c_,
                 WriteBlocking(
                     device_address_,     // Arg 0 : I2C Address.
                     NotNull(),           // Arg 1 : Data buffer address.
@@ -673,7 +683,7 @@ TEST_F(Adau1361LowerTest, ConfigurePll_441_08000) {
     const unsigned int mclock = 8000000;
     const unsigned int fs = 22050;
     uint8_t config_pll[] = {0x40, 0x02, 0x02, 0x71, 0x01, 0x93, 0x29, 0x01};
-    EXPECT_CALL(i2c_,
+    EXPECT_CALL(*i2c_,
                 WriteBlocking(
                     device_address_,     // Arg 0 : I2C Address.
                     NotNull(),           // Arg 1 : Data buffer address.
@@ -703,7 +713,7 @@ TEST_F(Adau1361LowerTest, ConfigurePll_441_12000) {
     const unsigned int mclock = 12000000;
     const unsigned int fs = 44100;
     uint8_t config_pll[] = {0x40, 0x02, 0x02, 0x71, 0x01, 0xDD, 0x19, 0x01};
-    EXPECT_CALL(i2c_,
+    EXPECT_CALL(*i2c_,
                 WriteBlocking(
                     device_address_,     // Arg 0 : I2C Address.
                     NotNull(),           // Arg 1 : Data buffer address.
@@ -733,7 +743,7 @@ TEST_F(Adau1361LowerTest, ConfigurePll_441_13000) {
     const unsigned int mclock = 13000000;
     const unsigned int fs = 88200;
     uint8_t config_pll[] = {0x40, 0x02, 0x1F, 0xBD, 0x0F, 0x09, 0x19, 0x01};
-    EXPECT_CALL(i2c_,
+    EXPECT_CALL(*i2c_,
                 WriteBlocking(
                     device_address_,     // Arg 0 : I2C Address.
                     NotNull(),           // Arg 1 : Data buffer address.
@@ -763,7 +773,7 @@ TEST_F(Adau1361LowerTest, ConfigurePll_441_14400) {
     const unsigned int mclock = 14400000;
     const unsigned int fs = 44100;
     uint8_t config_pll[] = {0x40, 0x02, 0x00, 0x7D, 0x00, 0x22, 0x33, 0x01};
-    EXPECT_CALL(i2c_,
+    EXPECT_CALL(*i2c_,
                 WriteBlocking(
                     device_address_,     // Arg 0 : I2C Address.
                     NotNull(),           // Arg 1 : Data buffer address.
@@ -793,7 +803,7 @@ TEST_F(Adau1361LowerTest, ConfigurePll_441_19200) {
     const unsigned int mclock = 19200000;
     const unsigned int fs = 88200;
     uint8_t config_pll[] = {0x40, 0x02, 0x00, 0x7D, 0x00, 0x58, 0x23, 0x01};
-    EXPECT_CALL(i2c_,
+    EXPECT_CALL(*i2c_,
                 WriteBlocking(
                     device_address_,     // Arg 0 : I2C Address.
                     NotNull(),           // Arg 1 : Data buffer address.
@@ -824,7 +834,7 @@ TEST_F(Adau1361LowerTest, ConfigurePll_441_19680) {
     const unsigned int mclock = 19680000;
     const unsigned int fs = 44100;
     uint8_t config_pll[] = {0x40, 0x02, 0x04, 0x01, 0x02, 0x5C, 0x23, 0x01};
-    EXPECT_CALL(i2c_,
+    EXPECT_CALL(*i2c_,
                 WriteBlocking(
                     device_address_,     // Arg 0 : I2C Address.
                     NotNull(),           // Arg 1 : Data buffer address.
@@ -854,7 +864,7 @@ TEST_F(Adau1361LowerTest, ConfigurePll_441_19800) {
     const unsigned int mclock = 19800000;
     const unsigned int fs = 44100;
     uint8_t config_pll[] = {0x40, 0x02, 0x05, 0x5F, 0x03, 0x04, 0x23, 0x01};
-    EXPECT_CALL(i2c_,
+    EXPECT_CALL(*i2c_,
                 WriteBlocking(
                     device_address_,     // Arg 0 : I2C Address.
                     NotNull(),           // Arg 1 : Data buffer address.
@@ -884,7 +894,7 @@ TEST_F(Adau1361LowerTest, ConfigurePll_441_24000) {
     const unsigned int mclock = 24000000;
     const unsigned int fs = 44100;
     uint8_t config_pll[] = {0x40, 0x02, 0x02, 0x71, 0x01, 0xDD, 0x1B, 0x01};
-    EXPECT_CALL(i2c_,
+    EXPECT_CALL(*i2c_,
                 WriteBlocking(
                     device_address_,     // Arg 0 : I2C Address.
                     NotNull(),           // Arg 1 : Data buffer address.
@@ -915,7 +925,7 @@ TEST_F(Adau1361LowerTest, ConfigurePll_441_26000) {
     const unsigned int mclock = 26000000;
     const unsigned int fs = 44100;
     uint8_t config_pll[] = {0x40, 0x02, 0x1F, 0xBD, 0x0F, 0x09, 0x1B, 0x01};
-    EXPECT_CALL(i2c_,
+    EXPECT_CALL(*i2c_,
                 WriteBlocking(
                     device_address_,     // Arg 0 : I2C Address.
                     NotNull(),           // Arg 1 : Data buffer address.
@@ -945,7 +955,7 @@ TEST_F(Adau1361LowerTest, ConfigurePll_441_27000) {
     const unsigned int mclock = 27000000;
     const unsigned int fs = 44100;
     uint8_t config_pll[] = {0x40, 0x02, 0x07, 0x53, 0x02, 0x87, 0x1B, 0x01};
-    EXPECT_CALL(i2c_,
+    EXPECT_CALL(*i2c_,
                 WriteBlocking(
                     device_address_,     // Arg 0 : I2C Address.
                     NotNull(),           // Arg 1 : Data buffer address.
@@ -975,7 +985,7 @@ TEST_F(Adau1361LowerTest, ConfigurePll_441_12288) {
     const unsigned int mclock = 12288000;
     const unsigned int fs = 44100;
     uint8_t config_pll[] = {0x40, 0x02, 0x03, 0xE8, 0x02, 0xA3, 0x19, 0x01};
-    EXPECT_CALL(i2c_,
+    EXPECT_CALL(*i2c_,
                 WriteBlocking(
                     device_address_,     // Arg 0 : I2C Address.
                     NotNull(),           // Arg 1 : Data buffer address.
@@ -1005,7 +1015,7 @@ TEST_F(Adau1361LowerTest, ConfigurePll_441_24576) {
     const unsigned int mclock = 24576000;
     const unsigned int fs = 44100;
     uint8_t config_pll[] = {0x40, 0x02, 0x03, 0xE8, 0x02, 0xA3, 0x1B, 0x01};
-    EXPECT_CALL(i2c_,
+    EXPECT_CALL(*i2c_,
                 WriteBlocking(
                     device_address_,     // Arg 0 : I2C Address.
                     NotNull(),           // Arg 1 : Data buffer address.
@@ -1101,7 +1111,7 @@ TEST_F(Adau1361LowerTest, SetLineInputGain_mute) {
 
     // Expectation of mute
     EXPECT_CALL(
-        i2c_,
+        *i2c_,
         WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                       NotNull(),        // Arg 1 : Data buffer address.
                       sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
@@ -1117,7 +1127,7 @@ TEST_F(Adau1361LowerTest, SetLineInputGain_mute) {
 
     // Expectation of mute.
     EXPECT_CALL(
-        i2c_,
+        *i2c_,
         WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                       NotNull(),        // Arg 1 : Data buffer address.
                       sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
@@ -1151,7 +1161,7 @@ TEST_F(Adau1361LowerTest, SetLineInputGain_overgain) {
 
     //  expectation of gain setting.
     EXPECT_CALL(
-        i2c_,
+        *i2c_,
         WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                       NotNull(),        // Arg 1 : Data buffer address.
                       sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
@@ -1167,7 +1177,7 @@ TEST_F(Adau1361LowerTest, SetLineInputGain_overgain) {
 
     //  expectation of gain setting.
     EXPECT_CALL(
-        i2c_,
+        *i2c_,
         WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                       NotNull(),        // Arg 1 : Data buffer address.
                       sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
@@ -1202,7 +1212,7 @@ TEST_F(Adau1361LowerTest, SetLineInputGain_undergain) {
 
     //  expectation of -12dB.
     EXPECT_CALL(
-        i2c_,
+        *i2c_,
         WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                       NotNull(),        // Arg 1 : Data buffer address.
                       sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
@@ -1218,7 +1228,7 @@ TEST_F(Adau1361LowerTest, SetLineInputGain_undergain) {
 
     //  expectation of -12dB.
     EXPECT_CALL(
-        i2c_,
+        *i2c_,
         WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                       NotNull(),        // Arg 1 : Data buffer address.
                       sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
@@ -1252,7 +1262,7 @@ TEST_F(Adau1361LowerTest, SetLineInputGain_appropriate_gain) {
 
     // expectation of appropriate gain.
     EXPECT_CALL(
-        i2c_,
+        *i2c_,
         WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                       NotNull(),        // Arg 1 : Data buffer address.
                       sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
@@ -1269,7 +1279,7 @@ TEST_F(Adau1361LowerTest, SetLineInputGain_appropriate_gain) {
 
     // expectation of appropriate gain.
     EXPECT_CALL(
-        i2c_,
+        *i2c_,
         WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                       NotNull(),        // Arg 1 : Data buffer address.
                       sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
@@ -1306,7 +1316,7 @@ TEST_F(Adau1361LowerTest, SetLineOutputGain_mute) {
     //  expectation of mute.
     ltxbuf1[2] = (0x39 << 2) | 0x00;  // given 0dB, mute, line
     EXPECT_CALL(
-        i2c_,
+        *i2c_,
         WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                       NotNull(),        // Arg 1 : Data buffer address.
                       sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
@@ -1322,7 +1332,7 @@ TEST_F(Adau1361LowerTest, SetLineOutputGain_mute) {
     //  expectation of mute.
     rtxbuf1[2] = (0x39 << 2) | 0x00;  // given 0dB, mute, line
     EXPECT_CALL(
-        i2c_,
+        *i2c_,
         WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                       NotNull(),        // Arg 1 : Data buffer address.
                       sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
@@ -1354,7 +1364,7 @@ TEST_F(Adau1361LowerTest, SetLineOutputGain_overgain) {
     //  expectation of mute.
     ltxbuf1[2] = (0x3F << 2) | 0x02;  // 6dB is 111111, unmute, line
     EXPECT_CALL(
-        i2c_,
+        *i2c_,
         WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                       NotNull(),        // Arg 1 : Data buffer address.
                       sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
@@ -1370,7 +1380,7 @@ TEST_F(Adau1361LowerTest, SetLineOutputGain_overgain) {
     //  expectation of mute.
     rtxbuf1[2] = (0x3F << 2) | 0x02;  // 6dB is 1111, unmute, line
     EXPECT_CALL(
-        i2c_,
+        *i2c_,
         WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                       NotNull(),        // Arg 1 : Data buffer address.
                       sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
@@ -1402,7 +1412,7 @@ TEST_F(Adau1361LowerTest, SetLineOutputGain_undergain) {
     //  expectation of mute.
     ltxbuf1[2] = (0x00 << 2) | 0x02;  // -57dB is 0000, unmute, line
     EXPECT_CALL(
-        i2c_,
+        *i2c_,
         WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                       NotNull(),        // Arg 1 : Data buffer address.
                       sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
@@ -1418,7 +1428,7 @@ TEST_F(Adau1361LowerTest, SetLineOutputGain_undergain) {
     //  expectation of mute.
     rtxbuf1[2] = (0x00 << 2) | 0x02;  // -57dB is 0000, unmute, line
     EXPECT_CALL(
-        i2c_,
+        *i2c_,
         WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                       NotNull(),        // Arg 1 : Data buffer address.
                       sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
@@ -1451,7 +1461,7 @@ TEST_F(Adau1361LowerTest, SetLineOutputGain_appropriate_gain) {
     //  expectation of mute.
     ltxbuf1[2] = (0x3b << 2) | 0x02;  // 2dB is 110011, unmute, line
     EXPECT_CALL(
-        i2c_,
+        *i2c_,
         WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                       NotNull(),        // Arg 1 : Data buffer address.
                       sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
@@ -1467,7 +1477,7 @@ TEST_F(Adau1361LowerTest, SetLineOutputGain_appropriate_gain) {
     //  expectation of mute.
     rtxbuf1[2] = (0x34 << 2) | 0x02;  // -57dB is 000000, unmute, line
     EXPECT_CALL(
-        i2c_,
+        *i2c_,
         WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                       NotNull(),        // Arg 1 : Data buffer address.
                       sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
@@ -1504,7 +1514,7 @@ TEST_F(Adau1361LowerTest, SetAuxInputGain_mute) {
 
     //  expectation of mute.
     EXPECT_CALL(
-        i2c_,
+        *i2c_,
         WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                       NotNull(),        // Arg 1 : Data buffer address.
                       sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
@@ -1519,7 +1529,7 @@ TEST_F(Adau1361LowerTest, SetAuxInputGain_mute) {
 
     //  expectation of mute.
     EXPECT_CALL(
-        i2c_,
+        *i2c_,
         WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                       NotNull(),        // Arg 1 : Data buffer address.
                       sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
@@ -1550,7 +1560,7 @@ TEST_F(Adau1361LowerTest, SetAuxInputGain_overgain) {
 
     //  expectation of 6db.
     EXPECT_CALL(
-        i2c_,
+        *i2c_,
         WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                       NotNull(),        // Arg 1 : Data buffer address.
                       sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
@@ -1565,7 +1575,7 @@ TEST_F(Adau1361LowerTest, SetAuxInputGain_overgain) {
 
     //  expectation of 6db.
     EXPECT_CALL(
-        i2c_,
+        *i2c_,
         WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                       NotNull(),        // Arg 1 : Data buffer address.
                       sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
@@ -1596,7 +1606,7 @@ TEST_F(Adau1361LowerTest, SetAuxInputGain_undergain) {
 
     //  expectation of -12dB.
     EXPECT_CALL(
-        i2c_,
+        *i2c_,
         WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                       NotNull(),        // Arg 1 : Data buffer address.
                       sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
@@ -1611,7 +1621,7 @@ TEST_F(Adau1361LowerTest, SetAuxInputGain_undergain) {
 
     //  expectation of -12dB.
     EXPECT_CALL(
-        i2c_,
+        *i2c_,
         WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                       NotNull(),        // Arg 1 : Data buffer address.
                       sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
@@ -1642,7 +1652,7 @@ TEST_F(Adau1361LowerTest, SetAuxInputGain_appropriate_gain) {
 
     //  expectation of mute.
     EXPECT_CALL(
-        i2c_,
+        *i2c_,
         WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                       NotNull(),        // Arg 1 : Data buffer address.
                       sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
@@ -1657,7 +1667,7 @@ TEST_F(Adau1361LowerTest, SetAuxInputGain_appropriate_gain) {
 
     //  expectation of mute.
     EXPECT_CALL(
-        i2c_,
+        *i2c_,
         WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                       NotNull(),        // Arg 1 : Data buffer address.
                       sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
@@ -1695,7 +1705,7 @@ TEST_F(Adau1361LowerTest, SetHpOutputGain_mute) {
 
     //  expectation of mute.
     EXPECT_CALL(
-        i2c_,
+        *i2c_,
         WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                       NotNull(),        // Arg 1 : Data buffer address.
                       sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
@@ -1711,7 +1721,7 @@ TEST_F(Adau1361LowerTest, SetHpOutputGain_mute) {
 
     //  expectation of mute.
     EXPECT_CALL(
-        i2c_,
+        *i2c_,
         WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                       NotNull(),        // Arg 1 : Data buffer address.
                       sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
@@ -1743,7 +1753,7 @@ TEST_F(Adau1361LowerTest, SetHpOutputGain_overgain) {
 
     //  expectation of 6dB.
     EXPECT_CALL(
-        i2c_,
+        *i2c_,
         WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                       NotNull(),        // Arg 1 : Data buffer address.
                       sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
@@ -1758,7 +1768,7 @@ TEST_F(Adau1361LowerTest, SetHpOutputGain_overgain) {
 
     //  expectation of 6dB.
     EXPECT_CALL(
-        i2c_,
+        *i2c_,
         WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                       NotNull(),        // Arg 1 : Data buffer address.
                       sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
@@ -1790,7 +1800,7 @@ TEST_F(Adau1361LowerTest, SetHpOutputGain_undergain) {
 
     //  expectation of -57.
     EXPECT_CALL(
-        i2c_,
+        *i2c_,
         WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                       NotNull(),        // Arg 1 : Data buffer address.
                       sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
@@ -1806,7 +1816,7 @@ TEST_F(Adau1361LowerTest, SetHpOutputGain_undergain) {
 
     //  expectation of -57dB.
     EXPECT_CALL(
-        i2c_,
+        *i2c_,
         WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                       NotNull(),        // Arg 1 : Data buffer address.
                       sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
@@ -1839,7 +1849,7 @@ TEST_F(Adau1361LowerTest, SetHpOutputGain_appropriate_gain) {
 
     //  expectation of mute.
     EXPECT_CALL(
-        i2c_,
+        *i2c_,
         WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                       NotNull(),        // Arg 1 : Data buffer address.
                       sizeof(ltxbuf1),  // Arg 2 : Data buffer length to send.
@@ -1855,7 +1865,7 @@ TEST_F(Adau1361LowerTest, SetHpOutputGain_appropriate_gain) {
 
     //  expectation of mute.
     EXPECT_CALL(
-        i2c_,
+        *i2c_,
         WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                       NotNull(),        // Arg 1 : Data buffer address.
                       sizeof(rtxbuf1),  // Arg 2 : Data buffer length to send.
@@ -1896,7 +1906,7 @@ TEST_F(Adau1361LowerTest, ConfigureSRC_22050) {
   using ::testing::Return;
 
   EXPECT_CALL(
-      i2c_,
+      *i2c_,
       WriteBlocking(device_address_,     // Arg 0 : I2C Address.
                     NotNull(),           // Arg 1 : Data buffer address.
                     sizeof(config_src),  // Arg 2 : Data buffer length to send.
@@ -1921,7 +1931,7 @@ TEST_F(Adau1361LowerTest, ConfigureSRC_24000) {
   using ::testing::Return;
 
   EXPECT_CALL(
-      i2c_,
+      *i2c_,
       WriteBlocking(device_address_,     // Arg 0 : I2C Address.
                     NotNull(),           // Arg 1 : Data buffer address.
                     sizeof(config_src),  // Arg 2 : Data buffer length to send.
@@ -1946,7 +1956,7 @@ TEST_F(Adau1361LowerTest, ConfigureSRC_32000) {
   using ::testing::Return;
 
   EXPECT_CALL(
-      i2c_,
+      *i2c_,
       WriteBlocking(device_address_,     // Arg 0 : I2C Address.
                     NotNull(),           // Arg 1 : Data buffer address.
                     sizeof(config_src),  // Arg 2 : Data buffer length to send.
@@ -1971,7 +1981,7 @@ TEST_F(Adau1361LowerTest, ConfigureSRC_44100) {
   using ::testing::Return;
 
   EXPECT_CALL(
-      i2c_,
+      *i2c_,
       WriteBlocking(device_address_,     // Arg 0 : I2C Address.
                     NotNull(),           // Arg 1 : Data buffer address.
                     sizeof(config_src),  // Arg 2 : Data buffer length to send.
@@ -1996,7 +2006,7 @@ TEST_F(Adau1361LowerTest, ConfigureSRC_48000) {
   using ::testing::Return;
 
   EXPECT_CALL(
-      i2c_,
+      *i2c_,
       WriteBlocking(device_address_,     // Arg 0 : I2C Address.
                     NotNull(),           // Arg 1 : Data buffer address.
                     sizeof(config_src),  // Arg 2 : Data buffer length to send.
@@ -2021,7 +2031,7 @@ TEST_F(Adau1361LowerTest, ConfigureSRC_88200) {
   using ::testing::Return;
 
   EXPECT_CALL(
-      i2c_,
+      *i2c_,
       WriteBlocking(device_address_,     // Arg 0 : I2C Address.
                     NotNull(),           // Arg 1 : Data buffer address.
                     sizeof(config_src),  // Arg 2 : Data buffer length to send.
@@ -2046,7 +2056,7 @@ TEST_F(Adau1361LowerTest, ConfigureSRC_96000) {
   using ::testing::Return;
 
   EXPECT_CALL(
-      i2c_,
+      *i2c_,
       WriteBlocking(device_address_,     // Arg 0 : I2C Address.
                     NotNull(),           // Arg 1 : Data buffer address.
                     sizeof(config_src),  // Arg 2 : Data buffer length to send.
@@ -2077,7 +2087,7 @@ TEST_F(Adau1361LowerTest, EnableCore) {
 
   //  we test initialization of core.
 
-  EXPECT_CALL(i2c_,
+  EXPECT_CALL(*i2c_,
               WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                             NotNull(),        // Arg 1 : Data buffer address.
                             3,       // Arg 2 : Data buffer length to send.
@@ -2151,7 +2161,7 @@ TEST_F(Adau1361LowerTest, InitializeRegisters) {
     InSequence dummy;
 
     for (int i = 0; i < sizeof(config_Adau1361) / 3; i++)
-      EXPECT_CALL(i2c_,
+      EXPECT_CALL(*i2c_,
                   WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                                 NotNull(),  // Arg 1 : Data buffer address.
                                 3,       // Arg 2 : Data buffer length to send.
@@ -2200,7 +2210,7 @@ TEST_F(Adau1361LowerTest, ConfigureSignalPath) {
     InSequence dummy;
 
     for (int i = 0; i < sizeof(config_UMB_ADAU1361A) / 3; i++)
-      EXPECT_CALL(i2c_,
+      EXPECT_CALL(*i2c_,
                   WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                                 NotNull(),  // Arg 1 : Data buffer address.
                                 3,       // Arg 2 : Data buffer length to send.
