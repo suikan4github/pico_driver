@@ -6,8 +6,8 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include "gpiobasic.hpp"
-#include "sdkwrapper.hpp"
+#include "gpio/gpiobasic.hpp"
+#include "sdk/sdkwrapper.hpp"
 
 using ::testing::_;
 class MockGpioBasicTest : public ::testing::Test {

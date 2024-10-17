@@ -19,7 +19,7 @@
 // Alternate definition for unit test.
 #endif  // __has_include(<hardware/i2c.h>)
 
-#include "sdkwrapper.hpp"
+#include "sdk/sdkwrapper.hpp"
 
 namespace rpp_driver {
 /**

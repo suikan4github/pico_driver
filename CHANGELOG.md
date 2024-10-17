@@ -14,6 +14,7 @@ The issue #16 changes its public member function. But it is referred internally 
 ### Removed
 ### Fixed
 - [Issue #11](https://github.com/suikan4github/rpp_driver/issues/11) Fails to compile in MSVC. 
+- [Issue #14](https://github.com/suikan4github/rpp_driver/issues/14)  Clean up Internal include directive.   
 - [Issue #17](https://github.com/suikan4github/rpp_driver/issues/17) The mock of the GpioBasic has the wrong definition. 
 - [Issue #18](https://github.com/suikan4github/rpp_driver/issues/18) The constructor of the MockI2sSlaveDuplex.hpp is missing.
 - [Issue #19](https://github.com/suikan4github/rpp_driver/issues/19) The Mock of the rpp_driver::Adau1361 is missing.

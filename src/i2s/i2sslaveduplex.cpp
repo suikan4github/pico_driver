@@ -1,6 +1,6 @@
-#include "i2sslaveduplex.hpp"
+#include "i2s/i2sslaveduplex.hpp"
 
-#include "sdkwrapper.hpp"
+#include "sdk/sdkwrapper.hpp"
 
 #if __has_include(<hardware/pio.h>)  // Is build in Pico Environment?
 extern "C" {

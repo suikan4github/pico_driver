@@ -1,7 +1,7 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include "i2cmaster.hpp"
+#include "i2c/i2cmaster.hpp"
 
 using testing::Return;
 
