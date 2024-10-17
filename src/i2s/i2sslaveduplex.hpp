@@ -154,15 +154,15 @@ class I2sSlaveDuplex {
 class MockI2sSlaveDuplex : public I2sSlaveDuplex {
  public:
   MockI2sSlaveDuplex(SdkWrapper &sdk)
-      : I2sSlaveDuplex(sdk, 0, 0) {}  //  // 0 is dummy. We don't care.
+      : I2sSlaveDuplex(sdk, 0, 0) {}  // 0 is dummy. We don't care.
   MOCK_METHOD0(GetStateMachine, uint32_t(void));
   MOCK_METHOD0(Start, void(void));
   MOCK_METHOD0(Stop, void(void));
   MOCK_METHOD1(PutFifoBlocking, void(int32_t value));
   MOCK_METHOD0(GetFifoBlocking, int32_t());
 };
-#endif  // __has_include(<gmock/gmock.h>)
 // GCOVR_EXCL_STOP
+#endif  // __has_include(<gmock/gmock.h>)
 }  // namespace rpp_driver
 
 #endif  // PICO_DRIVER_SRC_I2S_DUPLEXSLAVEI2S_HPP_
