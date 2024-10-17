@@ -78,14 +78,12 @@ add_subdirectory(rpp_driver)
 
 ```
 target_link_libraries(${PROJECT_NAME}  pico_stdlib 
-                                        hardware_i2c
-                                        hardware_pio
                                         rpp_driver)
 ```
 
-Note : Whichever you use PIO/I2C or not, you need to link these libraries. 
+Note : Beside of rpp_driver, link the Raspberry Pi Pico SDK libraries as needed. 
 
-By linking library, the include path for the include files are set automatically. 
+By linking rpp_driver library, the include path for the source code are set automatically. 
 
 # License
 This project is provided under [MIT License](LICENSE). 
