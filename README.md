@@ -38,8 +38,8 @@ git clone --recursive https://github.com/suikan4github/rpp_driver-sample.git
 
 
 # Tools and building
-## Installing tool
-To build the samples or test, you need to install the build tools. 
+## How to install the tools
+To build the samples and/or test, you need to install the build tools. 
 The installation of Ubuntu is : 
 
 ```sh
@@ -49,7 +49,7 @@ apt-get -y install gcc-arm-none-eabi libnewlib-arm-none-eabi
 apt-get -y install doxygen graphviz
 ```
 
-## Building the tests
+## How to build the tests
 The driver classes are tested by GoogleTest and fff. Follow the procedure to build the tests. 
 
 From the repository root ( where this README.md stays), run the following commands. 
@@ -59,7 +59,7 @@ cmake -B build -S . -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++
 cmake --build build --config Debug --target all
 ```
 
-## Building document
+## How to build the document
 An API document is provided as HTML files. 
 To obtain it, run doxygen at the project root ( where the README.md exists).
 
