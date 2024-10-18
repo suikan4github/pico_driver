@@ -59,6 +59,35 @@ namespace rpp_driver {
  * output to PutFifoBLock(). To provide the high quality processing,
  * The first GetFifoBlocking() call should be as soon as possible, after
  * calling start() function.
+ *
+  * ### Usage of mock
+ * In the case of the testing of the user program which uses this class,
+ * a programmer can use the pre-defined mock class
+ * ::rpp_driver::MockI2sSlaveDuplex inside i2sslaveduplex.hpp.
+ *
+ * ```cpp
+#include <gmock/gmock.h>
+#include <gtest/gtest.h>
+
+#include "i2s/i2sslaveduplex.hpp"
+#include "sdk/sdkwrapper.hpp"
+
+class UserCodeTest : public ::testing::Test {
+ protected:
+  ::rpp_driver::MockSdkWrapper mock_sdk_;
+  ::rpp_driver::MockI2sSlaveDuplex* mock_i2sslaveduplex_;
+
+  virtual void SetUp() {
+    mock_i2sslaveduplex_ = new ::rpp_driver::MockI2sSlaveDuplex(mock_sdk_);
+  }
+
+  virtual void TearDown() { delete (mock_i2sslaveduplex_); }
+};
+
+TEST_F(UserCodeTest, foo) {
+  // Write Test code here.
+}
+ * ```
  */
 class I2sSlaveDuplex {
  private:

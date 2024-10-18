@@ -41,6 +41,43 @@ namespace rpp_driver {
  * The ReadBlocking() and WriteBlocking() functions has nostop parameter. To use
  * the restart condition, set this parameter to true.
  *
+ * ### Usage of mock
+ * In the case of the testing of the user program which uses this class,
+ * a programmer can use the pre-defined mock class ::rpp_driver::MockI2cMaster.
+ * inside i2cmaster.hpp.
+ *
+ * ```cpp
+#include <gmock/gmock.h>
+#include <gtest/gtest.h>
+
+#include "i2c/i2cmaster.hpp"
+
+using ::testing::_;
+class UserCodeTest : public ::testing::Test {
+ protected:
+  ::rpp_driver::MockSdkWrapper mock_sdk_;
+  ::rpp_driver::MockI2cMaster* mock_i2c_;
+
+  virtual void SetUp() {
+    // Constructor will call these functiions.
+    EXPECT_CALL(mock_sdk_, i2c_init(_, _));
+    EXPECT_CALL(mock_sdk_, gpio_set_function(_, GPIO_FUNC_I2C)).Times(2);
+    EXPECT_CALL(mock_sdk_, gpio_pull_up(_)).Times(2);
+
+    mock_i2c_ = new ::rpp_driver::MockI2cMaster(mock_sdk_);
+  }
+
+  virtual void TearDown() {
+    // We can ignore these call inside destructor
+    EXPECT_CALL(mock_sdk_, i2c_deinit(_));
+    delete mock_i2c_;
+  }
+};
+
+TEST_F(UserCodeTest, foo) {
+  // Write Test code here.
+}
+ * ```
  */
 class I2cMaster {
  public:

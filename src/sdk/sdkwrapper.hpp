@@ -50,6 +50,26 @@ namespace rpp_driver {
  * the unit test.
  *
  * The mock of this class is declared in the same file with this class.
+  * ### Usage of mock
+ * In the case of the testing of the user program which uses this class,
+ * a programmer can use the pre-defined mock class
+ * ::rpp_driver::MockSdkWrapper inside sdkwrapper.hpp.
+ *
+ * ```cpp
+#include <gmock/gmock.h>
+#include <gtest/gtest.h>
+
+#include "sdk/sdkwrapper.hpp"
+
+class UserCodeTest : public ::testing::Test {
+ protected:
+  ::rpp_driver::MockSdkWrapper mock_sdk_;
+};
+
+TEST_F(UserCodeTest, foo) {
+  // Write Test code here.
+}
+ * ```
  */
 class SdkWrapper {
  public:
