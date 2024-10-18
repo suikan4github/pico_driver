@@ -12,6 +12,7 @@ The issue #12 removed public class I2cMasterInterface. But it is referred intern
 - [Issue #10](https://github.com/suikan4github/rpp_driver/issues/10) Cover APIs of the Raspberry Pi Pico SDK.
 - [Issue #15](https://github.com/suikan4github/rpp_driver/issues/15) Remove the redundant parameter check code from ConfigureSRC() 
 - [Issue #16](https://github.com/suikan4github/rpp_driver/issues/16) Change the member function name from ConfigureSRC() to ConfigureSrc().
+- [Issue #21](https://github.com/suikan4github/rpp_driver/issues/21) Add usege of the mock for each class description.
 - [Issue #22](https://github.com/suikan4github/rpp_driver/issues/22) Refactor the test_i2cmaster.cpp to use the fixture.
 ### Deprecated
 - [Issue #12](https://github.com/suikan4github/rpp_driver/issues/12)  Is I2cMasterInterface needed?  
