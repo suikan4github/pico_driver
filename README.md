@@ -1,4 +1,4 @@
-# Raspberry Pi Pico Driver class collection
+# Raspberry Pi Pico driver class collection
 A Collection of the Raspberry Pi [Pico](https://www.raspberrypi.com/products/raspberry-pi-pico/)/[Pico2](https://www.raspberrypi.com/products/raspberry-pi-pico-2/) classes. Also, a [SDK API](https://www.raspberrypi.com/documentation/pico-sdk/hardware.html#group_sm_config_1gaed7a6e7dc4f1979c7c62e4773df8c79b) wrapper class is provided. 
 
 An online [HTML documentation](https://suikan4github.github.io/rpp_driver/) is available for the details.  
