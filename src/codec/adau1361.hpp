@@ -40,6 +40,44 @@ namespace rpp_driver {
       kMClock,       // Master clock of UMB-ADAU1361-A[Hz].
       codec_lower);  // Inject Codec lower part dependency.
  * ```
+ * ### Usage of mock
+ * In the case of the testing of the user program which uses this class,
+ * a programmer can use the pre-defined mock class ::rpp_driver::MockAdau1361
+ * inside adau1361.hpp.
+ *
+ * ```cpp
+#include <gmock/gmock.h>
+#include <gtest/gtest.h>
+
+#include "codec/adau1361.hpp"
+#include "codec/umbadau1361lower.hpp"
+#include "i2c/i2cmaster.hpp"
+
+
+class UserCodeTest : public ::testing::Test {
+ protected:
+  virtual void SetUp() {
+    mock_i2c_ = new ::rpp_driver::MockI2cMaster(mock_sdk_);
+    mock_codec_lower_ = new ::rpp_driver::MockAdau1361Lower(*mock_i2c_);
+    mock_codec_ = new ::rpp_driver::MockAdau1361(*mock_codec_lower_);
+  }
+
+  virtual void TearDown() {
+    delete mock_codec_;
+    delete mock_codec_lower_;
+    delete mock_i2c_;
+  }
+
+  ::rpp_driver::SdkWrapper mock_sdk_;
+  ::rpp_driver::MockI2cMaster *mock_i2c_;
+  ::rpp_driver::MockAdau1361Lower *mock_codec_lower_;
+  ::rpp_driver::MockAdau1361 *mock_codec_;
+};
+
+TEST_F(UserCodeTest, foo) {
+  // Write Test code here.
+}
+ * ```
  */
 class Adau1361 {
  public:
