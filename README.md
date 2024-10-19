@@ -1,12 +1,12 @@
 # Raspberry Pi Pico driver class collection
 A Collection of the Raspberry Pi [Pico](https://www.raspberrypi.com/products/raspberry-pi-pico/)/[Pico2](https://www.raspberrypi.com/products/raspberry-pi-pico-2/) classes. Also, a [SDK API](https://www.raspberrypi.com/documentation/pico-sdk/hardware.html#group_sm_config_1gaed7a6e7dc4f1979c7c62e4773df8c79b) wrapper class is provided. 
 
-An online [HTML documentation](https://suikan4github.github.io/rpp_driver/) is available for the details.  
+An online [HTML documentation](https://suikan4github.github.io/rpp_driver/) is available for the details of the APIs.  
 
 # Details
-This class collection ( or class library ) encapsule the certain data inside class. And it also allows you to use the dependency-injection inside your project. So, you can test your code with [Google Test](https://github.com/google/googletest) before testing on the target hardware. 
+This class collection ( or class library ) encapsules the certain data structure of Pico SDK behind the classes. And it also allows programmers to use the dependency-injection in their projects. So, programmers can test their code with [Google Test](https://github.com/google/googletest) before testing on the target hardware. 
 
-These classes are provided in this version. 
+The following classes are provided in this version. 
 
 | Class                           | Header file                | Description |
 |---------------------------------|----                        |----------------------------- |
@@ -29,7 +29,7 @@ git clone --recursive https://github.com/suikan4github/rpp_driver.git
 
 ## How to obtain the sample programs
 
-The newest copy of the sample program project is found in the [GitHub repository](https://github.com/suikan4github/rpp_driver-sample). 
+The newest copy of the sample programs are found in the [GitHub repository](https://github.com/suikan4github/rpp_driver-sample). 
 
 Run the following command to obtain the sample from CLI:
 ```sh
@@ -39,8 +39,8 @@ git clone --recursive https://github.com/suikan4github/rpp_driver-sample.git
 
 # Tools and building
 ## How to install the tools
-To build the samples and/or test, you need to install the build tools. 
-The installation of Ubuntu is : 
+To build the sample program and/or test program, you need to install the build tools. 
+The followings are the command to install these tools on Ubuntu.
 
 ```sh
 apt-get -y update
