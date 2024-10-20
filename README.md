@@ -44,7 +44,7 @@ The followings are the command to install these tools on Ubuntu.
 
 ```sh
 apt-get -y update
-apt-get -y install build-essential cmake ninja-build git doxygen
+apt-get -y install build-essential cmake ninja-build git 
 apt-get -y install gcc-arm-none-eabi libnewlib-arm-none-eabi
 apt-get -y install doxygen graphviz
 ```
