@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['sdkwrapper_0',['SdkWrapper',['../classrpp__driver_1_1SdkWrapper.html',1,'rpp_driver']]]
+  ['gpiobasic_0',['GpioBasic',['../classrpp__driver_1_1GpioBasic.html',1,'rpp_driver']]]
 ];

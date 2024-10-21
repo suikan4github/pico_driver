@@ -1,0 +1,8 @@
+<map id="src/i2s/i2sslaveduplex.hpp" name="src/i2s/i2sslaveduplex.hpp">
+<area shape="rect" id="node1" title="Duplex Slave I2S class." alt="" coords="103,5,298,31"/>
+<area shape="rect" id="node2" href="$sdkwrapper_8hpp.html" title="Wrapper for RasPi Pico SDK API." alt="" coords="125,79,277,104"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,159,76,185"/>
+<area shape="rect" id="node4" title=" " alt="" coords="100,159,171,185"/>
+<area shape="rect" id="node5" title=" " alt="" coords="195,152,337,192"/>
+<area shape="rect" id="node6" title=" " alt="" coords="361,159,523,185"/>
+</map>

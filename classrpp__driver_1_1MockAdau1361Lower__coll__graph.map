@@ -1,0 +1,5 @@
+<map id="rpp_driver::MockAdau1361Lower" name="rpp_driver::MockAdau1361Lower">
+<area shape="rect" id="node1" title="Mock class for test." alt="" coords="7,168,203,208"/>
+<area shape="rect" id="node2" href="$classrpp__driver_1_1Adau1361Lower.html" title="lower part of the Adau1361 CODEC controller class." alt="" coords="5,93,205,119"/>
+<area shape="rect" id="node3" href="$classrpp__driver_1_1I2cMaster.html" title="I2C Master controller class." alt="" coords="25,5,185,31"/>
+</map>

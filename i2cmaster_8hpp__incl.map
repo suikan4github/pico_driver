@@ -1,0 +1,8 @@
+<map id="src/i2c/i2cmaster.hpp" name="src/i2c/i2cmaster.hpp">
+<area shape="rect" id="node1" title="I2C Master Controller." alt="" coords="17,5,177,31"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,159,76,185"/>
+<area shape="rect" id="node3" href="$sdkwrapper_8hpp.html" title="Wrapper for RasPi Pico SDK API." alt="" coords="78,79,230,104"/>
+<area shape="rect" id="node4" title=" " alt="" coords="100,159,171,185"/>
+<area shape="rect" id="node5" title=" " alt="" coords="195,152,337,192"/>
+<area shape="rect" id="node6" title=" " alt="" coords="361,159,523,185"/>
+</map>

@@ -75,7 +75,7 @@ $(function() {
 <div class="textblock"><p><a class="anchor" id="md_README"></a>A Collection of the Raspberry Pi <a href="https://www.raspberrypi.com/products/raspberry-pi-pico/">Pico</a>/<a href="https://www.raspberrypi.com/products/raspberry-pi-pico-2/">Pico2</a> classes. Also, a <a href="https://www.raspberrypi.com/documentation/pico-sdk/hardware.html#group_sm_config_1gaed7a6e7dc4f1979c7c62e4773df8c79b">SDK API</a> wrapper class is provided.</p>
 <p>An online <a href="https://suikan4github.github.io/rpp_driver/">HTML documentation</a> is available for the details of the APIs. <br  />
 </p>
-<h1><a class="anchor" id="autotoc_md3"></a>
+<h1><a class="anchor" id="autotoc_md6"></a>
 Details</h1>
 <p>This class collection ( or class library ) encapsules the certain data structure of Pico SDK behind the classes. And it also allows programmers to use the dependency-injection in their projects. So, programmers can test their code with <a href="https://github.com/google/googletest">Google Test</a> before testing on the target hardware.</p>
 <p>The following classes are provided in this version.</p>
@@ -87,43 +87,43 @@ Details</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><a class="el" href="classrpp__driver_1_1GpioBasic.html" title="Basic GPIO driver class.">rpp_driver::GpioBasic</a>   </td><td class="markdownTableBodyNone"><a class="el" href="gpiobasic_8hpp.html" title="basic GPIO controller.">gpio/gpiobasic.hpp</a>   </td><td class="markdownTableBodyNone">Basic GPIO controller    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">::rpp_driver::I2cMaster   </td><td class="markdownTableBodyNone"><a class="el" href="i2cmaster_8hpp.html" title="I2C Master Controller.">i2c/i2cmaster.hpp</a>   </td><td class="markdownTableBodyNone">I2C Master controller    </td></tr>
+<td class="markdownTableBodyNone"><a class="el" href="classrpp__driver_1_1I2cMaster.html" title="I2C Master controller class.">rpp_driver::I2cMaster</a>   </td><td class="markdownTableBodyNone"><a class="el" href="i2cmaster_8hpp.html" title="I2C Master Controller.">i2c/i2cmaster.hpp</a>   </td><td class="markdownTableBodyNone">I2C Master controller    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">::rpp_driver::I2sSlaveDuplex   </td><td class="markdownTableBodyNone"><a class="el" href="i2sslaveduplex_8hpp.html" title="Duplex Slave I2S class.">i2s/i2sslaveduplex.hpp</a>   </td><td class="markdownTableBodyNone">Polling based PIO I2S driver    </td></tr>
+<td class="markdownTableBodyNone"><a class="el" href="classrpp__driver_1_1I2sSlaveDuplex.html" title="Duplex Slave I2S controller class.">rpp_driver::I2sSlaveDuplex</a>   </td><td class="markdownTableBodyNone"><a class="el" href="i2sslaveduplex_8hpp.html" title="Duplex Slave I2S class.">i2s/i2sslaveduplex.hpp</a>   </td><td class="markdownTableBodyNone">Polling based PIO I2S driver    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">::rpp_driver::Adau1361   </td><td class="markdownTableBodyNone"><a class="el" href="adau1361_8hpp.html" title="ADAU1361A CODEC Control.">codec/adau1361.hpp</a>   </td><td class="markdownTableBodyNone">Audio CODEC driver    </td></tr>
+<td class="markdownTableBodyNone"><a class="el" href="classrpp__driver_1_1Adau1361.html" title="Analog Device ADAU1361A audio codec control class.">rpp_driver::Adau1361</a>   </td><td class="markdownTableBodyNone"><a class="el" href="adau1361_8hpp.html" title="ADAU1361A CODEC Control.">codec/adau1361.hpp</a>   </td><td class="markdownTableBodyNone">Audio CODEC driver    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">::rpp_driver::UmbAdau1361Lower   </td><td class="markdownTableBodyNone"><a class="el" href="umbadau1361lower_8hpp.html" title="Lower class for the UMB-ADAU1361A.">codec/umbadau1361lower.hpp</a>   </td><td class="markdownTableBodyNone">CODEC lower driver dedicated to UMB-ADAU1361-A board   </td></tr>
+<td class="markdownTableBodyNone"><a class="el" href="classrpp__driver_1_1UmbAdau1361Lower.html" title="lower part of the Adau1361 CODEC controller class.">rpp_driver::UmbAdau1361Lower</a>   </td><td class="markdownTableBodyNone"><a class="el" href="umbadau1361lower_8hpp.html" title="Lower class for the UMB-ADAU1361A.">codec/umbadau1361lower.hpp</a>   </td><td class="markdownTableBodyNone">CODEC lower driver dedicated to UMB-ADAU1361-A board   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md4"></a>
+<h2><a class="anchor" id="autotoc_md7"></a>
 How to obtain this project</h2>
 <p>The newest copy of this project is found in the <a href="https://github.com/suikan4github/rpp_driver">GitHub repository</a>.</p>
 <p>Run the following command to obtain this project from CLI: </p><div class="fragment"><div class="line">git clone --recursive https://github.com/suikan4github/rpp_driver.git</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md5"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md8"></a>
 How to obtain the sample programs</h2>
 <p>The newest copy of the sample programs are found in the <a href="https://github.com/suikan4github/rpp_driver-sample">GitHub repository</a>.</p>
 <p>Run the following command to obtain the sample from CLI: </p><div class="fragment"><div class="line">git clone --recursive https://github.com/suikan4github/rpp_driver-sample.git</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md6"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md9"></a>
 Tools and building</h1>
-<h2><a class="anchor" id="autotoc_md7"></a>
+<h2><a class="anchor" id="autotoc_md10"></a>
 How to install the tools</h2>
 <p>To build the sample program and/or test program, you need to install the build tools. The followings are the command to install these tools on Ubuntu.</p>
 <div class="fragment"><div class="line">apt-get -y update</div>
 <div class="line">apt-get -y install build-essential cmake ninja-build git </div>
 <div class="line">apt-get -y install gcc-arm-none-eabi libnewlib-arm-none-eabi</div>
 <div class="line">apt-get -y install doxygen graphviz</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md8"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md11"></a>
 How to build the tests</h2>
 <p>The driver classes are tested by GoogleTest and fff. Follow the procedure to build the tests.</p>
 <p>From the repository root ( where this README.md stays), run the following commands. </p><div class="fragment"><div class="line">mkdir build</div>
 <div class="line">cmake -B build -S . -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ </div>
 <div class="line">cmake --build build --config Debug --target all</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md9"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md12"></a>
 How to build the document</h2>
 <p>An API document is provided as HTML files. To obtain it, run doxygen at the project root ( where the README.md exists).</p>
 <div class="fragment"><div class="line">doxygen</div>
 </div><!-- fragment --><p>The documentation will be generated under the docs/html/ subdirectory.</p>
-<h1><a class="anchor" id="autotoc_md10"></a>
+<h1><a class="anchor" id="autotoc_md13"></a>
 Integration to your RasPi Pico project</h1>
 <p>To use the <a class="el" href="namespacerpp__driver.html" title="Collection of the RP2040/RP2350 control.">rpp_driver</a>, as a first step, you need to add following lines into your CMakeLists.txt.</p>
 <div class="fragment"><div class="line">add_subdirectory(rpp_driver)</div>
@@ -131,10 +131,10 @@ Integration to your RasPi Pico project</h1>
 <div class="line">                                        rpp_driver)</div>
 </div><!-- fragment --><p>Note : Beside of <a class="el" href="namespacerpp__driver.html" title="Collection of the RP2040/RP2350 control.">rpp_driver</a>, link the Raspberry Pi Pico SDK libraries as needed.</p>
 <p>By linking <a class="el" href="namespacerpp__driver.html" title="Collection of the RP2040/RP2350 control.">rpp_driver</a> library, the include path for the source code are set automatically.</p>
-<h1><a class="anchor" id="autotoc_md11"></a>
+<h1><a class="anchor" id="autotoc_md14"></a>
 License</h1>
 <p>This project is provided under [MIT License](LICENSE).</p>
-<h1><a class="anchor" id="autotoc_md12"></a>
+<h1><a class="anchor" id="autotoc_md15"></a>
 Copyright</h1>
 <dl class="section author"><dt>Author</dt><dd>Seiichi Horie </dd></dl>
 </div></div><!-- PageDoc -->

@@ -1,0 +1,4 @@
+<map id="rpp_driver::I2sSlaveDuplex" name="rpp_driver::I2sSlaveDuplex">
+<area shape="rect" id="node1" title="Duplex Slave I2S controller class." alt="" coords="5,5,203,31"/>
+<area shape="rect" id="node2" href="$classrpp__driver_1_1MockI2sSlaveDuplex.html" title="Mock class for test." alt="" coords="11,79,197,119"/>
+</map>

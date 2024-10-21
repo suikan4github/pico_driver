@@ -1,0 +1,10 @@
+<map id="src/codec/adau1361.hpp" name="src/codec/adau1361.hpp">
+<area shape="rect" id="node1" title="ADAU1361A CODEC Control." alt="" coords="7,5,186,31"/>
+<area shape="rect" id="node2" href="$i2cmaster_8hpp.html" title="I2C Master Controller." alt="" coords="28,152,165,177"/>
+<area shape="rect" id="node8" href="$adau1361lower_8hpp.html" title="Lower class for the ADAU1361." alt="" coords="78,79,227,104"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,306,76,331"/>
+<area shape="rect" id="node4" href="$sdkwrapper_8hpp.html" title="Wrapper for RasPi Pico SDK API." alt="" coords="78,225,230,251"/>
+<area shape="rect" id="node5" title=" " alt="" coords="100,306,171,331"/>
+<area shape="rect" id="node6" title=" " alt="" coords="195,299,337,339"/>
+<area shape="rect" id="node7" title=" " alt="" coords="361,306,523,331"/>
+</map>

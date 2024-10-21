@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['i2cmaster_2ehpp_0',['i2cmaster.hpp',['../i2cmaster_8hpp.html',1,'']]],
-  ['i2sslaveduplex_2ehpp_1',['i2sslaveduplex.hpp',['../i2sslaveduplex_8hpp.html',1,'']]]
+  ['enablecore_0',['EnableCore',['../classrpp__driver_1_1Adau1361Lower.html#a29106e17db2da5697b6cb448f3a8bd28',1,'rpp_driver::Adau1361Lower']]]
 ];
