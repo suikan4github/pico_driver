@@ -10,6 +10,7 @@
 
 #ifndef PICO_DRIVER_SRC_I2C_I2CMASATER_HPP_
 #define PICO_DRIVER_SRC_I2C_I2CMASATER_HPP_
+#if __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
 
 #include <stdint.h>
 
@@ -161,5 +162,6 @@ class MockI2cMaster : public I2cMaster {
 #endif  // __has_include(<gmock/gmock.h>)
 
 };  // namespace rpp_driver
+#endif  // __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
 
 #endif /* PICO_DRIVER_SRC_I2C_I2CMASATER_HPP_ */

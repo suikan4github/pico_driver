@@ -1,3 +1,5 @@
+#if __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
+
 #include "adau1361lower.hpp"
 
 #include <assert.h>
@@ -765,3 +767,5 @@ void ::rpp_driver::Adau1361Lower::SetHpOutputGain(float left_gain,
   // SET RHPVOL : R30
   SendCommand(txbuf, 3);
 }
+
+#endif  // __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
