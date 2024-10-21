@@ -9,7 +9,7 @@
 
 #ifndef PICO_DRIVER_SRC_CODEC_UMBADAU1361LOWER_HPP_
 #define PICO_DRIVER_SRC_CODEC_UMBADAU1361LOWER_HPP_
-#if __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
+#if __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>) || DOXYGEN_COMPILE
 
 #include "codec/adau1361lower.hpp"
 #include "i2c/i2cmaster.hpp"

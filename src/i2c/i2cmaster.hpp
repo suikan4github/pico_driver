@@ -10,7 +10,7 @@
 
 #ifndef PICO_DRIVER_SRC_I2C_I2CMASATER_HPP_
 #define PICO_DRIVER_SRC_I2C_I2CMASATER_HPP_
-#if __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
+#if __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>) || DOXYGEN_COMPILE
 
 #include <stdint.h>
 
@@ -142,8 +142,11 @@ class I2cMaster {
   SdkWrapper &sdk_;
 };  // I2cMaster
 
-#if __has_include(<gmock/gmock.h>)
+#if __has_include(<gmock/gmock.h>)|| DOXYGEN_COMPILE
 // GCOVR_EXCL_START
+/**
+ * @brief Mock class for test.
+ */
 class MockI2cMaster : public I2cMaster {
  private:
   i2c_inst_t dummy_i2c = 3;

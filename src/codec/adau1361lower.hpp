@@ -9,7 +9,7 @@
 
 #ifndef PICO_DRIVER_SRC_CODEC_ADAU1361LOWER_HPP_
 #define PICO_DRIVER_SRC_CODEC_ADAU1361LOWER_HPP_
-#if __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
+#if __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>) || DOXYGEN_COMPILE
 
 #include "i2c/i2cmaster.hpp"
 
@@ -231,8 +231,11 @@ class Adau1361Lower {
 };
 
 // #ifdef MOCK_METHOD0
-#if __has_include(<gmock/gmock.h>)
+#if __has_include(<gmock/gmock.h>) || DOXYGEN_COMPILE
 // GCOVR_EXCL_START
+/**
+ * @brief Mock class for test.
+ */
 class MockAdau1361Lower : public Adau1361Lower {
  public:
   explicit MockAdau1361Lower(::rpp_driver::I2cMaster& controller)
