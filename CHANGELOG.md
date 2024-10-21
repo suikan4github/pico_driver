@@ -24,6 +24,7 @@ The issue #12 removed public class I2cMasterInterface. But it is referred intern
 - [Issue #18](https://github.com/suikan4github/rpp_driver/issues/18) The constructor of the MockI2sSlaveDuplex.hpp is missing.
 - [Issue #19](https://github.com/suikan4github/rpp_driver/issues/19) The Mock of the rpp_driver::Adau1361 is missing.
 - [Issue #20](https://github.com/suikan4github/rpp_driver/issues/20) Redundant section in README.md 
+- [Issue #23](https://github.com/suikan4github/rpp_driver/issues/23) Make SdkWrapper member functions and SDK API Stub conditional. 
 ### Security
 ### Known Issue
 
