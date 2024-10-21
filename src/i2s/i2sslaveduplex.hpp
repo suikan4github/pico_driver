@@ -5,7 +5,7 @@
  */
 #ifndef PICO_DRIVER_SRC_I2S_DUPLEXSLAVEI2S_HPP_
 #define PICO_DRIVER_SRC_I2S_DUPLEXSLAVEI2S_HPP_
-#if __has_include(<hardware/pio.h>) || __has_include(<gmock/gmock.h>)
+#if __has_include(<hardware/pio.h>) || __has_include(<gmock/gmock.h>) || DOXYGEN_COMPILE
 
 #if __has_include(<hardware/pio.h>)
 #include "hardware/pio.h"
@@ -179,8 +179,11 @@ class I2sSlaveDuplex {
   virtual void PutFifoBlocking(int32_t value);
 };
 
-#if __has_include(<gmock/gmock.h>)
+#if __has_include(<gmock/gmock.h>) || DOXYGEN_COMPILE
 // GCOVR_EXCL_START
+/**
+ * @brief Mock class for test.
+ */
 class MockI2sSlaveDuplex : public I2sSlaveDuplex {
  public:
   MockI2sSlaveDuplex(SdkWrapper &sdk)
@@ -195,6 +198,6 @@ class MockI2sSlaveDuplex : public I2sSlaveDuplex {
 #endif  // __has_include(<gmock/gmock.h>)
 }  // namespace rpp_driver
 
-#endif // __has_include(<hardware/pio.h>) || __has_include(<gmock/gmock.h>)
+#endif  // __has_include(<hardware/pio.h>) || __has_include(<gmock/gmock.h>)
 
 #endif  // PICO_DRIVER_SRC_I2S_DUPLEXSLAVEI2S_HPP_

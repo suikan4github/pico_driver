@@ -2,11 +2,25 @@
 History of the project development
 
 ## [Unreleased] yyyy-mm-zz
+Hotfix release. 
+
 ### Added
 ### Changed
 ### Deprecated
 ### Removed
 ### Fixed
+### Security
+### Known Issue
+
+## [v1.1.1] 2024-10-22
+Hotfix release. 
+
+### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+- [Issue #24](https://github.com/suikan4github/rpp_driver/issues/24) Doxygen cannot generate document. 
 ### Security
 ### Known Issue
 
@@ -22,7 +36,7 @@ Update to the v1.0.0. The major change is the SdkWrapper class. This class is no
 - [Issue #10](https://github.com/suikan4github/rpp_driver/issues/10) Cover APIs of the Raspberry Pi Pico SDK.
 - [Issue #15](https://github.com/suikan4github/rpp_driver/issues/15) Remove the redundant parameter check code from ConfigureSRC() 
 - [Issue #16](https://github.com/suikan4github/rpp_driver/issues/16) Change the member function name from ConfigureSRC() to ConfigureSrc().
-- [Issue #21](https://github.com/suikan4github/rpp_driver/issues/21) Add usege of the mock for each class description.
+- [Issue #21](https://github.com/suikan4github/rpp_driver/issues/21) Add usage of the mock for each class description.
 - [Issue #22](https://github.com/suikan4github/rpp_driver/issues/22) Refactor the test_i2cmaster.cpp to use the fixture.
 ### Deprecated
 - [Issue #12](https://github.com/suikan4github/rpp_driver/issues/12)  Is I2cMasterInterface needed?  
@@ -65,6 +79,8 @@ First official release of the rpp_driver ( Raspberry Pi Pico Driver) class libra
 ## [v0.9.0] 2024-09-28
 Pre-release version. 
 
-[Unreleased]: https://github.com/suikan4github/rpp_driver/compare/v1.0.0...develop
+[Unreleased]: https://github.com/suikan4github/rpp_driver/compare/v1.1.1...develop
+[v1.1.1]: https://github.com/suikan4github/rpp_driver/compare/v1.1.0...v1.1.1
+[v1.1.0]: https://github.com/suikan4github/rpp_driver/compare/v1.0.0...v1.1.0
 [v1.0.0]: https://github.com/suikan4github/rpp_driver/compare/v0.9.0...v1.0.0
 [v0.9.0]: https://github.com/suikan4github/rpp_driver/compare/v0.0.0...v0.9.0
