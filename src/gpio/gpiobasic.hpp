@@ -19,7 +19,7 @@
 // Alternate definition for unit test.
 #endif  // __has_include(<hardware/i2c.h>)
 
-#include "sdkwrapper.hpp"
+#include "sdk/sdkwrapper.hpp"
 
 namespace rpp_driver {
 /**
@@ -29,6 +29,41 @@ namespace rpp_driver {
  * this class, pass a GPIO pin# through the constructor.
  * So, this class initialize and deinitialize that pin in the constructor and
  * destructor, respectively.
+ *
+ * ### Usage of mock
+ * In the case of the testing of the user program which uses this class,
+ * a programmer can use the pre-defined mock class ::rpp_driver::MockGpioBasic.
+ * inside gpiobasic.hpp.
+ *
+ * ```cpp
+#include <gmock/gmock.h>
+#include <gtest/gtest.h>
+
+#include "gpio/gpiobasic.hpp"
+#include "sdk/sdkwrapper.hpp"
+
+
+using ::testing::_;
+class UserCodeTest : public ::testing::Test {
+ protected:
+  ::rpp_driver::MockSdkWrapper mock_sdk_;
+  ::rpp_driver::MockGpioBasic* mock_gpio_;
+
+  virtual void SetUp() {
+    EXPECT_CALL(mock_sdk_, gpio_init(_)).Times(1);
+    mock_gpio_ = new ::rpp_driver::MockGpioBasic(mock_sdk_);
+  }
+
+  virtual void TearDown() {
+    EXPECT_CALL(mock_sdk_, gpio_deinit(_)).Times(1);
+    delete (mock_gpio_);
+  }
+};
+
+TEST_F(UserCodeTest, foo) {
+  // Write Test code here.
+}
+ * ```
  */
 class GpioBasic {
  public:
@@ -100,9 +135,11 @@ class GpioBasic {
   const uint pin_;
 };
 #if __has_include(<gmock/gmock.h>)
-
-class MockGpioBasic : public SdkWrapper {
+// GCOVR_EXCL_START
+class MockGpioBasic : public GpioBasic {
  public:
+  MockGpioBasic(SdkWrapper &sdk)
+      : GpioBasic(sdk, 0) {};  // 0 is dummy. We don't care.
   MOCK_METHOD1(SetDir, void(bool));
   MOCK_METHOD1(SetInputEnabled, void(bool));
   MOCK_METHOD1(Put, void(bool));
@@ -112,7 +149,7 @@ class MockGpioBasic : public SdkWrapper {
   MOCK_METHOD0(PullDown, void(void));
   MOCK_METHOD0(DisablePulls, void(void));
 };  // MockGpioBasic
-
+// GCOVR_EXCL_STOP
 #endif  //  __has_include(<gmock/gmock.h>)
 };  // namespace rpp_driver
 

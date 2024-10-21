@@ -9,8 +9,9 @@
 
 #ifndef PICO_DRIVER_SRC_CODEC_ADAU1361LOWER_HPP_
 #define PICO_DRIVER_SRC_CODEC_ADAU1361LOWER_HPP_
+#if __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
 
-#include "i2cmaster.hpp"
+#include "i2c/i2cmaster.hpp"
 
 #if __has_include(<gmock/gmock.h>)
 #include <gmock/gmock.h>
@@ -36,7 +37,7 @@ namespace rpp_driver {
  * @li ConfigurePll()
  * @li WaitPllLock()
  * @li EnableCore()
- * @li ConfigureSRC()
+ * @li ConfigureSrc()
  * @li InitializeRegisters()
  * @li ConfigureSignalPath()
  *
@@ -54,7 +55,7 @@ class Adau1361Lower {
    * @param i2c_device_addr ADAU1361A 7bits I2C device address. Refer device
    * deta sheet for details.
    */
-  Adau1361Lower(::rpp_driver::I2cMasterInterface& controller,
+  Adau1361Lower(::rpp_driver::I2cMaster& controller,
                 unsigned int i2c_device_addr);
   Adau1361Lower() = delete;
   virtual ~Adau1361Lower() {}
@@ -136,7 +137,7 @@ class Adau1361Lower {
    * @details
    * Must call after EnableCore().
    */
-  virtual void ConfigureSRC(unsigned int fs);
+  virtual void ConfigureSrc(unsigned int fs);
 
   /**
    * @brief Initialize the core part of the ADAU1361A.
@@ -153,7 +154,7 @@ class Adau1361Lower {
    * Clock must working well before calling this routine.
    *
    * This function clean-up.
-   * Need to call after ConfigureSRC() and before InitializeSignalPath()
+   * Need to call after ConfigureSrc() and before InitializeSignalPath()
    */
   virtual void InitializeRegisters();
 
@@ -224,17 +225,17 @@ class Adau1361Lower {
 
  protected:
   /// @brief Internal variable to hold the I2C controller variable.
-  ::rpp_driver::I2cMasterInterface& i2c_;
+  ::rpp_driver::I2cMaster& i2c_;
   /// @brief Internal variable to hold the I2C device address.
   const unsigned int device_addr_;
 };
 
 // #ifdef MOCK_METHOD0
 #if __has_include(<gmock/gmock.h>)
-
+// GCOVR_EXCL_START
 class MockAdau1361Lower : public Adau1361Lower {
  public:
-  explicit MockAdau1361Lower(::rpp_driver::I2cMasterInterface& controller)
+  explicit MockAdau1361Lower(::rpp_driver::I2cMaster& controller)
       : Adau1361Lower(controller, 0x3A) {};
   MOCK_METHOD2(SendCommand, void(const uint8_t command[], int size));
   MOCK_METHOD2(SendCommandTable, void(const uint8_t table[][3], int rows));
@@ -243,7 +244,7 @@ class MockAdau1361Lower : public Adau1361Lower {
   MOCK_METHOD0(DisablePLL, void());
   MOCK_METHOD0(WaitPllLock, void());
   MOCK_METHOD2(ConfigurePll, void(unsigned int fs, unsigned int master_clock));
-  MOCK_METHOD1(ConfigureSRC, void(unsigned int fs));
+  MOCK_METHOD1(ConfigureSrc, void(unsigned int fs));
   MOCK_METHOD0(EnableCore, void());
   MOCK_METHOD0(InitializeRegisters, void());
   MOCK_METHOD0(ConfigureSignalPath, void());
@@ -257,7 +258,9 @@ class MockAdau1361Lower : public Adau1361Lower {
                void(float left_gain, float right_gain, bool mute));
 };
 #endif  //  __has_include(<gmock/gmock.h>)
-
+// GCOVR_EXCL_STOP
 }  // namespace rpp_driver
+
+#endif  // __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
 
 #endif /* PICO_DRIVER_SRC_CODEC_ADAU1361LOWER_HPP_ */

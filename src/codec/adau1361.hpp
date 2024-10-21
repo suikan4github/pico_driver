@@ -9,8 +9,9 @@
 
 #ifndef PICO_DRIVER_SRC_CODEC_ADAU1361_HPP_
 #define PICO_DRIVER_SRC_CODEC_ADAU1361_HPP_
+#if __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
 
-#include <i2cmasterinterface.hpp>
+#include <i2c/i2cmaster.hpp>
 
 #include "adau1361lower.hpp"
 namespace rpp_driver {
@@ -39,6 +40,44 @@ namespace rpp_driver {
       kFs,           // Sampling frequency[Hz].
       kMClock,       // Master clock of UMB-ADAU1361-A[Hz].
       codec_lower);  // Inject Codec lower part dependency.
+ * ```
+ * ### Usage of mock
+ * In the case of the testing of the user program which uses this class,
+ * a programmer can use the pre-defined mock class ::rpp_driver::MockAdau1361
+ * inside adau1361.hpp.
+ *
+ * ```cpp
+#include <gmock/gmock.h>
+#include <gtest/gtest.h>
+
+#include "codec/adau1361.hpp"
+#include "codec/umbadau1361lower.hpp"
+#include "i2c/i2cmaster.hpp"
+
+
+class UserCodeTest : public ::testing::Test {
+ protected:
+  virtual void SetUp() {
+    mock_i2c_ = new ::rpp_driver::MockI2cMaster(mock_sdk_);
+    mock_codec_lower_ = new ::rpp_driver::MockAdau1361Lower(*mock_i2c_);
+    mock_codec_ = new ::rpp_driver::MockAdau1361(*mock_codec_lower_);
+  }
+
+  virtual void TearDown() {
+    delete mock_codec_;
+    delete mock_codec_lower_;
+    delete mock_i2c_;
+  }
+
+  ::rpp_driver::SdkWrapper mock_sdk_;
+  ::rpp_driver::MockI2cMaster *mock_i2c_;
+  ::rpp_driver::MockAdau1361Lower *mock_codec_lower_;
+  ::rpp_driver::MockAdau1361 *mock_codec_;
+};
+
+TEST_F(UserCodeTest, foo) {
+  // Write Test code here.
+}
  * ```
  */
 class Adau1361 {
@@ -159,6 +198,26 @@ class Adau1361 {
   bool line_output_mute_;
   bool hp_output_mute_;  // headphone
 };
+
+#if __has_include(<gmock/gmock.h>)
+// GCOVR_EXCL_START
+class MockAdau1361 : public Adau1361 {
+ public:
+  MockAdau1361(Adau1361Lower& adau1361_lower)
+      : Adau1361(48'000, 12'000'000, adau1361_lower) {
+  }  // with dummy fs and dummy mclock
+
+  MOCK_METHOD0(Start, void(void));
+  MOCK_METHOD3(SetGain,
+               void(CodecChannel channel, float left_gain, float right_gain));
+  MOCK_METHOD2(Mute, void(CodecChannel channel, bool mute));
+  MOCK_METHOD1(Mute, void(CodecChannel channel));
+};
+// GCOVR_EXCL_STOP
+#endif  // __has_include(<gmock/gmock.h>)
+
 }  // namespace rpp_driver
+
+#endif  // __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
 
 #endif /* PICO_DRIVER_SRC_CODEC_ADAU1361_HPP_ */

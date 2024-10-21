@@ -1,20 +1,25 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include "i2cmasterinterface.hpp"
-#include "umbadau1361lower.hpp"
+#include "codec/umbadau1361lower.hpp"
+#include "i2c/i2cmaster.hpp"
 
 class UmbAdau1361LowerTest : public ::testing::Test {
  protected:
   virtual void SetUp() {
     device_address_ = 0x39;  // 7bit I2C address
-    codec_lower_ = new ::rpp_driver::UmbAdau1361Lower(i2c_, device_address_);
+    i2c_ = new ::rpp_driver::MockI2cMaster(sdk_);
+    codec_lower_ = new ::rpp_driver::UmbAdau1361Lower(*i2c_, device_address_);
   }
 
-  virtual void TearDown() { delete codec_lower_; }
+  virtual void TearDown() {
+    delete codec_lower_;
+    delete i2c_;
+  }
 
   unsigned int device_address_;  // 7bit I2C address
-  ::rpp_driver::MockI2cMasterInterface i2c_;
+  ::rpp_driver::SdkWrapper sdk_;
+  ::rpp_driver::MockI2cMaster *i2c_;
   ::rpp_driver::Adau1361Lower *codec_lower_;
 };
 
@@ -54,7 +59,7 @@ TEST_F(UmbAdau1361LowerTest, ConfigureSignalPath) {
     InSequence dummy;
 
     for (int i = 0; i < sizeof(config_UMB_ADAU1361A) / 3; i++)
-      EXPECT_CALL(i2c_,
+      EXPECT_CALL(*i2c_,
                   WriteBlocking(device_address_,  // Arg 0 : I2C Address.
                                 NotNull(),  // Arg 1 : Data buffer address.
                                 3,       // Arg 2 : Data buffer length to send.

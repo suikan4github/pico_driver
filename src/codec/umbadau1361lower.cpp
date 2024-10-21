@@ -1,3 +1,5 @@
+#if __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
+
 #include "umbadau1361lower.hpp"
 
 #include <assert.h>
@@ -34,3 +36,5 @@ void ::rpp_driver::UmbAdau1361Lower::ConfigureSignalPath() {
       config_UMB_ADAU1361A,
       sizeof(config_UMB_ADAU1361A) / 3);  // init UMB-ADAU1361 as default state.
 }
+
+#endif  // __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)

@@ -10,6 +10,7 @@
 
 #ifndef PICO_DRIVER_SRC_I2C_I2CMASATER_HPP_
 #define PICO_DRIVER_SRC_I2C_I2CMASATER_HPP_
+#if __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
 
 #include <stdint.h>
 
@@ -25,8 +26,7 @@ typedef int i2c_inst_t;
 #define GPIO_FUNC_I2C 11
 #endif  // __has_include(<hardware/i2c.h>)
 
-#include "i2cmasterinterface.hpp"
-#include "sdkwrapper.hpp"
+#include "sdk/sdkwrapper.hpp"
 
 namespace rpp_driver {
 /**
@@ -42,8 +42,45 @@ namespace rpp_driver {
  * The ReadBlocking() and WriteBlocking() functions has nostop parameter. To use
  * the restart condition, set this parameter to true.
  *
+ * ### Usage of mock
+ * In the case of the testing of the user program which uses this class,
+ * a programmer can use the pre-defined mock class ::rpp_driver::MockI2cMaster.
+ * inside i2cmaster.hpp.
+ *
+ * ```cpp
+#include <gmock/gmock.h>
+#include <gtest/gtest.h>
+
+#include "i2c/i2cmaster.hpp"
+
+using ::testing::_;
+class UserCodeTest : public ::testing::Test {
+ protected:
+  ::rpp_driver::MockSdkWrapper mock_sdk_;
+  ::rpp_driver::MockI2cMaster* mock_i2c_;
+
+  virtual void SetUp() {
+    // Constructor will call these functiions.
+    EXPECT_CALL(mock_sdk_, i2c_init(_, _));
+    EXPECT_CALL(mock_sdk_, gpio_set_function(_, GPIO_FUNC_I2C)).Times(2);
+    EXPECT_CALL(mock_sdk_, gpio_pull_up(_)).Times(2);
+
+    mock_i2c_ = new ::rpp_driver::MockI2cMaster(mock_sdk_);
+  }
+
+  virtual void TearDown() {
+    // We can ignore these call inside destructor
+    EXPECT_CALL(mock_sdk_, i2c_deinit(_));
+    delete mock_i2c_;
+  }
+};
+
+TEST_F(UserCodeTest, foo) {
+  // Write Test code here.
+}
+ * ```
  */
-class I2cMaster : public I2cMasterInterface {
+class I2cMaster {
  public:
   /**
    * @brief Initialize the given I2C port and setup the pins.
@@ -77,8 +114,7 @@ class I2cMaster : public I2cMasterInterface {
    * not acknowledged or no device present.
    */
 
-  int ReadBlocking(uint8_t addr, uint8_t *dst, size_t len,
-                   bool nostop) override;
+  virtual int ReadBlocking(uint8_t addr, uint8_t *dst, size_t len, bool nostop);
   /**
    * @brief Attempt to write specified number of bytes to address, blocking.
    * @param addr 7-bit address of device to write to
@@ -90,8 +126,8 @@ class I2cMaster : public I2cMasterInterface {
    * @returns Number of bytes written, or PICO_ERROR_GENERIC
    * if address not acknowledged, no device present.
    */
-  int WriteBlocking(uint8_t addr, const uint8_t *src, size_t len,
-                    bool nostop) override;
+  virtual int WriteBlocking(uint8_t addr, const uint8_t *src, size_t len,
+                            bool nostop);
 
   /**
    * @brief Check wether device at specified I2C address exists or not.
@@ -99,12 +135,33 @@ class I2cMaster : public I2cMasterInterface {
    * @returns true if exist, false if not exist.
    */
 
-  bool IsDeviceExisting(uint8_t addr) override;
+  virtual bool IsDeviceExisting(uint8_t addr);
 
  private:
   i2c_inst_t &i2c_;
   SdkWrapper &sdk_;
+};  // I2cMaster
+
+#if __has_include(<gmock/gmock.h>)
+// GCOVR_EXCL_START
+class MockI2cMaster : public I2cMaster {
+ private:
+  i2c_inst_t dummy_i2c = 3;
+
+ public:
+  MockI2cMaster(SdkWrapper &sdk)
+      : I2cMaster(sdk, dummy_i2c, 100'000, 10, 11) {
+        };  // Sdk wrapper and dummy parameters.
+  MOCK_METHOD4(ReadBlocking,
+               int(uint8_t addr, uint8_t *dst, size_t len, bool nostop));
+  MOCK_METHOD4(WriteBlocking,
+               int(uint8_t addr, const uint8_t *src, size_t len, bool nostop));
+  MOCK_METHOD1(IsDeviceExisting, bool(uint8_t addr));
 };
+// GCOVR_EXCL_STOP
+#endif  // __has_include(<gmock/gmock.h>)
+
 };  // namespace rpp_driver
+#endif  // __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
 
 #endif /* PICO_DRIVER_SRC_I2C_I2CMASATER_HPP_ */

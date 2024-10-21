@@ -9,9 +9,10 @@
 
 #ifndef PICO_DRIVER_SRC_CODEC_UMBADAU1361LOWER_HPP_
 #define PICO_DRIVER_SRC_CODEC_UMBADAU1361LOWER_HPP_
+#if __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
 
-#include "adau1361lower.hpp"
-#include "i2cmaster.hpp"
+#include "codec/adau1361lower.hpp"
+#include "i2c/i2cmaster.hpp"
 
 namespace rpp_driver {
 
@@ -32,7 +33,7 @@ class UmbAdau1361Lower : public Adau1361Lower {
    * @param i2c_device_addr ADAU1361A 7bits I2C device address. Refer device
    * deta sheet for details.
    */
-  UmbAdau1361Lower(::rpp_driver::I2cMasterInterface& controller,
+  UmbAdau1361Lower(::rpp_driver::I2cMaster& controller,
                    unsigned int i2c_device_addr)
       : Adau1361Lower(controller, i2c_device_addr) {}
   UmbAdau1361Lower() = delete;
@@ -49,5 +50,6 @@ class UmbAdau1361Lower : public Adau1361Lower {
 };
 
 }  // namespace rpp_driver
+#endif  //  __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
 
 #endif /* PICO_DRIVER_SRC_CODEC_UMBADAU1361LOWER_HPP_ */

@@ -1,6 +1,8 @@
-#include "i2sslaveduplex.hpp"
+#if __has_include(<hardware/pio.h>) || __has_include(<gmock/gmock.h>)
 
-#include "sdkwrapper.hpp"
+#include "i2s/i2sslaveduplex.hpp"
+
+#include "sdk/sdkwrapper.hpp"
 
 #if __has_include(<hardware/pio.h>)  // Is build in Pico Environment?
 extern "C" {
@@ -130,3 +132,5 @@ void rpp_driver::I2sSlaveDuplex::Stop() {
   // We don't unclaim the state machine.
   // The SM will be unclaimed by destructor.
 }
+
+#endif  // __has_include(<hardware/pio.h>) || __has_include(<gmock/gmock.h>)

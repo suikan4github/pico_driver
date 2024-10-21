@@ -1,5 +1,11 @@
+/**
+ * @file i2sslaveduplex.hpp
+ * @brief Duplex Slave I2S class.
+ * @copyright COPYRIGHT 2024 Seiichi Horie
+ */
 #ifndef PICO_DRIVER_SRC_I2S_DUPLEXSLAVEI2S_HPP_
 #define PICO_DRIVER_SRC_I2S_DUPLEXSLAVEI2S_HPP_
+#if __has_include(<hardware/pio.h>) || __has_include(<gmock/gmock.h>)
 
 #if __has_include(<hardware/pio.h>)
 #include "hardware/pio.h"
@@ -13,7 +19,7 @@
 #include <gmock/gmock.h>
 #endif
 
-#include "sdkwrapper.hpp"
+#include "sdk/sdkwrapper.hpp"
 
 namespace rpp_driver {
 /**
@@ -54,6 +60,35 @@ namespace rpp_driver {
  * output to PutFifoBLock(). To provide the high quality processing,
  * The first GetFifoBlocking() call should be as soon as possible, after
  * calling start() function.
+ *
+  * ### Usage of mock
+ * In the case of the testing of the user program which uses this class,
+ * a programmer can use the pre-defined mock class
+ * ::rpp_driver::MockI2sSlaveDuplex inside i2sslaveduplex.hpp.
+ *
+ * ```cpp
+#include <gmock/gmock.h>
+#include <gtest/gtest.h>
+
+#include "i2s/i2sslaveduplex.hpp"
+#include "sdk/sdkwrapper.hpp"
+
+class UserCodeTest : public ::testing::Test {
+ protected:
+  ::rpp_driver::MockSdkWrapper mock_sdk_;
+  ::rpp_driver::MockI2sSlaveDuplex* mock_i2sslaveduplex_;
+
+  virtual void SetUp() {
+    mock_i2sslaveduplex_ = new ::rpp_driver::MockI2sSlaveDuplex(mock_sdk_);
+  }
+
+  virtual void TearDown() { delete (mock_i2sslaveduplex_); }
+};
+
+TEST_F(UserCodeTest, foo) {
+  // Write Test code here.
+}
+ * ```
  */
 class I2sSlaveDuplex {
  private:
@@ -145,17 +180,21 @@ class I2sSlaveDuplex {
 };
 
 #if __has_include(<gmock/gmock.h>)
-
+// GCOVR_EXCL_START
 class MockI2sSlaveDuplex : public I2sSlaveDuplex {
  public:
+  MockI2sSlaveDuplex(SdkWrapper &sdk)
+      : I2sSlaveDuplex(sdk, 0, 0) {}  // 0 is dummy. We don't care.
   MOCK_METHOD0(GetStateMachine, uint32_t(void));
   MOCK_METHOD0(Start, void(void));
   MOCK_METHOD0(Stop, void(void));
   MOCK_METHOD1(PutFifoBlocking, void(int32_t value));
   MOCK_METHOD0(GetFifoBlocking, int32_t());
 };
+// GCOVR_EXCL_STOP
 #endif  // __has_include(<gmock/gmock.h>)
-
 }  // namespace rpp_driver
+
+#endif // __has_include(<hardware/pio.h>) || __has_include(<gmock/gmock.h>)
 
 #endif  // PICO_DRIVER_SRC_I2S_DUPLEXSLAVEI2S_HPP_

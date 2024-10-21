@@ -1,11 +1,13 @@
+#if __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
+
 #include "adau1361lower.hpp"
 
 #include <assert.h>
 
 #include <algorithm>
 
-rpp_driver::Adau1361Lower::Adau1361Lower(
-    ::rpp_driver::I2cMasterInterface& controller, unsigned int i2c_device_addr)
+rpp_driver::Adau1361Lower::Adau1361Lower(::rpp_driver::I2cMaster& controller,
+                                         unsigned int i2c_device_addr)
     : i2c_(controller), device_addr_(i2c_device_addr) {
   assert((0x3C > device_addr_) &&
          "ADAU1361 I2C Address must be lower than 0x3C.");
@@ -511,11 +513,7 @@ void ::rpp_driver::Adau1361Lower::InitializeRegisters() {
 }
 
 // Set the converter clock.
-void ::rpp_driver::Adau1361Lower::ConfigureSRC(unsigned int fs) {
-  assert((fs == 24000 || fs == 32000 || fs == 48000 || fs == 96000 ||
-          fs == 22050 || fs == 44100 || fs == 88200) &&
-         "Bad Fs");
-
+void ::rpp_driver::Adau1361Lower::ConfigureSrc(unsigned int fs) {
   switch (fs) {
     case 22050:
     case 24000: {
@@ -549,7 +547,7 @@ void ::rpp_driver::Adau1361Lower::ConfigureSRC(unsigned int fs) {
       break;
     }
     default:
-      assert(false);
+      assert(false && "Bad Fs");
   }
 }
 
@@ -769,3 +767,5 @@ void ::rpp_driver::Adau1361Lower::SetHpOutputGain(float left_gain,
   // SET RHPVOL : R30
   SendCommand(txbuf, 3);
 }
+
+#endif  // __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)

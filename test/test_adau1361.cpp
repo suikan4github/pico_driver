@@ -1,25 +1,28 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include "adau1361.hpp"
-#include "i2cmasterinterface.hpp"
-#include "umbadau1361lower.hpp"
+#include "codec/adau1361.hpp"
+#include "codec/umbadau1361lower.hpp"
+#include "i2c/i2cmaster.hpp"
 
 class Adau1361Test : public ::testing::Test {
  protected:
   virtual void SetUp() {
-    codec_lower_ = new ::rpp_driver::MockAdau1361Lower(i2c_);
+    i2c_ = new ::rpp_driver::MockI2cMaster(sdk_);
+    codec_lower_ = new ::rpp_driver::MockAdau1361Lower(*i2c_);
     codec_ = new ::rpp_driver::Adau1361(fs_, master_clk_, *codec_lower_);
   }
 
   virtual void TearDown() {
     delete codec_;
     delete codec_lower_;
+    delete i2c_;
   }
 
   uint fs_ = 48000;
   uint master_clk_ = 12000000;
-  ::rpp_driver::MockI2cMasterInterface i2c_;
+  ::rpp_driver::SdkWrapper sdk_;
+  ::rpp_driver::MockI2cMaster *i2c_;
   ::rpp_driver::MockAdau1361Lower *codec_lower_;
   ::rpp_driver::Adau1361 *codec_;
 };
@@ -232,7 +235,7 @@ TEST_F(Adau1361Test, Start) {
     EXPECT_CALL(*codec_lower_, ConfigurePll(fs_, master_clk_));
     EXPECT_CALL(*codec_lower_, WaitPllLock());
     EXPECT_CALL(*codec_lower_, EnableCore());
-    EXPECT_CALL(*codec_lower_, ConfigureSRC(fs_));
+    EXPECT_CALL(*codec_lower_, ConfigureSrc(fs_));
     EXPECT_CALL(*codec_lower_, InitializeRegisters());
     EXPECT_CALL(*codec_lower_, ConfigureSignalPath());
   }

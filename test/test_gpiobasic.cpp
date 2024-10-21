@@ -3,8 +3,8 @@
 
 #include <random>
 
-#include "gpiobasic.hpp"
-#include "sdkwrapper.hpp"
+#include "gpio/gpiobasic.hpp"
+#include "sdk/sdkwrapper.hpp"
 
 class GpioBasicTest : public ::testing::Test {
  protected:

@@ -18,7 +18,7 @@ DEFINE_FFF_GLOBALS;
 
 // The header file of the library to test.
 #include "../src/sdk/sdkwrapper.hpp"
-
+extern "C" {
 // Create Test Spies
 FAKE_VALUE_FUNC(bool, stdio_init_all);
 FAKE_VOID_FUNC(sleep_ms, uint32_t);
@@ -64,7 +64,7 @@ FAKE_VOID_FUNC(pio_sm_unclaim, PIO, uint);
 FAKE_VALUE_FUNC(int, pio_claim_unused_sm, PIO, bool);
 FAKE_VALUE_FUNC(bool, pio_sm_is_claimed, PIO, uint);
 FAKE_VOID_FUNC(pio_sm_clear_fifos, PIO, uint);
-
+}
 // The cpp file of the library to test.
 #include "../src/sdk/sdkwrapper.cpp"
 

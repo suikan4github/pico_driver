@@ -4,6 +4,7 @@
  *  Created on: 2018/05/11
  *      Author: Seiichi "Suikan" Horie
  */
+#if __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
 
 // GCC/Clang : Promote the switch-enum warning to error.
 // MSVC : ignored.
@@ -13,7 +14,7 @@
 
 #include <assert.h>
 
-#include "i2cmasterinterface.hpp"
+#include "i2c/i2cmaster.hpp"
 
 // Macro for easy-to-read
 #define CODEC_SYSLOG(fmt, ...) \
@@ -55,7 +56,7 @@ void ::rpp_driver::Adau1361::Start(void) {
   // Enable core to start operation.
   adau1361_lower_.EnableCore();
   // Set SRC for the right FS.
-  adau1361_lower_.ConfigureSRC(fs_);
+  adau1361_lower_.ConfigureSrc(fs_);
   // Board independent register initialization.
   adau1361_lower_.InitializeRegisters();
   // Board dependent register initialization.
@@ -134,3 +135,5 @@ void ::rpp_driver::Adau1361::Mute(CodecChannel channel, bool mute) {
   }
   CODEC_SYSLOG("Leave.")
 }
+
+#endif  // __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
