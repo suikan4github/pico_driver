@@ -4,6 +4,7 @@
  *  Created on: 2018/05/11
  *      Author: Seiichi "Suikan" Horie
  */
+#if __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
 
 // GCC/Clang : Promote the switch-enum warning to error.
 // MSVC : ignored.
@@ -134,3 +135,5 @@ void ::rpp_driver::Adau1361::Mute(CodecChannel channel, bool mute) {
   }
   CODEC_SYSLOG("Leave.")
 }
+
+#endif  // __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)

@@ -62,14 +62,23 @@ grep -v 'stdio_getchar' | grep -v 'stdio_putchar' | grep -v 'stdio_puts' |grep -
 cat "$TEMPLIST" >> debug.hpp
 
 # Gnerate include headers. 
-echo "#include <../../${MODULE_PREFIX}_${MODULE_NAME}/include/${MODULE_PREFIX}/${MODULE_NAME}.h>"  >> output/pico_sdk_headers.h
+echo "#if __has_include(<${MODULE_PREFIX}/${MODULE_NAME}.h>) || __has_include(<gmock/gmock.h>)" >> output/pico_sdk_headers.h
+echo "#include <${MODULE_PREFIX}/${MODULE_NAME}.h>"  >> output/pico_sdk_headers.h
+echo "#endif //  __has_include(<${MODULE_PREFIX}/${MODULE_NAME}.h>) || __has_include(<gmock/gmock.h>)" >> output/pico_sdk_headers.h
+echo "" >> output/pico_sdk_headers.h
 
 # Generate the class delcaration. 
 # add "virtual" and ";" to be a right function prototype. 
+echo "#if __has_include(<${MODULE_PREFIX}/${MODULE_NAME}.h>) || __has_include(<gmock/gmock.h>)" >> output/sdkwrapper.hpp
 sed -e 's/^/virtual /' < "$TEMPLIST" | sed -e 's/$/;/' | sed -e 's/enum_/enum /g'  | sed -e 's/const_/const /g' | sed -e 's/void_/void /g' >> output/sdkwrapper.hpp
+echo "#endif //  __has_include(<${MODULE_PREFIX}/${MODULE_NAME}.h>) || __has_include(<gmock/gmock.h>)" >> output/sdkwrapper.hpp
+echo "" >> output/sdkwrapper.hpp
 
 # Generate the class implementation
+echo "#if __has_include(<${MODULE_PREFIX}/${MODULE_NAME}.h>) || __has_include(<gmock/gmock.h>)" >> output/sdkwrapper.cpp
 awk  -f awk/gen_impl.awk < "$TEMPLIST" | sed -e 's/enum_/enum /g'  | sed -e 's/const_/const /g' | sed -e 's/void_/void /g' >> output/sdkwrapper.cpp
+echo "#endif //  __has_include(<${MODULE_PREFIX}/${MODULE_NAME}.h>) || __has_include(<gmock/gmock.h>)" >> output/sdkwrapper.cpp
+echo "" >> output/sdkwrapper.cpp
 
 # Generate the API stub
 awk -v module="$MODULE" -f awk/gen_apistub.awk < "$TEMPLIST" | sed -e 's/enum_/enum /g'  | sed -e 's/const_/const /g' | sed -e 's/void_/void /g' >> output/pico_sdk_apistub.cpp

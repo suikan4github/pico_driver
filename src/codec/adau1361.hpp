@@ -9,6 +9,7 @@
 
 #ifndef PICO_DRIVER_SRC_CODEC_ADAU1361_HPP_
 #define PICO_DRIVER_SRC_CODEC_ADAU1361_HPP_
+#if __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
 
 #include <i2c/i2cmaster.hpp>
 
@@ -216,5 +217,7 @@ class MockAdau1361 : public Adau1361 {
 #endif  // __has_include(<gmock/gmock.h>)
 
 }  // namespace rpp_driver
+
+#endif  // __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
 
 #endif /* PICO_DRIVER_SRC_CODEC_ADAU1361_HPP_ */

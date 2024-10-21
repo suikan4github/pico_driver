@@ -74,6 +74,8 @@ TEST_F(UserCodeTest, foo) {
 class SdkWrapper {
  public:
   virtual ~SdkWrapper() {}
+
+#if __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
   virtual void i2c_deinit(i2c_inst_t* i2c);
   virtual uint i2c_get_dreq(i2c_inst_t* i2c, bool is_tx);
   virtual i2c_hw_t* i2c_get_hw(i2c_inst_t* i2c);
@@ -112,6 +114,9 @@ class SdkWrapper {
   virtual int i2c_write_timeout_us(i2c_inst_t* i2c, uint8_t addr,
                                    const uint8_t* src, size_t len, bool nostop,
                                    uint timeout_us);
+#endif  //  __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
+
+#if __has_include(<hardware/pio.h>) || __has_include(<gmock/gmock.h>)
   virtual int pio_add_program(PIO pio, const pio_program_t* program);
   virtual int pio_add_program_at_offset(PIO pio, const pio_program_t* program,
                                         uint offset);
@@ -255,6 +260,9 @@ class SdkWrapper {
   virtual void sm_config_set_sideset_pins(pio_sm_config* c, uint sideset_base);
   virtual void sm_config_set_wrap(pio_sm_config* c, uint wrap_target,
                                   uint wrap);
+#endif  //  __has_include(<hardware/pio.h>) || __has_include(<gmock/gmock.h>)
+
+#if __has_include(<hardware/gpio.h>) || __has_include(<gmock/gmock.h>)
   virtual void gpio_acknowledge_irq(uint gpio, uint32_t event_mask);
   virtual void gpio_add_raw_irq_handler(uint gpio, irq_handler_t handler);
   virtual void gpio_add_raw_irq_handler_masked(uint32_t gpio_mask,
@@ -340,6 +348,9 @@ class SdkWrapper {
   virtual void gpio_xor_mask(uint32_t mask);
   virtual void gpio_xor_mask64(uint64_t mask);
   virtual void gpio_xor_mask_n(uint n, uint32_t mask);
+#endif  //  __has_include(<hardware/gpio.h>) || __has_include(<gmock/gmock.h>)
+
+#if __has_include(<hardware/clocks.h>) || __has_include(<gmock/gmock.h>)
   virtual bool check_sys_clock_hz(uint32_t freq_hz, uint* vco_freq_out,
                                   uint* post_div1_out, uint* post_div2_out);
   virtual bool check_sys_clock_khz(uint32_t freq_khz, uint* vco_freq_out,
@@ -368,6 +379,9 @@ class SdkWrapper {
   virtual bool set_sys_clock_khz(uint32_t freq_khz, bool required);
   virtual void set_sys_clock_pll(uint32_t vco_freq, uint post_div1,
                                  uint post_div2);
+#endif  //  __has_include(<hardware/clocks.h>) || __has_include(<gmock/gmock.h>)
+
+#if __has_include(<pico/time.h>) || __has_include(<gmock/gmock.h>)
   virtual int64_t absolute_time_diff_us(absolute_time_t from,
                                         absolute_time_t to);
   virtual absolute_time_t absolute_time_min(absolute_time_t a,
@@ -447,6 +461,9 @@ class SdkWrapper {
   virtual void sleep_us(uint64_t us);
   virtual uint32_t to_ms_since_boot(absolute_time_t t);
   virtual uint32_t us_to_ms(uint64_t us);
+#endif  //  __has_include(<pico/time.h>) || __has_include(<gmock/gmock.h>)
+
+#if __has_include(<pico/stdio.h>) || __has_include(<gmock/gmock.h>)
   virtual int getchar_timeout_us(uint32_t timeout_us);
   virtual int putchar_raw(int c);
   virtual int puts_raw(const char* s);
@@ -459,6 +476,7 @@ class SdkWrapper {
                                bool cr_translation);
   virtual void stdio_set_driver_enabled(stdio_driver_t* driver, bool enabled);
   virtual void stdio_set_translate_crlf(stdio_driver_t* driver, bool translate);
+#endif  //  __has_include(<pico/stdio.h>) || __has_include(<gmock/gmock.h>)
 
 };  // class SdkWrapper
 

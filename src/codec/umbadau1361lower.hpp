@@ -9,6 +9,7 @@
 
 #ifndef PICO_DRIVER_SRC_CODEC_UMBADAU1361LOWER_HPP_
 #define PICO_DRIVER_SRC_CODEC_UMBADAU1361LOWER_HPP_
+#if __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
 
 #include "codec/adau1361lower.hpp"
 #include "i2c/i2cmaster.hpp"
@@ -49,5 +50,6 @@ class UmbAdau1361Lower : public Adau1361Lower {
 };
 
 }  // namespace rpp_driver
+#endif  //  __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
 
 #endif /* PICO_DRIVER_SRC_CODEC_UMBADAU1361LOWER_HPP_ */

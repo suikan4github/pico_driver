@@ -1,3 +1,5 @@
+#if __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
+
 #include "i2cmaster.hpp"
 
 ::rpp_driver::I2cMaster::I2cMaster(SdkWrapper& sdk, i2c_inst_t& i2c,
@@ -31,3 +33,4 @@ bool rpp_driver::I2cMaster::IsDeviceExisting(uint8_t addr) {
   return (PICO_ERROR_GENERIC !=
           ReadBlocking(addr, dummy_buf, sizeof(dummy_buf), false));
 }
+#endif  // __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)

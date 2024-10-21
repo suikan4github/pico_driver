@@ -1,5 +1,6 @@
 
 #include "sdkwrapper.hpp"
+#if __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
 // --------------------------------------------------
 extern "C" void i2c_deinit(i2c_inst_t* i2c);
 void rpp_driver::SdkWrapper::i2c_deinit(i2c_inst_t* i2c) { ::i2c_deinit(i2c); }
@@ -151,6 +152,9 @@ int rpp_driver::SdkWrapper::i2c_write_timeout_us(i2c_inst_t* i2c, uint8_t addr,
                                                  bool nostop, uint timeout_us) {
   return ::i2c_write_timeout_us(i2c, addr, src, len, nostop, timeout_us);
 }
+#endif  //  __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
+
+#if __has_include(<hardware/pio.h>) || __has_include(<gmock/gmock.h>)
 // --------------------------------------------------
 extern "C" int pio_add_program(PIO pio, const pio_program_t* program);
 int rpp_driver::SdkWrapper::pio_add_program(PIO pio,
@@ -761,6 +765,9 @@ void rpp_driver::SdkWrapper::sm_config_set_wrap(pio_sm_config* c,
                                                 uint wrap_target, uint wrap) {
   ::sm_config_set_wrap(c, wrap_target, wrap);
 }
+#endif  //  __has_include(<hardware/pio.h>) || __has_include(<gmock/gmock.h>)
+
+#if __has_include(<hardware/gpio.h>) || __has_include(<gmock/gmock.h>)
 // --------------------------------------------------
 extern "C" void gpio_acknowledge_irq(uint gpio, uint32_t event_mask);
 void rpp_driver::SdkWrapper::gpio_acknowledge_irq(uint gpio,
@@ -1149,6 +1156,9 @@ extern "C" void gpio_xor_mask_n(uint n, uint32_t mask);
 void rpp_driver::SdkWrapper::gpio_xor_mask_n(uint n, uint32_t mask) {
   ::gpio_xor_mask_n(n, mask);
 }
+#endif  //  __has_include(<hardware/gpio.h>) || __has_include(<gmock/gmock.h>)
+
+#if __has_include(<hardware/clocks.h>) || __has_include(<gmock/gmock.h>)
 // --------------------------------------------------
 extern "C" bool check_sys_clock_hz(uint32_t freq_hz, uint* vco_freq_out,
                                    uint* post_div1_out, uint* post_div2_out);
@@ -1274,6 +1284,9 @@ void rpp_driver::SdkWrapper::set_sys_clock_pll(uint32_t vco_freq,
                                                uint post_div1, uint post_div2) {
   ::set_sys_clock_pll(vco_freq, post_div1, post_div2);
 }
+#endif  //  __has_include(<hardware/clocks.h>) || __has_include(<gmock/gmock.h>)
+
+#if __has_include(<pico/time.h>) || __has_include(<gmock/gmock.h>)
 // --------------------------------------------------
 extern "C" int64_t absolute_time_diff_us(absolute_time_t from,
                                          absolute_time_t to);
@@ -1583,6 +1596,9 @@ extern "C" uint32_t us_to_ms(uint64_t us);
 uint32_t rpp_driver::SdkWrapper::us_to_ms(uint64_t us) {
   return ::us_to_ms(us);
 }
+#endif  //  __has_include(<pico/time.h>) || __has_include(<gmock/gmock.h>)
+
+#if __has_include(<pico/stdio.h>) || __has_include(<gmock/gmock.h>)
 // --------------------------------------------------
 extern "C" int getchar_timeout_us(uint32_t timeout_us);
 int rpp_driver::SdkWrapper::getchar_timeout_us(uint32_t timeout_us) {
@@ -1637,3 +1653,4 @@ void rpp_driver::SdkWrapper::stdio_set_translate_crlf(stdio_driver_t* driver,
                                                       bool translate) {
   ::stdio_set_translate_crlf(driver, translate);
 }
+#endif  //  __has_include(<pico/stdio.h>) || __has_include(<gmock/gmock.h>)
