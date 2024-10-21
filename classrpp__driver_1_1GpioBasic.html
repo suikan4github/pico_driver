@@ -86,12 +86,12 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a37f7e209e466a1346a218ba7ad8b7c5f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrpp__driver_1_1GpioBasic.html#a37f7e209e466a1346a218ba7ad8b7c5f">GpioBasic</a> (<a class="el" href="classrpp__driver_1_1SdkWrapper.html">SdkWrapper</a> &amp;sdk, <a class="el" href="i2cmasterinterface_8hpp.html#a4d3943ddea65db7163a58e6c7e8df95a">uint</a> pin)</td></tr>
+<tr class="memitem:a37f7e209e466a1346a218ba7ad8b7c5f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrpp__driver_1_1GpioBasic.html#a37f7e209e466a1346a218ba7ad8b7c5f">GpioBasic</a> (<a class="el" href="classrpp__driver_1_1SdkWrapper.html">SdkWrapper</a> &amp;sdk, uint pin)</td></tr>
 <tr class="memdesc:a37f7e209e466a1346a218ba7ad8b7c5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the given GPIO pin and setup the pins.  <br /></td></tr>
 <tr class="separator:a37f7e209e466a1346a218ba7ad8b7c5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8723931c906620ea3dc386a0472740e3"><td class="memItemLeft" align="right" valign="top"><a id="a8723931c906620ea3dc386a0472740e3" name="a8723931c906620ea3dc386a0472740e3"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~GpioBasic</b> ()</td></tr>
-<tr class="memdesc:a8723931c906620ea3dc386a0472740e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">deinit the GPIO by <a class="el" href="classrpp__driver_1_1SdkWrapper.html#a80c3299aa1fec3121d322239939224d2" title="Resets a GPIO back to the NULL function, i.e. disables it.">SdkWrapper::gpio_deinit()</a>; <br /></td></tr>
+<tr class="memdesc:a8723931c906620ea3dc386a0472740e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">deinit the GPIO by SdkWrapper::gpio_deinit(); <br /></td></tr>
 <tr class="separator:a8723931c906620ea3dc386a0472740e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40b8c3fa5e497dbd7ba450f19bbfe18c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrpp__driver_1_1GpioBasic.html#a40b8c3fa5e497dbd7ba450f19bbfe18c">SetDir</a> (bool out)</td></tr>
 <tr class="memdesc:a40b8c3fa5e497dbd7ba450f19bbfe18c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a single GPIO direction.  <br /></td></tr>
@@ -122,8 +122,40 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>PullDown</b> 
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Basic GPIO driver class. </p>
-<p>This class provides the handy way to control GPIO. To use this class, pass a GPIO pin# through the constructor. So, this class initialize and deinitialize that pin in the constructor and destructor, respectively. </p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<p>This class provides the handy way to control GPIO. To use this class, pass a GPIO pin# through the constructor. So, this class initialize and deinitialize that pin in the constructor and destructor, respectively.</p>
+<h3><a class="anchor" id="autotoc_md0"></a>
+Usage of mock</h3>
+<p>In the case of the testing of the user program which uses this class, a programmer can use the pre-defined mock class ::rpp_driver::MockGpioBasic. inside <a class="el" href="gpiobasic_8hpp.html" title="basic GPIO controller.">gpiobasic.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;gmock/gmock.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;gtest/gtest.h&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="gpiobasic_8hpp.html">gpio/gpiobasic.hpp</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="sdkwrapper_8hpp.html">sdk/sdkwrapper.hpp</a>&quot;</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">using ::testing::_;</div>
+<div class="line"><span class="keyword">class </span>UserCodeTest : <span class="keyword">public</span> ::testing::Test {</div>
+<div class="line"> <span class="keyword">protected</span>:</div>
+<div class="line">  ::rpp_driver::MockSdkWrapper mock_sdk_;</div>
+<div class="line">  ::rpp_driver::MockGpioBasic* mock_gpio_;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">virtual</span> <span class="keywordtype">void</span> SetUp() {</div>
+<div class="line">    EXPECT_CALL(mock_sdk_, gpio_init(_)).Times(1);</div>
+<div class="line">    mock_gpio_ = new ::rpp_driver::MockGpioBasic(mock_sdk_);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">virtual</span> <span class="keywordtype">void</span> TearDown() {</div>
+<div class="line">    EXPECT_CALL(mock_sdk_, gpio_deinit(_)).Times(1);</div>
+<div class="line">    <span class="keyword">delete</span> (mock_gpio_);</div>
+<div class="line">  }</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line">TEST_F(UserCodeTest, foo) {</div>
+<div class="line">  <span class="comment">// Write Test code here.</span></div>
+<div class="line">}</div>
+<div class="ttc" id="agpiobasic_8hpp_html"><div class="ttname"><a href="gpiobasic_8hpp.html">gpiobasic.hpp</a></div><div class="ttdoc">basic GPIO controller.</div></div>
+<div class="ttc" id="asdkwrapper_8hpp_html"><div class="ttname"><a href="sdkwrapper_8hpp.html">sdkwrapper.hpp</a></div><div class="ttdoc">Wrapper for RasPi Pico SDK API.</div></div>
+</div><!-- fragment --> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a37f7e209e466a1346a218ba7ad8b7c5f" name="a37f7e209e466a1346a218ba7ad8b7c5f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a37f7e209e466a1346a218ba7ad8b7c5f">&#9670;&#160;</a></span>GpioBasic()</h2>
 
@@ -139,7 +171,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>PullDown</b> 
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="i2cmasterinterface_8hpp.html#a4d3943ddea65db7163a58e6c7e8df95a">uint</a>&#160;</td>
+          <td class="paramtype">uint&#160;</td>
           <td class="paramname"><em>pin</em>&#160;</td>
         </tr>
         <tr>
@@ -158,7 +190,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>PullDown</b> 
   </table>
   </dd>
 </dl>
-<p>Receive the GPIO pin. And then, init it by <a class="el" href="classrpp__driver_1_1SdkWrapper.html#a93cf89a59e427c3d1bbae1de8f09087f" title="Initialise a GPIO for (enabled I/O and set func to GPIO_FUNC_SIO)">SdkWrapper::gpio_init()</a>. </p>
+<p>Receive the GPIO pin. And then, init it by SdkWrapper::gpio_init(). </p>
 
 </div>
 </div>
