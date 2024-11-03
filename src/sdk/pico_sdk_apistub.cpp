@@ -39,6 +39,353 @@ typedef unsigned int uint;
 #endif  // _MSC_VER
 // --------------------------------------------------
 #if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void adc_fifo_drain(void);
+__attribute__((weak)) void adc_fifo_drain(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_adc_fifo_drain(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_adc library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_adc_fifo_drain=__weak_adc_fifo_drain")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:adc_fifo_drain=_weak_adc_fifo_drain")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint16_t adc_fifo_get(void);
+__attribute__((weak)) uint16_t adc_fifo_get(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint16_t _weak_adc_fifo_get(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_adc library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_adc_fifo_get=__weak_adc_fifo_get")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:adc_fifo_get=_weak_adc_fifo_get")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint16_t adc_fifo_get_blocking(void);
+__attribute__((weak)) uint16_t adc_fifo_get_blocking(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint16_t _weak_adc_fifo_get_blocking(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_adc library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_adc_fifo_get_blocking=__weak_adc_fifo_get_blocking")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:adc_fifo_get_blocking=_weak_adc_fifo_get_blocking")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint8_t adc_fifo_get_level(void);
+__attribute__((weak)) uint8_t adc_fifo_get_level(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint8_t _weak_adc_fifo_get_level(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_adc library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_adc_fifo_get_level=__weak_adc_fifo_get_level")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:adc_fifo_get_level=_weak_adc_fifo_get_level")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool adc_fifo_is_empty(void);
+__attribute__((weak)) bool adc_fifo_is_empty(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_adc_fifo_is_empty(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_adc library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_adc_fifo_is_empty=__weak_adc_fifo_is_empty")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:adc_fifo_is_empty=_weak_adc_fifo_is_empty")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void adc_fifo_setup(bool en, bool dreq_en, uint16_t dreq_thresh,
+                               bool err_in_fifo, bool byte_shift);
+__attribute__((weak)) void adc_fifo_setup(bool en, bool dreq_en,
+                                          uint16_t dreq_thresh,
+                                          bool err_in_fifo, bool byte_shift)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_adc_fifo_setup(bool en, bool dreq_en,
+                                     uint16_t dreq_thresh, bool err_in_fifo,
+                                     bool byte_shift)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_adc library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_adc_fifo_setup=__weak_adc_fifo_setup")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:adc_fifo_setup=_weak_adc_fifo_setup")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint adc_get_selected_input(void);
+__attribute__((weak)) uint adc_get_selected_input(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint _weak_adc_get_selected_input(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_adc library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_adc_get_selected_input=__weak_adc_get_selected_input")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:adc_get_selected_input=_weak_adc_get_selected_input")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void adc_gpio_init(uint gpio);
+__attribute__((weak)) void adc_gpio_init(uint gpio)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_adc_gpio_init(uint gpio)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_adc library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_adc_gpio_init=__weak_adc_gpio_init")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:adc_gpio_init=_weak_adc_gpio_init")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void adc_init(void);
+__attribute__((weak)) void adc_init(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_adc_init(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_adc library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_adc_init=__weak_adc_init")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:adc_init=_weak_adc_init")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void adc_irq_set_enabled(bool enabled);
+__attribute__((weak)) void adc_irq_set_enabled(bool enabled)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_adc_irq_set_enabled(bool enabled)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_adc library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_adc_irq_set_enabled=__weak_adc_irq_set_enabled")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:adc_irq_set_enabled=_weak_adc_irq_set_enabled")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint16_t adc_read(void);
+__attribute__((weak)) uint16_t adc_read(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint16_t _weak_adc_read(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_adc library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_adc_read=__weak_adc_read")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:adc_read=_weak_adc_read")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void adc_run(bool run);
+__attribute__((weak)) void adc_run(bool run)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_adc_run(bool run)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_adc library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_adc_run=__weak_adc_run")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:adc_run=_weak_adc_run")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void adc_select_input(uint input);
+__attribute__((weak)) void adc_select_input(uint input)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_adc_select_input(uint input)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_adc library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_adc_select_input=__weak_adc_select_input")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:adc_select_input=_weak_adc_select_input")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void adc_set_clkdiv(float clkdiv);
+__attribute__((weak)) void adc_set_clkdiv(float clkdiv)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_adc_set_clkdiv(float clkdiv)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_adc library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_adc_set_clkdiv=__weak_adc_set_clkdiv")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:adc_set_clkdiv=_weak_adc_set_clkdiv")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void adc_set_round_robin(uint input_mask);
+__attribute__((weak)) void adc_set_round_robin(uint input_mask)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_adc_set_round_robin(uint input_mask)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_adc library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_adc_set_round_robin=__weak_adc_set_round_robin")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:adc_set_round_robin=_weak_adc_set_round_robin")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void adc_set_temp_sensor_enabled(bool enable);
+__attribute__((weak)) void adc_set_temp_sensor_enabled(bool enable)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_adc_set_temp_sensor_enabled(bool enable)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_adc library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_adc_set_temp_sensor_enabled=__weak_adc_set_temp_sensor_enabled")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:adc_set_temp_sensor_enabled=_weak_adc_set_temp_sensor_enabled")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
 extern "C" void i2c_deinit(i2c_inst_t* i2c);
 __attribute__((weak)) void i2c_deinit(i2c_inst_t* i2c)
 #elif defined(_MSC_VER)  // Microsoft Visual C

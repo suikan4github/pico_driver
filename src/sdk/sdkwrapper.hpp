@@ -75,6 +75,26 @@ class SdkWrapper {
  public:
   virtual ~SdkWrapper() {}
 
+#if __has_include(<hardware/adc.h>) || __has_include(<gmock/gmock.h>)
+virtual void adc_fifo_drain ( void );
+  virtual uint16_t adc_fifo_get(void);
+  virtual uint16_t adc_fifo_get_blocking(void);
+  virtual uint8_t adc_fifo_get_level(void);
+  virtual bool adc_fifo_is_empty(void);
+  virtual void adc_fifo_setup(bool en, bool dreq_en, uint16_t dreq_thresh,
+                              bool err_in_fifo, bool byte_shift);
+  virtual uint adc_get_selected_input(void);
+  virtual void adc_gpio_init(uint gpio);
+  virtual void adc_init(void);
+  virtual void adc_irq_set_enabled(bool enabled);
+  virtual uint16_t adc_read(void);
+  virtual void adc_run(bool run);
+  virtual void adc_select_input(uint input);
+  virtual void adc_set_clkdiv(float clkdiv);
+  virtual void adc_set_round_robin(uint input_mask);
+  virtual void adc_set_temp_sensor_enabled(bool enable);
+#endif  //  __has_include(<hardware/adc.h>) || __has_include(<gmock/gmock.h>)
+
 #if __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
   virtual void i2c_deinit(i2c_inst_t* i2c);
   virtual uint i2c_get_dreq(i2c_inst_t* i2c, bool is_tx);

@@ -1,5 +1,79 @@
 
 #include "sdkwrapper.hpp"
+#if __has_include(<hardware/adc.h>) || __has_include(<gmock/gmock.h>)
+// --------------------------------------------------
+extern "C" void adc_fifo_drain(void);
+void rpp_driver::SdkWrapper::adc_fifo_drain(void) { ::adc_fifo_drain(); }
+// --------------------------------------------------
+extern "C" uint16_t adc_fifo_get(void);
+uint16_t rpp_driver::SdkWrapper::adc_fifo_get(void) { return ::adc_fifo_get(); }
+// --------------------------------------------------
+extern "C" uint16_t adc_fifo_get_blocking(void);
+uint16_t rpp_driver::SdkWrapper::adc_fifo_get_blocking(void) {
+  return ::adc_fifo_get_blocking();
+}
+// --------------------------------------------------
+extern "C" uint8_t adc_fifo_get_level(void);
+uint8_t rpp_driver::SdkWrapper::adc_fifo_get_level(void) {
+  return ::adc_fifo_get_level();
+}
+// --------------------------------------------------
+extern "C" bool adc_fifo_is_empty(void);
+bool rpp_driver::SdkWrapper::adc_fifo_is_empty(void) {
+  return ::adc_fifo_is_empty();
+}
+// --------------------------------------------------
+extern "C" void adc_fifo_setup(bool en, bool dreq_en, uint16_t dreq_thresh,
+                               bool err_in_fifo, bool byte_shift);
+void rpp_driver::SdkWrapper::adc_fifo_setup(bool en, bool dreq_en,
+                                            uint16_t dreq_thresh,
+                                            bool err_in_fifo, bool byte_shift) {
+  ::adc_fifo_setup(en, dreq_en, dreq_thresh, err_in_fifo, byte_shift);
+}
+// --------------------------------------------------
+extern "C" uint adc_get_selected_input(void);
+uint rpp_driver::SdkWrapper::adc_get_selected_input(void) {
+  return ::adc_get_selected_input();
+}
+// --------------------------------------------------
+extern "C" void adc_gpio_init(uint gpio);
+void rpp_driver::SdkWrapper::adc_gpio_init(uint gpio) { ::adc_gpio_init(gpio); }
+// --------------------------------------------------
+extern "C" void adc_init(void);
+void rpp_driver::SdkWrapper::adc_init(void) { ::adc_init(); }
+// --------------------------------------------------
+extern "C" void adc_irq_set_enabled(bool enabled);
+void rpp_driver::SdkWrapper::adc_irq_set_enabled(bool enabled) {
+  ::adc_irq_set_enabled(enabled);
+}
+// --------------------------------------------------
+extern "C" uint16_t adc_read(void);
+uint16_t rpp_driver::SdkWrapper::adc_read(void) { return ::adc_read(); }
+// --------------------------------------------------
+extern "C" void adc_run(bool run);
+void rpp_driver::SdkWrapper::adc_run(bool run) { ::adc_run(run); }
+// --------------------------------------------------
+extern "C" void adc_select_input(uint input);
+void rpp_driver::SdkWrapper::adc_select_input(uint input) {
+  ::adc_select_input(input);
+}
+// --------------------------------------------------
+extern "C" void adc_set_clkdiv(float clkdiv);
+void rpp_driver::SdkWrapper::adc_set_clkdiv(float clkdiv) {
+  ::adc_set_clkdiv(clkdiv);
+}
+// --------------------------------------------------
+extern "C" void adc_set_round_robin(uint input_mask);
+void rpp_driver::SdkWrapper::adc_set_round_robin(uint input_mask) {
+  ::adc_set_round_robin(input_mask);
+}
+// --------------------------------------------------
+extern "C" void adc_set_temp_sensor_enabled(bool enable);
+void rpp_driver::SdkWrapper::adc_set_temp_sensor_enabled(bool enable) {
+  ::adc_set_temp_sensor_enabled(enable);
+}
+#endif  //  __has_include(<hardware/adc.h>) || __has_include(<gmock/gmock.h>)
+
 #if __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
 // --------------------------------------------------
 extern "C" void i2c_deinit(i2c_inst_t* i2c);

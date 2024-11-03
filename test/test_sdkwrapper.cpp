@@ -64,6 +64,9 @@ FAKE_VOID_FUNC(pio_sm_unclaim, PIO, uint);
 FAKE_VALUE_FUNC(int, pio_claim_unused_sm, PIO, bool);
 FAKE_VALUE_FUNC(bool, pio_sm_is_claimed, PIO, uint);
 FAKE_VOID_FUNC(pio_sm_clear_fifos, PIO, uint);
+
+FAKE_VOID_FUNC(adc_gpio_init, uint);
+FAKE_VALUE_FUNC(uint16_t, adc_read);
 }
 // The cpp file of the library to test.
 #include "../src/sdk/sdkwrapper.cpp"
@@ -1415,3 +1418,64 @@ TEST(SdkWrapper, pio_sm_clear_fifos) {
   RESET_FAKE(pio_sm_clear_fifos);
 
 }  // TEST(SdkWrapper, pio_sm_clear_fifos)
+
+// -----------------------------------------------------------
+//
+//  hardware_adc
+//
+// -----------------------------------------------------------
+
+TEST(SdkWrapper, adc_gpio_init) {
+  std::random_device rng;
+  ::rpp_driver::SdkWrapper pico;
+
+  uint param_array[] = {rng(), rng()};
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(adc_gpio_init);
+
+  for (auto &&param : param_array) {
+    pico.adc_gpio_init(param);
+  }
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(adc_gpio_init_fake.call_count, std::size(param_array));
+
+  int index = 0;
+  for (auto &&param : param_array) {
+    // Check the data from test spy. Call order.
+    ASSERT_EQ(fff.call_history[index], (void *)adc_gpio_init);
+    // Check the data from test spy. : Parameters.
+    ASSERT_EQ(adc_gpio_init_fake.arg0_history[index], param);
+    index++;
+  }
+  RESET_FAKE(adc_gpio_init);
+}  // TEST(SdkWrapper, adc_gpio_init)
+
+TEST(SdkWrapper, adc_read) {
+  std::random_device rng;
+  // uniform distribution
+  std::uniform_int_distribution<std::uint16_t> dist(0, UINT16_MAX);
+  ::rpp_driver::SdkWrapper pico;
+  uint16_t retval_array[] = {dist(rng), dist(rng)};
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(adc_read);
+
+  SET_RETURN_SEQ(adc_read, retval_array, std::size(retval_array));
+
+  for (auto &&param : retval_array) {
+    ASSERT_EQ(pico.adc_read(), param);
+  }
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(adc_read_fake.call_count, std::size(retval_array));
+
+  // Check wether callee are correct function.
+  int index = 0;
+  for (auto &&retval : retval_array) {
+    ASSERT_EQ(fff.call_history[index], (void *)adc_read);
+    index++;
+  }
+
+  RESET_FAKE(adc_read);
+}  // TEST(SdkWrapper, adc_read)

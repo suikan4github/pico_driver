@@ -1,5 +1,20 @@
 # test_SdkWrapper TDD
 
+
+## SdkWrapper::adc_read()
+- [] Implement member function . 
+- [] Create test case to fail. 
+- [] Make it success. 
+- [] Remove the duplication. 
+
+
+## SdkWrapper::adc_gpio_init()
+- [x] Implement member function . 
+- [x] Create test case to fail. 
+- [x] Make it success. 
+- [x] Remove the duplication. 
+
+
 ## SdkWrapper::gpio_deinit()
 - [x] Implement member function . 
 - [x] Create test case to fail. 

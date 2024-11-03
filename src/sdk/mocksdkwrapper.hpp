@@ -7,6 +7,23 @@
 // GCOVR_EXCL_START
 class MockSdkWrapper : public SdkWrapper {
  public:
+  MOCK_METHOD0(adc_fifo_drain, void());
+  MOCK_METHOD0(adc_fifo_get, uint16_t());
+  MOCK_METHOD0(adc_fifo_get_blocking, uint16_t());
+  MOCK_METHOD0(adc_fifo_get_level, uint8_t());
+  MOCK_METHOD0(adc_fifo_is_empty, bool());
+  MOCK_METHOD5(adc_fifo_setup, void(bool en, bool dreq_en, uint16_t dreq_thresh,
+                                    bool err_in_fifo, bool byte_shift));
+  MOCK_METHOD0(adc_get_selected_input, uint());
+  MOCK_METHOD1(adc_gpio_init, void(uint gpio));
+  MOCK_METHOD0(adc_init, void());
+  MOCK_METHOD1(adc_irq_set_enabled, void(bool enabled));
+  MOCK_METHOD0(adc_read, uint16_t());
+  MOCK_METHOD1(adc_run, void(bool run));
+  MOCK_METHOD1(adc_select_input, void(uint input));
+  MOCK_METHOD1(adc_set_clkdiv, void(float clkdiv));
+  MOCK_METHOD1(adc_set_round_robin, void(uint input_mask));
+  MOCK_METHOD1(adc_set_temp_sensor_enabled, void(bool enable));
   MOCK_METHOD1(i2c_deinit, void(i2c_inst_t* i2c));
   MOCK_METHOD2(i2c_get_dreq, uint(i2c_inst_t* i2c, bool is_tx));
   MOCK_METHOD1(i2c_get_hw, i2c_hw_t*(i2c_inst_t* i2c));

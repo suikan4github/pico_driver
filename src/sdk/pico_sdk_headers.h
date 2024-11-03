@@ -6,6 +6,10 @@
  *
  * Not intended to be read from the application program.
  */
+#if __has_include(<hardware/adc.h>) || __has_include(<gmock/gmock.h>)
+#include <hardware/adc.h>
+#endif  //  __has_include(<hardware/adc.h>) || __has_include(<gmock/gmock.h>)
+
 #if __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
 #include <hardware/i2c.h>
 #endif  //  __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
