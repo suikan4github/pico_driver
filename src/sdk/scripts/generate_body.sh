@@ -39,7 +39,8 @@ TEMPLIST=$(mktemp).h
 # 10. sed concatenate const to the following word to handle the type as 1 field in the awk.
 # 11. sed concatenate void to the following word to handle the type as 1 field in the awk.
 # 12. convert foo *bar to foo* bar. 
-# 13. grep removed the aliases of the std lib functions. 
+# 13. grep removes the aliases of the std lib functions. 
+# 14. tr removes consecutive spaces. uniq removes repeating lines. 
 clang-format "$TARGET" --style="{ColumnLimit: 9999}" > "$TEMPSRC"
 ctags -x --c++-kinds=pf "$TEMPSRC"|\
 sed -e 's/{.*$//' |\
@@ -52,7 +53,8 @@ sed -e 's/enum /enum_/g' | \
 sed -e 's/const /const_/g' | \
 sed -e 's/void /void_/g' | sed -e 's/^ *void_/void /'| \
 sed -e 's/ *\*/\* /g' | \
-grep -v 'stdio_getchar' | grep -v 'stdio_putchar' | grep -v 'stdio_puts' |grep -v 'stdio_vprintf' | grep -v 'stdio_printf' | grep -v 'stdio_set_chars_available_callback' \
+grep -v 'stdio_getchar' | grep -v 'stdio_putchar' | grep -v 'stdio_puts' |grep -v 'stdio_vprintf' | grep -v 'stdio_printf' | grep -v 'stdio_set_chars_available_callback' | \
+tr -s "[:space:]" | uniq  \
 > "$TEMPLIST"
 
 
