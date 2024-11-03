@@ -386,6 +386,646 @@ extern "C" void _weak_adc_set_temp_sensor_enabled(bool enable)
 #endif  // _MSC_VER
 // --------------------------------------------------
 #if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" int __sign_of(int32_t v);
+__attribute__((weak)) int __sign_of(int32_t v)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" int _weak___sign_of(int32_t v)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_divider library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:___sign_of=__weak___sign_of")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:__sign_of=_weak___sign_of")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" divmod_result_t hw_divider_divmod_s32(int32_t a, int32_t b);
+__attribute__((weak)) divmod_result_t hw_divider_divmod_s32(int32_t a,
+                                                            int32_t b)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" divmod_result_t _weak_hw_divider_divmod_s32(int32_t a, int32_t b)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_divider library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_hw_divider_divmod_s32=__weak_hw_divider_divmod_s32")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:hw_divider_divmod_s32=_weak_hw_divider_divmod_s32")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void hw_divider_divmod_s32_start(int32_t a, int32_t b);
+__attribute__((weak)) void hw_divider_divmod_s32_start(int32_t a, int32_t b)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_hw_divider_divmod_s32_start(int32_t a, int32_t b)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_divider library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_hw_divider_divmod_s32_start=__weak_hw_divider_divmod_s32_start")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:hw_divider_divmod_s32_start=_weak_hw_divider_divmod_s32_start")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" divmod_result_t hw_divider_divmod_u32(uint32_t a, uint32_t b);
+__attribute__((weak)) divmod_result_t hw_divider_divmod_u32(uint32_t a,
+                                                            uint32_t b)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" divmod_result_t _weak_hw_divider_divmod_u32(uint32_t a, uint32_t b)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_divider library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_hw_divider_divmod_u32=__weak_hw_divider_divmod_u32")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:hw_divider_divmod_u32=_weak_hw_divider_divmod_u32")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void hw_divider_divmod_u32_start(uint32_t a, uint32_t b);
+__attribute__((weak)) void hw_divider_divmod_u32_start(uint32_t a, uint32_t b)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_hw_divider_divmod_u32_start(uint32_t a, uint32_t b)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_divider library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_hw_divider_divmod_u32_start=__weak_hw_divider_divmod_u32_start")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:hw_divider_divmod_u32_start=_weak_hw_divider_divmod_u32_start")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void hw_divider_pause(void);
+__attribute__((weak)) void hw_divider_pause(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_hw_divider_pause(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_divider library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_hw_divider_pause=__weak_hw_divider_pause")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:hw_divider_pause=_weak_hw_divider_pause")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" int32_t hw_divider_quotient_s32(int32_t a, int32_t b);
+__attribute__((weak)) int32_t hw_divider_quotient_s32(int32_t a, int32_t b)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" int32_t _weak_hw_divider_quotient_s32(int32_t a, int32_t b)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_divider library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_hw_divider_quotient_s32=__weak_hw_divider_quotient_s32")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:hw_divider_quotient_s32=_weak_hw_divider_quotient_s32")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" int32_t hw_divider_remainder_s32(int32_t a, int32_t b);
+__attribute__((weak)) int32_t hw_divider_remainder_s32(int32_t a, int32_t b)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" int32_t _weak_hw_divider_remainder_s32(int32_t a, int32_t b)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_divider library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_hw_divider_remainder_s32=__weak_hw_divider_remainder_s32")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:hw_divider_remainder_s32=_weak_hw_divider_remainder_s32")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void hw_divider_restore_state(hw_divider_state_t* src);
+__attribute__((weak)) void hw_divider_restore_state(hw_divider_state_t* src)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_hw_divider_restore_state(hw_divider_state_t* src)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_divider library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_hw_divider_restore_state=__weak_hw_divider_restore_state")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:hw_divider_restore_state=_weak_hw_divider_restore_state")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" divmod_result_t hw_divider_result_nowait(void);
+__attribute__((weak)) divmod_result_t hw_divider_result_nowait(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" divmod_result_t _weak_hw_divider_result_nowait(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_divider library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_hw_divider_result_nowait=__weak_hw_divider_result_nowait")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:hw_divider_result_nowait=_weak_hw_divider_result_nowait")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" divmod_result_t hw_divider_result_wait(void);
+__attribute__((weak)) divmod_result_t hw_divider_result_wait(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" divmod_result_t _weak_hw_divider_result_wait(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_divider library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_hw_divider_result_wait=__weak_hw_divider_result_wait")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:hw_divider_result_wait=_weak_hw_divider_result_wait")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" int32_t hw_divider_s32_quotient_inlined(int32_t a, int32_t b);
+__attribute__((weak)) int32_t hw_divider_s32_quotient_inlined(int32_t a,
+                                                              int32_t b)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" int32_t _weak_hw_divider_s32_quotient_inlined(int32_t a, int32_t b)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_divider library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_hw_divider_s32_quotient_inlined=__weak_hw_divider_s32_quotient_inlined")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:hw_divider_s32_quotient_inlined=_weak_hw_divider_s32_quotient_inlined")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" int32_t hw_divider_s32_quotient_wait(void);
+__attribute__((weak)) int32_t hw_divider_s32_quotient_wait(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" int32_t _weak_hw_divider_s32_quotient_wait(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_divider library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_hw_divider_s32_quotient_wait=__weak_hw_divider_s32_quotient_wait")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:hw_divider_s32_quotient_wait=_weak_hw_divider_s32_quotient_wait")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" int32_t hw_divider_s32_remainder_inlined(int32_t a, int32_t b);
+__attribute__((weak)) int32_t hw_divider_s32_remainder_inlined(int32_t a,
+                                                               int32_t b)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" int32_t _weak_hw_divider_s32_remainder_inlined(int32_t a, int32_t b)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_divider library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_hw_divider_s32_remainder_inlined=__weak_hw_divider_s32_remainder_inlined")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:hw_divider_s32_remainder_inlined=_weak_hw_divider_s32_remainder_inlined")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" int32_t hw_divider_s32_remainder_wait(void);
+__attribute__((weak)) int32_t hw_divider_s32_remainder_wait(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" int32_t _weak_hw_divider_s32_remainder_wait(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_divider library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_hw_divider_s32_remainder_wait=__weak_hw_divider_s32_remainder_wait")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:hw_divider_s32_remainder_wait=_weak_hw_divider_s32_remainder_wait")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void hw_divider_save_state(hw_divider_state_t* dest);
+__attribute__((weak)) void hw_divider_save_state(hw_divider_state_t* dest)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_hw_divider_save_state(hw_divider_state_t* dest)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_divider library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_hw_divider_save_state=__weak_hw_divider_save_state")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:hw_divider_save_state=_weak_hw_divider_save_state")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint32_t hw_divider_u32_quotient(uint32_t a, uint32_t b);
+__attribute__((weak)) uint32_t hw_divider_u32_quotient(uint32_t a, uint32_t b)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint32_t _weak_hw_divider_u32_quotient(uint32_t a, uint32_t b)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_divider library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_hw_divider_u32_quotient=__weak_hw_divider_u32_quotient")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:hw_divider_u32_quotient=_weak_hw_divider_u32_quotient")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint32_t hw_divider_u32_quotient_inlined(uint32_t a, uint32_t b);
+__attribute__((weak)) uint32_t hw_divider_u32_quotient_inlined(uint32_t a,
+                                                               uint32_t b)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint32_t _weak_hw_divider_u32_quotient_inlined(uint32_t a,
+                                                          uint32_t b)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_divider library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_hw_divider_u32_quotient_inlined=__weak_hw_divider_u32_quotient_inlined")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:hw_divider_u32_quotient_inlined=_weak_hw_divider_u32_quotient_inlined")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint32_t hw_divider_u32_quotient_wait(void);
+__attribute__((weak)) uint32_t hw_divider_u32_quotient_wait(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint32_t _weak_hw_divider_u32_quotient_wait(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_divider library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_hw_divider_u32_quotient_wait=__weak_hw_divider_u32_quotient_wait")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:hw_divider_u32_quotient_wait=_weak_hw_divider_u32_quotient_wait")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint32_t hw_divider_u32_remainder(uint32_t a, uint32_t b);
+__attribute__((weak)) uint32_t hw_divider_u32_remainder(uint32_t a, uint32_t b)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint32_t _weak_hw_divider_u32_remainder(uint32_t a, uint32_t b)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_divider library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_hw_divider_u32_remainder=__weak_hw_divider_u32_remainder")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:hw_divider_u32_remainder=_weak_hw_divider_u32_remainder")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint32_t hw_divider_u32_remainder_inlined(uint32_t a, uint32_t b);
+__attribute__((weak)) uint32_t hw_divider_u32_remainder_inlined(uint32_t a,
+                                                                uint32_t b)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint32_t _weak_hw_divider_u32_remainder_inlined(uint32_t a,
+                                                           uint32_t b)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_divider library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_hw_divider_u32_remainder_inlined=__weak_hw_divider_u32_remainder_inlined")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:hw_divider_u32_remainder_inlined=_weak_hw_divider_u32_remainder_inlined")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint32_t hw_divider_u32_remainder_wait(void);
+__attribute__((weak)) uint32_t hw_divider_u32_remainder_wait(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint32_t _weak_hw_divider_u32_remainder_wait(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_divider library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_hw_divider_u32_remainder_wait=__weak_hw_divider_u32_remainder_wait")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:hw_divider_u32_remainder_wait=_weak_hw_divider_u32_remainder_wait")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void hw_divider_wait_ready(void);
+__attribute__((weak)) void hw_divider_wait_ready(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_hw_divider_wait_ready(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_divider library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_hw_divider_wait_ready=__weak_hw_divider_wait_ready")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:hw_divider_wait_ready=_weak_hw_divider_wait_ready")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" int32_t to_quotient_s32(divmod_result_t r);
+__attribute__((weak)) int32_t to_quotient_s32(divmod_result_t r)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" int32_t _weak_to_quotient_s32(divmod_result_t r)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_divider library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_to_quotient_s32=__weak_to_quotient_s32")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:to_quotient_s32=_weak_to_quotient_s32")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint32_t to_quotient_u32(divmod_result_t r);
+__attribute__((weak)) uint32_t to_quotient_u32(divmod_result_t r)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint32_t _weak_to_quotient_u32(divmod_result_t r)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_divider library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_to_quotient_u32=__weak_to_quotient_u32")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:to_quotient_u32=_weak_to_quotient_u32")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" int32_t to_remainder_s32(divmod_result_t r);
+__attribute__((weak)) int32_t to_remainder_s32(divmod_result_t r)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" int32_t _weak_to_remainder_s32(divmod_result_t r)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_divider library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_to_remainder_s32=__weak_to_remainder_s32")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:to_remainder_s32=_weak_to_remainder_s32")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint32_t to_remainder_u32(divmod_result_t r);
+__attribute__((weak)) uint32_t to_remainder_u32(divmod_result_t r)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint32_t _weak_to_remainder_u32(divmod_result_t r)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_divider library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_to_remainder_u32=__weak_to_remainder_u32")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:to_remainder_u32=_weak_to_remainder_u32")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
 extern "C" void i2c_deinit(i2c_inst_t* i2c);
 __attribute__((weak)) void i2c_deinit(i2c_inst_t* i2c)
 #elif defined(_MSC_VER)  // Microsoft Visual C

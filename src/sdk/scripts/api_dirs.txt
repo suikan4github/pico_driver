@@ -1,4 +1,5 @@
 hardware adc
+hardware divider
 hardware i2c
 hardware pio
 hardware gpio

@@ -24,6 +24,35 @@ class MockSdkWrapper : public SdkWrapper {
   MOCK_METHOD1(adc_set_clkdiv, void(float clkdiv));
   MOCK_METHOD1(adc_set_round_robin, void(uint input_mask));
   MOCK_METHOD1(adc_set_temp_sensor_enabled, void(bool enable));
+  MOCK_METHOD1(__sign_of, int(int32_t v));
+  MOCK_METHOD2(hw_divider_divmod_s32, divmod_result_t(int32_t a, int32_t b));
+  MOCK_METHOD2(hw_divider_divmod_s32_start, void(int32_t a, int32_t b));
+  MOCK_METHOD2(hw_divider_divmod_u32, divmod_result_t(uint32_t a, uint32_t b));
+  MOCK_METHOD2(hw_divider_divmod_u32_start, void(uint32_t a, uint32_t b));
+  MOCK_METHOD0(hw_divider_pause, void());
+  MOCK_METHOD2(hw_divider_quotient_s32, int32_t(int32_t a, int32_t b));
+  MOCK_METHOD2(hw_divider_remainder_s32, int32_t(int32_t a, int32_t b));
+  MOCK_METHOD1(hw_divider_restore_state, void(hw_divider_state_t* src));
+  MOCK_METHOD0(hw_divider_result_nowait, divmod_result_t());
+  MOCK_METHOD0(hw_divider_result_wait, divmod_result_t());
+  MOCK_METHOD2(hw_divider_s32_quotient_inlined, int32_t(int32_t a, int32_t b));
+  MOCK_METHOD0(hw_divider_s32_quotient_wait, int32_t());
+  MOCK_METHOD2(hw_divider_s32_remainder_inlined, int32_t(int32_t a, int32_t b));
+  MOCK_METHOD0(hw_divider_s32_remainder_wait, int32_t());
+  MOCK_METHOD1(hw_divider_save_state, void(hw_divider_state_t* dest));
+  MOCK_METHOD2(hw_divider_u32_quotient, uint32_t(uint32_t a, uint32_t b));
+  MOCK_METHOD2(hw_divider_u32_quotient_inlined,
+               uint32_t(uint32_t a, uint32_t b));
+  MOCK_METHOD0(hw_divider_u32_quotient_wait, uint32_t());
+  MOCK_METHOD2(hw_divider_u32_remainder, uint32_t(uint32_t a, uint32_t b));
+  MOCK_METHOD2(hw_divider_u32_remainder_inlined,
+               uint32_t(uint32_t a, uint32_t b));
+  MOCK_METHOD0(hw_divider_u32_remainder_wait, uint32_t());
+  MOCK_METHOD0(hw_divider_wait_ready, void());
+  MOCK_METHOD1(to_quotient_s32, int32_t(divmod_result_t r));
+  MOCK_METHOD1(to_quotient_u32, uint32_t(divmod_result_t r));
+  MOCK_METHOD1(to_remainder_s32, int32_t(divmod_result_t r));
+  MOCK_METHOD1(to_remainder_u32, uint32_t(divmod_result_t r));
   MOCK_METHOD1(i2c_deinit, void(i2c_inst_t* i2c));
   MOCK_METHOD2(i2c_get_dreq, uint(i2c_inst_t* i2c, bool is_tx));
   MOCK_METHOD1(i2c_get_hw, i2c_hw_t*(i2c_inst_t* i2c));

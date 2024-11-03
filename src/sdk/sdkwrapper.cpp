@@ -74,6 +74,150 @@ void rpp_driver::SdkWrapper::adc_set_temp_sensor_enabled(bool enable) {
 }
 #endif  //  __has_include(<hardware/adc.h>) || __has_include(<gmock/gmock.h>)
 
+#if __has_include(<hardware/divider.h>) || __has_include(<gmock/gmock.h>)
+// --------------------------------------------------
+extern "C" int __sign_of(int32_t v);
+int rpp_driver::SdkWrapper::__sign_of(int32_t v) { return ::__sign_of(v); }
+// --------------------------------------------------
+extern "C" divmod_result_t hw_divider_divmod_s32(int32_t a, int32_t b);
+divmod_result_t rpp_driver::SdkWrapper::hw_divider_divmod_s32(int32_t a,
+                                                              int32_t b) {
+  return ::hw_divider_divmod_s32(a, b);
+}
+// --------------------------------------------------
+extern "C" void hw_divider_divmod_s32_start(int32_t a, int32_t b);
+void rpp_driver::SdkWrapper::hw_divider_divmod_s32_start(int32_t a, int32_t b) {
+  ::hw_divider_divmod_s32_start(a, b);
+}
+// --------------------------------------------------
+extern "C" divmod_result_t hw_divider_divmod_u32(uint32_t a, uint32_t b);
+divmod_result_t rpp_driver::SdkWrapper::hw_divider_divmod_u32(uint32_t a,
+                                                              uint32_t b) {
+  return ::hw_divider_divmod_u32(a, b);
+}
+// --------------------------------------------------
+extern "C" void hw_divider_divmod_u32_start(uint32_t a, uint32_t b);
+void rpp_driver::SdkWrapper::hw_divider_divmod_u32_start(uint32_t a,
+                                                         uint32_t b) {
+  ::hw_divider_divmod_u32_start(a, b);
+}
+// --------------------------------------------------
+extern "C" void hw_divider_pause(void);
+void rpp_driver::SdkWrapper::hw_divider_pause(void) { ::hw_divider_pause(); }
+// --------------------------------------------------
+extern "C" int32_t hw_divider_quotient_s32(int32_t a, int32_t b);
+int32_t rpp_driver::SdkWrapper::hw_divider_quotient_s32(int32_t a, int32_t b) {
+  return ::hw_divider_quotient_s32(a, b);
+}
+// --------------------------------------------------
+extern "C" int32_t hw_divider_remainder_s32(int32_t a, int32_t b);
+int32_t rpp_driver::SdkWrapper::hw_divider_remainder_s32(int32_t a, int32_t b) {
+  return ::hw_divider_remainder_s32(a, b);
+}
+// --------------------------------------------------
+extern "C" void hw_divider_restore_state(hw_divider_state_t* src);
+void rpp_driver::SdkWrapper::hw_divider_restore_state(hw_divider_state_t* src) {
+  ::hw_divider_restore_state(src);
+}
+// --------------------------------------------------
+extern "C" divmod_result_t hw_divider_result_nowait(void);
+divmod_result_t rpp_driver::SdkWrapper::hw_divider_result_nowait(void) {
+  return ::hw_divider_result_nowait();
+}
+// --------------------------------------------------
+extern "C" divmod_result_t hw_divider_result_wait(void);
+divmod_result_t rpp_driver::SdkWrapper::hw_divider_result_wait(void) {
+  return ::hw_divider_result_wait();
+}
+// --------------------------------------------------
+extern "C" int32_t hw_divider_s32_quotient_inlined(int32_t a, int32_t b);
+int32_t rpp_driver::SdkWrapper::hw_divider_s32_quotient_inlined(int32_t a,
+                                                                int32_t b) {
+  return ::hw_divider_s32_quotient_inlined(a, b);
+}
+// --------------------------------------------------
+extern "C" int32_t hw_divider_s32_quotient_wait(void);
+int32_t rpp_driver::SdkWrapper::hw_divider_s32_quotient_wait(void) {
+  return ::hw_divider_s32_quotient_wait();
+}
+// --------------------------------------------------
+extern "C" int32_t hw_divider_s32_remainder_inlined(int32_t a, int32_t b);
+int32_t rpp_driver::SdkWrapper::hw_divider_s32_remainder_inlined(int32_t a,
+                                                                 int32_t b) {
+  return ::hw_divider_s32_remainder_inlined(a, b);
+}
+// --------------------------------------------------
+extern "C" int32_t hw_divider_s32_remainder_wait(void);
+int32_t rpp_driver::SdkWrapper::hw_divider_s32_remainder_wait(void) {
+  return ::hw_divider_s32_remainder_wait();
+}
+// --------------------------------------------------
+extern "C" void hw_divider_save_state(hw_divider_state_t* dest);
+void rpp_driver::SdkWrapper::hw_divider_save_state(hw_divider_state_t* dest) {
+  ::hw_divider_save_state(dest);
+}
+// --------------------------------------------------
+extern "C" uint32_t hw_divider_u32_quotient(uint32_t a, uint32_t b);
+uint32_t rpp_driver::SdkWrapper::hw_divider_u32_quotient(uint32_t a,
+                                                         uint32_t b) {
+  return ::hw_divider_u32_quotient(a, b);
+}
+// --------------------------------------------------
+extern "C" uint32_t hw_divider_u32_quotient_inlined(uint32_t a, uint32_t b);
+uint32_t rpp_driver::SdkWrapper::hw_divider_u32_quotient_inlined(uint32_t a,
+                                                                 uint32_t b) {
+  return ::hw_divider_u32_quotient_inlined(a, b);
+}
+// --------------------------------------------------
+extern "C" uint32_t hw_divider_u32_quotient_wait(void);
+uint32_t rpp_driver::SdkWrapper::hw_divider_u32_quotient_wait(void) {
+  return ::hw_divider_u32_quotient_wait();
+}
+// --------------------------------------------------
+extern "C" uint32_t hw_divider_u32_remainder(uint32_t a, uint32_t b);
+uint32_t rpp_driver::SdkWrapper::hw_divider_u32_remainder(uint32_t a,
+                                                          uint32_t b) {
+  return ::hw_divider_u32_remainder(a, b);
+}
+// --------------------------------------------------
+extern "C" uint32_t hw_divider_u32_remainder_inlined(uint32_t a, uint32_t b);
+uint32_t rpp_driver::SdkWrapper::hw_divider_u32_remainder_inlined(uint32_t a,
+                                                                  uint32_t b) {
+  return ::hw_divider_u32_remainder_inlined(a, b);
+}
+// --------------------------------------------------
+extern "C" uint32_t hw_divider_u32_remainder_wait(void);
+uint32_t rpp_driver::SdkWrapper::hw_divider_u32_remainder_wait(void) {
+  return ::hw_divider_u32_remainder_wait();
+}
+// --------------------------------------------------
+extern "C" void hw_divider_wait_ready(void);
+void rpp_driver::SdkWrapper::hw_divider_wait_ready(void) {
+  ::hw_divider_wait_ready();
+}
+// --------------------------------------------------
+extern "C" int32_t to_quotient_s32(divmod_result_t r);
+int32_t rpp_driver::SdkWrapper::to_quotient_s32(divmod_result_t r) {
+  return ::to_quotient_s32(r);
+}
+// --------------------------------------------------
+extern "C" uint32_t to_quotient_u32(divmod_result_t r);
+uint32_t rpp_driver::SdkWrapper::to_quotient_u32(divmod_result_t r) {
+  return ::to_quotient_u32(r);
+}
+// --------------------------------------------------
+extern "C" int32_t to_remainder_s32(divmod_result_t r);
+int32_t rpp_driver::SdkWrapper::to_remainder_s32(divmod_result_t r) {
+  return ::to_remainder_s32(r);
+}
+// --------------------------------------------------
+extern "C" uint32_t to_remainder_u32(divmod_result_t r);
+uint32_t rpp_driver::SdkWrapper::to_remainder_u32(divmod_result_t r) {
+  return ::to_remainder_u32(r);
+}
+#endif  //  __has_include(<hardware/divider.h>) ||
+        //  __has_include(<gmock/gmock.h>)
+
 #if __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
 // --------------------------------------------------
 extern "C" void i2c_deinit(i2c_inst_t* i2c);

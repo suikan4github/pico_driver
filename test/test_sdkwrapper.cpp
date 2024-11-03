@@ -67,6 +67,8 @@ FAKE_VOID_FUNC(pio_sm_clear_fifos, PIO, uint);
 
 FAKE_VOID_FUNC(adc_gpio_init, uint);
 FAKE_VALUE_FUNC(uint16_t, adc_read);
+
+FAKE_VALUE_FUNC(int32_t, hw_divider_quotient_s32, int32_t, int32_t);
 }
 // The cpp file of the library to test.
 #include "../src/sdk/sdkwrapper.cpp"
@@ -1479,3 +1481,53 @@ TEST(SdkWrapper, adc_read) {
 
   RESET_FAKE(adc_read);
 }  // TEST(SdkWrapper, adc_read)
+
+// -----------------------------------------------------------
+//
+//  hardware_divider
+//
+// -----------------------------------------------------------
+
+TEST(SdkWrapper, hw_divider_quotient_s32) {
+  std::random_device rng;
+  ::rpp_driver::SdkWrapper pico;
+  // uniform distribution
+  std::uniform_int_distribution<std::int32_t> dist(0, INT32_MAX);
+  int32_t param_array0[] = {dist(rng), dist(rng)};
+  int32_t param_array1[] = {dist(rng), dist(rng)};
+  int32_t retval_array[std::size(param_array0) * std::size(param_array1)] = {
+      dist(rng), dist(rng), dist(rng), dist(rng)};
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(hw_divider_quotient_s32);
+
+  SET_RETURN_SEQ(hw_divider_quotient_s32, retval_array,
+                 std::size(retval_array));
+
+  // Check whether return values are correctly passed to wrapper.
+  int index = 0;
+  for (auto &&param0 : param_array0) {
+    for (auto &&param1 : param_array1) {
+      ASSERT_EQ(pico.hw_divider_quotient_s32(param0, param1),
+                retval_array[index]);
+      index++;
+    }
+  }
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(hw_divider_quotient_s32_fake.call_count, std::size(retval_array));
+
+  // Check whether parameters were correctly passed from wrapper.
+  index = 0;
+  for (auto &&param0 : param_array0) {
+    for (auto &&param1 : param_array1) {
+      // Check the data from test spy. Call order.
+      ASSERT_EQ(fff.call_history[index], (void *)hw_divider_quotient_s32);
+      // Check the data from test spy. : Parameters.
+      ASSERT_EQ(hw_divider_quotient_s32_fake.arg0_history[index], param0);
+      ASSERT_EQ(hw_divider_quotient_s32_fake.arg1_history[index], param1);
+      index++;
+    }
+  }
+  RESET_FAKE(hw_divider_quotient_s32);
+}  // TEST(SdkWrapper, hw_divider_quotient_s32)

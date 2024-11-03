@@ -1,11 +1,17 @@
 # test_SdkWrapper TDD
 
 
+## SdkWrapper::hw_divider_quotient_s32()
+- [x] Implement member function . 
+- [x] Create test case to fail. 
+- [x] Make it success. 
+- [x] Remove the duplication. 
+
 ## SdkWrapper::adc_read()
-- [] Implement member function . 
-- [] Create test case to fail. 
-- [] Make it success. 
-- [] Remove the duplication. 
+- [x] Implement member function . 
+- [x] Create test case to fail. 
+- [x] Make it success. 
+- [x] Remove the duplication. 
 
 
 ## SdkWrapper::adc_gpio_init()

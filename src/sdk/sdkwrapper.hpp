@@ -95,6 +95,37 @@ virtual void adc_fifo_drain ( void );
   virtual void adc_set_temp_sensor_enabled(bool enable);
 #endif  //  __has_include(<hardware/adc.h>) || __has_include(<gmock/gmock.h>)
 
+#if __has_include(<hardware/divider.h>) || __has_include(<gmock/gmock.h>)
+  virtual int __sign_of(int32_t v);
+  virtual divmod_result_t hw_divider_divmod_s32(int32_t a, int32_t b);
+  virtual void hw_divider_divmod_s32_start(int32_t a, int32_t b);
+  virtual divmod_result_t hw_divider_divmod_u32(uint32_t a, uint32_t b);
+  virtual void hw_divider_divmod_u32_start(uint32_t a, uint32_t b);
+  virtual void hw_divider_pause(void);
+  virtual int32_t hw_divider_quotient_s32(int32_t a, int32_t b);
+  virtual int32_t hw_divider_remainder_s32(int32_t a, int32_t b);
+  virtual void hw_divider_restore_state(hw_divider_state_t* src);
+  virtual divmod_result_t hw_divider_result_nowait(void);
+  virtual divmod_result_t hw_divider_result_wait(void);
+  virtual int32_t hw_divider_s32_quotient_inlined(int32_t a, int32_t b);
+  virtual int32_t hw_divider_s32_quotient_wait(void);
+  virtual int32_t hw_divider_s32_remainder_inlined(int32_t a, int32_t b);
+  virtual int32_t hw_divider_s32_remainder_wait(void);
+  virtual void hw_divider_save_state(hw_divider_state_t* dest);
+  virtual uint32_t hw_divider_u32_quotient(uint32_t a, uint32_t b);
+  virtual uint32_t hw_divider_u32_quotient_inlined(uint32_t a, uint32_t b);
+  virtual uint32_t hw_divider_u32_quotient_wait(void);
+  virtual uint32_t hw_divider_u32_remainder(uint32_t a, uint32_t b);
+  virtual uint32_t hw_divider_u32_remainder_inlined(uint32_t a, uint32_t b);
+  virtual uint32_t hw_divider_u32_remainder_wait(void);
+  virtual void hw_divider_wait_ready(void);
+  virtual int32_t to_quotient_s32(divmod_result_t r);
+  virtual uint32_t to_quotient_u32(divmod_result_t r);
+  virtual int32_t to_remainder_s32(divmod_result_t r);
+  virtual uint32_t to_remainder_u32(divmod_result_t r);
+#endif  //  __has_include(<hardware/divider.h>) ||
+        //  __has_include(<gmock/gmock.h>)
+
 #if __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
   virtual void i2c_deinit(i2c_inst_t* i2c);
   virtual uint i2c_get_dreq(i2c_inst_t* i2c, bool is_tx);

@@ -10,6 +10,11 @@
 #include <hardware/adc.h>
 #endif  //  __has_include(<hardware/adc.h>) || __has_include(<gmock/gmock.h>)
 
+#if __has_include(<hardware/divider.h>) || __has_include(<gmock/gmock.h>)
+#include <hardware/divider.h>
+#endif  //  __has_include(<hardware/divider.h>) ||
+        //  __has_include(<gmock/gmock.h>)
+
 #if __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
 #include <hardware/i2c.h>
 #endif  //  __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)

@@ -27,7 +27,11 @@ enum gpio_slew_rate { e, f };
 /// @brief Alternate definition for Google Test build.
 enum pio_mov_status_type { g, h };
 
+//// @brief Alternate definition for Google Test build.
+typedef int divmod_result_t;
 /// @brief Alternate definition for Google Test build.
+typedef int hw_divider_state_t;
+// @brief Alternate definition for Google Test build.
 typedef int stdio_driver_t;
 /// @brief Alternate definition for Google Test build.
 typedef int alarm_id_t;
