@@ -38,6 +38,7 @@ TEMPLIST=$(mktemp).h
 # 9. sed concatenate enum to the following word to handle the type as 1 field in the awk.
 # 10. sed concatenate const to the following word to handle the type as 1 field in the awk.
 # 11. sed concatenate void to the following word to handle the type as 1 field in the awk.
+# 11. sed concatenate volatile to the following word to handle the type as 1 field in the awk.
 # 12. convert foo *bar to foo* bar. 
 # 13. grep removes the aliases of the std lib functions. 
 # 14. tr removes consecutive spaces. uniq removes repeating lines. 
@@ -47,11 +48,12 @@ sed -e 's/{.*$//' |\
 sed -e 's/\;.*$//' |\
 grep -v "__unused" |\
 awk '{$1="";$2="";$3="";$4="";print $0}'|\
-sed -e 's/__attribute__\(\(always_inline\)\)//'|sed -e 's/static//' | sed -e 's/inline//' | sed -e 's/extern//' | \
+sed -e 's/__attribute__.*always_inline..//'|sed -e 's/static//' | sed -e 's/inline//' | sed -e 's/extern//' | \
 sed -e 's/(/ ( /' | sed -e 's/)$/ )/' | \
 sed -e 's/enum /enum_/g' | \
 sed -e 's/const /const_/g' | \
 sed -e 's/void /void_/g' | sed -e 's/^ *void_/void /'| \
+sed -e 's/volatile /volatile_/g' | \
 sed -e 's/ *\*/\* /g' | \
 grep -v 'stdio_getchar' | grep -v 'stdio_putchar' | grep -v 'stdio_puts' |grep -v 'stdio_vprintf' | grep -v 'stdio_printf' | grep -v 'stdio_set_chars_available_callback' | \
 tr -s "[:space:]" | uniq  \
@@ -72,24 +74,24 @@ echo "" >> output/pico_sdk_headers.h
 # Generate the class delcaration. 
 # add "virtual" and ";" to be a right function prototype. 
 echo "#if __has_include(<${MODULE_PREFIX}/${MODULE_NAME}.h>) || __has_include(<gmock/gmock.h>)" >> output/sdkwrapper.hpp
-sed -e 's/^/virtual /' < "$TEMPLIST" | sed -e 's/$/;/' | sed -e 's/enum_/enum /g'  | sed -e 's/const_/const /g' | sed -e 's/void_/void /g' >> output/sdkwrapper.hpp
+sed -e 's/^/virtual /' < "$TEMPLIST" | sed -e 's/$/;/' | sed -e 's/enum_/enum /g'  | sed -e 's/const_/const /g' | sed -e 's/void_/void /g' | sed -e 's/volatile_/volatile /g' >> output/sdkwrapper.hpp
 echo "#endif //  __has_include(<${MODULE_PREFIX}/${MODULE_NAME}.h>) || __has_include(<gmock/gmock.h>)" >> output/sdkwrapper.hpp
 echo "" >> output/sdkwrapper.hpp
 
 # Generate the class implementation
 echo "#if __has_include(<${MODULE_PREFIX}/${MODULE_NAME}.h>) || __has_include(<gmock/gmock.h>)" >> output/sdkwrapper.cpp
-awk  -f awk/gen_impl.awk < "$TEMPLIST" | sed -e 's/enum_/enum /g'  | sed -e 's/const_/const /g' | sed -e 's/void_/void /g' >> output/sdkwrapper.cpp
+awk  -f awk/gen_impl.awk < "$TEMPLIST" | sed -e 's/enum_/enum /g'  | sed -e 's/const_/const /g' | sed -e 's/void_/void /g' | sed -e 's/volatile_/volatile /g' >> output/sdkwrapper.cpp
 echo "#endif //  __has_include(<${MODULE_PREFIX}/${MODULE_NAME}.h>) || __has_include(<gmock/gmock.h>)" >> output/sdkwrapper.cpp
 echo "" >> output/sdkwrapper.cpp
 
 # Generate the API stub
-awk -v module="$MODULE" -f awk/gen_apistub.awk < "$TEMPLIST" | sed -e 's/enum_/enum /g'  | sed -e 's/const_/const /g' | sed -e 's/void_/void /g' >> output/pico_sdk_apistub.cpp
+awk -v module="$MODULE" -f awk/gen_apistub.awk < "$TEMPLIST" | sed -e 's/enum_/enum /g'  | sed -e 's/const_/const /g' | sed -e 's/void_/void /g' | sed -e 's/volatile_/volatile /g' >> output/pico_sdk_apistub.cpp
 
 # Generate the mock declaration
-awk  -f awk/gen_mock.awk < "$TEMPLIST" | sed -e 's/enum_/enum /g'  | sed -e 's/const_/const /g' | sed -e 's/void_/void /g' >> output/mocksdkwrapper.hpp
+sed -e 's/volatile_//g'  < "$TEMPLIST" | awk  -f awk/gen_mock.awk - | sed -e 's/enum_/enum /g'  | sed -e 's/const_/const /g' | sed -e 's/void_/void /g' >> output/mocksdkwrapper.hpp
 
 # Generate the fff declaration
-# awk  -f awk/gen_fff.awk < "$TEMPLIST" | sed -e 's/enum_/enum /g'  | sed -e 's/const_/const /g' | sed -e 's/void_/void /g' >> output/fffsdkwrapper.hpp
+# awk  -f awk/gen_fff.awk < "$TEMPLIST" | sed -e 's/enum_/enum /g'  | sed -e 's/const_/const /g' | sed -e 's/void_/void /g' | sed -e 's/volatile_/volatile /g' >> output/fffsdkwrapper.hpp
 
 # Remove the scratch pad files. 
 trap 'rm -f "$TEMPSRC"' EXIT
