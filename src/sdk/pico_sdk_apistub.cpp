@@ -1026,6 +1026,1528 @@ extern "C" uint32_t _weak_to_remainder_u32(divmod_result_t r)
 #endif  // _MSC_VER
 // --------------------------------------------------
 #if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint32_t channel_config_get_ctrl_value(
+    const dma_channel_config* config);
+__attribute__((weak)) uint32_t
+channel_config_get_ctrl_value(const dma_channel_config* config)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint32_t _weak_channel_config_get_ctrl_value(
+    const dma_channel_config* config)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_channel_config_get_ctrl_value=__weak_channel_config_get_ctrl_value")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:channel_config_get_ctrl_value=_weak_channel_config_get_ctrl_value")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void channel_config_set_bswap(dma_channel_config* c, bool bswap);
+__attribute__((weak)) void channel_config_set_bswap(dma_channel_config* c,
+                                                    bool bswap)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_channel_config_set_bswap(dma_channel_config* c,
+                                               bool bswap)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_channel_config_set_bswap=__weak_channel_config_set_bswap")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:channel_config_set_bswap=_weak_channel_config_set_bswap")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void channel_config_set_chain_to(dma_channel_config* c,
+                                            uint chain_to);
+__attribute__((weak)) void channel_config_set_chain_to(dma_channel_config* c,
+                                                       uint chain_to)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_channel_config_set_chain_to(dma_channel_config* c,
+                                                  uint chain_to)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_channel_config_set_chain_to=__weak_channel_config_set_chain_to")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:channel_config_set_chain_to=_weak_channel_config_set_chain_to")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void channel_config_set_dreq(dma_channel_config* c, uint dreq);
+__attribute__((weak)) void channel_config_set_dreq(dma_channel_config* c,
+                                                   uint dreq)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_channel_config_set_dreq(dma_channel_config* c, uint dreq)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_channel_config_set_dreq=__weak_channel_config_set_dreq")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:channel_config_set_dreq=_weak_channel_config_set_dreq")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void channel_config_set_enable(dma_channel_config* c, bool enable);
+__attribute__((weak)) void channel_config_set_enable(dma_channel_config* c,
+                                                     bool enable)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_channel_config_set_enable(dma_channel_config* c,
+                                                bool enable)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_channel_config_set_enable=__weak_channel_config_set_enable")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:channel_config_set_enable=_weak_channel_config_set_enable")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void channel_config_set_high_priority(dma_channel_config* c,
+                                                 bool high_priority);
+__attribute__((weak)) void channel_config_set_high_priority(
+    dma_channel_config* c, bool high_priority)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_channel_config_set_high_priority(dma_channel_config* c,
+                                                       bool high_priority)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_channel_config_set_high_priority=__weak_channel_config_set_high_priority")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:channel_config_set_high_priority=_weak_channel_config_set_high_priority")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void channel_config_set_irq_quiet(dma_channel_config* c,
+                                             bool irq_quiet);
+__attribute__((weak)) void channel_config_set_irq_quiet(dma_channel_config* c,
+                                                        bool irq_quiet)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_channel_config_set_irq_quiet(dma_channel_config* c,
+                                                   bool irq_quiet)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_channel_config_set_irq_quiet=__weak_channel_config_set_irq_quiet")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:channel_config_set_irq_quiet=_weak_channel_config_set_irq_quiet")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void channel_config_set_read_increment(dma_channel_config* c,
+                                                  bool incr);
+__attribute__((weak)) void channel_config_set_read_increment(
+    dma_channel_config* c, bool incr)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_channel_config_set_read_increment(dma_channel_config* c,
+                                                        bool incr)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_channel_config_set_read_increment=__weak_channel_config_set_read_increment")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:channel_config_set_read_increment=_weak_channel_config_set_read_increment")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void channel_config_set_ring(dma_channel_config* c, bool write,
+                                        uint size_bits);
+__attribute__((weak)) void channel_config_set_ring(dma_channel_config* c,
+                                                   bool write, uint size_bits)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_channel_config_set_ring(dma_channel_config* c, bool write,
+                                              uint size_bits)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_channel_config_set_ring=__weak_channel_config_set_ring")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:channel_config_set_ring=_weak_channel_config_set_ring")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void channel_config_set_sniff_enable(dma_channel_config* c,
+                                                bool sniff_enable);
+__attribute__((weak)) void channel_config_set_sniff_enable(
+    dma_channel_config* c, bool sniff_enable)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_channel_config_set_sniff_enable(dma_channel_config* c,
+                                                      bool sniff_enable)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_channel_config_set_sniff_enable=__weak_channel_config_set_sniff_enable")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:channel_config_set_sniff_enable=_weak_channel_config_set_sniff_enable")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void channel_config_set_transfer_data_size(
+    dma_channel_config* c, enum dma_channel_transfer_size size);
+__attribute__((weak)) void channel_config_set_transfer_data_size(
+    dma_channel_config* c, enum dma_channel_transfer_size size)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_channel_config_set_transfer_data_size(
+    dma_channel_config* c, enum dma_channel_transfer_size size)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_channel_config_set_transfer_data_size=__weak_channel_config_set_transfer_data_size")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:channel_config_set_transfer_data_size=_weak_channel_config_set_transfer_data_size")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void channel_config_set_write_increment(dma_channel_config* c,
+                                                   bool incr);
+__attribute__((weak)) void channel_config_set_write_increment(
+    dma_channel_config* c, bool incr)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_channel_config_set_write_increment(dma_channel_config* c,
+                                                         bool incr)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_channel_config_set_write_increment=__weak_channel_config_set_write_increment")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:channel_config_set_write_increment=_weak_channel_config_set_write_increment")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void dma_channel_abort(uint channel);
+__attribute__((weak)) void dma_channel_abort(uint channel)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_dma_channel_abort(uint channel)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_dma_channel_abort=__weak_dma_channel_abort")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:dma_channel_abort=_weak_dma_channel_abort")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void dma_channel_acknowledge_irq0(uint channel);
+__attribute__((weak)) void dma_channel_acknowledge_irq0(uint channel)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_dma_channel_acknowledge_irq0(uint channel)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_dma_channel_acknowledge_irq0=__weak_dma_channel_acknowledge_irq0")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:dma_channel_acknowledge_irq0=_weak_dma_channel_acknowledge_irq0")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void dma_channel_acknowledge_irq1(uint channel);
+__attribute__((weak)) void dma_channel_acknowledge_irq1(uint channel)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_dma_channel_acknowledge_irq1(uint channel)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_dma_channel_acknowledge_irq1=__weak_dma_channel_acknowledge_irq1")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:dma_channel_acknowledge_irq1=_weak_dma_channel_acknowledge_irq1")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void dma_channel_claim(uint channel);
+__attribute__((weak)) void dma_channel_claim(uint channel)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_dma_channel_claim(uint channel)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_dma_channel_claim=__weak_dma_channel_claim")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:dma_channel_claim=_weak_dma_channel_claim")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void dma_channel_cleanup(uint channel);
+__attribute__((weak)) void dma_channel_cleanup(uint channel)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_dma_channel_cleanup(uint channel)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_dma_channel_cleanup=__weak_dma_channel_cleanup")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:dma_channel_cleanup=_weak_dma_channel_cleanup")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void dma_channel_configure(uint channel,
+                                      const dma_channel_config* config,
+                                      volatile void* write_addr,
+                                      const volatile void* read_addr,
+                                      uint transfer_count, bool trigger);
+__attribute__((weak)) void dma_channel_configure(
+    uint channel, const dma_channel_config* config, volatile void* write_addr,
+    const volatile void* read_addr, uint transfer_count, bool trigger)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_dma_channel_configure(uint channel,
+                                            const dma_channel_config* config,
+                                            volatile void* write_addr,
+                                            const volatile void* read_addr,
+                                            uint transfer_count, bool trigger)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_dma_channel_configure=__weak_dma_channel_configure")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:dma_channel_configure=_weak_dma_channel_configure")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" dma_channel_config dma_channel_get_default_config(uint channel);
+__attribute__((weak)) dma_channel_config
+dma_channel_get_default_config(uint channel)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" dma_channel_config _weak_dma_channel_get_default_config(uint channel)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_dma_channel_get_default_config=__weak_dma_channel_get_default_config")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:dma_channel_get_default_config=_weak_dma_channel_get_default_config")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool dma_channel_get_irq0_status(uint channel);
+__attribute__((weak)) bool dma_channel_get_irq0_status(uint channel)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_dma_channel_get_irq0_status(uint channel)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_dma_channel_get_irq0_status=__weak_dma_channel_get_irq0_status")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:dma_channel_get_irq0_status=_weak_dma_channel_get_irq0_status")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool dma_channel_get_irq1_status(uint channel);
+__attribute__((weak)) bool dma_channel_get_irq1_status(uint channel)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_dma_channel_get_irq1_status(uint channel)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_dma_channel_get_irq1_status=__weak_dma_channel_get_irq1_status")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:dma_channel_get_irq1_status=_weak_dma_channel_get_irq1_status")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" dma_channel_hw_t* dma_channel_hw_addr(uint channel);
+__attribute__((weak)) dma_channel_hw_t* dma_channel_hw_addr(uint channel)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" dma_channel_hw_t* _weak_dma_channel_hw_addr(uint channel)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_dma_channel_hw_addr=__weak_dma_channel_hw_addr")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:dma_channel_hw_addr=_weak_dma_channel_hw_addr")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool dma_channel_is_busy(uint channel);
+__attribute__((weak)) bool dma_channel_is_busy(uint channel)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_dma_channel_is_busy(uint channel)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_dma_channel_is_busy=__weak_dma_channel_is_busy")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:dma_channel_is_busy=_weak_dma_channel_is_busy")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool dma_channel_is_claimed(uint channel);
+__attribute__((weak)) bool dma_channel_is_claimed(uint channel)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_dma_channel_is_claimed(uint channel)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_dma_channel_is_claimed=__weak_dma_channel_is_claimed")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:dma_channel_is_claimed=_weak_dma_channel_is_claimed")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void dma_channel_set_config(uint channel,
+                                       const dma_channel_config* config,
+                                       bool trigger);
+__attribute__((weak)) void dma_channel_set_config(
+    uint channel, const dma_channel_config* config, bool trigger)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_dma_channel_set_config(uint channel,
+                                             const dma_channel_config* config,
+                                             bool trigger)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_dma_channel_set_config=__weak_dma_channel_set_config")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:dma_channel_set_config=_weak_dma_channel_set_config")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void dma_channel_set_irq0_enabled(uint channel, bool enabled);
+__attribute__((weak)) void dma_channel_set_irq0_enabled(uint channel,
+                                                        bool enabled)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_dma_channel_set_irq0_enabled(uint channel, bool enabled)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_dma_channel_set_irq0_enabled=__weak_dma_channel_set_irq0_enabled")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:dma_channel_set_irq0_enabled=_weak_dma_channel_set_irq0_enabled")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void dma_channel_set_irq1_enabled(uint channel, bool enabled);
+__attribute__((weak)) void dma_channel_set_irq1_enabled(uint channel,
+                                                        bool enabled)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_dma_channel_set_irq1_enabled(uint channel, bool enabled)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_dma_channel_set_irq1_enabled=__weak_dma_channel_set_irq1_enabled")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:dma_channel_set_irq1_enabled=_weak_dma_channel_set_irq1_enabled")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void dma_channel_set_read_addr(uint channel,
+                                          const volatile void* read_addr,
+                                          bool trigger);
+__attribute__((weak)) void dma_channel_set_read_addr(
+    uint channel, const volatile void* read_addr, bool trigger)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_dma_channel_set_read_addr(uint channel,
+                                                const volatile void* read_addr,
+                                                bool trigger)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_dma_channel_set_read_addr=__weak_dma_channel_set_read_addr")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:dma_channel_set_read_addr=_weak_dma_channel_set_read_addr")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void dma_channel_set_trans_count(uint channel, uint32_t trans_count,
+                                            bool trigger);
+__attribute__((weak)) void dma_channel_set_trans_count(uint channel,
+                                                       uint32_t trans_count,
+                                                       bool trigger)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_dma_channel_set_trans_count(uint channel,
+                                                  uint32_t trans_count,
+                                                  bool trigger)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_dma_channel_set_trans_count=__weak_dma_channel_set_trans_count")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:dma_channel_set_trans_count=_weak_dma_channel_set_trans_count")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void dma_channel_set_write_addr(uint channel,
+                                           volatile void* write_addr,
+                                           bool trigger);
+__attribute__((weak)) void dma_channel_set_write_addr(uint channel,
+                                                      volatile void* write_addr,
+                                                      bool trigger)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_dma_channel_set_write_addr(uint channel,
+                                                 volatile void* write_addr,
+                                                 bool trigger)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_dma_channel_set_write_addr=__weak_dma_channel_set_write_addr")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:dma_channel_set_write_addr=_weak_dma_channel_set_write_addr")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void dma_channel_start(uint channel);
+__attribute__((weak)) void dma_channel_start(uint channel)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_dma_channel_start(uint channel)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_dma_channel_start=__weak_dma_channel_start")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:dma_channel_start=_weak_dma_channel_start")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void dma_channel_transfer_from_buffer_now(
+    uint channel, const volatile void* read_addr, uint32_t transfer_count);
+__attribute__((weak)) void dma_channel_transfer_from_buffer_now(
+    uint channel, const volatile void* read_addr, uint32_t transfer_count)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_dma_channel_transfer_from_buffer_now(
+    uint channel, const volatile void* read_addr, uint32_t transfer_count)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_dma_channel_transfer_from_buffer_now=__weak_dma_channel_transfer_from_buffer_now")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:dma_channel_transfer_from_buffer_now=_weak_dma_channel_transfer_from_buffer_now")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void dma_channel_transfer_to_buffer_now(uint channel,
+                                                   volatile void* write_addr,
+                                                   uint32_t transfer_count);
+__attribute__((weak)) void dma_channel_transfer_to_buffer_now(
+    uint channel, volatile void* write_addr, uint32_t transfer_count)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_dma_channel_transfer_to_buffer_now(
+    uint channel, volatile void* write_addr, uint32_t transfer_count)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_dma_channel_transfer_to_buffer_now=__weak_dma_channel_transfer_to_buffer_now")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:dma_channel_transfer_to_buffer_now=_weak_dma_channel_transfer_to_buffer_now")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void dma_channel_unclaim(uint channel);
+__attribute__((weak)) void dma_channel_unclaim(uint channel)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_dma_channel_unclaim(uint channel)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_dma_channel_unclaim=__weak_dma_channel_unclaim")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:dma_channel_unclaim=_weak_dma_channel_unclaim")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void dma_channel_wait_for_finish_blocking(uint channel);
+__attribute__((weak)) void dma_channel_wait_for_finish_blocking(uint channel)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_dma_channel_wait_for_finish_blocking(uint channel)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_dma_channel_wait_for_finish_blocking=__weak_dma_channel_wait_for_finish_blocking")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:dma_channel_wait_for_finish_blocking=_weak_dma_channel_wait_for_finish_blocking")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void dma_claim_mask(uint32_t channel_mask);
+__attribute__((weak)) void dma_claim_mask(uint32_t channel_mask)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_dma_claim_mask(uint32_t channel_mask)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_dma_claim_mask=__weak_dma_claim_mask")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:dma_claim_mask=_weak_dma_claim_mask")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" int dma_claim_unused_channel(bool required);
+__attribute__((weak)) int dma_claim_unused_channel(bool required)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" int _weak_dma_claim_unused_channel(bool required)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_dma_claim_unused_channel=__weak_dma_claim_unused_channel")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:dma_claim_unused_channel=_weak_dma_claim_unused_channel")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" int dma_claim_unused_timer(bool required);
+__attribute__((weak)) int dma_claim_unused_timer(bool required)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" int _weak_dma_claim_unused_timer(bool required)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_dma_claim_unused_timer=__weak_dma_claim_unused_timer")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:dma_claim_unused_timer=_weak_dma_claim_unused_timer")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" dma_channel_config dma_get_channel_config(uint channel);
+__attribute__((weak)) dma_channel_config dma_get_channel_config(uint channel)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" dma_channel_config _weak_dma_get_channel_config(uint channel)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_dma_get_channel_config=__weak_dma_get_channel_config")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:dma_get_channel_config=_weak_dma_get_channel_config")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" int dma_get_irq_num(uint irq_index);
+__attribute__((weak)) int dma_get_irq_num(uint irq_index)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" int _weak_dma_get_irq_num(uint irq_index)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_dma_get_irq_num=__weak_dma_get_irq_num")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:dma_get_irq_num=_weak_dma_get_irq_num")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint dma_get_timer_dreq(uint timer_num);
+__attribute__((weak)) uint dma_get_timer_dreq(uint timer_num)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint _weak_dma_get_timer_dreq(uint timer_num)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_dma_get_timer_dreq=__weak_dma_get_timer_dreq")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:dma_get_timer_dreq=_weak_dma_get_timer_dreq")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void dma_irqn_acknowledge_channel(uint irq_index, uint channel);
+__attribute__((weak)) void dma_irqn_acknowledge_channel(uint irq_index,
+                                                        uint channel)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_dma_irqn_acknowledge_channel(uint irq_index, uint channel)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_dma_irqn_acknowledge_channel=__weak_dma_irqn_acknowledge_channel")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:dma_irqn_acknowledge_channel=_weak_dma_irqn_acknowledge_channel")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool dma_irqn_get_channel_status(uint irq_index, uint channel);
+__attribute__((weak)) bool dma_irqn_get_channel_status(uint irq_index,
+                                                       uint channel)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_dma_irqn_get_channel_status(uint irq_index, uint channel)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_dma_irqn_get_channel_status=__weak_dma_irqn_get_channel_status")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:dma_irqn_get_channel_status=_weak_dma_irqn_get_channel_status")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void dma_irqn_set_channel_enabled(uint irq_index, uint channel,
+                                             bool enabled);
+__attribute__((weak)) void dma_irqn_set_channel_enabled(uint irq_index,
+                                                        uint channel,
+                                                        bool enabled)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_dma_irqn_set_channel_enabled(uint irq_index, uint channel,
+                                                   bool enabled)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_dma_irqn_set_channel_enabled=__weak_dma_irqn_set_channel_enabled")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:dma_irqn_set_channel_enabled=_weak_dma_irqn_set_channel_enabled")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void dma_irqn_set_channel_mask_enabled(uint irq_index,
+                                                  uint32_t channel_mask,
+                                                  bool enabled);
+__attribute__((weak)) void dma_irqn_set_channel_mask_enabled(
+    uint irq_index, uint32_t channel_mask, bool enabled)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_dma_irqn_set_channel_mask_enabled(uint irq_index,
+                                                        uint32_t channel_mask,
+                                                        bool enabled)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_dma_irqn_set_channel_mask_enabled=__weak_dma_irqn_set_channel_mask_enabled")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:dma_irqn_set_channel_mask_enabled=_weak_dma_irqn_set_channel_mask_enabled")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void dma_set_irq0_channel_mask_enabled(uint32_t channel_mask,
+                                                  bool enabled);
+__attribute__((weak)) void dma_set_irq0_channel_mask_enabled(
+    uint32_t channel_mask, bool enabled)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_dma_set_irq0_channel_mask_enabled(uint32_t channel_mask,
+                                                        bool enabled)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_dma_set_irq0_channel_mask_enabled=__weak_dma_set_irq0_channel_mask_enabled")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:dma_set_irq0_channel_mask_enabled=_weak_dma_set_irq0_channel_mask_enabled")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void dma_set_irq1_channel_mask_enabled(uint32_t channel_mask,
+                                                  bool enabled);
+__attribute__((weak)) void dma_set_irq1_channel_mask_enabled(
+    uint32_t channel_mask, bool enabled)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_dma_set_irq1_channel_mask_enabled(uint32_t channel_mask,
+                                                        bool enabled)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_dma_set_irq1_channel_mask_enabled=__weak_dma_set_irq1_channel_mask_enabled")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:dma_set_irq1_channel_mask_enabled=_weak_dma_set_irq1_channel_mask_enabled")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void dma_sniffer_disable(void);
+__attribute__((weak)) void dma_sniffer_disable(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_dma_sniffer_disable(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_dma_sniffer_disable=__weak_dma_sniffer_disable")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:dma_sniffer_disable=_weak_dma_sniffer_disable")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void dma_sniffer_enable(uint channel, uint mode,
+                                   bool force_channel_enable);
+__attribute__((weak)) void dma_sniffer_enable(uint channel, uint mode,
+                                              bool force_channel_enable)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_dma_sniffer_enable(uint channel, uint mode,
+                                         bool force_channel_enable)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_dma_sniffer_enable=__weak_dma_sniffer_enable")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:dma_sniffer_enable=_weak_dma_sniffer_enable")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint32_t dma_sniffer_get_data_accumulator(void);
+__attribute__((weak)) uint32_t dma_sniffer_get_data_accumulator(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint32_t _weak_dma_sniffer_get_data_accumulator(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_dma_sniffer_get_data_accumulator=__weak_dma_sniffer_get_data_accumulator")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:dma_sniffer_get_data_accumulator=_weak_dma_sniffer_get_data_accumulator")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void dma_sniffer_set_byte_swap_enabled(bool swap);
+__attribute__((weak)) void dma_sniffer_set_byte_swap_enabled(bool swap)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_dma_sniffer_set_byte_swap_enabled(bool swap)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_dma_sniffer_set_byte_swap_enabled=__weak_dma_sniffer_set_byte_swap_enabled")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:dma_sniffer_set_byte_swap_enabled=_weak_dma_sniffer_set_byte_swap_enabled")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void dma_sniffer_set_data_accumulator(uint32_t seed_value);
+__attribute__((weak)) void dma_sniffer_set_data_accumulator(uint32_t seed_value)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_dma_sniffer_set_data_accumulator(uint32_t seed_value)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_dma_sniffer_set_data_accumulator=__weak_dma_sniffer_set_data_accumulator")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:dma_sniffer_set_data_accumulator=_weak_dma_sniffer_set_data_accumulator")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void dma_sniffer_set_output_invert_enabled(bool invert);
+__attribute__((weak)) void dma_sniffer_set_output_invert_enabled(bool invert)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_dma_sniffer_set_output_invert_enabled(bool invert)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_dma_sniffer_set_output_invert_enabled=__weak_dma_sniffer_set_output_invert_enabled")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:dma_sniffer_set_output_invert_enabled=_weak_dma_sniffer_set_output_invert_enabled")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void dma_sniffer_set_output_reverse_enabled(bool reverse);
+__attribute__((weak)) void dma_sniffer_set_output_reverse_enabled(bool reverse)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_dma_sniffer_set_output_reverse_enabled(bool reverse)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_dma_sniffer_set_output_reverse_enabled=__weak_dma_sniffer_set_output_reverse_enabled")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:dma_sniffer_set_output_reverse_enabled=_weak_dma_sniffer_set_output_reverse_enabled")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void dma_start_channel_mask(uint32_t chan_mask);
+__attribute__((weak)) void dma_start_channel_mask(uint32_t chan_mask)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_dma_start_channel_mask(uint32_t chan_mask)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_dma_start_channel_mask=__weak_dma_start_channel_mask")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:dma_start_channel_mask=_weak_dma_start_channel_mask")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void dma_timer_claim(uint timer);
+__attribute__((weak)) void dma_timer_claim(uint timer)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_dma_timer_claim(uint timer)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_dma_timer_claim=__weak_dma_timer_claim")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:dma_timer_claim=_weak_dma_timer_claim")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool dma_timer_is_claimed(uint timer);
+__attribute__((weak)) bool dma_timer_is_claimed(uint timer)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_dma_timer_is_claimed(uint timer)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_dma_timer_is_claimed=__weak_dma_timer_is_claimed")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:dma_timer_is_claimed=_weak_dma_timer_is_claimed")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void dma_timer_set_fraction(uint timer, uint16_t numerator,
+                                       uint16_t denominator);
+__attribute__((weak)) void dma_timer_set_fraction(uint timer,
+                                                  uint16_t numerator,
+                                                  uint16_t denominator)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_dma_timer_set_fraction(uint timer, uint16_t numerator,
+                                             uint16_t denominator)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_dma_timer_set_fraction=__weak_dma_timer_set_fraction")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:dma_timer_set_fraction=_weak_dma_timer_set_fraction")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void dma_timer_unclaim(uint timer);
+__attribute__((weak)) void dma_timer_unclaim(uint timer)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_dma_timer_unclaim(uint timer)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_dma_timer_unclaim=__weak_dma_timer_unclaim")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:dma_timer_unclaim=_weak_dma_timer_unclaim")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void dma_unclaim_mask(uint32_t channel_mask);
+__attribute__((weak)) void dma_unclaim_mask(uint32_t channel_mask)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_dma_unclaim_mask(uint32_t channel_mask)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_dma_unclaim_mask=__weak_dma_unclaim_mask")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:dma_unclaim_mask=_weak_dma_unclaim_mask")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void print_dma_ctrl(dma_channel_hw_t* channel);
+__attribute__((weak)) void print_dma_ctrl(dma_channel_hw_t* channel)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_print_dma_ctrl(dma_channel_hw_t* channel)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_dma library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_print_dma_ctrl=__weak_print_dma_ctrl")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:print_dma_ctrl=_weak_print_dma_ctrl")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
 extern "C" uint exception_get_priority(uint num);
 __attribute__((weak)) uint exception_get_priority(uint num)
 #elif defined(_MSC_VER)  // Microsoft Visual C

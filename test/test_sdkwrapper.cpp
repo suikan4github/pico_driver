@@ -67,9 +67,8 @@ FAKE_VOID_FUNC(pio_sm_clear_fifos, PIO, uint);
 
 FAKE_VOID_FUNC(adc_gpio_init, uint);
 FAKE_VALUE_FUNC(uint16_t, adc_read);
-
 FAKE_VALUE_FUNC(int32_t, hw_divider_quotient_s32, int32_t, int32_t);
-
+FAKE_VALUE_FUNC(dma_channel_config, dma_channel_get_default_config, uint);
 FAKE_VALUE_FUNC(uint, exception_get_priority, uint);
 }
 // The cpp file of the library to test.
@@ -1534,6 +1533,50 @@ TEST(SdkWrapper, hw_divider_quotient_s32) {
   RESET_FAKE(hw_divider_quotient_s32);
 }  // TEST(SdkWrapper, hw_divider_quotient_s32)
 
+// -----------------------------------------------------------
+//
+//  hardware_dma
+//
+// -----------------------------------------------------------
+
+TEST(SdkWrapper, dma_channel_get_default_config) {
+  std::random_device rng;
+  ::rpp_driver::SdkWrapper pico;
+  // uniform distribution
+  std::uniform_int_distribution<uint> param_dist(0, UINT_MAX);
+  std::uniform_int_distribution<dma_channel_config> retval_dist(0, INT_MAX);
+  uint param_array0[] = {param_dist(rng), param_dist(rng)};
+  dma_channel_config retval_array[std::size(param_array0)] = {retval_dist(rng),
+                                                              retval_dist(rng)};
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(dma_channel_get_default_config);
+
+  SET_RETURN_SEQ(dma_channel_get_default_config, retval_array,
+                 std::size(retval_array));
+
+  // Check whether return values are correctly passed to wrapper.
+  int index = 0;
+  for (auto &&param0 : param_array0) {
+    ASSERT_EQ(pico.dma_channel_get_default_config(param0), retval_array[index]);
+    index++;
+  }
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(dma_channel_get_default_config_fake.call_count,
+            std::size(retval_array));
+
+  // Check whether parameters were correctly passed from wrapper.
+  index = 0;
+  for (auto &&param0 : param_array0) {
+    // Check the data from test spy. Call order.
+    ASSERT_EQ(fff.call_history[index], (void *)dma_channel_get_default_config);
+    // Check the data from test spy. : Parameters.
+    ASSERT_EQ(dma_channel_get_default_config_fake.arg0_history[index], param0);
+    index++;
+  }
+  RESET_FAKE(dma_channel_get_default_config);
+}  // TEST(SdkWrapper, dma_channel_get_default_config)
 // -----------------------------------------------------------
 //
 //  hardware_exception

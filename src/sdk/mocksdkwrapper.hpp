@@ -53,6 +53,98 @@ class MockSdkWrapper : public SdkWrapper {
   MOCK_METHOD1(to_quotient_u32, uint32_t(divmod_result_t r));
   MOCK_METHOD1(to_remainder_s32, int32_t(divmod_result_t r));
   MOCK_METHOD1(to_remainder_u32, uint32_t(divmod_result_t r));
+  MOCK_METHOD1(channel_config_get_ctrl_value,
+               uint32_t(const dma_channel_config* config));
+  MOCK_METHOD2(channel_config_set_bswap,
+               void(dma_channel_config* c, bool bswap));
+  MOCK_METHOD2(channel_config_set_chain_to,
+               void(dma_channel_config* c, uint chain_to));
+  MOCK_METHOD2(channel_config_set_dreq, void(dma_channel_config* c, uint dreq));
+  MOCK_METHOD2(channel_config_set_enable,
+               void(dma_channel_config* c, bool enable));
+  MOCK_METHOD2(channel_config_set_high_priority,
+               void(dma_channel_config* c, bool high_priority));
+  MOCK_METHOD2(channel_config_set_irq_quiet,
+               void(dma_channel_config* c, bool irq_quiet));
+  MOCK_METHOD2(channel_config_set_read_increment,
+               void(dma_channel_config* c, bool incr));
+  MOCK_METHOD3(channel_config_set_ring,
+               void(dma_channel_config* c, bool write, uint size_bits));
+  MOCK_METHOD2(channel_config_set_sniff_enable,
+               void(dma_channel_config* c, bool sniff_enable));
+  MOCK_METHOD2(channel_config_set_transfer_data_size,
+               void(dma_channel_config* c,
+                    enum dma_channel_transfer_size size));
+  MOCK_METHOD2(channel_config_set_write_increment,
+               void(dma_channel_config* c, bool incr));
+  MOCK_METHOD1(dma_channel_abort, void(uint channel));
+  MOCK_METHOD1(dma_channel_acknowledge_irq0, void(uint channel));
+  MOCK_METHOD1(dma_channel_acknowledge_irq1, void(uint channel));
+  MOCK_METHOD1(dma_channel_claim, void(uint channel));
+  MOCK_METHOD1(dma_channel_cleanup, void(uint channel));
+  MOCK_METHOD6(dma_channel_configure,
+               void(uint channel, const dma_channel_config* config,
+                    void* write_addr, const void* read_addr,
+                    uint transfer_count, bool trigger));
+  MOCK_METHOD1(dma_channel_get_default_config,
+               dma_channel_config(uint channel));
+  MOCK_METHOD1(dma_channel_get_irq0_status, bool(uint channel));
+  MOCK_METHOD1(dma_channel_get_irq1_status, bool(uint channel));
+  MOCK_METHOD1(dma_channel_hw_addr, dma_channel_hw_t*(uint channel));
+  MOCK_METHOD1(dma_channel_is_busy, bool(uint channel));
+  MOCK_METHOD1(dma_channel_is_claimed, bool(uint channel));
+  MOCK_METHOD3(dma_channel_set_config,
+               void(uint channel, const dma_channel_config* config,
+                    bool trigger));
+  MOCK_METHOD2(dma_channel_set_irq0_enabled, void(uint channel, bool enabled));
+  MOCK_METHOD2(dma_channel_set_irq1_enabled, void(uint channel, bool enabled));
+  MOCK_METHOD3(dma_channel_set_read_addr,
+               void(uint channel, const void* read_addr, bool trigger));
+  MOCK_METHOD3(dma_channel_set_trans_count,
+               void(uint channel, uint32_t trans_count, bool trigger));
+  MOCK_METHOD3(dma_channel_set_write_addr,
+               void(uint channel, void* write_addr, bool trigger));
+  MOCK_METHOD1(dma_channel_start, void(uint channel));
+  MOCK_METHOD3(dma_channel_transfer_from_buffer_now,
+               void(uint channel, const void* read_addr,
+                    uint32_t transfer_count));
+  MOCK_METHOD3(dma_channel_transfer_to_buffer_now,
+               void(uint channel, void* write_addr, uint32_t transfer_count));
+  MOCK_METHOD1(dma_channel_unclaim, void(uint channel));
+  MOCK_METHOD1(dma_channel_wait_for_finish_blocking, void(uint channel));
+  MOCK_METHOD1(dma_claim_mask, void(uint32_t channel_mask));
+  MOCK_METHOD1(dma_claim_unused_channel, int(bool required));
+  MOCK_METHOD1(dma_claim_unused_timer, int(bool required));
+  MOCK_METHOD1(dma_get_channel_config, dma_channel_config(uint channel));
+  MOCK_METHOD1(dma_get_irq_num, int(uint irq_index));
+  MOCK_METHOD1(dma_get_timer_dreq, uint(uint timer_num));
+  MOCK_METHOD2(dma_irqn_acknowledge_channel,
+               void(uint irq_index, uint channel));
+  MOCK_METHOD2(dma_irqn_get_channel_status, bool(uint irq_index, uint channel));
+  MOCK_METHOD3(dma_irqn_set_channel_enabled,
+               void(uint irq_index, uint channel, bool enabled));
+  MOCK_METHOD3(dma_irqn_set_channel_mask_enabled,
+               void(uint irq_index, uint32_t channel_mask, bool enabled));
+  MOCK_METHOD2(dma_set_irq0_channel_mask_enabled,
+               void(uint32_t channel_mask, bool enabled));
+  MOCK_METHOD2(dma_set_irq1_channel_mask_enabled,
+               void(uint32_t channel_mask, bool enabled));
+  MOCK_METHOD0(dma_sniffer_disable, void());
+  MOCK_METHOD3(dma_sniffer_enable,
+               void(uint channel, uint mode, bool force_channel_enable));
+  MOCK_METHOD0(dma_sniffer_get_data_accumulator, uint32_t());
+  MOCK_METHOD1(dma_sniffer_set_byte_swap_enabled, void(bool swap));
+  MOCK_METHOD1(dma_sniffer_set_data_accumulator, void(uint32_t seed_value));
+  MOCK_METHOD1(dma_sniffer_set_output_invert_enabled, void(bool invert));
+  MOCK_METHOD1(dma_sniffer_set_output_reverse_enabled, void(bool reverse));
+  MOCK_METHOD1(dma_start_channel_mask, void(uint32_t chan_mask));
+  MOCK_METHOD1(dma_timer_claim, void(uint timer));
+  MOCK_METHOD1(dma_timer_is_claimed, bool(uint timer));
+  MOCK_METHOD3(dma_timer_set_fraction,
+               void(uint timer, uint16_t numerator, uint16_t denominator));
+  MOCK_METHOD1(dma_timer_unclaim, void(uint timer));
+  MOCK_METHOD1(dma_unclaim_mask, void(uint32_t channel_mask));
+  MOCK_METHOD1(print_dma_ctrl, void(dma_channel_hw_t* channel));
   MOCK_METHOD1(exception_get_priority, uint(uint num));
   MOCK_METHOD1(exception_get_vtable_handler,
                exception_handler_t(enum exception_number num));

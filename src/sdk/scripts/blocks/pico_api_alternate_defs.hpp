@@ -28,7 +28,13 @@ enum gpio_slew_rate { e, f };
 enum pio_mov_status_type { g, h };
 /// @brief Alternate definition for Google Test build.
 enum exception_number { i, j };
+/// @brief Alternate definition for Google Test build.
+enum dma_channel_transfer_size { k, l };
 
+//// @brief Alternate definition for Google Test build.
+typedef int dma_channel_hw_t;
+//// @brief Alternate definition for Google Test build.
+typedef int dma_channel_config;
 //// @brief Alternate definition for Google Test build.
 typedef int exception_handler_t;
 //// @brief Alternate definition for Google Test build.

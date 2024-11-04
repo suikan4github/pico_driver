@@ -218,6 +218,385 @@ uint32_t rpp_driver::SdkWrapper::to_remainder_u32(divmod_result_t r) {
 #endif  //  __has_include(<hardware/divider.h>) ||
         //  __has_include(<gmock/gmock.h>)
 
+#if __has_include(<hardware/dma.h>) || __has_include(<gmock/gmock.h>)
+// --------------------------------------------------
+extern "C" uint32_t channel_config_get_ctrl_value(
+    const dma_channel_config* config);
+uint32_t rpp_driver::SdkWrapper::channel_config_get_ctrl_value(
+    const dma_channel_config* config) {
+  return ::channel_config_get_ctrl_value(config);
+}
+// --------------------------------------------------
+extern "C" void channel_config_set_bswap(dma_channel_config* c, bool bswap);
+void rpp_driver::SdkWrapper::channel_config_set_bswap(dma_channel_config* c,
+                                                      bool bswap) {
+  ::channel_config_set_bswap(c, bswap);
+}
+// --------------------------------------------------
+extern "C" void channel_config_set_chain_to(dma_channel_config* c,
+                                            uint chain_to);
+void rpp_driver::SdkWrapper::channel_config_set_chain_to(dma_channel_config* c,
+                                                         uint chain_to) {
+  ::channel_config_set_chain_to(c, chain_to);
+}
+// --------------------------------------------------
+extern "C" void channel_config_set_dreq(dma_channel_config* c, uint dreq);
+void rpp_driver::SdkWrapper::channel_config_set_dreq(dma_channel_config* c,
+                                                     uint dreq) {
+  ::channel_config_set_dreq(c, dreq);
+}
+// --------------------------------------------------
+extern "C" void channel_config_set_enable(dma_channel_config* c, bool enable);
+void rpp_driver::SdkWrapper::channel_config_set_enable(dma_channel_config* c,
+                                                       bool enable) {
+  ::channel_config_set_enable(c, enable);
+}
+// --------------------------------------------------
+extern "C" void channel_config_set_high_priority(dma_channel_config* c,
+                                                 bool high_priority);
+void rpp_driver::SdkWrapper::channel_config_set_high_priority(
+    dma_channel_config* c, bool high_priority) {
+  ::channel_config_set_high_priority(c, high_priority);
+}
+// --------------------------------------------------
+extern "C" void channel_config_set_irq_quiet(dma_channel_config* c,
+                                             bool irq_quiet);
+void rpp_driver::SdkWrapper::channel_config_set_irq_quiet(dma_channel_config* c,
+                                                          bool irq_quiet) {
+  ::channel_config_set_irq_quiet(c, irq_quiet);
+}
+// --------------------------------------------------
+extern "C" void channel_config_set_read_increment(dma_channel_config* c,
+                                                  bool incr);
+void rpp_driver::SdkWrapper::channel_config_set_read_increment(
+    dma_channel_config* c, bool incr) {
+  ::channel_config_set_read_increment(c, incr);
+}
+// --------------------------------------------------
+extern "C" void channel_config_set_ring(dma_channel_config* c, bool write,
+                                        uint size_bits);
+void rpp_driver::SdkWrapper::channel_config_set_ring(dma_channel_config* c,
+                                                     bool write,
+                                                     uint size_bits) {
+  ::channel_config_set_ring(c, write, size_bits);
+}
+// --------------------------------------------------
+extern "C" void channel_config_set_sniff_enable(dma_channel_config* c,
+                                                bool sniff_enable);
+void rpp_driver::SdkWrapper::channel_config_set_sniff_enable(
+    dma_channel_config* c, bool sniff_enable) {
+  ::channel_config_set_sniff_enable(c, sniff_enable);
+}
+// --------------------------------------------------
+extern "C" void channel_config_set_transfer_data_size(
+    dma_channel_config* c, enum dma_channel_transfer_size size);
+void rpp_driver::SdkWrapper::channel_config_set_transfer_data_size(
+    dma_channel_config* c, enum dma_channel_transfer_size size) {
+  ::channel_config_set_transfer_data_size(c, size);
+}
+// --------------------------------------------------
+extern "C" void channel_config_set_write_increment(dma_channel_config* c,
+                                                   bool incr);
+void rpp_driver::SdkWrapper::channel_config_set_write_increment(
+    dma_channel_config* c, bool incr) {
+  ::channel_config_set_write_increment(c, incr);
+}
+// --------------------------------------------------
+extern "C" void dma_channel_abort(uint channel);
+void rpp_driver::SdkWrapper::dma_channel_abort(uint channel) {
+  ::dma_channel_abort(channel);
+}
+// --------------------------------------------------
+extern "C" void dma_channel_acknowledge_irq0(uint channel);
+void rpp_driver::SdkWrapper::dma_channel_acknowledge_irq0(uint channel) {
+  ::dma_channel_acknowledge_irq0(channel);
+}
+// --------------------------------------------------
+extern "C" void dma_channel_acknowledge_irq1(uint channel);
+void rpp_driver::SdkWrapper::dma_channel_acknowledge_irq1(uint channel) {
+  ::dma_channel_acknowledge_irq1(channel);
+}
+// --------------------------------------------------
+extern "C" void dma_channel_claim(uint channel);
+void rpp_driver::SdkWrapper::dma_channel_claim(uint channel) {
+  ::dma_channel_claim(channel);
+}
+// --------------------------------------------------
+extern "C" void dma_channel_cleanup(uint channel);
+void rpp_driver::SdkWrapper::dma_channel_cleanup(uint channel) {
+  ::dma_channel_cleanup(channel);
+}
+// --------------------------------------------------
+extern "C" void dma_channel_configure(uint channel,
+                                      const dma_channel_config* config,
+                                      volatile void* write_addr,
+                                      const volatile void* read_addr,
+                                      uint transfer_count, bool trigger);
+void rpp_driver::SdkWrapper::dma_channel_configure(
+    uint channel, const dma_channel_config* config, volatile void* write_addr,
+    const volatile void* read_addr, uint transfer_count, bool trigger) {
+  ::dma_channel_configure(channel, config, write_addr, read_addr,
+                          transfer_count, trigger);
+}
+// --------------------------------------------------
+extern "C" dma_channel_config dma_channel_get_default_config(uint channel);
+dma_channel_config rpp_driver::SdkWrapper::dma_channel_get_default_config(
+    uint channel) {
+  return ::dma_channel_get_default_config(channel);
+}
+// --------------------------------------------------
+extern "C" bool dma_channel_get_irq0_status(uint channel);
+bool rpp_driver::SdkWrapper::dma_channel_get_irq0_status(uint channel) {
+  return ::dma_channel_get_irq0_status(channel);
+}
+// --------------------------------------------------
+extern "C" bool dma_channel_get_irq1_status(uint channel);
+bool rpp_driver::SdkWrapper::dma_channel_get_irq1_status(uint channel) {
+  return ::dma_channel_get_irq1_status(channel);
+}
+// --------------------------------------------------
+extern "C" dma_channel_hw_t* dma_channel_hw_addr(uint channel);
+dma_channel_hw_t* rpp_driver::SdkWrapper::dma_channel_hw_addr(uint channel) {
+  return ::dma_channel_hw_addr(channel);
+}
+// --------------------------------------------------
+extern "C" bool dma_channel_is_busy(uint channel);
+bool rpp_driver::SdkWrapper::dma_channel_is_busy(uint channel) {
+  return ::dma_channel_is_busy(channel);
+}
+// --------------------------------------------------
+extern "C" bool dma_channel_is_claimed(uint channel);
+bool rpp_driver::SdkWrapper::dma_channel_is_claimed(uint channel) {
+  return ::dma_channel_is_claimed(channel);
+}
+// --------------------------------------------------
+extern "C" void dma_channel_set_config(uint channel,
+                                       const dma_channel_config* config,
+                                       bool trigger);
+void rpp_driver::SdkWrapper::dma_channel_set_config(
+    uint channel, const dma_channel_config* config, bool trigger) {
+  ::dma_channel_set_config(channel, config, trigger);
+}
+// --------------------------------------------------
+extern "C" void dma_channel_set_irq0_enabled(uint channel, bool enabled);
+void rpp_driver::SdkWrapper::dma_channel_set_irq0_enabled(uint channel,
+                                                          bool enabled) {
+  ::dma_channel_set_irq0_enabled(channel, enabled);
+}
+// --------------------------------------------------
+extern "C" void dma_channel_set_irq1_enabled(uint channel, bool enabled);
+void rpp_driver::SdkWrapper::dma_channel_set_irq1_enabled(uint channel,
+                                                          bool enabled) {
+  ::dma_channel_set_irq1_enabled(channel, enabled);
+}
+// --------------------------------------------------
+extern "C" void dma_channel_set_read_addr(uint channel,
+                                          const volatile void* read_addr,
+                                          bool trigger);
+void rpp_driver::SdkWrapper::dma_channel_set_read_addr(
+    uint channel, const volatile void* read_addr, bool trigger) {
+  ::dma_channel_set_read_addr(channel, read_addr, trigger);
+}
+// --------------------------------------------------
+extern "C" void dma_channel_set_trans_count(uint channel, uint32_t trans_count,
+                                            bool trigger);
+void rpp_driver::SdkWrapper::dma_channel_set_trans_count(uint channel,
+                                                         uint32_t trans_count,
+                                                         bool trigger) {
+  ::dma_channel_set_trans_count(channel, trans_count, trigger);
+}
+// --------------------------------------------------
+extern "C" void dma_channel_set_write_addr(uint channel,
+                                           volatile void* write_addr,
+                                           bool trigger);
+void rpp_driver::SdkWrapper::dma_channel_set_write_addr(
+    uint channel, volatile void* write_addr, bool trigger) {
+  ::dma_channel_set_write_addr(channel, write_addr, trigger);
+}
+// --------------------------------------------------
+extern "C" void dma_channel_start(uint channel);
+void rpp_driver::SdkWrapper::dma_channel_start(uint channel) {
+  ::dma_channel_start(channel);
+}
+// --------------------------------------------------
+extern "C" void dma_channel_transfer_from_buffer_now(
+    uint channel, const volatile void* read_addr, uint32_t transfer_count);
+void rpp_driver::SdkWrapper::dma_channel_transfer_from_buffer_now(
+    uint channel, const volatile void* read_addr, uint32_t transfer_count) {
+  ::dma_channel_transfer_from_buffer_now(channel, read_addr, transfer_count);
+}
+// --------------------------------------------------
+extern "C" void dma_channel_transfer_to_buffer_now(uint channel,
+                                                   volatile void* write_addr,
+                                                   uint32_t transfer_count);
+void rpp_driver::SdkWrapper::dma_channel_transfer_to_buffer_now(
+    uint channel, volatile void* write_addr, uint32_t transfer_count) {
+  ::dma_channel_transfer_to_buffer_now(channel, write_addr, transfer_count);
+}
+// --------------------------------------------------
+extern "C" void dma_channel_unclaim(uint channel);
+void rpp_driver::SdkWrapper::dma_channel_unclaim(uint channel) {
+  ::dma_channel_unclaim(channel);
+}
+// --------------------------------------------------
+extern "C" void dma_channel_wait_for_finish_blocking(uint channel);
+void rpp_driver::SdkWrapper::dma_channel_wait_for_finish_blocking(
+    uint channel) {
+  ::dma_channel_wait_for_finish_blocking(channel);
+}
+// --------------------------------------------------
+extern "C" void dma_claim_mask(uint32_t channel_mask);
+void rpp_driver::SdkWrapper::dma_claim_mask(uint32_t channel_mask) {
+  ::dma_claim_mask(channel_mask);
+}
+// --------------------------------------------------
+extern "C" int dma_claim_unused_channel(bool required);
+int rpp_driver::SdkWrapper::dma_claim_unused_channel(bool required) {
+  return ::dma_claim_unused_channel(required);
+}
+// --------------------------------------------------
+extern "C" int dma_claim_unused_timer(bool required);
+int rpp_driver::SdkWrapper::dma_claim_unused_timer(bool required) {
+  return ::dma_claim_unused_timer(required);
+}
+// --------------------------------------------------
+extern "C" dma_channel_config dma_get_channel_config(uint channel);
+dma_channel_config rpp_driver::SdkWrapper::dma_get_channel_config(
+    uint channel) {
+  return ::dma_get_channel_config(channel);
+}
+// --------------------------------------------------
+extern "C" int dma_get_irq_num(uint irq_index);
+int rpp_driver::SdkWrapper::dma_get_irq_num(uint irq_index) {
+  return ::dma_get_irq_num(irq_index);
+}
+// --------------------------------------------------
+extern "C" uint dma_get_timer_dreq(uint timer_num);
+uint rpp_driver::SdkWrapper::dma_get_timer_dreq(uint timer_num) {
+  return ::dma_get_timer_dreq(timer_num);
+}
+// --------------------------------------------------
+extern "C" void dma_irqn_acknowledge_channel(uint irq_index, uint channel);
+void rpp_driver::SdkWrapper::dma_irqn_acknowledge_channel(uint irq_index,
+                                                          uint channel) {
+  ::dma_irqn_acknowledge_channel(irq_index, channel);
+}
+// --------------------------------------------------
+extern "C" bool dma_irqn_get_channel_status(uint irq_index, uint channel);
+bool rpp_driver::SdkWrapper::dma_irqn_get_channel_status(uint irq_index,
+                                                         uint channel) {
+  return ::dma_irqn_get_channel_status(irq_index, channel);
+}
+// --------------------------------------------------
+extern "C" void dma_irqn_set_channel_enabled(uint irq_index, uint channel,
+                                             bool enabled);
+void rpp_driver::SdkWrapper::dma_irqn_set_channel_enabled(uint irq_index,
+                                                          uint channel,
+                                                          bool enabled) {
+  ::dma_irqn_set_channel_enabled(irq_index, channel, enabled);
+}
+// --------------------------------------------------
+extern "C" void dma_irqn_set_channel_mask_enabled(uint irq_index,
+                                                  uint32_t channel_mask,
+                                                  bool enabled);
+void rpp_driver::SdkWrapper::dma_irqn_set_channel_mask_enabled(
+    uint irq_index, uint32_t channel_mask, bool enabled) {
+  ::dma_irqn_set_channel_mask_enabled(irq_index, channel_mask, enabled);
+}
+// --------------------------------------------------
+extern "C" void dma_set_irq0_channel_mask_enabled(uint32_t channel_mask,
+                                                  bool enabled);
+void rpp_driver::SdkWrapper::dma_set_irq0_channel_mask_enabled(
+    uint32_t channel_mask, bool enabled) {
+  ::dma_set_irq0_channel_mask_enabled(channel_mask, enabled);
+}
+// --------------------------------------------------
+extern "C" void dma_set_irq1_channel_mask_enabled(uint32_t channel_mask,
+                                                  bool enabled);
+void rpp_driver::SdkWrapper::dma_set_irq1_channel_mask_enabled(
+    uint32_t channel_mask, bool enabled) {
+  ::dma_set_irq1_channel_mask_enabled(channel_mask, enabled);
+}
+// --------------------------------------------------
+extern "C" void dma_sniffer_disable(void);
+void rpp_driver::SdkWrapper::dma_sniffer_disable(void) {
+  ::dma_sniffer_disable();
+}
+// --------------------------------------------------
+extern "C" void dma_sniffer_enable(uint channel, uint mode,
+                                   bool force_channel_enable);
+void rpp_driver::SdkWrapper::dma_sniffer_enable(uint channel, uint mode,
+                                                bool force_channel_enable) {
+  ::dma_sniffer_enable(channel, mode, force_channel_enable);
+}
+// --------------------------------------------------
+extern "C" uint32_t dma_sniffer_get_data_accumulator(void);
+uint32_t rpp_driver::SdkWrapper::dma_sniffer_get_data_accumulator(void) {
+  return ::dma_sniffer_get_data_accumulator();
+}
+// --------------------------------------------------
+extern "C" void dma_sniffer_set_byte_swap_enabled(bool swap);
+void rpp_driver::SdkWrapper::dma_sniffer_set_byte_swap_enabled(bool swap) {
+  ::dma_sniffer_set_byte_swap_enabled(swap);
+}
+// --------------------------------------------------
+extern "C" void dma_sniffer_set_data_accumulator(uint32_t seed_value);
+void rpp_driver::SdkWrapper::dma_sniffer_set_data_accumulator(
+    uint32_t seed_value) {
+  ::dma_sniffer_set_data_accumulator(seed_value);
+}
+// --------------------------------------------------
+extern "C" void dma_sniffer_set_output_invert_enabled(bool invert);
+void rpp_driver::SdkWrapper::dma_sniffer_set_output_invert_enabled(
+    bool invert) {
+  ::dma_sniffer_set_output_invert_enabled(invert);
+}
+// --------------------------------------------------
+extern "C" void dma_sniffer_set_output_reverse_enabled(bool reverse);
+void rpp_driver::SdkWrapper::dma_sniffer_set_output_reverse_enabled(
+    bool reverse) {
+  ::dma_sniffer_set_output_reverse_enabled(reverse);
+}
+// --------------------------------------------------
+extern "C" void dma_start_channel_mask(uint32_t chan_mask);
+void rpp_driver::SdkWrapper::dma_start_channel_mask(uint32_t chan_mask) {
+  ::dma_start_channel_mask(chan_mask);
+}
+// --------------------------------------------------
+extern "C" void dma_timer_claim(uint timer);
+void rpp_driver::SdkWrapper::dma_timer_claim(uint timer) {
+  ::dma_timer_claim(timer);
+}
+// --------------------------------------------------
+extern "C" bool dma_timer_is_claimed(uint timer);
+bool rpp_driver::SdkWrapper::dma_timer_is_claimed(uint timer) {
+  return ::dma_timer_is_claimed(timer);
+}
+// --------------------------------------------------
+extern "C" void dma_timer_set_fraction(uint timer, uint16_t numerator,
+                                       uint16_t denominator);
+void rpp_driver::SdkWrapper::dma_timer_set_fraction(uint timer,
+                                                    uint16_t numerator,
+                                                    uint16_t denominator) {
+  ::dma_timer_set_fraction(timer, numerator, denominator);
+}
+// --------------------------------------------------
+extern "C" void dma_timer_unclaim(uint timer);
+void rpp_driver::SdkWrapper::dma_timer_unclaim(uint timer) {
+  ::dma_timer_unclaim(timer);
+}
+// --------------------------------------------------
+extern "C" void dma_unclaim_mask(uint32_t channel_mask);
+void rpp_driver::SdkWrapper::dma_unclaim_mask(uint32_t channel_mask) {
+  ::dma_unclaim_mask(channel_mask);
+}
+// --------------------------------------------------
+extern "C" void print_dma_ctrl(dma_channel_hw_t* channel);
+void rpp_driver::SdkWrapper::print_dma_ctrl(dma_channel_hw_t* channel) {
+  ::print_dma_ctrl(channel);
+}
+#endif  //  __has_include(<hardware/dma.h>) || __has_include(<gmock/gmock.h>)
+
 #if __has_include(<hardware/exception.h>) || __has_include(<gmock/gmock.h>)
 // --------------------------------------------------
 extern "C" uint exception_get_priority(uint num);

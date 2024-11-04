@@ -126,6 +126,100 @@ virtual void adc_fifo_drain ( void );
 #endif  //  __has_include(<hardware/divider.h>) ||
         //  __has_include(<gmock/gmock.h>)
 
+#if __has_include(<hardware/dma.h>) || __has_include(<gmock/gmock.h>)
+  virtual uint32_t channel_config_get_ctrl_value(
+      const dma_channel_config* config);
+  virtual void channel_config_set_bswap(dma_channel_config* c, bool bswap);
+  virtual void channel_config_set_chain_to(dma_channel_config* c,
+                                           uint chain_to);
+  virtual void channel_config_set_dreq(dma_channel_config* c, uint dreq);
+  virtual void channel_config_set_enable(dma_channel_config* c, bool enable);
+  virtual void channel_config_set_high_priority(dma_channel_config* c,
+                                                bool high_priority);
+  virtual void channel_config_set_irq_quiet(dma_channel_config* c,
+                                            bool irq_quiet);
+  virtual void channel_config_set_read_increment(dma_channel_config* c,
+                                                 bool incr);
+  virtual void channel_config_set_ring(dma_channel_config* c, bool write,
+                                       uint size_bits);
+  virtual void channel_config_set_sniff_enable(dma_channel_config* c,
+                                               bool sniff_enable);
+  virtual void channel_config_set_transfer_data_size(
+      dma_channel_config* c, enum dma_channel_transfer_size size);
+  virtual void channel_config_set_write_increment(dma_channel_config* c,
+                                                  bool incr);
+  virtual void dma_channel_abort(uint channel);
+  virtual void dma_channel_acknowledge_irq0(uint channel);
+  virtual void dma_channel_acknowledge_irq1(uint channel);
+  virtual void dma_channel_claim(uint channel);
+  virtual void dma_channel_cleanup(uint channel);
+  virtual void dma_channel_configure(uint channel,
+                                     const dma_channel_config* config,
+                                     volatile void* write_addr,
+                                     const volatile void* read_addr,
+                                     uint transfer_count, bool trigger);
+  virtual dma_channel_config dma_channel_get_default_config(uint channel);
+  virtual bool dma_channel_get_irq0_status(uint channel);
+  virtual bool dma_channel_get_irq1_status(uint channel);
+  virtual dma_channel_hw_t* dma_channel_hw_addr(uint channel);
+  virtual bool dma_channel_is_busy(uint channel);
+  virtual bool dma_channel_is_claimed(uint channel);
+  virtual void dma_channel_set_config(uint channel,
+                                      const dma_channel_config* config,
+                                      bool trigger);
+  virtual void dma_channel_set_irq0_enabled(uint channel, bool enabled);
+  virtual void dma_channel_set_irq1_enabled(uint channel, bool enabled);
+  virtual void dma_channel_set_read_addr(uint channel,
+                                         const volatile void* read_addr,
+                                         bool trigger);
+  virtual void dma_channel_set_trans_count(uint channel, uint32_t trans_count,
+                                           bool trigger);
+  virtual void dma_channel_set_write_addr(uint channel,
+                                          volatile void* write_addr,
+                                          bool trigger);
+  virtual void dma_channel_start(uint channel);
+  virtual void dma_channel_transfer_from_buffer_now(
+      uint channel, const volatile void* read_addr, uint32_t transfer_count);
+  virtual void dma_channel_transfer_to_buffer_now(uint channel,
+                                                  volatile void* write_addr,
+                                                  uint32_t transfer_count);
+  virtual void dma_channel_unclaim(uint channel);
+  virtual void dma_channel_wait_for_finish_blocking(uint channel);
+  virtual void dma_claim_mask(uint32_t channel_mask);
+  virtual int dma_claim_unused_channel(bool required);
+  virtual int dma_claim_unused_timer(bool required);
+  virtual dma_channel_config dma_get_channel_config(uint channel);
+  virtual int dma_get_irq_num(uint irq_index);
+  virtual uint dma_get_timer_dreq(uint timer_num);
+  virtual void dma_irqn_acknowledge_channel(uint irq_index, uint channel);
+  virtual bool dma_irqn_get_channel_status(uint irq_index, uint channel);
+  virtual void dma_irqn_set_channel_enabled(uint irq_index, uint channel,
+                                            bool enabled);
+  virtual void dma_irqn_set_channel_mask_enabled(uint irq_index,
+                                                 uint32_t channel_mask,
+                                                 bool enabled);
+  virtual void dma_set_irq0_channel_mask_enabled(uint32_t channel_mask,
+                                                 bool enabled);
+  virtual void dma_set_irq1_channel_mask_enabled(uint32_t channel_mask,
+                                                 bool enabled);
+  virtual void dma_sniffer_disable(void);
+  virtual void dma_sniffer_enable(uint channel, uint mode,
+                                  bool force_channel_enable);
+  virtual uint32_t dma_sniffer_get_data_accumulator(void);
+  virtual void dma_sniffer_set_byte_swap_enabled(bool swap);
+  virtual void dma_sniffer_set_data_accumulator(uint32_t seed_value);
+  virtual void dma_sniffer_set_output_invert_enabled(bool invert);
+  virtual void dma_sniffer_set_output_reverse_enabled(bool reverse);
+  virtual void dma_start_channel_mask(uint32_t chan_mask);
+  virtual void dma_timer_claim(uint timer);
+  virtual bool dma_timer_is_claimed(uint timer);
+  virtual void dma_timer_set_fraction(uint timer, uint16_t numerator,
+                                      uint16_t denominator);
+  virtual void dma_timer_unclaim(uint timer);
+  virtual void dma_unclaim_mask(uint32_t channel_mask);
+  virtual void print_dma_ctrl(dma_channel_hw_t* channel);
+#endif  //  __has_include(<hardware/dma.h>) || __has_include(<gmock/gmock.h>)
+
 #if __has_include(<hardware/exception.h>) || __has_include(<gmock/gmock.h>)
   virtual uint exception_get_priority(uint num);
   virtual exception_handler_t exception_get_vtable_handler(

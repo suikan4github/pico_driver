@@ -1,11 +1,16 @@
 # test_SdkWrapper TDD
 
-## SdkWrapper::exception_get_priority()
+## SdkWrapper::dma_channel_get_default_config()
 - [x] Implement member function . 
 - [x] Create test case to fail. 
 - [x] Make it success. 
 - [x] Remove the duplication. 
 
+## SdkWrapper::exception_get_priority()
+- [x] Implement member function . 
+- [x] Create test case to fail. 
+- [x] Make it success. 
+- [x] Remove the duplication. 
 
 ## SdkWrapper::hw_divider_quotient_s32()
 - [x] Implement member function . 
