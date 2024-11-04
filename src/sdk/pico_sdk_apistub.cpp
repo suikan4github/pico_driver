@@ -1026,6 +1026,142 @@ extern "C" uint32_t _weak_to_remainder_u32(divmod_result_t r)
 #endif  // _MSC_VER
 // --------------------------------------------------
 #if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint exception_get_priority(uint num);
+__attribute__((weak)) uint exception_get_priority(uint num)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint _weak_exception_get_priority(uint num)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(
+      false &&
+      "Error : The hardware_exception library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_exception_get_priority=__weak_exception_get_priority")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:exception_get_priority=_weak_exception_get_priority")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" exception_handler_t exception_get_vtable_handler(
+    enum exception_number num);
+__attribute__((weak)) exception_handler_t
+exception_get_vtable_handler(enum exception_number num)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" exception_handler_t _weak_exception_get_vtable_handler(
+    enum exception_number num)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(
+      false &&
+      "Error : The hardware_exception library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_exception_get_vtable_handler=__weak_exception_get_vtable_handler")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:exception_get_vtable_handler=_weak_exception_get_vtable_handler")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void exception_restore_handler(enum exception_number num,
+                                          exception_handler_t original_handler);
+__attribute__((weak)) void exception_restore_handler(
+    enum exception_number num, exception_handler_t original_handler)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_exception_restore_handler(
+    enum exception_number num, exception_handler_t original_handler)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(
+      false &&
+      "Error : The hardware_exception library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_exception_restore_handler=__weak_exception_restore_handler")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:exception_restore_handler=_weak_exception_restore_handler")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" exception_handler_t exception_set_exclusive_handler(
+    enum exception_number num, exception_handler_t handler);
+__attribute__((weak)) exception_handler_t exception_set_exclusive_handler(
+    enum exception_number num, exception_handler_t handler)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" exception_handler_t _weak_exception_set_exclusive_handler(
+    enum exception_number num, exception_handler_t handler)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(
+      false &&
+      "Error : The hardware_exception library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_exception_set_exclusive_handler=__weak_exception_set_exclusive_handler")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:exception_set_exclusive_handler=_weak_exception_set_exclusive_handler")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool exception_set_priority(uint num, uint8_t hardware_priority);
+__attribute__((weak)) bool exception_set_priority(uint num,
+                                                  uint8_t hardware_priority)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_exception_set_priority(uint num,
+                                             uint8_t hardware_priority)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(
+      false &&
+      "Error : The hardware_exception library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_exception_set_priority=__weak_exception_set_priority")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:exception_set_priority=_weak_exception_set_priority")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
 extern "C" void i2c_deinit(i2c_inst_t* i2c);
 __attribute__((weak)) void i2c_deinit(i2c_inst_t* i2c)
 #elif defined(_MSC_VER)  // Microsoft Visual C

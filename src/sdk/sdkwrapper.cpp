@@ -218,6 +218,42 @@ uint32_t rpp_driver::SdkWrapper::to_remainder_u32(divmod_result_t r) {
 #endif  //  __has_include(<hardware/divider.h>) ||
         //  __has_include(<gmock/gmock.h>)
 
+#if __has_include(<hardware/exception.h>) || __has_include(<gmock/gmock.h>)
+// --------------------------------------------------
+extern "C" uint exception_get_priority(uint num);
+uint rpp_driver::SdkWrapper::exception_get_priority(uint num) {
+  return ::exception_get_priority(num);
+}
+// --------------------------------------------------
+extern "C" exception_handler_t exception_get_vtable_handler(
+    enum exception_number num);
+exception_handler_t rpp_driver::SdkWrapper::exception_get_vtable_handler(
+    enum exception_number num) {
+  return ::exception_get_vtable_handler(num);
+}
+// --------------------------------------------------
+extern "C" void exception_restore_handler(enum exception_number num,
+                                          exception_handler_t original_handler);
+void rpp_driver::SdkWrapper::exception_restore_handler(
+    enum exception_number num, exception_handler_t original_handler) {
+  ::exception_restore_handler(num, original_handler);
+}
+// --------------------------------------------------
+extern "C" exception_handler_t exception_set_exclusive_handler(
+    enum exception_number num, exception_handler_t handler);
+exception_handler_t rpp_driver::SdkWrapper::exception_set_exclusive_handler(
+    enum exception_number num, exception_handler_t handler) {
+  return ::exception_set_exclusive_handler(num, handler);
+}
+// --------------------------------------------------
+extern "C" bool exception_set_priority(uint num, uint8_t hardware_priority);
+bool rpp_driver::SdkWrapper::exception_set_priority(uint num,
+                                                    uint8_t hardware_priority) {
+  return ::exception_set_priority(num, hardware_priority);
+}
+#endif  //  __has_include(<hardware/exception.h>) ||
+        //  __has_include(<gmock/gmock.h>)
+
 #if __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
 // --------------------------------------------------
 extern "C" void i2c_deinit(i2c_inst_t* i2c);

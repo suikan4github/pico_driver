@@ -53,6 +53,17 @@ class MockSdkWrapper : public SdkWrapper {
   MOCK_METHOD1(to_quotient_u32, uint32_t(divmod_result_t r));
   MOCK_METHOD1(to_remainder_s32, int32_t(divmod_result_t r));
   MOCK_METHOD1(to_remainder_u32, uint32_t(divmod_result_t r));
+  MOCK_METHOD1(exception_get_priority, uint(uint num));
+  MOCK_METHOD1(exception_get_vtable_handler,
+               exception_handler_t(enum exception_number num));
+  MOCK_METHOD2(exception_restore_handler,
+               void(enum exception_number num,
+                    exception_handler_t original_handler));
+  MOCK_METHOD2(exception_set_exclusive_handler,
+               exception_handler_t(enum exception_number num,
+                                   exception_handler_t handler));
+  MOCK_METHOD2(exception_set_priority,
+               bool(uint num, uint8_t hardware_priority));
   MOCK_METHOD1(i2c_deinit, void(i2c_inst_t* i2c));
   MOCK_METHOD2(i2c_get_dreq, uint(i2c_inst_t* i2c, bool is_tx));
   MOCK_METHOD1(i2c_get_hw, i2c_hw_t*(i2c_inst_t* i2c));

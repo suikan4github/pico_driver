@@ -26,7 +26,11 @@ enum gpio_drive_strength { c, d };
 enum gpio_slew_rate { e, f };
 /// @brief Alternate definition for Google Test build.
 enum pio_mov_status_type { g, h };
+/// @brief Alternate definition for Google Test build.
+enum exception_number { i, j };
 
+//// @brief Alternate definition for Google Test build.
+typedef int exception_handler_t;
 //// @brief Alternate definition for Google Test build.
 typedef int divmod_result_t;
 /// @brief Alternate definition for Google Test build.

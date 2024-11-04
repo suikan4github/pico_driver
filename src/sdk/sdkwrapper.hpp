@@ -126,6 +126,18 @@ virtual void adc_fifo_drain ( void );
 #endif  //  __has_include(<hardware/divider.h>) ||
         //  __has_include(<gmock/gmock.h>)
 
+#if __has_include(<hardware/exception.h>) || __has_include(<gmock/gmock.h>)
+  virtual uint exception_get_priority(uint num);
+  virtual exception_handler_t exception_get_vtable_handler(
+      enum exception_number num);
+  virtual void exception_restore_handler(enum exception_number num,
+                                         exception_handler_t original_handler);
+  virtual exception_handler_t exception_set_exclusive_handler(
+      enum exception_number num, exception_handler_t handler);
+  virtual bool exception_set_priority(uint num, uint8_t hardware_priority);
+#endif  //  __has_include(<hardware/exception.h>) ||
+        //  __has_include(<gmock/gmock.h>)
+
 #if __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
   virtual void i2c_deinit(i2c_inst_t* i2c);
   virtual uint i2c_get_dreq(i2c_inst_t* i2c, bool is_tx);

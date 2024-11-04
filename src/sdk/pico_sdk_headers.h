@@ -15,6 +15,11 @@
 #endif  //  __has_include(<hardware/divider.h>) ||
         //  __has_include(<gmock/gmock.h>)
 
+#if __has_include(<hardware/exception.h>) || __has_include(<gmock/gmock.h>)
+#include <hardware/exception.h>
+#endif  //  __has_include(<hardware/exception.h>) ||
+        //  __has_include(<gmock/gmock.h>)
+
 #if __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
 #include <hardware/i2c.h>
 #endif  //  __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)

@@ -69,6 +69,8 @@ FAKE_VOID_FUNC(adc_gpio_init, uint);
 FAKE_VALUE_FUNC(uint16_t, adc_read);
 
 FAKE_VALUE_FUNC(int32_t, hw_divider_quotient_s32, int32_t, int32_t);
+
+FAKE_VALUE_FUNC(uint, exception_get_priority, uint);
 }
 // The cpp file of the library to test.
 #include "../src/sdk/sdkwrapper.cpp"
@@ -1531,3 +1533,44 @@ TEST(SdkWrapper, hw_divider_quotient_s32) {
   }
   RESET_FAKE(hw_divider_quotient_s32);
 }  // TEST(SdkWrapper, hw_divider_quotient_s32)
+
+// -----------------------------------------------------------
+//
+//  hardware_exception
+//
+// -----------------------------------------------------------
+
+TEST(SdkWrapper, exception_get_priority) {
+  std::random_device rng;
+  ::rpp_driver::SdkWrapper pico;
+  // uniform distribution
+  std::uniform_int_distribution<uint> dist(0, UINT_MAX);
+  uint param_array0[] = {dist(rng), dist(rng)};
+  uint retval_array[std::size(param_array0)] = {dist(rng), dist(rng)};
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(exception_get_priority);
+
+  SET_RETURN_SEQ(exception_get_priority, retval_array, std::size(retval_array));
+
+  // Check whether return values are correctly passed to wrapper.
+  int index = 0;
+  for (auto &&param0 : param_array0) {
+    ASSERT_EQ(pico.exception_get_priority(param0), retval_array[index]);
+    index++;
+  }
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(exception_get_priority_fake.call_count, std::size(retval_array));
+
+  // Check whether parameters were correctly passed from wrapper.
+  index = 0;
+  for (auto &&param0 : param_array0) {
+    // Check the data from test spy. Call order.
+    ASSERT_EQ(fff.call_history[index], (void *)exception_get_priority);
+    // Check the data from test spy. : Parameters.
+    ASSERT_EQ(exception_get_priority_fake.arg0_history[index], param0);
+    index++;
+  }
+  RESET_FAKE(exception_get_priority);
+}  // TEST(SdkWrapper, exception_get_priority)
