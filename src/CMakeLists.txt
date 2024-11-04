@@ -7,13 +7,6 @@ add_library(rpp_driver INTERFACE)
         target_include_directories(rpp_driver INTERFACE .)
 
 
-# Win/Unix specific option. 
-if((${WIN32}) OR (${UNIX}))    
-        target_compile_options(rpp_driver
-                                    INTERFACE
-                                    --coverage
-                                    )
-endif()
 
 add_subdirectory(codec)
 add_subdirectory(i2c)
