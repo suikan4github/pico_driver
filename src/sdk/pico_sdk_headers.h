@@ -24,6 +24,10 @@
 #endif  //  __has_include(<hardware/exception.h>) ||
         //  __has_include(<gmock/gmock.h>)
 
+#if __has_include(<hardware/flash.h>) || __has_include(<gmock/gmock.h>)
+#include <hardware/flash.h>
+#endif  //  __has_include(<hardware/flash.h>) || __has_include(<gmock/gmock.h>)
+
 #if __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
 #include <hardware/i2c.h>
 #endif  //  __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)

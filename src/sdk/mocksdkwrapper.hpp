@@ -156,6 +156,13 @@ class MockSdkWrapper : public SdkWrapper {
                                    exception_handler_t handler));
   MOCK_METHOD2(exception_set_priority,
                bool(uint num, uint8_t hardware_priority));
+  MOCK_METHOD3(flash_do_cmd,
+               void(const uint8_t* txbuf, uint8_t* rxbuf, size_t count));
+  MOCK_METHOD0(flash_flush_cache, void());
+  MOCK_METHOD1(flash_get_unique_id, void(uint8_t* id_out));
+  MOCK_METHOD2(flash_range_erase, void(uint32_t flash_offs, size_t count));
+  MOCK_METHOD3(flash_range_program,
+               void(uint32_t flash_offs, const uint8_t* data, size_t count));
   MOCK_METHOD1(i2c_deinit, void(i2c_inst_t* i2c));
   MOCK_METHOD2(i2c_get_dreq, uint(i2c_inst_t* i2c, bool is_tx));
   MOCK_METHOD1(i2c_get_hw, i2c_hw_t*(i2c_inst_t* i2c));

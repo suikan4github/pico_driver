@@ -2,6 +2,7 @@ hardware adc
 hardware divider
 hardware dma
 hardware exception
+hardware flash
 hardware i2c
 hardware pio
 hardware gpio

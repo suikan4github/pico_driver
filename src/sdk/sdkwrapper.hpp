@@ -232,6 +232,15 @@ virtual void adc_fifo_drain ( void );
 #endif  //  __has_include(<hardware/exception.h>) ||
         //  __has_include(<gmock/gmock.h>)
 
+#if __has_include(<hardware/flash.h>) || __has_include(<gmock/gmock.h>)
+  virtual void flash_do_cmd(const uint8_t* txbuf, uint8_t* rxbuf, size_t count);
+  virtual void flash_flush_cache(void);
+  virtual void flash_get_unique_id(uint8_t* id_out);
+  virtual void flash_range_erase(uint32_t flash_offs, size_t count);
+  virtual void flash_range_program(uint32_t flash_offs, const uint8_t* data,
+                                   size_t count);
+#endif  //  __has_include(<hardware/flash.h>) || __has_include(<gmock/gmock.h>)
+
 #if __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
   virtual void i2c_deinit(i2c_inst_t* i2c);
   virtual uint i2c_get_dreq(i2c_inst_t* i2c, bool is_tx);

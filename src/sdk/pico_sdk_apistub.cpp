@@ -2684,6 +2684,121 @@ extern "C" bool _weak_exception_set_priority(uint num,
 #endif  // _MSC_VER
 // --------------------------------------------------
 #if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void flash_do_cmd(const uint8_t* txbuf, uint8_t* rxbuf,
+                             size_t count);
+__attribute__((weak)) void flash_do_cmd(const uint8_t* txbuf, uint8_t* rxbuf,
+                                        size_t count)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_flash_do_cmd(const uint8_t* txbuf, uint8_t* rxbuf,
+                                   size_t count)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_flash library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_flash_do_cmd=__weak_flash_do_cmd")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:flash_do_cmd=_weak_flash_do_cmd")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void flash_flush_cache(void);
+__attribute__((weak)) void flash_flush_cache(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_flash_flush_cache(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_flash library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_flash_flush_cache=__weak_flash_flush_cache")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:flash_flush_cache=_weak_flash_flush_cache")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void flash_get_unique_id(uint8_t* id_out);
+__attribute__((weak)) void flash_get_unique_id(uint8_t* id_out)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_flash_get_unique_id(uint8_t* id_out)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_flash library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_flash_get_unique_id=__weak_flash_get_unique_id")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:flash_get_unique_id=_weak_flash_get_unique_id")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void flash_range_erase(uint32_t flash_offs, size_t count);
+__attribute__((weak)) void flash_range_erase(uint32_t flash_offs, size_t count)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_flash_range_erase(uint32_t flash_offs, size_t count)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_flash library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_flash_range_erase=__weak_flash_range_erase")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:flash_range_erase=_weak_flash_range_erase")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void flash_range_program(uint32_t flash_offs, const uint8_t* data,
+                                    size_t count);
+__attribute__((weak)) void flash_range_program(uint32_t flash_offs,
+                                               const uint8_t* data,
+                                               size_t count)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_flash_range_program(uint32_t flash_offs,
+                                          const uint8_t* data, size_t count)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_flash library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_flash_range_program=__weak_flash_range_program")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:flash_range_program=_weak_flash_range_program")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
 extern "C" void i2c_deinit(i2c_inst_t* i2c);
 __attribute__((weak)) void i2c_deinit(i2c_inst_t* i2c)
 #elif defined(_MSC_VER)  // Microsoft Visual C

@@ -70,6 +70,7 @@ FAKE_VALUE_FUNC(uint16_t, adc_read);
 FAKE_VALUE_FUNC(int32_t, hw_divider_quotient_s32, int32_t, int32_t);
 FAKE_VALUE_FUNC(dma_channel_config, dma_channel_get_default_config, uint);
 FAKE_VALUE_FUNC(uint, exception_get_priority, uint);
+FAKE_VOID_FUNC(flash_range_erase, uint32_t, size_t);
 }
 // The cpp file of the library to test.
 #include "../src/sdk/sdkwrapper.cpp"
@@ -1577,43 +1578,46 @@ TEST(SdkWrapper, dma_channel_get_default_config) {
   }
   RESET_FAKE(dma_channel_get_default_config);
 }  // TEST(SdkWrapper, dma_channel_get_default_config)
+
 // -----------------------------------------------------------
 //
-//  hardware_exception
+//  hardware_flash
+//  virtual void flash_range_erase(uint32_t flash_offs, size_t count);
 //
 // -----------------------------------------------------------
 
-TEST(SdkWrapper, exception_get_priority) {
+TEST(SdkWrapper, flash_range_erase) {
   std::random_device rng;
   ::rpp_driver::SdkWrapper pico;
   // uniform distribution
-  std::uniform_int_distribution<uint> dist(0, UINT_MAX);
-  uint param_array0[] = {dist(rng), dist(rng)};
-  uint retval_array[std::size(param_array0)] = {dist(rng), dist(rng)};
+  std::uniform_int_distribution<uint32_t> dist0(0, UINT32_MAX);
+  std::uniform_int_distribution<size_t> dist1(0, SIZE_MAX);
+  uint32_t param_array0[] = {dist0(rng), dist0(rng)};
+  size_t param_array1[] = {dist1(rng), dist1(rng)};
 
   FFF_RESET_HISTORY();
-  RESET_FAKE(exception_get_priority);
+  RESET_FAKE(flash_range_erase);
 
-  SET_RETURN_SEQ(exception_get_priority, retval_array, std::size(retval_array));
-
-  // Check whether return values are correctly passed to wrapper.
-  int index = 0;
   for (auto &&param0 : param_array0) {
-    ASSERT_EQ(pico.exception_get_priority(param0), retval_array[index]);
-    index++;
+    for (auto &&param1 : param_array1) {
+      pico.flash_range_erase(param0, param1);
+    }
   }
-
   // Check the data from test spy. How many time called?
-  ASSERT_EQ(exception_get_priority_fake.call_count, std::size(retval_array));
+  ASSERT_EQ(flash_range_erase_fake.call_count,
+            std::size(param_array0) * std::size(param_array1));
 
   // Check whether parameters were correctly passed from wrapper.
-  index = 0;
+  int index = 0;
   for (auto &&param0 : param_array0) {
-    // Check the data from test spy. Call order.
-    ASSERT_EQ(fff.call_history[index], (void *)exception_get_priority);
-    // Check the data from test spy. : Parameters.
-    ASSERT_EQ(exception_get_priority_fake.arg0_history[index], param0);
-    index++;
+    for (auto &&param1 : param_array1) {
+      // Check the data from test spy. Call order.
+      ASSERT_EQ(fff.call_history[index], (void *)flash_range_erase);
+      // Check the data from test spy. : Parameters.
+      ASSERT_EQ(flash_range_erase_fake.arg0_history[index], param0);
+      ASSERT_EQ(flash_range_erase_fake.arg1_history[index], param1);
+      index++;
+    }
   }
-  RESET_FAKE(exception_get_priority);
-}  // TEST(SdkWrapper, exception_get_priority)
+  RESET_FAKE(flash_range_erase);
+}  // TEST(SdkWrapper, flash_range_erase)

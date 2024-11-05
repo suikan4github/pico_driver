@@ -633,6 +633,38 @@ bool rpp_driver::SdkWrapper::exception_set_priority(uint num,
 #endif  //  __has_include(<hardware/exception.h>) ||
         //  __has_include(<gmock/gmock.h>)
 
+#if __has_include(<hardware/flash.h>) || __has_include(<gmock/gmock.h>)
+// --------------------------------------------------
+extern "C" void flash_do_cmd(const uint8_t* txbuf, uint8_t* rxbuf,
+                             size_t count);
+void rpp_driver::SdkWrapper::flash_do_cmd(const uint8_t* txbuf, uint8_t* rxbuf,
+                                          size_t count) {
+  ::flash_do_cmd(txbuf, rxbuf, count);
+}
+// --------------------------------------------------
+extern "C" void flash_flush_cache(void);
+void rpp_driver::SdkWrapper::flash_flush_cache(void) { ::flash_flush_cache(); }
+// --------------------------------------------------
+extern "C" void flash_get_unique_id(uint8_t* id_out);
+void rpp_driver::SdkWrapper::flash_get_unique_id(uint8_t* id_out) {
+  ::flash_get_unique_id(id_out);
+}
+// --------------------------------------------------
+extern "C" void flash_range_erase(uint32_t flash_offs, size_t count);
+void rpp_driver::SdkWrapper::flash_range_erase(uint32_t flash_offs,
+                                               size_t count) {
+  ::flash_range_erase(flash_offs, count);
+}
+// --------------------------------------------------
+extern "C" void flash_range_program(uint32_t flash_offs, const uint8_t* data,
+                                    size_t count);
+void rpp_driver::SdkWrapper::flash_range_program(uint32_t flash_offs,
+                                                 const uint8_t* data,
+                                                 size_t count) {
+  ::flash_range_program(flash_offs, data, count);
+}
+#endif  //  __has_include(<hardware/flash.h>) || __has_include(<gmock/gmock.h>)
+
 #if __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
 // --------------------------------------------------
 extern "C" void i2c_deinit(i2c_inst_t* i2c);

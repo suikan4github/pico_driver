@@ -1,5 +1,13 @@
 # test_SdkWrapper TDD
 
+
+## SdkWrapper::flash_range_erase()
+- [x] Implement member function . 
+- [x] Create test case to fail. 
+- [x] Make it success. 
+- [x] Remove the duplication. 
+
+
 ## SdkWrapper::dma_channel_get_default_config()
 - [x] Implement member function . 
 - [x] Create test case to fail. 
