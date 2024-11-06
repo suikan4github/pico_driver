@@ -203,6 +203,51 @@ class MockSdkWrapper : public SdkWrapper {
   MOCK_METHOD6(i2c_write_timeout_us,
                int(i2c_inst_t* i2c, uint8_t addr, const uint8_t* src,
                    size_t len, bool nostop, uint timeout_us));
+  MOCK_METHOD3(interp_add_accumulater,
+               void(interp_hw_t* interp, uint lane, uint32_t val));
+  MOCK_METHOD2(interp_claim_lane, void(interp_hw_t* interp, uint lane));
+  MOCK_METHOD2(interp_claim_lane_mask,
+               void(interp_hw_t* interp, uint lane_mask));
+  MOCK_METHOD2(interp_config_set_add_raw, void(interp_config* c, bool add_raw));
+  MOCK_METHOD2(interp_config_set_blend, void(interp_config* c, bool blend));
+  MOCK_METHOD2(interp_config_set_clamp, void(interp_config* c, bool clamp));
+  MOCK_METHOD2(interp_config_set_cross_input,
+               void(interp_config* c, bool cross_input));
+  MOCK_METHOD2(interp_config_set_cross_result,
+               void(interp_config* c, bool cross_result));
+  MOCK_METHOD2(interp_config_set_force_bits, void(interp_config* c, uint bits));
+  MOCK_METHOD3(interp_config_set_mask,
+               void(interp_config* c, uint mask_lsb, uint mask_msb));
+  MOCK_METHOD2(interp_config_set_shift, void(interp_config* c, uint shift));
+  MOCK_METHOD2(interp_config_set_signed, void(interp_config* c, bool _signed));
+  MOCK_METHOD0(interp_default_config, interp_config());
+  MOCK_METHOD2(interp_get_accumulator,
+               uint32_t(interp_hw_t* interp, uint lane));
+  MOCK_METHOD2(interp_get_base, uint32_t(interp_hw_t* interp, uint lane));
+  MOCK_METHOD2(interp_get_raw, uint32_t(interp_hw_t* interp, uint lane));
+  MOCK_METHOD1(interp_index, uint(interp_hw_t* interp));
+  MOCK_METHOD2(interp_lane_is_claimed, bool(interp_hw_t* interp, uint lane));
+  MOCK_METHOD1(interp_peek_full_result, uint32_t(interp_hw_t* interp));
+  MOCK_METHOD2(interp_peek_lane_result,
+               uint32_t(interp_hw_t* interp, uint lane));
+  MOCK_METHOD1(interp_pop_full_result, uint32_t(interp_hw_t* interp));
+  MOCK_METHOD2(interp_pop_lane_result,
+               uint32_t(interp_hw_t* interp, uint lane));
+  MOCK_METHOD2(interp_restore,
+               void(interp_hw_t* interp, interp_hw_save_t* saver));
+  MOCK_METHOD2(interp_save, void(interp_hw_t* interp, interp_hw_save_t* saver));
+  MOCK_METHOD3(interp_set_accumulator,
+               void(interp_hw_t* interp, uint lane, uint32_t val));
+  MOCK_METHOD3(interp_set_base,
+               void(interp_hw_t* interp, uint lane, uint32_t val));
+  MOCK_METHOD2(interp_set_base_both, void(interp_hw_t* interp, uint32_t val));
+  MOCK_METHOD3(interp_set_config,
+               void(interp_hw_t* interp, uint lane, interp_config* config));
+  MOCK_METHOD3(interp_set_force_bits,
+               void(interp_hw_t* interp, uint lane, uint bits));
+  MOCK_METHOD2(interp_unclaim_lane, void(interp_hw_t* interp, uint lane));
+  MOCK_METHOD2(interp_unclaim_lane_mask,
+               void(interp_hw_t* interp, uint lane_mask));
   MOCK_METHOD2(pio_add_program, int(PIO pio, const pio_program_t* program));
   MOCK_METHOD3(pio_add_program_at_offset,
                int(PIO pio, const pio_program_t* program, uint offset));

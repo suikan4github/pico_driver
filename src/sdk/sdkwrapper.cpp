@@ -819,6 +819,198 @@ int rpp_driver::SdkWrapper::i2c_write_timeout_us(i2c_inst_t* i2c, uint8_t addr,
 }
 #endif  //  __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
 
+#if __has_include(<hardware/interp.h>) || __has_include(<gmock/gmock.h>)
+// --------------------------------------------------
+extern "C" void interp_add_accumulater(interp_hw_t* interp, uint lane,
+                                       uint32_t val);
+void rpp_driver::SdkWrapper::interp_add_accumulater(interp_hw_t* interp,
+                                                    uint lane, uint32_t val) {
+  ::interp_add_accumulater(interp, lane, val);
+}
+// --------------------------------------------------
+extern "C" void interp_claim_lane(interp_hw_t* interp, uint lane);
+void rpp_driver::SdkWrapper::interp_claim_lane(interp_hw_t* interp, uint lane) {
+  ::interp_claim_lane(interp, lane);
+}
+// --------------------------------------------------
+extern "C" void interp_claim_lane_mask(interp_hw_t* interp, uint lane_mask);
+void rpp_driver::SdkWrapper::interp_claim_lane_mask(interp_hw_t* interp,
+                                                    uint lane_mask) {
+  ::interp_claim_lane_mask(interp, lane_mask);
+}
+// --------------------------------------------------
+extern "C" void interp_config_set_add_raw(interp_config* c, bool add_raw);
+void rpp_driver::SdkWrapper::interp_config_set_add_raw(interp_config* c,
+                                                       bool add_raw) {
+  ::interp_config_set_add_raw(c, add_raw);
+}
+// --------------------------------------------------
+extern "C" void interp_config_set_blend(interp_config* c, bool blend);
+void rpp_driver::SdkWrapper::interp_config_set_blend(interp_config* c,
+                                                     bool blend) {
+  ::interp_config_set_blend(c, blend);
+}
+// --------------------------------------------------
+extern "C" void interp_config_set_clamp(interp_config* c, bool clamp);
+void rpp_driver::SdkWrapper::interp_config_set_clamp(interp_config* c,
+                                                     bool clamp) {
+  ::interp_config_set_clamp(c, clamp);
+}
+// --------------------------------------------------
+extern "C" void interp_config_set_cross_input(interp_config* c,
+                                              bool cross_input);
+void rpp_driver::SdkWrapper::interp_config_set_cross_input(interp_config* c,
+                                                           bool cross_input) {
+  ::interp_config_set_cross_input(c, cross_input);
+}
+// --------------------------------------------------
+extern "C" void interp_config_set_cross_result(interp_config* c,
+                                               bool cross_result);
+void rpp_driver::SdkWrapper::interp_config_set_cross_result(interp_config* c,
+                                                            bool cross_result) {
+  ::interp_config_set_cross_result(c, cross_result);
+}
+// --------------------------------------------------
+extern "C" void interp_config_set_force_bits(interp_config* c, uint bits);
+void rpp_driver::SdkWrapper::interp_config_set_force_bits(interp_config* c,
+                                                          uint bits) {
+  ::interp_config_set_force_bits(c, bits);
+}
+// --------------------------------------------------
+extern "C" void interp_config_set_mask(interp_config* c, uint mask_lsb,
+                                       uint mask_msb);
+void rpp_driver::SdkWrapper::interp_config_set_mask(interp_config* c,
+                                                    uint mask_lsb,
+                                                    uint mask_msb) {
+  ::interp_config_set_mask(c, mask_lsb, mask_msb);
+}
+// --------------------------------------------------
+extern "C" void interp_config_set_shift(interp_config* c, uint shift);
+void rpp_driver::SdkWrapper::interp_config_set_shift(interp_config* c,
+                                                     uint shift) {
+  ::interp_config_set_shift(c, shift);
+}
+// --------------------------------------------------
+extern "C" void interp_config_set_signed(interp_config* c, bool _signed);
+void rpp_driver::SdkWrapper::interp_config_set_signed(interp_config* c,
+                                                      bool _signed) {
+  ::interp_config_set_signed(c, _signed);
+}
+// --------------------------------------------------
+extern "C" interp_config interp_default_config(void);
+interp_config rpp_driver::SdkWrapper::interp_default_config(void) {
+  return ::interp_default_config();
+}
+// --------------------------------------------------
+extern "C" uint32_t interp_get_accumulator(interp_hw_t* interp, uint lane);
+uint32_t rpp_driver::SdkWrapper::interp_get_accumulator(interp_hw_t* interp,
+                                                        uint lane) {
+  return ::interp_get_accumulator(interp, lane);
+}
+// --------------------------------------------------
+extern "C" uint32_t interp_get_base(interp_hw_t* interp, uint lane);
+uint32_t rpp_driver::SdkWrapper::interp_get_base(interp_hw_t* interp,
+                                                 uint lane) {
+  return ::interp_get_base(interp, lane);
+}
+// --------------------------------------------------
+extern "C" uint32_t interp_get_raw(interp_hw_t* interp, uint lane);
+uint32_t rpp_driver::SdkWrapper::interp_get_raw(interp_hw_t* interp,
+                                                uint lane) {
+  return ::interp_get_raw(interp, lane);
+}
+// --------------------------------------------------
+extern "C" uint interp_index(interp_hw_t* interp);
+uint rpp_driver::SdkWrapper::interp_index(interp_hw_t* interp) {
+  return ::interp_index(interp);
+}
+// --------------------------------------------------
+extern "C" bool interp_lane_is_claimed(interp_hw_t* interp, uint lane);
+bool rpp_driver::SdkWrapper::interp_lane_is_claimed(interp_hw_t* interp,
+                                                    uint lane) {
+  return ::interp_lane_is_claimed(interp, lane);
+}
+// --------------------------------------------------
+extern "C" uint32_t interp_peek_full_result(interp_hw_t* interp);
+uint32_t rpp_driver::SdkWrapper::interp_peek_full_result(interp_hw_t* interp) {
+  return ::interp_peek_full_result(interp);
+}
+// --------------------------------------------------
+extern "C" uint32_t interp_peek_lane_result(interp_hw_t* interp, uint lane);
+uint32_t rpp_driver::SdkWrapper::interp_peek_lane_result(interp_hw_t* interp,
+                                                         uint lane) {
+  return ::interp_peek_lane_result(interp, lane);
+}
+// --------------------------------------------------
+extern "C" uint32_t interp_pop_full_result(interp_hw_t* interp);
+uint32_t rpp_driver::SdkWrapper::interp_pop_full_result(interp_hw_t* interp) {
+  return ::interp_pop_full_result(interp);
+}
+// --------------------------------------------------
+extern "C" uint32_t interp_pop_lane_result(interp_hw_t* interp, uint lane);
+uint32_t rpp_driver::SdkWrapper::interp_pop_lane_result(interp_hw_t* interp,
+                                                        uint lane) {
+  return ::interp_pop_lane_result(interp, lane);
+}
+// --------------------------------------------------
+extern "C" void interp_restore(interp_hw_t* interp, interp_hw_save_t* saver);
+void rpp_driver::SdkWrapper::interp_restore(interp_hw_t* interp,
+                                            interp_hw_save_t* saver) {
+  ::interp_restore(interp, saver);
+}
+// --------------------------------------------------
+extern "C" void interp_save(interp_hw_t* interp, interp_hw_save_t* saver);
+void rpp_driver::SdkWrapper::interp_save(interp_hw_t* interp,
+                                         interp_hw_save_t* saver) {
+  ::interp_save(interp, saver);
+}
+// --------------------------------------------------
+extern "C" void interp_set_accumulator(interp_hw_t* interp, uint lane,
+                                       uint32_t val);
+void rpp_driver::SdkWrapper::interp_set_accumulator(interp_hw_t* interp,
+                                                    uint lane, uint32_t val) {
+  ::interp_set_accumulator(interp, lane, val);
+}
+// --------------------------------------------------
+extern "C" void interp_set_base(interp_hw_t* interp, uint lane, uint32_t val);
+void rpp_driver::SdkWrapper::interp_set_base(interp_hw_t* interp, uint lane,
+                                             uint32_t val) {
+  ::interp_set_base(interp, lane, val);
+}
+// --------------------------------------------------
+extern "C" void interp_set_base_both(interp_hw_t* interp, uint32_t val);
+void rpp_driver::SdkWrapper::interp_set_base_both(interp_hw_t* interp,
+                                                  uint32_t val) {
+  ::interp_set_base_both(interp, val);
+}
+// --------------------------------------------------
+extern "C" void interp_set_config(interp_hw_t* interp, uint lane,
+                                  interp_config* config);
+void rpp_driver::SdkWrapper::interp_set_config(interp_hw_t* interp, uint lane,
+                                               interp_config* config) {
+  ::interp_set_config(interp, lane, config);
+}
+// --------------------------------------------------
+extern "C" void interp_set_force_bits(interp_hw_t* interp, uint lane,
+                                      uint bits);
+void rpp_driver::SdkWrapper::interp_set_force_bits(interp_hw_t* interp,
+                                                   uint lane, uint bits) {
+  ::interp_set_force_bits(interp, lane, bits);
+}
+// --------------------------------------------------
+extern "C" void interp_unclaim_lane(interp_hw_t* interp, uint lane);
+void rpp_driver::SdkWrapper::interp_unclaim_lane(interp_hw_t* interp,
+                                                 uint lane) {
+  ::interp_unclaim_lane(interp, lane);
+}
+// --------------------------------------------------
+extern "C" void interp_unclaim_lane_mask(interp_hw_t* interp, uint lane_mask);
+void rpp_driver::SdkWrapper::interp_unclaim_lane_mask(interp_hw_t* interp,
+                                                      uint lane_mask) {
+  ::interp_unclaim_lane_mask(interp, lane_mask);
+}
+#endif  //  __has_include(<hardware/interp.h>) || __has_include(<gmock/gmock.h>)
+
 #if __has_include(<hardware/pio.h>) || __has_include(<gmock/gmock.h>)
 // --------------------------------------------------
 extern "C" int pio_add_program(PIO pio, const pio_program_t* program);

@@ -282,6 +282,46 @@ virtual void adc_fifo_drain ( void );
                                    uint timeout_us);
 #endif  //  __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
 
+#if __has_include(<hardware/interp.h>) || __has_include(<gmock/gmock.h>)
+  virtual void interp_add_accumulater(interp_hw_t* interp, uint lane,
+                                      uint32_t val);
+  virtual void interp_claim_lane(interp_hw_t* interp, uint lane);
+  virtual void interp_claim_lane_mask(interp_hw_t* interp, uint lane_mask);
+  virtual void interp_config_set_add_raw(interp_config* c, bool add_raw);
+  virtual void interp_config_set_blend(interp_config* c, bool blend);
+  virtual void interp_config_set_clamp(interp_config* c, bool clamp);
+  virtual void interp_config_set_cross_input(interp_config* c,
+                                             bool cross_input);
+  virtual void interp_config_set_cross_result(interp_config* c,
+                                              bool cross_result);
+  virtual void interp_config_set_force_bits(interp_config* c, uint bits);
+  virtual void interp_config_set_mask(interp_config* c, uint mask_lsb,
+                                      uint mask_msb);
+  virtual void interp_config_set_shift(interp_config* c, uint shift);
+  virtual void interp_config_set_signed(interp_config* c, bool _signed);
+  virtual interp_config interp_default_config(void);
+  virtual uint32_t interp_get_accumulator(interp_hw_t* interp, uint lane);
+  virtual uint32_t interp_get_base(interp_hw_t* interp, uint lane);
+  virtual uint32_t interp_get_raw(interp_hw_t* interp, uint lane);
+  virtual uint interp_index(interp_hw_t* interp);
+  virtual bool interp_lane_is_claimed(interp_hw_t* interp, uint lane);
+  virtual uint32_t interp_peek_full_result(interp_hw_t* interp);
+  virtual uint32_t interp_peek_lane_result(interp_hw_t* interp, uint lane);
+  virtual uint32_t interp_pop_full_result(interp_hw_t* interp);
+  virtual uint32_t interp_pop_lane_result(interp_hw_t* interp, uint lane);
+  virtual void interp_restore(interp_hw_t* interp, interp_hw_save_t* saver);
+  virtual void interp_save(interp_hw_t* interp, interp_hw_save_t* saver);
+  virtual void interp_set_accumulator(interp_hw_t* interp, uint lane,
+                                      uint32_t val);
+  virtual void interp_set_base(interp_hw_t* interp, uint lane, uint32_t val);
+  virtual void interp_set_base_both(interp_hw_t* interp, uint32_t val);
+  virtual void interp_set_config(interp_hw_t* interp, uint lane,
+                                 interp_config* config);
+  virtual void interp_set_force_bits(interp_hw_t* interp, uint lane, uint bits);
+  virtual void interp_unclaim_lane(interp_hw_t* interp, uint lane);
+  virtual void interp_unclaim_lane_mask(interp_hw_t* interp, uint lane_mask);
+#endif  //  __has_include(<hardware/interp.h>) || __has_include(<gmock/gmock.h>)
+
 #if __has_include(<hardware/pio.h>) || __has_include(<gmock/gmock.h>)
   virtual int pio_add_program(PIO pio, const pio_program_t* program);
   virtual int pio_add_program_at_offset(PIO pio, const pio_program_t* program,

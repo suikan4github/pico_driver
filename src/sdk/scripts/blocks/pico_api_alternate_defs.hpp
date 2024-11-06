@@ -32,6 +32,12 @@ enum exception_number { i, j };
 enum dma_channel_transfer_size { k, l };
 
 //// @brief Alternate definition for Google Test build.
+typedef int interp_hw_t;
+//// @brief Alternate definition for Google Test build.
+typedef int interp_config;
+//// @brief Alternate definition for Google Test build.
+typedef int interp_hw_save_t;
+//// @brief Alternate definition for Google Test build.
 typedef int dma_channel_hw_t;
 //// @brief Alternate definition for Google Test build.
 typedef int dma_channel_config;

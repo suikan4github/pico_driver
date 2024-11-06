@@ -4,6 +4,7 @@ hardware dma
 hardware exception
 hardware flash
 hardware i2c
+hardware interp
 hardware pio
 hardware gpio
 hardware clocks

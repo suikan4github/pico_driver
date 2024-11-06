@@ -71,6 +71,7 @@ FAKE_VALUE_FUNC(int32_t, hw_divider_quotient_s32, int32_t, int32_t);
 FAKE_VALUE_FUNC(dma_channel_config, dma_channel_get_default_config, uint);
 FAKE_VALUE_FUNC(uint, exception_get_priority, uint);
 FAKE_VOID_FUNC(flash_range_erase, uint32_t, size_t);
+FAKE_VALUE_FUNC(uint, interp_index, interp_hw_t *);
 }
 // The cpp file of the library to test.
 #include "../src/sdk/sdkwrapper.cpp"
@@ -1621,3 +1622,49 @@ TEST(SdkWrapper, flash_range_erase) {
   }
   RESET_FAKE(flash_range_erase);
 }  // TEST(SdkWrapper, flash_range_erase)
+
+// -----------------------------------------------------------
+//
+//  hardware_interp
+//  virtual uint interp_index(interp_hw_t *interp);
+//
+// -----------------------------------------------------------
+
+TEST(SdkWrapper, interp_index) {
+  std::random_device rng;
+  ::rpp_driver::SdkWrapper pico;
+  // uniform distribution
+  std::uniform_int_distribution<uint> param_dist(0, UINT_MAX);
+  std::uniform_int_distribution<uint> retval_dist(0, UINT_MAX);
+  interp_hw_t *param_array0[] = {
+      reinterpret_cast<interp_hw_t *>(param_dist(rng)),
+      reinterpret_cast<interp_hw_t *>(param_dist(rng))};
+  uint retval_array[std::size(param_array0)] = {retval_dist(rng),
+                                                retval_dist(rng)};
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(interp_index);
+
+  SET_RETURN_SEQ(interp_index, retval_array, std::size(retval_array));
+
+  // Check whether return values are correctly passed to wrapper.
+  int index = 0;
+  for (auto &&param0 : param_array0) {
+    ASSERT_EQ(pico.interp_index(param0), retval_array[index]);
+    index++;
+  }
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(interp_index_fake.call_count, std::size(retval_array));
+
+  // Check whether parameters were correctly passed from wrapper.
+  index = 0;
+  for (auto &&param0 : param_array0) {
+    // Check the data from test spy. Call order.
+    ASSERT_EQ(fff.call_history[index], (void *)interp_index);
+    // Check the data from test spy. : Parameters.
+    ASSERT_EQ(interp_index_fake.arg0_history[index], param0);
+    index++;
+  }
+  RESET_FAKE(interp_index);
+}  // TEST(SdkWrapper, interp_index)
