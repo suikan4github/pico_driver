@@ -1,5 +1,11 @@
 # test_SdkWrapper TDD
 
+## SdkWrapper::irq_is_enabled()
+- [x] Implement member function . 
+- [] Create test case to fail. 
+- [] Make it success. 
+- [] Remove the duplication. 
+
 ## SdkWrapper::interp_index()
 - [x] Implement member function . 
 - [x] Create test case to fail. 

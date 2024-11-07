@@ -248,6 +248,34 @@ class MockSdkWrapper : public SdkWrapper {
   MOCK_METHOD2(interp_unclaim_lane, void(interp_hw_t* interp, uint lane));
   MOCK_METHOD2(interp_unclaim_lane_mask,
                void(interp_hw_t* interp, uint lane_mask));
+  MOCK_METHOD0(__unhandled_user_irq, void());
+  MOCK_METHOD3(irq_add_shared_handler,
+               void(uint num, irq_handler_t handler, uint8_t order_priority));
+  MOCK_METHOD2(irq_assign_to_ns, void(uint irq_num, bool ns));
+  MOCK_METHOD1(irq_clear, void(uint int_num));
+  MOCK_METHOD1(irq_get_exclusive_handler, irq_handler_t(uint num));
+  MOCK_METHOD1(irq_get_priority, uint(uint num));
+  MOCK_METHOD1(irq_get_vtable_handler, irq_handler_t(uint num));
+  MOCK_METHOD1(irq_has_shared_handler, bool(uint num));
+  MOCK_METHOD0(irq_init_priorities, void());
+  MOCK_METHOD1(irq_is_enabled, bool(uint num));
+  MOCK_METHOD2(irq_remove_handler, void(uint num, irq_handler_t handler));
+  MOCK_METHOD2(irq_set_enabled, void(uint num, bool enabled));
+  MOCK_METHOD2(irq_set_exclusive_handler,
+               void(uint num, irq_handler_t handler));
+  MOCK_METHOD2(irq_set_mask_enabled, void(uint32_t mask, bool enabled));
+  MOCK_METHOD3(irq_set_mask_n_enabled,
+               void(uint n, uint32_t mask, bool enabled));
+  MOCK_METHOD1(irq_set_pending, void(uint num));
+  MOCK_METHOD2(irq_set_priority, void(uint num, uint8_t hardware_priority));
+  MOCK_METHOD2(irq_set_riscv_vector_handler,
+               irq_handler_t(enum riscv_vector_num index,
+                             irq_handler_t handler));
+  MOCK_METHOD0(runtime_init_per_core_irq_priorities, void());
+  MOCK_METHOD1(user_irq_claim, void(uint irq_num));
+  MOCK_METHOD1(user_irq_claim_unused, int(bool required));
+  MOCK_METHOD1(user_irq_is_claimed, bool(uint irq_num));
+  MOCK_METHOD1(user_irq_unclaim, void(uint irq_num));
   MOCK_METHOD2(pio_add_program, int(PIO pio, const pio_program_t* program));
   MOCK_METHOD3(pio_add_program_at_offset,
                int(PIO pio, const pio_program_t* program, uint offset));

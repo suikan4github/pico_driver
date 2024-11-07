@@ -1011,6 +1011,131 @@ void rpp_driver::SdkWrapper::interp_unclaim_lane_mask(interp_hw_t* interp,
 }
 #endif  //  __has_include(<hardware/interp.h>) || __has_include(<gmock/gmock.h>)
 
+#if __has_include(<hardware/irq.h>) || __has_include(<gmock/gmock.h>)
+// --------------------------------------------------
+extern "C" void __unhandled_user_irq(void);
+void rpp_driver::SdkWrapper::__unhandled_user_irq(void) {
+  ::__unhandled_user_irq();
+}
+// --------------------------------------------------
+extern "C" void irq_add_shared_handler(uint num, irq_handler_t handler,
+                                       uint8_t order_priority);
+void rpp_driver::SdkWrapper::irq_add_shared_handler(uint num,
+                                                    irq_handler_t handler,
+                                                    uint8_t order_priority) {
+  ::irq_add_shared_handler(num, handler, order_priority);
+}
+// --------------------------------------------------
+extern "C" void irq_assign_to_ns(uint irq_num, bool ns);
+void rpp_driver::SdkWrapper::irq_assign_to_ns(uint irq_num, bool ns) {
+  ::irq_assign_to_ns(irq_num, ns);
+}
+// --------------------------------------------------
+extern "C" void irq_clear(uint int_num);
+void rpp_driver::SdkWrapper::irq_clear(uint int_num) { ::irq_clear(int_num); }
+// --------------------------------------------------
+extern "C" irq_handler_t irq_get_exclusive_handler(uint num);
+irq_handler_t rpp_driver::SdkWrapper::irq_get_exclusive_handler(uint num) {
+  return ::irq_get_exclusive_handler(num);
+}
+// --------------------------------------------------
+extern "C" uint irq_get_priority(uint num);
+uint rpp_driver::SdkWrapper::irq_get_priority(uint num) {
+  return ::irq_get_priority(num);
+}
+// --------------------------------------------------
+extern "C" irq_handler_t irq_get_vtable_handler(uint num);
+irq_handler_t rpp_driver::SdkWrapper::irq_get_vtable_handler(uint num) {
+  return ::irq_get_vtable_handler(num);
+}
+// --------------------------------------------------
+extern "C" bool irq_has_shared_handler(uint num);
+bool rpp_driver::SdkWrapper::irq_has_shared_handler(uint num) {
+  return ::irq_has_shared_handler(num);
+}
+// --------------------------------------------------
+extern "C" void irq_init_priorities(void);
+void rpp_driver::SdkWrapper::irq_init_priorities(void) {
+  ::irq_init_priorities();
+}
+// --------------------------------------------------
+extern "C" bool irq_is_enabled(uint num);
+bool rpp_driver::SdkWrapper::irq_is_enabled(uint num) {
+  return ::irq_is_enabled(num);
+}
+// --------------------------------------------------
+extern "C" void irq_remove_handler(uint num, irq_handler_t handler);
+void rpp_driver::SdkWrapper::irq_remove_handler(uint num,
+                                                irq_handler_t handler) {
+  ::irq_remove_handler(num, handler);
+}
+// --------------------------------------------------
+extern "C" void irq_set_enabled(uint num, bool enabled);
+void rpp_driver::SdkWrapper::irq_set_enabled(uint num, bool enabled) {
+  ::irq_set_enabled(num, enabled);
+}
+// --------------------------------------------------
+extern "C" void irq_set_exclusive_handler(uint num, irq_handler_t handler);
+void rpp_driver::SdkWrapper::irq_set_exclusive_handler(uint num,
+                                                       irq_handler_t handler) {
+  ::irq_set_exclusive_handler(num, handler);
+}
+// --------------------------------------------------
+extern "C" void irq_set_mask_enabled(uint32_t mask, bool enabled);
+void rpp_driver::SdkWrapper::irq_set_mask_enabled(uint32_t mask, bool enabled) {
+  ::irq_set_mask_enabled(mask, enabled);
+}
+// --------------------------------------------------
+extern "C" void irq_set_mask_n_enabled(uint n, uint32_t mask, bool enabled);
+void rpp_driver::SdkWrapper::irq_set_mask_n_enabled(uint n, uint32_t mask,
+                                                    bool enabled) {
+  ::irq_set_mask_n_enabled(n, mask, enabled);
+}
+// --------------------------------------------------
+extern "C" void irq_set_pending(uint num);
+void rpp_driver::SdkWrapper::irq_set_pending(uint num) {
+  ::irq_set_pending(num);
+}
+// --------------------------------------------------
+extern "C" void irq_set_priority(uint num, uint8_t hardware_priority);
+void rpp_driver::SdkWrapper::irq_set_priority(uint num,
+                                              uint8_t hardware_priority) {
+  ::irq_set_priority(num, hardware_priority);
+}
+// --------------------------------------------------
+extern "C" irq_handler_t irq_set_riscv_vector_handler(
+    enum riscv_vector_num index, irq_handler_t handler);
+irq_handler_t rpp_driver::SdkWrapper::irq_set_riscv_vector_handler(
+    enum riscv_vector_num index, irq_handler_t handler) {
+  return ::irq_set_riscv_vector_handler(index, handler);
+}
+// --------------------------------------------------
+extern "C" void runtime_init_per_core_irq_priorities(void);
+void rpp_driver::SdkWrapper::runtime_init_per_core_irq_priorities(void) {
+  ::runtime_init_per_core_irq_priorities();
+}
+// --------------------------------------------------
+extern "C" void user_irq_claim(uint irq_num);
+void rpp_driver::SdkWrapper::user_irq_claim(uint irq_num) {
+  ::user_irq_claim(irq_num);
+}
+// --------------------------------------------------
+extern "C" int user_irq_claim_unused(bool required);
+int rpp_driver::SdkWrapper::user_irq_claim_unused(bool required) {
+  return ::user_irq_claim_unused(required);
+}
+// --------------------------------------------------
+extern "C" bool user_irq_is_claimed(uint irq_num);
+bool rpp_driver::SdkWrapper::user_irq_is_claimed(uint irq_num) {
+  return ::user_irq_is_claimed(irq_num);
+}
+// --------------------------------------------------
+extern "C" void user_irq_unclaim(uint irq_num);
+void rpp_driver::SdkWrapper::user_irq_unclaim(uint irq_num) {
+  ::user_irq_unclaim(irq_num);
+}
+#endif  //  __has_include(<hardware/irq.h>) || __has_include(<gmock/gmock.h>)
+
 #if __has_include(<hardware/pio.h>) || __has_include(<gmock/gmock.h>)
 // --------------------------------------------------
 extern "C" int pio_add_program(PIO pio, const pio_program_t* program);

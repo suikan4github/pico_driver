@@ -5,6 +5,7 @@ hardware exception
 hardware flash
 hardware i2c
 hardware interp
+hardware irq
 hardware pio
 hardware gpio
 hardware clocks

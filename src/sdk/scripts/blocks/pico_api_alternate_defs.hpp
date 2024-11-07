@@ -30,7 +30,11 @@ enum pio_mov_status_type { g, h };
 enum exception_number { i, j };
 /// @brief Alternate definition for Google Test build.
 enum dma_channel_transfer_size { k, l };
+/// @brief Alternate definition for Google Test build.
+enum riscv_vector_num { m, n };
 
+//// @brief Alternate definition for Google Test build.
+typedef int irq_handler_t;
 //// @brief Alternate definition for Google Test build.
 typedef int interp_hw_t;
 //// @brief Alternate definition for Google Test build.

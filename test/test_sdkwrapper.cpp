@@ -72,6 +72,7 @@ FAKE_VALUE_FUNC(dma_channel_config, dma_channel_get_default_config, uint);
 FAKE_VALUE_FUNC(uint, exception_get_priority, uint);
 FAKE_VOID_FUNC(flash_range_erase, uint32_t, size_t);
 FAKE_VALUE_FUNC(uint, interp_index, interp_hw_t *);
+FAKE_VALUE_FUNC(bool, irq_is_enabled, uint);
 }
 // The cpp file of the library to test.
 #include "../src/sdk/sdkwrapper.cpp"
@@ -1668,3 +1669,45 @@ TEST(SdkWrapper, interp_index) {
   }
   RESET_FAKE(interp_index);
 }  // TEST(SdkWrapper, interp_index)
+
+// -----------------------------------------------------------
+//
+//  hardware_irq
+// virtual bool irq_is_enabled(uint num);
+//
+// -----------------------------------------------------------
+
+TEST(SdkWrapper, irq_is_enabled) {
+  std::random_device rng;
+  ::rpp_driver::SdkWrapper pico;
+  // uniform distribution
+  std::uniform_int_distribution<uint> param_dist(0, UINT_MAX);
+  uint param_array0[] = {param_dist(rng), param_dist(rng)};
+  bool retval_array[std::size(param_array0)] = {true, false};
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(irq_is_enabled);
+
+  SET_RETURN_SEQ(irq_is_enabled, retval_array, std::size(retval_array));
+
+  // Check whether return values are correctly passed to wrapper.
+  int index = 0;
+  for (auto &&param0 : param_array0) {
+    ASSERT_EQ(pico.irq_is_enabled(param0), retval_array[index]);
+    index++;
+  }
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(irq_is_enabled_fake.call_count, std::size(retval_array));
+
+  // Check whether parameters were correctly passed from wrapper.
+  index = 0;
+  for (auto &&param0 : param_array0) {
+    // Check the data from test spy. Call order.
+    ASSERT_EQ(fff.call_history[index], (void *)irq_is_enabled);
+    // Check the data from test spy. : Parameters.
+    ASSERT_EQ(irq_is_enabled_fake.arg0_history[index], param0);
+    index++;
+  }
+  RESET_FAKE(irq_is_enabled);
+}  // TEST(SdkWrapper, irq_is_enabled)

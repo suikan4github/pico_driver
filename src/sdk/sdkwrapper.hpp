@@ -74,9 +74,8 @@ TEST_F(UserCodeTest, foo) {
 class SdkWrapper {
  public:
   virtual ~SdkWrapper() {}
-
 #if __has_include(<hardware/adc.h>) || __has_include(<gmock/gmock.h>)
-virtual void adc_fifo_drain ( void );
+  virtual void adc_fifo_drain(void);
   virtual uint16_t adc_fifo_get(void);
   virtual uint16_t adc_fifo_get_blocking(void);
   virtual uint8_t adc_fifo_get_level(void);
@@ -321,6 +320,34 @@ virtual void adc_fifo_drain ( void );
   virtual void interp_unclaim_lane(interp_hw_t* interp, uint lane);
   virtual void interp_unclaim_lane_mask(interp_hw_t* interp, uint lane_mask);
 #endif  //  __has_include(<hardware/interp.h>) || __has_include(<gmock/gmock.h>)
+
+#if __has_include(<hardware/irq.h>) || __has_include(<gmock/gmock.h>)
+  virtual void __unhandled_user_irq(void);
+  virtual void irq_add_shared_handler(uint num, irq_handler_t handler,
+                                      uint8_t order_priority);
+  virtual void irq_assign_to_ns(uint irq_num, bool ns);
+  virtual void irq_clear(uint int_num);
+  virtual irq_handler_t irq_get_exclusive_handler(uint num);
+  virtual uint irq_get_priority(uint num);
+  virtual irq_handler_t irq_get_vtable_handler(uint num);
+  virtual bool irq_has_shared_handler(uint num);
+  virtual void irq_init_priorities(void);
+  virtual bool irq_is_enabled(uint num);
+  virtual void irq_remove_handler(uint num, irq_handler_t handler);
+  virtual void irq_set_enabled(uint num, bool enabled);
+  virtual void irq_set_exclusive_handler(uint num, irq_handler_t handler);
+  virtual void irq_set_mask_enabled(uint32_t mask, bool enabled);
+  virtual void irq_set_mask_n_enabled(uint n, uint32_t mask, bool enabled);
+  virtual void irq_set_pending(uint num);
+  virtual void irq_set_priority(uint num, uint8_t hardware_priority);
+  virtual irq_handler_t irq_set_riscv_vector_handler(
+      enum riscv_vector_num index, irq_handler_t handler);
+  virtual void runtime_init_per_core_irq_priorities(void);
+  virtual void user_irq_claim(uint irq_num);
+  virtual int user_irq_claim_unused(bool required);
+  virtual bool user_irq_is_claimed(uint irq_num);
+  virtual void user_irq_unclaim(uint irq_num);
+#endif  //  __has_include(<hardware/irq.h>) || __has_include(<gmock/gmock.h>)
 
 #if __has_include(<hardware/pio.h>) || __has_include(<gmock/gmock.h>)
   virtual int pio_add_program(PIO pio, const pio_program_t* program);
