@@ -276,6 +276,9 @@ class MockSdkWrapper : public SdkWrapper {
   MOCK_METHOD1(user_irq_claim_unused, int(bool required));
   MOCK_METHOD1(user_irq_is_claimed, bool(uint irq_num));
   MOCK_METHOD1(user_irq_unclaim, void(uint irq_num));
+  MOCK_METHOD1(pll_deinit, void(PLL pll));
+  MOCK_METHOD5(pll_init, void(PLL pll, uint ref_div, uint vco_freq,
+                              uint post_div1, uint post_div2));
   MOCK_METHOD2(pio_add_program, int(PIO pio, const pio_program_t* program));
   MOCK_METHOD3(pio_add_program_at_offset,
                int(PIO pio, const pio_program_t* program, uint offset));

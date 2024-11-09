@@ -34,6 +34,8 @@ enum dma_channel_transfer_size { k, l };
 enum riscv_vector_num { m, n };
 
 //// @brief Alternate definition for Google Test build.
+typedef int PLL;
+//// @brief Alternate definition for Google Test build.
 typedef int irq_handler_t;
 //// @brief Alternate definition for Google Test build.
 typedef int interp_hw_t;

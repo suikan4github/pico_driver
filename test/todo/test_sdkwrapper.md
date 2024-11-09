@@ -1,5 +1,11 @@
 # test_SdkWrapper TDD
 
+## SdkWrapper::pll_deinit()
+- [x] Implement member function . 
+- [x] Create test case to fail. 
+- [x] Make it success. 
+- [x] Remove the duplication. 
+
 ## SdkWrapper::irq_is_enabled()
 - [x] Implement member function . 
 - [x] Create test case to fail. 

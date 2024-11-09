@@ -1136,6 +1136,19 @@ void rpp_driver::SdkWrapper::user_irq_unclaim(uint irq_num) {
 }
 #endif  //  __has_include(<hardware/irq.h>) || __has_include(<gmock/gmock.h>)
 
+#if __has_include(<hardware/pll.h>) || __has_include(<gmock/gmock.h>)
+// --------------------------------------------------
+extern "C" void pll_deinit(PLL pll);
+void rpp_driver::SdkWrapper::pll_deinit(PLL pll) { ::pll_deinit(pll); }
+// --------------------------------------------------
+extern "C" void pll_init(PLL pll, uint ref_div, uint vco_freq, uint post_div1,
+                         uint post_div2);
+void rpp_driver::SdkWrapper::pll_init(PLL pll, uint ref_div, uint vco_freq,
+                                      uint post_div1, uint post_div2) {
+  ::pll_init(pll, ref_div, vco_freq, post_div1, post_div2);
+}
+#endif  //  __has_include(<hardware/pll.h>) || __has_include(<gmock/gmock.h>)
+
 #if __has_include(<hardware/pio.h>) || __has_include(<gmock/gmock.h>)
 // --------------------------------------------------
 extern "C" int pio_add_program(PIO pio, const pio_program_t* program);

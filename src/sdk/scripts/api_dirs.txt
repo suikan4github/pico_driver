@@ -6,6 +6,7 @@ hardware flash
 hardware i2c
 hardware interp
 hardware irq
+hardware pll
 hardware pio
 hardware gpio
 hardware clocks

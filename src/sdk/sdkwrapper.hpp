@@ -349,6 +349,12 @@ class SdkWrapper {
   virtual void user_irq_unclaim(uint irq_num);
 #endif  //  __has_include(<hardware/irq.h>) || __has_include(<gmock/gmock.h>)
 
+#if __has_include(<hardware/pll.h>) || __has_include(<gmock/gmock.h>)
+  virtual void pll_deinit(PLL pll);
+  virtual void pll_init(PLL pll, uint ref_div, uint vco_freq, uint post_div1,
+                        uint post_div2);
+#endif  //  __has_include(<hardware/pll.h>) || __has_include(<gmock/gmock.h>)
+
 #if __has_include(<hardware/pio.h>) || __has_include(<gmock/gmock.h>)
   virtual int pio_add_program(PIO pio, const pio_program_t* program);
   virtual int pio_add_program_at_offset(PIO pio, const pio_program_t* program,

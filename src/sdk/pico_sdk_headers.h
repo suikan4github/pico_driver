@@ -40,6 +40,10 @@
 #include <hardware/irq.h>
 #endif  //  __has_include(<hardware/irq.h>) || __has_include(<gmock/gmock.h>)
 
+#if __has_include(<hardware/pll.h>) || __has_include(<gmock/gmock.h>)
+#include <hardware/pll.h>
+#endif  //  __has_include(<hardware/pll.h>) || __has_include(<gmock/gmock.h>)
+
 #if __has_include(<hardware/pio.h>) || __has_include(<gmock/gmock.h>)
 #include <hardware/pio.h>
 #endif  //  __has_include(<hardware/pio.h>) || __has_include(<gmock/gmock.h>)

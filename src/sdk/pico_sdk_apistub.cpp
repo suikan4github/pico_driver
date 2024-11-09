@@ -4636,6 +4636,49 @@ extern "C" void _weak_user_irq_unclaim(uint irq_num)
 #endif  // _MSC_VER
 // --------------------------------------------------
 #if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void pll_deinit(PLL pll);
+__attribute__((weak)) void pll_deinit(PLL pll)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_pll_deinit(PLL pll)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pll library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_pll_deinit=__weak_pll_deinit")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:pll_deinit=_weak_pll_deinit")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void pll_init(PLL pll, uint ref_div, uint vco_freq, uint post_div1,
+                         uint post_div2);
+__attribute__((weak)) void pll_init(PLL pll, uint ref_div, uint vco_freq,
+                                    uint post_div1, uint post_div2)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_pll_init(PLL pll, uint ref_div, uint vco_freq,
+                               uint post_div1, uint post_div2)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pll library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_pll_init=__weak_pll_init")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:pll_init=_weak_pll_init")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
 extern "C" int pio_add_program(PIO pio, const pio_program_t* program);
 __attribute__((weak)) int pio_add_program(PIO pio, const pio_program_t* program)
 #elif defined(_MSC_VER)  // Microsoft Visual C

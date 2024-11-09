@@ -73,6 +73,7 @@ FAKE_VALUE_FUNC(uint, exception_get_priority, uint);
 FAKE_VOID_FUNC(flash_range_erase, uint32_t, size_t);
 FAKE_VALUE_FUNC(uint, interp_index, interp_hw_t *);
 FAKE_VALUE_FUNC(bool, irq_is_enabled, uint);
+FAKE_VOID_FUNC(pll_deinit, PLL);
 }
 // The cpp file of the library to test.
 #include "../src/sdk/sdkwrapper.cpp"
@@ -1711,3 +1712,42 @@ TEST(SdkWrapper, irq_is_enabled) {
   }
   RESET_FAKE(irq_is_enabled);
 }  // TEST(SdkWrapper, irq_is_enabled)
+
+// -----------------------------------------------------------
+//
+//  hardware_pll
+// virtual void pll_deinit(PLL pll);
+//
+// -----------------------------------------------------------
+
+TEST(SdkWrapper, pll_deinit) {
+  std::random_device rng;
+  ::rpp_driver::SdkWrapper pico;
+  // uniform distribution
+  std::uniform_int_distribution<uint> param_dist(0, UINT_MAX);
+  uint param_array0[] = {param_dist(rng), param_dist(rng)};
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(pll_deinit);
+
+  // Check whether return values are correctly passed to wrapper.
+  int index = 0;
+  for (auto &&param0 : param_array0) {
+    pico.pll_deinit(param0);
+    index++;
+  }
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(pll_deinit_fake.call_count, std::size(param_array0));
+
+  // Check whether parameters were correctly passed from wrapper.
+  index = 0;
+  for (auto &&param0 : param_array0) {
+    // Check the data from test spy. Call order.
+    ASSERT_EQ(fff.call_history[index], (void *)pll_deinit);
+    // Check the data from test spy. : Parameters.
+    ASSERT_EQ(pll_deinit_fake.arg0_history[index], param0);
+    index++;
+  }
+  RESET_FAKE(pll_deinit);
+}  // TEST(SdkWrapper, pll_deinit)
