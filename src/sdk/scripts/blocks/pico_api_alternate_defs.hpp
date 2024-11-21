@@ -32,7 +32,11 @@ enum exception_number { i, j };
 enum dma_channel_transfer_size { k, l };
 /// @brief Alternate definition for Google Test build.
 enum riscv_vector_num { m, n };
+/// @brief Alternate definition for Google Test build.
+enum powman_power_domains { o, p };
 
+//// @brief Alternate definition for Google Test build.
+typedef int powman_power_state;
 //// @brief Alternate definition for Google Test build.
 typedef int PLL;
 //// @brief Alternate definition for Google Test build.

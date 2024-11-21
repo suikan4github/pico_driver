@@ -48,6 +48,10 @@
 #include <hardware/pio.h>
 #endif  //  __has_include(<hardware/pio.h>) || __has_include(<gmock/gmock.h>)
 
+#if __has_include(<hardware/powman.h>) || __has_include(<gmock/gmock.h>)
+#include <hardware/powman.h>
+#endif  //  __has_include(<hardware/powman.h>) || __has_include(<gmock/gmock.h>)
+
 #if __has_include(<hardware/gpio.h>) || __has_include(<gmock/gmock.h>)
 #include <hardware/gpio.h>
 #endif  //  __has_include(<hardware/gpio.h>) || __has_include(<gmock/gmock.h>)

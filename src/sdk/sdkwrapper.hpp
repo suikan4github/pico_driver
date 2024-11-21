@@ -501,6 +501,45 @@ class SdkWrapper {
                                   uint wrap);
 #endif  //  __has_include(<hardware/pio.h>) || __has_include(<gmock/gmock.h>)
 
+#if __has_include(<hardware/powman.h>) || __has_include(<gmock/gmock.h>)
+  virtual void powman_clear_alarm(void);
+  virtual void powman_clear_bits(volatile uint32_t* reg, uint32_t bits);
+  virtual bool powman_configure_wakeup_state(powman_power_state sleep_state,
+                                             powman_power_state wakeup_state);
+  virtual void powman_disable_alarm_wakeup(void);
+  virtual void powman_disable_all_wakeups(void);
+  virtual void powman_disable_gpio_wakeup(uint gpio_wakeup_num);
+  virtual void powman_enable_alarm_wakeup_at_ms(uint64_t alarm_time_ms);
+  virtual void powman_enable_gpio_wakeup(uint gpio_wakeup_num, uint32_t gpio,
+                                         bool edge, bool high);
+  virtual powman_power_state powman_get_power_state(void);
+  virtual bool powman_power_state_is_domain_on(
+      powman_power_state state, enum powman_power_domains domain);
+  virtual powman_power_state powman_power_state_with_domain_off(
+      powman_power_state orig, enum powman_power_domains domain);
+  virtual powman_power_state powman_power_state_with_domain_on(
+      powman_power_state orig, enum powman_power_domains domain);
+  virtual void powman_set_bits(volatile uint32_t* reg, uint32_t bits);
+  virtual void powman_set_debug_power_request_ignored(bool ignored);
+  virtual int powman_set_power_state(powman_power_state state);
+  virtual void powman_timer_disable_alarm(void);
+  virtual void powman_timer_disable_gpio_1hz_sync(void);
+  virtual void powman_timer_enable_alarm_at_ms(uint64_t alarm_time_ms);
+  virtual void powman_timer_enable_gpio_1hz_sync(uint32_t gpio);
+  virtual uint64_t powman_timer_get_ms(void);
+  virtual bool powman_timer_is_running(void);
+  virtual void powman_timer_set_1khz_tick_source_gpio(uint32_t gpio);
+  virtual void powman_timer_set_1khz_tick_source_lposc(void);
+  virtual void powman_timer_set_1khz_tick_source_lposc_with_hz(
+      uint32_t lposc_freq_hz);
+  virtual void powman_timer_set_1khz_tick_source_xosc(void);
+  virtual void powman_timer_set_1khz_tick_source_xosc_with_hz(
+      uint32_t xosc_freq_hz);
+  virtual void powman_timer_set_ms(uint64_t time_ms);
+  virtual void powman_timer_start(void);
+  virtual void powman_timer_stop(void);
+#endif  //  __has_include(<hardware/powman.h>) || __has_include(<gmock/gmock.h>)
+
 #if __has_include(<hardware/gpio.h>) || __has_include(<gmock/gmock.h>)
   virtual void gpio_acknowledge_irq(uint gpio, uint32_t event_mask);
   virtual void gpio_add_raw_irq_handler(uint gpio, irq_handler_t handler);

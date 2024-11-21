@@ -1,5 +1,11 @@
 # test_SdkWrapper TDD
 
+## SdkWrapper::powman_set_power_state()
+- [x] Implement member function . 
+- [x] Create test case to fail. 
+- [x] Make it success. 
+- [x] Remove the duplication. 
+
 ## SdkWrapper::pll_deinit()
 - [x] Implement member function . 
 - [x] Create test case to fail. 

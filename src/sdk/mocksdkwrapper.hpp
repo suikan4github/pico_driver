@@ -435,6 +435,46 @@ class MockSdkWrapper : public SdkWrapper {
                void(pio_sm_config* c, uint sideset_base));
   MOCK_METHOD3(sm_config_set_wrap,
                void(pio_sm_config* c, uint wrap_target, uint wrap));
+  MOCK_METHOD0(powman_clear_alarm, void());
+  MOCK_METHOD2(powman_clear_bits, void(uint32_t* reg, uint32_t bits));
+  MOCK_METHOD2(powman_configure_wakeup_state,
+               bool(powman_power_state sleep_state,
+                    powman_power_state wakeup_state));
+  MOCK_METHOD0(powman_disable_alarm_wakeup, void());
+  MOCK_METHOD0(powman_disable_all_wakeups, void());
+  MOCK_METHOD1(powman_disable_gpio_wakeup, void(uint gpio_wakeup_num));
+  MOCK_METHOD1(powman_enable_alarm_wakeup_at_ms, void(uint64_t alarm_time_ms));
+  MOCK_METHOD4(powman_enable_gpio_wakeup,
+               void(uint gpio_wakeup_num, uint32_t gpio, bool edge, bool high));
+  MOCK_METHOD0(powman_get_power_state, powman_power_state());
+  MOCK_METHOD2(powman_power_state_is_domain_on,
+               bool(powman_power_state state,
+                    enum powman_power_domains domain));
+  MOCK_METHOD2(powman_power_state_with_domain_off,
+               powman_power_state(powman_power_state orig,
+                                  enum powman_power_domains domain));
+  MOCK_METHOD2(powman_power_state_with_domain_on,
+               powman_power_state(powman_power_state orig,
+                                  enum powman_power_domains domain));
+  MOCK_METHOD2(powman_set_bits, void(uint32_t* reg, uint32_t bits));
+  MOCK_METHOD1(powman_set_debug_power_request_ignored, void(bool ignored));
+  MOCK_METHOD1(powman_set_power_state, int(powman_power_state state));
+  MOCK_METHOD0(powman_timer_disable_alarm, void());
+  MOCK_METHOD0(powman_timer_disable_gpio_1hz_sync, void());
+  MOCK_METHOD1(powman_timer_enable_alarm_at_ms, void(uint64_t alarm_time_ms));
+  MOCK_METHOD1(powman_timer_enable_gpio_1hz_sync, void(uint32_t gpio));
+  MOCK_METHOD0(powman_timer_get_ms, uint64_t());
+  MOCK_METHOD0(powman_timer_is_running, bool());
+  MOCK_METHOD1(powman_timer_set_1khz_tick_source_gpio, void(uint32_t gpio));
+  MOCK_METHOD0(powman_timer_set_1khz_tick_source_lposc, void());
+  MOCK_METHOD1(powman_timer_set_1khz_tick_source_lposc_with_hz,
+               void(uint32_t lposc_freq_hz));
+  MOCK_METHOD0(powman_timer_set_1khz_tick_source_xosc, void());
+  MOCK_METHOD1(powman_timer_set_1khz_tick_source_xosc_with_hz,
+               void(uint32_t xosc_freq_hz));
+  MOCK_METHOD1(powman_timer_set_ms, void(uint64_t time_ms));
+  MOCK_METHOD0(powman_timer_start, void());
+  MOCK_METHOD0(powman_timer_stop, void());
   MOCK_METHOD2(gpio_acknowledge_irq, void(uint gpio, uint32_t event_mask));
   MOCK_METHOD2(gpio_add_raw_irq_handler,
                void(uint gpio, irq_handler_t handler));

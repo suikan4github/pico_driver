@@ -74,6 +74,7 @@ FAKE_VOID_FUNC(flash_range_erase, uint32_t, size_t);
 FAKE_VALUE_FUNC(uint, interp_index, interp_hw_t *);
 FAKE_VALUE_FUNC(bool, irq_is_enabled, uint);
 FAKE_VOID_FUNC(pll_deinit, PLL);
+FAKE_VALUE_FUNC(int, powman_set_power_state, powman_power_state);
 }
 // The cpp file of the library to test.
 #include "../src/sdk/sdkwrapper.cpp"
@@ -1751,3 +1752,48 @@ TEST(SdkWrapper, pll_deinit) {
   }
   RESET_FAKE(pll_deinit);
 }  // TEST(SdkWrapper, pll_deinit)
+
+// -----------------------------------------------------------
+//
+//  hardware_powerman
+//  virtual int powman_set_power_state(powman_power_state state);
+//
+// -----------------------------------------------------------
+
+TEST(SdkWrapper, powman_set_power_state) {
+  std::random_device rng;
+  ::rpp_driver::SdkWrapper pico;
+
+  std::uniform_int_distribution<powman_power_state> param_dist(0, UINT_MAX);
+  powman_power_state param_array0[] = {param_dist(rng), param_dist(rng)};
+
+  std::uniform_int_distribution<int> retval_dist(0, INT_MAX);
+  int retval_array[std::size(param_array0)] = {retval_dist(rng),
+                                               retval_dist(rng)};
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(powman_set_power_state);
+
+  SET_RETURN_SEQ(powman_set_power_state, retval_array, std::size(retval_array));
+
+  // Check whether return values are correctly passed to wrapper.
+  int index = 0;
+  for (auto &&param0 : param_array0) {
+    ASSERT_EQ(pico.powman_set_power_state(param0), retval_array[index]);
+    index++;
+  }
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(powman_set_power_state_fake.call_count, std::size(retval_array));
+
+  // Check whether parameters were correctly passed from wrapper.
+  index = 0;
+  for (auto &&param0 : param_array0) {
+    // Check the data from test spy. Call order.
+    ASSERT_EQ(fff.call_history[index], (void *)powman_set_power_state);
+    // Check the data from test spy. : Parameters.
+    ASSERT_EQ(powman_set_power_state_fake.arg0_history[index], param0);
+    index++;
+  }
+  RESET_FAKE(powman_set_power_state);
+}  // TEST(SdkWrapper, irq_is_enabled)

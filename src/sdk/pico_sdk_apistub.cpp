@@ -7046,6 +7046,714 @@ extern "C" void _weak_sm_config_set_wrap(pio_sm_config* c, uint wrap_target,
 #endif  // _MSC_VER
 // --------------------------------------------------
 #if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void powman_clear_alarm(void);
+__attribute__((weak)) void powman_clear_alarm(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_powman_clear_alarm(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_powman library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_powman_clear_alarm=__weak_powman_clear_alarm")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:powman_clear_alarm=_weak_powman_clear_alarm")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void powman_clear_bits(volatile uint32_t* reg, uint32_t bits);
+__attribute__((weak)) void powman_clear_bits(volatile uint32_t* reg,
+                                             uint32_t bits)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_powman_clear_bits(volatile uint32_t* reg, uint32_t bits)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_powman library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_powman_clear_bits=__weak_powman_clear_bits")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:powman_clear_bits=_weak_powman_clear_bits")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool powman_configure_wakeup_state(powman_power_state sleep_state,
+                                              powman_power_state wakeup_state);
+__attribute__((weak)) bool powman_configure_wakeup_state(
+    powman_power_state sleep_state, powman_power_state wakeup_state)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_powman_configure_wakeup_state(
+    powman_power_state sleep_state, powman_power_state wakeup_state)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_powman library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_powman_configure_wakeup_state=__weak_powman_configure_wakeup_state")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:powman_configure_wakeup_state=_weak_powman_configure_wakeup_state")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void powman_disable_alarm_wakeup(void);
+__attribute__((weak)) void powman_disable_alarm_wakeup(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_powman_disable_alarm_wakeup(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_powman library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_powman_disable_alarm_wakeup=__weak_powman_disable_alarm_wakeup")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:powman_disable_alarm_wakeup=_weak_powman_disable_alarm_wakeup")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void powman_disable_all_wakeups(void);
+__attribute__((weak)) void powman_disable_all_wakeups(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_powman_disable_all_wakeups(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_powman library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_powman_disable_all_wakeups=__weak_powman_disable_all_wakeups")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:powman_disable_all_wakeups=_weak_powman_disable_all_wakeups")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void powman_disable_gpio_wakeup(uint gpio_wakeup_num);
+__attribute__((weak)) void powman_disable_gpio_wakeup(uint gpio_wakeup_num)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_powman_disable_gpio_wakeup(uint gpio_wakeup_num)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_powman library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_powman_disable_gpio_wakeup=__weak_powman_disable_gpio_wakeup")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:powman_disable_gpio_wakeup=_weak_powman_disable_gpio_wakeup")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void powman_enable_alarm_wakeup_at_ms(uint64_t alarm_time_ms);
+__attribute__((weak)) void powman_enable_alarm_wakeup_at_ms(
+    uint64_t alarm_time_ms)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_powman_enable_alarm_wakeup_at_ms(uint64_t alarm_time_ms)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_powman library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_powman_enable_alarm_wakeup_at_ms=__weak_powman_enable_alarm_wakeup_at_ms")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:powman_enable_alarm_wakeup_at_ms=_weak_powman_enable_alarm_wakeup_at_ms")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void powman_enable_gpio_wakeup(uint gpio_wakeup_num, uint32_t gpio,
+                                          bool edge, bool high);
+__attribute__((weak)) void powman_enable_gpio_wakeup(uint gpio_wakeup_num,
+                                                     uint32_t gpio, bool edge,
+                                                     bool high)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_powman_enable_gpio_wakeup(uint gpio_wakeup_num,
+                                                uint32_t gpio, bool edge,
+                                                bool high)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_powman library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_powman_enable_gpio_wakeup=__weak_powman_enable_gpio_wakeup")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:powman_enable_gpio_wakeup=_weak_powman_enable_gpio_wakeup")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" powman_power_state powman_get_power_state(void);
+__attribute__((weak)) powman_power_state powman_get_power_state(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" powman_power_state _weak_powman_get_power_state(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_powman library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_powman_get_power_state=__weak_powman_get_power_state")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:powman_get_power_state=_weak_powman_get_power_state")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool powman_power_state_is_domain_on(
+    powman_power_state state, enum powman_power_domains domain);
+__attribute__((weak)) bool powman_power_state_is_domain_on(
+    powman_power_state state, enum powman_power_domains domain)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_powman_power_state_is_domain_on(
+    powman_power_state state, enum powman_power_domains domain)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_powman library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_powman_power_state_is_domain_on=__weak_powman_power_state_is_domain_on")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:powman_power_state_is_domain_on=_weak_powman_power_state_is_domain_on")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" powman_power_state powman_power_state_with_domain_off(
+    powman_power_state orig, enum powman_power_domains domain);
+__attribute__((weak)) powman_power_state powman_power_state_with_domain_off(
+    powman_power_state orig, enum powman_power_domains domain)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" powman_power_state _weak_powman_power_state_with_domain_off(
+    powman_power_state orig, enum powman_power_domains domain)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_powman library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_powman_power_state_with_domain_off=__weak_powman_power_state_with_domain_off")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:powman_power_state_with_domain_off=_weak_powman_power_state_with_domain_off")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" powman_power_state powman_power_state_with_domain_on(
+    powman_power_state orig, enum powman_power_domains domain);
+__attribute__((weak)) powman_power_state powman_power_state_with_domain_on(
+    powman_power_state orig, enum powman_power_domains domain)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" powman_power_state _weak_powman_power_state_with_domain_on(
+    powman_power_state orig, enum powman_power_domains domain)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_powman library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_powman_power_state_with_domain_on=__weak_powman_power_state_with_domain_on")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:powman_power_state_with_domain_on=_weak_powman_power_state_with_domain_on")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void powman_set_bits(volatile uint32_t* reg, uint32_t bits);
+__attribute__((weak)) void powman_set_bits(volatile uint32_t* reg,
+                                           uint32_t bits)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_powman_set_bits(volatile uint32_t* reg, uint32_t bits)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_powman library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_powman_set_bits=__weak_powman_set_bits")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:powman_set_bits=_weak_powman_set_bits")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void powman_set_debug_power_request_ignored(bool ignored);
+__attribute__((weak)) void powman_set_debug_power_request_ignored(bool ignored)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_powman_set_debug_power_request_ignored(bool ignored)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_powman library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_powman_set_debug_power_request_ignored=__weak_powman_set_debug_power_request_ignored")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:powman_set_debug_power_request_ignored=_weak_powman_set_debug_power_request_ignored")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" int powman_set_power_state(powman_power_state state);
+__attribute__((weak)) int powman_set_power_state(powman_power_state state)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" int _weak_powman_set_power_state(powman_power_state state)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_powman library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_powman_set_power_state=__weak_powman_set_power_state")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:powman_set_power_state=_weak_powman_set_power_state")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void powman_timer_disable_alarm(void);
+__attribute__((weak)) void powman_timer_disable_alarm(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_powman_timer_disable_alarm(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_powman library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_powman_timer_disable_alarm=__weak_powman_timer_disable_alarm")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:powman_timer_disable_alarm=_weak_powman_timer_disable_alarm")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void powman_timer_disable_gpio_1hz_sync(void);
+__attribute__((weak)) void powman_timer_disable_gpio_1hz_sync(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_powman_timer_disable_gpio_1hz_sync(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_powman library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_powman_timer_disable_gpio_1hz_sync=__weak_powman_timer_disable_gpio_1hz_sync")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:powman_timer_disable_gpio_1hz_sync=_weak_powman_timer_disable_gpio_1hz_sync")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void powman_timer_enable_alarm_at_ms(uint64_t alarm_time_ms);
+__attribute__((weak)) void powman_timer_enable_alarm_at_ms(
+    uint64_t alarm_time_ms)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_powman_timer_enable_alarm_at_ms(uint64_t alarm_time_ms)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_powman library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_powman_timer_enable_alarm_at_ms=__weak_powman_timer_enable_alarm_at_ms")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:powman_timer_enable_alarm_at_ms=_weak_powman_timer_enable_alarm_at_ms")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void powman_timer_enable_gpio_1hz_sync(uint32_t gpio);
+__attribute__((weak)) void powman_timer_enable_gpio_1hz_sync(uint32_t gpio)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_powman_timer_enable_gpio_1hz_sync(uint32_t gpio)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_powman library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_powman_timer_enable_gpio_1hz_sync=__weak_powman_timer_enable_gpio_1hz_sync")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:powman_timer_enable_gpio_1hz_sync=_weak_powman_timer_enable_gpio_1hz_sync")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint64_t powman_timer_get_ms(void);
+__attribute__((weak)) uint64_t powman_timer_get_ms(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint64_t _weak_powman_timer_get_ms(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_powman library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_powman_timer_get_ms=__weak_powman_timer_get_ms")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:powman_timer_get_ms=_weak_powman_timer_get_ms")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool powman_timer_is_running(void);
+__attribute__((weak)) bool powman_timer_is_running(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_powman_timer_is_running(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_powman library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_powman_timer_is_running=__weak_powman_timer_is_running")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:powman_timer_is_running=_weak_powman_timer_is_running")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void powman_timer_set_1khz_tick_source_gpio(uint32_t gpio);
+__attribute__((weak)) void powman_timer_set_1khz_tick_source_gpio(uint32_t gpio)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_powman_timer_set_1khz_tick_source_gpio(uint32_t gpio)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_powman library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_powman_timer_set_1khz_tick_source_gpio=__weak_powman_timer_set_1khz_tick_source_gpio")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:powman_timer_set_1khz_tick_source_gpio=_weak_powman_timer_set_1khz_tick_source_gpio")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void powman_timer_set_1khz_tick_source_lposc(void);
+__attribute__((weak)) void powman_timer_set_1khz_tick_source_lposc(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_powman_timer_set_1khz_tick_source_lposc(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_powman library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_powman_timer_set_1khz_tick_source_lposc=__weak_powman_timer_set_1khz_tick_source_lposc")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:powman_timer_set_1khz_tick_source_lposc=_weak_powman_timer_set_1khz_tick_source_lposc")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void powman_timer_set_1khz_tick_source_lposc_with_hz(
+    uint32_t lposc_freq_hz);
+__attribute__((weak)) void powman_timer_set_1khz_tick_source_lposc_with_hz(
+    uint32_t lposc_freq_hz)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_powman_timer_set_1khz_tick_source_lposc_with_hz(
+    uint32_t lposc_freq_hz)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_powman library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_powman_timer_set_1khz_tick_source_lposc_with_hz=__weak_powman_timer_set_1khz_tick_source_lposc_with_hz")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:powman_timer_set_1khz_tick_source_lposc_with_hz=_weak_powman_timer_set_1khz_tick_source_lposc_with_hz")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void powman_timer_set_1khz_tick_source_xosc(void);
+__attribute__((weak)) void powman_timer_set_1khz_tick_source_xosc(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_powman_timer_set_1khz_tick_source_xosc(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_powman library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_powman_timer_set_1khz_tick_source_xosc=__weak_powman_timer_set_1khz_tick_source_xosc")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:powman_timer_set_1khz_tick_source_xosc=_weak_powman_timer_set_1khz_tick_source_xosc")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void powman_timer_set_1khz_tick_source_xosc_with_hz(
+    uint32_t xosc_freq_hz);
+__attribute__((weak)) void powman_timer_set_1khz_tick_source_xosc_with_hz(
+    uint32_t xosc_freq_hz)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_powman_timer_set_1khz_tick_source_xosc_with_hz(
+    uint32_t xosc_freq_hz)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_powman library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_powman_timer_set_1khz_tick_source_xosc_with_hz=__weak_powman_timer_set_1khz_tick_source_xosc_with_hz")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:powman_timer_set_1khz_tick_source_xosc_with_hz=_weak_powman_timer_set_1khz_tick_source_xosc_with_hz")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void powman_timer_set_ms(uint64_t time_ms);
+__attribute__((weak)) void powman_timer_set_ms(uint64_t time_ms)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_powman_timer_set_ms(uint64_t time_ms)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_powman library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_powman_timer_set_ms=__weak_powman_timer_set_ms")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:powman_timer_set_ms=_weak_powman_timer_set_ms")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void powman_timer_start(void);
+__attribute__((weak)) void powman_timer_start(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_powman_timer_start(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_powman library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_powman_timer_start=__weak_powman_timer_start")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:powman_timer_start=_weak_powman_timer_start")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void powman_timer_stop(void);
+__attribute__((weak)) void powman_timer_stop(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_powman_timer_stop(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_powman library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_powman_timer_stop=__weak_powman_timer_stop")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:powman_timer_stop=_weak_powman_timer_stop")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
 extern "C" void gpio_acknowledge_irq(uint gpio, uint32_t event_mask);
 __attribute__((weak)) void gpio_acknowledge_irq(uint gpio, uint32_t event_mask)
 #elif defined(_MSC_VER)  // Microsoft Visual C

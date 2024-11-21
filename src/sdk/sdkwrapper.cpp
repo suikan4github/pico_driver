@@ -1762,6 +1762,173 @@ void rpp_driver::SdkWrapper::sm_config_set_wrap(pio_sm_config* c,
 }
 #endif  //  __has_include(<hardware/pio.h>) || __has_include(<gmock/gmock.h>)
 
+#if __has_include(<hardware/powman.h>) || __has_include(<gmock/gmock.h>)
+// --------------------------------------------------
+extern "C" void powman_clear_alarm(void);
+void rpp_driver::SdkWrapper::powman_clear_alarm(void) {
+  ::powman_clear_alarm();
+}
+// --------------------------------------------------
+extern "C" void powman_clear_bits(volatile uint32_t* reg, uint32_t bits);
+void rpp_driver::SdkWrapper::powman_clear_bits(volatile uint32_t* reg,
+                                               uint32_t bits) {
+  ::powman_clear_bits(reg, bits);
+}
+// --------------------------------------------------
+extern "C" bool powman_configure_wakeup_state(powman_power_state sleep_state,
+                                              powman_power_state wakeup_state);
+bool rpp_driver::SdkWrapper::powman_configure_wakeup_state(
+    powman_power_state sleep_state, powman_power_state wakeup_state) {
+  return ::powman_configure_wakeup_state(sleep_state, wakeup_state);
+}
+// --------------------------------------------------
+extern "C" void powman_disable_alarm_wakeup(void);
+void rpp_driver::SdkWrapper::powman_disable_alarm_wakeup(void) {
+  ::powman_disable_alarm_wakeup();
+}
+// --------------------------------------------------
+extern "C" void powman_disable_all_wakeups(void);
+void rpp_driver::SdkWrapper::powman_disable_all_wakeups(void) {
+  ::powman_disable_all_wakeups();
+}
+// --------------------------------------------------
+extern "C" void powman_disable_gpio_wakeup(uint gpio_wakeup_num);
+void rpp_driver::SdkWrapper::powman_disable_gpio_wakeup(uint gpio_wakeup_num) {
+  ::powman_disable_gpio_wakeup(gpio_wakeup_num);
+}
+// --------------------------------------------------
+extern "C" void powman_enable_alarm_wakeup_at_ms(uint64_t alarm_time_ms);
+void rpp_driver::SdkWrapper::powman_enable_alarm_wakeup_at_ms(
+    uint64_t alarm_time_ms) {
+  ::powman_enable_alarm_wakeup_at_ms(alarm_time_ms);
+}
+// --------------------------------------------------
+extern "C" void powman_enable_gpio_wakeup(uint gpio_wakeup_num, uint32_t gpio,
+                                          bool edge, bool high);
+void rpp_driver::SdkWrapper::powman_enable_gpio_wakeup(uint gpio_wakeup_num,
+                                                       uint32_t gpio, bool edge,
+                                                       bool high) {
+  ::powman_enable_gpio_wakeup(gpio_wakeup_num, gpio, edge, high);
+}
+// --------------------------------------------------
+extern "C" powman_power_state powman_get_power_state(void);
+powman_power_state rpp_driver::SdkWrapper::powman_get_power_state(void) {
+  return ::powman_get_power_state();
+}
+// --------------------------------------------------
+extern "C" bool powman_power_state_is_domain_on(
+    powman_power_state state, enum powman_power_domains domain);
+bool rpp_driver::SdkWrapper::powman_power_state_is_domain_on(
+    powman_power_state state, enum powman_power_domains domain) {
+  return ::powman_power_state_is_domain_on(state, domain);
+}
+// --------------------------------------------------
+extern "C" powman_power_state powman_power_state_with_domain_off(
+    powman_power_state orig, enum powman_power_domains domain);
+powman_power_state rpp_driver::SdkWrapper::powman_power_state_with_domain_off(
+    powman_power_state orig, enum powman_power_domains domain) {
+  return ::powman_power_state_with_domain_off(orig, domain);
+}
+// --------------------------------------------------
+extern "C" powman_power_state powman_power_state_with_domain_on(
+    powman_power_state orig, enum powman_power_domains domain);
+powman_power_state rpp_driver::SdkWrapper::powman_power_state_with_domain_on(
+    powman_power_state orig, enum powman_power_domains domain) {
+  return ::powman_power_state_with_domain_on(orig, domain);
+}
+// --------------------------------------------------
+extern "C" void powman_set_bits(volatile uint32_t* reg, uint32_t bits);
+void rpp_driver::SdkWrapper::powman_set_bits(volatile uint32_t* reg,
+                                             uint32_t bits) {
+  ::powman_set_bits(reg, bits);
+}
+// --------------------------------------------------
+extern "C" void powman_set_debug_power_request_ignored(bool ignored);
+void rpp_driver::SdkWrapper::powman_set_debug_power_request_ignored(
+    bool ignored) {
+  ::powman_set_debug_power_request_ignored(ignored);
+}
+// --------------------------------------------------
+extern "C" int powman_set_power_state(powman_power_state state);
+int rpp_driver::SdkWrapper::powman_set_power_state(powman_power_state state) {
+  return ::powman_set_power_state(state);
+}
+// --------------------------------------------------
+extern "C" void powman_timer_disable_alarm(void);
+void rpp_driver::SdkWrapper::powman_timer_disable_alarm(void) {
+  ::powman_timer_disable_alarm();
+}
+// --------------------------------------------------
+extern "C" void powman_timer_disable_gpio_1hz_sync(void);
+void rpp_driver::SdkWrapper::powman_timer_disable_gpio_1hz_sync(void) {
+  ::powman_timer_disable_gpio_1hz_sync();
+}
+// --------------------------------------------------
+extern "C" void powman_timer_enable_alarm_at_ms(uint64_t alarm_time_ms);
+void rpp_driver::SdkWrapper::powman_timer_enable_alarm_at_ms(
+    uint64_t alarm_time_ms) {
+  ::powman_timer_enable_alarm_at_ms(alarm_time_ms);
+}
+// --------------------------------------------------
+extern "C" void powman_timer_enable_gpio_1hz_sync(uint32_t gpio);
+void rpp_driver::SdkWrapper::powman_timer_enable_gpio_1hz_sync(uint32_t gpio) {
+  ::powman_timer_enable_gpio_1hz_sync(gpio);
+}
+// --------------------------------------------------
+extern "C" uint64_t powman_timer_get_ms(void);
+uint64_t rpp_driver::SdkWrapper::powman_timer_get_ms(void) {
+  return ::powman_timer_get_ms();
+}
+// --------------------------------------------------
+extern "C" bool powman_timer_is_running(void);
+bool rpp_driver::SdkWrapper::powman_timer_is_running(void) {
+  return ::powman_timer_is_running();
+}
+// --------------------------------------------------
+extern "C" void powman_timer_set_1khz_tick_source_gpio(uint32_t gpio);
+void rpp_driver::SdkWrapper::powman_timer_set_1khz_tick_source_gpio(
+    uint32_t gpio) {
+  ::powman_timer_set_1khz_tick_source_gpio(gpio);
+}
+// --------------------------------------------------
+extern "C" void powman_timer_set_1khz_tick_source_lposc(void);
+void rpp_driver::SdkWrapper::powman_timer_set_1khz_tick_source_lposc(void) {
+  ::powman_timer_set_1khz_tick_source_lposc();
+}
+// --------------------------------------------------
+extern "C" void powman_timer_set_1khz_tick_source_lposc_with_hz(
+    uint32_t lposc_freq_hz);
+void rpp_driver::SdkWrapper::powman_timer_set_1khz_tick_source_lposc_with_hz(
+    uint32_t lposc_freq_hz) {
+  ::powman_timer_set_1khz_tick_source_lposc_with_hz(lposc_freq_hz);
+}
+// --------------------------------------------------
+extern "C" void powman_timer_set_1khz_tick_source_xosc(void);
+void rpp_driver::SdkWrapper::powman_timer_set_1khz_tick_source_xosc(void) {
+  ::powman_timer_set_1khz_tick_source_xosc();
+}
+// --------------------------------------------------
+extern "C" void powman_timer_set_1khz_tick_source_xosc_with_hz(
+    uint32_t xosc_freq_hz);
+void rpp_driver::SdkWrapper::powman_timer_set_1khz_tick_source_xosc_with_hz(
+    uint32_t xosc_freq_hz) {
+  ::powman_timer_set_1khz_tick_source_xosc_with_hz(xosc_freq_hz);
+}
+// --------------------------------------------------
+extern "C" void powman_timer_set_ms(uint64_t time_ms);
+void rpp_driver::SdkWrapper::powman_timer_set_ms(uint64_t time_ms) {
+  ::powman_timer_set_ms(time_ms);
+}
+// --------------------------------------------------
+extern "C" void powman_timer_start(void);
+void rpp_driver::SdkWrapper::powman_timer_start(void) {
+  ::powman_timer_start();
+}
+// --------------------------------------------------
+extern "C" void powman_timer_stop(void);
+void rpp_driver::SdkWrapper::powman_timer_stop(void) { ::powman_timer_stop(); }
+#endif  //  __has_include(<hardware/powman.h>) || __has_include(<gmock/gmock.h>)
+
 #if __has_include(<hardware/gpio.h>) || __has_include(<gmock/gmock.h>)
 // --------------------------------------------------
 extern "C" void gpio_acknowledge_irq(uint gpio, uint32_t event_mask);
