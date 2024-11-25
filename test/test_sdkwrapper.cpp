@@ -75,6 +75,7 @@ FAKE_VALUE_FUNC(uint, interp_index, interp_hw_t *);
 FAKE_VALUE_FUNC(bool, irq_is_enabled, uint);
 FAKE_VOID_FUNC(pll_deinit, PLL);
 FAKE_VALUE_FUNC(int, powman_set_power_state, powman_power_state);
+FAKE_VALUE_FUNC(uint, pwm_gpio_to_channel, uint);
 }
 // The cpp file of the library to test.
 #include "../src/sdk/sdkwrapper.cpp"
@@ -1797,3 +1798,48 @@ TEST(SdkWrapper, powman_set_power_state) {
   }
   RESET_FAKE(powman_set_power_state);
 }  // TEST(SdkWrapper, irq_is_enabled)
+
+// -----------------------------------------------------------
+//
+//  hardware_powerman
+//  virtual uint pwm_gpio_to_channel(uint gpio);
+//
+// -----------------------------------------------------------
+
+TEST(SdkWrapper, pwm_gpio_to_channel) {
+  std::random_device rng;
+  ::rpp_driver::SdkWrapper pico;
+
+  std::uniform_int_distribution<uint> param_dist(0, UINT_MAX);
+  uint param_array0[] = {param_dist(rng), param_dist(rng)};
+
+  std::uniform_int_distribution<uint> retval_dist(0, UINT_MAX);
+  uint retval_array[std::size(param_array0)] = {retval_dist(rng),
+                                                retval_dist(rng)};
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(pwm_gpio_to_channel);
+
+  SET_RETURN_SEQ(pwm_gpio_to_channel, retval_array, std::size(retval_array));
+
+  // Check whether return values are correctly passed to wrapper.
+  int index = 0;
+  for (auto &&param0 : param_array0) {
+    ASSERT_EQ(pico.pwm_gpio_to_channel(param0), retval_array[index]);
+    index++;
+  }
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(pwm_gpio_to_channel_fake.call_count, std::size(retval_array));
+
+  // Check whether parameters were correctly passed from wrapper.
+  index = 0;
+  for (auto &&param0 : param_array0) {
+    // Check the data from test spy. Call order.
+    ASSERT_EQ(fff.call_history[index], (void *)pwm_gpio_to_channel);
+    // Check the data from test spy. : Parameters.
+    ASSERT_EQ(pwm_gpio_to_channel_fake.arg0_history[index], param0);
+    index++;
+  }
+  RESET_FAKE(pwm_gpio_to_channel);
+}  // TEST(SdkWrapper, pwm_gpio_to_channel)

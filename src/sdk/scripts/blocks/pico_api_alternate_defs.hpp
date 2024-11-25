@@ -34,7 +34,11 @@ enum dma_channel_transfer_size { k, l };
 enum riscv_vector_num { m, n };
 /// @brief Alternate definition for Google Test build.
 enum powman_power_domains { o, p };
+/// @brief Alternate definition for Google Test build.
+enum pwm_clkdiv_mode { q, r };
 
+//// @brief Alternate definition for Google Test build.
+typedef int pwm_config;
 //// @brief Alternate definition for Google Test build.
 typedef int powman_power_state;
 //// @brief Alternate definition for Google Test build.

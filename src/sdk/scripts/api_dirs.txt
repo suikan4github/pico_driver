@@ -9,6 +9,7 @@ hardware irq
 hardware pll
 hardware pio
 hardware powman
+hardware pwm
 hardware gpio
 hardware clocks
 pico time

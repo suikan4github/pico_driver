@@ -475,6 +475,63 @@ class MockSdkWrapper : public SdkWrapper {
   MOCK_METHOD1(powman_timer_set_ms, void(uint64_t time_ms));
   MOCK_METHOD0(powman_timer_start, void());
   MOCK_METHOD0(powman_timer_stop, void());
+  MOCK_METHOD1(pwm_advance_count, void(uint slice_num));
+  MOCK_METHOD1(pwm_clear_irq, void(uint slice_num));
+  MOCK_METHOD2(pwm_config_set_clkdiv, void(pwm_config* c, float div));
+  MOCK_METHOD2(pwm_config_set_clkdiv_int, void(pwm_config* c, uint div));
+  MOCK_METHOD3(pwm_config_set_clkdiv_int_frac,
+               void(pwm_config* c, uint8_t integer, uint8_t fract));
+  MOCK_METHOD2(pwm_config_set_clkdiv_mode,
+               void(pwm_config* c, enum pwm_clkdiv_mode mode));
+  MOCK_METHOD3(pwm_config_set_output_polarity,
+               void(pwm_config* c, bool a, bool b));
+  MOCK_METHOD2(pwm_config_set_phase_correct,
+               void(pwm_config* c, bool phase_correct));
+  MOCK_METHOD2(pwm_config_set_wrap, void(pwm_config* c, uint16_t wrap));
+  MOCK_METHOD1(pwm_force_irq, void(uint slice_num));
+  MOCK_METHOD1(pwm_force_irq0, void(uint slice_num));
+  MOCK_METHOD1(pwm_force_irq1, void(uint slice_num));
+  MOCK_METHOD1(pwm_get_counter, uint16_t(uint slice_num));
+  MOCK_METHOD0(pwm_get_default_config, pwm_config());
+  MOCK_METHOD1(pwm_get_dreq, uint(uint slice_num));
+  MOCK_METHOD0(pwm_get_irq0_status_mask, uint32_t());
+  MOCK_METHOD0(pwm_get_irq1_status_mask, uint32_t());
+  MOCK_METHOD0(pwm_get_irq_status_mask, uint32_t());
+  MOCK_METHOD1(pwm_gpio_to_channel, uint(uint gpio));
+  MOCK_METHOD1(pwm_gpio_to_slice_num, uint(uint gpio));
+  MOCK_METHOD3(pwm_init, void(uint slice_num, pwm_config* c, bool start));
+  MOCK_METHOD2(pwm_irqn_force, void(uint irq_index, uint slice_num));
+  MOCK_METHOD1(pwm_irqn_get_status_mask, uint32_t(uint irq_index));
+  MOCK_METHOD3(pwm_irqn_set_slice_enabled,
+               void(uint irq_index, uint slice_num, bool enabled));
+  MOCK_METHOD3(pwm_irqn_set_slice_mask_enabled,
+               void(uint irq_index, uint slice_mask, bool enabled));
+  MOCK_METHOD1(pwm_retard_count, void(uint slice_num));
+  MOCK_METHOD3(pwm_set_both_levels,
+               void(uint slice_num, uint16_t level_a, uint16_t level_b));
+  MOCK_METHOD3(pwm_set_chan_level,
+               void(uint slice_num, uint chan, uint16_t level));
+  MOCK_METHOD2(pwm_set_clkdiv, void(uint slice_num, float divider));
+  MOCK_METHOD3(pwm_set_clkdiv_int_frac,
+               void(uint slice_num, uint8_t integer, uint8_t fract));
+  MOCK_METHOD2(pwm_set_clkdiv_mode,
+               void(uint slice_num, enum pwm_clkdiv_mode mode));
+  MOCK_METHOD2(pwm_set_counter, void(uint slice_num, uint16_t c));
+  MOCK_METHOD2(pwm_set_enabled, void(uint slice_num, bool enabled));
+  MOCK_METHOD2(pwm_set_gpio_level, void(uint gpio, uint16_t level));
+  MOCK_METHOD2(pwm_set_irq0_enabled, void(uint slice_num, bool enabled));
+  MOCK_METHOD2(pwm_set_irq0_mask_enabled,
+               void(uint32_t slice_mask, bool enabled));
+  MOCK_METHOD2(pwm_set_irq1_enabled, void(uint slice_num, bool enabled));
+  MOCK_METHOD2(pwm_set_irq1_mask_enabled,
+               void(uint32_t slice_mask, bool enabled));
+  MOCK_METHOD2(pwm_set_irq_enabled, void(uint slice_num, bool enabled));
+  MOCK_METHOD2(pwm_set_irq_mask_enabled,
+               void(uint32_t slice_mask, bool enabled));
+  MOCK_METHOD1(pwm_set_mask_enabled, void(uint32_t mask));
+  MOCK_METHOD3(pwm_set_output_polarity, void(uint slice_num, bool a, bool b));
+  MOCK_METHOD2(pwm_set_phase_correct, void(uint slice_num, bool phase_correct));
+  MOCK_METHOD2(pwm_set_wrap, void(uint slice_num, uint16_t wrap));
   MOCK_METHOD2(gpio_acknowledge_irq, void(uint gpio, uint32_t event_mask));
   MOCK_METHOD2(gpio_add_raw_irq_handler,
                void(uint gpio, irq_handler_t handler));

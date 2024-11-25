@@ -540,6 +540,59 @@ class SdkWrapper {
   virtual void powman_timer_stop(void);
 #endif  //  __has_include(<hardware/powman.h>) || __has_include(<gmock/gmock.h>)
 
+#if __has_include(<hardware/pwm.h>) || __has_include(<gmock/gmock.h>)
+  virtual void pwm_advance_count(uint slice_num);
+  virtual void pwm_clear_irq(uint slice_num);
+  virtual void pwm_config_set_clkdiv(pwm_config* c, float div);
+  virtual void pwm_config_set_clkdiv_int(pwm_config* c, uint div);
+  virtual void pwm_config_set_clkdiv_int_frac(pwm_config* c, uint8_t integer,
+                                              uint8_t fract);
+  virtual void pwm_config_set_clkdiv_mode(pwm_config* c,
+                                          enum pwm_clkdiv_mode mode);
+  virtual void pwm_config_set_output_polarity(pwm_config* c, bool a, bool b);
+  virtual void pwm_config_set_phase_correct(pwm_config* c, bool phase_correct);
+  virtual void pwm_config_set_wrap(pwm_config* c, uint16_t wrap);
+  virtual void pwm_force_irq(uint slice_num);
+  virtual void pwm_force_irq0(uint slice_num);
+  virtual void pwm_force_irq1(uint slice_num);
+  virtual uint16_t pwm_get_counter(uint slice_num);
+  virtual pwm_config pwm_get_default_config(void);
+  virtual uint pwm_get_dreq(uint slice_num);
+  virtual uint32_t pwm_get_irq0_status_mask(void);
+  virtual uint32_t pwm_get_irq1_status_mask(void);
+  virtual uint32_t pwm_get_irq_status_mask(void);
+  virtual uint pwm_gpio_to_channel(uint gpio);
+  virtual uint pwm_gpio_to_slice_num(uint gpio);
+  virtual void pwm_init(uint slice_num, pwm_config* c, bool start);
+  virtual void pwm_irqn_force(uint irq_index, uint slice_num);
+  virtual uint32_t pwm_irqn_get_status_mask(uint irq_index);
+  virtual void pwm_irqn_set_slice_enabled(uint irq_index, uint slice_num,
+                                          bool enabled);
+  virtual void pwm_irqn_set_slice_mask_enabled(uint irq_index, uint slice_mask,
+                                               bool enabled);
+  virtual void pwm_retard_count(uint slice_num);
+  virtual void pwm_set_both_levels(uint slice_num, uint16_t level_a,
+                                   uint16_t level_b);
+  virtual void pwm_set_chan_level(uint slice_num, uint chan, uint16_t level);
+  virtual void pwm_set_clkdiv(uint slice_num, float divider);
+  virtual void pwm_set_clkdiv_int_frac(uint slice_num, uint8_t integer,
+                                       uint8_t fract);
+  virtual void pwm_set_clkdiv_mode(uint slice_num, enum pwm_clkdiv_mode mode);
+  virtual void pwm_set_counter(uint slice_num, uint16_t c);
+  virtual void pwm_set_enabled(uint slice_num, bool enabled);
+  virtual void pwm_set_gpio_level(uint gpio, uint16_t level);
+  virtual void pwm_set_irq0_enabled(uint slice_num, bool enabled);
+  virtual void pwm_set_irq0_mask_enabled(uint32_t slice_mask, bool enabled);
+  virtual void pwm_set_irq1_enabled(uint slice_num, bool enabled);
+  virtual void pwm_set_irq1_mask_enabled(uint32_t slice_mask, bool enabled);
+  virtual void pwm_set_irq_enabled(uint slice_num, bool enabled);
+  virtual void pwm_set_irq_mask_enabled(uint32_t slice_mask, bool enabled);
+  virtual void pwm_set_mask_enabled(uint32_t mask);
+  virtual void pwm_set_output_polarity(uint slice_num, bool a, bool b);
+  virtual void pwm_set_phase_correct(uint slice_num, bool phase_correct);
+  virtual void pwm_set_wrap(uint slice_num, uint16_t wrap);
+#endif  //  __has_include(<hardware/pwm.h>) || __has_include(<gmock/gmock.h>)
+
 #if __has_include(<hardware/gpio.h>) || __has_include(<gmock/gmock.h>)
   virtual void gpio_acknowledge_irq(uint gpio, uint32_t event_mask);
   virtual void gpio_add_raw_irq_handler(uint gpio, irq_handler_t handler);

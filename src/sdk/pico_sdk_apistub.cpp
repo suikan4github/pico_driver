@@ -7754,6 +7754,1036 @@ extern "C" void _weak_powman_timer_stop(void)
 #endif  // _MSC_VER
 // --------------------------------------------------
 #if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void pwm_advance_count(uint slice_num);
+__attribute__((weak)) void pwm_advance_count(uint slice_num)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_pwm_advance_count(uint slice_num)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_pwm_advance_count=__weak_pwm_advance_count")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:pwm_advance_count=_weak_pwm_advance_count")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void pwm_clear_irq(uint slice_num);
+__attribute__((weak)) void pwm_clear_irq(uint slice_num)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_pwm_clear_irq(uint slice_num)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_pwm_clear_irq=__weak_pwm_clear_irq")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:pwm_clear_irq=_weak_pwm_clear_irq")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void pwm_config_set_clkdiv(pwm_config* c, float div);
+__attribute__((weak)) void pwm_config_set_clkdiv(pwm_config* c, float div)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_pwm_config_set_clkdiv(pwm_config* c, float div)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_pwm_config_set_clkdiv=__weak_pwm_config_set_clkdiv")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:pwm_config_set_clkdiv=_weak_pwm_config_set_clkdiv")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void pwm_config_set_clkdiv_int(pwm_config* c, uint div);
+__attribute__((weak)) void pwm_config_set_clkdiv_int(pwm_config* c, uint div)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_pwm_config_set_clkdiv_int(pwm_config* c, uint div)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_pwm_config_set_clkdiv_int=__weak_pwm_config_set_clkdiv_int")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:pwm_config_set_clkdiv_int=_weak_pwm_config_set_clkdiv_int")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void pwm_config_set_clkdiv_int_frac(pwm_config* c, uint8_t integer,
+                                               uint8_t fract);
+__attribute__((weak)) void pwm_config_set_clkdiv_int_frac(pwm_config* c,
+                                                          uint8_t integer,
+                                                          uint8_t fract)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_pwm_config_set_clkdiv_int_frac(pwm_config* c,
+                                                     uint8_t integer,
+                                                     uint8_t fract)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_pwm_config_set_clkdiv_int_frac=__weak_pwm_config_set_clkdiv_int_frac")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:pwm_config_set_clkdiv_int_frac=_weak_pwm_config_set_clkdiv_int_frac")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void pwm_config_set_clkdiv_mode(pwm_config* c,
+                                           enum pwm_clkdiv_mode mode);
+__attribute__((weak)) void pwm_config_set_clkdiv_mode(pwm_config* c,
+                                                      enum pwm_clkdiv_mode mode)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_pwm_config_set_clkdiv_mode(pwm_config* c,
+                                                 enum pwm_clkdiv_mode mode)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_pwm_config_set_clkdiv_mode=__weak_pwm_config_set_clkdiv_mode")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:pwm_config_set_clkdiv_mode=_weak_pwm_config_set_clkdiv_mode")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void pwm_config_set_output_polarity(pwm_config* c, bool a, bool b);
+__attribute__((weak)) void pwm_config_set_output_polarity(pwm_config* c, bool a,
+                                                          bool b)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_pwm_config_set_output_polarity(pwm_config* c, bool a,
+                                                     bool b)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_pwm_config_set_output_polarity=__weak_pwm_config_set_output_polarity")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:pwm_config_set_output_polarity=_weak_pwm_config_set_output_polarity")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void pwm_config_set_phase_correct(pwm_config* c, bool phase_correct);
+__attribute__((weak)) void pwm_config_set_phase_correct(pwm_config* c,
+                                                        bool phase_correct)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_pwm_config_set_phase_correct(pwm_config* c,
+                                                   bool phase_correct)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_pwm_config_set_phase_correct=__weak_pwm_config_set_phase_correct")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:pwm_config_set_phase_correct=_weak_pwm_config_set_phase_correct")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void pwm_config_set_wrap(pwm_config* c, uint16_t wrap);
+__attribute__((weak)) void pwm_config_set_wrap(pwm_config* c, uint16_t wrap)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_pwm_config_set_wrap(pwm_config* c, uint16_t wrap)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_pwm_config_set_wrap=__weak_pwm_config_set_wrap")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:pwm_config_set_wrap=_weak_pwm_config_set_wrap")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void pwm_force_irq(uint slice_num);
+__attribute__((weak)) void pwm_force_irq(uint slice_num)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_pwm_force_irq(uint slice_num)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_pwm_force_irq=__weak_pwm_force_irq")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:pwm_force_irq=_weak_pwm_force_irq")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void pwm_force_irq0(uint slice_num);
+__attribute__((weak)) void pwm_force_irq0(uint slice_num)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_pwm_force_irq0(uint slice_num)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_pwm_force_irq0=__weak_pwm_force_irq0")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:pwm_force_irq0=_weak_pwm_force_irq0")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void pwm_force_irq1(uint slice_num);
+__attribute__((weak)) void pwm_force_irq1(uint slice_num)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_pwm_force_irq1(uint slice_num)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_pwm_force_irq1=__weak_pwm_force_irq1")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:pwm_force_irq1=_weak_pwm_force_irq1")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint16_t pwm_get_counter(uint slice_num);
+__attribute__((weak)) uint16_t pwm_get_counter(uint slice_num)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint16_t _weak_pwm_get_counter(uint slice_num)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_pwm_get_counter=__weak_pwm_get_counter")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:pwm_get_counter=_weak_pwm_get_counter")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" pwm_config pwm_get_default_config(void);
+__attribute__((weak)) pwm_config pwm_get_default_config(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" pwm_config _weak_pwm_get_default_config(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_pwm_get_default_config=__weak_pwm_get_default_config")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:pwm_get_default_config=_weak_pwm_get_default_config")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint pwm_get_dreq(uint slice_num);
+__attribute__((weak)) uint pwm_get_dreq(uint slice_num)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint _weak_pwm_get_dreq(uint slice_num)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_pwm_get_dreq=__weak_pwm_get_dreq")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:pwm_get_dreq=_weak_pwm_get_dreq")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint32_t pwm_get_irq0_status_mask(void);
+__attribute__((weak)) uint32_t pwm_get_irq0_status_mask(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint32_t _weak_pwm_get_irq0_status_mask(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_pwm_get_irq0_status_mask=__weak_pwm_get_irq0_status_mask")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:pwm_get_irq0_status_mask=_weak_pwm_get_irq0_status_mask")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint32_t pwm_get_irq1_status_mask(void);
+__attribute__((weak)) uint32_t pwm_get_irq1_status_mask(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint32_t _weak_pwm_get_irq1_status_mask(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_pwm_get_irq1_status_mask=__weak_pwm_get_irq1_status_mask")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:pwm_get_irq1_status_mask=_weak_pwm_get_irq1_status_mask")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint32_t pwm_get_irq_status_mask(void);
+__attribute__((weak)) uint32_t pwm_get_irq_status_mask(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint32_t _weak_pwm_get_irq_status_mask(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_pwm_get_irq_status_mask=__weak_pwm_get_irq_status_mask")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:pwm_get_irq_status_mask=_weak_pwm_get_irq_status_mask")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint pwm_gpio_to_channel(uint gpio);
+__attribute__((weak)) uint pwm_gpio_to_channel(uint gpio)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint _weak_pwm_gpio_to_channel(uint gpio)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_pwm_gpio_to_channel=__weak_pwm_gpio_to_channel")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:pwm_gpio_to_channel=_weak_pwm_gpio_to_channel")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint pwm_gpio_to_slice_num(uint gpio);
+__attribute__((weak)) uint pwm_gpio_to_slice_num(uint gpio)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint _weak_pwm_gpio_to_slice_num(uint gpio)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_pwm_gpio_to_slice_num=__weak_pwm_gpio_to_slice_num")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:pwm_gpio_to_slice_num=_weak_pwm_gpio_to_slice_num")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void pwm_init(uint slice_num, pwm_config* c, bool start);
+__attribute__((weak)) void pwm_init(uint slice_num, pwm_config* c, bool start)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_pwm_init(uint slice_num, pwm_config* c, bool start)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_pwm_init=__weak_pwm_init")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:pwm_init=_weak_pwm_init")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void pwm_irqn_force(uint irq_index, uint slice_num);
+__attribute__((weak)) void pwm_irqn_force(uint irq_index, uint slice_num)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_pwm_irqn_force(uint irq_index, uint slice_num)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_pwm_irqn_force=__weak_pwm_irqn_force")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:pwm_irqn_force=_weak_pwm_irqn_force")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint32_t pwm_irqn_get_status_mask(uint irq_index);
+__attribute__((weak)) uint32_t pwm_irqn_get_status_mask(uint irq_index)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint32_t _weak_pwm_irqn_get_status_mask(uint irq_index)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_pwm_irqn_get_status_mask=__weak_pwm_irqn_get_status_mask")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:pwm_irqn_get_status_mask=_weak_pwm_irqn_get_status_mask")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void pwm_irqn_set_slice_enabled(uint irq_index, uint slice_num,
+                                           bool enabled);
+__attribute__((weak)) void pwm_irqn_set_slice_enabled(uint irq_index,
+                                                      uint slice_num,
+                                                      bool enabled)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_pwm_irqn_set_slice_enabled(uint irq_index, uint slice_num,
+                                                 bool enabled)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_pwm_irqn_set_slice_enabled=__weak_pwm_irqn_set_slice_enabled")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:pwm_irqn_set_slice_enabled=_weak_pwm_irqn_set_slice_enabled")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void pwm_irqn_set_slice_mask_enabled(uint irq_index, uint slice_mask,
+                                                bool enabled);
+__attribute__((weak)) void pwm_irqn_set_slice_mask_enabled(uint irq_index,
+                                                           uint slice_mask,
+                                                           bool enabled)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_pwm_irqn_set_slice_mask_enabled(uint irq_index,
+                                                      uint slice_mask,
+                                                      bool enabled)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_pwm_irqn_set_slice_mask_enabled=__weak_pwm_irqn_set_slice_mask_enabled")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:pwm_irqn_set_slice_mask_enabled=_weak_pwm_irqn_set_slice_mask_enabled")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void pwm_retard_count(uint slice_num);
+__attribute__((weak)) void pwm_retard_count(uint slice_num)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_pwm_retard_count(uint slice_num)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_pwm_retard_count=__weak_pwm_retard_count")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:pwm_retard_count=_weak_pwm_retard_count")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void pwm_set_both_levels(uint slice_num, uint16_t level_a,
+                                    uint16_t level_b);
+__attribute__((weak)) void pwm_set_both_levels(uint slice_num, uint16_t level_a,
+                                               uint16_t level_b)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_pwm_set_both_levels(uint slice_num, uint16_t level_a,
+                                          uint16_t level_b)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_pwm_set_both_levels=__weak_pwm_set_both_levels")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:pwm_set_both_levels=_weak_pwm_set_both_levels")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void pwm_set_chan_level(uint slice_num, uint chan, uint16_t level);
+__attribute__((weak)) void pwm_set_chan_level(uint slice_num, uint chan,
+                                              uint16_t level)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_pwm_set_chan_level(uint slice_num, uint chan,
+                                         uint16_t level)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_pwm_set_chan_level=__weak_pwm_set_chan_level")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:pwm_set_chan_level=_weak_pwm_set_chan_level")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void pwm_set_clkdiv(uint slice_num, float divider);
+__attribute__((weak)) void pwm_set_clkdiv(uint slice_num, float divider)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_pwm_set_clkdiv(uint slice_num, float divider)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_pwm_set_clkdiv=__weak_pwm_set_clkdiv")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:pwm_set_clkdiv=_weak_pwm_set_clkdiv")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void pwm_set_clkdiv_int_frac(uint slice_num, uint8_t integer,
+                                        uint8_t fract);
+__attribute__((weak)) void pwm_set_clkdiv_int_frac(uint slice_num,
+                                                   uint8_t integer,
+                                                   uint8_t fract)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_pwm_set_clkdiv_int_frac(uint slice_num, uint8_t integer,
+                                              uint8_t fract)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_pwm_set_clkdiv_int_frac=__weak_pwm_set_clkdiv_int_frac")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:pwm_set_clkdiv_int_frac=_weak_pwm_set_clkdiv_int_frac")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void pwm_set_clkdiv_mode(uint slice_num, enum pwm_clkdiv_mode mode);
+__attribute__((weak)) void pwm_set_clkdiv_mode(uint slice_num,
+                                               enum pwm_clkdiv_mode mode)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_pwm_set_clkdiv_mode(uint slice_num,
+                                          enum pwm_clkdiv_mode mode)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_pwm_set_clkdiv_mode=__weak_pwm_set_clkdiv_mode")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:pwm_set_clkdiv_mode=_weak_pwm_set_clkdiv_mode")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void pwm_set_counter(uint slice_num, uint16_t c);
+__attribute__((weak)) void pwm_set_counter(uint slice_num, uint16_t c)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_pwm_set_counter(uint slice_num, uint16_t c)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_pwm_set_counter=__weak_pwm_set_counter")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:pwm_set_counter=_weak_pwm_set_counter")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void pwm_set_enabled(uint slice_num, bool enabled);
+__attribute__((weak)) void pwm_set_enabled(uint slice_num, bool enabled)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_pwm_set_enabled(uint slice_num, bool enabled)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_pwm_set_enabled=__weak_pwm_set_enabled")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:pwm_set_enabled=_weak_pwm_set_enabled")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void pwm_set_gpio_level(uint gpio, uint16_t level);
+__attribute__((weak)) void pwm_set_gpio_level(uint gpio, uint16_t level)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_pwm_set_gpio_level(uint gpio, uint16_t level)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_pwm_set_gpio_level=__weak_pwm_set_gpio_level")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:pwm_set_gpio_level=_weak_pwm_set_gpio_level")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void pwm_set_irq0_enabled(uint slice_num, bool enabled);
+__attribute__((weak)) void pwm_set_irq0_enabled(uint slice_num, bool enabled)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_pwm_set_irq0_enabled(uint slice_num, bool enabled)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_pwm_set_irq0_enabled=__weak_pwm_set_irq0_enabled")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:pwm_set_irq0_enabled=_weak_pwm_set_irq0_enabled")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void pwm_set_irq0_mask_enabled(uint32_t slice_mask, bool enabled);
+__attribute__((weak)) void pwm_set_irq0_mask_enabled(uint32_t slice_mask,
+                                                     bool enabled)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_pwm_set_irq0_mask_enabled(uint32_t slice_mask,
+                                                bool enabled)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_pwm_set_irq0_mask_enabled=__weak_pwm_set_irq0_mask_enabled")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:pwm_set_irq0_mask_enabled=_weak_pwm_set_irq0_mask_enabled")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void pwm_set_irq1_enabled(uint slice_num, bool enabled);
+__attribute__((weak)) void pwm_set_irq1_enabled(uint slice_num, bool enabled)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_pwm_set_irq1_enabled(uint slice_num, bool enabled)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_pwm_set_irq1_enabled=__weak_pwm_set_irq1_enabled")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:pwm_set_irq1_enabled=_weak_pwm_set_irq1_enabled")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void pwm_set_irq1_mask_enabled(uint32_t slice_mask, bool enabled);
+__attribute__((weak)) void pwm_set_irq1_mask_enabled(uint32_t slice_mask,
+                                                     bool enabled)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_pwm_set_irq1_mask_enabled(uint32_t slice_mask,
+                                                bool enabled)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_pwm_set_irq1_mask_enabled=__weak_pwm_set_irq1_mask_enabled")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:pwm_set_irq1_mask_enabled=_weak_pwm_set_irq1_mask_enabled")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void pwm_set_irq_enabled(uint slice_num, bool enabled);
+__attribute__((weak)) void pwm_set_irq_enabled(uint slice_num, bool enabled)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_pwm_set_irq_enabled(uint slice_num, bool enabled)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_pwm_set_irq_enabled=__weak_pwm_set_irq_enabled")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:pwm_set_irq_enabled=_weak_pwm_set_irq_enabled")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void pwm_set_irq_mask_enabled(uint32_t slice_mask, bool enabled);
+__attribute__((weak)) void pwm_set_irq_mask_enabled(uint32_t slice_mask,
+                                                    bool enabled)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_pwm_set_irq_mask_enabled(uint32_t slice_mask,
+                                               bool enabled)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_pwm_set_irq_mask_enabled=__weak_pwm_set_irq_mask_enabled")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:pwm_set_irq_mask_enabled=_weak_pwm_set_irq_mask_enabled")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void pwm_set_mask_enabled(uint32_t mask);
+__attribute__((weak)) void pwm_set_mask_enabled(uint32_t mask)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_pwm_set_mask_enabled(uint32_t mask)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_pwm_set_mask_enabled=__weak_pwm_set_mask_enabled")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:pwm_set_mask_enabled=_weak_pwm_set_mask_enabled")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void pwm_set_output_polarity(uint slice_num, bool a, bool b);
+__attribute__((weak)) void pwm_set_output_polarity(uint slice_num, bool a,
+                                                   bool b)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_pwm_set_output_polarity(uint slice_num, bool a, bool b)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_pwm_set_output_polarity=__weak_pwm_set_output_polarity")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:pwm_set_output_polarity=_weak_pwm_set_output_polarity")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void pwm_set_phase_correct(uint slice_num, bool phase_correct);
+__attribute__((weak)) void pwm_set_phase_correct(uint slice_num,
+                                                 bool phase_correct)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_pwm_set_phase_correct(uint slice_num, bool phase_correct)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_pwm_set_phase_correct=__weak_pwm_set_phase_correct")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:pwm_set_phase_correct=_weak_pwm_set_phase_correct")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void pwm_set_wrap(uint slice_num, uint16_t wrap);
+__attribute__((weak)) void pwm_set_wrap(uint slice_num, uint16_t wrap)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_pwm_set_wrap(uint slice_num, uint16_t wrap)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_pwm library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_pwm_set_wrap=__weak_pwm_set_wrap")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:pwm_set_wrap=_weak_pwm_set_wrap")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
 extern "C" void gpio_acknowledge_irq(uint gpio, uint32_t event_mask);
 __attribute__((weak)) void gpio_acknowledge_irq(uint gpio, uint32_t event_mask)
 #elif defined(_MSC_VER)  // Microsoft Visual C

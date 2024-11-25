@@ -1,5 +1,13 @@
 # test_SdkWrapper TDD
 
+
+
+## SdkWrapper::pwm_gpio_to_channel()
+- [x] Implement member function . 
+- [x] Create test case to fail. 
+- [x] Make it success. 
+- [x] Remove the duplication. 
+
 ## SdkWrapper::powman_set_power_state()
 - [x] Implement member function . 
 - [x] Create test case to fail. 
