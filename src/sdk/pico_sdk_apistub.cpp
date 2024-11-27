@@ -8784,6 +8784,672 @@ extern "C" void _weak_pwm_set_wrap(uint slice_num, uint16_t wrap)
 #endif  // _MSC_VER
 // --------------------------------------------------
 #if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void rcp_b2and(uint32_t b0, uint32_t b1);
+__attribute__((weak)) void rcp_b2and(uint32_t b0, uint32_t b1)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_rcp_b2and(uint32_t b0, uint32_t b1)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_rcp library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_rcp_b2and=__weak_rcp_b2and")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:rcp_b2and=_weak_rcp_b2and")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void rcp_b2and_nodelay(uint32_t b0, uint32_t b1);
+__attribute__((weak)) void rcp_b2and_nodelay(uint32_t b0, uint32_t b1)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_rcp_b2and_nodelay(uint32_t b0, uint32_t b1)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_rcp library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_rcp_b2and_nodelay=__weak_rcp_b2and_nodelay")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:rcp_b2and_nodelay=_weak_rcp_b2and_nodelay")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void rcp_b2or(uint32_t b0, uint32_t b1);
+__attribute__((weak)) void rcp_b2or(uint32_t b0, uint32_t b1)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_rcp_b2or(uint32_t b0, uint32_t b1)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_rcp library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_rcp_b2or=__weak_rcp_b2or")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:rcp_b2or=_weak_rcp_b2or")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void rcp_b2or_nodelay(uint32_t b0, uint32_t b1);
+__attribute__((weak)) void rcp_b2or_nodelay(uint32_t b0, uint32_t b1)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_rcp_b2or_nodelay(uint32_t b0, uint32_t b1)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_rcp library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_rcp_b2or_nodelay=__weak_rcp_b2or_nodelay")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:rcp_b2or_nodelay=_weak_rcp_b2or_nodelay")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void rcp_b2valid(uint32_t b0, uint32_t b1);
+__attribute__((weak)) void rcp_b2valid(uint32_t b0, uint32_t b1)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_rcp_b2valid(uint32_t b0, uint32_t b1)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_rcp library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_rcp_b2valid=__weak_rcp_b2valid")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:rcp_b2valid=_weak_rcp_b2valid")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void rcp_b2valid_nodelay(uint32_t b0, uint32_t b1);
+__attribute__((weak)) void rcp_b2valid_nodelay(uint32_t b0, uint32_t b1)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_rcp_b2valid_nodelay(uint32_t b0, uint32_t b1)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_rcp library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_rcp_b2valid_nodelay=__weak_rcp_b2valid_nodelay")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:rcp_b2valid_nodelay=_weak_rcp_b2valid_nodelay")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void rcp_bfalse(uint32_t b);
+__attribute__((weak)) void rcp_bfalse(uint32_t b)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_rcp_bfalse(uint32_t b)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_rcp library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_rcp_bfalse=__weak_rcp_bfalse")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:rcp_bfalse=_weak_rcp_bfalse")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void rcp_bfalse_nodelay(uint32_t b);
+__attribute__((weak)) void rcp_bfalse_nodelay(uint32_t b)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_rcp_bfalse_nodelay(uint32_t b)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_rcp library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_rcp_bfalse_nodelay=__weak_rcp_bfalse_nodelay")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:rcp_bfalse_nodelay=_weak_rcp_bfalse_nodelay")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void rcp_btrue(uint32_t b);
+__attribute__((weak)) void rcp_btrue(uint32_t b)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_rcp_btrue(uint32_t b)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_rcp library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_rcp_btrue=__weak_rcp_btrue")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:rcp_btrue=_weak_rcp_btrue")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void rcp_btrue_nodelay(uint32_t b);
+__attribute__((weak)) void rcp_btrue_nodelay(uint32_t b)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_rcp_btrue_nodelay(uint32_t b)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_rcp library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_rcp_btrue_nodelay=__weak_rcp_btrue_nodelay")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:rcp_btrue_nodelay=_weak_rcp_btrue_nodelay")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void rcp_bvalid(uint32_t b);
+__attribute__((weak)) void rcp_bvalid(uint32_t b)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_rcp_bvalid(uint32_t b)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_rcp library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_rcp_bvalid=__weak_rcp_bvalid")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:rcp_bvalid=_weak_rcp_bvalid")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void rcp_bvalid_nodelay(uint32_t b);
+__attribute__((weak)) void rcp_bvalid_nodelay(uint32_t b)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_rcp_bvalid_nodelay(uint32_t b)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_rcp library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_rcp_bvalid_nodelay=__weak_rcp_bvalid_nodelay")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:rcp_bvalid_nodelay=_weak_rcp_bvalid_nodelay")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void rcp_bxorfalse(uint32_t b, uint32_t mask);
+__attribute__((weak)) void rcp_bxorfalse(uint32_t b, uint32_t mask)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_rcp_bxorfalse(uint32_t b, uint32_t mask)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_rcp library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_rcp_bxorfalse=__weak_rcp_bxorfalse")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:rcp_bxorfalse=_weak_rcp_bxorfalse")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void rcp_bxorfalse_nodelay(uint32_t b, uint32_t mask);
+__attribute__((weak)) void rcp_bxorfalse_nodelay(uint32_t b, uint32_t mask)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_rcp_bxorfalse_nodelay(uint32_t b, uint32_t mask)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_rcp library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_rcp_bxorfalse_nodelay=__weak_rcp_bxorfalse_nodelay")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:rcp_bxorfalse_nodelay=_weak_rcp_bxorfalse_nodelay")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void rcp_bxortrue(uint32_t b, uint32_t mask);
+__attribute__((weak)) void rcp_bxortrue(uint32_t b, uint32_t mask)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_rcp_bxortrue(uint32_t b, uint32_t mask)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_rcp library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_rcp_bxortrue=__weak_rcp_bxortrue")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:rcp_bxortrue=_weak_rcp_bxortrue")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void rcp_bxortrue_nodelay(uint32_t b, uint32_t mask);
+__attribute__((weak)) void rcp_bxortrue_nodelay(uint32_t b, uint32_t mask)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_rcp_bxortrue_nodelay(uint32_t b, uint32_t mask)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_rcp library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_rcp_bxortrue_nodelay=__weak_rcp_bxortrue_nodelay")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:rcp_bxortrue_nodelay=_weak_rcp_bxortrue_nodelay")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void rcp_bxorvalid(uint32_t b, uint32_t mask);
+__attribute__((weak)) void rcp_bxorvalid(uint32_t b, uint32_t mask)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_rcp_bxorvalid(uint32_t b, uint32_t mask)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_rcp library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_rcp_bxorvalid=__weak_rcp_bxorvalid")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:rcp_bxorvalid=_weak_rcp_bxorvalid")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void rcp_bxorvalid_nodelay(uint32_t b, uint32_t mask);
+__attribute__((weak)) void rcp_bxorvalid_nodelay(uint32_t b, uint32_t mask)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_rcp_bxorvalid_nodelay(uint32_t b, uint32_t mask)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_rcp library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_rcp_bxorvalid_nodelay=__weak_rcp_bxorvalid_nodelay")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:rcp_bxorvalid_nodelay=_weak_rcp_bxorvalid_nodelay")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint32_t rcp_canary_status(void);
+__attribute__((weak)) uint32_t rcp_canary_status(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint32_t _weak_rcp_canary_status(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_rcp library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_rcp_canary_status=__weak_rcp_canary_status")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:rcp_canary_status=_weak_rcp_canary_status")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint32_t rcp_canary_status_nodelay(void);
+__attribute__((weak)) uint32_t rcp_canary_status_nodelay(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint32_t _weak_rcp_canary_status_nodelay(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_rcp library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_rcp_canary_status_nodelay=__weak_rcp_canary_status_nodelay")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:rcp_canary_status_nodelay=_weak_rcp_canary_status_nodelay")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void rcp_iequal(uint32_t x, uint32_t y);
+__attribute__((weak)) void rcp_iequal(uint32_t x, uint32_t y)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_rcp_iequal(uint32_t x, uint32_t y)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_rcp library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_rcp_iequal=__weak_rcp_iequal")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:rcp_iequal=_weak_rcp_iequal")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void rcp_iequal_nodelay(uint32_t x, uint32_t y);
+__attribute__((weak)) void rcp_iequal_nodelay(uint32_t x, uint32_t y)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_rcp_iequal_nodelay(uint32_t x, uint32_t y)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_rcp library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_rcp_iequal_nodelay=__weak_rcp_iequal_nodelay")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:rcp_iequal_nodelay=_weak_rcp_iequal_nodelay")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void rcp_ivalid(uint32_t x, uint32_t parity);
+__attribute__((weak)) void rcp_ivalid(uint32_t x, uint32_t parity)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_rcp_ivalid(uint32_t x, uint32_t parity)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_rcp library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_rcp_ivalid=__weak_rcp_ivalid")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:rcp_ivalid=_weak_rcp_ivalid")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void rcp_ivalid_nodelay(uint32_t x, uint32_t parity);
+__attribute__((weak)) void rcp_ivalid_nodelay(uint32_t x, uint32_t parity)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_rcp_ivalid_nodelay(uint32_t x, uint32_t parity)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_rcp library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_rcp_ivalid_nodelay=__weak_rcp_ivalid_nodelay")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:rcp_ivalid_nodelay=_weak_rcp_ivalid_nodelay")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void rcp_panic(void);
+__attribute__((weak)) void rcp_panic(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_rcp_panic(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_rcp library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_rcp_panic=__weak_rcp_panic")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:rcp_panic=_weak_rcp_panic")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint8_t rcp_random_byte(void);
+__attribute__((weak)) uint8_t rcp_random_byte(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint8_t _weak_rcp_random_byte(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_rcp library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_rcp_random_byte=__weak_rcp_random_byte")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:rcp_random_byte=_weak_rcp_random_byte")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint8_t rcp_random_byte_nodelay(void);
+__attribute__((weak)) uint8_t rcp_random_byte_nodelay(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint8_t _weak_rcp_random_byte_nodelay(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_rcp library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_rcp_random_byte_nodelay=__weak_rcp_random_byte_nodelay")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:rcp_random_byte_nodelay=_weak_rcp_random_byte_nodelay")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void rcp_salt_core0(uint64_t salt);
+__attribute__((weak)) void rcp_salt_core0(uint64_t salt)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_rcp_salt_core0(uint64_t salt)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_rcp library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_rcp_salt_core0=__weak_rcp_salt_core0")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:rcp_salt_core0=_weak_rcp_salt_core0")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void rcp_salt_core0_nodelay(uint64_t salt);
+__attribute__((weak)) void rcp_salt_core0_nodelay(uint64_t salt)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_rcp_salt_core0_nodelay(uint64_t salt)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_rcp library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_rcp_salt_core0_nodelay=__weak_rcp_salt_core0_nodelay")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:rcp_salt_core0_nodelay=_weak_rcp_salt_core0_nodelay")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void rcp_salt_core1(uint64_t salt);
+__attribute__((weak)) void rcp_salt_core1(uint64_t salt)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_rcp_salt_core1(uint64_t salt)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_rcp library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_rcp_salt_core1=__weak_rcp_salt_core1")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:rcp_salt_core1=_weak_rcp_salt_core1")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void rcp_salt_core1_nodelay(uint64_t salt);
+__attribute__((weak)) void rcp_salt_core1_nodelay(uint64_t salt)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_rcp_salt_core1_nodelay(uint64_t salt)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_rcp library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_rcp_salt_core1_nodelay=__weak_rcp_salt_core1_nodelay")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:rcp_salt_core1_nodelay=_weak_rcp_salt_core1_nodelay")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
 extern "C" void gpio_acknowledge_irq(uint gpio, uint32_t event_mask);
 __attribute__((weak)) void gpio_acknowledge_irq(uint gpio, uint32_t event_mask)
 #elif defined(_MSC_VER)  // Microsoft Visual C

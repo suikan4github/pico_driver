@@ -2182,6 +2182,156 @@ void rpp_driver::SdkWrapper::pwm_set_wrap(uint slice_num, uint16_t wrap) {
 }
 #endif  //  __has_include(<hardware/pwm.h>) || __has_include(<gmock/gmock.h>)
 
+#if __has_include(<hardware/rcp.h>) || __has_include(<gmock/gmock.h>)
+// --------------------------------------------------
+extern "C" void rcp_b2and(uint32_t b0, uint32_t b1);
+void rpp_driver::SdkWrapper::rcp_b2and(uint32_t b0, uint32_t b1) {
+  ::rcp_b2and(b0, b1);
+}
+// --------------------------------------------------
+extern "C" void rcp_b2and_nodelay(uint32_t b0, uint32_t b1);
+void rpp_driver::SdkWrapper::rcp_b2and_nodelay(uint32_t b0, uint32_t b1) {
+  ::rcp_b2and_nodelay(b0, b1);
+}
+// --------------------------------------------------
+extern "C" void rcp_b2or(uint32_t b0, uint32_t b1);
+void rpp_driver::SdkWrapper::rcp_b2or(uint32_t b0, uint32_t b1) {
+  ::rcp_b2or(b0, b1);
+}
+// --------------------------------------------------
+extern "C" void rcp_b2or_nodelay(uint32_t b0, uint32_t b1);
+void rpp_driver::SdkWrapper::rcp_b2or_nodelay(uint32_t b0, uint32_t b1) {
+  ::rcp_b2or_nodelay(b0, b1);
+}
+// --------------------------------------------------
+extern "C" void rcp_b2valid(uint32_t b0, uint32_t b1);
+void rpp_driver::SdkWrapper::rcp_b2valid(uint32_t b0, uint32_t b1) {
+  ::rcp_b2valid(b0, b1);
+}
+// --------------------------------------------------
+extern "C" void rcp_b2valid_nodelay(uint32_t b0, uint32_t b1);
+void rpp_driver::SdkWrapper::rcp_b2valid_nodelay(uint32_t b0, uint32_t b1) {
+  ::rcp_b2valid_nodelay(b0, b1);
+}
+// --------------------------------------------------
+extern "C" void rcp_bfalse(uint32_t b);
+void rpp_driver::SdkWrapper::rcp_bfalse(uint32_t b) { ::rcp_bfalse(b); }
+// --------------------------------------------------
+extern "C" void rcp_bfalse_nodelay(uint32_t b);
+void rpp_driver::SdkWrapper::rcp_bfalse_nodelay(uint32_t b) {
+  ::rcp_bfalse_nodelay(b);
+}
+// --------------------------------------------------
+extern "C" void rcp_btrue(uint32_t b);
+void rpp_driver::SdkWrapper::rcp_btrue(uint32_t b) { ::rcp_btrue(b); }
+// --------------------------------------------------
+extern "C" void rcp_btrue_nodelay(uint32_t b);
+void rpp_driver::SdkWrapper::rcp_btrue_nodelay(uint32_t b) {
+  ::rcp_btrue_nodelay(b);
+}
+// --------------------------------------------------
+extern "C" void rcp_bvalid(uint32_t b);
+void rpp_driver::SdkWrapper::rcp_bvalid(uint32_t b) { ::rcp_bvalid(b); }
+// --------------------------------------------------
+extern "C" void rcp_bvalid_nodelay(uint32_t b);
+void rpp_driver::SdkWrapper::rcp_bvalid_nodelay(uint32_t b) {
+  ::rcp_bvalid_nodelay(b);
+}
+// --------------------------------------------------
+extern "C" void rcp_bxorfalse(uint32_t b, uint32_t mask);
+void rpp_driver::SdkWrapper::rcp_bxorfalse(uint32_t b, uint32_t mask) {
+  ::rcp_bxorfalse(b, mask);
+}
+// --------------------------------------------------
+extern "C" void rcp_bxorfalse_nodelay(uint32_t b, uint32_t mask);
+void rpp_driver::SdkWrapper::rcp_bxorfalse_nodelay(uint32_t b, uint32_t mask) {
+  ::rcp_bxorfalse_nodelay(b, mask);
+}
+// --------------------------------------------------
+extern "C" void rcp_bxortrue(uint32_t b, uint32_t mask);
+void rpp_driver::SdkWrapper::rcp_bxortrue(uint32_t b, uint32_t mask) {
+  ::rcp_bxortrue(b, mask);
+}
+// --------------------------------------------------
+extern "C" void rcp_bxortrue_nodelay(uint32_t b, uint32_t mask);
+void rpp_driver::SdkWrapper::rcp_bxortrue_nodelay(uint32_t b, uint32_t mask) {
+  ::rcp_bxortrue_nodelay(b, mask);
+}
+// --------------------------------------------------
+extern "C" void rcp_bxorvalid(uint32_t b, uint32_t mask);
+void rpp_driver::SdkWrapper::rcp_bxorvalid(uint32_t b, uint32_t mask) {
+  ::rcp_bxorvalid(b, mask);
+}
+// --------------------------------------------------
+extern "C" void rcp_bxorvalid_nodelay(uint32_t b, uint32_t mask);
+void rpp_driver::SdkWrapper::rcp_bxorvalid_nodelay(uint32_t b, uint32_t mask) {
+  ::rcp_bxorvalid_nodelay(b, mask);
+}
+// --------------------------------------------------
+extern "C" uint32_t rcp_canary_status(void);
+uint32_t rpp_driver::SdkWrapper::rcp_canary_status(void) {
+  return ::rcp_canary_status();
+}
+// --------------------------------------------------
+extern "C" uint32_t rcp_canary_status_nodelay(void);
+uint32_t rpp_driver::SdkWrapper::rcp_canary_status_nodelay(void) {
+  return ::rcp_canary_status_nodelay();
+}
+// --------------------------------------------------
+extern "C" void rcp_iequal(uint32_t x, uint32_t y);
+void rpp_driver::SdkWrapper::rcp_iequal(uint32_t x, uint32_t y) {
+  ::rcp_iequal(x, y);
+}
+// --------------------------------------------------
+extern "C" void rcp_iequal_nodelay(uint32_t x, uint32_t y);
+void rpp_driver::SdkWrapper::rcp_iequal_nodelay(uint32_t x, uint32_t y) {
+  ::rcp_iequal_nodelay(x, y);
+}
+// --------------------------------------------------
+extern "C" void rcp_ivalid(uint32_t x, uint32_t parity);
+void rpp_driver::SdkWrapper::rcp_ivalid(uint32_t x, uint32_t parity) {
+  ::rcp_ivalid(x, parity);
+}
+// --------------------------------------------------
+extern "C" void rcp_ivalid_nodelay(uint32_t x, uint32_t parity);
+void rpp_driver::SdkWrapper::rcp_ivalid_nodelay(uint32_t x, uint32_t parity) {
+  ::rcp_ivalid_nodelay(x, parity);
+}
+// --------------------------------------------------
+extern "C" void rcp_panic(void);
+void rpp_driver::SdkWrapper::rcp_panic(void) { ::rcp_panic(); }
+// --------------------------------------------------
+extern "C" uint8_t rcp_random_byte(void);
+uint8_t rpp_driver::SdkWrapper::rcp_random_byte(void) {
+  return ::rcp_random_byte();
+}
+// --------------------------------------------------
+extern "C" uint8_t rcp_random_byte_nodelay(void);
+uint8_t rpp_driver::SdkWrapper::rcp_random_byte_nodelay(void) {
+  return ::rcp_random_byte_nodelay();
+}
+// --------------------------------------------------
+extern "C" void rcp_salt_core0(uint64_t salt);
+void rpp_driver::SdkWrapper::rcp_salt_core0(uint64_t salt) {
+  ::rcp_salt_core0(salt);
+}
+// --------------------------------------------------
+extern "C" void rcp_salt_core0_nodelay(uint64_t salt);
+void rpp_driver::SdkWrapper::rcp_salt_core0_nodelay(uint64_t salt) {
+  ::rcp_salt_core0_nodelay(salt);
+}
+// --------------------------------------------------
+extern "C" void rcp_salt_core1(uint64_t salt);
+void rpp_driver::SdkWrapper::rcp_salt_core1(uint64_t salt) {
+  ::rcp_salt_core1(salt);
+}
+// --------------------------------------------------
+extern "C" void rcp_salt_core1_nodelay(uint64_t salt);
+void rpp_driver::SdkWrapper::rcp_salt_core1_nodelay(uint64_t salt) {
+  ::rcp_salt_core1_nodelay(salt);
+}
+#endif  //  __has_include(<hardware/rcp.h>) || __has_include(<gmock/gmock.h>)
+
 #if __has_include(<hardware/gpio.h>) || __has_include(<gmock/gmock.h>)
 // --------------------------------------------------
 extern "C" void gpio_acknowledge_irq(uint gpio, uint32_t event_mask);

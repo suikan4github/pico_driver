@@ -10,6 +10,7 @@ hardware pll
 hardware pio
 hardware powman
 hardware pwm
+hardware rcp
 hardware gpio
 hardware clocks
 pico time

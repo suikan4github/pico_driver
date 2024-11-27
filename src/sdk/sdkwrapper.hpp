@@ -593,6 +593,40 @@ class SdkWrapper {
   virtual void pwm_set_wrap(uint slice_num, uint16_t wrap);
 #endif  //  __has_include(<hardware/pwm.h>) || __has_include(<gmock/gmock.h>)
 
+#if __has_include(<hardware/rcp.h>) || __has_include(<gmock/gmock.h>)
+  virtual void rcp_b2and(uint32_t b0, uint32_t b1);
+  virtual void rcp_b2and_nodelay(uint32_t b0, uint32_t b1);
+  virtual void rcp_b2or(uint32_t b0, uint32_t b1);
+  virtual void rcp_b2or_nodelay(uint32_t b0, uint32_t b1);
+  virtual void rcp_b2valid(uint32_t b0, uint32_t b1);
+  virtual void rcp_b2valid_nodelay(uint32_t b0, uint32_t b1);
+  virtual void rcp_bfalse(uint32_t b);
+  virtual void rcp_bfalse_nodelay(uint32_t b);
+  virtual void rcp_btrue(uint32_t b);
+  virtual void rcp_btrue_nodelay(uint32_t b);
+  virtual void rcp_bvalid(uint32_t b);
+  virtual void rcp_bvalid_nodelay(uint32_t b);
+  virtual void rcp_bxorfalse(uint32_t b, uint32_t mask);
+  virtual void rcp_bxorfalse_nodelay(uint32_t b, uint32_t mask);
+  virtual void rcp_bxortrue(uint32_t b, uint32_t mask);
+  virtual void rcp_bxortrue_nodelay(uint32_t b, uint32_t mask);
+  virtual void rcp_bxorvalid(uint32_t b, uint32_t mask);
+  virtual void rcp_bxorvalid_nodelay(uint32_t b, uint32_t mask);
+  virtual uint32_t rcp_canary_status(void);
+  virtual uint32_t rcp_canary_status_nodelay(void);
+  virtual void rcp_iequal(uint32_t x, uint32_t y);
+  virtual void rcp_iequal_nodelay(uint32_t x, uint32_t y);
+  virtual void rcp_ivalid(uint32_t x, uint32_t parity);
+  virtual void rcp_ivalid_nodelay(uint32_t x, uint32_t parity);
+  virtual void rcp_panic(void);
+  virtual uint8_t rcp_random_byte(void);
+  virtual uint8_t rcp_random_byte_nodelay(void);
+  virtual void rcp_salt_core0(uint64_t salt);
+  virtual void rcp_salt_core0_nodelay(uint64_t salt);
+  virtual void rcp_salt_core1(uint64_t salt);
+  virtual void rcp_salt_core1_nodelay(uint64_t salt);
+#endif  //  __has_include(<hardware/rcp.h>) || __has_include(<gmock/gmock.h>)
+
 #if __has_include(<hardware/gpio.h>) || __has_include(<gmock/gmock.h>)
   virtual void gpio_acknowledge_irq(uint gpio, uint32_t event_mask);
   virtual void gpio_add_raw_irq_handler(uint gpio, irq_handler_t handler);

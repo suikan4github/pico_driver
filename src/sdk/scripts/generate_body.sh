@@ -48,7 +48,7 @@ sed -e 's/{.*$//' |\
 sed -e 's/\;.*$//' |\
 grep -v "__unused" |\
 awk '{$1="";$2="";$3="";$4="";print $0}'|\
-sed -e 's/__attribute__.*always_inline..//'|sed -e 's/static//' | sed -e 's/inline//' | sed -e 's/extern//' | sed -e 's/__force_//' | \
+sed -e 's/__attribute__.*always_inline..//'|sed -e 's/__attribute__.*noreturn..//'|sed -e 's/__rcpinline//' |sed -e 's/static//' | sed -e 's/inline//' | sed -e 's/extern//' | sed -e 's/__force_//' | \
 sed -e 's/(/ ( /' | sed -e 's/)$/ )/' | \
 sed -e 's/enum /enum_/g' | \
 sed -e 's/const /const_/g' | \
