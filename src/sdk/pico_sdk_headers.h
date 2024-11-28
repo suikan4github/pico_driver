@@ -60,6 +60,10 @@
 #include <hardware/rcp.h>
 #endif  //  __has_include(<hardware/rcp.h>) || __has_include(<gmock/gmock.h>)
 
+#if __has_include(<hardware/resets.h>) || __has_include(<gmock/gmock.h>)
+#include <hardware/resets.h>
+#endif  //  __has_include(<hardware/resets.h>) || __has_include(<gmock/gmock.h>)
+
 #if __has_include(<hardware/gpio.h>) || __has_include(<gmock/gmock.h>)
 #include <hardware/gpio.h>
 #endif  //  __has_include(<hardware/gpio.h>) || __has_include(<gmock/gmock.h>)

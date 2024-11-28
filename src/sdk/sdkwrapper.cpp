@@ -2332,6 +2332,78 @@ void rpp_driver::SdkWrapper::rcp_salt_core1_nodelay(uint64_t salt) {
 }
 #endif  //  __has_include(<hardware/rcp.h>) || __has_include(<gmock/gmock.h>)
 
+#if __has_include(<hardware/resets.h>) || __has_include(<gmock/gmock.h>)
+// --------------------------------------------------
+extern "C" void reset_block(uint32_t bits);
+void rpp_driver::SdkWrapper::reset_block(uint32_t bits) { ::reset_block(bits); }
+// --------------------------------------------------
+extern "C" void reset_block_mask(uint32_t bits);
+void rpp_driver::SdkWrapper::reset_block_mask(uint32_t bits) {
+  ::reset_block_mask(bits);
+}
+// --------------------------------------------------
+extern "C" void reset_block_num(uint32_t block_num);
+void rpp_driver::SdkWrapper::reset_block_num(uint32_t block_num) {
+  ::reset_block_num(block_num);
+}
+// --------------------------------------------------
+extern "C" void reset_block_reg_mask(io_rw_32* reset, uint32_t mask);
+void rpp_driver::SdkWrapper::reset_block_reg_mask(io_rw_32* reset,
+                                                  uint32_t mask) {
+  ::reset_block_reg_mask(reset, mask);
+}
+// --------------------------------------------------
+extern "C" void reset_unreset_block_num_wait_blocking(uint block_num);
+void rpp_driver::SdkWrapper::reset_unreset_block_num_wait_blocking(
+    uint block_num) {
+  ::reset_unreset_block_num_wait_blocking(block_num);
+}
+// --------------------------------------------------
+extern "C" void unreset_block(uint32_t bits);
+void rpp_driver::SdkWrapper::unreset_block(uint32_t bits) {
+  ::unreset_block(bits);
+}
+// --------------------------------------------------
+extern "C" void unreset_block_mask(uint32_t bits);
+void rpp_driver::SdkWrapper::unreset_block_mask(uint32_t bits) {
+  ::unreset_block_mask(bits);
+}
+// --------------------------------------------------
+extern "C" void unreset_block_mask_wait_blocking(uint32_t bits);
+void rpp_driver::SdkWrapper::unreset_block_mask_wait_blocking(uint32_t bits) {
+  ::unreset_block_mask_wait_blocking(bits);
+}
+// --------------------------------------------------
+extern "C" void unreset_block_num(uint block_num);
+void rpp_driver::SdkWrapper::unreset_block_num(uint block_num) {
+  ::unreset_block_num(block_num);
+}
+// --------------------------------------------------
+extern "C" void unreset_block_num_wait_blocking(uint block_num);
+void rpp_driver::SdkWrapper::unreset_block_num_wait_blocking(uint block_num) {
+  ::unreset_block_num_wait_blocking(block_num);
+}
+// --------------------------------------------------
+extern "C" void unreset_block_reg_mask(io_rw_32* reset, uint32_t mask);
+void rpp_driver::SdkWrapper::unreset_block_reg_mask(io_rw_32* reset,
+                                                    uint32_t mask) {
+  ::unreset_block_reg_mask(reset, mask);
+}
+// --------------------------------------------------
+extern "C" void unreset_block_reg_mask_wait_blocking(io_rw_32* reset,
+                                                     io_ro_32* reset_done,
+                                                     uint32_t mask);
+void rpp_driver::SdkWrapper::unreset_block_reg_mask_wait_blocking(
+    io_rw_32* reset, io_ro_32* reset_done, uint32_t mask) {
+  ::unreset_block_reg_mask_wait_blocking(reset, reset_done, mask);
+}
+// --------------------------------------------------
+extern "C" void unreset_block_wait(uint32_t bits);
+void rpp_driver::SdkWrapper::unreset_block_wait(uint32_t bits) {
+  ::unreset_block_wait(bits);
+}
+#endif  //  __has_include(<hardware/resets.h>) || __has_include(<gmock/gmock.h>)
+
 #if __has_include(<hardware/gpio.h>) || __has_include(<gmock/gmock.h>)
 // --------------------------------------------------
 extern "C" void gpio_acknowledge_irq(uint gpio, uint32_t event_mask);

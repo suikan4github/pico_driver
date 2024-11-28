@@ -9450,6 +9450,304 @@ extern "C" void _weak_rcp_salt_core1_nodelay(uint64_t salt)
 #endif  // _MSC_VER
 // --------------------------------------------------
 #if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void reset_block(uint32_t bits);
+__attribute__((weak)) void reset_block(uint32_t bits)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_reset_block(uint32_t bits)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_resets library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_reset_block=__weak_reset_block")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:reset_block=_weak_reset_block")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void reset_block_mask(uint32_t bits);
+__attribute__((weak)) void reset_block_mask(uint32_t bits)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_reset_block_mask(uint32_t bits)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_resets library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_reset_block_mask=__weak_reset_block_mask")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:reset_block_mask=_weak_reset_block_mask")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void reset_block_num(uint32_t block_num);
+__attribute__((weak)) void reset_block_num(uint32_t block_num)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_reset_block_num(uint32_t block_num)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_resets library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_reset_block_num=__weak_reset_block_num")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:reset_block_num=_weak_reset_block_num")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void reset_block_reg_mask(io_rw_32* reset, uint32_t mask);
+__attribute__((weak)) void reset_block_reg_mask(io_rw_32* reset, uint32_t mask)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_reset_block_reg_mask(io_rw_32* reset, uint32_t mask)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_resets library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_reset_block_reg_mask=__weak_reset_block_reg_mask")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:reset_block_reg_mask=_weak_reset_block_reg_mask")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void reset_unreset_block_num_wait_blocking(uint block_num);
+__attribute__((weak)) void reset_unreset_block_num_wait_blocking(uint block_num)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_reset_unreset_block_num_wait_blocking(uint block_num)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_resets library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_reset_unreset_block_num_wait_blocking=__weak_reset_unreset_block_num_wait_blocking")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:reset_unreset_block_num_wait_blocking=_weak_reset_unreset_block_num_wait_blocking")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void unreset_block(uint32_t bits);
+__attribute__((weak)) void unreset_block(uint32_t bits)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_unreset_block(uint32_t bits)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_resets library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_unreset_block=__weak_unreset_block")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:unreset_block=_weak_unreset_block")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void unreset_block_mask(uint32_t bits);
+__attribute__((weak)) void unreset_block_mask(uint32_t bits)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_unreset_block_mask(uint32_t bits)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_resets library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_unreset_block_mask=__weak_unreset_block_mask")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:unreset_block_mask=_weak_unreset_block_mask")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void unreset_block_mask_wait_blocking(uint32_t bits);
+__attribute__((weak)) void unreset_block_mask_wait_blocking(uint32_t bits)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_unreset_block_mask_wait_blocking(uint32_t bits)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_resets library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_unreset_block_mask_wait_blocking=__weak_unreset_block_mask_wait_blocking")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:unreset_block_mask_wait_blocking=_weak_unreset_block_mask_wait_blocking")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void unreset_block_num(uint block_num);
+__attribute__((weak)) void unreset_block_num(uint block_num)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_unreset_block_num(uint block_num)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_resets library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_unreset_block_num=__weak_unreset_block_num")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:unreset_block_num=_weak_unreset_block_num")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void unreset_block_num_wait_blocking(uint block_num);
+__attribute__((weak)) void unreset_block_num_wait_blocking(uint block_num)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_unreset_block_num_wait_blocking(uint block_num)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_resets library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_unreset_block_num_wait_blocking=__weak_unreset_block_num_wait_blocking")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:unreset_block_num_wait_blocking=_weak_unreset_block_num_wait_blocking")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void unreset_block_reg_mask(io_rw_32* reset, uint32_t mask);
+__attribute__((weak)) void unreset_block_reg_mask(io_rw_32* reset,
+                                                  uint32_t mask)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_unreset_block_reg_mask(io_rw_32* reset, uint32_t mask)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_resets library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_unreset_block_reg_mask=__weak_unreset_block_reg_mask")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:unreset_block_reg_mask=_weak_unreset_block_reg_mask")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void unreset_block_reg_mask_wait_blocking(io_rw_32* reset,
+                                                     io_ro_32* reset_done,
+                                                     uint32_t mask);
+__attribute__((weak)) void unreset_block_reg_mask_wait_blocking(
+    io_rw_32* reset, io_ro_32* reset_done, uint32_t mask)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_unreset_block_reg_mask_wait_blocking(io_rw_32* reset,
+                                                           io_ro_32* reset_done,
+                                                           uint32_t mask)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_resets library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_unreset_block_reg_mask_wait_blocking=__weak_unreset_block_reg_mask_wait_blocking")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:unreset_block_reg_mask_wait_blocking=_weak_unreset_block_reg_mask_wait_blocking")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void unreset_block_wait(uint32_t bits);
+__attribute__((weak)) void unreset_block_wait(uint32_t bits)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_unreset_block_wait(uint32_t bits)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_resets library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_unreset_block_wait=__weak_unreset_block_wait")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:unreset_block_wait=_weak_unreset_block_wait")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
 extern "C" void gpio_acknowledge_irq(uint gpio, uint32_t event_mask);
 __attribute__((weak)) void gpio_acknowledge_irq(uint gpio, uint32_t event_mask)
 #elif defined(_MSC_VER)  // Microsoft Visual C

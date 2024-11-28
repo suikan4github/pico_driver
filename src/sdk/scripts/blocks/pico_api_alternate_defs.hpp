@@ -38,6 +38,10 @@ enum powman_power_domains { o, p };
 enum pwm_clkdiv_mode { q, r };
 
 //// @brief Alternate definition for Google Test build.
+typedef int io_rw_32;
+//// @brief Alternate definition for Google Test build.
+typedef int io_ro_32;
+//// @brief Alternate definition for Google Test build.
 typedef int pwm_config;
 //// @brief Alternate definition for Google Test build.
 typedef int powman_power_state;

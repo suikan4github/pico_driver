@@ -11,6 +11,7 @@ hardware pio
 hardware powman
 hardware pwm
 hardware rcp
+hardware resets
 hardware gpio
 hardware clocks
 pico time

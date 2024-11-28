@@ -627,6 +627,24 @@ class SdkWrapper {
   virtual void rcp_salt_core1_nodelay(uint64_t salt);
 #endif  //  __has_include(<hardware/rcp.h>) || __has_include(<gmock/gmock.h>)
 
+#if __has_include(<hardware/resets.h>) || __has_include(<gmock/gmock.h>)
+  virtual void reset_block(uint32_t bits);
+  virtual void reset_block_mask(uint32_t bits);
+  virtual void reset_block_num(uint32_t block_num);
+  virtual void reset_block_reg_mask(io_rw_32* reset, uint32_t mask);
+  virtual void reset_unreset_block_num_wait_blocking(uint block_num);
+  virtual void unreset_block(uint32_t bits);
+  virtual void unreset_block_mask(uint32_t bits);
+  virtual void unreset_block_mask_wait_blocking(uint32_t bits);
+  virtual void unreset_block_num(uint block_num);
+  virtual void unreset_block_num_wait_blocking(uint block_num);
+  virtual void unreset_block_reg_mask(io_rw_32* reset, uint32_t mask);
+  virtual void unreset_block_reg_mask_wait_blocking(io_rw_32* reset,
+                                                    io_ro_32* reset_done,
+                                                    uint32_t mask);
+  virtual void unreset_block_wait(uint32_t bits);
+#endif  //  __has_include(<hardware/resets.h>) || __has_include(<gmock/gmock.h>)
+
 #if __has_include(<hardware/gpio.h>) || __has_include(<gmock/gmock.h>)
   virtual void gpio_acknowledge_irq(uint gpio, uint32_t event_mask);
   virtual void gpio_add_raw_irq_handler(uint gpio, irq_handler_t handler);

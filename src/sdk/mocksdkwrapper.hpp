@@ -563,6 +563,20 @@ class MockSdkWrapper : public SdkWrapper {
   MOCK_METHOD1(rcp_salt_core0_nodelay, void(uint64_t salt));
   MOCK_METHOD1(rcp_salt_core1, void(uint64_t salt));
   MOCK_METHOD1(rcp_salt_core1_nodelay, void(uint64_t salt));
+  MOCK_METHOD1(reset_block, void(uint32_t bits));
+  MOCK_METHOD1(reset_block_mask, void(uint32_t bits));
+  MOCK_METHOD1(reset_block_num, void(uint32_t block_num));
+  MOCK_METHOD2(reset_block_reg_mask, void(io_rw_32* reset, uint32_t mask));
+  MOCK_METHOD1(reset_unreset_block_num_wait_blocking, void(uint block_num));
+  MOCK_METHOD1(unreset_block, void(uint32_t bits));
+  MOCK_METHOD1(unreset_block_mask, void(uint32_t bits));
+  MOCK_METHOD1(unreset_block_mask_wait_blocking, void(uint32_t bits));
+  MOCK_METHOD1(unreset_block_num, void(uint block_num));
+  MOCK_METHOD1(unreset_block_num_wait_blocking, void(uint block_num));
+  MOCK_METHOD2(unreset_block_reg_mask, void(io_rw_32* reset, uint32_t mask));
+  MOCK_METHOD3(unreset_block_reg_mask_wait_blocking,
+               void(io_rw_32* reset, io_ro_32* reset_done, uint32_t mask));
+  MOCK_METHOD1(unreset_block_wait, void(uint32_t bits));
   MOCK_METHOD2(gpio_acknowledge_irq, void(uint gpio, uint32_t event_mask));
   MOCK_METHOD2(gpio_add_raw_irq_handler,
                void(uint gpio, irq_handler_t handler));

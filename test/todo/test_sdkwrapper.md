@@ -1,11 +1,16 @@
 # test_SdkWrapper TDD
 
-## SdkWrapper::rcp_salt_core0()
+## SdkWrapper::reset_block()
 - [x] Implement member function . 
 - [x] Create test case to fail. 
 - [x] Make it success. 
 - [x] Remove the duplication. 
 
+## SdkWrapper::rcp_salt_core0()
+- [x] Implement member function . 
+- [x] Create test case to fail. 
+- [x] Make it success. 
+- [x] Remove the duplication. 
 
 ## SdkWrapper::pwm_gpio_to_channel()
 - [x] Implement member function . 
