@@ -78,6 +78,7 @@ FAKE_VALUE_FUNC(int, powman_set_power_state, powman_power_state);
 FAKE_VALUE_FUNC(uint, pwm_gpio_to_channel, uint);
 FAKE_VOID_FUNC(rcp_salt_core0, uint64_t);
 FAKE_VOID_FUNC(reset_block, uint32_t);
+FAKE_VOID_FUNC(rtc_init);
 }
 // The cpp file of the library to test.
 #include "../src/sdk/sdkwrapper.cpp"
@@ -1923,3 +1924,24 @@ TEST(SdkWrapper, reset_block) {
   }
   RESET_FAKE(reset_block);
 }  // TEST(SdkWrapper, rcp_salt_core0)
+
+// -----------------------------------------------------------
+//
+//  hardware_powerman
+//  virtual void rtc_init(void);
+//
+// -----------------------------------------------------------
+
+TEST(SdkWrapper, rtc_init) {
+  std::random_device rng;
+  ::rpp_driver::SdkWrapper pico;
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(rtc_init);
+
+  pico.rtc_init();
+
+  // Check the data from test spy. Call order.
+  ASSERT_EQ(fff.call_history[0], (void *)rtc_init);
+  RESET_FAKE(rtc_init);
+}  // TEST(SdkWrapper, rtc_init)

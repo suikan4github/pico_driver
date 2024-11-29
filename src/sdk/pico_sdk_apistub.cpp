@@ -39,6 +39,1413 @@ typedef unsigned int uint;
 #endif  // _MSC_VER
 // --------------------------------------------------
 #if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" int64_t absolute_time_diff_us(absolute_time_t from,
+                                         absolute_time_t to);
+__attribute__((weak)) int64_t absolute_time_diff_us(absolute_time_t from,
+                                                    absolute_time_t to)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" int64_t _weak_absolute_time_diff_us(absolute_time_t from,
+                                               absolute_time_t to)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_absolute_time_diff_us=__weak_absolute_time_diff_us")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:absolute_time_diff_us=_weak_absolute_time_diff_us")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" absolute_time_t absolute_time_min(absolute_time_t a,
+                                             absolute_time_t b);
+__attribute__((weak)) absolute_time_t absolute_time_min(absolute_time_t a,
+                                                        absolute_time_t b)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" absolute_time_t _weak_absolute_time_min(absolute_time_t a,
+                                                   absolute_time_t b)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_absolute_time_min=__weak_absolute_time_min")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:absolute_time_min=_weak_absolute_time_min")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" alarm_id_t add_alarm_at(absolute_time_t time,
+                                   alarm_callback_t callback, void* user_data,
+                                   bool fire_if_past);
+__attribute__((weak)) alarm_id_t add_alarm_at(absolute_time_t time,
+                                              alarm_callback_t callback,
+                                              void* user_data,
+                                              bool fire_if_past)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" alarm_id_t _weak_add_alarm_at(absolute_time_t time,
+                                         alarm_callback_t callback,
+                                         void* user_data, bool fire_if_past)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_add_alarm_at=__weak_add_alarm_at")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:add_alarm_at=_weak_add_alarm_at")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" alarm_id_t add_alarm_in_ms(uint32_t ms, alarm_callback_t callback,
+                                      void* user_data, bool fire_if_past);
+__attribute__((weak)) alarm_id_t add_alarm_in_ms(uint32_t ms,
+                                                 alarm_callback_t callback,
+                                                 void* user_data,
+                                                 bool fire_if_past)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" alarm_id_t _weak_add_alarm_in_ms(uint32_t ms,
+                                            alarm_callback_t callback,
+                                            void* user_data, bool fire_if_past)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_add_alarm_in_ms=__weak_add_alarm_in_ms")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:add_alarm_in_ms=_weak_add_alarm_in_ms")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" alarm_id_t add_alarm_in_us(uint64_t us, alarm_callback_t callback,
+                                      void* user_data, bool fire_if_past);
+__attribute__((weak)) alarm_id_t add_alarm_in_us(uint64_t us,
+                                                 alarm_callback_t callback,
+                                                 void* user_data,
+                                                 bool fire_if_past)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" alarm_id_t _weak_add_alarm_in_us(uint64_t us,
+                                            alarm_callback_t callback,
+                                            void* user_data, bool fire_if_past)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_add_alarm_in_us=__weak_add_alarm_in_us")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:add_alarm_in_us=_weak_add_alarm_in_us")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool add_repeating_timer_ms(int32_t delay_ms,
+                                       repeating_timer_callback_t callback,
+                                       void* user_data, repeating_timer_t* out);
+__attribute__((weak)) bool add_repeating_timer_ms(
+    int32_t delay_ms, repeating_timer_callback_t callback, void* user_data,
+    repeating_timer_t* out)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_add_repeating_timer_ms(
+    int32_t delay_ms, repeating_timer_callback_t callback, void* user_data,
+    repeating_timer_t* out)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_add_repeating_timer_ms=__weak_add_repeating_timer_ms")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:add_repeating_timer_ms=_weak_add_repeating_timer_ms")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool add_repeating_timer_us(int64_t delay_us,
+                                       repeating_timer_callback_t callback,
+                                       void* user_data, repeating_timer_t* out);
+__attribute__((weak)) bool add_repeating_timer_us(
+    int64_t delay_us, repeating_timer_callback_t callback, void* user_data,
+    repeating_timer_t* out)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_add_repeating_timer_us(
+    int64_t delay_us, repeating_timer_callback_t callback, void* user_data,
+    repeating_timer_t* out)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_add_repeating_timer_us=__weak_add_repeating_timer_us")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:add_repeating_timer_us=_weak_add_repeating_timer_us")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" alarm_id_t alarm_pool_add_alarm_at(alarm_pool_t* pool,
+                                              absolute_time_t time,
+                                              alarm_callback_t callback,
+                                              void* user_data,
+                                              bool fire_if_past);
+__attribute__((weak)) alarm_id_t alarm_pool_add_alarm_at(
+    alarm_pool_t* pool, absolute_time_t time, alarm_callback_t callback,
+    void* user_data, bool fire_if_past)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" alarm_id_t _weak_alarm_pool_add_alarm_at(alarm_pool_t* pool,
+                                                    absolute_time_t time,
+                                                    alarm_callback_t callback,
+                                                    void* user_data,
+                                                    bool fire_if_past)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_alarm_pool_add_alarm_at=__weak_alarm_pool_add_alarm_at")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:alarm_pool_add_alarm_at=_weak_alarm_pool_add_alarm_at")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" alarm_id_t alarm_pool_add_alarm_at_force_in_context(
+    alarm_pool_t* pool, absolute_time_t time, alarm_callback_t callback,
+    void* user_data);
+__attribute__((weak)) alarm_id_t alarm_pool_add_alarm_at_force_in_context(
+    alarm_pool_t* pool, absolute_time_t time, alarm_callback_t callback,
+    void* user_data)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" alarm_id_t _weak_alarm_pool_add_alarm_at_force_in_context(
+    alarm_pool_t* pool, absolute_time_t time, alarm_callback_t callback,
+    void* user_data)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_alarm_pool_add_alarm_at_force_in_context=__weak_alarm_pool_add_alarm_at_force_in_context")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:alarm_pool_add_alarm_at_force_in_context=_weak_alarm_pool_add_alarm_at_force_in_context")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" alarm_id_t alarm_pool_add_alarm_in_ms(alarm_pool_t* pool,
+                                                 uint32_t ms,
+                                                 alarm_callback_t callback,
+                                                 void* user_data,
+                                                 bool fire_if_past);
+__attribute__((weak)) alarm_id_t alarm_pool_add_alarm_in_ms(
+    alarm_pool_t* pool, uint32_t ms, alarm_callback_t callback, void* user_data,
+    bool fire_if_past)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" alarm_id_t _weak_alarm_pool_add_alarm_in_ms(
+    alarm_pool_t* pool, uint32_t ms, alarm_callback_t callback, void* user_data,
+    bool fire_if_past)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_alarm_pool_add_alarm_in_ms=__weak_alarm_pool_add_alarm_in_ms")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:alarm_pool_add_alarm_in_ms=_weak_alarm_pool_add_alarm_in_ms")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" alarm_id_t alarm_pool_add_alarm_in_us(alarm_pool_t* pool,
+                                                 uint64_t us,
+                                                 alarm_callback_t callback,
+                                                 void* user_data,
+                                                 bool fire_if_past);
+__attribute__((weak)) alarm_id_t alarm_pool_add_alarm_in_us(
+    alarm_pool_t* pool, uint64_t us, alarm_callback_t callback, void* user_data,
+    bool fire_if_past)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" alarm_id_t _weak_alarm_pool_add_alarm_in_us(
+    alarm_pool_t* pool, uint64_t us, alarm_callback_t callback, void* user_data,
+    bool fire_if_past)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_alarm_pool_add_alarm_in_us=__weak_alarm_pool_add_alarm_in_us")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:alarm_pool_add_alarm_in_us=_weak_alarm_pool_add_alarm_in_us")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool alarm_pool_add_repeating_timer_ms(
+    alarm_pool_t* pool, int32_t delay_ms, repeating_timer_callback_t callback,
+    void* user_data, repeating_timer_t* out);
+__attribute__((weak)) bool alarm_pool_add_repeating_timer_ms(
+    alarm_pool_t* pool, int32_t delay_ms, repeating_timer_callback_t callback,
+    void* user_data, repeating_timer_t* out)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_alarm_pool_add_repeating_timer_ms(
+    alarm_pool_t* pool, int32_t delay_ms, repeating_timer_callback_t callback,
+    void* user_data, repeating_timer_t* out)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_alarm_pool_add_repeating_timer_ms=__weak_alarm_pool_add_repeating_timer_ms")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:alarm_pool_add_repeating_timer_ms=_weak_alarm_pool_add_repeating_timer_ms")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool alarm_pool_add_repeating_timer_us(
+    alarm_pool_t* pool, int64_t delay_us, repeating_timer_callback_t callback,
+    void* user_data, repeating_timer_t* out);
+__attribute__((weak)) bool alarm_pool_add_repeating_timer_us(
+    alarm_pool_t* pool, int64_t delay_us, repeating_timer_callback_t callback,
+    void* user_data, repeating_timer_t* out)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_alarm_pool_add_repeating_timer_us(
+    alarm_pool_t* pool, int64_t delay_us, repeating_timer_callback_t callback,
+    void* user_data, repeating_timer_t* out)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_alarm_pool_add_repeating_timer_us=__weak_alarm_pool_add_repeating_timer_us")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:alarm_pool_add_repeating_timer_us=_weak_alarm_pool_add_repeating_timer_us")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool alarm_pool_cancel_alarm(alarm_pool_t* pool,
+                                        alarm_id_t alarm_id);
+__attribute__((weak)) bool alarm_pool_cancel_alarm(alarm_pool_t* pool,
+                                                   alarm_id_t alarm_id)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_alarm_pool_cancel_alarm(alarm_pool_t* pool,
+                                              alarm_id_t alarm_id)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_alarm_pool_cancel_alarm=__weak_alarm_pool_cancel_alarm")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:alarm_pool_cancel_alarm=_weak_alarm_pool_cancel_alarm")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint alarm_pool_core_num(alarm_pool_t* pool);
+__attribute__((weak)) uint alarm_pool_core_num(alarm_pool_t* pool)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint _weak_alarm_pool_core_num(alarm_pool_t* pool)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_alarm_pool_core_num=__weak_alarm_pool_core_num")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:alarm_pool_core_num=_weak_alarm_pool_core_num")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" alarm_pool_t* alarm_pool_create(uint timer_alarm_num,
+                                           uint max_timers);
+__attribute__((weak)) alarm_pool_t* alarm_pool_create(uint timer_alarm_num,
+                                                      uint max_timers)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" alarm_pool_t* _weak_alarm_pool_create(uint timer_alarm_num,
+                                                 uint max_timers)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_alarm_pool_create=__weak_alarm_pool_create")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:alarm_pool_create=_weak_alarm_pool_create")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" alarm_pool_t* alarm_pool_create_on_timer(alarm_pool_timer_t* timer,
+                                                    uint timer_alarm_num,
+                                                    uint max_timers);
+__attribute__((weak)) alarm_pool_t* alarm_pool_create_on_timer(
+    alarm_pool_timer_t* timer, uint timer_alarm_num, uint max_timers)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" alarm_pool_t* _weak_alarm_pool_create_on_timer(
+    alarm_pool_timer_t* timer, uint timer_alarm_num, uint max_timers)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_alarm_pool_create_on_timer=__weak_alarm_pool_create_on_timer")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:alarm_pool_create_on_timer=_weak_alarm_pool_create_on_timer")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" alarm_pool_t* alarm_pool_create_on_timer_with_unused_hardware_alarm(
+    alarm_pool_timer_t* timer, uint max_timers);
+__attribute__((weak)) alarm_pool_t*
+alarm_pool_create_on_timer_with_unused_hardware_alarm(alarm_pool_timer_t* timer,
+                                                      uint max_timers)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" alarm_pool_t*
+_weak_alarm_pool_create_on_timer_with_unused_hardware_alarm(
+    alarm_pool_timer_t* timer, uint max_timers)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_alarm_pool_create_on_timer_with_unused_hardware_alarm=__weak_alarm_pool_create_on_timer_with_unused_hardware_alarm")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:alarm_pool_create_on_timer_with_unused_hardware_alarm=_weak_alarm_pool_create_on_timer_with_unused_hardware_alarm")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" alarm_pool_t* alarm_pool_create_with_unused_hardware_alarm(
+    uint max_timers);
+__attribute__((weak)) alarm_pool_t*
+alarm_pool_create_with_unused_hardware_alarm(uint max_timers)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" alarm_pool_t* _weak_alarm_pool_create_with_unused_hardware_alarm(
+    uint max_timers)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_alarm_pool_create_with_unused_hardware_alarm=__weak_alarm_pool_create_with_unused_hardware_alarm")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:alarm_pool_create_with_unused_hardware_alarm=_weak_alarm_pool_create_with_unused_hardware_alarm")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void alarm_pool_destroy(alarm_pool_t* pool);
+__attribute__((weak)) void alarm_pool_destroy(alarm_pool_t* pool)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_alarm_pool_destroy(alarm_pool_t* pool)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_alarm_pool_destroy=__weak_alarm_pool_destroy")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:alarm_pool_destroy=_weak_alarm_pool_destroy")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" alarm_pool_t* alarm_pool_get_default(void);
+__attribute__((weak)) alarm_pool_t* alarm_pool_get_default(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" alarm_pool_t* _weak_alarm_pool_get_default(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_alarm_pool_get_default=__weak_alarm_pool_get_default")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:alarm_pool_get_default=_weak_alarm_pool_get_default")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" alarm_pool_timer_t* alarm_pool_get_default_timer(void);
+__attribute__((weak)) alarm_pool_timer_t* alarm_pool_get_default_timer(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" alarm_pool_timer_t* _weak_alarm_pool_get_default_timer(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_alarm_pool_get_default_timer=__weak_alarm_pool_get_default_timer")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:alarm_pool_get_default_timer=_weak_alarm_pool_get_default_timer")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint alarm_pool_hardware_alarm_num(alarm_pool_t* pool);
+__attribute__((weak)) uint alarm_pool_hardware_alarm_num(alarm_pool_t* pool)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint _weak_alarm_pool_hardware_alarm_num(alarm_pool_t* pool)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_alarm_pool_hardware_alarm_num=__weak_alarm_pool_hardware_alarm_num")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:alarm_pool_hardware_alarm_num=_weak_alarm_pool_hardware_alarm_num")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void alarm_pool_init_default(void);
+__attribute__((weak)) void alarm_pool_init_default(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_alarm_pool_init_default(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_alarm_pool_init_default=__weak_alarm_pool_init_default")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:alarm_pool_init_default=_weak_alarm_pool_init_default")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" int32_t alarm_pool_remaining_alarm_time_ms(alarm_pool_t* pool,
+                                                      alarm_id_t alarm_id);
+__attribute__((weak)) int32_t
+alarm_pool_remaining_alarm_time_ms(alarm_pool_t* pool, alarm_id_t alarm_id)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" int32_t _weak_alarm_pool_remaining_alarm_time_ms(alarm_pool_t* pool,
+                                                            alarm_id_t alarm_id)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_alarm_pool_remaining_alarm_time_ms=__weak_alarm_pool_remaining_alarm_time_ms")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:alarm_pool_remaining_alarm_time_ms=_weak_alarm_pool_remaining_alarm_time_ms")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" int64_t alarm_pool_remaining_alarm_time_us(alarm_pool_t* pool,
+                                                      alarm_id_t alarm_id);
+__attribute__((weak)) int64_t
+alarm_pool_remaining_alarm_time_us(alarm_pool_t* pool, alarm_id_t alarm_id)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" int64_t _weak_alarm_pool_remaining_alarm_time_us(alarm_pool_t* pool,
+                                                            alarm_id_t alarm_id)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_alarm_pool_remaining_alarm_time_us=__weak_alarm_pool_remaining_alarm_time_us")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:alarm_pool_remaining_alarm_time_us=_weak_alarm_pool_remaining_alarm_time_us")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint alarm_pool_timer_alarm_num(alarm_pool_t* pool);
+__attribute__((weak)) uint alarm_pool_timer_alarm_num(alarm_pool_t* pool)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint _weak_alarm_pool_timer_alarm_num(alarm_pool_t* pool)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_alarm_pool_timer_alarm_num=__weak_alarm_pool_timer_alarm_num")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:alarm_pool_timer_alarm_num=_weak_alarm_pool_timer_alarm_num")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" alarm_pool_timer_t* alarm_pool_timer_for_timer_num(uint timer_num);
+__attribute__((weak)) alarm_pool_timer_t* alarm_pool_timer_for_timer_num(
+    uint timer_num)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" alarm_pool_timer_t* _weak_alarm_pool_timer_for_timer_num(
+    uint timer_num)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_alarm_pool_timer_for_timer_num=__weak_alarm_pool_timer_for_timer_num")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:alarm_pool_timer_for_timer_num=_weak_alarm_pool_timer_for_timer_num")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool best_effort_wfe_or_timeout(absolute_time_t timeout_timestamp);
+__attribute__((weak)) bool best_effort_wfe_or_timeout(
+    absolute_time_t timeout_timestamp)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_best_effort_wfe_or_timeout(
+    absolute_time_t timeout_timestamp)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_best_effort_wfe_or_timeout=__weak_best_effort_wfe_or_timeout")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:best_effort_wfe_or_timeout=_weak_best_effort_wfe_or_timeout")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool cancel_alarm(alarm_id_t alarm_id);
+__attribute__((weak)) bool cancel_alarm(alarm_id_t alarm_id)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_cancel_alarm(alarm_id_t alarm_id)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_cancel_alarm=__weak_cancel_alarm")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:cancel_alarm=_weak_cancel_alarm")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool cancel_repeating_timer(repeating_timer_t* timer);
+__attribute__((weak)) bool cancel_repeating_timer(repeating_timer_t* timer)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_cancel_repeating_timer(repeating_timer_t* timer)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_cancel_repeating_timer=__weak_cancel_repeating_timer")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:cancel_repeating_timer=_weak_cancel_repeating_timer")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" absolute_time_t delayed_by_ms(const absolute_time_t t, uint32_t ms);
+__attribute__((weak)) absolute_time_t delayed_by_ms(const absolute_time_t t,
+                                                    uint32_t ms)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" absolute_time_t _weak_delayed_by_ms(const absolute_time_t t,
+                                               uint32_t ms)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_delayed_by_ms=__weak_delayed_by_ms")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:delayed_by_ms=_weak_delayed_by_ms")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" absolute_time_t delayed_by_us(const absolute_time_t t, uint64_t us);
+__attribute__((weak)) absolute_time_t delayed_by_us(const absolute_time_t t,
+                                                    uint64_t us)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" absolute_time_t _weak_delayed_by_us(const absolute_time_t t,
+                                               uint64_t us)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_delayed_by_us=__weak_delayed_by_us")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:delayed_by_us=_weak_delayed_by_us")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" absolute_time_t get_absolute_time(void);
+__attribute__((weak)) absolute_time_t get_absolute_time(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" absolute_time_t _weak_get_absolute_time(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_get_absolute_time=__weak_get_absolute_time")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:get_absolute_time=_weak_get_absolute_time")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool is_at_the_end_of_time(absolute_time_t t);
+__attribute__((weak)) bool is_at_the_end_of_time(absolute_time_t t)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_is_at_the_end_of_time(absolute_time_t t)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_is_at_the_end_of_time=__weak_is_at_the_end_of_time")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:is_at_the_end_of_time=_weak_is_at_the_end_of_time")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool is_nil_time(absolute_time_t t);
+__attribute__((weak)) bool is_nil_time(absolute_time_t t)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_is_nil_time(absolute_time_t t)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_is_nil_time=__weak_is_nil_time")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:is_nil_time=_weak_is_nil_time")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" absolute_time_t make_timeout_time_ms(uint32_t ms);
+__attribute__((weak)) absolute_time_t make_timeout_time_ms(uint32_t ms)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" absolute_time_t _weak_make_timeout_time_ms(uint32_t ms)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_make_timeout_time_ms=__weak_make_timeout_time_ms")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:make_timeout_time_ms=_weak_make_timeout_time_ms")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" absolute_time_t make_timeout_time_us(uint64_t us);
+__attribute__((weak)) absolute_time_t make_timeout_time_us(uint64_t us)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" absolute_time_t _weak_make_timeout_time_us(uint64_t us)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_make_timeout_time_us=__weak_make_timeout_time_us")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:make_timeout_time_us=_weak_make_timeout_time_us")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" int32_t remaining_alarm_time_ms(alarm_id_t alarm_id);
+__attribute__((weak)) int32_t remaining_alarm_time_ms(alarm_id_t alarm_id)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" int32_t _weak_remaining_alarm_time_ms(alarm_id_t alarm_id)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_remaining_alarm_time_ms=__weak_remaining_alarm_time_ms")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:remaining_alarm_time_ms=_weak_remaining_alarm_time_ms")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" int64_t remaining_alarm_time_us(alarm_id_t alarm_id);
+__attribute__((weak)) int64_t remaining_alarm_time_us(alarm_id_t alarm_id)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" int64_t _weak_remaining_alarm_time_us(alarm_id_t alarm_id)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_remaining_alarm_time_us=__weak_remaining_alarm_time_us")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:remaining_alarm_time_us=_weak_remaining_alarm_time_us")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void runtime_init_default_alarm_pool(void);
+__attribute__((weak)) void runtime_init_default_alarm_pool(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_runtime_init_default_alarm_pool(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_runtime_init_default_alarm_pool=__weak_runtime_init_default_alarm_pool")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:runtime_init_default_alarm_pool=_weak_runtime_init_default_alarm_pool")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void sleep_ms(uint32_t ms);
+__attribute__((weak)) void sleep_ms(uint32_t ms)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_sleep_ms(uint32_t ms)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_sleep_ms=__weak_sleep_ms")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:sleep_ms=_weak_sleep_ms")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void sleep_until(absolute_time_t target);
+__attribute__((weak)) void sleep_until(absolute_time_t target)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_sleep_until(absolute_time_t target)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_sleep_until=__weak_sleep_until")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:sleep_until=_weak_sleep_until")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void sleep_us(uint64_t us);
+__attribute__((weak)) void sleep_us(uint64_t us)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_sleep_us(uint64_t us)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_sleep_us=__weak_sleep_us")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:sleep_us=_weak_sleep_us")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint32_t to_ms_since_boot(absolute_time_t t);
+__attribute__((weak)) uint32_t to_ms_since_boot(absolute_time_t t)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint32_t _weak_to_ms_since_boot(absolute_time_t t)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_to_ms_since_boot=__weak_to_ms_since_boot")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:to_ms_since_boot=_weak_to_ms_since_boot")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint32_t us_to_ms(uint64_t us);
+__attribute__((weak)) uint32_t us_to_ms(uint64_t us)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint32_t _weak_us_to_ms(uint64_t us)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_time library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_us_to_ms=__weak_us_to_ms")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:us_to_ms=_weak_us_to_ms")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" int getchar_timeout_us(uint32_t timeout_us);
+__attribute__((weak)) int getchar_timeout_us(uint32_t timeout_us)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" int _weak_getchar_timeout_us(uint32_t timeout_us)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_stdio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_getchar_timeout_us=__weak_getchar_timeout_us")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:getchar_timeout_us=_weak_getchar_timeout_us")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" int putchar_raw(int c);
+__attribute__((weak)) int putchar_raw(int c)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" int _weak_putchar_raw(int c)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_stdio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_putchar_raw=__weak_putchar_raw")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:putchar_raw=_weak_putchar_raw")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" int puts_raw(const char* s);
+__attribute__((weak)) int puts_raw(const char* s)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" int _weak_puts_raw(const char* s)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_stdio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_puts_raw=__weak_puts_raw")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:puts_raw=_weak_puts_raw")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool stdio_deinit_all(void);
+__attribute__((weak)) bool stdio_deinit_all(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_stdio_deinit_all(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_stdio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_stdio_deinit_all=__weak_stdio_deinit_all")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:stdio_deinit_all=_weak_stdio_deinit_all")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void stdio_filter_driver(stdio_driver_t* driver);
+__attribute__((weak)) void stdio_filter_driver(stdio_driver_t* driver)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_stdio_filter_driver(stdio_driver_t* driver)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_stdio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_stdio_filter_driver=__weak_stdio_filter_driver")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:stdio_filter_driver=_weak_stdio_filter_driver")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void stdio_flush(void);
+__attribute__((weak)) void stdio_flush(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_stdio_flush(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_stdio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_stdio_flush=__weak_stdio_flush")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:stdio_flush=_weak_stdio_flush")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" int stdio_get_until(char* buf, int len, absolute_time_t until);
+__attribute__((weak)) int stdio_get_until(char* buf, int len,
+                                          absolute_time_t until)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" int _weak_stdio_get_until(char* buf, int len, absolute_time_t until)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_stdio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_stdio_get_until=__weak_stdio_get_until")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:stdio_get_until=_weak_stdio_get_until")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool stdio_init_all(void);
+__attribute__((weak)) bool stdio_init_all(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_stdio_init_all(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_stdio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_stdio_init_all=__weak_stdio_init_all")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:stdio_init_all=_weak_stdio_init_all")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" int stdio_put_string(const char* s, int len, bool newline,
+                                bool cr_translation);
+__attribute__((weak)) int stdio_put_string(const char* s, int len, bool newline,
+                                           bool cr_translation)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" int _weak_stdio_put_string(const char* s, int len, bool newline,
+                                      bool cr_translation)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_stdio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_stdio_put_string=__weak_stdio_put_string")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:stdio_put_string=_weak_stdio_put_string")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void stdio_set_driver_enabled(stdio_driver_t* driver, bool enabled);
+__attribute__((weak)) void stdio_set_driver_enabled(stdio_driver_t* driver,
+                                                    bool enabled)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_stdio_set_driver_enabled(stdio_driver_t* driver,
+                                               bool enabled)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_stdio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_stdio_set_driver_enabled=__weak_stdio_set_driver_enabled")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:stdio_set_driver_enabled=_weak_stdio_set_driver_enabled")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void stdio_set_translate_crlf(stdio_driver_t* driver,
+                                         bool translate);
+__attribute__((weak)) void stdio_set_translate_crlf(stdio_driver_t* driver,
+                                                    bool translate)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_stdio_set_translate_crlf(stdio_driver_t* driver,
+                                               bool translate)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The pico_stdio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_stdio_set_translate_crlf=__weak_stdio_set_translate_crlf")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:stdio_set_translate_crlf=_weak_stdio_set_translate_crlf")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
 extern "C" void adc_fifo_drain(void);
 __attribute__((weak)) void adc_fifo_drain(void)
 #elif defined(_MSC_VER)  // Microsoft Visual C
@@ -382,6 +1789,450 @@ extern "C" void _weak_adc_set_temp_sensor_enabled(bool enable)
 #pragma comment( \
     linker,      \
     "/alternatename:adc_set_temp_sensor_enabled=_weak_adc_set_temp_sensor_enabled")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool check_sys_clock_hz(uint32_t freq_hz, uint* vco_freq_out,
+                                   uint* post_div1_out, uint* post_div2_out);
+__attribute__((weak)) bool check_sys_clock_hz(uint32_t freq_hz,
+                                              uint* vco_freq_out,
+                                              uint* post_div1_out,
+                                              uint* post_div2_out)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_check_sys_clock_hz(uint32_t freq_hz, uint* vco_freq_out,
+                                         uint* post_div1_out,
+                                         uint* post_div2_out)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_clocks library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_check_sys_clock_hz=__weak_check_sys_clock_hz")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:check_sys_clock_hz=_weak_check_sys_clock_hz")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool check_sys_clock_khz(uint32_t freq_khz, uint* vco_freq_out,
+                                    uint* post_div1_out, uint* post_div2_out);
+__attribute__((weak)) bool check_sys_clock_khz(uint32_t freq_khz,
+                                               uint* vco_freq_out,
+                                               uint* post_div1_out,
+                                               uint* post_div2_out)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_check_sys_clock_khz(uint32_t freq_khz, uint* vco_freq_out,
+                                          uint* post_div1_out,
+                                          uint* post_div2_out)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_clocks library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_check_sys_clock_khz=__weak_check_sys_clock_khz")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:check_sys_clock_khz=_weak_check_sys_clock_khz")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool clock_configure(clock_handle_t clock, uint32_t src,
+                                uint32_t auxsrc, uint32_t src_freq,
+                                uint32_t freq);
+__attribute__((weak)) bool clock_configure(clock_handle_t clock, uint32_t src,
+                                           uint32_t auxsrc, uint32_t src_freq,
+                                           uint32_t freq)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_clock_configure(clock_handle_t clock, uint32_t src,
+                                      uint32_t auxsrc, uint32_t src_freq,
+                                      uint32_t freq)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_clocks library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_clock_configure=__weak_clock_configure")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:clock_configure=_weak_clock_configure")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool clock_configure_gpin(clock_handle_t clock, uint gpio,
+                                     uint32_t src_freq, uint32_t freq);
+__attribute__((weak)) bool clock_configure_gpin(clock_handle_t clock, uint gpio,
+                                                uint32_t src_freq,
+                                                uint32_t freq)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_clock_configure_gpin(clock_handle_t clock, uint gpio,
+                                           uint32_t src_freq, uint32_t freq)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_clocks library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_clock_configure_gpin=__weak_clock_configure_gpin")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:clock_configure_gpin=_weak_clock_configure_gpin")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void clock_configure_int_divider(clock_handle_t clock, uint32_t src,
+                                            uint32_t auxsrc, uint32_t src_freq,
+                                            uint32_t int_divider);
+__attribute__((weak)) void clock_configure_int_divider(clock_handle_t clock,
+                                                       uint32_t src,
+                                                       uint32_t auxsrc,
+                                                       uint32_t src_freq,
+                                                       uint32_t int_divider)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_clock_configure_int_divider(clock_handle_t clock,
+                                                  uint32_t src, uint32_t auxsrc,
+                                                  uint32_t src_freq,
+                                                  uint32_t int_divider)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_clocks library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_clock_configure_int_divider=__weak_clock_configure_int_divider")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:clock_configure_int_divider=_weak_clock_configure_int_divider")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void clock_configure_undivided(clock_handle_t clock, uint32_t src,
+                                          uint32_t auxsrc, uint32_t src_freq);
+__attribute__((weak)) void clock_configure_undivided(clock_handle_t clock,
+                                                     uint32_t src,
+                                                     uint32_t auxsrc,
+                                                     uint32_t src_freq)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_clock_configure_undivided(clock_handle_t clock,
+                                                uint32_t src, uint32_t auxsrc,
+                                                uint32_t src_freq)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_clocks library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_clock_configure_undivided=__weak_clock_configure_undivided")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:clock_configure_undivided=_weak_clock_configure_undivided")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint32_t clock_get_hz(clock_handle_t clock);
+__attribute__((weak)) uint32_t clock_get_hz(clock_handle_t clock)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint32_t _weak_clock_get_hz(clock_handle_t clock)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_clocks library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_clock_get_hz=__weak_clock_get_hz")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:clock_get_hz=_weak_clock_get_hz")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void clock_gpio_init(uint gpio, uint src, float div);
+__attribute__((weak)) void clock_gpio_init(uint gpio, uint src, float div)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_clock_gpio_init(uint gpio, uint src, float div)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_clocks library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_clock_gpio_init=__weak_clock_gpio_init")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:clock_gpio_init=_weak_clock_gpio_init")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void clock_gpio_init_int_frac(uint gpio, uint src, uint32_t div_int,
+                                         uint8_t div_frac);
+__attribute__((weak)) void clock_gpio_init_int_frac(uint gpio, uint src,
+                                                    uint32_t div_int,
+                                                    uint8_t div_frac)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_clock_gpio_init_int_frac(uint gpio, uint src,
+                                               uint32_t div_int,
+                                               uint8_t div_frac)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_clocks library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_clock_gpio_init_int_frac=__weak_clock_gpio_init_int_frac")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:clock_gpio_init_int_frac=_weak_clock_gpio_init_int_frac")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void clock_set_reported_hz(clock_handle_t clock, uint hz);
+__attribute__((weak)) void clock_set_reported_hz(clock_handle_t clock, uint hz)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_clock_set_reported_hz(clock_handle_t clock, uint hz)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_clocks library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_clock_set_reported_hz=__weak_clock_set_reported_hz")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:clock_set_reported_hz=_weak_clock_set_reported_hz")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void clock_stop(clock_handle_t clock);
+__attribute__((weak)) void clock_stop(clock_handle_t clock)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_clock_stop(clock_handle_t clock)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_clocks library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_clock_stop=__weak_clock_stop")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:clock_stop=_weak_clock_stop")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void clocks_enable_resus(resus_callback_t resus_callback);
+__attribute__((weak)) void clocks_enable_resus(resus_callback_t resus_callback)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_clocks_enable_resus(resus_callback_t resus_callback)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_clocks library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_clocks_enable_resus=__weak_clocks_enable_resus")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:clocks_enable_resus=_weak_clocks_enable_resus")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint32_t frequency_count_khz(uint src);
+__attribute__((weak)) uint32_t frequency_count_khz(uint src)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint32_t _weak_frequency_count_khz(uint src)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_clocks library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_frequency_count_khz=__weak_frequency_count_khz")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:frequency_count_khz=_weak_frequency_count_khz")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" float frequency_count_mhz(uint src);
+__attribute__((weak)) float frequency_count_mhz(uint src)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" float _weak_frequency_count_mhz(uint src)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_clocks library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_frequency_count_mhz=__weak_frequency_count_mhz")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:frequency_count_mhz=_weak_frequency_count_mhz")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void set_sys_clock_48mhz(void);
+__attribute__((weak)) void set_sys_clock_48mhz(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_set_sys_clock_48mhz(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_clocks library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_set_sys_clock_48mhz=__weak_set_sys_clock_48mhz")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:set_sys_clock_48mhz=_weak_set_sys_clock_48mhz")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool set_sys_clock_hz(uint32_t freq_hz, bool required);
+__attribute__((weak)) bool set_sys_clock_hz(uint32_t freq_hz, bool required)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_set_sys_clock_hz(uint32_t freq_hz, bool required)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_clocks library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_set_sys_clock_hz=__weak_set_sys_clock_hz")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:set_sys_clock_hz=_weak_set_sys_clock_hz")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool set_sys_clock_khz(uint32_t freq_khz, bool required);
+__attribute__((weak)) bool set_sys_clock_khz(uint32_t freq_khz, bool required)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_set_sys_clock_khz(uint32_t freq_khz, bool required)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_clocks library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_set_sys_clock_khz=__weak_set_sys_clock_khz")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:set_sys_clock_khz=_weak_set_sys_clock_khz")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void set_sys_clock_pll(uint32_t vco_freq, uint post_div1,
+                                  uint post_div2);
+__attribute__((weak)) void set_sys_clock_pll(uint32_t vco_freq, uint post_div1,
+                                             uint post_div2)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_set_sys_clock_pll(uint32_t vco_freq, uint post_div1,
+                                        uint post_div2)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_clocks library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_set_sys_clock_pll=__weak_set_sys_clock_pll")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:set_sys_clock_pll=_weak_set_sys_clock_pll")
 #endif  // x86 or amd64
 #endif  // _MSC_VER
 // --------------------------------------------------
@@ -2795,6 +4646,1631 @@ extern "C" void _weak_flash_range_program(uint32_t flash_offs,
 #elif defined(_M_AMD64)  // for AMD64
 #pragma comment( \
     linker, "/alternatename:flash_range_program=_weak_flash_range_program")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_acknowledge_irq(uint gpio, uint32_t event_mask);
+__attribute__((weak)) void gpio_acknowledge_irq(uint gpio, uint32_t event_mask)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_acknowledge_irq(uint gpio, uint32_t event_mask)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_gpio_acknowledge_irq=__weak_gpio_acknowledge_irq")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:gpio_acknowledge_irq=_weak_gpio_acknowledge_irq")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_add_raw_irq_handler(uint gpio, irq_handler_t handler);
+__attribute__((weak)) void gpio_add_raw_irq_handler(uint gpio,
+                                                    irq_handler_t handler)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_add_raw_irq_handler(uint gpio, irq_handler_t handler)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_gpio_add_raw_irq_handler=__weak_gpio_add_raw_irq_handler")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:gpio_add_raw_irq_handler=_weak_gpio_add_raw_irq_handler")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_add_raw_irq_handler_masked(uint32_t gpio_mask,
+                                                irq_handler_t handler);
+__attribute__((weak)) void gpio_add_raw_irq_handler_masked(
+    uint32_t gpio_mask, irq_handler_t handler)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_add_raw_irq_handler_masked(uint32_t gpio_mask,
+                                                      irq_handler_t handler)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_gpio_add_raw_irq_handler_masked=__weak_gpio_add_raw_irq_handler_masked")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:gpio_add_raw_irq_handler_masked=_weak_gpio_add_raw_irq_handler_masked")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_add_raw_irq_handler_masked64(uint64_t gpio_mask,
+                                                  irq_handler_t handler);
+__attribute__((weak)) void gpio_add_raw_irq_handler_masked64(
+    uint64_t gpio_mask, irq_handler_t handler)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_add_raw_irq_handler_masked64(uint64_t gpio_mask,
+                                                        irq_handler_t handler)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_gpio_add_raw_irq_handler_masked64=__weak_gpio_add_raw_irq_handler_masked64")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:gpio_add_raw_irq_handler_masked64=_weak_gpio_add_raw_irq_handler_masked64")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_add_raw_irq_handler_with_order_priority(
+    uint gpio, irq_handler_t handler, uint8_t order_priority);
+__attribute__((weak)) void gpio_add_raw_irq_handler_with_order_priority(
+    uint gpio, irq_handler_t handler, uint8_t order_priority)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_add_raw_irq_handler_with_order_priority(
+    uint gpio, irq_handler_t handler, uint8_t order_priority)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_gpio_add_raw_irq_handler_with_order_priority=__weak_gpio_add_raw_irq_handler_with_order_priority")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:gpio_add_raw_irq_handler_with_order_priority=_weak_gpio_add_raw_irq_handler_with_order_priority")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_add_raw_irq_handler_with_order_priority_masked(
+    uint32_t gpio_mask, irq_handler_t handler, uint8_t order_priority);
+__attribute__((weak)) void gpio_add_raw_irq_handler_with_order_priority_masked(
+    uint32_t gpio_mask, irq_handler_t handler, uint8_t order_priority)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_add_raw_irq_handler_with_order_priority_masked(
+    uint32_t gpio_mask, irq_handler_t handler, uint8_t order_priority)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_gpio_add_raw_irq_handler_with_order_priority_masked=__weak_gpio_add_raw_irq_handler_with_order_priority_masked")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:gpio_add_raw_irq_handler_with_order_priority_masked=_weak_gpio_add_raw_irq_handler_with_order_priority_masked")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_add_raw_irq_handler_with_order_priority_masked64(
+    uint64_t gpio_mask, irq_handler_t handler, uint8_t order_priority);
+__attribute__((weak)) void
+gpio_add_raw_irq_handler_with_order_priority_masked64(uint64_t gpio_mask,
+                                                      irq_handler_t handler,
+                                                      uint8_t order_priority)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_add_raw_irq_handler_with_order_priority_masked64(
+    uint64_t gpio_mask, irq_handler_t handler, uint8_t order_priority)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_gpio_add_raw_irq_handler_with_order_priority_masked64=__weak_gpio_add_raw_irq_handler_with_order_priority_masked64")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:gpio_add_raw_irq_handler_with_order_priority_masked64=_weak_gpio_add_raw_irq_handler_with_order_priority_masked64")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_assign_to_ns(uint gpio, bool ns);
+__attribute__((weak)) void gpio_assign_to_ns(uint gpio, bool ns)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_assign_to_ns(uint gpio, bool ns)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_gpio_assign_to_ns=__weak_gpio_assign_to_ns")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:gpio_assign_to_ns=_weak_gpio_assign_to_ns")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_clr_mask(uint32_t mask);
+__attribute__((weak)) void gpio_clr_mask(uint32_t mask)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_clr_mask(uint32_t mask)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_gpio_clr_mask=__weak_gpio_clr_mask")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:gpio_clr_mask=_weak_gpio_clr_mask")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_clr_mask64(uint64_t mask);
+__attribute__((weak)) void gpio_clr_mask64(uint64_t mask)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_clr_mask64(uint64_t mask)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_gpio_clr_mask64=__weak_gpio_clr_mask64")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:gpio_clr_mask64=_weak_gpio_clr_mask64")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_clr_mask_n(uint n, uint32_t mask);
+__attribute__((weak)) void gpio_clr_mask_n(uint n, uint32_t mask)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_clr_mask_n(uint n, uint32_t mask)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_gpio_clr_mask_n=__weak_gpio_clr_mask_n")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:gpio_clr_mask_n=_weak_gpio_clr_mask_n")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_debug_pins_init(void);
+__attribute__((weak)) void gpio_debug_pins_init(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_debug_pins_init(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_gpio_debug_pins_init=__weak_gpio_debug_pins_init")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:gpio_debug_pins_init=_weak_gpio_debug_pins_init")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_deinit(uint gpio);
+__attribute__((weak)) void gpio_deinit(uint gpio)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_deinit(uint gpio)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_gpio_deinit=__weak_gpio_deinit")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:gpio_deinit=_weak_gpio_deinit")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_disable_pulls(uint gpio);
+__attribute__((weak)) void gpio_disable_pulls(uint gpio)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_disable_pulls(uint gpio)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_gpio_disable_pulls=__weak_gpio_disable_pulls")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:gpio_disable_pulls=_weak_gpio_disable_pulls")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool gpio_get(uint gpio);
+__attribute__((weak)) bool gpio_get(uint gpio)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_gpio_get(uint gpio)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_gpio_get=__weak_gpio_get")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:gpio_get=_weak_gpio_get")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint32_t gpio_get_all(void);
+__attribute__((weak)) uint32_t gpio_get_all(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint32_t _weak_gpio_get_all(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_gpio_get_all=__weak_gpio_get_all")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:gpio_get_all=_weak_gpio_get_all")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint64_t gpio_get_all64(void);
+__attribute__((weak)) uint64_t gpio_get_all64(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint64_t _weak_gpio_get_all64(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_gpio_get_all64=__weak_gpio_get_all64")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:gpio_get_all64=_weak_gpio_get_all64")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint gpio_get_dir(uint gpio);
+__attribute__((weak)) uint gpio_get_dir(uint gpio)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint _weak_gpio_get_dir(uint gpio)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_gpio_get_dir=__weak_gpio_get_dir")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:gpio_get_dir=_weak_gpio_get_dir")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" enum gpio_drive_strength gpio_get_drive_strength(uint gpio);
+__attribute__((weak)) enum gpio_drive_strength gpio_get_drive_strength(
+    uint gpio)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" enum gpio_drive_strength _weak_gpio_get_drive_strength(uint gpio)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_gpio_get_drive_strength=__weak_gpio_get_drive_strength")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:gpio_get_drive_strength=_weak_gpio_get_drive_strength")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" gpio_function_t gpio_get_function(uint gpio);
+__attribute__((weak)) gpio_function_t gpio_get_function(uint gpio)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" gpio_function_t _weak_gpio_get_function(uint gpio)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_gpio_get_function=__weak_gpio_get_function")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:gpio_get_function=_weak_gpio_get_function")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint32_t gpio_get_irq_event_mask(uint gpio);
+__attribute__((weak)) uint32_t gpio_get_irq_event_mask(uint gpio)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint32_t _weak_gpio_get_irq_event_mask(uint gpio)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_gpio_get_irq_event_mask=__weak_gpio_get_irq_event_mask")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:gpio_get_irq_event_mask=_weak_gpio_get_irq_event_mask")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool gpio_get_out_level(uint gpio);
+__attribute__((weak)) bool gpio_get_out_level(uint gpio)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_gpio_get_out_level(uint gpio)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_gpio_get_out_level=__weak_gpio_get_out_level")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:gpio_get_out_level=_weak_gpio_get_out_level")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" enum gpio_slew_rate gpio_get_slew_rate(uint gpio);
+__attribute__((weak)) enum gpio_slew_rate gpio_get_slew_rate(uint gpio)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" enum gpio_slew_rate _weak_gpio_get_slew_rate(uint gpio)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_gpio_get_slew_rate=__weak_gpio_get_slew_rate")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:gpio_get_slew_rate=_weak_gpio_get_slew_rate")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_init(uint gpio);
+__attribute__((weak)) void gpio_init(uint gpio)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_init(uint gpio)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_gpio_init=__weak_gpio_init")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:gpio_init=_weak_gpio_init")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_init_mask(uint gpio_mask);
+__attribute__((weak)) void gpio_init_mask(uint gpio_mask)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_init_mask(uint gpio_mask)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_gpio_init_mask=__weak_gpio_init_mask")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:gpio_init_mask=_weak_gpio_init_mask")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool gpio_is_dir_out(uint gpio);
+__attribute__((weak)) bool gpio_is_dir_out(uint gpio)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_gpio_is_dir_out(uint gpio)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_gpio_is_dir_out=__weak_gpio_is_dir_out")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:gpio_is_dir_out=_weak_gpio_is_dir_out")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool gpio_is_input_hysteresis_enabled(uint gpio);
+__attribute__((weak)) bool gpio_is_input_hysteresis_enabled(uint gpio)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_gpio_is_input_hysteresis_enabled(uint gpio)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_gpio_is_input_hysteresis_enabled=__weak_gpio_is_input_hysteresis_enabled")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:gpio_is_input_hysteresis_enabled=_weak_gpio_is_input_hysteresis_enabled")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool gpio_is_pulled_down(uint gpio);
+__attribute__((weak)) bool gpio_is_pulled_down(uint gpio)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_gpio_is_pulled_down(uint gpio)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_gpio_is_pulled_down=__weak_gpio_is_pulled_down")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:gpio_is_pulled_down=_weak_gpio_is_pulled_down")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool gpio_is_pulled_up(uint gpio);
+__attribute__((weak)) bool gpio_is_pulled_up(uint gpio)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_gpio_is_pulled_up(uint gpio)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_gpio_is_pulled_up=__weak_gpio_is_pulled_up")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:gpio_is_pulled_up=_weak_gpio_is_pulled_up")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_pull_down(uint gpio);
+__attribute__((weak)) void gpio_pull_down(uint gpio)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_pull_down(uint gpio)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_gpio_pull_down=__weak_gpio_pull_down")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:gpio_pull_down=_weak_gpio_pull_down")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_pull_up(uint gpio);
+__attribute__((weak)) void gpio_pull_up(uint gpio)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_pull_up(uint gpio)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_gpio_pull_up=__weak_gpio_pull_up")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:gpio_pull_up=_weak_gpio_pull_up")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_put(uint gpio, bool value);
+__attribute__((weak)) void gpio_put(uint gpio, bool value)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_put(uint gpio, bool value)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_gpio_put=__weak_gpio_put")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:gpio_put=_weak_gpio_put")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_put_all(uint32_t value);
+__attribute__((weak)) void gpio_put_all(uint32_t value)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_put_all(uint32_t value)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_gpio_put_all=__weak_gpio_put_all")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:gpio_put_all=_weak_gpio_put_all")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_put_all64(uint64_t value);
+__attribute__((weak)) void gpio_put_all64(uint64_t value)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_put_all64(uint64_t value)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_gpio_put_all64=__weak_gpio_put_all64")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:gpio_put_all64=_weak_gpio_put_all64")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_put_masked(uint32_t mask, uint32_t value);
+__attribute__((weak)) void gpio_put_masked(uint32_t mask, uint32_t value)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_put_masked(uint32_t mask, uint32_t value)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_gpio_put_masked=__weak_gpio_put_masked")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:gpio_put_masked=_weak_gpio_put_masked")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_put_masked64(uint64_t mask, uint64_t value);
+__attribute__((weak)) void gpio_put_masked64(uint64_t mask, uint64_t value)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_put_masked64(uint64_t mask, uint64_t value)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_gpio_put_masked64=__weak_gpio_put_masked64")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:gpio_put_masked64=_weak_gpio_put_masked64")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_put_masked_n(uint n, uint32_t mask, uint32_t value);
+__attribute__((weak)) void gpio_put_masked_n(uint n, uint32_t mask,
+                                             uint32_t value)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_put_masked_n(uint n, uint32_t mask, uint32_t value)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_gpio_put_masked_n=__weak_gpio_put_masked_n")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:gpio_put_masked_n=_weak_gpio_put_masked_n")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_remove_raw_irq_handler(uint gpio, irq_handler_t handler);
+__attribute__((weak)) void gpio_remove_raw_irq_handler(uint gpio,
+                                                       irq_handler_t handler)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_remove_raw_irq_handler(uint gpio,
+                                                  irq_handler_t handler)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_gpio_remove_raw_irq_handler=__weak_gpio_remove_raw_irq_handler")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:gpio_remove_raw_irq_handler=_weak_gpio_remove_raw_irq_handler")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_remove_raw_irq_handler_masked(uint32_t gpio_mask,
+                                                   irq_handler_t handler);
+__attribute__((weak)) void gpio_remove_raw_irq_handler_masked(
+    uint32_t gpio_mask, irq_handler_t handler)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_remove_raw_irq_handler_masked(uint32_t gpio_mask,
+                                                         irq_handler_t handler)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_gpio_remove_raw_irq_handler_masked=__weak_gpio_remove_raw_irq_handler_masked")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:gpio_remove_raw_irq_handler_masked=_weak_gpio_remove_raw_irq_handler_masked")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_remove_raw_irq_handler_masked64(uint64_t gpio_mask,
+                                                     irq_handler_t handler);
+__attribute__((weak)) void gpio_remove_raw_irq_handler_masked64(
+    uint64_t gpio_mask, irq_handler_t handler)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_remove_raw_irq_handler_masked64(
+    uint64_t gpio_mask, irq_handler_t handler)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_gpio_remove_raw_irq_handler_masked64=__weak_gpio_remove_raw_irq_handler_masked64")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:gpio_remove_raw_irq_handler_masked64=_weak_gpio_remove_raw_irq_handler_masked64")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_set_dir(uint gpio, bool out);
+__attribute__((weak)) void gpio_set_dir(uint gpio, bool out)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_set_dir(uint gpio, bool out)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_gpio_set_dir=__weak_gpio_set_dir")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:gpio_set_dir=_weak_gpio_set_dir")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_set_dir_all_bits(uint32_t values);
+__attribute__((weak)) void gpio_set_dir_all_bits(uint32_t values)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_set_dir_all_bits(uint32_t values)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_gpio_set_dir_all_bits=__weak_gpio_set_dir_all_bits")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:gpio_set_dir_all_bits=_weak_gpio_set_dir_all_bits")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_set_dir_all_bits64(uint64_t values);
+__attribute__((weak)) void gpio_set_dir_all_bits64(uint64_t values)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_set_dir_all_bits64(uint64_t values)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_gpio_set_dir_all_bits64=__weak_gpio_set_dir_all_bits64")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:gpio_set_dir_all_bits64=_weak_gpio_set_dir_all_bits64")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_set_dir_in_masked(uint32_t mask);
+__attribute__((weak)) void gpio_set_dir_in_masked(uint32_t mask)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_set_dir_in_masked(uint32_t mask)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_gpio_set_dir_in_masked=__weak_gpio_set_dir_in_masked")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:gpio_set_dir_in_masked=_weak_gpio_set_dir_in_masked")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_set_dir_in_masked64(uint64_t mask);
+__attribute__((weak)) void gpio_set_dir_in_masked64(uint64_t mask)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_set_dir_in_masked64(uint64_t mask)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_gpio_set_dir_in_masked64=__weak_gpio_set_dir_in_masked64")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:gpio_set_dir_in_masked64=_weak_gpio_set_dir_in_masked64")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_set_dir_masked(uint32_t mask, uint32_t value);
+__attribute__((weak)) void gpio_set_dir_masked(uint32_t mask, uint32_t value)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_set_dir_masked(uint32_t mask, uint32_t value)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_gpio_set_dir_masked=__weak_gpio_set_dir_masked")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:gpio_set_dir_masked=_weak_gpio_set_dir_masked")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_set_dir_masked64(uint64_t mask, uint64_t value);
+__attribute__((weak)) void gpio_set_dir_masked64(uint64_t mask, uint64_t value)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_set_dir_masked64(uint64_t mask, uint64_t value)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_gpio_set_dir_masked64=__weak_gpio_set_dir_masked64")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:gpio_set_dir_masked64=_weak_gpio_set_dir_masked64")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_set_dir_out_masked(uint32_t mask);
+__attribute__((weak)) void gpio_set_dir_out_masked(uint32_t mask)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_set_dir_out_masked(uint32_t mask)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_gpio_set_dir_out_masked=__weak_gpio_set_dir_out_masked")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:gpio_set_dir_out_masked=_weak_gpio_set_dir_out_masked")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_set_dir_out_masked64(uint64_t mask);
+__attribute__((weak)) void gpio_set_dir_out_masked64(uint64_t mask)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_set_dir_out_masked64(uint64_t mask)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_gpio_set_dir_out_masked64=__weak_gpio_set_dir_out_masked64")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:gpio_set_dir_out_masked64=_weak_gpio_set_dir_out_masked64")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_set_dormant_irq_enabled(uint gpio, uint32_t event_mask,
+                                             bool enabled);
+__attribute__((weak)) void gpio_set_dormant_irq_enabled(uint gpio,
+                                                        uint32_t event_mask,
+                                                        bool enabled)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_set_dormant_irq_enabled(uint gpio,
+                                                   uint32_t event_mask,
+                                                   bool enabled)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_gpio_set_dormant_irq_enabled=__weak_gpio_set_dormant_irq_enabled")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:gpio_set_dormant_irq_enabled=_weak_gpio_set_dormant_irq_enabled")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_set_drive_strength(uint gpio,
+                                        enum gpio_drive_strength drive);
+__attribute__((weak)) void gpio_set_drive_strength(
+    uint gpio, enum gpio_drive_strength drive)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_set_drive_strength(uint gpio,
+                                              enum gpio_drive_strength drive)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_gpio_set_drive_strength=__weak_gpio_set_drive_strength")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:gpio_set_drive_strength=_weak_gpio_set_drive_strength")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_set_function(uint gpio, gpio_function_t fn);
+__attribute__((weak)) void gpio_set_function(uint gpio, gpio_function_t fn)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_set_function(uint gpio, gpio_function_t fn)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_gpio_set_function=__weak_gpio_set_function")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:gpio_set_function=_weak_gpio_set_function")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_set_function_masked(uint32_t gpio_mask,
+                                         gpio_function_t fn);
+__attribute__((weak)) void gpio_set_function_masked(uint32_t gpio_mask,
+                                                    gpio_function_t fn)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_set_function_masked(uint32_t gpio_mask,
+                                               gpio_function_t fn)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_gpio_set_function_masked=__weak_gpio_set_function_masked")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:gpio_set_function_masked=_weak_gpio_set_function_masked")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_set_function_masked64(uint64_t gpio_mask,
+                                           gpio_function_t fn);
+__attribute__((weak)) void gpio_set_function_masked64(uint64_t gpio_mask,
+                                                      gpio_function_t fn)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_set_function_masked64(uint64_t gpio_mask,
+                                                 gpio_function_t fn)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_gpio_set_function_masked64=__weak_gpio_set_function_masked64")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:gpio_set_function_masked64=_weak_gpio_set_function_masked64")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_set_inover(uint gpio, uint value);
+__attribute__((weak)) void gpio_set_inover(uint gpio, uint value)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_set_inover(uint gpio, uint value)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_gpio_set_inover=__weak_gpio_set_inover")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:gpio_set_inover=_weak_gpio_set_inover")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_set_input_enabled(uint gpio, bool enabled);
+__attribute__((weak)) void gpio_set_input_enabled(uint gpio, bool enabled)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_set_input_enabled(uint gpio, bool enabled)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_gpio_set_input_enabled=__weak_gpio_set_input_enabled")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:gpio_set_input_enabled=_weak_gpio_set_input_enabled")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_set_input_hysteresis_enabled(uint gpio, bool enabled);
+__attribute__((weak)) void gpio_set_input_hysteresis_enabled(uint gpio,
+                                                             bool enabled)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_set_input_hysteresis_enabled(uint gpio, bool enabled)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_gpio_set_input_hysteresis_enabled=__weak_gpio_set_input_hysteresis_enabled")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:gpio_set_input_hysteresis_enabled=_weak_gpio_set_input_hysteresis_enabled")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_set_irq_callback(gpio_irq_callback_t callback);
+__attribute__((weak)) void gpio_set_irq_callback(gpio_irq_callback_t callback)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_set_irq_callback(gpio_irq_callback_t callback)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_gpio_set_irq_callback=__weak_gpio_set_irq_callback")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:gpio_set_irq_callback=_weak_gpio_set_irq_callback")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_set_irq_enabled(uint gpio, uint32_t event_mask,
+                                     bool enabled);
+__attribute__((weak)) void gpio_set_irq_enabled(uint gpio, uint32_t event_mask,
+                                                bool enabled)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_set_irq_enabled(uint gpio, uint32_t event_mask,
+                                           bool enabled)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_gpio_set_irq_enabled=__weak_gpio_set_irq_enabled")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:gpio_set_irq_enabled=_weak_gpio_set_irq_enabled")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_set_irq_enabled_with_callback(
+    uint gpio, uint32_t event_mask, bool enabled, gpio_irq_callback_t callback);
+__attribute__((weak)) void gpio_set_irq_enabled_with_callback(
+    uint gpio, uint32_t event_mask, bool enabled, gpio_irq_callback_t callback)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_set_irq_enabled_with_callback(
+    uint gpio, uint32_t event_mask, bool enabled, gpio_irq_callback_t callback)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_gpio_set_irq_enabled_with_callback=__weak_gpio_set_irq_enabled_with_callback")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:gpio_set_irq_enabled_with_callback=_weak_gpio_set_irq_enabled_with_callback")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_set_irqover(uint gpio, uint value);
+__attribute__((weak)) void gpio_set_irqover(uint gpio, uint value)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_set_irqover(uint gpio, uint value)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_gpio_set_irqover=__weak_gpio_set_irqover")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:gpio_set_irqover=_weak_gpio_set_irqover")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_set_mask(uint32_t mask);
+__attribute__((weak)) void gpio_set_mask(uint32_t mask)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_set_mask(uint32_t mask)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_gpio_set_mask=__weak_gpio_set_mask")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:gpio_set_mask=_weak_gpio_set_mask")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_set_mask64(uint64_t mask);
+__attribute__((weak)) void gpio_set_mask64(uint64_t mask)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_set_mask64(uint64_t mask)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_gpio_set_mask64=__weak_gpio_set_mask64")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:gpio_set_mask64=_weak_gpio_set_mask64")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_set_mask_n(uint n, uint32_t mask);
+__attribute__((weak)) void gpio_set_mask_n(uint n, uint32_t mask)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_set_mask_n(uint n, uint32_t mask)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_gpio_set_mask_n=__weak_gpio_set_mask_n")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:gpio_set_mask_n=_weak_gpio_set_mask_n")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_set_oeover(uint gpio, uint value);
+__attribute__((weak)) void gpio_set_oeover(uint gpio, uint value)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_set_oeover(uint gpio, uint value)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_gpio_set_oeover=__weak_gpio_set_oeover")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:gpio_set_oeover=_weak_gpio_set_oeover")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_set_outover(uint gpio, uint value);
+__attribute__((weak)) void gpio_set_outover(uint gpio, uint value)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_set_outover(uint gpio, uint value)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_gpio_set_outover=__weak_gpio_set_outover")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:gpio_set_outover=_weak_gpio_set_outover")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_set_pulls(uint gpio, bool up, bool down);
+__attribute__((weak)) void gpio_set_pulls(uint gpio, bool up, bool down)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_set_pulls(uint gpio, bool up, bool down)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_gpio_set_pulls=__weak_gpio_set_pulls")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:gpio_set_pulls=_weak_gpio_set_pulls")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_set_slew_rate(uint gpio, enum gpio_slew_rate slew);
+__attribute__((weak)) void gpio_set_slew_rate(uint gpio,
+                                              enum gpio_slew_rate slew)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_set_slew_rate(uint gpio, enum gpio_slew_rate slew)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_gpio_set_slew_rate=__weak_gpio_set_slew_rate")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:gpio_set_slew_rate=_weak_gpio_set_slew_rate")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_xor_mask(uint32_t mask);
+__attribute__((weak)) void gpio_xor_mask(uint32_t mask)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_xor_mask(uint32_t mask)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_gpio_xor_mask=__weak_gpio_xor_mask")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:gpio_xor_mask=_weak_gpio_xor_mask")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_xor_mask64(uint64_t mask);
+__attribute__((weak)) void gpio_xor_mask64(uint64_t mask)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_xor_mask64(uint64_t mask)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_gpio_xor_mask64=__weak_gpio_xor_mask64")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:gpio_xor_mask64=_weak_gpio_xor_mask64")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void gpio_xor_mask_n(uint n, uint32_t mask);
+__attribute__((weak)) void gpio_xor_mask_n(uint n, uint32_t mask)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_gpio_xor_mask_n(uint n, uint32_t mask)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_gpio library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_gpio_xor_mask_n=__weak_gpio_xor_mask_n")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:gpio_xor_mask_n=_weak_gpio_xor_mask_n")
 #endif  // x86 or amd64
 #endif  // _MSC_VER
 // --------------------------------------------------
@@ -9748,3477 +13224,152 @@ extern "C" void _weak_unreset_block_wait(uint32_t bits)
 #endif  // _MSC_VER
 // --------------------------------------------------
 #if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_acknowledge_irq(uint gpio, uint32_t event_mask);
-__attribute__((weak)) void gpio_acknowledge_irq(uint gpio, uint32_t event_mask)
+extern "C" void rtc_disable_alarm(void);
+__attribute__((weak)) void rtc_disable_alarm(void)
 #elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_acknowledge_irq(uint gpio, uint32_t event_mask)
+extern "C" void _weak_rtc_disable_alarm(void)
 #else                    // Other compilers are not supported
 #error "Unknown compiler."
 #endif  // Compiler detection
 {
   assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_gpio_acknowledge_irq=__weak_gpio_acknowledge_irq")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker, "/alternatename:gpio_acknowledge_irq=_weak_gpio_acknowledge_irq")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_add_raw_irq_handler(uint gpio, irq_handler_t handler);
-__attribute__((weak)) void gpio_add_raw_irq_handler(uint gpio,
-                                                    irq_handler_t handler)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_add_raw_irq_handler(uint gpio, irq_handler_t handler)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_gpio_add_raw_irq_handler=__weak_gpio_add_raw_irq_handler")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:gpio_add_raw_irq_handler=_weak_gpio_add_raw_irq_handler")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_add_raw_irq_handler_masked(uint32_t gpio_mask,
-                                                irq_handler_t handler);
-__attribute__((weak)) void gpio_add_raw_irq_handler_masked(
-    uint32_t gpio_mask, irq_handler_t handler)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_add_raw_irq_handler_masked(uint32_t gpio_mask,
-                                                      irq_handler_t handler)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_gpio_add_raw_irq_handler_masked=__weak_gpio_add_raw_irq_handler_masked")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:gpio_add_raw_irq_handler_masked=_weak_gpio_add_raw_irq_handler_masked")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_add_raw_irq_handler_masked64(uint64_t gpio_mask,
-                                                  irq_handler_t handler);
-__attribute__((weak)) void gpio_add_raw_irq_handler_masked64(
-    uint64_t gpio_mask, irq_handler_t handler)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_add_raw_irq_handler_masked64(uint64_t gpio_mask,
-                                                        irq_handler_t handler)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_gpio_add_raw_irq_handler_masked64=__weak_gpio_add_raw_irq_handler_masked64")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:gpio_add_raw_irq_handler_masked64=_weak_gpio_add_raw_irq_handler_masked64")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_add_raw_irq_handler_with_order_priority(
-    uint gpio, irq_handler_t handler, uint8_t order_priority);
-__attribute__((weak)) void gpio_add_raw_irq_handler_with_order_priority(
-    uint gpio, irq_handler_t handler, uint8_t order_priority)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_add_raw_irq_handler_with_order_priority(
-    uint gpio, irq_handler_t handler, uint8_t order_priority)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_gpio_add_raw_irq_handler_with_order_priority=__weak_gpio_add_raw_irq_handler_with_order_priority")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:gpio_add_raw_irq_handler_with_order_priority=_weak_gpio_add_raw_irq_handler_with_order_priority")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_add_raw_irq_handler_with_order_priority_masked(
-    uint32_t gpio_mask, irq_handler_t handler, uint8_t order_priority);
-__attribute__((weak)) void gpio_add_raw_irq_handler_with_order_priority_masked(
-    uint32_t gpio_mask, irq_handler_t handler, uint8_t order_priority)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_add_raw_irq_handler_with_order_priority_masked(
-    uint32_t gpio_mask, irq_handler_t handler, uint8_t order_priority)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_gpio_add_raw_irq_handler_with_order_priority_masked=__weak_gpio_add_raw_irq_handler_with_order_priority_masked")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:gpio_add_raw_irq_handler_with_order_priority_masked=_weak_gpio_add_raw_irq_handler_with_order_priority_masked")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_add_raw_irq_handler_with_order_priority_masked64(
-    uint64_t gpio_mask, irq_handler_t handler, uint8_t order_priority);
-__attribute__((weak)) void
-gpio_add_raw_irq_handler_with_order_priority_masked64(uint64_t gpio_mask,
-                                                      irq_handler_t handler,
-                                                      uint8_t order_priority)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_add_raw_irq_handler_with_order_priority_masked64(
-    uint64_t gpio_mask, irq_handler_t handler, uint8_t order_priority)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_gpio_add_raw_irq_handler_with_order_priority_masked64=__weak_gpio_add_raw_irq_handler_with_order_priority_masked64")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:gpio_add_raw_irq_handler_with_order_priority_masked64=_weak_gpio_add_raw_irq_handler_with_order_priority_masked64")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_assign_to_ns(uint gpio, bool ns);
-__attribute__((weak)) void gpio_assign_to_ns(uint gpio, bool ns)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_assign_to_ns(uint gpio, bool ns)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
+         "Error : The hardware_rtc library is missing in the link phase.");
 }
 #if defined(_MSC_VER)  // weak binding in MSVC must be after definition
 #if defined(_M_IX86)   // for x86
 #pragma comment(linker, \
-                "/alternatename:_gpio_assign_to_ns=__weak_gpio_assign_to_ns")
+                "/alternatename:_rtc_disable_alarm=__weak_rtc_disable_alarm")
 #elif defined(_M_AMD64)  // for AMD64
 #pragma comment(linker, \
-                "/alternatename:gpio_assign_to_ns=_weak_gpio_assign_to_ns")
+                "/alternatename:rtc_disable_alarm=_weak_rtc_disable_alarm")
 #endif  // x86 or amd64
 #endif  // _MSC_VER
 // --------------------------------------------------
 #if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_clr_mask(uint32_t mask);
-__attribute__((weak)) void gpio_clr_mask(uint32_t mask)
+extern "C" void rtc_enable_alarm(void);
+__attribute__((weak)) void rtc_enable_alarm(void)
 #elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_clr_mask(uint32_t mask)
+extern "C" void _weak_rtc_enable_alarm(void)
 #else                    // Other compilers are not supported
 #error "Unknown compiler."
 #endif  // Compiler detection
 {
   assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, "/alternatename:_gpio_clr_mask=__weak_gpio_clr_mask")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:gpio_clr_mask=_weak_gpio_clr_mask")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_clr_mask64(uint64_t mask);
-__attribute__((weak)) void gpio_clr_mask64(uint64_t mask)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_clr_mask64(uint64_t mask)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
+         "Error : The hardware_rtc library is missing in the link phase.");
 }
 #if defined(_MSC_VER)  // weak binding in MSVC must be after definition
 #if defined(_M_IX86)   // for x86
 #pragma comment(linker, \
-                "/alternatename:_gpio_clr_mask64=__weak_gpio_clr_mask64")
+                "/alternatename:_rtc_enable_alarm=__weak_rtc_enable_alarm")
 #elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:gpio_clr_mask64=_weak_gpio_clr_mask64")
+#pragma comment(linker, \
+                "/alternatename:rtc_enable_alarm=_weak_rtc_enable_alarm")
 #endif  // x86 or amd64
 #endif  // _MSC_VER
 // --------------------------------------------------
 #if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_clr_mask_n(uint n, uint32_t mask);
-__attribute__((weak)) void gpio_clr_mask_n(uint n, uint32_t mask)
+extern "C" bool rtc_get_datetime(datetime_t* t);
+__attribute__((weak)) bool rtc_get_datetime(datetime_t* t)
 #elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_clr_mask_n(uint n, uint32_t mask)
+extern "C" bool _weak_rtc_get_datetime(datetime_t* t)
 #else                    // Other compilers are not supported
 #error "Unknown compiler."
 #endif  // Compiler detection
 {
   assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
+         "Error : The hardware_rtc library is missing in the link phase.");
 }
 #if defined(_MSC_VER)  // weak binding in MSVC must be after definition
 #if defined(_M_IX86)   // for x86
 #pragma comment(linker, \
-                "/alternatename:_gpio_clr_mask_n=__weak_gpio_clr_mask_n")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:gpio_clr_mask_n=_weak_gpio_clr_mask_n")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_debug_pins_init(void);
-__attribute__((weak)) void gpio_debug_pins_init(void)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_debug_pins_init(void)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_gpio_debug_pins_init=__weak_gpio_debug_pins_init")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker, "/alternatename:gpio_debug_pins_init=_weak_gpio_debug_pins_init")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_deinit(uint gpio);
-__attribute__((weak)) void gpio_deinit(uint gpio)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_deinit(uint gpio)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, "/alternatename:_gpio_deinit=__weak_gpio_deinit")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:gpio_deinit=_weak_gpio_deinit")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_disable_pulls(uint gpio);
-__attribute__((weak)) void gpio_disable_pulls(uint gpio)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_disable_pulls(uint gpio)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker, "/alternatename:_gpio_disable_pulls=__weak_gpio_disable_pulls")
+                "/alternatename:_rtc_get_datetime=__weak_rtc_get_datetime")
 #elif defined(_M_AMD64)  // for AMD64
 #pragma comment(linker, \
-                "/alternatename:gpio_disable_pulls=_weak_gpio_disable_pulls")
+                "/alternatename:rtc_get_datetime=_weak_rtc_get_datetime")
 #endif  // x86 or amd64
 #endif  // _MSC_VER
 // --------------------------------------------------
 #if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" bool gpio_get(uint gpio);
-__attribute__((weak)) bool gpio_get(uint gpio)
+extern "C" void rtc_init(void);
+__attribute__((weak)) void rtc_init(void)
 #elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" bool _weak_gpio_get(uint gpio)
+extern "C" void _weak_rtc_init(void)
 #else                    // Other compilers are not supported
 #error "Unknown compiler."
 #endif  // Compiler detection
 {
   assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
+         "Error : The hardware_rtc library is missing in the link phase.");
 }
 #if defined(_MSC_VER)  // weak binding in MSVC must be after definition
 #if defined(_M_IX86)   // for x86
-#pragma comment(linker, "/alternatename:_gpio_get=__weak_gpio_get")
+#pragma comment(linker, "/alternatename:_rtc_init=__weak_rtc_init")
 #elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:gpio_get=_weak_gpio_get")
+#pragma comment(linker, "/alternatename:rtc_init=_weak_rtc_init")
 #endif  // x86 or amd64
 #endif  // _MSC_VER
 // --------------------------------------------------
 #if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" uint32_t gpio_get_all(void);
-__attribute__((weak)) uint32_t gpio_get_all(void)
+extern "C" bool rtc_running(void);
+__attribute__((weak)) bool rtc_running(void)
 #elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" uint32_t _weak_gpio_get_all(void)
+extern "C" bool _weak_rtc_running(void)
 #else                    // Other compilers are not supported
 #error "Unknown compiler."
 #endif  // Compiler detection
 {
   assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
+         "Error : The hardware_rtc library is missing in the link phase.");
 }
 #if defined(_MSC_VER)  // weak binding in MSVC must be after definition
 #if defined(_M_IX86)   // for x86
-#pragma comment(linker, "/alternatename:_gpio_get_all=__weak_gpio_get_all")
+#pragma comment(linker, "/alternatename:_rtc_running=__weak_rtc_running")
 #elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:gpio_get_all=_weak_gpio_get_all")
+#pragma comment(linker, "/alternatename:rtc_running=_weak_rtc_running")
 #endif  // x86 or amd64
 #endif  // _MSC_VER
 // --------------------------------------------------
 #if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" uint64_t gpio_get_all64(void);
-__attribute__((weak)) uint64_t gpio_get_all64(void)
+extern "C" void rtc_set_alarm(const datetime_t* t,
+                              rtc_callback_t user_callback);
+__attribute__((weak)) void rtc_set_alarm(const datetime_t* t,
+                                         rtc_callback_t user_callback)
 #elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" uint64_t _weak_gpio_get_all64(void)
+extern "C" void _weak_rtc_set_alarm(const datetime_t* t,
+                                    rtc_callback_t user_callback)
 #else                    // Other compilers are not supported
 #error "Unknown compiler."
 #endif  // Compiler detection
 {
   assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
+         "Error : The hardware_rtc library is missing in the link phase.");
 }
 #if defined(_MSC_VER)  // weak binding in MSVC must be after definition
 #if defined(_M_IX86)   // for x86
-#pragma comment(linker, "/alternatename:_gpio_get_all64=__weak_gpio_get_all64")
+#pragma comment(linker, "/alternatename:_rtc_set_alarm=__weak_rtc_set_alarm")
 #elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:gpio_get_all64=_weak_gpio_get_all64")
+#pragma comment(linker, "/alternatename:rtc_set_alarm=_weak_rtc_set_alarm")
 #endif  // x86 or amd64
 #endif  // _MSC_VER
 // --------------------------------------------------
 #if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" uint gpio_get_dir(uint gpio);
-__attribute__((weak)) uint gpio_get_dir(uint gpio)
+extern "C" bool rtc_set_datetime(const datetime_t* t);
+__attribute__((weak)) bool rtc_set_datetime(const datetime_t* t)
 #elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" uint _weak_gpio_get_dir(uint gpio)
+extern "C" bool _weak_rtc_set_datetime(const datetime_t* t)
 #else                    // Other compilers are not supported
 #error "Unknown compiler."
 #endif  // Compiler detection
 {
   assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, "/alternatename:_gpio_get_dir=__weak_gpio_get_dir")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:gpio_get_dir=_weak_gpio_get_dir")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" enum gpio_drive_strength gpio_get_drive_strength(uint gpio);
-__attribute__((weak)) enum gpio_drive_strength gpio_get_drive_strength(
-    uint gpio)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" enum gpio_drive_strength _weak_gpio_get_drive_strength(uint gpio)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_gpio_get_drive_strength=__weak_gpio_get_drive_strength")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:gpio_get_drive_strength=_weak_gpio_get_drive_strength")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" gpio_function_t gpio_get_function(uint gpio);
-__attribute__((weak)) gpio_function_t gpio_get_function(uint gpio)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" gpio_function_t _weak_gpio_get_function(uint gpio)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
+         "Error : The hardware_rtc library is missing in the link phase.");
 }
 #if defined(_MSC_VER)  // weak binding in MSVC must be after definition
 #if defined(_M_IX86)   // for x86
 #pragma comment(linker, \
-                "/alternatename:_gpio_get_function=__weak_gpio_get_function")
+                "/alternatename:_rtc_set_datetime=__weak_rtc_set_datetime")
 #elif defined(_M_AMD64)  // for AMD64
 #pragma comment(linker, \
-                "/alternatename:gpio_get_function=_weak_gpio_get_function")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" uint32_t gpio_get_irq_event_mask(uint gpio);
-__attribute__((weak)) uint32_t gpio_get_irq_event_mask(uint gpio)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" uint32_t _weak_gpio_get_irq_event_mask(uint gpio)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_gpio_get_irq_event_mask=__weak_gpio_get_irq_event_mask")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:gpio_get_irq_event_mask=_weak_gpio_get_irq_event_mask")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" bool gpio_get_out_level(uint gpio);
-__attribute__((weak)) bool gpio_get_out_level(uint gpio)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" bool _weak_gpio_get_out_level(uint gpio)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker, "/alternatename:_gpio_get_out_level=__weak_gpio_get_out_level")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, \
-                "/alternatename:gpio_get_out_level=_weak_gpio_get_out_level")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" enum gpio_slew_rate gpio_get_slew_rate(uint gpio);
-__attribute__((weak)) enum gpio_slew_rate gpio_get_slew_rate(uint gpio)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" enum gpio_slew_rate _weak_gpio_get_slew_rate(uint gpio)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker, "/alternatename:_gpio_get_slew_rate=__weak_gpio_get_slew_rate")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, \
-                "/alternatename:gpio_get_slew_rate=_weak_gpio_get_slew_rate")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_init(uint gpio);
-__attribute__((weak)) void gpio_init(uint gpio)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_init(uint gpio)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, "/alternatename:_gpio_init=__weak_gpio_init")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:gpio_init=_weak_gpio_init")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_init_mask(uint gpio_mask);
-__attribute__((weak)) void gpio_init_mask(uint gpio_mask)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_init_mask(uint gpio_mask)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, "/alternatename:_gpio_init_mask=__weak_gpio_init_mask")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:gpio_init_mask=_weak_gpio_init_mask")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" bool gpio_is_dir_out(uint gpio);
-__attribute__((weak)) bool gpio_is_dir_out(uint gpio)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" bool _weak_gpio_is_dir_out(uint gpio)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, \
-                "/alternatename:_gpio_is_dir_out=__weak_gpio_is_dir_out")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:gpio_is_dir_out=_weak_gpio_is_dir_out")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" bool gpio_is_input_hysteresis_enabled(uint gpio);
-__attribute__((weak)) bool gpio_is_input_hysteresis_enabled(uint gpio)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" bool _weak_gpio_is_input_hysteresis_enabled(uint gpio)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_gpio_is_input_hysteresis_enabled=__weak_gpio_is_input_hysteresis_enabled")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:gpio_is_input_hysteresis_enabled=_weak_gpio_is_input_hysteresis_enabled")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" bool gpio_is_pulled_down(uint gpio);
-__attribute__((weak)) bool gpio_is_pulled_down(uint gpio)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" bool _weak_gpio_is_pulled_down(uint gpio)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker, "/alternatename:_gpio_is_pulled_down=__weak_gpio_is_pulled_down")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker, "/alternatename:gpio_is_pulled_down=_weak_gpio_is_pulled_down")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" bool gpio_is_pulled_up(uint gpio);
-__attribute__((weak)) bool gpio_is_pulled_up(uint gpio)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" bool _weak_gpio_is_pulled_up(uint gpio)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, \
-                "/alternatename:_gpio_is_pulled_up=__weak_gpio_is_pulled_up")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, \
-                "/alternatename:gpio_is_pulled_up=_weak_gpio_is_pulled_up")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_pull_down(uint gpio);
-__attribute__((weak)) void gpio_pull_down(uint gpio)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_pull_down(uint gpio)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, "/alternatename:_gpio_pull_down=__weak_gpio_pull_down")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:gpio_pull_down=_weak_gpio_pull_down")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_pull_up(uint gpio);
-__attribute__((weak)) void gpio_pull_up(uint gpio)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_pull_up(uint gpio)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, "/alternatename:_gpio_pull_up=__weak_gpio_pull_up")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:gpio_pull_up=_weak_gpio_pull_up")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_put(uint gpio, bool value);
-__attribute__((weak)) void gpio_put(uint gpio, bool value)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_put(uint gpio, bool value)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, "/alternatename:_gpio_put=__weak_gpio_put")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:gpio_put=_weak_gpio_put")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_put_all(uint32_t value);
-__attribute__((weak)) void gpio_put_all(uint32_t value)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_put_all(uint32_t value)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, "/alternatename:_gpio_put_all=__weak_gpio_put_all")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:gpio_put_all=_weak_gpio_put_all")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_put_all64(uint64_t value);
-__attribute__((weak)) void gpio_put_all64(uint64_t value)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_put_all64(uint64_t value)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, "/alternatename:_gpio_put_all64=__weak_gpio_put_all64")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:gpio_put_all64=_weak_gpio_put_all64")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_put_masked(uint32_t mask, uint32_t value);
-__attribute__((weak)) void gpio_put_masked(uint32_t mask, uint32_t value)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_put_masked(uint32_t mask, uint32_t value)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, \
-                "/alternatename:_gpio_put_masked=__weak_gpio_put_masked")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:gpio_put_masked=_weak_gpio_put_masked")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_put_masked64(uint64_t mask, uint64_t value);
-__attribute__((weak)) void gpio_put_masked64(uint64_t mask, uint64_t value)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_put_masked64(uint64_t mask, uint64_t value)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, \
-                "/alternatename:_gpio_put_masked64=__weak_gpio_put_masked64")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, \
-                "/alternatename:gpio_put_masked64=_weak_gpio_put_masked64")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_put_masked_n(uint n, uint32_t mask, uint32_t value);
-__attribute__((weak)) void gpio_put_masked_n(uint n, uint32_t mask,
-                                             uint32_t value)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_put_masked_n(uint n, uint32_t mask, uint32_t value)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, \
-                "/alternatename:_gpio_put_masked_n=__weak_gpio_put_masked_n")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, \
-                "/alternatename:gpio_put_masked_n=_weak_gpio_put_masked_n")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_remove_raw_irq_handler(uint gpio, irq_handler_t handler);
-__attribute__((weak)) void gpio_remove_raw_irq_handler(uint gpio,
-                                                       irq_handler_t handler)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_remove_raw_irq_handler(uint gpio,
-                                                  irq_handler_t handler)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_gpio_remove_raw_irq_handler=__weak_gpio_remove_raw_irq_handler")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:gpio_remove_raw_irq_handler=_weak_gpio_remove_raw_irq_handler")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_remove_raw_irq_handler_masked(uint32_t gpio_mask,
-                                                   irq_handler_t handler);
-__attribute__((weak)) void gpio_remove_raw_irq_handler_masked(
-    uint32_t gpio_mask, irq_handler_t handler)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_remove_raw_irq_handler_masked(uint32_t gpio_mask,
-                                                         irq_handler_t handler)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_gpio_remove_raw_irq_handler_masked=__weak_gpio_remove_raw_irq_handler_masked")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:gpio_remove_raw_irq_handler_masked=_weak_gpio_remove_raw_irq_handler_masked")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_remove_raw_irq_handler_masked64(uint64_t gpio_mask,
-                                                     irq_handler_t handler);
-__attribute__((weak)) void gpio_remove_raw_irq_handler_masked64(
-    uint64_t gpio_mask, irq_handler_t handler)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_remove_raw_irq_handler_masked64(
-    uint64_t gpio_mask, irq_handler_t handler)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_gpio_remove_raw_irq_handler_masked64=__weak_gpio_remove_raw_irq_handler_masked64")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:gpio_remove_raw_irq_handler_masked64=_weak_gpio_remove_raw_irq_handler_masked64")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_set_dir(uint gpio, bool out);
-__attribute__((weak)) void gpio_set_dir(uint gpio, bool out)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_set_dir(uint gpio, bool out)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, "/alternatename:_gpio_set_dir=__weak_gpio_set_dir")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:gpio_set_dir=_weak_gpio_set_dir")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_set_dir_all_bits(uint32_t values);
-__attribute__((weak)) void gpio_set_dir_all_bits(uint32_t values)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_set_dir_all_bits(uint32_t values)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_gpio_set_dir_all_bits=__weak_gpio_set_dir_all_bits")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:gpio_set_dir_all_bits=_weak_gpio_set_dir_all_bits")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_set_dir_all_bits64(uint64_t values);
-__attribute__((weak)) void gpio_set_dir_all_bits64(uint64_t values)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_set_dir_all_bits64(uint64_t values)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_gpio_set_dir_all_bits64=__weak_gpio_set_dir_all_bits64")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:gpio_set_dir_all_bits64=_weak_gpio_set_dir_all_bits64")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_set_dir_in_masked(uint32_t mask);
-__attribute__((weak)) void gpio_set_dir_in_masked(uint32_t mask)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_set_dir_in_masked(uint32_t mask)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_gpio_set_dir_in_masked=__weak_gpio_set_dir_in_masked")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:gpio_set_dir_in_masked=_weak_gpio_set_dir_in_masked")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_set_dir_in_masked64(uint64_t mask);
-__attribute__((weak)) void gpio_set_dir_in_masked64(uint64_t mask)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_set_dir_in_masked64(uint64_t mask)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_gpio_set_dir_in_masked64=__weak_gpio_set_dir_in_masked64")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:gpio_set_dir_in_masked64=_weak_gpio_set_dir_in_masked64")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_set_dir_masked(uint32_t mask, uint32_t value);
-__attribute__((weak)) void gpio_set_dir_masked(uint32_t mask, uint32_t value)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_set_dir_masked(uint32_t mask, uint32_t value)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker, "/alternatename:_gpio_set_dir_masked=__weak_gpio_set_dir_masked")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker, "/alternatename:gpio_set_dir_masked=_weak_gpio_set_dir_masked")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_set_dir_masked64(uint64_t mask, uint64_t value);
-__attribute__((weak)) void gpio_set_dir_masked64(uint64_t mask, uint64_t value)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_set_dir_masked64(uint64_t mask, uint64_t value)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_gpio_set_dir_masked64=__weak_gpio_set_dir_masked64")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:gpio_set_dir_masked64=_weak_gpio_set_dir_masked64")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_set_dir_out_masked(uint32_t mask);
-__attribute__((weak)) void gpio_set_dir_out_masked(uint32_t mask)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_set_dir_out_masked(uint32_t mask)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_gpio_set_dir_out_masked=__weak_gpio_set_dir_out_masked")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:gpio_set_dir_out_masked=_weak_gpio_set_dir_out_masked")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_set_dir_out_masked64(uint64_t mask);
-__attribute__((weak)) void gpio_set_dir_out_masked64(uint64_t mask)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_set_dir_out_masked64(uint64_t mask)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_gpio_set_dir_out_masked64=__weak_gpio_set_dir_out_masked64")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:gpio_set_dir_out_masked64=_weak_gpio_set_dir_out_masked64")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_set_dormant_irq_enabled(uint gpio, uint32_t event_mask,
-                                             bool enabled);
-__attribute__((weak)) void gpio_set_dormant_irq_enabled(uint gpio,
-                                                        uint32_t event_mask,
-                                                        bool enabled)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_set_dormant_irq_enabled(uint gpio,
-                                                   uint32_t event_mask,
-                                                   bool enabled)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_gpio_set_dormant_irq_enabled=__weak_gpio_set_dormant_irq_enabled")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:gpio_set_dormant_irq_enabled=_weak_gpio_set_dormant_irq_enabled")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_set_drive_strength(uint gpio,
-                                        enum gpio_drive_strength drive);
-__attribute__((weak)) void gpio_set_drive_strength(
-    uint gpio, enum gpio_drive_strength drive)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_set_drive_strength(uint gpio,
-                                              enum gpio_drive_strength drive)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_gpio_set_drive_strength=__weak_gpio_set_drive_strength")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:gpio_set_drive_strength=_weak_gpio_set_drive_strength")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_set_function(uint gpio, gpio_function_t fn);
-__attribute__((weak)) void gpio_set_function(uint gpio, gpio_function_t fn)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_set_function(uint gpio, gpio_function_t fn)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, \
-                "/alternatename:_gpio_set_function=__weak_gpio_set_function")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, \
-                "/alternatename:gpio_set_function=_weak_gpio_set_function")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_set_function_masked(uint32_t gpio_mask,
-                                         gpio_function_t fn);
-__attribute__((weak)) void gpio_set_function_masked(uint32_t gpio_mask,
-                                                    gpio_function_t fn)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_set_function_masked(uint32_t gpio_mask,
-                                               gpio_function_t fn)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_gpio_set_function_masked=__weak_gpio_set_function_masked")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:gpio_set_function_masked=_weak_gpio_set_function_masked")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_set_function_masked64(uint64_t gpio_mask,
-                                           gpio_function_t fn);
-__attribute__((weak)) void gpio_set_function_masked64(uint64_t gpio_mask,
-                                                      gpio_function_t fn)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_set_function_masked64(uint64_t gpio_mask,
-                                                 gpio_function_t fn)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_gpio_set_function_masked64=__weak_gpio_set_function_masked64")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:gpio_set_function_masked64=_weak_gpio_set_function_masked64")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_set_inover(uint gpio, uint value);
-__attribute__((weak)) void gpio_set_inover(uint gpio, uint value)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_set_inover(uint gpio, uint value)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, \
-                "/alternatename:_gpio_set_inover=__weak_gpio_set_inover")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:gpio_set_inover=_weak_gpio_set_inover")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_set_input_enabled(uint gpio, bool enabled);
-__attribute__((weak)) void gpio_set_input_enabled(uint gpio, bool enabled)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_set_input_enabled(uint gpio, bool enabled)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_gpio_set_input_enabled=__weak_gpio_set_input_enabled")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:gpio_set_input_enabled=_weak_gpio_set_input_enabled")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_set_input_hysteresis_enabled(uint gpio, bool enabled);
-__attribute__((weak)) void gpio_set_input_hysteresis_enabled(uint gpio,
-                                                             bool enabled)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_set_input_hysteresis_enabled(uint gpio, bool enabled)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_gpio_set_input_hysteresis_enabled=__weak_gpio_set_input_hysteresis_enabled")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:gpio_set_input_hysteresis_enabled=_weak_gpio_set_input_hysteresis_enabled")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_set_irq_callback(gpio_irq_callback_t callback);
-__attribute__((weak)) void gpio_set_irq_callback(gpio_irq_callback_t callback)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_set_irq_callback(gpio_irq_callback_t callback)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_gpio_set_irq_callback=__weak_gpio_set_irq_callback")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:gpio_set_irq_callback=_weak_gpio_set_irq_callback")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_set_irq_enabled(uint gpio, uint32_t event_mask,
-                                     bool enabled);
-__attribute__((weak)) void gpio_set_irq_enabled(uint gpio, uint32_t event_mask,
-                                                bool enabled)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_set_irq_enabled(uint gpio, uint32_t event_mask,
-                                           bool enabled)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_gpio_set_irq_enabled=__weak_gpio_set_irq_enabled")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker, "/alternatename:gpio_set_irq_enabled=_weak_gpio_set_irq_enabled")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_set_irq_enabled_with_callback(
-    uint gpio, uint32_t event_mask, bool enabled, gpio_irq_callback_t callback);
-__attribute__((weak)) void gpio_set_irq_enabled_with_callback(
-    uint gpio, uint32_t event_mask, bool enabled, gpio_irq_callback_t callback)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_set_irq_enabled_with_callback(
-    uint gpio, uint32_t event_mask, bool enabled, gpio_irq_callback_t callback)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_gpio_set_irq_enabled_with_callback=__weak_gpio_set_irq_enabled_with_callback")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:gpio_set_irq_enabled_with_callback=_weak_gpio_set_irq_enabled_with_callback")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_set_irqover(uint gpio, uint value);
-__attribute__((weak)) void gpio_set_irqover(uint gpio, uint value)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_set_irqover(uint gpio, uint value)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, \
-                "/alternatename:_gpio_set_irqover=__weak_gpio_set_irqover")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, \
-                "/alternatename:gpio_set_irqover=_weak_gpio_set_irqover")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_set_mask(uint32_t mask);
-__attribute__((weak)) void gpio_set_mask(uint32_t mask)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_set_mask(uint32_t mask)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, "/alternatename:_gpio_set_mask=__weak_gpio_set_mask")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:gpio_set_mask=_weak_gpio_set_mask")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_set_mask64(uint64_t mask);
-__attribute__((weak)) void gpio_set_mask64(uint64_t mask)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_set_mask64(uint64_t mask)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, \
-                "/alternatename:_gpio_set_mask64=__weak_gpio_set_mask64")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:gpio_set_mask64=_weak_gpio_set_mask64")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_set_mask_n(uint n, uint32_t mask);
-__attribute__((weak)) void gpio_set_mask_n(uint n, uint32_t mask)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_set_mask_n(uint n, uint32_t mask)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, \
-                "/alternatename:_gpio_set_mask_n=__weak_gpio_set_mask_n")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:gpio_set_mask_n=_weak_gpio_set_mask_n")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_set_oeover(uint gpio, uint value);
-__attribute__((weak)) void gpio_set_oeover(uint gpio, uint value)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_set_oeover(uint gpio, uint value)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, \
-                "/alternatename:_gpio_set_oeover=__weak_gpio_set_oeover")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:gpio_set_oeover=_weak_gpio_set_oeover")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_set_outover(uint gpio, uint value);
-__attribute__((weak)) void gpio_set_outover(uint gpio, uint value)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_set_outover(uint gpio, uint value)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, \
-                "/alternatename:_gpio_set_outover=__weak_gpio_set_outover")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, \
-                "/alternatename:gpio_set_outover=_weak_gpio_set_outover")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_set_pulls(uint gpio, bool up, bool down);
-__attribute__((weak)) void gpio_set_pulls(uint gpio, bool up, bool down)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_set_pulls(uint gpio, bool up, bool down)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, "/alternatename:_gpio_set_pulls=__weak_gpio_set_pulls")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:gpio_set_pulls=_weak_gpio_set_pulls")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_set_slew_rate(uint gpio, enum gpio_slew_rate slew);
-__attribute__((weak)) void gpio_set_slew_rate(uint gpio,
-                                              enum gpio_slew_rate slew)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_set_slew_rate(uint gpio, enum gpio_slew_rate slew)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker, "/alternatename:_gpio_set_slew_rate=__weak_gpio_set_slew_rate")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, \
-                "/alternatename:gpio_set_slew_rate=_weak_gpio_set_slew_rate")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_xor_mask(uint32_t mask);
-__attribute__((weak)) void gpio_xor_mask(uint32_t mask)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_xor_mask(uint32_t mask)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, "/alternatename:_gpio_xor_mask=__weak_gpio_xor_mask")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:gpio_xor_mask=_weak_gpio_xor_mask")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_xor_mask64(uint64_t mask);
-__attribute__((weak)) void gpio_xor_mask64(uint64_t mask)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_xor_mask64(uint64_t mask)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, \
-                "/alternatename:_gpio_xor_mask64=__weak_gpio_xor_mask64")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:gpio_xor_mask64=_weak_gpio_xor_mask64")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void gpio_xor_mask_n(uint n, uint32_t mask);
-__attribute__((weak)) void gpio_xor_mask_n(uint n, uint32_t mask)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_gpio_xor_mask_n(uint n, uint32_t mask)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_gpio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, \
-                "/alternatename:_gpio_xor_mask_n=__weak_gpio_xor_mask_n")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:gpio_xor_mask_n=_weak_gpio_xor_mask_n")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" bool check_sys_clock_hz(uint32_t freq_hz, uint* vco_freq_out,
-                                   uint* post_div1_out, uint* post_div2_out);
-__attribute__((weak)) bool check_sys_clock_hz(uint32_t freq_hz,
-                                              uint* vco_freq_out,
-                                              uint* post_div1_out,
-                                              uint* post_div2_out)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" bool _weak_check_sys_clock_hz(uint32_t freq_hz, uint* vco_freq_out,
-                                         uint* post_div1_out,
-                                         uint* post_div2_out)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_clocks library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker, "/alternatename:_check_sys_clock_hz=__weak_check_sys_clock_hz")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, \
-                "/alternatename:check_sys_clock_hz=_weak_check_sys_clock_hz")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" bool check_sys_clock_khz(uint32_t freq_khz, uint* vco_freq_out,
-                                    uint* post_div1_out, uint* post_div2_out);
-__attribute__((weak)) bool check_sys_clock_khz(uint32_t freq_khz,
-                                               uint* vco_freq_out,
-                                               uint* post_div1_out,
-                                               uint* post_div2_out)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" bool _weak_check_sys_clock_khz(uint32_t freq_khz, uint* vco_freq_out,
-                                          uint* post_div1_out,
-                                          uint* post_div2_out)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_clocks library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker, "/alternatename:_check_sys_clock_khz=__weak_check_sys_clock_khz")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker, "/alternatename:check_sys_clock_khz=_weak_check_sys_clock_khz")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" bool clock_configure(clock_handle_t clock, uint32_t src,
-                                uint32_t auxsrc, uint32_t src_freq,
-                                uint32_t freq);
-__attribute__((weak)) bool clock_configure(clock_handle_t clock, uint32_t src,
-                                           uint32_t auxsrc, uint32_t src_freq,
-                                           uint32_t freq)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" bool _weak_clock_configure(clock_handle_t clock, uint32_t src,
-                                      uint32_t auxsrc, uint32_t src_freq,
-                                      uint32_t freq)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_clocks library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, \
-                "/alternatename:_clock_configure=__weak_clock_configure")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:clock_configure=_weak_clock_configure")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" bool clock_configure_gpin(clock_handle_t clock, uint gpio,
-                                     uint32_t src_freq, uint32_t freq);
-__attribute__((weak)) bool clock_configure_gpin(clock_handle_t clock, uint gpio,
-                                                uint32_t src_freq,
-                                                uint32_t freq)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" bool _weak_clock_configure_gpin(clock_handle_t clock, uint gpio,
-                                           uint32_t src_freq, uint32_t freq)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_clocks library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_clock_configure_gpin=__weak_clock_configure_gpin")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker, "/alternatename:clock_configure_gpin=_weak_clock_configure_gpin")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void clock_configure_int_divider(clock_handle_t clock, uint32_t src,
-                                            uint32_t auxsrc, uint32_t src_freq,
-                                            uint32_t int_divider);
-__attribute__((weak)) void clock_configure_int_divider(clock_handle_t clock,
-                                                       uint32_t src,
-                                                       uint32_t auxsrc,
-                                                       uint32_t src_freq,
-                                                       uint32_t int_divider)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_clock_configure_int_divider(clock_handle_t clock,
-                                                  uint32_t src, uint32_t auxsrc,
-                                                  uint32_t src_freq,
-                                                  uint32_t int_divider)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_clocks library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_clock_configure_int_divider=__weak_clock_configure_int_divider")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:clock_configure_int_divider=_weak_clock_configure_int_divider")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void clock_configure_undivided(clock_handle_t clock, uint32_t src,
-                                          uint32_t auxsrc, uint32_t src_freq);
-__attribute__((weak)) void clock_configure_undivided(clock_handle_t clock,
-                                                     uint32_t src,
-                                                     uint32_t auxsrc,
-                                                     uint32_t src_freq)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_clock_configure_undivided(clock_handle_t clock,
-                                                uint32_t src, uint32_t auxsrc,
-                                                uint32_t src_freq)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_clocks library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_clock_configure_undivided=__weak_clock_configure_undivided")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:clock_configure_undivided=_weak_clock_configure_undivided")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" uint32_t clock_get_hz(clock_handle_t clock);
-__attribute__((weak)) uint32_t clock_get_hz(clock_handle_t clock)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" uint32_t _weak_clock_get_hz(clock_handle_t clock)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_clocks library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, "/alternatename:_clock_get_hz=__weak_clock_get_hz")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:clock_get_hz=_weak_clock_get_hz")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void clock_gpio_init(uint gpio, uint src, float div);
-__attribute__((weak)) void clock_gpio_init(uint gpio, uint src, float div)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_clock_gpio_init(uint gpio, uint src, float div)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_clocks library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, \
-                "/alternatename:_clock_gpio_init=__weak_clock_gpio_init")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:clock_gpio_init=_weak_clock_gpio_init")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void clock_gpio_init_int_frac(uint gpio, uint src, uint32_t div_int,
-                                         uint8_t div_frac);
-__attribute__((weak)) void clock_gpio_init_int_frac(uint gpio, uint src,
-                                                    uint32_t div_int,
-                                                    uint8_t div_frac)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_clock_gpio_init_int_frac(uint gpio, uint src,
-                                               uint32_t div_int,
-                                               uint8_t div_frac)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_clocks library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_clock_gpio_init_int_frac=__weak_clock_gpio_init_int_frac")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:clock_gpio_init_int_frac=_weak_clock_gpio_init_int_frac")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void clock_set_reported_hz(clock_handle_t clock, uint hz);
-__attribute__((weak)) void clock_set_reported_hz(clock_handle_t clock, uint hz)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_clock_set_reported_hz(clock_handle_t clock, uint hz)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_clocks library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_clock_set_reported_hz=__weak_clock_set_reported_hz")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:clock_set_reported_hz=_weak_clock_set_reported_hz")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void clock_stop(clock_handle_t clock);
-__attribute__((weak)) void clock_stop(clock_handle_t clock)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_clock_stop(clock_handle_t clock)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_clocks library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, "/alternatename:_clock_stop=__weak_clock_stop")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:clock_stop=_weak_clock_stop")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void clocks_enable_resus(resus_callback_t resus_callback);
-__attribute__((weak)) void clocks_enable_resus(resus_callback_t resus_callback)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_clocks_enable_resus(resus_callback_t resus_callback)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_clocks library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker, "/alternatename:_clocks_enable_resus=__weak_clocks_enable_resus")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker, "/alternatename:clocks_enable_resus=_weak_clocks_enable_resus")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" uint32_t frequency_count_khz(uint src);
-__attribute__((weak)) uint32_t frequency_count_khz(uint src)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" uint32_t _weak_frequency_count_khz(uint src)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_clocks library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker, "/alternatename:_frequency_count_khz=__weak_frequency_count_khz")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker, "/alternatename:frequency_count_khz=_weak_frequency_count_khz")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" float frequency_count_mhz(uint src);
-__attribute__((weak)) float frequency_count_mhz(uint src)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" float _weak_frequency_count_mhz(uint src)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_clocks library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker, "/alternatename:_frequency_count_mhz=__weak_frequency_count_mhz")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker, "/alternatename:frequency_count_mhz=_weak_frequency_count_mhz")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void set_sys_clock_48mhz(void);
-__attribute__((weak)) void set_sys_clock_48mhz(void)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_set_sys_clock_48mhz(void)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_clocks library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker, "/alternatename:_set_sys_clock_48mhz=__weak_set_sys_clock_48mhz")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker, "/alternatename:set_sys_clock_48mhz=_weak_set_sys_clock_48mhz")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" bool set_sys_clock_hz(uint32_t freq_hz, bool required);
-__attribute__((weak)) bool set_sys_clock_hz(uint32_t freq_hz, bool required)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" bool _weak_set_sys_clock_hz(uint32_t freq_hz, bool required)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_clocks library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, \
-                "/alternatename:_set_sys_clock_hz=__weak_set_sys_clock_hz")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, \
-                "/alternatename:set_sys_clock_hz=_weak_set_sys_clock_hz")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" bool set_sys_clock_khz(uint32_t freq_khz, bool required);
-__attribute__((weak)) bool set_sys_clock_khz(uint32_t freq_khz, bool required)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" bool _weak_set_sys_clock_khz(uint32_t freq_khz, bool required)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_clocks library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, \
-                "/alternatename:_set_sys_clock_khz=__weak_set_sys_clock_khz")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, \
-                "/alternatename:set_sys_clock_khz=_weak_set_sys_clock_khz")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void set_sys_clock_pll(uint32_t vco_freq, uint post_div1,
-                                  uint post_div2);
-__attribute__((weak)) void set_sys_clock_pll(uint32_t vco_freq, uint post_div1,
-                                             uint post_div2)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_set_sys_clock_pll(uint32_t vco_freq, uint post_div1,
-                                        uint post_div2)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The hardware_clocks library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, \
-                "/alternatename:_set_sys_clock_pll=__weak_set_sys_clock_pll")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, \
-                "/alternatename:set_sys_clock_pll=_weak_set_sys_clock_pll")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" int64_t absolute_time_diff_us(absolute_time_t from,
-                                         absolute_time_t to);
-__attribute__((weak)) int64_t absolute_time_diff_us(absolute_time_t from,
-                                                    absolute_time_t to)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" int64_t _weak_absolute_time_diff_us(absolute_time_t from,
-                                               absolute_time_t to)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_absolute_time_diff_us=__weak_absolute_time_diff_us")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:absolute_time_diff_us=_weak_absolute_time_diff_us")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" absolute_time_t absolute_time_min(absolute_time_t a,
-                                             absolute_time_t b);
-__attribute__((weak)) absolute_time_t absolute_time_min(absolute_time_t a,
-                                                        absolute_time_t b)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" absolute_time_t _weak_absolute_time_min(absolute_time_t a,
-                                                   absolute_time_t b)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, \
-                "/alternatename:_absolute_time_min=__weak_absolute_time_min")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, \
-                "/alternatename:absolute_time_min=_weak_absolute_time_min")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" alarm_id_t add_alarm_at(absolute_time_t time,
-                                   alarm_callback_t callback, void* user_data,
-                                   bool fire_if_past);
-__attribute__((weak)) alarm_id_t add_alarm_at(absolute_time_t time,
-                                              alarm_callback_t callback,
-                                              void* user_data,
-                                              bool fire_if_past)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" alarm_id_t _weak_add_alarm_at(absolute_time_t time,
-                                         alarm_callback_t callback,
-                                         void* user_data, bool fire_if_past)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, "/alternatename:_add_alarm_at=__weak_add_alarm_at")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:add_alarm_at=_weak_add_alarm_at")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" alarm_id_t add_alarm_in_ms(uint32_t ms, alarm_callback_t callback,
-                                      void* user_data, bool fire_if_past);
-__attribute__((weak)) alarm_id_t add_alarm_in_ms(uint32_t ms,
-                                                 alarm_callback_t callback,
-                                                 void* user_data,
-                                                 bool fire_if_past)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" alarm_id_t _weak_add_alarm_in_ms(uint32_t ms,
-                                            alarm_callback_t callback,
-                                            void* user_data, bool fire_if_past)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, \
-                "/alternatename:_add_alarm_in_ms=__weak_add_alarm_in_ms")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:add_alarm_in_ms=_weak_add_alarm_in_ms")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" alarm_id_t add_alarm_in_us(uint64_t us, alarm_callback_t callback,
-                                      void* user_data, bool fire_if_past);
-__attribute__((weak)) alarm_id_t add_alarm_in_us(uint64_t us,
-                                                 alarm_callback_t callback,
-                                                 void* user_data,
-                                                 bool fire_if_past)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" alarm_id_t _weak_add_alarm_in_us(uint64_t us,
-                                            alarm_callback_t callback,
-                                            void* user_data, bool fire_if_past)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, \
-                "/alternatename:_add_alarm_in_us=__weak_add_alarm_in_us")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:add_alarm_in_us=_weak_add_alarm_in_us")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" bool add_repeating_timer_ms(int32_t delay_ms,
-                                       repeating_timer_callback_t callback,
-                                       void* user_data, repeating_timer_t* out);
-__attribute__((weak)) bool add_repeating_timer_ms(
-    int32_t delay_ms, repeating_timer_callback_t callback, void* user_data,
-    repeating_timer_t* out)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" bool _weak_add_repeating_timer_ms(
-    int32_t delay_ms, repeating_timer_callback_t callback, void* user_data,
-    repeating_timer_t* out)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_add_repeating_timer_ms=__weak_add_repeating_timer_ms")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:add_repeating_timer_ms=_weak_add_repeating_timer_ms")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" bool add_repeating_timer_us(int64_t delay_us,
-                                       repeating_timer_callback_t callback,
-                                       void* user_data, repeating_timer_t* out);
-__attribute__((weak)) bool add_repeating_timer_us(
-    int64_t delay_us, repeating_timer_callback_t callback, void* user_data,
-    repeating_timer_t* out)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" bool _weak_add_repeating_timer_us(
-    int64_t delay_us, repeating_timer_callback_t callback, void* user_data,
-    repeating_timer_t* out)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_add_repeating_timer_us=__weak_add_repeating_timer_us")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:add_repeating_timer_us=_weak_add_repeating_timer_us")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" alarm_id_t alarm_pool_add_alarm_at(alarm_pool_t* pool,
-                                              absolute_time_t time,
-                                              alarm_callback_t callback,
-                                              void* user_data,
-                                              bool fire_if_past);
-__attribute__((weak)) alarm_id_t alarm_pool_add_alarm_at(
-    alarm_pool_t* pool, absolute_time_t time, alarm_callback_t callback,
-    void* user_data, bool fire_if_past)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" alarm_id_t _weak_alarm_pool_add_alarm_at(alarm_pool_t* pool,
-                                                    absolute_time_t time,
-                                                    alarm_callback_t callback,
-                                                    void* user_data,
-                                                    bool fire_if_past)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_alarm_pool_add_alarm_at=__weak_alarm_pool_add_alarm_at")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:alarm_pool_add_alarm_at=_weak_alarm_pool_add_alarm_at")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" alarm_id_t alarm_pool_add_alarm_at_force_in_context(
-    alarm_pool_t* pool, absolute_time_t time, alarm_callback_t callback,
-    void* user_data);
-__attribute__((weak)) alarm_id_t alarm_pool_add_alarm_at_force_in_context(
-    alarm_pool_t* pool, absolute_time_t time, alarm_callback_t callback,
-    void* user_data)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" alarm_id_t _weak_alarm_pool_add_alarm_at_force_in_context(
-    alarm_pool_t* pool, absolute_time_t time, alarm_callback_t callback,
-    void* user_data)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_alarm_pool_add_alarm_at_force_in_context=__weak_alarm_pool_add_alarm_at_force_in_context")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:alarm_pool_add_alarm_at_force_in_context=_weak_alarm_pool_add_alarm_at_force_in_context")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" alarm_id_t alarm_pool_add_alarm_in_ms(alarm_pool_t* pool,
-                                                 uint32_t ms,
-                                                 alarm_callback_t callback,
-                                                 void* user_data,
-                                                 bool fire_if_past);
-__attribute__((weak)) alarm_id_t alarm_pool_add_alarm_in_ms(
-    alarm_pool_t* pool, uint32_t ms, alarm_callback_t callback, void* user_data,
-    bool fire_if_past)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" alarm_id_t _weak_alarm_pool_add_alarm_in_ms(
-    alarm_pool_t* pool, uint32_t ms, alarm_callback_t callback, void* user_data,
-    bool fire_if_past)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_alarm_pool_add_alarm_in_ms=__weak_alarm_pool_add_alarm_in_ms")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:alarm_pool_add_alarm_in_ms=_weak_alarm_pool_add_alarm_in_ms")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" alarm_id_t alarm_pool_add_alarm_in_us(alarm_pool_t* pool,
-                                                 uint64_t us,
-                                                 alarm_callback_t callback,
-                                                 void* user_data,
-                                                 bool fire_if_past);
-__attribute__((weak)) alarm_id_t alarm_pool_add_alarm_in_us(
-    alarm_pool_t* pool, uint64_t us, alarm_callback_t callback, void* user_data,
-    bool fire_if_past)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" alarm_id_t _weak_alarm_pool_add_alarm_in_us(
-    alarm_pool_t* pool, uint64_t us, alarm_callback_t callback, void* user_data,
-    bool fire_if_past)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_alarm_pool_add_alarm_in_us=__weak_alarm_pool_add_alarm_in_us")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:alarm_pool_add_alarm_in_us=_weak_alarm_pool_add_alarm_in_us")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" bool alarm_pool_add_repeating_timer_ms(
-    alarm_pool_t* pool, int32_t delay_ms, repeating_timer_callback_t callback,
-    void* user_data, repeating_timer_t* out);
-__attribute__((weak)) bool alarm_pool_add_repeating_timer_ms(
-    alarm_pool_t* pool, int32_t delay_ms, repeating_timer_callback_t callback,
-    void* user_data, repeating_timer_t* out)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" bool _weak_alarm_pool_add_repeating_timer_ms(
-    alarm_pool_t* pool, int32_t delay_ms, repeating_timer_callback_t callback,
-    void* user_data, repeating_timer_t* out)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_alarm_pool_add_repeating_timer_ms=__weak_alarm_pool_add_repeating_timer_ms")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:alarm_pool_add_repeating_timer_ms=_weak_alarm_pool_add_repeating_timer_ms")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" bool alarm_pool_add_repeating_timer_us(
-    alarm_pool_t* pool, int64_t delay_us, repeating_timer_callback_t callback,
-    void* user_data, repeating_timer_t* out);
-__attribute__((weak)) bool alarm_pool_add_repeating_timer_us(
-    alarm_pool_t* pool, int64_t delay_us, repeating_timer_callback_t callback,
-    void* user_data, repeating_timer_t* out)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" bool _weak_alarm_pool_add_repeating_timer_us(
-    alarm_pool_t* pool, int64_t delay_us, repeating_timer_callback_t callback,
-    void* user_data, repeating_timer_t* out)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_alarm_pool_add_repeating_timer_us=__weak_alarm_pool_add_repeating_timer_us")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:alarm_pool_add_repeating_timer_us=_weak_alarm_pool_add_repeating_timer_us")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" bool alarm_pool_cancel_alarm(alarm_pool_t* pool,
-                                        alarm_id_t alarm_id);
-__attribute__((weak)) bool alarm_pool_cancel_alarm(alarm_pool_t* pool,
-                                                   alarm_id_t alarm_id)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" bool _weak_alarm_pool_cancel_alarm(alarm_pool_t* pool,
-                                              alarm_id_t alarm_id)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_alarm_pool_cancel_alarm=__weak_alarm_pool_cancel_alarm")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:alarm_pool_cancel_alarm=_weak_alarm_pool_cancel_alarm")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" uint alarm_pool_core_num(alarm_pool_t* pool);
-__attribute__((weak)) uint alarm_pool_core_num(alarm_pool_t* pool)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" uint _weak_alarm_pool_core_num(alarm_pool_t* pool)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker, "/alternatename:_alarm_pool_core_num=__weak_alarm_pool_core_num")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker, "/alternatename:alarm_pool_core_num=_weak_alarm_pool_core_num")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" alarm_pool_t* alarm_pool_create(uint timer_alarm_num,
-                                           uint max_timers);
-__attribute__((weak)) alarm_pool_t* alarm_pool_create(uint timer_alarm_num,
-                                                      uint max_timers)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" alarm_pool_t* _weak_alarm_pool_create(uint timer_alarm_num,
-                                                 uint max_timers)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, \
-                "/alternatename:_alarm_pool_create=__weak_alarm_pool_create")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, \
-                "/alternatename:alarm_pool_create=_weak_alarm_pool_create")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" alarm_pool_t* alarm_pool_create_on_timer(alarm_pool_timer_t* timer,
-                                                    uint timer_alarm_num,
-                                                    uint max_timers);
-__attribute__((weak)) alarm_pool_t* alarm_pool_create_on_timer(
-    alarm_pool_timer_t* timer, uint timer_alarm_num, uint max_timers)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" alarm_pool_t* _weak_alarm_pool_create_on_timer(
-    alarm_pool_timer_t* timer, uint timer_alarm_num, uint max_timers)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_alarm_pool_create_on_timer=__weak_alarm_pool_create_on_timer")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:alarm_pool_create_on_timer=_weak_alarm_pool_create_on_timer")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" alarm_pool_t* alarm_pool_create_on_timer_with_unused_hardware_alarm(
-    alarm_pool_timer_t* timer, uint max_timers);
-__attribute__((weak)) alarm_pool_t*
-alarm_pool_create_on_timer_with_unused_hardware_alarm(alarm_pool_timer_t* timer,
-                                                      uint max_timers)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" alarm_pool_t*
-_weak_alarm_pool_create_on_timer_with_unused_hardware_alarm(
-    alarm_pool_timer_t* timer, uint max_timers)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_alarm_pool_create_on_timer_with_unused_hardware_alarm=__weak_alarm_pool_create_on_timer_with_unused_hardware_alarm")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:alarm_pool_create_on_timer_with_unused_hardware_alarm=_weak_alarm_pool_create_on_timer_with_unused_hardware_alarm")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" alarm_pool_t* alarm_pool_create_with_unused_hardware_alarm(
-    uint max_timers);
-__attribute__((weak)) alarm_pool_t*
-alarm_pool_create_with_unused_hardware_alarm(uint max_timers)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" alarm_pool_t* _weak_alarm_pool_create_with_unused_hardware_alarm(
-    uint max_timers)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_alarm_pool_create_with_unused_hardware_alarm=__weak_alarm_pool_create_with_unused_hardware_alarm")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:alarm_pool_create_with_unused_hardware_alarm=_weak_alarm_pool_create_with_unused_hardware_alarm")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void alarm_pool_destroy(alarm_pool_t* pool);
-__attribute__((weak)) void alarm_pool_destroy(alarm_pool_t* pool)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_alarm_pool_destroy(alarm_pool_t* pool)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker, "/alternatename:_alarm_pool_destroy=__weak_alarm_pool_destroy")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, \
-                "/alternatename:alarm_pool_destroy=_weak_alarm_pool_destroy")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" alarm_pool_t* alarm_pool_get_default(void);
-__attribute__((weak)) alarm_pool_t* alarm_pool_get_default(void)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" alarm_pool_t* _weak_alarm_pool_get_default(void)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_alarm_pool_get_default=__weak_alarm_pool_get_default")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:alarm_pool_get_default=_weak_alarm_pool_get_default")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" alarm_pool_timer_t* alarm_pool_get_default_timer(void);
-__attribute__((weak)) alarm_pool_timer_t* alarm_pool_get_default_timer(void)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" alarm_pool_timer_t* _weak_alarm_pool_get_default_timer(void)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_alarm_pool_get_default_timer=__weak_alarm_pool_get_default_timer")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:alarm_pool_get_default_timer=_weak_alarm_pool_get_default_timer")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" uint alarm_pool_hardware_alarm_num(alarm_pool_t* pool);
-__attribute__((weak)) uint alarm_pool_hardware_alarm_num(alarm_pool_t* pool)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" uint _weak_alarm_pool_hardware_alarm_num(alarm_pool_t* pool)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_alarm_pool_hardware_alarm_num=__weak_alarm_pool_hardware_alarm_num")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:alarm_pool_hardware_alarm_num=_weak_alarm_pool_hardware_alarm_num")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void alarm_pool_init_default(void);
-__attribute__((weak)) void alarm_pool_init_default(void)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_alarm_pool_init_default(void)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_alarm_pool_init_default=__weak_alarm_pool_init_default")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:alarm_pool_init_default=_weak_alarm_pool_init_default")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" int32_t alarm_pool_remaining_alarm_time_ms(alarm_pool_t* pool,
-                                                      alarm_id_t alarm_id);
-__attribute__((weak)) int32_t
-alarm_pool_remaining_alarm_time_ms(alarm_pool_t* pool, alarm_id_t alarm_id)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" int32_t _weak_alarm_pool_remaining_alarm_time_ms(alarm_pool_t* pool,
-                                                            alarm_id_t alarm_id)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_alarm_pool_remaining_alarm_time_ms=__weak_alarm_pool_remaining_alarm_time_ms")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:alarm_pool_remaining_alarm_time_ms=_weak_alarm_pool_remaining_alarm_time_ms")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" int64_t alarm_pool_remaining_alarm_time_us(alarm_pool_t* pool,
-                                                      alarm_id_t alarm_id);
-__attribute__((weak)) int64_t
-alarm_pool_remaining_alarm_time_us(alarm_pool_t* pool, alarm_id_t alarm_id)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" int64_t _weak_alarm_pool_remaining_alarm_time_us(alarm_pool_t* pool,
-                                                            alarm_id_t alarm_id)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_alarm_pool_remaining_alarm_time_us=__weak_alarm_pool_remaining_alarm_time_us")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:alarm_pool_remaining_alarm_time_us=_weak_alarm_pool_remaining_alarm_time_us")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" uint alarm_pool_timer_alarm_num(alarm_pool_t* pool);
-__attribute__((weak)) uint alarm_pool_timer_alarm_num(alarm_pool_t* pool)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" uint _weak_alarm_pool_timer_alarm_num(alarm_pool_t* pool)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_alarm_pool_timer_alarm_num=__weak_alarm_pool_timer_alarm_num")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:alarm_pool_timer_alarm_num=_weak_alarm_pool_timer_alarm_num")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" alarm_pool_timer_t* alarm_pool_timer_for_timer_num(uint timer_num);
-__attribute__((weak)) alarm_pool_timer_t* alarm_pool_timer_for_timer_num(
-    uint timer_num)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" alarm_pool_timer_t* _weak_alarm_pool_timer_for_timer_num(
-    uint timer_num)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_alarm_pool_timer_for_timer_num=__weak_alarm_pool_timer_for_timer_num")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:alarm_pool_timer_for_timer_num=_weak_alarm_pool_timer_for_timer_num")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" bool best_effort_wfe_or_timeout(absolute_time_t timeout_timestamp);
-__attribute__((weak)) bool best_effort_wfe_or_timeout(
-    absolute_time_t timeout_timestamp)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" bool _weak_best_effort_wfe_or_timeout(
-    absolute_time_t timeout_timestamp)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_best_effort_wfe_or_timeout=__weak_best_effort_wfe_or_timeout")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:best_effort_wfe_or_timeout=_weak_best_effort_wfe_or_timeout")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" bool cancel_alarm(alarm_id_t alarm_id);
-__attribute__((weak)) bool cancel_alarm(alarm_id_t alarm_id)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" bool _weak_cancel_alarm(alarm_id_t alarm_id)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, "/alternatename:_cancel_alarm=__weak_cancel_alarm")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:cancel_alarm=_weak_cancel_alarm")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" bool cancel_repeating_timer(repeating_timer_t* timer);
-__attribute__((weak)) bool cancel_repeating_timer(repeating_timer_t* timer)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" bool _weak_cancel_repeating_timer(repeating_timer_t* timer)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_cancel_repeating_timer=__weak_cancel_repeating_timer")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:cancel_repeating_timer=_weak_cancel_repeating_timer")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" absolute_time_t delayed_by_ms(const absolute_time_t t, uint32_t ms);
-__attribute__((weak)) absolute_time_t delayed_by_ms(const absolute_time_t t,
-                                                    uint32_t ms)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" absolute_time_t _weak_delayed_by_ms(const absolute_time_t t,
-                                               uint32_t ms)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, "/alternatename:_delayed_by_ms=__weak_delayed_by_ms")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:delayed_by_ms=_weak_delayed_by_ms")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" absolute_time_t delayed_by_us(const absolute_time_t t, uint64_t us);
-__attribute__((weak)) absolute_time_t delayed_by_us(const absolute_time_t t,
-                                                    uint64_t us)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" absolute_time_t _weak_delayed_by_us(const absolute_time_t t,
-                                               uint64_t us)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, "/alternatename:_delayed_by_us=__weak_delayed_by_us")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:delayed_by_us=_weak_delayed_by_us")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" absolute_time_t get_absolute_time(void);
-__attribute__((weak)) absolute_time_t get_absolute_time(void)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" absolute_time_t _weak_get_absolute_time(void)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, \
-                "/alternatename:_get_absolute_time=__weak_get_absolute_time")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, \
-                "/alternatename:get_absolute_time=_weak_get_absolute_time")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" bool is_at_the_end_of_time(absolute_time_t t);
-__attribute__((weak)) bool is_at_the_end_of_time(absolute_time_t t)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" bool _weak_is_at_the_end_of_time(absolute_time_t t)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_is_at_the_end_of_time=__weak_is_at_the_end_of_time")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:is_at_the_end_of_time=_weak_is_at_the_end_of_time")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" bool is_nil_time(absolute_time_t t);
-__attribute__((weak)) bool is_nil_time(absolute_time_t t)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" bool _weak_is_nil_time(absolute_time_t t)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, "/alternatename:_is_nil_time=__weak_is_nil_time")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:is_nil_time=_weak_is_nil_time")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" absolute_time_t make_timeout_time_ms(uint32_t ms);
-__attribute__((weak)) absolute_time_t make_timeout_time_ms(uint32_t ms)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" absolute_time_t _weak_make_timeout_time_ms(uint32_t ms)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_make_timeout_time_ms=__weak_make_timeout_time_ms")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker, "/alternatename:make_timeout_time_ms=_weak_make_timeout_time_ms")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" absolute_time_t make_timeout_time_us(uint64_t us);
-__attribute__((weak)) absolute_time_t make_timeout_time_us(uint64_t us)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" absolute_time_t _weak_make_timeout_time_us(uint64_t us)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_make_timeout_time_us=__weak_make_timeout_time_us")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker, "/alternatename:make_timeout_time_us=_weak_make_timeout_time_us")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" int32_t remaining_alarm_time_ms(alarm_id_t alarm_id);
-__attribute__((weak)) int32_t remaining_alarm_time_ms(alarm_id_t alarm_id)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" int32_t _weak_remaining_alarm_time_ms(alarm_id_t alarm_id)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_remaining_alarm_time_ms=__weak_remaining_alarm_time_ms")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:remaining_alarm_time_ms=_weak_remaining_alarm_time_ms")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" int64_t remaining_alarm_time_us(alarm_id_t alarm_id);
-__attribute__((weak)) int64_t remaining_alarm_time_us(alarm_id_t alarm_id)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" int64_t _weak_remaining_alarm_time_us(alarm_id_t alarm_id)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_remaining_alarm_time_us=__weak_remaining_alarm_time_us")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:remaining_alarm_time_us=_weak_remaining_alarm_time_us")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void runtime_init_default_alarm_pool(void);
-__attribute__((weak)) void runtime_init_default_alarm_pool(void)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_runtime_init_default_alarm_pool(void)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_runtime_init_default_alarm_pool=__weak_runtime_init_default_alarm_pool")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:runtime_init_default_alarm_pool=_weak_runtime_init_default_alarm_pool")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void sleep_ms(uint32_t ms);
-__attribute__((weak)) void sleep_ms(uint32_t ms)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_sleep_ms(uint32_t ms)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, "/alternatename:_sleep_ms=__weak_sleep_ms")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:sleep_ms=_weak_sleep_ms")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void sleep_until(absolute_time_t target);
-__attribute__((weak)) void sleep_until(absolute_time_t target)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_sleep_until(absolute_time_t target)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, "/alternatename:_sleep_until=__weak_sleep_until")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:sleep_until=_weak_sleep_until")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void sleep_us(uint64_t us);
-__attribute__((weak)) void sleep_us(uint64_t us)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_sleep_us(uint64_t us)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, "/alternatename:_sleep_us=__weak_sleep_us")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:sleep_us=_weak_sleep_us")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" uint32_t to_ms_since_boot(absolute_time_t t);
-__attribute__((weak)) uint32_t to_ms_since_boot(absolute_time_t t)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" uint32_t _weak_to_ms_since_boot(absolute_time_t t)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, \
-                "/alternatename:_to_ms_since_boot=__weak_to_ms_since_boot")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, \
-                "/alternatename:to_ms_since_boot=_weak_to_ms_since_boot")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" uint32_t us_to_ms(uint64_t us);
-__attribute__((weak)) uint32_t us_to_ms(uint64_t us)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" uint32_t _weak_us_to_ms(uint64_t us)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_time library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, "/alternatename:_us_to_ms=__weak_us_to_ms")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:us_to_ms=_weak_us_to_ms")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" int getchar_timeout_us(uint32_t timeout_us);
-__attribute__((weak)) int getchar_timeout_us(uint32_t timeout_us)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" int _weak_getchar_timeout_us(uint32_t timeout_us)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_stdio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker, "/alternatename:_getchar_timeout_us=__weak_getchar_timeout_us")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, \
-                "/alternatename:getchar_timeout_us=_weak_getchar_timeout_us")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" int putchar_raw(int c);
-__attribute__((weak)) int putchar_raw(int c)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" int _weak_putchar_raw(int c)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_stdio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, "/alternatename:_putchar_raw=__weak_putchar_raw")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:putchar_raw=_weak_putchar_raw")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" int puts_raw(const char* s);
-__attribute__((weak)) int puts_raw(const char* s)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" int _weak_puts_raw(const char* s)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_stdio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, "/alternatename:_puts_raw=__weak_puts_raw")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:puts_raw=_weak_puts_raw")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" bool stdio_deinit_all(void);
-__attribute__((weak)) bool stdio_deinit_all(void)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" bool _weak_stdio_deinit_all(void)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_stdio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, \
-                "/alternatename:_stdio_deinit_all=__weak_stdio_deinit_all")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, \
-                "/alternatename:stdio_deinit_all=_weak_stdio_deinit_all")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void stdio_filter_driver(stdio_driver_t* driver);
-__attribute__((weak)) void stdio_filter_driver(stdio_driver_t* driver)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_stdio_filter_driver(stdio_driver_t* driver)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_stdio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker, "/alternatename:_stdio_filter_driver=__weak_stdio_filter_driver")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker, "/alternatename:stdio_filter_driver=_weak_stdio_filter_driver")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void stdio_flush(void);
-__attribute__((weak)) void stdio_flush(void)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_stdio_flush(void)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_stdio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, "/alternatename:_stdio_flush=__weak_stdio_flush")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:stdio_flush=_weak_stdio_flush")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" int stdio_get_until(char* buf, int len, absolute_time_t until);
-__attribute__((weak)) int stdio_get_until(char* buf, int len,
-                                          absolute_time_t until)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" int _weak_stdio_get_until(char* buf, int len, absolute_time_t until)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_stdio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, \
-                "/alternatename:_stdio_get_until=__weak_stdio_get_until")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:stdio_get_until=_weak_stdio_get_until")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" bool stdio_init_all(void);
-__attribute__((weak)) bool stdio_init_all(void)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" bool _weak_stdio_init_all(void)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_stdio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, "/alternatename:_stdio_init_all=__weak_stdio_init_all")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, "/alternatename:stdio_init_all=_weak_stdio_init_all")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" int stdio_put_string(const char* s, int len, bool newline,
-                                bool cr_translation);
-__attribute__((weak)) int stdio_put_string(const char* s, int len, bool newline,
-                                           bool cr_translation)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" int _weak_stdio_put_string(const char* s, int len, bool newline,
-                                      bool cr_translation)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_stdio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment(linker, \
-                "/alternatename:_stdio_put_string=__weak_stdio_put_string")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment(linker, \
-                "/alternatename:stdio_put_string=_weak_stdio_put_string")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void stdio_set_driver_enabled(stdio_driver_t* driver, bool enabled);
-__attribute__((weak)) void stdio_set_driver_enabled(stdio_driver_t* driver,
-                                                    bool enabled)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_stdio_set_driver_enabled(stdio_driver_t* driver,
-                                               bool enabled)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_stdio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_stdio_set_driver_enabled=__weak_stdio_set_driver_enabled")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:stdio_set_driver_enabled=_weak_stdio_set_driver_enabled")
-#endif  // x86 or amd64
-#endif  // _MSC_VER
-// --------------------------------------------------
-#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
-extern "C" void stdio_set_translate_crlf(stdio_driver_t* driver,
-                                         bool translate);
-__attribute__((weak)) void stdio_set_translate_crlf(stdio_driver_t* driver,
-                                                    bool translate)
-#elif defined(_MSC_VER)  // Microsoft Visual C
-extern "C" void _weak_stdio_set_translate_crlf(stdio_driver_t* driver,
-                                               bool translate)
-#else                    // Other compilers are not supported
-#error "Unknown compiler."
-#endif  // Compiler detection
-{
-  assert(false &&
-         "Error : The pico_stdio library is missing in the link phase.");
-}
-#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
-#if defined(_M_IX86)   // for x86
-#pragma comment( \
-    linker,      \
-    "/alternatename:_stdio_set_translate_crlf=__weak_stdio_set_translate_crlf")
-#elif defined(_M_AMD64)  // for AMD64
-#pragma comment( \
-    linker,      \
-    "/alternatename:stdio_set_translate_crlf=_weak_stdio_set_translate_crlf")
+                "/alternatename:rtc_set_datetime=_weak_rtc_set_datetime")
 #endif  // x86 or amd64
 #endif  // _MSC_VER

@@ -74,6 +74,103 @@ TEST_F(UserCodeTest, foo) {
 class SdkWrapper {
  public:
   virtual ~SdkWrapper() {}
+#if __has_include(<pico/time.h>) || __has_include(<gmock/gmock.h>)
+  virtual int64_t absolute_time_diff_us(absolute_time_t from,
+                                        absolute_time_t to);
+  virtual absolute_time_t absolute_time_min(absolute_time_t a,
+                                            absolute_time_t b);
+  virtual alarm_id_t add_alarm_at(absolute_time_t time,
+                                  alarm_callback_t callback, void* user_data,
+                                  bool fire_if_past);
+  virtual alarm_id_t add_alarm_in_ms(uint32_t ms, alarm_callback_t callback,
+                                     void* user_data, bool fire_if_past);
+  virtual alarm_id_t add_alarm_in_us(uint64_t us, alarm_callback_t callback,
+                                     void* user_data, bool fire_if_past);
+  virtual bool add_repeating_timer_ms(int32_t delay_ms,
+                                      repeating_timer_callback_t callback,
+                                      void* user_data, repeating_timer_t* out);
+  virtual bool add_repeating_timer_us(int64_t delay_us,
+                                      repeating_timer_callback_t callback,
+                                      void* user_data, repeating_timer_t* out);
+  virtual alarm_id_t alarm_pool_add_alarm_at(alarm_pool_t* pool,
+                                             absolute_time_t time,
+                                             alarm_callback_t callback,
+                                             void* user_data,
+                                             bool fire_if_past);
+  virtual alarm_id_t alarm_pool_add_alarm_at_force_in_context(
+      alarm_pool_t* pool, absolute_time_t time, alarm_callback_t callback,
+      void* user_data);
+  virtual alarm_id_t alarm_pool_add_alarm_in_ms(alarm_pool_t* pool, uint32_t ms,
+                                                alarm_callback_t callback,
+                                                void* user_data,
+                                                bool fire_if_past);
+  virtual alarm_id_t alarm_pool_add_alarm_in_us(alarm_pool_t* pool, uint64_t us,
+                                                alarm_callback_t callback,
+                                                void* user_data,
+                                                bool fire_if_past);
+  virtual bool alarm_pool_add_repeating_timer_ms(
+      alarm_pool_t* pool, int32_t delay_ms, repeating_timer_callback_t callback,
+      void* user_data, repeating_timer_t* out);
+  virtual bool alarm_pool_add_repeating_timer_us(
+      alarm_pool_t* pool, int64_t delay_us, repeating_timer_callback_t callback,
+      void* user_data, repeating_timer_t* out);
+  virtual bool alarm_pool_cancel_alarm(alarm_pool_t* pool, alarm_id_t alarm_id);
+  virtual uint alarm_pool_core_num(alarm_pool_t* pool);
+  virtual alarm_pool_t* alarm_pool_create(uint timer_alarm_num,
+                                          uint max_timers);
+  virtual alarm_pool_t* alarm_pool_create_on_timer(alarm_pool_timer_t* timer,
+                                                   uint timer_alarm_num,
+                                                   uint max_timers);
+  virtual alarm_pool_t* alarm_pool_create_on_timer_with_unused_hardware_alarm(
+      alarm_pool_timer_t* timer, uint max_timers);
+  virtual alarm_pool_t* alarm_pool_create_with_unused_hardware_alarm(
+      uint max_timers);
+  virtual void alarm_pool_destroy(alarm_pool_t* pool);
+  virtual alarm_pool_t* alarm_pool_get_default(void);
+  virtual alarm_pool_timer_t* alarm_pool_get_default_timer(void);
+  virtual uint alarm_pool_hardware_alarm_num(alarm_pool_t* pool);
+  virtual void alarm_pool_init_default(void);
+  virtual int32_t alarm_pool_remaining_alarm_time_ms(alarm_pool_t* pool,
+                                                     alarm_id_t alarm_id);
+  virtual int64_t alarm_pool_remaining_alarm_time_us(alarm_pool_t* pool,
+                                                     alarm_id_t alarm_id);
+  virtual uint alarm_pool_timer_alarm_num(alarm_pool_t* pool);
+  virtual alarm_pool_timer_t* alarm_pool_timer_for_timer_num(uint timer_num);
+  virtual bool best_effort_wfe_or_timeout(absolute_time_t timeout_timestamp);
+  virtual bool cancel_alarm(alarm_id_t alarm_id);
+  virtual bool cancel_repeating_timer(repeating_timer_t* timer);
+  virtual absolute_time_t delayed_by_ms(const absolute_time_t t, uint32_t ms);
+  virtual absolute_time_t delayed_by_us(const absolute_time_t t, uint64_t us);
+  virtual absolute_time_t get_absolute_time(void);
+  virtual bool is_at_the_end_of_time(absolute_time_t t);
+  virtual bool is_nil_time(absolute_time_t t);
+  virtual absolute_time_t make_timeout_time_ms(uint32_t ms);
+  virtual absolute_time_t make_timeout_time_us(uint64_t us);
+  virtual int32_t remaining_alarm_time_ms(alarm_id_t alarm_id);
+  virtual int64_t remaining_alarm_time_us(alarm_id_t alarm_id);
+  virtual void runtime_init_default_alarm_pool(void);
+  virtual void sleep_ms(uint32_t ms);
+  virtual void sleep_until(absolute_time_t target);
+  virtual void sleep_us(uint64_t us);
+  virtual uint32_t to_ms_since_boot(absolute_time_t t);
+  virtual uint32_t us_to_ms(uint64_t us);
+#endif  //  __has_include(<pico/time.h>) || __has_include(<gmock/gmock.h>)
+
+#if __has_include(<pico/stdio.h>) || __has_include(<gmock/gmock.h>)
+  virtual int getchar_timeout_us(uint32_t timeout_us);
+  virtual int putchar_raw(int c);
+  virtual int puts_raw(const char* s);
+  virtual bool stdio_deinit_all(void);
+  virtual void stdio_filter_driver(stdio_driver_t* driver);
+  virtual void stdio_flush(void);
+  virtual int stdio_get_until(char* buf, int len, absolute_time_t until);
+  virtual bool stdio_init_all(void);
+  virtual int stdio_put_string(const char* s, int len, bool newline,
+                               bool cr_translation);
+  virtual void stdio_set_driver_enabled(stdio_driver_t* driver, bool enabled);
+  virtual void stdio_set_translate_crlf(stdio_driver_t* driver, bool translate);
+#endif  //  __has_include(<pico/stdio.h>) || __has_include(<gmock/gmock.h>)
+
 #if __has_include(<hardware/adc.h>) || __has_include(<gmock/gmock.h>)
   virtual void adc_fifo_drain(void);
   virtual uint16_t adc_fifo_get(void);
@@ -93,6 +190,37 @@ class SdkWrapper {
   virtual void adc_set_round_robin(uint input_mask);
   virtual void adc_set_temp_sensor_enabled(bool enable);
 #endif  //  __has_include(<hardware/adc.h>) || __has_include(<gmock/gmock.h>)
+
+#if __has_include(<hardware/clocks.h>) || __has_include(<gmock/gmock.h>)
+  virtual bool check_sys_clock_hz(uint32_t freq_hz, uint* vco_freq_out,
+                                  uint* post_div1_out, uint* post_div2_out);
+  virtual bool check_sys_clock_khz(uint32_t freq_khz, uint* vco_freq_out,
+                                   uint* post_div1_out, uint* post_div2_out);
+  virtual bool clock_configure(clock_handle_t clock, uint32_t src,
+                               uint32_t auxsrc, uint32_t src_freq,
+                               uint32_t freq);
+  virtual bool clock_configure_gpin(clock_handle_t clock, uint gpio,
+                                    uint32_t src_freq, uint32_t freq);
+  virtual void clock_configure_int_divider(clock_handle_t clock, uint32_t src,
+                                           uint32_t auxsrc, uint32_t src_freq,
+                                           uint32_t int_divider);
+  virtual void clock_configure_undivided(clock_handle_t clock, uint32_t src,
+                                         uint32_t auxsrc, uint32_t src_freq);
+  virtual uint32_t clock_get_hz(clock_handle_t clock);
+  virtual void clock_gpio_init(uint gpio, uint src, float div);
+  virtual void clock_gpio_init_int_frac(uint gpio, uint src, uint32_t div_int,
+                                        uint8_t div_frac);
+  virtual void clock_set_reported_hz(clock_handle_t clock, uint hz);
+  virtual void clock_stop(clock_handle_t clock);
+  virtual void clocks_enable_resus(resus_callback_t resus_callback);
+  virtual uint32_t frequency_count_khz(uint src);
+  virtual float frequency_count_mhz(uint src);
+  virtual void set_sys_clock_48mhz(void);
+  virtual bool set_sys_clock_hz(uint32_t freq_hz, bool required);
+  virtual bool set_sys_clock_khz(uint32_t freq_khz, bool required);
+  virtual void set_sys_clock_pll(uint32_t vco_freq, uint post_div1,
+                                 uint post_div2);
+#endif  //  __has_include(<hardware/clocks.h>) || __has_include(<gmock/gmock.h>)
 
 #if __has_include(<hardware/divider.h>) || __has_include(<gmock/gmock.h>)
   virtual int __sign_of(int32_t v);
@@ -239,6 +367,94 @@ class SdkWrapper {
   virtual void flash_range_program(uint32_t flash_offs, const uint8_t* data,
                                    size_t count);
 #endif  //  __has_include(<hardware/flash.h>) || __has_include(<gmock/gmock.h>)
+
+#if __has_include(<hardware/gpio.h>) || __has_include(<gmock/gmock.h>)
+  virtual void gpio_acknowledge_irq(uint gpio, uint32_t event_mask);
+  virtual void gpio_add_raw_irq_handler(uint gpio, irq_handler_t handler);
+  virtual void gpio_add_raw_irq_handler_masked(uint32_t gpio_mask,
+                                               irq_handler_t handler);
+  virtual void gpio_add_raw_irq_handler_masked64(uint64_t gpio_mask,
+                                                 irq_handler_t handler);
+  virtual void gpio_add_raw_irq_handler_with_order_priority(
+      uint gpio, irq_handler_t handler, uint8_t order_priority);
+  virtual void gpio_add_raw_irq_handler_with_order_priority_masked(
+      uint32_t gpio_mask, irq_handler_t handler, uint8_t order_priority);
+  virtual void gpio_add_raw_irq_handler_with_order_priority_masked64(
+      uint64_t gpio_mask, irq_handler_t handler, uint8_t order_priority);
+  virtual void gpio_assign_to_ns(uint gpio, bool ns);
+  virtual void gpio_clr_mask(uint32_t mask);
+  virtual void gpio_clr_mask64(uint64_t mask);
+  virtual void gpio_clr_mask_n(uint n, uint32_t mask);
+  virtual void gpio_debug_pins_init(void);
+  virtual void gpio_deinit(uint gpio);
+  virtual void gpio_disable_pulls(uint gpio);
+  virtual bool gpio_get(uint gpio);
+  virtual uint32_t gpio_get_all(void);
+  virtual uint64_t gpio_get_all64(void);
+  virtual uint gpio_get_dir(uint gpio);
+  virtual enum gpio_drive_strength gpio_get_drive_strength(uint gpio);
+  virtual gpio_function_t gpio_get_function(uint gpio);
+  virtual uint32_t gpio_get_irq_event_mask(uint gpio);
+  virtual bool gpio_get_out_level(uint gpio);
+  virtual enum gpio_slew_rate gpio_get_slew_rate(uint gpio);
+  virtual void gpio_init(uint gpio);
+  virtual void gpio_init_mask(uint gpio_mask);
+  virtual bool gpio_is_dir_out(uint gpio);
+  virtual bool gpio_is_input_hysteresis_enabled(uint gpio);
+  virtual bool gpio_is_pulled_down(uint gpio);
+  virtual bool gpio_is_pulled_up(uint gpio);
+  virtual void gpio_pull_down(uint gpio);
+  virtual void gpio_pull_up(uint gpio);
+  virtual void gpio_put(uint gpio, bool value);
+  virtual void gpio_put_all(uint32_t value);
+  virtual void gpio_put_all64(uint64_t value);
+  virtual void gpio_put_masked(uint32_t mask, uint32_t value);
+  virtual void gpio_put_masked64(uint64_t mask, uint64_t value);
+  virtual void gpio_put_masked_n(uint n, uint32_t mask, uint32_t value);
+  virtual void gpio_remove_raw_irq_handler(uint gpio, irq_handler_t handler);
+  virtual void gpio_remove_raw_irq_handler_masked(uint32_t gpio_mask,
+                                                  irq_handler_t handler);
+  virtual void gpio_remove_raw_irq_handler_masked64(uint64_t gpio_mask,
+                                                    irq_handler_t handler);
+  virtual void gpio_set_dir(uint gpio, bool out);
+  virtual void gpio_set_dir_all_bits(uint32_t values);
+  virtual void gpio_set_dir_all_bits64(uint64_t values);
+  virtual void gpio_set_dir_in_masked(uint32_t mask);
+  virtual void gpio_set_dir_in_masked64(uint64_t mask);
+  virtual void gpio_set_dir_masked(uint32_t mask, uint32_t value);
+  virtual void gpio_set_dir_masked64(uint64_t mask, uint64_t value);
+  virtual void gpio_set_dir_out_masked(uint32_t mask);
+  virtual void gpio_set_dir_out_masked64(uint64_t mask);
+  virtual void gpio_set_dormant_irq_enabled(uint gpio, uint32_t event_mask,
+                                            bool enabled);
+  virtual void gpio_set_drive_strength(uint gpio,
+                                       enum gpio_drive_strength drive);
+  virtual void gpio_set_function(uint gpio, gpio_function_t fn);
+  virtual void gpio_set_function_masked(uint32_t gpio_mask, gpio_function_t fn);
+  virtual void gpio_set_function_masked64(uint64_t gpio_mask,
+                                          gpio_function_t fn);
+  virtual void gpio_set_inover(uint gpio, uint value);
+  virtual void gpio_set_input_enabled(uint gpio, bool enabled);
+  virtual void gpio_set_input_hysteresis_enabled(uint gpio, bool enabled);
+  virtual void gpio_set_irq_callback(gpio_irq_callback_t callback);
+  virtual void gpio_set_irq_enabled(uint gpio, uint32_t event_mask,
+                                    bool enabled);
+  virtual void gpio_set_irq_enabled_with_callback(uint gpio,
+                                                  uint32_t event_mask,
+                                                  bool enabled,
+                                                  gpio_irq_callback_t callback);
+  virtual void gpio_set_irqover(uint gpio, uint value);
+  virtual void gpio_set_mask(uint32_t mask);
+  virtual void gpio_set_mask64(uint64_t mask);
+  virtual void gpio_set_mask_n(uint n, uint32_t mask);
+  virtual void gpio_set_oeover(uint gpio, uint value);
+  virtual void gpio_set_outover(uint gpio, uint value);
+  virtual void gpio_set_pulls(uint gpio, bool up, bool down);
+  virtual void gpio_set_slew_rate(uint gpio, enum gpio_slew_rate slew);
+  virtual void gpio_xor_mask(uint32_t mask);
+  virtual void gpio_xor_mask64(uint64_t mask);
+  virtual void gpio_xor_mask_n(uint n, uint32_t mask);
+#endif  //  __has_include(<hardware/gpio.h>) || __has_include(<gmock/gmock.h>)
 
 #if __has_include(<hardware/i2c.h>) || __has_include(<gmock/gmock.h>)
   virtual void i2c_deinit(i2c_inst_t* i2c);
@@ -645,221 +861,15 @@ class SdkWrapper {
   virtual void unreset_block_wait(uint32_t bits);
 #endif  //  __has_include(<hardware/resets.h>) || __has_include(<gmock/gmock.h>)
 
-#if __has_include(<hardware/gpio.h>) || __has_include(<gmock/gmock.h>)
-  virtual void gpio_acknowledge_irq(uint gpio, uint32_t event_mask);
-  virtual void gpio_add_raw_irq_handler(uint gpio, irq_handler_t handler);
-  virtual void gpio_add_raw_irq_handler_masked(uint32_t gpio_mask,
-                                               irq_handler_t handler);
-  virtual void gpio_add_raw_irq_handler_masked64(uint64_t gpio_mask,
-                                                 irq_handler_t handler);
-  virtual void gpio_add_raw_irq_handler_with_order_priority(
-      uint gpio, irq_handler_t handler, uint8_t order_priority);
-  virtual void gpio_add_raw_irq_handler_with_order_priority_masked(
-      uint32_t gpio_mask, irq_handler_t handler, uint8_t order_priority);
-  virtual void gpio_add_raw_irq_handler_with_order_priority_masked64(
-      uint64_t gpio_mask, irq_handler_t handler, uint8_t order_priority);
-  virtual void gpio_assign_to_ns(uint gpio, bool ns);
-  virtual void gpio_clr_mask(uint32_t mask);
-  virtual void gpio_clr_mask64(uint64_t mask);
-  virtual void gpio_clr_mask_n(uint n, uint32_t mask);
-  virtual void gpio_debug_pins_init(void);
-  virtual void gpio_deinit(uint gpio);
-  virtual void gpio_disable_pulls(uint gpio);
-  virtual bool gpio_get(uint gpio);
-  virtual uint32_t gpio_get_all(void);
-  virtual uint64_t gpio_get_all64(void);
-  virtual uint gpio_get_dir(uint gpio);
-  virtual enum gpio_drive_strength gpio_get_drive_strength(uint gpio);
-  virtual gpio_function_t gpio_get_function(uint gpio);
-  virtual uint32_t gpio_get_irq_event_mask(uint gpio);
-  virtual bool gpio_get_out_level(uint gpio);
-  virtual enum gpio_slew_rate gpio_get_slew_rate(uint gpio);
-  virtual void gpio_init(uint gpio);
-  virtual void gpio_init_mask(uint gpio_mask);
-  virtual bool gpio_is_dir_out(uint gpio);
-  virtual bool gpio_is_input_hysteresis_enabled(uint gpio);
-  virtual bool gpio_is_pulled_down(uint gpio);
-  virtual bool gpio_is_pulled_up(uint gpio);
-  virtual void gpio_pull_down(uint gpio);
-  virtual void gpio_pull_up(uint gpio);
-  virtual void gpio_put(uint gpio, bool value);
-  virtual void gpio_put_all(uint32_t value);
-  virtual void gpio_put_all64(uint64_t value);
-  virtual void gpio_put_masked(uint32_t mask, uint32_t value);
-  virtual void gpio_put_masked64(uint64_t mask, uint64_t value);
-  virtual void gpio_put_masked_n(uint n, uint32_t mask, uint32_t value);
-  virtual void gpio_remove_raw_irq_handler(uint gpio, irq_handler_t handler);
-  virtual void gpio_remove_raw_irq_handler_masked(uint32_t gpio_mask,
-                                                  irq_handler_t handler);
-  virtual void gpio_remove_raw_irq_handler_masked64(uint64_t gpio_mask,
-                                                    irq_handler_t handler);
-  virtual void gpio_set_dir(uint gpio, bool out);
-  virtual void gpio_set_dir_all_bits(uint32_t values);
-  virtual void gpio_set_dir_all_bits64(uint64_t values);
-  virtual void gpio_set_dir_in_masked(uint32_t mask);
-  virtual void gpio_set_dir_in_masked64(uint64_t mask);
-  virtual void gpio_set_dir_masked(uint32_t mask, uint32_t value);
-  virtual void gpio_set_dir_masked64(uint64_t mask, uint64_t value);
-  virtual void gpio_set_dir_out_masked(uint32_t mask);
-  virtual void gpio_set_dir_out_masked64(uint64_t mask);
-  virtual void gpio_set_dormant_irq_enabled(uint gpio, uint32_t event_mask,
-                                            bool enabled);
-  virtual void gpio_set_drive_strength(uint gpio,
-                                       enum gpio_drive_strength drive);
-  virtual void gpio_set_function(uint gpio, gpio_function_t fn);
-  virtual void gpio_set_function_masked(uint32_t gpio_mask, gpio_function_t fn);
-  virtual void gpio_set_function_masked64(uint64_t gpio_mask,
-                                          gpio_function_t fn);
-  virtual void gpio_set_inover(uint gpio, uint value);
-  virtual void gpio_set_input_enabled(uint gpio, bool enabled);
-  virtual void gpio_set_input_hysteresis_enabled(uint gpio, bool enabled);
-  virtual void gpio_set_irq_callback(gpio_irq_callback_t callback);
-  virtual void gpio_set_irq_enabled(uint gpio, uint32_t event_mask,
-                                    bool enabled);
-  virtual void gpio_set_irq_enabled_with_callback(uint gpio,
-                                                  uint32_t event_mask,
-                                                  bool enabled,
-                                                  gpio_irq_callback_t callback);
-  virtual void gpio_set_irqover(uint gpio, uint value);
-  virtual void gpio_set_mask(uint32_t mask);
-  virtual void gpio_set_mask64(uint64_t mask);
-  virtual void gpio_set_mask_n(uint n, uint32_t mask);
-  virtual void gpio_set_oeover(uint gpio, uint value);
-  virtual void gpio_set_outover(uint gpio, uint value);
-  virtual void gpio_set_pulls(uint gpio, bool up, bool down);
-  virtual void gpio_set_slew_rate(uint gpio, enum gpio_slew_rate slew);
-  virtual void gpio_xor_mask(uint32_t mask);
-  virtual void gpio_xor_mask64(uint64_t mask);
-  virtual void gpio_xor_mask_n(uint n, uint32_t mask);
-#endif  //  __has_include(<hardware/gpio.h>) || __has_include(<gmock/gmock.h>)
-
-#if __has_include(<hardware/clocks.h>) || __has_include(<gmock/gmock.h>)
-  virtual bool check_sys_clock_hz(uint32_t freq_hz, uint* vco_freq_out,
-                                  uint* post_div1_out, uint* post_div2_out);
-  virtual bool check_sys_clock_khz(uint32_t freq_khz, uint* vco_freq_out,
-                                   uint* post_div1_out, uint* post_div2_out);
-  virtual bool clock_configure(clock_handle_t clock, uint32_t src,
-                               uint32_t auxsrc, uint32_t src_freq,
-                               uint32_t freq);
-  virtual bool clock_configure_gpin(clock_handle_t clock, uint gpio,
-                                    uint32_t src_freq, uint32_t freq);
-  virtual void clock_configure_int_divider(clock_handle_t clock, uint32_t src,
-                                           uint32_t auxsrc, uint32_t src_freq,
-                                           uint32_t int_divider);
-  virtual void clock_configure_undivided(clock_handle_t clock, uint32_t src,
-                                         uint32_t auxsrc, uint32_t src_freq);
-  virtual uint32_t clock_get_hz(clock_handle_t clock);
-  virtual void clock_gpio_init(uint gpio, uint src, float div);
-  virtual void clock_gpio_init_int_frac(uint gpio, uint src, uint32_t div_int,
-                                        uint8_t div_frac);
-  virtual void clock_set_reported_hz(clock_handle_t clock, uint hz);
-  virtual void clock_stop(clock_handle_t clock);
-  virtual void clocks_enable_resus(resus_callback_t resus_callback);
-  virtual uint32_t frequency_count_khz(uint src);
-  virtual float frequency_count_mhz(uint src);
-  virtual void set_sys_clock_48mhz(void);
-  virtual bool set_sys_clock_hz(uint32_t freq_hz, bool required);
-  virtual bool set_sys_clock_khz(uint32_t freq_khz, bool required);
-  virtual void set_sys_clock_pll(uint32_t vco_freq, uint post_div1,
-                                 uint post_div2);
-#endif  //  __has_include(<hardware/clocks.h>) || __has_include(<gmock/gmock.h>)
-
-#if __has_include(<pico/time.h>) || __has_include(<gmock/gmock.h>)
-  virtual int64_t absolute_time_diff_us(absolute_time_t from,
-                                        absolute_time_t to);
-  virtual absolute_time_t absolute_time_min(absolute_time_t a,
-                                            absolute_time_t b);
-  virtual alarm_id_t add_alarm_at(absolute_time_t time,
-                                  alarm_callback_t callback, void* user_data,
-                                  bool fire_if_past);
-  virtual alarm_id_t add_alarm_in_ms(uint32_t ms, alarm_callback_t callback,
-                                     void* user_data, bool fire_if_past);
-  virtual alarm_id_t add_alarm_in_us(uint64_t us, alarm_callback_t callback,
-                                     void* user_data, bool fire_if_past);
-  virtual bool add_repeating_timer_ms(int32_t delay_ms,
-                                      repeating_timer_callback_t callback,
-                                      void* user_data, repeating_timer_t* out);
-  virtual bool add_repeating_timer_us(int64_t delay_us,
-                                      repeating_timer_callback_t callback,
-                                      void* user_data, repeating_timer_t* out);
-  virtual alarm_id_t alarm_pool_add_alarm_at(alarm_pool_t* pool,
-                                             absolute_time_t time,
-                                             alarm_callback_t callback,
-                                             void* user_data,
-                                             bool fire_if_past);
-  virtual alarm_id_t alarm_pool_add_alarm_at_force_in_context(
-      alarm_pool_t* pool, absolute_time_t time, alarm_callback_t callback,
-      void* user_data);
-  virtual alarm_id_t alarm_pool_add_alarm_in_ms(alarm_pool_t* pool, uint32_t ms,
-                                                alarm_callback_t callback,
-                                                void* user_data,
-                                                bool fire_if_past);
-  virtual alarm_id_t alarm_pool_add_alarm_in_us(alarm_pool_t* pool, uint64_t us,
-                                                alarm_callback_t callback,
-                                                void* user_data,
-                                                bool fire_if_past);
-  virtual bool alarm_pool_add_repeating_timer_ms(
-      alarm_pool_t* pool, int32_t delay_ms, repeating_timer_callback_t callback,
-      void* user_data, repeating_timer_t* out);
-  virtual bool alarm_pool_add_repeating_timer_us(
-      alarm_pool_t* pool, int64_t delay_us, repeating_timer_callback_t callback,
-      void* user_data, repeating_timer_t* out);
-  virtual bool alarm_pool_cancel_alarm(alarm_pool_t* pool, alarm_id_t alarm_id);
-  virtual uint alarm_pool_core_num(alarm_pool_t* pool);
-  virtual alarm_pool_t* alarm_pool_create(uint timer_alarm_num,
-                                          uint max_timers);
-  virtual alarm_pool_t* alarm_pool_create_on_timer(alarm_pool_timer_t* timer,
-                                                   uint timer_alarm_num,
-                                                   uint max_timers);
-  virtual alarm_pool_t* alarm_pool_create_on_timer_with_unused_hardware_alarm(
-      alarm_pool_timer_t* timer, uint max_timers);
-  virtual alarm_pool_t* alarm_pool_create_with_unused_hardware_alarm(
-      uint max_timers);
-  virtual void alarm_pool_destroy(alarm_pool_t* pool);
-  virtual alarm_pool_t* alarm_pool_get_default(void);
-  virtual alarm_pool_timer_t* alarm_pool_get_default_timer(void);
-  virtual uint alarm_pool_hardware_alarm_num(alarm_pool_t* pool);
-  virtual void alarm_pool_init_default(void);
-  virtual int32_t alarm_pool_remaining_alarm_time_ms(alarm_pool_t* pool,
-                                                     alarm_id_t alarm_id);
-  virtual int64_t alarm_pool_remaining_alarm_time_us(alarm_pool_t* pool,
-                                                     alarm_id_t alarm_id);
-  virtual uint alarm_pool_timer_alarm_num(alarm_pool_t* pool);
-  virtual alarm_pool_timer_t* alarm_pool_timer_for_timer_num(uint timer_num);
-  virtual bool best_effort_wfe_or_timeout(absolute_time_t timeout_timestamp);
-  virtual bool cancel_alarm(alarm_id_t alarm_id);
-  virtual bool cancel_repeating_timer(repeating_timer_t* timer);
-  virtual absolute_time_t delayed_by_ms(const absolute_time_t t, uint32_t ms);
-  virtual absolute_time_t delayed_by_us(const absolute_time_t t, uint64_t us);
-  virtual absolute_time_t get_absolute_time(void);
-  virtual bool is_at_the_end_of_time(absolute_time_t t);
-  virtual bool is_nil_time(absolute_time_t t);
-  virtual absolute_time_t make_timeout_time_ms(uint32_t ms);
-  virtual absolute_time_t make_timeout_time_us(uint64_t us);
-  virtual int32_t remaining_alarm_time_ms(alarm_id_t alarm_id);
-  virtual int64_t remaining_alarm_time_us(alarm_id_t alarm_id);
-  virtual void runtime_init_default_alarm_pool(void);
-  virtual void sleep_ms(uint32_t ms);
-  virtual void sleep_until(absolute_time_t target);
-  virtual void sleep_us(uint64_t us);
-  virtual uint32_t to_ms_since_boot(absolute_time_t t);
-  virtual uint32_t us_to_ms(uint64_t us);
-#endif  //  __has_include(<pico/time.h>) || __has_include(<gmock/gmock.h>)
-
-#if __has_include(<pico/stdio.h>) || __has_include(<gmock/gmock.h>)
-  virtual int getchar_timeout_us(uint32_t timeout_us);
-  virtual int putchar_raw(int c);
-  virtual int puts_raw(const char* s);
-  virtual bool stdio_deinit_all(void);
-  virtual void stdio_filter_driver(stdio_driver_t* driver);
-  virtual void stdio_flush(void);
-  virtual int stdio_get_until(char* buf, int len, absolute_time_t until);
-  virtual bool stdio_init_all(void);
-  virtual int stdio_put_string(const char* s, int len, bool newline,
-                               bool cr_translation);
-  virtual void stdio_set_driver_enabled(stdio_driver_t* driver, bool enabled);
-  virtual void stdio_set_translate_crlf(stdio_driver_t* driver, bool translate);
-#endif  //  __has_include(<pico/stdio.h>) || __has_include(<gmock/gmock.h>)
+#if __has_include(<hardware/rtc.h>) || __has_include(<gmock/gmock.h>)
+  virtual void rtc_disable_alarm(void);
+  virtual void rtc_enable_alarm(void);
+  virtual bool rtc_get_datetime(datetime_t* t);
+  virtual void rtc_init(void);
+  virtual bool rtc_running(void);
+  virtual void rtc_set_alarm(const datetime_t* t, rtc_callback_t user_callback);
+  virtual bool rtc_set_datetime(const datetime_t* t);
+#endif  //  __has_include(<hardware/rtc.h>) || __has_include(<gmock/gmock.h>)
 
 };  // class SdkWrapper
 

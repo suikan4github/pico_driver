@@ -1,8 +1,12 @@
+pico time
+pico stdio
 hardware adc
+hardware clocks
 hardware divider
 hardware dma
 hardware exception
 hardware flash
+hardware gpio
 hardware i2c
 hardware interp
 hardware irq
@@ -12,7 +16,4 @@ hardware powman
 hardware pwm
 hardware rcp
 hardware resets
-hardware gpio
-hardware clocks
-pico time
-pico stdio
+hardware rtc

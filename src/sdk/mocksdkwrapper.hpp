@@ -7,6 +7,107 @@
 // GCOVR_EXCL_START
 class MockSdkWrapper : public SdkWrapper {
  public:
+  MOCK_METHOD2(absolute_time_diff_us,
+               int64_t(absolute_time_t from, absolute_time_t to));
+  MOCK_METHOD2(absolute_time_min,
+               absolute_time_t(absolute_time_t a, absolute_time_t b));
+  MOCK_METHOD4(add_alarm_at,
+               alarm_id_t(absolute_time_t time, alarm_callback_t callback,
+                          void* user_data, bool fire_if_past));
+  MOCK_METHOD4(add_alarm_in_ms,
+               alarm_id_t(uint32_t ms, alarm_callback_t callback,
+                          void* user_data, bool fire_if_past));
+  MOCK_METHOD4(add_alarm_in_us,
+               alarm_id_t(uint64_t us, alarm_callback_t callback,
+                          void* user_data, bool fire_if_past));
+  MOCK_METHOD4(add_repeating_timer_ms,
+               bool(int32_t delay_ms, repeating_timer_callback_t callback,
+                    void* user_data, repeating_timer_t* out));
+  MOCK_METHOD4(add_repeating_timer_us,
+               bool(int64_t delay_us, repeating_timer_callback_t callback,
+                    void* user_data, repeating_timer_t* out));
+  MOCK_METHOD5(alarm_pool_add_alarm_at,
+               alarm_id_t(alarm_pool_t* pool, absolute_time_t time,
+                          alarm_callback_t callback, void* user_data,
+                          bool fire_if_past));
+  MOCK_METHOD4(alarm_pool_add_alarm_at_force_in_context,
+               alarm_id_t(alarm_pool_t* pool, absolute_time_t time,
+                          alarm_callback_t callback, void* user_data));
+  MOCK_METHOD5(alarm_pool_add_alarm_in_ms,
+               alarm_id_t(alarm_pool_t* pool, uint32_t ms,
+                          alarm_callback_t callback, void* user_data,
+                          bool fire_if_past));
+  MOCK_METHOD5(alarm_pool_add_alarm_in_us,
+               alarm_id_t(alarm_pool_t* pool, uint64_t us,
+                          alarm_callback_t callback, void* user_data,
+                          bool fire_if_past));
+  MOCK_METHOD5(alarm_pool_add_repeating_timer_ms,
+               bool(alarm_pool_t* pool, int32_t delay_ms,
+                    repeating_timer_callback_t callback, void* user_data,
+                    repeating_timer_t* out));
+  MOCK_METHOD5(alarm_pool_add_repeating_timer_us,
+               bool(alarm_pool_t* pool, int64_t delay_us,
+                    repeating_timer_callback_t callback, void* user_data,
+                    repeating_timer_t* out));
+  MOCK_METHOD2(alarm_pool_cancel_alarm,
+               bool(alarm_pool_t* pool, alarm_id_t alarm_id));
+  MOCK_METHOD1(alarm_pool_core_num, uint(alarm_pool_t* pool));
+  MOCK_METHOD2(alarm_pool_create,
+               alarm_pool_t*(uint timer_alarm_num, uint max_timers));
+  MOCK_METHOD3(alarm_pool_create_on_timer,
+               alarm_pool_t*(alarm_pool_timer_t* timer, uint timer_alarm_num,
+                             uint max_timers));
+  MOCK_METHOD2(alarm_pool_create_on_timer_with_unused_hardware_alarm,
+               alarm_pool_t*(alarm_pool_timer_t* timer, uint max_timers));
+  MOCK_METHOD1(alarm_pool_create_with_unused_hardware_alarm,
+               alarm_pool_t*(uint max_timers));
+  MOCK_METHOD1(alarm_pool_destroy, void(alarm_pool_t* pool));
+  MOCK_METHOD0(alarm_pool_get_default, alarm_pool_t*());
+  MOCK_METHOD0(alarm_pool_get_default_timer, alarm_pool_timer_t*());
+  MOCK_METHOD1(alarm_pool_hardware_alarm_num, uint(alarm_pool_t* pool));
+  MOCK_METHOD0(alarm_pool_init_default, void());
+  MOCK_METHOD2(alarm_pool_remaining_alarm_time_ms,
+               int32_t(alarm_pool_t* pool, alarm_id_t alarm_id));
+  MOCK_METHOD2(alarm_pool_remaining_alarm_time_us,
+               int64_t(alarm_pool_t* pool, alarm_id_t alarm_id));
+  MOCK_METHOD1(alarm_pool_timer_alarm_num, uint(alarm_pool_t* pool));
+  MOCK_METHOD1(alarm_pool_timer_for_timer_num,
+               alarm_pool_timer_t*(uint timer_num));
+  MOCK_METHOD1(best_effort_wfe_or_timeout,
+               bool(absolute_time_t timeout_timestamp));
+  MOCK_METHOD1(cancel_alarm, bool(alarm_id_t alarm_id));
+  MOCK_METHOD1(cancel_repeating_timer, bool(repeating_timer_t* timer));
+  MOCK_METHOD2(delayed_by_ms,
+               absolute_time_t(const absolute_time_t t, uint32_t ms));
+  MOCK_METHOD2(delayed_by_us,
+               absolute_time_t(const absolute_time_t t, uint64_t us));
+  MOCK_METHOD0(get_absolute_time, absolute_time_t());
+  MOCK_METHOD1(is_at_the_end_of_time, bool(absolute_time_t t));
+  MOCK_METHOD1(is_nil_time, bool(absolute_time_t t));
+  MOCK_METHOD1(make_timeout_time_ms, absolute_time_t(uint32_t ms));
+  MOCK_METHOD1(make_timeout_time_us, absolute_time_t(uint64_t us));
+  MOCK_METHOD1(remaining_alarm_time_ms, int32_t(alarm_id_t alarm_id));
+  MOCK_METHOD1(remaining_alarm_time_us, int64_t(alarm_id_t alarm_id));
+  MOCK_METHOD0(runtime_init_default_alarm_pool, void());
+  MOCK_METHOD1(sleep_ms, void(uint32_t ms));
+  MOCK_METHOD1(sleep_until, void(absolute_time_t target));
+  MOCK_METHOD1(sleep_us, void(uint64_t us));
+  MOCK_METHOD1(to_ms_since_boot, uint32_t(absolute_time_t t));
+  MOCK_METHOD1(us_to_ms, uint32_t(uint64_t us));
+  MOCK_METHOD1(getchar_timeout_us, int(uint32_t timeout_us));
+  MOCK_METHOD1(putchar_raw, int(int c));
+  MOCK_METHOD1(puts_raw, int(const char* s));
+  MOCK_METHOD0(stdio_deinit_all, bool());
+  MOCK_METHOD1(stdio_filter_driver, void(stdio_driver_t* driver));
+  MOCK_METHOD0(stdio_flush, void());
+  MOCK_METHOD3(stdio_get_until, int(char* buf, int len, absolute_time_t until));
+  MOCK_METHOD0(stdio_init_all, bool());
+  MOCK_METHOD4(stdio_put_string,
+               int(const char* s, int len, bool newline, bool cr_translation));
+  MOCK_METHOD2(stdio_set_driver_enabled,
+               void(stdio_driver_t* driver, bool enabled));
+  MOCK_METHOD2(stdio_set_translate_crlf,
+               void(stdio_driver_t* driver, bool translate));
   MOCK_METHOD0(adc_fifo_drain, void());
   MOCK_METHOD0(adc_fifo_get, uint16_t());
   MOCK_METHOD0(adc_fifo_get_blocking, uint16_t());
@@ -24,6 +125,37 @@ class MockSdkWrapper : public SdkWrapper {
   MOCK_METHOD1(adc_set_clkdiv, void(float clkdiv));
   MOCK_METHOD1(adc_set_round_robin, void(uint input_mask));
   MOCK_METHOD1(adc_set_temp_sensor_enabled, void(bool enable));
+  MOCK_METHOD4(check_sys_clock_hz,
+               bool(uint32_t freq_hz, uint* vco_freq_out, uint* post_div1_out,
+                    uint* post_div2_out));
+  MOCK_METHOD4(check_sys_clock_khz,
+               bool(uint32_t freq_khz, uint* vco_freq_out, uint* post_div1_out,
+                    uint* post_div2_out));
+  MOCK_METHOD5(clock_configure,
+               bool(clock_handle_t clock, uint32_t src, uint32_t auxsrc,
+                    uint32_t src_freq, uint32_t freq));
+  MOCK_METHOD4(clock_configure_gpin, bool(clock_handle_t clock, uint gpio,
+                                          uint32_t src_freq, uint32_t freq));
+  MOCK_METHOD5(clock_configure_int_divider,
+               void(clock_handle_t clock, uint32_t src, uint32_t auxsrc,
+                    uint32_t src_freq, uint32_t int_divider));
+  MOCK_METHOD4(clock_configure_undivided,
+               void(clock_handle_t clock, uint32_t src, uint32_t auxsrc,
+                    uint32_t src_freq));
+  MOCK_METHOD1(clock_get_hz, uint32_t(clock_handle_t clock));
+  MOCK_METHOD3(clock_gpio_init, void(uint gpio, uint src, float div));
+  MOCK_METHOD4(clock_gpio_init_int_frac,
+               void(uint gpio, uint src, uint32_t div_int, uint8_t div_frac));
+  MOCK_METHOD2(clock_set_reported_hz, void(clock_handle_t clock, uint hz));
+  MOCK_METHOD1(clock_stop, void(clock_handle_t clock));
+  MOCK_METHOD1(clocks_enable_resus, void(resus_callback_t resus_callback));
+  MOCK_METHOD1(frequency_count_khz, uint32_t(uint src));
+  MOCK_METHOD1(frequency_count_mhz, float(uint src));
+  MOCK_METHOD0(set_sys_clock_48mhz, void());
+  MOCK_METHOD2(set_sys_clock_hz, bool(uint32_t freq_hz, bool required));
+  MOCK_METHOD2(set_sys_clock_khz, bool(uint32_t freq_khz, bool required));
+  MOCK_METHOD3(set_sys_clock_pll,
+               void(uint32_t vco_freq, uint post_div1, uint post_div2));
   MOCK_METHOD1(__sign_of, int(int32_t v));
   MOCK_METHOD2(hw_divider_divmod_s32, divmod_result_t(int32_t a, int32_t b));
   MOCK_METHOD2(hw_divider_divmod_s32_start, void(int32_t a, int32_t b));
@@ -163,6 +295,96 @@ class MockSdkWrapper : public SdkWrapper {
   MOCK_METHOD2(flash_range_erase, void(uint32_t flash_offs, size_t count));
   MOCK_METHOD3(flash_range_program,
                void(uint32_t flash_offs, const uint8_t* data, size_t count));
+  MOCK_METHOD2(gpio_acknowledge_irq, void(uint gpio, uint32_t event_mask));
+  MOCK_METHOD2(gpio_add_raw_irq_handler,
+               void(uint gpio, irq_handler_t handler));
+  MOCK_METHOD2(gpio_add_raw_irq_handler_masked,
+               void(uint32_t gpio_mask, irq_handler_t handler));
+  MOCK_METHOD2(gpio_add_raw_irq_handler_masked64,
+               void(uint64_t gpio_mask, irq_handler_t handler));
+  MOCK_METHOD3(gpio_add_raw_irq_handler_with_order_priority,
+               void(uint gpio, irq_handler_t handler, uint8_t order_priority));
+  MOCK_METHOD3(gpio_add_raw_irq_handler_with_order_priority_masked,
+               void(uint32_t gpio_mask, irq_handler_t handler,
+                    uint8_t order_priority));
+  MOCK_METHOD3(gpio_add_raw_irq_handler_with_order_priority_masked64,
+               void(uint64_t gpio_mask, irq_handler_t handler,
+                    uint8_t order_priority));
+  MOCK_METHOD2(gpio_assign_to_ns, void(uint gpio, bool ns));
+  MOCK_METHOD1(gpio_clr_mask, void(uint32_t mask));
+  MOCK_METHOD1(gpio_clr_mask64, void(uint64_t mask));
+  MOCK_METHOD2(gpio_clr_mask_n, void(uint n, uint32_t mask));
+  MOCK_METHOD0(gpio_debug_pins_init, void());
+  MOCK_METHOD1(gpio_deinit, void(uint gpio));
+  MOCK_METHOD1(gpio_disable_pulls, void(uint gpio));
+  MOCK_METHOD1(gpio_get, bool(uint gpio));
+  MOCK_METHOD0(gpio_get_all, uint32_t());
+  MOCK_METHOD0(gpio_get_all64, uint64_t());
+  MOCK_METHOD1(gpio_get_dir, uint(uint gpio));
+  MOCK_METHOD1(gpio_get_drive_strength, enum gpio_drive_strength(uint gpio));
+  MOCK_METHOD1(gpio_get_function, gpio_function_t(uint gpio));
+  MOCK_METHOD1(gpio_get_irq_event_mask, uint32_t(uint gpio));
+  MOCK_METHOD1(gpio_get_out_level, bool(uint gpio));
+  MOCK_METHOD1(gpio_get_slew_rate, enum gpio_slew_rate(uint gpio));
+  MOCK_METHOD1(gpio_init, void(uint gpio));
+  MOCK_METHOD1(gpio_init_mask, void(uint gpio_mask));
+  MOCK_METHOD1(gpio_is_dir_out, bool(uint gpio));
+  MOCK_METHOD1(gpio_is_input_hysteresis_enabled, bool(uint gpio));
+  MOCK_METHOD1(gpio_is_pulled_down, bool(uint gpio));
+  MOCK_METHOD1(gpio_is_pulled_up, bool(uint gpio));
+  MOCK_METHOD1(gpio_pull_down, void(uint gpio));
+  MOCK_METHOD1(gpio_pull_up, void(uint gpio));
+  MOCK_METHOD2(gpio_put, void(uint gpio, bool value));
+  MOCK_METHOD1(gpio_put_all, void(uint32_t value));
+  MOCK_METHOD1(gpio_put_all64, void(uint64_t value));
+  MOCK_METHOD2(gpio_put_masked, void(uint32_t mask, uint32_t value));
+  MOCK_METHOD2(gpio_put_masked64, void(uint64_t mask, uint64_t value));
+  MOCK_METHOD3(gpio_put_masked_n, void(uint n, uint32_t mask, uint32_t value));
+  MOCK_METHOD2(gpio_remove_raw_irq_handler,
+               void(uint gpio, irq_handler_t handler));
+  MOCK_METHOD2(gpio_remove_raw_irq_handler_masked,
+               void(uint32_t gpio_mask, irq_handler_t handler));
+  MOCK_METHOD2(gpio_remove_raw_irq_handler_masked64,
+               void(uint64_t gpio_mask, irq_handler_t handler));
+  MOCK_METHOD2(gpio_set_dir, void(uint gpio, bool out));
+  MOCK_METHOD1(gpio_set_dir_all_bits, void(uint32_t values));
+  MOCK_METHOD1(gpio_set_dir_all_bits64, void(uint64_t values));
+  MOCK_METHOD1(gpio_set_dir_in_masked, void(uint32_t mask));
+  MOCK_METHOD1(gpio_set_dir_in_masked64, void(uint64_t mask));
+  MOCK_METHOD2(gpio_set_dir_masked, void(uint32_t mask, uint32_t value));
+  MOCK_METHOD2(gpio_set_dir_masked64, void(uint64_t mask, uint64_t value));
+  MOCK_METHOD1(gpio_set_dir_out_masked, void(uint32_t mask));
+  MOCK_METHOD1(gpio_set_dir_out_masked64, void(uint64_t mask));
+  MOCK_METHOD3(gpio_set_dormant_irq_enabled,
+               void(uint gpio, uint32_t event_mask, bool enabled));
+  MOCK_METHOD2(gpio_set_drive_strength,
+               void(uint gpio, enum gpio_drive_strength drive));
+  MOCK_METHOD2(gpio_set_function, void(uint gpio, gpio_function_t fn));
+  MOCK_METHOD2(gpio_set_function_masked,
+               void(uint32_t gpio_mask, gpio_function_t fn));
+  MOCK_METHOD2(gpio_set_function_masked64,
+               void(uint64_t gpio_mask, gpio_function_t fn));
+  MOCK_METHOD2(gpio_set_inover, void(uint gpio, uint value));
+  MOCK_METHOD2(gpio_set_input_enabled, void(uint gpio, bool enabled));
+  MOCK_METHOD2(gpio_set_input_hysteresis_enabled,
+               void(uint gpio, bool enabled));
+  MOCK_METHOD1(gpio_set_irq_callback, void(gpio_irq_callback_t callback));
+  MOCK_METHOD3(gpio_set_irq_enabled,
+               void(uint gpio, uint32_t event_mask, bool enabled));
+  MOCK_METHOD4(gpio_set_irq_enabled_with_callback,
+               void(uint gpio, uint32_t event_mask, bool enabled,
+                    gpio_irq_callback_t callback));
+  MOCK_METHOD2(gpio_set_irqover, void(uint gpio, uint value));
+  MOCK_METHOD1(gpio_set_mask, void(uint32_t mask));
+  MOCK_METHOD1(gpio_set_mask64, void(uint64_t mask));
+  MOCK_METHOD2(gpio_set_mask_n, void(uint n, uint32_t mask));
+  MOCK_METHOD2(gpio_set_oeover, void(uint gpio, uint value));
+  MOCK_METHOD2(gpio_set_outover, void(uint gpio, uint value));
+  MOCK_METHOD3(gpio_set_pulls, void(uint gpio, bool up, bool down));
+  MOCK_METHOD2(gpio_set_slew_rate, void(uint gpio, enum gpio_slew_rate slew));
+  MOCK_METHOD1(gpio_xor_mask, void(uint32_t mask));
+  MOCK_METHOD1(gpio_xor_mask64, void(uint64_t mask));
+  MOCK_METHOD2(gpio_xor_mask_n, void(uint n, uint32_t mask));
   MOCK_METHOD1(i2c_deinit, void(i2c_inst_t* i2c));
   MOCK_METHOD2(i2c_get_dreq, uint(i2c_inst_t* i2c, bool is_tx));
   MOCK_METHOD1(i2c_get_hw, i2c_hw_t*(i2c_inst_t* i2c));
@@ -577,228 +799,14 @@ class MockSdkWrapper : public SdkWrapper {
   MOCK_METHOD3(unreset_block_reg_mask_wait_blocking,
                void(io_rw_32* reset, io_ro_32* reset_done, uint32_t mask));
   MOCK_METHOD1(unreset_block_wait, void(uint32_t bits));
-  MOCK_METHOD2(gpio_acknowledge_irq, void(uint gpio, uint32_t event_mask));
-  MOCK_METHOD2(gpio_add_raw_irq_handler,
-               void(uint gpio, irq_handler_t handler));
-  MOCK_METHOD2(gpio_add_raw_irq_handler_masked,
-               void(uint32_t gpio_mask, irq_handler_t handler));
-  MOCK_METHOD2(gpio_add_raw_irq_handler_masked64,
-               void(uint64_t gpio_mask, irq_handler_t handler));
-  MOCK_METHOD3(gpio_add_raw_irq_handler_with_order_priority,
-               void(uint gpio, irq_handler_t handler, uint8_t order_priority));
-  MOCK_METHOD3(gpio_add_raw_irq_handler_with_order_priority_masked,
-               void(uint32_t gpio_mask, irq_handler_t handler,
-                    uint8_t order_priority));
-  MOCK_METHOD3(gpio_add_raw_irq_handler_with_order_priority_masked64,
-               void(uint64_t gpio_mask, irq_handler_t handler,
-                    uint8_t order_priority));
-  MOCK_METHOD2(gpio_assign_to_ns, void(uint gpio, bool ns));
-  MOCK_METHOD1(gpio_clr_mask, void(uint32_t mask));
-  MOCK_METHOD1(gpio_clr_mask64, void(uint64_t mask));
-  MOCK_METHOD2(gpio_clr_mask_n, void(uint n, uint32_t mask));
-  MOCK_METHOD0(gpio_debug_pins_init, void());
-  MOCK_METHOD1(gpio_deinit, void(uint gpio));
-  MOCK_METHOD1(gpio_disable_pulls, void(uint gpio));
-  MOCK_METHOD1(gpio_get, bool(uint gpio));
-  MOCK_METHOD0(gpio_get_all, uint32_t());
-  MOCK_METHOD0(gpio_get_all64, uint64_t());
-  MOCK_METHOD1(gpio_get_dir, uint(uint gpio));
-  MOCK_METHOD1(gpio_get_drive_strength, enum gpio_drive_strength(uint gpio));
-  MOCK_METHOD1(gpio_get_function, gpio_function_t(uint gpio));
-  MOCK_METHOD1(gpio_get_irq_event_mask, uint32_t(uint gpio));
-  MOCK_METHOD1(gpio_get_out_level, bool(uint gpio));
-  MOCK_METHOD1(gpio_get_slew_rate, enum gpio_slew_rate(uint gpio));
-  MOCK_METHOD1(gpio_init, void(uint gpio));
-  MOCK_METHOD1(gpio_init_mask, void(uint gpio_mask));
-  MOCK_METHOD1(gpio_is_dir_out, bool(uint gpio));
-  MOCK_METHOD1(gpio_is_input_hysteresis_enabled, bool(uint gpio));
-  MOCK_METHOD1(gpio_is_pulled_down, bool(uint gpio));
-  MOCK_METHOD1(gpio_is_pulled_up, bool(uint gpio));
-  MOCK_METHOD1(gpio_pull_down, void(uint gpio));
-  MOCK_METHOD1(gpio_pull_up, void(uint gpio));
-  MOCK_METHOD2(gpio_put, void(uint gpio, bool value));
-  MOCK_METHOD1(gpio_put_all, void(uint32_t value));
-  MOCK_METHOD1(gpio_put_all64, void(uint64_t value));
-  MOCK_METHOD2(gpio_put_masked, void(uint32_t mask, uint32_t value));
-  MOCK_METHOD2(gpio_put_masked64, void(uint64_t mask, uint64_t value));
-  MOCK_METHOD3(gpio_put_masked_n, void(uint n, uint32_t mask, uint32_t value));
-  MOCK_METHOD2(gpio_remove_raw_irq_handler,
-               void(uint gpio, irq_handler_t handler));
-  MOCK_METHOD2(gpio_remove_raw_irq_handler_masked,
-               void(uint32_t gpio_mask, irq_handler_t handler));
-  MOCK_METHOD2(gpio_remove_raw_irq_handler_masked64,
-               void(uint64_t gpio_mask, irq_handler_t handler));
-  MOCK_METHOD2(gpio_set_dir, void(uint gpio, bool out));
-  MOCK_METHOD1(gpio_set_dir_all_bits, void(uint32_t values));
-  MOCK_METHOD1(gpio_set_dir_all_bits64, void(uint64_t values));
-  MOCK_METHOD1(gpio_set_dir_in_masked, void(uint32_t mask));
-  MOCK_METHOD1(gpio_set_dir_in_masked64, void(uint64_t mask));
-  MOCK_METHOD2(gpio_set_dir_masked, void(uint32_t mask, uint32_t value));
-  MOCK_METHOD2(gpio_set_dir_masked64, void(uint64_t mask, uint64_t value));
-  MOCK_METHOD1(gpio_set_dir_out_masked, void(uint32_t mask));
-  MOCK_METHOD1(gpio_set_dir_out_masked64, void(uint64_t mask));
-  MOCK_METHOD3(gpio_set_dormant_irq_enabled,
-               void(uint gpio, uint32_t event_mask, bool enabled));
-  MOCK_METHOD2(gpio_set_drive_strength,
-               void(uint gpio, enum gpio_drive_strength drive));
-  MOCK_METHOD2(gpio_set_function, void(uint gpio, gpio_function_t fn));
-  MOCK_METHOD2(gpio_set_function_masked,
-               void(uint32_t gpio_mask, gpio_function_t fn));
-  MOCK_METHOD2(gpio_set_function_masked64,
-               void(uint64_t gpio_mask, gpio_function_t fn));
-  MOCK_METHOD2(gpio_set_inover, void(uint gpio, uint value));
-  MOCK_METHOD2(gpio_set_input_enabled, void(uint gpio, bool enabled));
-  MOCK_METHOD2(gpio_set_input_hysteresis_enabled,
-               void(uint gpio, bool enabled));
-  MOCK_METHOD1(gpio_set_irq_callback, void(gpio_irq_callback_t callback));
-  MOCK_METHOD3(gpio_set_irq_enabled,
-               void(uint gpio, uint32_t event_mask, bool enabled));
-  MOCK_METHOD4(gpio_set_irq_enabled_with_callback,
-               void(uint gpio, uint32_t event_mask, bool enabled,
-                    gpio_irq_callback_t callback));
-  MOCK_METHOD2(gpio_set_irqover, void(uint gpio, uint value));
-  MOCK_METHOD1(gpio_set_mask, void(uint32_t mask));
-  MOCK_METHOD1(gpio_set_mask64, void(uint64_t mask));
-  MOCK_METHOD2(gpio_set_mask_n, void(uint n, uint32_t mask));
-  MOCK_METHOD2(gpio_set_oeover, void(uint gpio, uint value));
-  MOCK_METHOD2(gpio_set_outover, void(uint gpio, uint value));
-  MOCK_METHOD3(gpio_set_pulls, void(uint gpio, bool up, bool down));
-  MOCK_METHOD2(gpio_set_slew_rate, void(uint gpio, enum gpio_slew_rate slew));
-  MOCK_METHOD1(gpio_xor_mask, void(uint32_t mask));
-  MOCK_METHOD1(gpio_xor_mask64, void(uint64_t mask));
-  MOCK_METHOD2(gpio_xor_mask_n, void(uint n, uint32_t mask));
-  MOCK_METHOD4(check_sys_clock_hz,
-               bool(uint32_t freq_hz, uint* vco_freq_out, uint* post_div1_out,
-                    uint* post_div2_out));
-  MOCK_METHOD4(check_sys_clock_khz,
-               bool(uint32_t freq_khz, uint* vco_freq_out, uint* post_div1_out,
-                    uint* post_div2_out));
-  MOCK_METHOD5(clock_configure,
-               bool(clock_handle_t clock, uint32_t src, uint32_t auxsrc,
-                    uint32_t src_freq, uint32_t freq));
-  MOCK_METHOD4(clock_configure_gpin, bool(clock_handle_t clock, uint gpio,
-                                          uint32_t src_freq, uint32_t freq));
-  MOCK_METHOD5(clock_configure_int_divider,
-               void(clock_handle_t clock, uint32_t src, uint32_t auxsrc,
-                    uint32_t src_freq, uint32_t int_divider));
-  MOCK_METHOD4(clock_configure_undivided,
-               void(clock_handle_t clock, uint32_t src, uint32_t auxsrc,
-                    uint32_t src_freq));
-  MOCK_METHOD1(clock_get_hz, uint32_t(clock_handle_t clock));
-  MOCK_METHOD3(clock_gpio_init, void(uint gpio, uint src, float div));
-  MOCK_METHOD4(clock_gpio_init_int_frac,
-               void(uint gpio, uint src, uint32_t div_int, uint8_t div_frac));
-  MOCK_METHOD2(clock_set_reported_hz, void(clock_handle_t clock, uint hz));
-  MOCK_METHOD1(clock_stop, void(clock_handle_t clock));
-  MOCK_METHOD1(clocks_enable_resus, void(resus_callback_t resus_callback));
-  MOCK_METHOD1(frequency_count_khz, uint32_t(uint src));
-  MOCK_METHOD1(frequency_count_mhz, float(uint src));
-  MOCK_METHOD0(set_sys_clock_48mhz, void());
-  MOCK_METHOD2(set_sys_clock_hz, bool(uint32_t freq_hz, bool required));
-  MOCK_METHOD2(set_sys_clock_khz, bool(uint32_t freq_khz, bool required));
-  MOCK_METHOD3(set_sys_clock_pll,
-               void(uint32_t vco_freq, uint post_div1, uint post_div2));
-  MOCK_METHOD2(absolute_time_diff_us,
-               int64_t(absolute_time_t from, absolute_time_t to));
-  MOCK_METHOD2(absolute_time_min,
-               absolute_time_t(absolute_time_t a, absolute_time_t b));
-  MOCK_METHOD4(add_alarm_at,
-               alarm_id_t(absolute_time_t time, alarm_callback_t callback,
-                          void* user_data, bool fire_if_past));
-  MOCK_METHOD4(add_alarm_in_ms,
-               alarm_id_t(uint32_t ms, alarm_callback_t callback,
-                          void* user_data, bool fire_if_past));
-  MOCK_METHOD4(add_alarm_in_us,
-               alarm_id_t(uint64_t us, alarm_callback_t callback,
-                          void* user_data, bool fire_if_past));
-  MOCK_METHOD4(add_repeating_timer_ms,
-               bool(int32_t delay_ms, repeating_timer_callback_t callback,
-                    void* user_data, repeating_timer_t* out));
-  MOCK_METHOD4(add_repeating_timer_us,
-               bool(int64_t delay_us, repeating_timer_callback_t callback,
-                    void* user_data, repeating_timer_t* out));
-  MOCK_METHOD5(alarm_pool_add_alarm_at,
-               alarm_id_t(alarm_pool_t* pool, absolute_time_t time,
-                          alarm_callback_t callback, void* user_data,
-                          bool fire_if_past));
-  MOCK_METHOD4(alarm_pool_add_alarm_at_force_in_context,
-               alarm_id_t(alarm_pool_t* pool, absolute_time_t time,
-                          alarm_callback_t callback, void* user_data));
-  MOCK_METHOD5(alarm_pool_add_alarm_in_ms,
-               alarm_id_t(alarm_pool_t* pool, uint32_t ms,
-                          alarm_callback_t callback, void* user_data,
-                          bool fire_if_past));
-  MOCK_METHOD5(alarm_pool_add_alarm_in_us,
-               alarm_id_t(alarm_pool_t* pool, uint64_t us,
-                          alarm_callback_t callback, void* user_data,
-                          bool fire_if_past));
-  MOCK_METHOD5(alarm_pool_add_repeating_timer_ms,
-               bool(alarm_pool_t* pool, int32_t delay_ms,
-                    repeating_timer_callback_t callback, void* user_data,
-                    repeating_timer_t* out));
-  MOCK_METHOD5(alarm_pool_add_repeating_timer_us,
-               bool(alarm_pool_t* pool, int64_t delay_us,
-                    repeating_timer_callback_t callback, void* user_data,
-                    repeating_timer_t* out));
-  MOCK_METHOD2(alarm_pool_cancel_alarm,
-               bool(alarm_pool_t* pool, alarm_id_t alarm_id));
-  MOCK_METHOD1(alarm_pool_core_num, uint(alarm_pool_t* pool));
-  MOCK_METHOD2(alarm_pool_create,
-               alarm_pool_t*(uint timer_alarm_num, uint max_timers));
-  MOCK_METHOD3(alarm_pool_create_on_timer,
-               alarm_pool_t*(alarm_pool_timer_t* timer, uint timer_alarm_num,
-                             uint max_timers));
-  MOCK_METHOD2(alarm_pool_create_on_timer_with_unused_hardware_alarm,
-               alarm_pool_t*(alarm_pool_timer_t* timer, uint max_timers));
-  MOCK_METHOD1(alarm_pool_create_with_unused_hardware_alarm,
-               alarm_pool_t*(uint max_timers));
-  MOCK_METHOD1(alarm_pool_destroy, void(alarm_pool_t* pool));
-  MOCK_METHOD0(alarm_pool_get_default, alarm_pool_t*());
-  MOCK_METHOD0(alarm_pool_get_default_timer, alarm_pool_timer_t*());
-  MOCK_METHOD1(alarm_pool_hardware_alarm_num, uint(alarm_pool_t* pool));
-  MOCK_METHOD0(alarm_pool_init_default, void());
-  MOCK_METHOD2(alarm_pool_remaining_alarm_time_ms,
-               int32_t(alarm_pool_t* pool, alarm_id_t alarm_id));
-  MOCK_METHOD2(alarm_pool_remaining_alarm_time_us,
-               int64_t(alarm_pool_t* pool, alarm_id_t alarm_id));
-  MOCK_METHOD1(alarm_pool_timer_alarm_num, uint(alarm_pool_t* pool));
-  MOCK_METHOD1(alarm_pool_timer_for_timer_num,
-               alarm_pool_timer_t*(uint timer_num));
-  MOCK_METHOD1(best_effort_wfe_or_timeout,
-               bool(absolute_time_t timeout_timestamp));
-  MOCK_METHOD1(cancel_alarm, bool(alarm_id_t alarm_id));
-  MOCK_METHOD1(cancel_repeating_timer, bool(repeating_timer_t* timer));
-  MOCK_METHOD2(delayed_by_ms,
-               absolute_time_t(const absolute_time_t t, uint32_t ms));
-  MOCK_METHOD2(delayed_by_us,
-               absolute_time_t(const absolute_time_t t, uint64_t us));
-  MOCK_METHOD0(get_absolute_time, absolute_time_t());
-  MOCK_METHOD1(is_at_the_end_of_time, bool(absolute_time_t t));
-  MOCK_METHOD1(is_nil_time, bool(absolute_time_t t));
-  MOCK_METHOD1(make_timeout_time_ms, absolute_time_t(uint32_t ms));
-  MOCK_METHOD1(make_timeout_time_us, absolute_time_t(uint64_t us));
-  MOCK_METHOD1(remaining_alarm_time_ms, int32_t(alarm_id_t alarm_id));
-  MOCK_METHOD1(remaining_alarm_time_us, int64_t(alarm_id_t alarm_id));
-  MOCK_METHOD0(runtime_init_default_alarm_pool, void());
-  MOCK_METHOD1(sleep_ms, void(uint32_t ms));
-  MOCK_METHOD1(sleep_until, void(absolute_time_t target));
-  MOCK_METHOD1(sleep_us, void(uint64_t us));
-  MOCK_METHOD1(to_ms_since_boot, uint32_t(absolute_time_t t));
-  MOCK_METHOD1(us_to_ms, uint32_t(uint64_t us));
-  MOCK_METHOD1(getchar_timeout_us, int(uint32_t timeout_us));
-  MOCK_METHOD1(putchar_raw, int(int c));
-  MOCK_METHOD1(puts_raw, int(const char* s));
-  MOCK_METHOD0(stdio_deinit_all, bool());
-  MOCK_METHOD1(stdio_filter_driver, void(stdio_driver_t* driver));
-  MOCK_METHOD0(stdio_flush, void());
-  MOCK_METHOD3(stdio_get_until, int(char* buf, int len, absolute_time_t until));
-  MOCK_METHOD0(stdio_init_all, bool());
-  MOCK_METHOD4(stdio_put_string,
-               int(const char* s, int len, bool newline, bool cr_translation));
-  MOCK_METHOD2(stdio_set_driver_enabled,
-               void(stdio_driver_t* driver, bool enabled));
-  MOCK_METHOD2(stdio_set_translate_crlf,
-               void(stdio_driver_t* driver, bool translate));
+  MOCK_METHOD0(rtc_disable_alarm, void());
+  MOCK_METHOD0(rtc_enable_alarm, void());
+  MOCK_METHOD1(rtc_get_datetime, bool(datetime_t* t));
+  MOCK_METHOD0(rtc_init, void());
+  MOCK_METHOD0(rtc_running, bool());
+  MOCK_METHOD2(rtc_set_alarm,
+               void(const datetime_t* t, rtc_callback_t user_callback));
+  MOCK_METHOD1(rtc_set_datetime, bool(const datetime_t* t));
 }  // class MockSdkWrapper : public SdkWrapper
 ;
 // GCOVR_EXCL_STOP
