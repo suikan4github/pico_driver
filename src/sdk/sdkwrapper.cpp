@@ -3323,3 +3323,66 @@ bool rpp_driver::SdkWrapper::rtc_set_datetime(const datetime_t* t) {
   return ::rtc_set_datetime(t);
 }
 #endif  //  __has_include(<hardware/rtc.h>) || __has_include(<gmock/gmock.h>)
+
+#if __has_include(<hardware/sha256.h>) || __has_include(<gmock/gmock.h>)
+// --------------------------------------------------
+extern "C" bool sha256_err_not_ready(void);
+bool rpp_driver::SdkWrapper::sha256_err_not_ready(void) {
+  return ::sha256_err_not_ready();
+}
+// --------------------------------------------------
+extern "C" void sha256_err_not_ready_clear(void);
+void rpp_driver::SdkWrapper::sha256_err_not_ready_clear(void) {
+  ::sha256_err_not_ready_clear();
+}
+// --------------------------------------------------
+extern "C" void sha256_get_result(sha256_result_t* out,
+                                  enum sha256_endianness endianness);
+void rpp_driver::SdkWrapper::sha256_get_result(
+    sha256_result_t* out, enum sha256_endianness endianness) {
+  ::sha256_get_result(out, endianness);
+}
+// --------------------------------------------------
+extern "C" bool sha256_is_ready(void);
+bool rpp_driver::SdkWrapper::sha256_is_ready(void) {
+  return ::sha256_is_ready();
+}
+// --------------------------------------------------
+extern "C" bool sha256_is_sum_valid(void);
+bool rpp_driver::SdkWrapper::sha256_is_sum_valid(void) {
+  return ::sha256_is_sum_valid();
+}
+// --------------------------------------------------
+extern "C" void sha256_put_byte(uint8_t b);
+void rpp_driver::SdkWrapper::sha256_put_byte(uint8_t b) {
+  ::sha256_put_byte(b);
+}
+// --------------------------------------------------
+extern "C" void sha256_put_word(uint32_t word);
+void rpp_driver::SdkWrapper::sha256_put_word(uint32_t word) {
+  ::sha256_put_word(word);
+}
+// --------------------------------------------------
+extern "C" void sha256_set_bswap(bool swap);
+void rpp_driver::SdkWrapper::sha256_set_bswap(bool swap) {
+  ::sha256_set_bswap(swap);
+}
+// --------------------------------------------------
+extern "C" void sha256_set_dma_size(uint size_in_bytes);
+void rpp_driver::SdkWrapper::sha256_set_dma_size(uint size_in_bytes) {
+  ::sha256_set_dma_size(size_in_bytes);
+}
+// --------------------------------------------------
+extern "C" void sha256_start(void);
+void rpp_driver::SdkWrapper::sha256_start(void) { ::sha256_start(); }
+// --------------------------------------------------
+extern "C" void sha256_wait_ready_blocking(void);
+void rpp_driver::SdkWrapper::sha256_wait_ready_blocking(void) {
+  ::sha256_wait_ready_blocking();
+}
+// --------------------------------------------------
+extern "C" void sha256_wait_valid_blocking(void);
+void rpp_driver::SdkWrapper::sha256_wait_valid_blocking(void) {
+  ::sha256_wait_valid_blocking();
+}
+#endif  //  __has_include(<hardware/sha256.h>) || __has_include(<gmock/gmock.h>)

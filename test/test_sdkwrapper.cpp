@@ -79,6 +79,7 @@ FAKE_VALUE_FUNC(uint, pwm_gpio_to_channel, uint);
 FAKE_VOID_FUNC(rcp_salt_core0, uint64_t);
 FAKE_VOID_FUNC(reset_block, uint32_t);
 FAKE_VOID_FUNC(rtc_init);
+FAKE_VOID_FUNC(sha256_set_dma_size, uint);
 }
 // The cpp file of the library to test.
 #include "../src/sdk/sdkwrapper.cpp"
@@ -1804,7 +1805,7 @@ TEST(SdkWrapper, powman_set_power_state) {
 
 // -----------------------------------------------------------
 //
-//  hardware_powerman
+//  hardware_pwm
 //  virtual uint pwm_gpio_to_channel(uint gpio);
 //
 // -----------------------------------------------------------
@@ -1849,7 +1850,7 @@ TEST(SdkWrapper, pwm_gpio_to_channel) {
 
 // -----------------------------------------------------------
 //
-//  hardware_powerman
+//  hardware_rcp
 //  virtual void rcp_salt_core0(uint64_t salt);
 //
 // -----------------------------------------------------------
@@ -1888,7 +1889,7 @@ TEST(SdkWrapper, rcp_salt_core0) {
 
 // -----------------------------------------------------------
 //
-//  hardware_powerman
+//  hardware_reset
 //  virtual void reset_block(uint32_t bits);
 //
 // -----------------------------------------------------------
@@ -1927,7 +1928,7 @@ TEST(SdkWrapper, reset_block) {
 
 // -----------------------------------------------------------
 //
-//  hardware_powerman
+//  hardware_rtc
 //  virtual void rtc_init(void);
 //
 // -----------------------------------------------------------
@@ -1945,3 +1946,42 @@ TEST(SdkWrapper, rtc_init) {
   ASSERT_EQ(fff.call_history[0], (void *)rtc_init);
   RESET_FAKE(rtc_init);
 }  // TEST(SdkWrapper, rtc_init)
+
+// -----------------------------------------------------------
+//
+//  hardware_sha256
+//  virtual void sha256_set_dma_size(uint size_in_bytes);
+//
+// -----------------------------------------------------------
+
+TEST(SdkWrapper, sha256_set_dma_size) {
+  std::random_device rng;
+  ::rpp_driver::SdkWrapper pico;
+
+  std::uniform_int_distribution<uint32_t> param_dist(0, UINT_MAX);
+  uint param_array0[] = {param_dist(rng), param_dist(rng)};
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(sha256_set_dma_size);
+
+  // Check whether return values are correctly passed to wrapper.
+  int index = 0;
+  for (auto &&param0 : param_array0) {
+    pico.sha256_set_dma_size(param0);
+    index++;
+  }
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(sha256_set_dma_size_fake.call_count, std::size(param_array0));
+
+  // Check whether parameters were correctly passed from wrapper.
+  index = 0;
+  for (auto &&param0 : param_array0) {
+    // Check the data from test spy. Call order.
+    ASSERT_EQ(fff.call_history[index], (void *)sha256_set_dma_size);
+    // Check the data from test spy. : Parameters.
+    ASSERT_EQ(sha256_set_dma_size_fake.arg0_history[index], param0);
+    index++;
+  }
+  RESET_FAKE(sha256_set_dma_size);
+}  // TEST(SdkWrapper, sha256_set_dma_size)

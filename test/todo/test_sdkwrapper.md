@@ -1,5 +1,9 @@
 # test_SdkWrapper TDD
-
+## SdkWrapper::sha256_set_dma_size()
+- [x] Implement member function . 
+- [x] Create test case to fail. 
+- [x] Make it success. 
+- [x] Remove the duplication. 
 
 ## SdkWrapper::rtc_init()
 - [x] Implement member function . 

@@ -807,6 +807,19 @@ class MockSdkWrapper : public SdkWrapper {
   MOCK_METHOD2(rtc_set_alarm,
                void(const datetime_t* t, rtc_callback_t user_callback));
   MOCK_METHOD1(rtc_set_datetime, bool(const datetime_t* t));
+  MOCK_METHOD0(sha256_err_not_ready, bool());
+  MOCK_METHOD0(sha256_err_not_ready_clear, void());
+  MOCK_METHOD2(sha256_get_result,
+               void(sha256_result_t* out, enum sha256_endianness endianness));
+  MOCK_METHOD0(sha256_is_ready, bool());
+  MOCK_METHOD0(sha256_is_sum_valid, bool());
+  MOCK_METHOD1(sha256_put_byte, void(uint8_t b));
+  MOCK_METHOD1(sha256_put_word, void(uint32_t word));
+  MOCK_METHOD1(sha256_set_bswap, void(bool swap));
+  MOCK_METHOD1(sha256_set_dma_size, void(uint size_in_bytes));
+  MOCK_METHOD0(sha256_start, void());
+  MOCK_METHOD0(sha256_wait_ready_blocking, void());
+  MOCK_METHOD0(sha256_wait_valid_blocking, void());
 }  // class MockSdkWrapper : public SdkWrapper
 ;
 // GCOVR_EXCL_STOP

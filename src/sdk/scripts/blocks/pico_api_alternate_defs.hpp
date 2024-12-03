@@ -36,7 +36,11 @@ enum riscv_vector_num { m, n };
 enum powman_power_domains { o, p };
 /// @brief Alternate definition for Google Test build.
 enum pwm_clkdiv_mode { q, r };
+/// @brief Alternate definition for Google Test build.
+enum sha256_endianness { s, t };
 
+//// @brief Alternate definition for Google Test build.
+typedef int sha256_result_t;
 //// @brief Alternate definition for Google Test build.
 typedef int rtc_callback_t;
 //// @brief Alternate definition for Google Test build.

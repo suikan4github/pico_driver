@@ -82,3 +82,7 @@
 #include <hardware/rtc.h>
 #endif //  __has_include(<hardware/rtc.h>) || __has_include(<gmock/gmock.h>)
 
+#if __has_include(<hardware/sha256.h>) || __has_include(<gmock/gmock.h>)
+#include <hardware/sha256.h>
+#endif //  __has_include(<hardware/sha256.h>) || __has_include(<gmock/gmock.h>)
+

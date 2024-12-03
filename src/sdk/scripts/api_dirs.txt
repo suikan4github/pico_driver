@@ -17,3 +17,4 @@ hardware pwm
 hardware rcp
 hardware resets
 hardware rtc
+hardware sha256

@@ -13373,3 +13373,272 @@ extern "C" bool _weak_rtc_set_datetime(const datetime_t* t)
                 "/alternatename:rtc_set_datetime=_weak_rtc_set_datetime")
 #endif  // x86 or amd64
 #endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool sha256_err_not_ready(void);
+__attribute__((weak)) bool sha256_err_not_ready(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_sha256_err_not_ready(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_sha256 library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_sha256_err_not_ready=__weak_sha256_err_not_ready")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:sha256_err_not_ready=_weak_sha256_err_not_ready")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void sha256_err_not_ready_clear(void);
+__attribute__((weak)) void sha256_err_not_ready_clear(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_sha256_err_not_ready_clear(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_sha256 library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_sha256_err_not_ready_clear=__weak_sha256_err_not_ready_clear")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:sha256_err_not_ready_clear=_weak_sha256_err_not_ready_clear")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void sha256_get_result(sha256_result_t* out,
+                                  enum sha256_endianness endianness);
+__attribute__((weak)) void sha256_get_result(sha256_result_t* out,
+                                             enum sha256_endianness endianness)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_sha256_get_result(sha256_result_t* out,
+                                        enum sha256_endianness endianness)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_sha256 library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_sha256_get_result=__weak_sha256_get_result")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:sha256_get_result=_weak_sha256_get_result")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool sha256_is_ready(void);
+__attribute__((weak)) bool sha256_is_ready(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_sha256_is_ready(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_sha256 library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_sha256_is_ready=__weak_sha256_is_ready")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:sha256_is_ready=_weak_sha256_is_ready")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool sha256_is_sum_valid(void);
+__attribute__((weak)) bool sha256_is_sum_valid(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_sha256_is_sum_valid(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_sha256 library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_sha256_is_sum_valid=__weak_sha256_is_sum_valid")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:sha256_is_sum_valid=_weak_sha256_is_sum_valid")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void sha256_put_byte(uint8_t b);
+__attribute__((weak)) void sha256_put_byte(uint8_t b)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_sha256_put_byte(uint8_t b)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_sha256 library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_sha256_put_byte=__weak_sha256_put_byte")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:sha256_put_byte=_weak_sha256_put_byte")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void sha256_put_word(uint32_t word);
+__attribute__((weak)) void sha256_put_word(uint32_t word)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_sha256_put_word(uint32_t word)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_sha256 library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_sha256_put_word=__weak_sha256_put_word")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:sha256_put_word=_weak_sha256_put_word")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void sha256_set_bswap(bool swap);
+__attribute__((weak)) void sha256_set_bswap(bool swap)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_sha256_set_bswap(bool swap)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_sha256 library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_sha256_set_bswap=__weak_sha256_set_bswap")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:sha256_set_bswap=_weak_sha256_set_bswap")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void sha256_set_dma_size(uint size_in_bytes);
+__attribute__((weak)) void sha256_set_dma_size(uint size_in_bytes)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_sha256_set_dma_size(uint size_in_bytes)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_sha256 library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_sha256_set_dma_size=__weak_sha256_set_dma_size")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:sha256_set_dma_size=_weak_sha256_set_dma_size")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void sha256_start(void);
+__attribute__((weak)) void sha256_start(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_sha256_start(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_sha256 library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_sha256_start=__weak_sha256_start")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:sha256_start=_weak_sha256_start")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void sha256_wait_ready_blocking(void);
+__attribute__((weak)) void sha256_wait_ready_blocking(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_sha256_wait_ready_blocking(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_sha256 library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_sha256_wait_ready_blocking=__weak_sha256_wait_ready_blocking")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:sha256_wait_ready_blocking=_weak_sha256_wait_ready_blocking")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void sha256_wait_valid_blocking(void);
+__attribute__((weak)) void sha256_wait_valid_blocking(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_sha256_wait_valid_blocking(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_sha256 library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_sha256_wait_valid_blocking=__weak_sha256_wait_valid_blocking")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:sha256_wait_valid_blocking=_weak_sha256_wait_valid_blocking")
+#endif  // x86 or amd64
+#endif  // _MSC_VER

@@ -871,6 +871,22 @@ class SdkWrapper {
   virtual bool rtc_set_datetime(const datetime_t* t);
 #endif  //  __has_include(<hardware/rtc.h>) || __has_include(<gmock/gmock.h>)
 
+#if __has_include(<hardware/sha256.h>) || __has_include(<gmock/gmock.h>)
+  virtual bool sha256_err_not_ready(void);
+  virtual void sha256_err_not_ready_clear(void);
+  virtual void sha256_get_result(sha256_result_t* out,
+                                 enum sha256_endianness endianness);
+  virtual bool sha256_is_ready(void);
+  virtual bool sha256_is_sum_valid(void);
+  virtual void sha256_put_byte(uint8_t b);
+  virtual void sha256_put_word(uint32_t word);
+  virtual void sha256_set_bswap(bool swap);
+  virtual void sha256_set_dma_size(uint size_in_bytes);
+  virtual void sha256_start(void);
+  virtual void sha256_wait_ready_blocking(void);
+  virtual void sha256_wait_valid_blocking(void);
+#endif  //  __has_include(<hardware/sha256.h>) || __has_include(<gmock/gmock.h>)
+
 };  // class SdkWrapper
 
 #include "mocksdkwrapper.hpp"
