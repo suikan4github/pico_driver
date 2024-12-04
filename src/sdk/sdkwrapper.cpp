@@ -3386,3 +3386,113 @@ void rpp_driver::SdkWrapper::sha256_wait_valid_blocking(void) {
   ::sha256_wait_valid_blocking();
 }
 #endif  //  __has_include(<hardware/sha256.h>) || __has_include(<gmock/gmock.h>)
+
+#if __has_include(<hardware/spi.h>) || __has_include(<gmock/gmock.h>)
+// --------------------------------------------------
+extern "C" void spi_deinit(spi_inst_t* spi);
+void rpp_driver::SdkWrapper::spi_deinit(spi_inst_t* spi) { ::spi_deinit(spi); }
+// --------------------------------------------------
+extern "C" uint spi_get_baudrate(const spi_inst_t* spi);
+uint rpp_driver::SdkWrapper::spi_get_baudrate(const spi_inst_t* spi) {
+  return ::spi_get_baudrate(spi);
+}
+// --------------------------------------------------
+extern "C" const spi_hw_t* spi_get_const_hw(const spi_inst_t* spi);
+const spi_hw_t* rpp_driver::SdkWrapper::spi_get_const_hw(
+    const spi_inst_t* spi) {
+  return ::spi_get_const_hw(spi);
+}
+// --------------------------------------------------
+extern "C" uint spi_get_dreq(spi_inst_t* spi, bool is_tx);
+uint rpp_driver::SdkWrapper::spi_get_dreq(spi_inst_t* spi, bool is_tx) {
+  return ::spi_get_dreq(spi, is_tx);
+}
+// --------------------------------------------------
+extern "C" spi_hw_t* spi_get_hw(spi_inst_t* spi);
+spi_hw_t* rpp_driver::SdkWrapper::spi_get_hw(spi_inst_t* spi) {
+  return ::spi_get_hw(spi);
+}
+// --------------------------------------------------
+extern "C" uint spi_get_index(const spi_inst_t* spi);
+uint rpp_driver::SdkWrapper::spi_get_index(const spi_inst_t* spi) {
+  return ::spi_get_index(spi);
+}
+// --------------------------------------------------
+extern "C" uint spi_init(spi_inst_t* spi, uint baudrate);
+uint rpp_driver::SdkWrapper::spi_init(spi_inst_t* spi, uint baudrate) {
+  return ::spi_init(spi, baudrate);
+}
+// --------------------------------------------------
+extern "C" bool spi_is_busy(const spi_inst_t* spi);
+bool rpp_driver::SdkWrapper::spi_is_busy(const spi_inst_t* spi) {
+  return ::spi_is_busy(spi);
+}
+// --------------------------------------------------
+extern "C" bool spi_is_readable(const spi_inst_t* spi);
+bool rpp_driver::SdkWrapper::spi_is_readable(const spi_inst_t* spi) {
+  return ::spi_is_readable(spi);
+}
+// --------------------------------------------------
+extern "C" bool spi_is_writable(const spi_inst_t* spi);
+bool rpp_driver::SdkWrapper::spi_is_writable(const spi_inst_t* spi) {
+  return ::spi_is_writable(spi);
+}
+// --------------------------------------------------
+extern "C" int spi_read16_blocking(spi_inst_t* spi, uint16_t repeated_tx_data,
+                                   uint16_t* dst, size_t len);
+int rpp_driver::SdkWrapper::spi_read16_blocking(spi_inst_t* spi,
+                                                uint16_t repeated_tx_data,
+                                                uint16_t* dst, size_t len) {
+  return ::spi_read16_blocking(spi, repeated_tx_data, dst, len);
+}
+// --------------------------------------------------
+extern "C" int spi_read_blocking(spi_inst_t* spi, uint8_t repeated_tx_data,
+                                 uint8_t* dst, size_t len);
+int rpp_driver::SdkWrapper::spi_read_blocking(spi_inst_t* spi,
+                                              uint8_t repeated_tx_data,
+                                              uint8_t* dst, size_t len) {
+  return ::spi_read_blocking(spi, repeated_tx_data, dst, len);
+}
+// --------------------------------------------------
+extern "C" uint spi_set_baudrate(spi_inst_t* spi, uint baudrate);
+uint rpp_driver::SdkWrapper::spi_set_baudrate(spi_inst_t* spi, uint baudrate) {
+  return ::spi_set_baudrate(spi, baudrate);
+}
+// --------------------------------------------------
+extern "C" void spi_set_slave(spi_inst_t* spi, bool slave);
+void rpp_driver::SdkWrapper::spi_set_slave(spi_inst_t* spi, bool slave) {
+  ::spi_set_slave(spi, slave);
+}
+// --------------------------------------------------
+extern "C" int spi_write16_blocking(spi_inst_t* spi, const uint16_t* src,
+                                    size_t len);
+int rpp_driver::SdkWrapper::spi_write16_blocking(spi_inst_t* spi,
+                                                 const uint16_t* src,
+                                                 size_t len) {
+  return ::spi_write16_blocking(spi, src, len);
+}
+// --------------------------------------------------
+extern "C" int spi_write16_read16_blocking(spi_inst_t* spi, const uint16_t* src,
+                                           uint16_t* dst, size_t len);
+int rpp_driver::SdkWrapper::spi_write16_read16_blocking(spi_inst_t* spi,
+                                                        const uint16_t* src,
+                                                        uint16_t* dst,
+                                                        size_t len) {
+  return ::spi_write16_read16_blocking(spi, src, dst, len);
+}
+// --------------------------------------------------
+extern "C" int spi_write_blocking(spi_inst_t* spi, const uint8_t* src,
+                                  size_t len);
+int rpp_driver::SdkWrapper::spi_write_blocking(spi_inst_t* spi,
+                                               const uint8_t* src, size_t len) {
+  return ::spi_write_blocking(spi, src, len);
+}
+// --------------------------------------------------
+extern "C" int spi_write_read_blocking(spi_inst_t* spi, const uint8_t* src,
+                                       uint8_t* dst, size_t len);
+int rpp_driver::SdkWrapper::spi_write_read_blocking(spi_inst_t* spi,
+                                                    const uint8_t* src,
+                                                    uint8_t* dst, size_t len) {
+  return ::spi_write_read_blocking(spi, src, dst, len);
+}
+#endif  //  __has_include(<hardware/spi.h>) || __has_include(<gmock/gmock.h>)

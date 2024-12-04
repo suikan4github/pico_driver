@@ -86,3 +86,7 @@
 #include <hardware/sha256.h>
 #endif //  __has_include(<hardware/sha256.h>) || __has_include(<gmock/gmock.h>)
 
+#if __has_include(<hardware/spi.h>) || __has_include(<gmock/gmock.h>)
+#include <hardware/spi.h>
+#endif //  __has_include(<hardware/spi.h>) || __has_include(<gmock/gmock.h>)
+

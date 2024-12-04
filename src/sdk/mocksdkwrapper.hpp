@@ -820,6 +820,32 @@ class MockSdkWrapper : public SdkWrapper {
   MOCK_METHOD0(sha256_start, void());
   MOCK_METHOD0(sha256_wait_ready_blocking, void());
   MOCK_METHOD0(sha256_wait_valid_blocking, void());
+  MOCK_METHOD1(spi_deinit, void(spi_inst_t* spi));
+  MOCK_METHOD1(spi_get_baudrate, uint(const spi_inst_t* spi));
+  MOCK_METHOD1(spi_get_const_hw, const spi_hw_t*(const spi_inst_t* spi));
+  MOCK_METHOD2(spi_get_dreq, uint(spi_inst_t* spi, bool is_tx));
+  MOCK_METHOD1(spi_get_hw, spi_hw_t*(spi_inst_t* spi));
+  MOCK_METHOD1(spi_get_index, uint(const spi_inst_t* spi));
+  MOCK_METHOD2(spi_init, uint(spi_inst_t* spi, uint baudrate));
+  MOCK_METHOD1(spi_is_busy, bool(const spi_inst_t* spi));
+  MOCK_METHOD1(spi_is_readable, bool(const spi_inst_t* spi));
+  MOCK_METHOD1(spi_is_writable, bool(const spi_inst_t* spi));
+  MOCK_METHOD4(spi_read16_blocking,
+               int(spi_inst_t* spi, uint16_t repeated_tx_data, uint16_t* dst,
+                   size_t len));
+  MOCK_METHOD4(spi_read_blocking, int(spi_inst_t* spi, uint8_t repeated_tx_data,
+                                      uint8_t* dst, size_t len));
+  MOCK_METHOD2(spi_set_baudrate, uint(spi_inst_t* spi, uint baudrate));
+  MOCK_METHOD2(spi_set_slave, void(spi_inst_t* spi, bool slave));
+  MOCK_METHOD3(spi_write16_blocking,
+               int(spi_inst_t* spi, const uint16_t* src, size_t len));
+  MOCK_METHOD4(spi_write16_read16_blocking,
+               int(spi_inst_t* spi, const uint16_t* src, uint16_t* dst,
+                   size_t len));
+  MOCK_METHOD3(spi_write_blocking,
+               int(spi_inst_t* spi, const uint8_t* src, size_t len));
+  MOCK_METHOD4(spi_write_read_blocking, int(spi_inst_t* spi, const uint8_t* src,
+                                            uint8_t* dst, size_t len));
 }  // class MockSdkWrapper : public SdkWrapper
 ;
 // GCOVR_EXCL_STOP

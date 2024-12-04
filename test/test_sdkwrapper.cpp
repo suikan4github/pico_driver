@@ -80,6 +80,7 @@ FAKE_VOID_FUNC(rcp_salt_core0, uint64_t);
 FAKE_VOID_FUNC(reset_block, uint32_t);
 FAKE_VOID_FUNC(rtc_init);
 FAKE_VOID_FUNC(sha256_set_dma_size, uint);
+FAKE_VALUE_FUNC(bool, spi_is_readable, const spi_inst_t *);
 }
 // The cpp file of the library to test.
 #include "../src/sdk/sdkwrapper.cpp"
@@ -538,7 +539,7 @@ TEST(SdkWrapper, i2c_read_blocking) {
   // Check the data from test spy. How many time called?
   ASSERT_EQ(i2c_read_blocking_fake.call_count, 8);
 
-  // Check wether parameters are passed collectly.
+  // Check wether parameters are passed correctly.
   index = 0;
   for (auto &&addrs : addrs_array) {
     for (auto &&bufsize : bufsize_array) {
@@ -593,7 +594,7 @@ TEST(SdkWrapper, i2c_write_blocking) {
   // Check the data from test spy. How many time called?
   ASSERT_EQ(i2c_write_blocking_fake.call_count, 8);
 
-  // Check wether parameters are passed collectly.
+  // Check wether parameters are passed correctly.
   index = 0;
   for (auto &&addrs : addrs_array) {
     for (auto &&bufsize : bufsize_array) {
@@ -647,7 +648,7 @@ TEST(SdkWrapper, pio_sm_set_consecutive_pindirs) {
   // Check the data from test spy. How many time called?
   ASSERT_EQ(pio_sm_set_consecutive_pindirs_fake.call_count, 32);
 
-  // Check wether parameters are passed collectly.
+  // Check wether parameters are passed correctly.
   index = 0;
   for (auto &&pio : pio_array)
     for (auto &&sm : sm_array)
@@ -690,7 +691,7 @@ TEST(SdkWrapper, pio_gpio_init) {
   // Check the data from test spy. How many time called?
   ASSERT_EQ(pio_gpio_init_fake.call_count, 4);
 
-  // Check wether parameters are passed collectly.
+  // Check wether parameters are passed correctly.
   int index = 0;
   for (auto &&pio : pio_array)
     for (auto &&pin : pin_array) {
@@ -723,7 +724,7 @@ TEST(SdkWrapper, sm_config_set_out_pins) {
   // Check the data from test spy. How many time called?
   ASSERT_EQ(sm_config_set_out_pins_fake.call_count, 4);
 
-  // Check wether parameters are passed collectly.
+  // Check wether parameters are passed correctly.
   int index = 0;
   for (auto &&pio : pio_array)
     for (auto &&length : length_array) {
@@ -754,7 +755,7 @@ TEST(SdkWrapper, sm_config_set_in_pin_base) {
   // Check the data from test spy. How many time called?
   ASSERT_EQ(sm_config_set_in_pin_base_fake.call_count, 2);
 
-  // Check wether parameters are passed collectly.
+  // Check wether parameters are passed correctly.
   int index = 0;
   for (auto &&base : base_array) {
     // Check the data from test spy. Call order.
@@ -784,7 +785,7 @@ TEST(SdkWrapper, sm_config_set_in_pin_count) {
   // Check the data from test spy. How many time called?
   ASSERT_EQ(sm_config_set_in_pin_count_fake.call_count, 2);
 
-  // Check wether parameters are passed collectly.
+  // Check wether parameters are passed correctly.
   int index = 0;
   for (auto &&count : count_array) {
     // Check the data from test spy. Call order.
@@ -820,7 +821,7 @@ TEST(SdkWrapper, clock_get_hz) {
   // Check the data from test spy. How many time called?
   ASSERT_EQ(clock_get_hz_fake.call_count, 2);
 
-  // Check wether parameters are passed collectly.
+  // Check wether parameters are passed correctly.
   index = 0;
   for (auto &&clock_handle : clock_handle_array) {
     // Check the data from test spy. Call order.
@@ -848,7 +849,7 @@ TEST(SdkWrapper, sm_config_set_clkdiv) {
   // Check the data from test spy. How many time called?
   ASSERT_EQ(sm_config_set_clkdiv_fake.call_count, 2);
 
-  // Check wether parameters are passed collectly.
+  // Check wether parameters are passed correctly.
   int index = 0;
   for (auto &&div : div_array) {
     // Check the data from test spy. Call order.
@@ -884,7 +885,7 @@ TEST(SdkWrapper, sm_config_set_in_shift) {
   // Check the data from test spy. How many time called?
   ASSERT_EQ(sm_config_set_in_shift_fake.call_count, 8);
 
-  // Check wether parameters are passed collectly.
+  // Check wether parameters are passed correctly.
   int index = 0;
   for (auto &&shift_right : shift_right_array)
     for (auto &&autopush : autopush_array)
@@ -925,7 +926,7 @@ TEST(SdkWrapper, sm_config_set_out_shift) {
   // Check the data from test spy. How many time called?
   ASSERT_EQ(sm_config_set_out_shift_fake.call_count, 8);
 
-  // Check wether parameters are passed collectly.
+  // Check wether parameters are passed correctly.
   int index = 0;
   for (auto &&shift_right : shift_right_array)
     for (auto &&autopull : autopull_array)
@@ -973,7 +974,7 @@ TEST(SdkWrapper, pio_sm_init) {
   // Check the data from test spy. How many time called?
   ASSERT_EQ(pio_sm_init_fake.call_count, 8);
 
-  // Check wether parameters are passed collectly.
+  // Check wether parameters are passed correctly.
   index = 0;
   for (auto &&pio : pio_array)
     for (auto &&sm : sm_array)
@@ -1011,7 +1012,7 @@ TEST(SdkWrapper, pio_sm_put) {
   // Check the data from test spy. How many time called?
   ASSERT_EQ(pio_sm_put_fake.call_count, 8);
 
-  // Check wether parameters are passed collectly.
+  // Check wether parameters are passed correctly.
   int index = 0;
   for (auto &&pio : pio_array)
     for (auto &&sm : sm_array)
@@ -1048,7 +1049,7 @@ TEST(SdkWrapper, pio_sm_put_blocking) {
   // Check the data from test spy. How many time called?
   ASSERT_EQ(pio_sm_put_blocking_fake.call_count, 8);
 
-  // Check wether parameters are passed collectly.
+  // Check wether parameters are passed correctly.
   int index = 0;
   for (auto &&pio : pio_array)
     for (auto &&sm : sm_array)
@@ -1086,7 +1087,7 @@ TEST(SdkWrapper, pio_sm_set_enabled) {
   // Check the data from test spy. How many time called?
   ASSERT_EQ(pio_sm_set_enabled_fake.call_count, 8);
 
-  // Check wether parameters are passed collectly.
+  // Check wether parameters are passed correctly.
   int index = 0;
   for (auto &&pio : pio_array)
     for (auto &&sm : sm_array)
@@ -1128,7 +1129,7 @@ TEST(SdkWrapper, pio_add_program) {
   // Check the data from test spy. How many time called?
   ASSERT_EQ(pio_add_program_fake.call_count, 2);
 
-  // Check wether parameters are passed collectly.
+  // Check wether parameters are passed correctly.
   index = 0;
   for (auto &&pio : pio_array) {
     // Check the data from test spy. Call order.
@@ -1157,7 +1158,7 @@ TEST(SdkWrapper, sm_config_set_jmp_pin) {
   // Check the data from test spy. How many time called?
   ASSERT_EQ(sm_config_set_jmp_pin_fake.call_count, 2);
 
-  // Check wether parameters are passed collectly.
+  // Check wether parameters are passed correctly.
   int index = 0;
   for (auto &&pin : pin_array) {
     // Check the data from test spy. Call order.
@@ -1196,7 +1197,7 @@ TEST(SdkWrapper, pio_sm_get) {
   // Check the data from test spy. How many time called?
   ASSERT_EQ(pio_sm_get_fake.call_count, 4);
 
-  // Check wether parameters are passed collectly.
+  // Check wether parameters are passed correctly.
   index = 0;
   for (auto &&pio : pio_array)
     for (auto &&sm : sm_array) {
@@ -1237,7 +1238,7 @@ TEST(SdkWrapper, pio_sm_get_blocking) {
   // Check the data from test spy. How many time called?
   ASSERT_EQ(pio_sm_get_blocking_fake.call_count, 4);
 
-  // Check wether parameters are passed collectly.
+  // Check wether parameters are passed correctly.
   index = 0;
   for (auto &&pio : pio_array)
     for (auto &&sm : sm_array) {
@@ -1269,7 +1270,7 @@ TEST(SdkWrapper, pio_sm_claim) {
   // Check the data from test spy. How many time called?
   ASSERT_EQ(pio_sm_claim_fake.call_count, 4);
 
-  // Check wether parameters are passed collectly.
+  // Check wether parameters are passed correctly.
   int index = 0;
   for (auto &&pio : pio_array)
     for (auto &&sm : sm_array) {
@@ -1303,7 +1304,7 @@ TEST(SdkWrapper, pio_sm_unclaim) {
   // Check the data from test spy. How many time called?
   ASSERT_EQ(pio_sm_unclaim_fake.call_count, 4);
 
-  // Check wether parameters are passed collectly.
+  // Check wether parameters are passed correctly.
   int index = 0;
   for (auto &&pio : pio_array)
     for (auto &&sm : sm_array) {
@@ -1344,7 +1345,7 @@ TEST(SdkWrapper, pio_claim_unused_sm) {
   // Check the data from test spy. How many time called?
   ASSERT_EQ(pio_claim_unused_sm_fake.call_count, 4);
 
-  // Check wether parameters are passed collectly.
+  // Check wether parameters are passed correctly.
   index = 0;
   for (auto &&pio : pio_array)
     for (auto &&required : required_array) {
@@ -1383,7 +1384,7 @@ TEST(SdkWrapper, pio_sm_is_claimed) {
   // Check the data from test spy. How many time called?
   ASSERT_EQ(pio_sm_is_claimed_fake.call_count, 4);
 
-  // Check wether parameters are passed collectly.
+  // Check wether parameters are passed correctly.
   index = 0;
   for (auto &&pio : pio_array)
     for (auto &&sm : sm_array) {
@@ -1416,7 +1417,7 @@ TEST(SdkWrapper, pio_sm_clear_fifos) {
   // Check the data from test spy. How many time called?
   ASSERT_EQ(pio_sm_clear_fifos_fake.call_count, 4);
 
-  // Check wether parameters are passed collectly.
+  // Check wether parameters are passed correctly.
   int index = 0;
   for (auto &&pio : pio_array)
     for (auto &&sm : sm_array) {
@@ -1985,3 +1986,46 @@ TEST(SdkWrapper, sha256_set_dma_size) {
   }
   RESET_FAKE(sha256_set_dma_size);
 }  // TEST(SdkWrapper, sha256_set_dma_size)
+
+// -----------------------------------------------------------
+//
+//  hardware_pwm
+//  virtual bool spi_is_readable(const spi_inst_t *spi);
+//
+// -----------------------------------------------------------
+
+TEST(SdkWrapper, spi_is_readable) {
+  std::random_device rng;
+  ::rpp_driver::SdkWrapper pico;
+
+  std::uniform_int_distribution<spi_inst_t> param_dist(0, INT_MAX);
+  spi_inst_t param_array0[] = {param_dist(rng), param_dist(rng)};
+
+  bool retval_array[std::size(param_array0)] = {true, false};
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(spi_is_readable);
+
+  SET_RETURN_SEQ(spi_is_readable, retval_array, std::size(retval_array));
+
+  // Check whether return values are correctly passed to wrapper.
+  int index = 0;
+  for (auto &&param0 : param_array0) {
+    ASSERT_EQ(pico.spi_is_readable(&param_array0[index]), retval_array[index]);
+    index++;
+  }
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(spi_is_readable_fake.call_count, std::size(retval_array));
+
+  // Check whether parameters were correctly passed from wrapper.
+  index = 0;
+  for (auto &&param0 : param_array0) {
+    // Check the data from test spy. Call order.
+    ASSERT_EQ(fff.call_history[index], (void *)spi_is_readable);
+    // Check the data from test spy. : Parameters.
+    ASSERT_EQ(spi_is_readable_fake.arg0_history[index], &param_array0[index]);
+    index++;
+  }
+  RESET_FAKE(spi_is_readable);
+}  // TEST(SdkWrapper, spi_is_readable)

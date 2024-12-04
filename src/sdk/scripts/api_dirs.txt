@@ -18,3 +18,4 @@ hardware rcp
 hardware resets
 hardware rtc
 hardware sha256
+hardware spi

@@ -887,6 +887,33 @@ class SdkWrapper {
   virtual void sha256_wait_valid_blocking(void);
 #endif  //  __has_include(<hardware/sha256.h>) || __has_include(<gmock/gmock.h>)
 
+#if __has_include(<hardware/spi.h>) || __has_include(<gmock/gmock.h>)
+  virtual void spi_deinit(spi_inst_t* spi);
+  virtual uint spi_get_baudrate(const spi_inst_t* spi);
+  virtual const spi_hw_t* spi_get_const_hw(const spi_inst_t* spi);
+  virtual uint spi_get_dreq(spi_inst_t* spi, bool is_tx);
+  virtual spi_hw_t* spi_get_hw(spi_inst_t* spi);
+  virtual uint spi_get_index(const spi_inst_t* spi);
+  virtual uint spi_init(spi_inst_t* spi, uint baudrate);
+  virtual bool spi_is_busy(const spi_inst_t* spi);
+  virtual bool spi_is_readable(const spi_inst_t* spi);
+  virtual bool spi_is_writable(const spi_inst_t* spi);
+  virtual int spi_read16_blocking(spi_inst_t* spi, uint16_t repeated_tx_data,
+                                  uint16_t* dst, size_t len);
+  virtual int spi_read_blocking(spi_inst_t* spi, uint8_t repeated_tx_data,
+                                uint8_t* dst, size_t len);
+  virtual uint spi_set_baudrate(spi_inst_t* spi, uint baudrate);
+  virtual void spi_set_slave(spi_inst_t* spi, bool slave);
+  virtual int spi_write16_blocking(spi_inst_t* spi, const uint16_t* src,
+                                   size_t len);
+  virtual int spi_write16_read16_blocking(spi_inst_t* spi, const uint16_t* src,
+                                          uint16_t* dst, size_t len);
+  virtual int spi_write_blocking(spi_inst_t* spi, const uint8_t* src,
+                                 size_t len);
+  virtual int spi_write_read_blocking(spi_inst_t* spi, const uint8_t* src,
+                                      uint8_t* dst, size_t len);
+#endif  //  __has_include(<hardware/spi.h>) || __has_include(<gmock/gmock.h>)
+
 };  // class SdkWrapper
 
 #include "mocksdkwrapper.hpp"

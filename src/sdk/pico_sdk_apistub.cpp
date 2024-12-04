@@ -13642,3 +13642,414 @@ extern "C" void _weak_sha256_wait_valid_blocking(void)
     "/alternatename:sha256_wait_valid_blocking=_weak_sha256_wait_valid_blocking")
 #endif  // x86 or amd64
 #endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void spi_deinit(spi_inst_t* spi);
+__attribute__((weak)) void spi_deinit(spi_inst_t* spi)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_spi_deinit(spi_inst_t* spi)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_spi library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_spi_deinit=__weak_spi_deinit")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:spi_deinit=_weak_spi_deinit")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint spi_get_baudrate(const spi_inst_t* spi);
+__attribute__((weak)) uint spi_get_baudrate(const spi_inst_t* spi)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint _weak_spi_get_baudrate(const spi_inst_t* spi)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_spi library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_spi_get_baudrate=__weak_spi_get_baudrate")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:spi_get_baudrate=_weak_spi_get_baudrate")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" const spi_hw_t* spi_get_const_hw(const spi_inst_t* spi);
+__attribute__((weak)) const spi_hw_t* spi_get_const_hw(const spi_inst_t* spi)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" const spi_hw_t* _weak_spi_get_const_hw(const spi_inst_t* spi)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_spi library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_spi_get_const_hw=__weak_spi_get_const_hw")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:spi_get_const_hw=_weak_spi_get_const_hw")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint spi_get_dreq(spi_inst_t* spi, bool is_tx);
+__attribute__((weak)) uint spi_get_dreq(spi_inst_t* spi, bool is_tx)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint _weak_spi_get_dreq(spi_inst_t* spi, bool is_tx)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_spi library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_spi_get_dreq=__weak_spi_get_dreq")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:spi_get_dreq=_weak_spi_get_dreq")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" spi_hw_t* spi_get_hw(spi_inst_t* spi);
+__attribute__((weak)) spi_hw_t* spi_get_hw(spi_inst_t* spi)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" spi_hw_t* _weak_spi_get_hw(spi_inst_t* spi)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_spi library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_spi_get_hw=__weak_spi_get_hw")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:spi_get_hw=_weak_spi_get_hw")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint spi_get_index(const spi_inst_t* spi);
+__attribute__((weak)) uint spi_get_index(const spi_inst_t* spi)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint _weak_spi_get_index(const spi_inst_t* spi)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_spi library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_spi_get_index=__weak_spi_get_index")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:spi_get_index=_weak_spi_get_index")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint spi_init(spi_inst_t* spi, uint baudrate);
+__attribute__((weak)) uint spi_init(spi_inst_t* spi, uint baudrate)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint _weak_spi_init(spi_inst_t* spi, uint baudrate)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_spi library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_spi_init=__weak_spi_init")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:spi_init=_weak_spi_init")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool spi_is_busy(const spi_inst_t* spi);
+__attribute__((weak)) bool spi_is_busy(const spi_inst_t* spi)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_spi_is_busy(const spi_inst_t* spi)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_spi library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_spi_is_busy=__weak_spi_is_busy")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:spi_is_busy=_weak_spi_is_busy")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool spi_is_readable(const spi_inst_t* spi);
+__attribute__((weak)) bool spi_is_readable(const spi_inst_t* spi)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_spi_is_readable(const spi_inst_t* spi)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_spi library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_spi_is_readable=__weak_spi_is_readable")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:spi_is_readable=_weak_spi_is_readable")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool spi_is_writable(const spi_inst_t* spi);
+__attribute__((weak)) bool spi_is_writable(const spi_inst_t* spi)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_spi_is_writable(const spi_inst_t* spi)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_spi library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_spi_is_writable=__weak_spi_is_writable")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:spi_is_writable=_weak_spi_is_writable")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" int spi_read16_blocking(spi_inst_t* spi, uint16_t repeated_tx_data,
+                                   uint16_t* dst, size_t len);
+__attribute__((weak)) int spi_read16_blocking(spi_inst_t* spi,
+                                              uint16_t repeated_tx_data,
+                                              uint16_t* dst, size_t len)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" int _weak_spi_read16_blocking(spi_inst_t* spi,
+                                         uint16_t repeated_tx_data,
+                                         uint16_t* dst, size_t len)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_spi library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_spi_read16_blocking=__weak_spi_read16_blocking")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:spi_read16_blocking=_weak_spi_read16_blocking")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" int spi_read_blocking(spi_inst_t* spi, uint8_t repeated_tx_data,
+                                 uint8_t* dst, size_t len);
+__attribute__((weak)) int spi_read_blocking(spi_inst_t* spi,
+                                            uint8_t repeated_tx_data,
+                                            uint8_t* dst, size_t len)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" int _weak_spi_read_blocking(spi_inst_t* spi,
+                                       uint8_t repeated_tx_data, uint8_t* dst,
+                                       size_t len)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_spi library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_spi_read_blocking=__weak_spi_read_blocking")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:spi_read_blocking=_weak_spi_read_blocking")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint spi_set_baudrate(spi_inst_t* spi, uint baudrate);
+__attribute__((weak)) uint spi_set_baudrate(spi_inst_t* spi, uint baudrate)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint _weak_spi_set_baudrate(spi_inst_t* spi, uint baudrate)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_spi library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_spi_set_baudrate=__weak_spi_set_baudrate")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:spi_set_baudrate=_weak_spi_set_baudrate")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void spi_set_slave(spi_inst_t* spi, bool slave);
+__attribute__((weak)) void spi_set_slave(spi_inst_t* spi, bool slave)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_spi_set_slave(spi_inst_t* spi, bool slave)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_spi library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_spi_set_slave=__weak_spi_set_slave")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:spi_set_slave=_weak_spi_set_slave")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" int spi_write16_blocking(spi_inst_t* spi, const uint16_t* src,
+                                    size_t len);
+__attribute__((weak)) int spi_write16_blocking(spi_inst_t* spi,
+                                               const uint16_t* src, size_t len)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" int _weak_spi_write16_blocking(spi_inst_t* spi, const uint16_t* src,
+                                          size_t len)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_spi library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_spi_write16_blocking=__weak_spi_write16_blocking")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:spi_write16_blocking=_weak_spi_write16_blocking")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" int spi_write16_read16_blocking(spi_inst_t* spi, const uint16_t* src,
+                                           uint16_t* dst, size_t len);
+__attribute__((weak)) int spi_write16_read16_blocking(spi_inst_t* spi,
+                                                      const uint16_t* src,
+                                                      uint16_t* dst, size_t len)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" int _weak_spi_write16_read16_blocking(spi_inst_t* spi,
+                                                 const uint16_t* src,
+                                                 uint16_t* dst, size_t len)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_spi library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_spi_write16_read16_blocking=__weak_spi_write16_read16_blocking")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:spi_write16_read16_blocking=_weak_spi_write16_read16_blocking")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" int spi_write_blocking(spi_inst_t* spi, const uint8_t* src,
+                                  size_t len);
+__attribute__((weak)) int spi_write_blocking(spi_inst_t* spi,
+                                             const uint8_t* src, size_t len)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" int _weak_spi_write_blocking(spi_inst_t* spi, const uint8_t* src,
+                                        size_t len)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_spi library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_spi_write_blocking=__weak_spi_write_blocking")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:spi_write_blocking=_weak_spi_write_blocking")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" int spi_write_read_blocking(spi_inst_t* spi, const uint8_t* src,
+                                       uint8_t* dst, size_t len);
+__attribute__((weak)) int spi_write_read_blocking(spi_inst_t* spi,
+                                                  const uint8_t* src,
+                                                  uint8_t* dst, size_t len)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" int _weak_spi_write_read_blocking(spi_inst_t* spi,
+                                             const uint8_t* src, uint8_t* dst,
+                                             size_t len)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_spi library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_spi_write_read_blocking=__weak_spi_write_read_blocking")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:spi_write_read_blocking=_weak_spi_write_read_blocking")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
