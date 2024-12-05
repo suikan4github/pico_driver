@@ -14053,3 +14053,394 @@ extern "C" int _weak_spi_write_read_blocking(spi_inst_t* spi,
     "/alternatename:spi_write_read_blocking=_weak_spi_write_read_blocking")
 #endif  // x86 or amd64
 #endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void __dmb(void);
+__attribute__((weak)) void __dmb(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak___dmb(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:___dmb=__weak___dmb")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:__dmb=_weak___dmb")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void __dsb(void);
+__attribute__((weak)) void __dsb(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak___dsb(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:___dsb=__weak___dsb")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:__dsb=_weak___dsb")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void __isb(void);
+__attribute__((weak)) void __isb(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak___isb(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:___isb=__weak___isb")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:__isb=_weak___isb")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void __mem_fence_acquire(void);
+__attribute__((weak)) void __mem_fence_acquire(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak___mem_fence_acquire(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:___mem_fence_acquire=__weak___mem_fence_acquire")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:__mem_fence_acquire=_weak___mem_fence_acquire")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void __mem_fence_release(void);
+__attribute__((weak)) void __mem_fence_release(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak___mem_fence_release(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:___mem_fence_release=__weak___mem_fence_release")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:__mem_fence_release=_weak___mem_fence_release")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void __nop(void);
+__attribute__((weak)) void __nop(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak___nop(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:___nop=__weak___nop")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:__nop=_weak___nop")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void __sev(void);
+__attribute__((weak)) void __sev(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak___sev(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:___sev=__weak___sev")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:__sev=_weak___sev")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void __wfe(void);
+__attribute__((weak)) void __wfe(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak___wfe(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:___wfe=__weak___wfe")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:__wfe=_weak___wfe")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void __wfi(void);
+__attribute__((weak)) void __wfi(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak___wfi(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:___wfi=__weak___wfi")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:__wfi=_weak___wfi")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint next_striped_spin_lock_num(void);
+__attribute__((weak)) uint next_striped_spin_lock_num(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint _weak_next_striped_spin_lock_num(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_next_striped_spin_lock_num=__weak_next_striped_spin_lock_num")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:next_striped_spin_lock_num=_weak_next_striped_spin_lock_num")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void restore_interrupts(uint32_t status);
+__attribute__((weak)) void restore_interrupts(uint32_t status)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_restore_interrupts(uint32_t status)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_restore_interrupts=__weak_restore_interrupts")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:restore_interrupts=_weak_restore_interrupts")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void restore_interrupts_from_disabled(uint32_t status);
+__attribute__((weak)) void restore_interrupts_from_disabled(uint32_t status)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_restore_interrupts_from_disabled(uint32_t status)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_restore_interrupts_from_disabled=__weak_restore_interrupts_from_disabled")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:restore_interrupts_from_disabled=_weak_restore_interrupts_from_disabled")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint32_t save_and_disable_interrupts(void);
+__attribute__((weak)) uint32_t save_and_disable_interrupts(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint32_t _weak_save_and_disable_interrupts(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_save_and_disable_interrupts=__weak_save_and_disable_interrupts")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:save_and_disable_interrupts=_weak_save_and_disable_interrupts")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void spin_lock_claim(uint lock_num);
+__attribute__((weak)) void spin_lock_claim(uint lock_num)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_spin_lock_claim(uint lock_num)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_spin_lock_claim=__weak_spin_lock_claim")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:spin_lock_claim=_weak_spin_lock_claim")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void spin_lock_claim_mask(uint32_t lock_num_mask);
+__attribute__((weak)) void spin_lock_claim_mask(uint32_t lock_num_mask)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_spin_lock_claim_mask(uint32_t lock_num_mask)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_spin_lock_claim_mask=__weak_spin_lock_claim_mask")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:spin_lock_claim_mask=_weak_spin_lock_claim_mask")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" int spin_lock_claim_unused(bool required);
+__attribute__((weak)) int spin_lock_claim_unused(bool required)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" int _weak_spin_lock_claim_unused(bool required)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_spin_lock_claim_unused=__weak_spin_lock_claim_unused")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:spin_lock_claim_unused=_weak_spin_lock_claim_unused")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool spin_lock_is_claimed(uint lock_num);
+__attribute__((weak)) bool spin_lock_is_claimed(uint lock_num)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_spin_lock_is_claimed(uint lock_num)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_spin_lock_is_claimed=__weak_spin_lock_is_claimed")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:spin_lock_is_claimed=_weak_spin_lock_is_claimed")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void spin_lock_unclaim(uint lock_num);
+__attribute__((weak)) void spin_lock_unclaim(uint lock_num)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_spin_lock_unclaim(uint lock_num)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_spin_lock_unclaim=__weak_spin_lock_unclaim")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:spin_lock_unclaim=_weak_spin_lock_unclaim")
+#endif  // x86 or amd64
+#endif  // _MSC_VER

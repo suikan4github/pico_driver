@@ -81,6 +81,7 @@ FAKE_VOID_FUNC(reset_block, uint32_t);
 FAKE_VOID_FUNC(rtc_init);
 FAKE_VOID_FUNC(sha256_set_dma_size, uint);
 FAKE_VALUE_FUNC(bool, spi_is_readable, const spi_inst_t *);
+FAKE_VALUE_FUNC(bool, spin_lock_is_claimed, uint);
 }
 // The cpp file of the library to test.
 #include "../src/sdk/sdkwrapper.cpp"
@@ -2029,3 +2030,45 @@ TEST(SdkWrapper, spi_is_readable) {
   }
   RESET_FAKE(spi_is_readable);
 }  // TEST(SdkWrapper, spi_is_readable)
+
+// -----------------------------------------------------------
+//
+//  hardware_sync
+// virtual bool spin_lock_is_claimed(uint lock_num);
+//
+// -----------------------------------------------------------
+
+TEST(SdkWrapper, spin_lock_is_claimed) {
+  std::random_device rng;
+  ::rpp_driver::SdkWrapper pico;
+  // uniform distribution
+  std::uniform_int_distribution<uint> param_dist(0, UINT_MAX);
+  uint param_array0[] = {param_dist(rng), param_dist(rng)};
+  bool retval_array[std::size(param_array0)] = {true, false};
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(spin_lock_is_claimed);
+
+  SET_RETURN_SEQ(spin_lock_is_claimed, retval_array, std::size(retval_array));
+
+  // Check whether return values are correctly passed to wrapper.
+  int index = 0;
+  for (auto &&param0 : param_array0) {
+    ASSERT_EQ(pico.spin_lock_is_claimed(param0), retval_array[index]);
+    index++;
+  }
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(spin_lock_is_claimed_fake.call_count, std::size(retval_array));
+
+  // Check whether parameters were correctly passed from wrapper.
+  index = 0;
+  for (auto &&param0 : param_array0) {
+    // Check the data from test spy. Call order.
+    ASSERT_EQ(fff.call_history[index], (void *)spin_lock_is_claimed);
+    // Check the data from test spy. : Parameters.
+    ASSERT_EQ(spin_lock_is_claimed_fake.arg0_history[index], param0);
+    index++;
+  }
+  RESET_FAKE(spin_lock_is_claimed);
+}  // TEST(SdkWrapper, irq_is_enabled)

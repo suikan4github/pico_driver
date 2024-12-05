@@ -914,6 +914,27 @@ class SdkWrapper {
                                       uint8_t* dst, size_t len);
 #endif  //  __has_include(<hardware/spi.h>) || __has_include(<gmock/gmock.h>)
 
+#if __has_include(<hardware/sync.h>) || __has_include(<gmock/gmock.h>)
+  virtual void __dmb(void);
+  virtual void __dsb(void);
+  virtual void __isb(void);
+  virtual void __mem_fence_acquire(void);
+  virtual void __mem_fence_release(void);
+  virtual void __nop(void);
+  virtual void __sev(void);
+  virtual void __wfe(void);
+  virtual void __wfi(void);
+  virtual uint next_striped_spin_lock_num(void);
+  virtual void restore_interrupts(uint32_t status);
+  virtual void restore_interrupts_from_disabled(uint32_t status);
+  virtual uint32_t save_and_disable_interrupts(void);
+  virtual void spin_lock_claim(uint lock_num);
+  virtual void spin_lock_claim_mask(uint32_t lock_num_mask);
+  virtual int spin_lock_claim_unused(bool required);
+  virtual bool spin_lock_is_claimed(uint lock_num);
+  virtual void spin_lock_unclaim(uint lock_num);
+#endif  //  __has_include(<hardware/sync.h>) || __has_include(<gmock/gmock.h>)
+
 };  // class SdkWrapper
 
 #include "mocksdkwrapper.hpp"

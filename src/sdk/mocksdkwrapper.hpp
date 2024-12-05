@@ -846,6 +846,24 @@ class MockSdkWrapper : public SdkWrapper {
                int(spi_inst_t* spi, const uint8_t* src, size_t len));
   MOCK_METHOD4(spi_write_read_blocking, int(spi_inst_t* spi, const uint8_t* src,
                                             uint8_t* dst, size_t len));
+  MOCK_METHOD0(__dmb, void());
+  MOCK_METHOD0(__dsb, void());
+  MOCK_METHOD0(__isb, void());
+  MOCK_METHOD0(__mem_fence_acquire, void());
+  MOCK_METHOD0(__mem_fence_release, void());
+  MOCK_METHOD0(__nop, void());
+  MOCK_METHOD0(__sev, void());
+  MOCK_METHOD0(__wfe, void());
+  MOCK_METHOD0(__wfi, void());
+  MOCK_METHOD0(next_striped_spin_lock_num, uint());
+  MOCK_METHOD1(restore_interrupts, void(uint32_t status));
+  MOCK_METHOD1(restore_interrupts_from_disabled, void(uint32_t status));
+  MOCK_METHOD0(save_and_disable_interrupts, uint32_t());
+  MOCK_METHOD1(spin_lock_claim, void(uint lock_num));
+  MOCK_METHOD1(spin_lock_claim_mask, void(uint32_t lock_num_mask));
+  MOCK_METHOD1(spin_lock_claim_unused, int(bool required));
+  MOCK_METHOD1(spin_lock_is_claimed, bool(uint lock_num));
+  MOCK_METHOD1(spin_lock_unclaim, void(uint lock_num));
 }  // class MockSdkWrapper : public SdkWrapper
 ;
 // GCOVR_EXCL_STOP

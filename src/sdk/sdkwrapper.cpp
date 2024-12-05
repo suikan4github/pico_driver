@@ -3496,3 +3496,82 @@ int rpp_driver::SdkWrapper::spi_write_read_blocking(spi_inst_t* spi,
   return ::spi_write_read_blocking(spi, src, dst, len);
 }
 #endif  //  __has_include(<hardware/spi.h>) || __has_include(<gmock/gmock.h>)
+
+#if __has_include(<hardware/sync.h>) || __has_include(<gmock/gmock.h>)
+// --------------------------------------------------
+extern "C" void __dmb(void);
+void rpp_driver::SdkWrapper::__dmb(void) { ::__dmb(); }
+// --------------------------------------------------
+extern "C" void __dsb(void);
+void rpp_driver::SdkWrapper::__dsb(void) { ::__dsb(); }
+// --------------------------------------------------
+extern "C" void __isb(void);
+void rpp_driver::SdkWrapper::__isb(void) { ::__isb(); }
+// --------------------------------------------------
+extern "C" void __mem_fence_acquire(void);
+void rpp_driver::SdkWrapper::__mem_fence_acquire(void) {
+  ::__mem_fence_acquire();
+}
+// --------------------------------------------------
+extern "C" void __mem_fence_release(void);
+void rpp_driver::SdkWrapper::__mem_fence_release(void) {
+  ::__mem_fence_release();
+}
+// --------------------------------------------------
+extern "C" void __nop(void);
+void rpp_driver::SdkWrapper::__nop(void) { ::__nop(); }
+// --------------------------------------------------
+extern "C" void __sev(void);
+void rpp_driver::SdkWrapper::__sev(void) { ::__sev(); }
+// --------------------------------------------------
+extern "C" void __wfe(void);
+void rpp_driver::SdkWrapper::__wfe(void) { ::__wfe(); }
+// --------------------------------------------------
+extern "C" void __wfi(void);
+void rpp_driver::SdkWrapper::__wfi(void) { ::__wfi(); }
+// --------------------------------------------------
+extern "C" uint next_striped_spin_lock_num(void);
+uint rpp_driver::SdkWrapper::next_striped_spin_lock_num(void) {
+  return ::next_striped_spin_lock_num();
+}
+// --------------------------------------------------
+extern "C" void restore_interrupts(uint32_t status);
+void rpp_driver::SdkWrapper::restore_interrupts(uint32_t status) {
+  ::restore_interrupts(status);
+}
+// --------------------------------------------------
+extern "C" void restore_interrupts_from_disabled(uint32_t status);
+void rpp_driver::SdkWrapper::restore_interrupts_from_disabled(uint32_t status) {
+  ::restore_interrupts_from_disabled(status);
+}
+// --------------------------------------------------
+extern "C" uint32_t save_and_disable_interrupts(void);
+uint32_t rpp_driver::SdkWrapper::save_and_disable_interrupts(void) {
+  return ::save_and_disable_interrupts();
+}
+// --------------------------------------------------
+extern "C" void spin_lock_claim(uint lock_num);
+void rpp_driver::SdkWrapper::spin_lock_claim(uint lock_num) {
+  ::spin_lock_claim(lock_num);
+}
+// --------------------------------------------------
+extern "C" void spin_lock_claim_mask(uint32_t lock_num_mask);
+void rpp_driver::SdkWrapper::spin_lock_claim_mask(uint32_t lock_num_mask) {
+  ::spin_lock_claim_mask(lock_num_mask);
+}
+// --------------------------------------------------
+extern "C" int spin_lock_claim_unused(bool required);
+int rpp_driver::SdkWrapper::spin_lock_claim_unused(bool required) {
+  return ::spin_lock_claim_unused(required);
+}
+// --------------------------------------------------
+extern "C" bool spin_lock_is_claimed(uint lock_num);
+bool rpp_driver::SdkWrapper::spin_lock_is_claimed(uint lock_num) {
+  return ::spin_lock_is_claimed(lock_num);
+}
+// --------------------------------------------------
+extern "C" void spin_lock_unclaim(uint lock_num);
+void rpp_driver::SdkWrapper::spin_lock_unclaim(uint lock_num) {
+  ::spin_lock_unclaim(lock_num);
+}
+#endif  //  __has_include(<hardware/sync.h>) || __has_include(<gmock/gmock.h>)
