@@ -95,3 +95,7 @@
 #if __has_include(<hardware/sync.h>) || __has_include(<gmock/gmock.h>)
 #include <hardware/sync.h>
 #endif  //  __has_include(<hardware/sync.h>) || __has_include(<gmock/gmock.h>)
+
+#if __has_include(<hardware/ticks.h>) || __has_include(<gmock/gmock.h>)
+#include <hardware/ticks.h>
+#endif  //  __has_include(<hardware/ticks.h>) || __has_include(<gmock/gmock.h>)

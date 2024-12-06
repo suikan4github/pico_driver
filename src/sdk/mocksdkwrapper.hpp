@@ -864,6 +864,9 @@ class MockSdkWrapper : public SdkWrapper {
   MOCK_METHOD1(spin_lock_claim_unused, int(bool required));
   MOCK_METHOD1(spin_lock_is_claimed, bool(uint lock_num));
   MOCK_METHOD1(spin_lock_unclaim, void(uint lock_num));
+  MOCK_METHOD1(tick_is_running, bool(tick_gen_num_t tick));
+  MOCK_METHOD2(tick_start, void(tick_gen_num_t tick, uint cycles));
+  MOCK_METHOD1(tick_stop, void(tick_gen_num_t tick));
 }  // class MockSdkWrapper : public SdkWrapper
 ;
 // GCOVR_EXCL_STOP

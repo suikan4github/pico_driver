@@ -1,4 +1,9 @@
 # test_SdkWrapper TDD
+## SdkWrapper::tick_is_running()
+- [x] Implement member function . 
+- [x] Create test case to fail. 
+- [x] Make it success. 
+- [x] Remove the duplication. 
 
 ## SdkWrapper::spin_lock_is_claimed()
 - [x] Implement member function . 

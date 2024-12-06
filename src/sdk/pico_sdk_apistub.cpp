@@ -14444,3 +14444,64 @@ extern "C" void _weak_spin_lock_unclaim(uint lock_num)
                 "/alternatename:spin_lock_unclaim=_weak_spin_lock_unclaim")
 #endif  // x86 or amd64
 #endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool tick_is_running(tick_gen_num_t tick);
+__attribute__((weak)) bool tick_is_running(tick_gen_num_t tick)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_tick_is_running(tick_gen_num_t tick)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_ticks library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_tick_is_running=__weak_tick_is_running")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:tick_is_running=_weak_tick_is_running")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void tick_start(tick_gen_num_t tick, uint cycles);
+__attribute__((weak)) void tick_start(tick_gen_num_t tick, uint cycles)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_tick_start(tick_gen_num_t tick, uint cycles)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_ticks library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_tick_start=__weak_tick_start")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:tick_start=_weak_tick_start")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void tick_stop(tick_gen_num_t tick);
+__attribute__((weak)) void tick_stop(tick_gen_num_t tick)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_tick_stop(tick_gen_num_t tick)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_ticks library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_tick_stop=__weak_tick_stop")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:tick_stop=_weak_tick_stop")
+#endif  // x86 or amd64
+#endif  // _MSC_VER

@@ -40,6 +40,8 @@ enum pwm_clkdiv_mode { q, r };
 enum sha256_endianness { s, t };
 
 //// @brief Alternate definition for Google Test build.
+typedef int tick_gen_num_t;
+//// @brief Alternate definition for Google Test build.
 typedef int spi_inst_t;
 //// @brief Alternate definition for Google Test build.
 typedef int spi_hw_t;

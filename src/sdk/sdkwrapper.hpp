@@ -935,6 +935,12 @@ class SdkWrapper {
   virtual void spin_lock_unclaim(uint lock_num);
 #endif  //  __has_include(<hardware/sync.h>) || __has_include(<gmock/gmock.h>)
 
+#if __has_include(<hardware/ticks.h>) || __has_include(<gmock/gmock.h>)
+  virtual bool tick_is_running(tick_gen_num_t tick);
+  virtual void tick_start(tick_gen_num_t tick, uint cycles);
+  virtual void tick_stop(tick_gen_num_t tick);
+#endif  //  __has_include(<hardware/ticks.h>) || __has_include(<gmock/gmock.h>)
+
 };  // class SdkWrapper
 
 #include "mocksdkwrapper.hpp"

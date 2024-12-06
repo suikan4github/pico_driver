@@ -3575,3 +3575,21 @@ void rpp_driver::SdkWrapper::spin_lock_unclaim(uint lock_num) {
   ::spin_lock_unclaim(lock_num);
 }
 #endif  //  __has_include(<hardware/sync.h>) || __has_include(<gmock/gmock.h>)
+
+#if __has_include(<hardware/ticks.h>) || __has_include(<gmock/gmock.h>)
+// --------------------------------------------------
+extern "C" bool tick_is_running(tick_gen_num_t tick);
+bool rpp_driver::SdkWrapper::tick_is_running(tick_gen_num_t tick) {
+  return ::tick_is_running(tick);
+}
+// --------------------------------------------------
+extern "C" void tick_start(tick_gen_num_t tick, uint cycles);
+void rpp_driver::SdkWrapper::tick_start(tick_gen_num_t tick, uint cycles) {
+  ::tick_start(tick, cycles);
+}
+// --------------------------------------------------
+extern "C" void tick_stop(tick_gen_num_t tick);
+void rpp_driver::SdkWrapper::tick_stop(tick_gen_num_t tick) {
+  ::tick_stop(tick);
+}
+#endif  //  __has_include(<hardware/ticks.h>) || __has_include(<gmock/gmock.h>)
