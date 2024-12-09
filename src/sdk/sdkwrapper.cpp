@@ -3593,3 +3593,190 @@ void rpp_driver::SdkWrapper::tick_stop(tick_gen_num_t tick) {
   ::tick_stop(tick);
 }
 #endif  //  __has_include(<hardware/ticks.h>) || __has_include(<gmock/gmock.h>)
+
+#if __has_include(<hardware/timer.h>) || __has_include(<gmock/gmock.h>)
+// --------------------------------------------------
+extern "C" void busy_wait_ms(uint32_t delay_ms);
+void rpp_driver::SdkWrapper::busy_wait_ms(uint32_t delay_ms) {
+  ::busy_wait_ms(delay_ms);
+}
+// --------------------------------------------------
+extern "C" void busy_wait_until(absolute_time_t t);
+void rpp_driver::SdkWrapper::busy_wait_until(absolute_time_t t) {
+  ::busy_wait_until(t);
+}
+// --------------------------------------------------
+extern "C" void busy_wait_us(uint64_t delay_us);
+void rpp_driver::SdkWrapper::busy_wait_us(uint64_t delay_us) {
+  ::busy_wait_us(delay_us);
+}
+// --------------------------------------------------
+extern "C" void busy_wait_us_32(uint32_t delay_us);
+void rpp_driver::SdkWrapper::busy_wait_us_32(uint32_t delay_us) {
+  ::busy_wait_us_32(delay_us);
+}
+// --------------------------------------------------
+extern "C" void hardware_alarm_cancel(uint alarm_num);
+void rpp_driver::SdkWrapper::hardware_alarm_cancel(uint alarm_num) {
+  ::hardware_alarm_cancel(alarm_num);
+}
+// --------------------------------------------------
+extern "C" void hardware_alarm_claim(uint alarm_num);
+void rpp_driver::SdkWrapper::hardware_alarm_claim(uint alarm_num) {
+  ::hardware_alarm_claim(alarm_num);
+}
+// --------------------------------------------------
+extern "C" int hardware_alarm_claim_unused(bool required);
+int rpp_driver::SdkWrapper::hardware_alarm_claim_unused(bool required) {
+  return ::hardware_alarm_claim_unused(required);
+}
+// --------------------------------------------------
+extern "C" void hardware_alarm_force_irq(uint alarm_num);
+void rpp_driver::SdkWrapper::hardware_alarm_force_irq(uint alarm_num) {
+  ::hardware_alarm_force_irq(alarm_num);
+}
+// --------------------------------------------------
+extern "C" uint hardware_alarm_get_irq_num(timer_hw_t* timer, uint alarm_num);
+uint rpp_driver::SdkWrapper::hardware_alarm_get_irq_num(timer_hw_t* timer,
+                                                        uint alarm_num) {
+  return ::hardware_alarm_get_irq_num(timer, alarm_num);
+}
+// --------------------------------------------------
+extern "C" bool hardware_alarm_is_claimed(uint alarm_num);
+bool rpp_driver::SdkWrapper::hardware_alarm_is_claimed(uint alarm_num) {
+  return ::hardware_alarm_is_claimed(alarm_num);
+}
+// --------------------------------------------------
+extern "C" void hardware_alarm_set_callback(uint alarm_num,
+                                            hardware_alarm_callback_t callback);
+void rpp_driver::SdkWrapper::hardware_alarm_set_callback(
+    uint alarm_num, hardware_alarm_callback_t callback) {
+  ::hardware_alarm_set_callback(alarm_num, callback);
+}
+// --------------------------------------------------
+extern "C" bool hardware_alarm_set_target(uint alarm_num, absolute_time_t t);
+bool rpp_driver::SdkWrapper::hardware_alarm_set_target(uint alarm_num,
+                                                       absolute_time_t t) {
+  return ::hardware_alarm_set_target(alarm_num, t);
+}
+// --------------------------------------------------
+extern "C" void hardware_alarm_unclaim(uint alarm_num);
+void rpp_driver::SdkWrapper::hardware_alarm_unclaim(uint alarm_num) {
+  ::hardware_alarm_unclaim(alarm_num);
+}
+// --------------------------------------------------
+extern "C" bool time_reached(absolute_time_t t);
+bool rpp_driver::SdkWrapper::time_reached(absolute_time_t t) {
+  return ::time_reached(t);
+}
+// --------------------------------------------------
+extern "C" uint32_t time_us_32(void);
+uint32_t rpp_driver::SdkWrapper::time_us_32(void) { return ::time_us_32(); }
+// --------------------------------------------------
+extern "C" uint64_t time_us_64(void);
+uint64_t rpp_driver::SdkWrapper::time_us_64(void) { return ::time_us_64(); }
+// --------------------------------------------------
+extern "C" void timer_busy_wait_ms(timer_hw_t* timer, uint32_t delay_ms);
+void rpp_driver::SdkWrapper::timer_busy_wait_ms(timer_hw_t* timer,
+                                                uint32_t delay_ms) {
+  ::timer_busy_wait_ms(timer, delay_ms);
+}
+// --------------------------------------------------
+extern "C" void timer_busy_wait_until(timer_hw_t* timer, absolute_time_t t);
+void rpp_driver::SdkWrapper::timer_busy_wait_until(timer_hw_t* timer,
+                                                   absolute_time_t t) {
+  ::timer_busy_wait_until(timer, t);
+}
+// --------------------------------------------------
+extern "C" void timer_busy_wait_us(timer_hw_t* timer, uint64_t delay_us);
+void rpp_driver::SdkWrapper::timer_busy_wait_us(timer_hw_t* timer,
+                                                uint64_t delay_us) {
+  ::timer_busy_wait_us(timer, delay_us);
+}
+// --------------------------------------------------
+extern "C" void timer_busy_wait_us_32(timer_hw_t* timer, uint32_t delay_us);
+void rpp_driver::SdkWrapper::timer_busy_wait_us_32(timer_hw_t* timer,
+                                                   uint32_t delay_us) {
+  ::timer_busy_wait_us_32(timer, delay_us);
+}
+// --------------------------------------------------
+extern "C" uint timer_get_index(timer_hw_t* timer);
+uint rpp_driver::SdkWrapper::timer_get_index(timer_hw_t* timer) {
+  return ::timer_get_index(timer);
+}
+// --------------------------------------------------
+extern "C" timer_hw_t* timer_get_instance(uint timer_num);
+timer_hw_t* rpp_driver::SdkWrapper::timer_get_instance(uint timer_num) {
+  return ::timer_get_instance(timer_num);
+}
+// --------------------------------------------------
+extern "C" void timer_hardware_alarm_cancel(timer_hw_t* timer, uint alarm_num);
+void rpp_driver::SdkWrapper::timer_hardware_alarm_cancel(timer_hw_t* timer,
+                                                         uint alarm_num) {
+  ::timer_hardware_alarm_cancel(timer, alarm_num);
+}
+// --------------------------------------------------
+extern "C" void timer_hardware_alarm_claim(timer_hw_t* timer, uint alarm_num);
+void rpp_driver::SdkWrapper::timer_hardware_alarm_claim(timer_hw_t* timer,
+                                                        uint alarm_num) {
+  ::timer_hardware_alarm_claim(timer, alarm_num);
+}
+// --------------------------------------------------
+extern "C" int timer_hardware_alarm_claim_unused(timer_hw_t* timer,
+                                                 bool required);
+int rpp_driver::SdkWrapper::timer_hardware_alarm_claim_unused(timer_hw_t* timer,
+                                                              bool required) {
+  return ::timer_hardware_alarm_claim_unused(timer, required);
+}
+// --------------------------------------------------
+extern "C" void timer_hardware_alarm_force_irq(timer_hw_t* timer,
+                                               uint alarm_num);
+void rpp_driver::SdkWrapper::timer_hardware_alarm_force_irq(timer_hw_t* timer,
+                                                            uint alarm_num) {
+  ::timer_hardware_alarm_force_irq(timer, alarm_num);
+}
+// --------------------------------------------------
+extern "C" bool timer_hardware_alarm_is_claimed(timer_hw_t* timer,
+                                                uint alarm_num);
+bool rpp_driver::SdkWrapper::timer_hardware_alarm_is_claimed(timer_hw_t* timer,
+                                                             uint alarm_num) {
+  return ::timer_hardware_alarm_is_claimed(timer, alarm_num);
+}
+// --------------------------------------------------
+extern "C" void timer_hardware_alarm_set_callback(
+    timer_hw_t* timer, uint alarm_num, hardware_alarm_callback_t callback);
+void rpp_driver::SdkWrapper::timer_hardware_alarm_set_callback(
+    timer_hw_t* timer, uint alarm_num, hardware_alarm_callback_t callback) {
+  ::timer_hardware_alarm_set_callback(timer, alarm_num, callback);
+}
+// --------------------------------------------------
+extern "C" bool timer_hardware_alarm_set_target(timer_hw_t* timer,
+                                                uint alarm_num,
+                                                absolute_time_t t);
+bool rpp_driver::SdkWrapper::timer_hardware_alarm_set_target(
+    timer_hw_t* timer, uint alarm_num, absolute_time_t t) {
+  return ::timer_hardware_alarm_set_target(timer, alarm_num, t);
+}
+// --------------------------------------------------
+extern "C" void timer_hardware_alarm_unclaim(timer_hw_t* timer, uint alarm_num);
+void rpp_driver::SdkWrapper::timer_hardware_alarm_unclaim(timer_hw_t* timer,
+                                                          uint alarm_num) {
+  ::timer_hardware_alarm_unclaim(timer, alarm_num);
+}
+// --------------------------------------------------
+extern "C" bool timer_time_reached(timer_hw_t* timer, absolute_time_t t);
+bool rpp_driver::SdkWrapper::timer_time_reached(timer_hw_t* timer,
+                                                absolute_time_t t) {
+  return ::timer_time_reached(timer, t);
+}
+// --------------------------------------------------
+extern "C" uint32_t timer_time_us_32(timer_hw_t* timer);
+uint32_t rpp_driver::SdkWrapper::timer_time_us_32(timer_hw_t* timer) {
+  return ::timer_time_us_32(timer);
+}
+// --------------------------------------------------
+extern "C" uint64_t timer_time_us_64(timer_hw_t* timer);
+uint64_t rpp_driver::SdkWrapper::timer_time_us_64(timer_hw_t* timer) {
+  return ::timer_time_us_64(timer);
+}
+#endif  //  __has_include(<hardware/timer.h>) || __has_include(<gmock/gmock.h>)

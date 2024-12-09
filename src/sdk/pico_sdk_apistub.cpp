@@ -14505,3 +14505,791 @@ extern "C" void _weak_tick_stop(tick_gen_num_t tick)
 #pragma comment(linker, "/alternatename:tick_stop=_weak_tick_stop")
 #endif  // x86 or amd64
 #endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void busy_wait_ms(uint32_t delay_ms);
+__attribute__((weak)) void busy_wait_ms(uint32_t delay_ms)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_busy_wait_ms(uint32_t delay_ms)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_timer library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_busy_wait_ms=__weak_busy_wait_ms")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:busy_wait_ms=_weak_busy_wait_ms")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void busy_wait_until(absolute_time_t t);
+__attribute__((weak)) void busy_wait_until(absolute_time_t t)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_busy_wait_until(absolute_time_t t)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_timer library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_busy_wait_until=__weak_busy_wait_until")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:busy_wait_until=_weak_busy_wait_until")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void busy_wait_us(uint64_t delay_us);
+__attribute__((weak)) void busy_wait_us(uint64_t delay_us)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_busy_wait_us(uint64_t delay_us)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_timer library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_busy_wait_us=__weak_busy_wait_us")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:busy_wait_us=_weak_busy_wait_us")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void busy_wait_us_32(uint32_t delay_us);
+__attribute__((weak)) void busy_wait_us_32(uint32_t delay_us)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_busy_wait_us_32(uint32_t delay_us)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_timer library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_busy_wait_us_32=__weak_busy_wait_us_32")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:busy_wait_us_32=_weak_busy_wait_us_32")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void hardware_alarm_cancel(uint alarm_num);
+__attribute__((weak)) void hardware_alarm_cancel(uint alarm_num)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_hardware_alarm_cancel(uint alarm_num)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_timer library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_hardware_alarm_cancel=__weak_hardware_alarm_cancel")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:hardware_alarm_cancel=_weak_hardware_alarm_cancel")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void hardware_alarm_claim(uint alarm_num);
+__attribute__((weak)) void hardware_alarm_claim(uint alarm_num)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_hardware_alarm_claim(uint alarm_num)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_timer library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_hardware_alarm_claim=__weak_hardware_alarm_claim")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:hardware_alarm_claim=_weak_hardware_alarm_claim")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" int hardware_alarm_claim_unused(bool required);
+__attribute__((weak)) int hardware_alarm_claim_unused(bool required)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" int _weak_hardware_alarm_claim_unused(bool required)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_timer library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_hardware_alarm_claim_unused=__weak_hardware_alarm_claim_unused")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:hardware_alarm_claim_unused=_weak_hardware_alarm_claim_unused")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void hardware_alarm_force_irq(uint alarm_num);
+__attribute__((weak)) void hardware_alarm_force_irq(uint alarm_num)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_hardware_alarm_force_irq(uint alarm_num)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_timer library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_hardware_alarm_force_irq=__weak_hardware_alarm_force_irq")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:hardware_alarm_force_irq=_weak_hardware_alarm_force_irq")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint hardware_alarm_get_irq_num(timer_hw_t* timer, uint alarm_num);
+__attribute__((weak)) uint hardware_alarm_get_irq_num(timer_hw_t* timer,
+                                                      uint alarm_num)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint _weak_hardware_alarm_get_irq_num(timer_hw_t* timer,
+                                                 uint alarm_num)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_timer library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_hardware_alarm_get_irq_num=__weak_hardware_alarm_get_irq_num")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:hardware_alarm_get_irq_num=_weak_hardware_alarm_get_irq_num")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool hardware_alarm_is_claimed(uint alarm_num);
+__attribute__((weak)) bool hardware_alarm_is_claimed(uint alarm_num)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_hardware_alarm_is_claimed(uint alarm_num)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_timer library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_hardware_alarm_is_claimed=__weak_hardware_alarm_is_claimed")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:hardware_alarm_is_claimed=_weak_hardware_alarm_is_claimed")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void hardware_alarm_set_callback(uint alarm_num,
+                                            hardware_alarm_callback_t callback);
+__attribute__((weak)) void hardware_alarm_set_callback(
+    uint alarm_num, hardware_alarm_callback_t callback)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_hardware_alarm_set_callback(
+    uint alarm_num, hardware_alarm_callback_t callback)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_timer library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_hardware_alarm_set_callback=__weak_hardware_alarm_set_callback")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:hardware_alarm_set_callback=_weak_hardware_alarm_set_callback")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool hardware_alarm_set_target(uint alarm_num, absolute_time_t t);
+__attribute__((weak)) bool hardware_alarm_set_target(uint alarm_num,
+                                                     absolute_time_t t)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_hardware_alarm_set_target(uint alarm_num,
+                                                absolute_time_t t)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_timer library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_hardware_alarm_set_target=__weak_hardware_alarm_set_target")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:hardware_alarm_set_target=_weak_hardware_alarm_set_target")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void hardware_alarm_unclaim(uint alarm_num);
+__attribute__((weak)) void hardware_alarm_unclaim(uint alarm_num)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_hardware_alarm_unclaim(uint alarm_num)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_timer library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_hardware_alarm_unclaim=__weak_hardware_alarm_unclaim")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:hardware_alarm_unclaim=_weak_hardware_alarm_unclaim")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool time_reached(absolute_time_t t);
+__attribute__((weak)) bool time_reached(absolute_time_t t)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_time_reached(absolute_time_t t)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_timer library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_time_reached=__weak_time_reached")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:time_reached=_weak_time_reached")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint32_t time_us_32(void);
+__attribute__((weak)) uint32_t time_us_32(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint32_t _weak_time_us_32(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_timer library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_time_us_32=__weak_time_us_32")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:time_us_32=_weak_time_us_32")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint64_t time_us_64(void);
+__attribute__((weak)) uint64_t time_us_64(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint64_t _weak_time_us_64(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_timer library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_time_us_64=__weak_time_us_64")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:time_us_64=_weak_time_us_64")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void timer_busy_wait_ms(timer_hw_t* timer, uint32_t delay_ms);
+__attribute__((weak)) void timer_busy_wait_ms(timer_hw_t* timer,
+                                              uint32_t delay_ms)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_timer_busy_wait_ms(timer_hw_t* timer, uint32_t delay_ms)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_timer library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_timer_busy_wait_ms=__weak_timer_busy_wait_ms")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:timer_busy_wait_ms=_weak_timer_busy_wait_ms")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void timer_busy_wait_until(timer_hw_t* timer, absolute_time_t t);
+__attribute__((weak)) void timer_busy_wait_until(timer_hw_t* timer,
+                                                 absolute_time_t t)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_timer_busy_wait_until(timer_hw_t* timer,
+                                            absolute_time_t t)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_timer library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_timer_busy_wait_until=__weak_timer_busy_wait_until")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:timer_busy_wait_until=_weak_timer_busy_wait_until")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void timer_busy_wait_us(timer_hw_t* timer, uint64_t delay_us);
+__attribute__((weak)) void timer_busy_wait_us(timer_hw_t* timer,
+                                              uint64_t delay_us)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_timer_busy_wait_us(timer_hw_t* timer, uint64_t delay_us)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_timer library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_timer_busy_wait_us=__weak_timer_busy_wait_us")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:timer_busy_wait_us=_weak_timer_busy_wait_us")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void timer_busy_wait_us_32(timer_hw_t* timer, uint32_t delay_us);
+__attribute__((weak)) void timer_busy_wait_us_32(timer_hw_t* timer,
+                                                 uint32_t delay_us)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_timer_busy_wait_us_32(timer_hw_t* timer,
+                                            uint32_t delay_us)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_timer library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_timer_busy_wait_us_32=__weak_timer_busy_wait_us_32")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:timer_busy_wait_us_32=_weak_timer_busy_wait_us_32")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint timer_get_index(timer_hw_t* timer);
+__attribute__((weak)) uint timer_get_index(timer_hw_t* timer)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint _weak_timer_get_index(timer_hw_t* timer)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_timer library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_timer_get_index=__weak_timer_get_index")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:timer_get_index=_weak_timer_get_index")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" timer_hw_t* timer_get_instance(uint timer_num);
+__attribute__((weak)) timer_hw_t* timer_get_instance(uint timer_num)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" timer_hw_t* _weak_timer_get_instance(uint timer_num)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_timer library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_timer_get_instance=__weak_timer_get_instance")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:timer_get_instance=_weak_timer_get_instance")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void timer_hardware_alarm_cancel(timer_hw_t* timer, uint alarm_num);
+__attribute__((weak)) void timer_hardware_alarm_cancel(timer_hw_t* timer,
+                                                       uint alarm_num)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_timer_hardware_alarm_cancel(timer_hw_t* timer,
+                                                  uint alarm_num)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_timer library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_timer_hardware_alarm_cancel=__weak_timer_hardware_alarm_cancel")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:timer_hardware_alarm_cancel=_weak_timer_hardware_alarm_cancel")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void timer_hardware_alarm_claim(timer_hw_t* timer, uint alarm_num);
+__attribute__((weak)) void timer_hardware_alarm_claim(timer_hw_t* timer,
+                                                      uint alarm_num)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_timer_hardware_alarm_claim(timer_hw_t* timer,
+                                                 uint alarm_num)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_timer library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_timer_hardware_alarm_claim=__weak_timer_hardware_alarm_claim")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:timer_hardware_alarm_claim=_weak_timer_hardware_alarm_claim")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" int timer_hardware_alarm_claim_unused(timer_hw_t* timer,
+                                                 bool required);
+__attribute__((weak)) int timer_hardware_alarm_claim_unused(timer_hw_t* timer,
+                                                            bool required)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" int _weak_timer_hardware_alarm_claim_unused(timer_hw_t* timer,
+                                                       bool required)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_timer library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_timer_hardware_alarm_claim_unused=__weak_timer_hardware_alarm_claim_unused")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:timer_hardware_alarm_claim_unused=_weak_timer_hardware_alarm_claim_unused")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void timer_hardware_alarm_force_irq(timer_hw_t* timer,
+                                               uint alarm_num);
+__attribute__((weak)) void timer_hardware_alarm_force_irq(timer_hw_t* timer,
+                                                          uint alarm_num)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_timer_hardware_alarm_force_irq(timer_hw_t* timer,
+                                                     uint alarm_num)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_timer library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_timer_hardware_alarm_force_irq=__weak_timer_hardware_alarm_force_irq")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:timer_hardware_alarm_force_irq=_weak_timer_hardware_alarm_force_irq")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool timer_hardware_alarm_is_claimed(timer_hw_t* timer,
+                                                uint alarm_num);
+__attribute__((weak)) bool timer_hardware_alarm_is_claimed(timer_hw_t* timer,
+                                                           uint alarm_num)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_timer_hardware_alarm_is_claimed(timer_hw_t* timer,
+                                                      uint alarm_num)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_timer library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_timer_hardware_alarm_is_claimed=__weak_timer_hardware_alarm_is_claimed")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:timer_hardware_alarm_is_claimed=_weak_timer_hardware_alarm_is_claimed")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void timer_hardware_alarm_set_callback(
+    timer_hw_t* timer, uint alarm_num, hardware_alarm_callback_t callback);
+__attribute__((weak)) void timer_hardware_alarm_set_callback(
+    timer_hw_t* timer, uint alarm_num, hardware_alarm_callback_t callback)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_timer_hardware_alarm_set_callback(
+    timer_hw_t* timer, uint alarm_num, hardware_alarm_callback_t callback)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_timer library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_timer_hardware_alarm_set_callback=__weak_timer_hardware_alarm_set_callback")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:timer_hardware_alarm_set_callback=_weak_timer_hardware_alarm_set_callback")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool timer_hardware_alarm_set_target(timer_hw_t* timer,
+                                                uint alarm_num,
+                                                absolute_time_t t);
+__attribute__((weak)) bool timer_hardware_alarm_set_target(timer_hw_t* timer,
+                                                           uint alarm_num,
+                                                           absolute_time_t t)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_timer_hardware_alarm_set_target(timer_hw_t* timer,
+                                                      uint alarm_num,
+                                                      absolute_time_t t)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_timer library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_timer_hardware_alarm_set_target=__weak_timer_hardware_alarm_set_target")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:timer_hardware_alarm_set_target=_weak_timer_hardware_alarm_set_target")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void timer_hardware_alarm_unclaim(timer_hw_t* timer, uint alarm_num);
+__attribute__((weak)) void timer_hardware_alarm_unclaim(timer_hw_t* timer,
+                                                        uint alarm_num)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_timer_hardware_alarm_unclaim(timer_hw_t* timer,
+                                                   uint alarm_num)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_timer library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_timer_hardware_alarm_unclaim=__weak_timer_hardware_alarm_unclaim")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:timer_hardware_alarm_unclaim=_weak_timer_hardware_alarm_unclaim")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool timer_time_reached(timer_hw_t* timer, absolute_time_t t);
+__attribute__((weak)) bool timer_time_reached(timer_hw_t* timer,
+                                              absolute_time_t t)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_timer_time_reached(timer_hw_t* timer, absolute_time_t t)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_timer library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_timer_time_reached=__weak_timer_time_reached")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:timer_time_reached=_weak_timer_time_reached")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint32_t timer_time_us_32(timer_hw_t* timer);
+__attribute__((weak)) uint32_t timer_time_us_32(timer_hw_t* timer)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint32_t _weak_timer_time_us_32(timer_hw_t* timer)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_timer library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_timer_time_us_32=__weak_timer_time_us_32")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:timer_time_us_32=_weak_timer_time_us_32")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint64_t timer_time_us_64(timer_hw_t* timer);
+__attribute__((weak)) uint64_t timer_time_us_64(timer_hw_t* timer)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint64_t _weak_timer_time_us_64(timer_hw_t* timer)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_timer library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_timer_time_us_64=__weak_timer_time_us_64")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:timer_time_us_64=_weak_timer_time_us_64")
+#endif  // x86 or amd64
+#endif  // _MSC_VER

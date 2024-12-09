@@ -941,6 +941,49 @@ class SdkWrapper {
   virtual void tick_stop(tick_gen_num_t tick);
 #endif  //  __has_include(<hardware/ticks.h>) || __has_include(<gmock/gmock.h>)
 
+#if __has_include(<hardware/timer.h>) || __has_include(<gmock/gmock.h>)
+  virtual void busy_wait_ms(uint32_t delay_ms);
+  virtual void busy_wait_until(absolute_time_t t);
+  virtual void busy_wait_us(uint64_t delay_us);
+  virtual void busy_wait_us_32(uint32_t delay_us);
+  virtual void hardware_alarm_cancel(uint alarm_num);
+  virtual void hardware_alarm_claim(uint alarm_num);
+  virtual int hardware_alarm_claim_unused(bool required);
+  virtual void hardware_alarm_force_irq(uint alarm_num);
+  virtual uint hardware_alarm_get_irq_num(timer_hw_t* timer, uint alarm_num);
+  virtual bool hardware_alarm_is_claimed(uint alarm_num);
+  virtual void hardware_alarm_set_callback(uint alarm_num,
+                                           hardware_alarm_callback_t callback);
+  virtual bool hardware_alarm_set_target(uint alarm_num, absolute_time_t t);
+  virtual void hardware_alarm_unclaim(uint alarm_num);
+  virtual bool time_reached(absolute_time_t t);
+  virtual uint32_t time_us_32(void);
+  virtual uint64_t time_us_64(void);
+  virtual void timer_busy_wait_ms(timer_hw_t* timer, uint32_t delay_ms);
+  virtual void timer_busy_wait_until(timer_hw_t* timer, absolute_time_t t);
+  virtual void timer_busy_wait_us(timer_hw_t* timer, uint64_t delay_us);
+  virtual void timer_busy_wait_us_32(timer_hw_t* timer, uint32_t delay_us);
+  virtual uint timer_get_index(timer_hw_t* timer);
+  virtual timer_hw_t* timer_get_instance(uint timer_num);
+  virtual void timer_hardware_alarm_cancel(timer_hw_t* timer, uint alarm_num);
+  virtual void timer_hardware_alarm_claim(timer_hw_t* timer, uint alarm_num);
+  virtual int timer_hardware_alarm_claim_unused(timer_hw_t* timer,
+                                                bool required);
+  virtual void timer_hardware_alarm_force_irq(timer_hw_t* timer,
+                                              uint alarm_num);
+  virtual bool timer_hardware_alarm_is_claimed(timer_hw_t* timer,
+                                               uint alarm_num);
+  virtual void timer_hardware_alarm_set_callback(
+      timer_hw_t* timer, uint alarm_num, hardware_alarm_callback_t callback);
+  virtual bool timer_hardware_alarm_set_target(timer_hw_t* timer,
+                                               uint alarm_num,
+                                               absolute_time_t t);
+  virtual void timer_hardware_alarm_unclaim(timer_hw_t* timer, uint alarm_num);
+  virtual bool timer_time_reached(timer_hw_t* timer, absolute_time_t t);
+  virtual uint32_t timer_time_us_32(timer_hw_t* timer);
+  virtual uint64_t timer_time_us_64(timer_hw_t* timer);
+#endif  //  __has_include(<hardware/timer.h>) || __has_include(<gmock/gmock.h>)
+
 };  // class SdkWrapper
 
 #include "mocksdkwrapper.hpp"

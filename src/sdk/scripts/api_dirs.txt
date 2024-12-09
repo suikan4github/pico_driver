@@ -21,3 +21,4 @@ hardware sha256
 hardware spi
 hardware sync
 hardware ticks
+hardware timer

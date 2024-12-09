@@ -1,4 +1,10 @@
 # test_SdkWrapper TDD
+## SdkWrapper::time_reached()
+- [x] Implement member function . 
+- [x] Create test case to fail. 
+- [x] Make it success. 
+- [x] Remove the duplication. 
+
 ## SdkWrapper::tick_is_running()
 - [x] Implement member function . 
 - [x] Create test case to fail. 

@@ -83,6 +83,7 @@ FAKE_VOID_FUNC(sha256_set_dma_size, uint);
 FAKE_VALUE_FUNC(bool, spi_is_readable, const spi_inst_t *);
 FAKE_VALUE_FUNC(bool, spin_lock_is_claimed, uint);
 FAKE_VALUE_FUNC(bool, tick_is_running, tick_gen_num_t);
+FAKE_VALUE_FUNC(bool, time_reached, absolute_time_t);
 }
 // The cpp file of the library to test.
 #include "../src/sdk/sdkwrapper.cpp"
@@ -2115,3 +2116,45 @@ TEST(SdkWrapper, tick_is_running) {
   }
   RESET_FAKE(tick_is_running);
 }  // TEST(SdkWrapper, tick_is_running)
+
+// -----------------------------------------------------------
+//
+//  hardware_timer
+//  virtual bool time_reached(absolute_time_t t);
+//
+// -----------------------------------------------------------
+
+TEST(SdkWrapper, time_reached) {
+  std::random_device rng;
+  ::rpp_driver::SdkWrapper pico;
+  // uniform distribution
+  std::uniform_int_distribution<absolute_time_t> param_dist(0, INT_MAX);
+  absolute_time_t param_array0[] = {param_dist(rng), param_dist(rng)};
+  bool retval_array[std::size(param_array0)] = {true, false};
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(time_reached);
+
+  SET_RETURN_SEQ(time_reached, retval_array, std::size(retval_array));
+
+  // Check whether return values are correctly passed to wrapper.
+  int index = 0;
+  for (auto &&param0 : param_array0) {
+    ASSERT_EQ(pico.time_reached(param0), retval_array[index]);
+    index++;
+  }
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(time_reached_fake.call_count, std::size(retval_array));
+
+  // Check whether parameters were correctly passed from wrapper.
+  index = 0;
+  for (auto &&param0 : param_array0) {
+    // Check the data from test spy. Call order.
+    ASSERT_EQ(fff.call_history[index], (void *)time_reached);
+    // Check the data from test spy. : Parameters.
+    ASSERT_EQ(time_reached_fake.arg0_history[index], param0);
+    index++;
+  }
+  RESET_FAKE(time_reached);
+}  // TEST(SdkWrapper, time_reached)

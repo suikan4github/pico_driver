@@ -867,6 +867,53 @@ class MockSdkWrapper : public SdkWrapper {
   MOCK_METHOD1(tick_is_running, bool(tick_gen_num_t tick));
   MOCK_METHOD2(tick_start, void(tick_gen_num_t tick, uint cycles));
   MOCK_METHOD1(tick_stop, void(tick_gen_num_t tick));
+  MOCK_METHOD1(busy_wait_ms, void(uint32_t delay_ms));
+  MOCK_METHOD1(busy_wait_until, void(absolute_time_t t));
+  MOCK_METHOD1(busy_wait_us, void(uint64_t delay_us));
+  MOCK_METHOD1(busy_wait_us_32, void(uint32_t delay_us));
+  MOCK_METHOD1(hardware_alarm_cancel, void(uint alarm_num));
+  MOCK_METHOD1(hardware_alarm_claim, void(uint alarm_num));
+  MOCK_METHOD1(hardware_alarm_claim_unused, int(bool required));
+  MOCK_METHOD1(hardware_alarm_force_irq, void(uint alarm_num));
+  MOCK_METHOD2(hardware_alarm_get_irq_num,
+               uint(timer_hw_t* timer, uint alarm_num));
+  MOCK_METHOD1(hardware_alarm_is_claimed, bool(uint alarm_num));
+  MOCK_METHOD2(hardware_alarm_set_callback,
+               void(uint alarm_num, hardware_alarm_callback_t callback));
+  MOCK_METHOD2(hardware_alarm_set_target,
+               bool(uint alarm_num, absolute_time_t t));
+  MOCK_METHOD1(hardware_alarm_unclaim, void(uint alarm_num));
+  MOCK_METHOD1(time_reached, bool(absolute_time_t t));
+  MOCK_METHOD0(time_us_32, uint32_t());
+  MOCK_METHOD0(time_us_64, uint64_t());
+  MOCK_METHOD2(timer_busy_wait_ms, void(timer_hw_t* timer, uint32_t delay_ms));
+  MOCK_METHOD2(timer_busy_wait_until,
+               void(timer_hw_t* timer, absolute_time_t t));
+  MOCK_METHOD2(timer_busy_wait_us, void(timer_hw_t* timer, uint64_t delay_us));
+  MOCK_METHOD2(timer_busy_wait_us_32,
+               void(timer_hw_t* timer, uint32_t delay_us));
+  MOCK_METHOD1(timer_get_index, uint(timer_hw_t* timer));
+  MOCK_METHOD1(timer_get_instance, timer_hw_t*(uint timer_num));
+  MOCK_METHOD2(timer_hardware_alarm_cancel,
+               void(timer_hw_t* timer, uint alarm_num));
+  MOCK_METHOD2(timer_hardware_alarm_claim,
+               void(timer_hw_t* timer, uint alarm_num));
+  MOCK_METHOD2(timer_hardware_alarm_claim_unused,
+               int(timer_hw_t* timer, bool required));
+  MOCK_METHOD2(timer_hardware_alarm_force_irq,
+               void(timer_hw_t* timer, uint alarm_num));
+  MOCK_METHOD2(timer_hardware_alarm_is_claimed,
+               bool(timer_hw_t* timer, uint alarm_num));
+  MOCK_METHOD3(timer_hardware_alarm_set_callback,
+               void(timer_hw_t* timer, uint alarm_num,
+                    hardware_alarm_callback_t callback));
+  MOCK_METHOD3(timer_hardware_alarm_set_target,
+               bool(timer_hw_t* timer, uint alarm_num, absolute_time_t t));
+  MOCK_METHOD2(timer_hardware_alarm_unclaim,
+               void(timer_hw_t* timer, uint alarm_num));
+  MOCK_METHOD2(timer_time_reached, bool(timer_hw_t* timer, absolute_time_t t));
+  MOCK_METHOD1(timer_time_us_32, uint32_t(timer_hw_t* timer));
+  MOCK_METHOD1(timer_time_us_64, uint64_t(timer_hw_t* timer));
 }  // class MockSdkWrapper : public SdkWrapper
 ;
 // GCOVR_EXCL_STOP
