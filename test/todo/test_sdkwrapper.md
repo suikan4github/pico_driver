@@ -1,4 +1,12 @@
 # test_SdkWrapper TDD
+  virtual char uart_getc(uart_inst_t* uart);
+
+## SdkWrapper::uart_getc()
+- [x] Implement member function . 
+- [x] Create test case to fail. 
+- [x] Make it success. 
+- [x] Remove the duplication. 
+
 ## SdkWrapper::time_reached()
 - [x] Implement member function . 
 - [x] Create test case to fail. 

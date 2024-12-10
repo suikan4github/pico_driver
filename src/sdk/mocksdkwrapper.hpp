@@ -914,6 +914,41 @@ class MockSdkWrapper : public SdkWrapper {
   MOCK_METHOD2(timer_time_reached, bool(timer_hw_t* timer, absolute_time_t t));
   MOCK_METHOD1(timer_time_us_32, uint32_t(timer_hw_t* timer));
   MOCK_METHOD1(timer_time_us_64, uint64_t(timer_hw_t* timer));
+  MOCK_METHOD0(uart_default_tx_wait_blocking, void());
+  MOCK_METHOD1(uart_deinit, void(uart_inst_t* uart));
+  MOCK_METHOD2(uart_get_dreq, uint(uart_inst_t* uart, bool is_tx));
+  MOCK_METHOD2(uart_get_dreq_num, uint(uart_inst_t* uart, bool is_tx));
+  MOCK_METHOD1(uart_get_hw, uart_hw_t*(uart_inst_t* uart));
+  MOCK_METHOD1(uart_get_index, uint(uart_inst_t* uart));
+  MOCK_METHOD1(uart_get_instance, uart_inst_t*(uint num));
+  MOCK_METHOD1(uart_get_reset_num, uint(uart_inst_t* uart));
+  MOCK_METHOD1(uart_getc, char(uart_inst_t* uart));
+  MOCK_METHOD2(uart_init, uint(uart_inst_t* uart, uint baudrate));
+  MOCK_METHOD1(uart_is_enabled, bool(uart_inst_t* uart));
+  MOCK_METHOD1(uart_is_readable, bool(uart_inst_t* uart));
+  MOCK_METHOD2(uart_is_readable_within_us,
+               bool(uart_inst_t* uart, uint32_t us));
+  MOCK_METHOD1(uart_is_writable, bool(uart_inst_t* uart));
+  MOCK_METHOD2(uart_putc, void(uart_inst_t* uart, char c));
+  MOCK_METHOD2(uart_putc_raw, void(uart_inst_t* uart, char c));
+  MOCK_METHOD2(uart_puts, void(uart_inst_t* uart, const char* s));
+  MOCK_METHOD3(uart_read_blocking,
+               void(uart_inst_t* uart, uint8_t* dst, size_t len));
+  MOCK_METHOD2(uart_set_baudrate, uint(uart_inst_t* uart, uint baudrate));
+  MOCK_METHOD2(uart_set_break, void(uart_inst_t* uart, bool en));
+  MOCK_METHOD2(uart_set_fifo_enabled, void(uart_inst_t* uart, bool enabled));
+  MOCK_METHOD4(uart_set_format, void(uart_inst_t* uart, uint data_bits,
+                                     uint stop_bits, uart_parity_t parity));
+  MOCK_METHOD3(uart_set_hw_flow, void(uart_inst_t* uart, bool cts, bool rts));
+  MOCK_METHOD3(uart_set_irq_enables,
+               void(uart_inst_t* uart, bool rx_has_data, bool tx_needs_data));
+  MOCK_METHOD3(uart_set_irqs_enabled,
+               void(uart_inst_t* uart, bool rx_has_data, bool tx_needs_data));
+  MOCK_METHOD2(uart_set_translate_crlf,
+               void(uart_inst_t* uart, bool translate));
+  MOCK_METHOD1(uart_tx_wait_blocking, void(uart_inst_t* uart));
+  MOCK_METHOD3(uart_write_blocking,
+               void(uart_inst_t* uart, const uint8_t* src, size_t len));
 }  // class MockSdkWrapper : public SdkWrapper
 ;
 // GCOVR_EXCL_STOP

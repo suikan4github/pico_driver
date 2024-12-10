@@ -103,3 +103,7 @@
 #if __has_include(<hardware/timer.h>) || __has_include(<gmock/gmock.h>)
 #include <hardware/timer.h>
 #endif  //  __has_include(<hardware/timer.h>) || __has_include(<gmock/gmock.h>)
+
+#if __has_include(<hardware/uart.h>) || __has_include(<gmock/gmock.h>)
+#include <hardware/uart.h>
+#endif  //  __has_include(<hardware/uart.h>) || __has_include(<gmock/gmock.h>)

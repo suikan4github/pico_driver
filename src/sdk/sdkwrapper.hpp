@@ -984,6 +984,41 @@ class SdkWrapper {
   virtual uint64_t timer_time_us_64(timer_hw_t* timer);
 #endif  //  __has_include(<hardware/timer.h>) || __has_include(<gmock/gmock.h>)
 
+#if __has_include(<hardware/uart.h>) || __has_include(<gmock/gmock.h>)
+  virtual void uart_default_tx_wait_blocking(void);
+  virtual void uart_deinit(uart_inst_t* uart);
+  virtual uint uart_get_dreq(uart_inst_t* uart, bool is_tx);
+  virtual uint uart_get_dreq_num(uart_inst_t* uart, bool is_tx);
+  virtual uart_hw_t* uart_get_hw(uart_inst_t* uart);
+  virtual uint uart_get_index(uart_inst_t* uart);
+  virtual uart_inst_t* uart_get_instance(uint num);
+  virtual uint uart_get_reset_num(uart_inst_t* uart);
+  virtual char uart_getc(uart_inst_t* uart);
+  virtual uint uart_init(uart_inst_t* uart, uint baudrate);
+  virtual bool uart_is_enabled(uart_inst_t* uart);
+  virtual bool uart_is_readable(uart_inst_t* uart);
+  virtual bool uart_is_readable_within_us(uart_inst_t* uart, uint32_t us);
+  virtual bool uart_is_writable(uart_inst_t* uart);
+  virtual void uart_putc(uart_inst_t* uart, char c);
+  virtual void uart_putc_raw(uart_inst_t* uart, char c);
+  virtual void uart_puts(uart_inst_t* uart, const char* s);
+  virtual void uart_read_blocking(uart_inst_t* uart, uint8_t* dst, size_t len);
+  virtual uint uart_set_baudrate(uart_inst_t* uart, uint baudrate);
+  virtual void uart_set_break(uart_inst_t* uart, bool en);
+  virtual void uart_set_fifo_enabled(uart_inst_t* uart, bool enabled);
+  virtual void uart_set_format(uart_inst_t* uart, uint data_bits,
+                               uint stop_bits, uart_parity_t parity);
+  virtual void uart_set_hw_flow(uart_inst_t* uart, bool cts, bool rts);
+  virtual void uart_set_irq_enables(uart_inst_t* uart, bool rx_has_data,
+                                    bool tx_needs_data);
+  virtual void uart_set_irqs_enabled(uart_inst_t* uart, bool rx_has_data,
+                                     bool tx_needs_data);
+  virtual void uart_set_translate_crlf(uart_inst_t* uart, bool translate);
+  virtual void uart_tx_wait_blocking(uart_inst_t* uart);
+  virtual void uart_write_blocking(uart_inst_t* uart, const uint8_t* src,
+                                   size_t len);
+#endif  //  __has_include(<hardware/uart.h>) || __has_include(<gmock/gmock.h>)
+
 };  // class SdkWrapper
 
 #include "mocksdkwrapper.hpp"

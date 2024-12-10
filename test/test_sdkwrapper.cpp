@@ -84,6 +84,7 @@ FAKE_VALUE_FUNC(bool, spi_is_readable, const spi_inst_t *);
 FAKE_VALUE_FUNC(bool, spin_lock_is_claimed, uint);
 FAKE_VALUE_FUNC(bool, tick_is_running, tick_gen_num_t);
 FAKE_VALUE_FUNC(bool, time_reached, absolute_time_t);
+FAKE_VALUE_FUNC(char, uart_getc, uart_inst_t *);
 }
 // The cpp file of the library to test.
 #include "../src/sdk/sdkwrapper.cpp"
@@ -2158,3 +2159,46 @@ TEST(SdkWrapper, time_reached) {
   }
   RESET_FAKE(time_reached);
 }  // TEST(SdkWrapper, time_reached)
+
+// -----------------------------------------------------------
+//
+//  hardware_uart
+//  virtual char uart_getc(uart_inst_t *);
+//
+// -----------------------------------------------------------
+
+TEST(SdkWrapper, uart_getc) {
+  std::random_device rng;
+  ::rpp_driver::SdkWrapper pico;
+  // uniform distribution
+  std::uniform_int_distribution<uart_inst_t> param_dist(0, INT_MAX);
+  uart_inst_t param_array0[] = {param_dist(rng), param_dist(rng)};
+  std::uniform_int_distribution<char> retval_dist(0, CHAR_MAX);
+  char retval_array[] = {retval_dist(rng), retval_dist(rng)};
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(uart_getc);
+
+  SET_RETURN_SEQ(uart_getc, retval_array, std::size(retval_array));
+
+  // Check whether return values are correctly passed to wrapper.
+  int index = 0;
+  for (auto &&param0 : param_array0) {
+    ASSERT_EQ(pico.uart_getc(&param_array0[index]), retval_array[index]);
+    index++;
+  }
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(uart_getc_fake.call_count, std::size(retval_array));
+
+  // Check whether parameters were correctly passed from wrapper.
+  index = 0;
+  for (auto &&param0 : param_array0) {
+    // Check the data from test spy. Call order.
+    ASSERT_EQ(fff.call_history[index], (void *)uart_getc);
+    // Check the data from test spy. : Parameters.
+    ASSERT_EQ(uart_getc_fake.arg0_history[index], &param_array0[index]);
+    index++;
+  }
+  RESET_FAKE(uart_getc);
+}  // TEST(SdkWrapper, uart_getc)

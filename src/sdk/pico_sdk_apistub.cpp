@@ -15293,3 +15293,630 @@ extern "C" uint64_t _weak_timer_time_us_64(timer_hw_t* timer)
                 "/alternatename:timer_time_us_64=_weak_timer_time_us_64")
 #endif  // x86 or amd64
 #endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void uart_default_tx_wait_blocking(void);
+__attribute__((weak)) void uart_default_tx_wait_blocking(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_uart_default_tx_wait_blocking(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_uart library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_uart_default_tx_wait_blocking=__weak_uart_default_tx_wait_blocking")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:uart_default_tx_wait_blocking=_weak_uart_default_tx_wait_blocking")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void uart_deinit(uart_inst_t* uart);
+__attribute__((weak)) void uart_deinit(uart_inst_t* uart)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_uart_deinit(uart_inst_t* uart)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_uart library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_uart_deinit=__weak_uart_deinit")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:uart_deinit=_weak_uart_deinit")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint uart_get_dreq(uart_inst_t* uart, bool is_tx);
+__attribute__((weak)) uint uart_get_dreq(uart_inst_t* uart, bool is_tx)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint _weak_uart_get_dreq(uart_inst_t* uart, bool is_tx)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_uart library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_uart_get_dreq=__weak_uart_get_dreq")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:uart_get_dreq=_weak_uart_get_dreq")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint uart_get_dreq_num(uart_inst_t* uart, bool is_tx);
+__attribute__((weak)) uint uart_get_dreq_num(uart_inst_t* uart, bool is_tx)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint _weak_uart_get_dreq_num(uart_inst_t* uart, bool is_tx)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_uart library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_uart_get_dreq_num=__weak_uart_get_dreq_num")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:uart_get_dreq_num=_weak_uart_get_dreq_num")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uart_hw_t* uart_get_hw(uart_inst_t* uart);
+__attribute__((weak)) uart_hw_t* uart_get_hw(uart_inst_t* uart)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uart_hw_t* _weak_uart_get_hw(uart_inst_t* uart)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_uart library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_uart_get_hw=__weak_uart_get_hw")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:uart_get_hw=_weak_uart_get_hw")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint uart_get_index(uart_inst_t* uart);
+__attribute__((weak)) uint uart_get_index(uart_inst_t* uart)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint _weak_uart_get_index(uart_inst_t* uart)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_uart library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_uart_get_index=__weak_uart_get_index")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:uart_get_index=_weak_uart_get_index")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uart_inst_t* uart_get_instance(uint num);
+__attribute__((weak)) uart_inst_t* uart_get_instance(uint num)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uart_inst_t* _weak_uart_get_instance(uint num)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_uart library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_uart_get_instance=__weak_uart_get_instance")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:uart_get_instance=_weak_uart_get_instance")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint uart_get_reset_num(uart_inst_t* uart);
+__attribute__((weak)) uint uart_get_reset_num(uart_inst_t* uart)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint _weak_uart_get_reset_num(uart_inst_t* uart)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_uart library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_uart_get_reset_num=__weak_uart_get_reset_num")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:uart_get_reset_num=_weak_uart_get_reset_num")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" char uart_getc(uart_inst_t* uart);
+__attribute__((weak)) char uart_getc(uart_inst_t* uart)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" char _weak_uart_getc(uart_inst_t* uart)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_uart library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_uart_getc=__weak_uart_getc")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:uart_getc=_weak_uart_getc")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint uart_init(uart_inst_t* uart, uint baudrate);
+__attribute__((weak)) uint uart_init(uart_inst_t* uart, uint baudrate)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint _weak_uart_init(uart_inst_t* uart, uint baudrate)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_uart library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_uart_init=__weak_uart_init")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:uart_init=_weak_uart_init")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool uart_is_enabled(uart_inst_t* uart);
+__attribute__((weak)) bool uart_is_enabled(uart_inst_t* uart)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_uart_is_enabled(uart_inst_t* uart)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_uart library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_uart_is_enabled=__weak_uart_is_enabled")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:uart_is_enabled=_weak_uart_is_enabled")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool uart_is_readable(uart_inst_t* uart);
+__attribute__((weak)) bool uart_is_readable(uart_inst_t* uart)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_uart_is_readable(uart_inst_t* uart)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_uart library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_uart_is_readable=__weak_uart_is_readable")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:uart_is_readable=_weak_uart_is_readable")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool uart_is_readable_within_us(uart_inst_t* uart, uint32_t us);
+__attribute__((weak)) bool uart_is_readable_within_us(uart_inst_t* uart,
+                                                      uint32_t us)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_uart_is_readable_within_us(uart_inst_t* uart, uint32_t us)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_uart library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_uart_is_readable_within_us=__weak_uart_is_readable_within_us")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:uart_is_readable_within_us=_weak_uart_is_readable_within_us")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" bool uart_is_writable(uart_inst_t* uart);
+__attribute__((weak)) bool uart_is_writable(uart_inst_t* uart)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" bool _weak_uart_is_writable(uart_inst_t* uart)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_uart library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_uart_is_writable=__weak_uart_is_writable")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:uart_is_writable=_weak_uart_is_writable")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void uart_putc(uart_inst_t* uart, char c);
+__attribute__((weak)) void uart_putc(uart_inst_t* uart, char c)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_uart_putc(uart_inst_t* uart, char c)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_uart library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_uart_putc=__weak_uart_putc")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:uart_putc=_weak_uart_putc")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void uart_putc_raw(uart_inst_t* uart, char c);
+__attribute__((weak)) void uart_putc_raw(uart_inst_t* uart, char c)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_uart_putc_raw(uart_inst_t* uart, char c)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_uart library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_uart_putc_raw=__weak_uart_putc_raw")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:uart_putc_raw=_weak_uart_putc_raw")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void uart_puts(uart_inst_t* uart, const char* s);
+__attribute__((weak)) void uart_puts(uart_inst_t* uart, const char* s)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_uart_puts(uart_inst_t* uart, const char* s)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_uart library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_uart_puts=__weak_uart_puts")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:uart_puts=_weak_uart_puts")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void uart_read_blocking(uart_inst_t* uart, uint8_t* dst, size_t len);
+__attribute__((weak)) void uart_read_blocking(uart_inst_t* uart, uint8_t* dst,
+                                              size_t len)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_uart_read_blocking(uart_inst_t* uart, uint8_t* dst,
+                                         size_t len)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_uart library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_uart_read_blocking=__weak_uart_read_blocking")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:uart_read_blocking=_weak_uart_read_blocking")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" uint uart_set_baudrate(uart_inst_t* uart, uint baudrate);
+__attribute__((weak)) uint uart_set_baudrate(uart_inst_t* uart, uint baudrate)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" uint _weak_uart_set_baudrate(uart_inst_t* uart, uint baudrate)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_uart library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_uart_set_baudrate=__weak_uart_set_baudrate")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:uart_set_baudrate=_weak_uart_set_baudrate")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void uart_set_break(uart_inst_t* uart, bool en);
+__attribute__((weak)) void uart_set_break(uart_inst_t* uart, bool en)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_uart_set_break(uart_inst_t* uart, bool en)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_uart library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, "/alternatename:_uart_set_break=__weak_uart_set_break")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:uart_set_break=_weak_uart_set_break")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void uart_set_fifo_enabled(uart_inst_t* uart, bool enabled);
+__attribute__((weak)) void uart_set_fifo_enabled(uart_inst_t* uart,
+                                                 bool enabled)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_uart_set_fifo_enabled(uart_inst_t* uart, bool enabled)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_uart library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_uart_set_fifo_enabled=__weak_uart_set_fifo_enabled")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:uart_set_fifo_enabled=_weak_uart_set_fifo_enabled")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void uart_set_format(uart_inst_t* uart, uint data_bits,
+                                uint stop_bits, uart_parity_t parity);
+__attribute__((weak)) void uart_set_format(uart_inst_t* uart, uint data_bits,
+                                           uint stop_bits, uart_parity_t parity)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_uart_set_format(uart_inst_t* uart, uint data_bits,
+                                      uint stop_bits, uart_parity_t parity)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_uart library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_uart_set_format=__weak_uart_set_format")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, "/alternatename:uart_set_format=_weak_uart_set_format")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void uart_set_hw_flow(uart_inst_t* uart, bool cts, bool rts);
+__attribute__((weak)) void uart_set_hw_flow(uart_inst_t* uart, bool cts,
+                                            bool rts)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_uart_set_hw_flow(uart_inst_t* uart, bool cts, bool rts)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_uart library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_uart_set_hw_flow=__weak_uart_set_hw_flow")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:uart_set_hw_flow=_weak_uart_set_hw_flow")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void uart_set_irq_enables(uart_inst_t* uart, bool rx_has_data,
+                                     bool tx_needs_data);
+__attribute__((weak)) void uart_set_irq_enables(uart_inst_t* uart,
+                                                bool rx_has_data,
+                                                bool tx_needs_data)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_uart_set_irq_enables(uart_inst_t* uart, bool rx_has_data,
+                                           bool tx_needs_data)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_uart library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_uart_set_irq_enables=__weak_uart_set_irq_enables")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:uart_set_irq_enables=_weak_uart_set_irq_enables")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void uart_set_irqs_enabled(uart_inst_t* uart, bool rx_has_data,
+                                      bool tx_needs_data);
+__attribute__((weak)) void uart_set_irqs_enabled(uart_inst_t* uart,
+                                                 bool rx_has_data,
+                                                 bool tx_needs_data)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_uart_set_irqs_enabled(uart_inst_t* uart, bool rx_has_data,
+                                            bool tx_needs_data)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_uart library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_uart_set_irqs_enabled=__weak_uart_set_irqs_enabled")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:uart_set_irqs_enabled=_weak_uart_set_irqs_enabled")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void uart_set_translate_crlf(uart_inst_t* uart, bool translate);
+__attribute__((weak)) void uart_set_translate_crlf(uart_inst_t* uart,
+                                                   bool translate)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_uart_set_translate_crlf(uart_inst_t* uart, bool translate)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_uart library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_uart_set_translate_crlf=__weak_uart_set_translate_crlf")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:uart_set_translate_crlf=_weak_uart_set_translate_crlf")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void uart_tx_wait_blocking(uart_inst_t* uart);
+__attribute__((weak)) void uart_tx_wait_blocking(uart_inst_t* uart)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_uart_tx_wait_blocking(uart_inst_t* uart)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_uart library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_uart_tx_wait_blocking=__weak_uart_tx_wait_blocking")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:uart_tx_wait_blocking=_weak_uart_tx_wait_blocking")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void uart_write_blocking(uart_inst_t* uart, const uint8_t* src,
+                                    size_t len);
+__attribute__((weak)) void uart_write_blocking(uart_inst_t* uart,
+                                               const uint8_t* src, size_t len)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_uart_write_blocking(uart_inst_t* uart, const uint8_t* src,
+                                          size_t len)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_uart library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker, "/alternatename:_uart_write_blocking=__weak_uart_write_blocking")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker, "/alternatename:uart_write_blocking=_weak_uart_write_blocking")
+#endif  // x86 or amd64
+#endif  // _MSC_VER

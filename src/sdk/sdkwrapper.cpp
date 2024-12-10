@@ -3780,3 +3780,164 @@ uint64_t rpp_driver::SdkWrapper::timer_time_us_64(timer_hw_t* timer) {
   return ::timer_time_us_64(timer);
 }
 #endif  //  __has_include(<hardware/timer.h>) || __has_include(<gmock/gmock.h>)
+
+#if __has_include(<hardware/uart.h>) || __has_include(<gmock/gmock.h>)
+// --------------------------------------------------
+extern "C" void uart_default_tx_wait_blocking(void);
+void rpp_driver::SdkWrapper::uart_default_tx_wait_blocking(void) {
+  ::uart_default_tx_wait_blocking();
+}
+// --------------------------------------------------
+extern "C" void uart_deinit(uart_inst_t* uart);
+void rpp_driver::SdkWrapper::uart_deinit(uart_inst_t* uart) {
+  ::uart_deinit(uart);
+}
+// --------------------------------------------------
+extern "C" uint uart_get_dreq(uart_inst_t* uart, bool is_tx);
+uint rpp_driver::SdkWrapper::uart_get_dreq(uart_inst_t* uart, bool is_tx) {
+  return ::uart_get_dreq(uart, is_tx);
+}
+// --------------------------------------------------
+extern "C" uint uart_get_dreq_num(uart_inst_t* uart, bool is_tx);
+uint rpp_driver::SdkWrapper::uart_get_dreq_num(uart_inst_t* uart, bool is_tx) {
+  return ::uart_get_dreq_num(uart, is_tx);
+}
+// --------------------------------------------------
+extern "C" uart_hw_t* uart_get_hw(uart_inst_t* uart);
+uart_hw_t* rpp_driver::SdkWrapper::uart_get_hw(uart_inst_t* uart) {
+  return ::uart_get_hw(uart);
+}
+// --------------------------------------------------
+extern "C" uint uart_get_index(uart_inst_t* uart);
+uint rpp_driver::SdkWrapper::uart_get_index(uart_inst_t* uart) {
+  return ::uart_get_index(uart);
+}
+// --------------------------------------------------
+extern "C" uart_inst_t* uart_get_instance(uint num);
+uart_inst_t* rpp_driver::SdkWrapper::uart_get_instance(uint num) {
+  return ::uart_get_instance(num);
+}
+// --------------------------------------------------
+extern "C" uint uart_get_reset_num(uart_inst_t* uart);
+uint rpp_driver::SdkWrapper::uart_get_reset_num(uart_inst_t* uart) {
+  return ::uart_get_reset_num(uart);
+}
+// --------------------------------------------------
+extern "C" char uart_getc(uart_inst_t* uart);
+char rpp_driver::SdkWrapper::uart_getc(uart_inst_t* uart) {
+  return ::uart_getc(uart);
+}
+// --------------------------------------------------
+extern "C" uint uart_init(uart_inst_t* uart, uint baudrate);
+uint rpp_driver::SdkWrapper::uart_init(uart_inst_t* uart, uint baudrate) {
+  return ::uart_init(uart, baudrate);
+}
+// --------------------------------------------------
+extern "C" bool uart_is_enabled(uart_inst_t* uart);
+bool rpp_driver::SdkWrapper::uart_is_enabled(uart_inst_t* uart) {
+  return ::uart_is_enabled(uart);
+}
+// --------------------------------------------------
+extern "C" bool uart_is_readable(uart_inst_t* uart);
+bool rpp_driver::SdkWrapper::uart_is_readable(uart_inst_t* uart) {
+  return ::uart_is_readable(uart);
+}
+// --------------------------------------------------
+extern "C" bool uart_is_readable_within_us(uart_inst_t* uart, uint32_t us);
+bool rpp_driver::SdkWrapper::uart_is_readable_within_us(uart_inst_t* uart,
+                                                        uint32_t us) {
+  return ::uart_is_readable_within_us(uart, us);
+}
+// --------------------------------------------------
+extern "C" bool uart_is_writable(uart_inst_t* uart);
+bool rpp_driver::SdkWrapper::uart_is_writable(uart_inst_t* uart) {
+  return ::uart_is_writable(uart);
+}
+// --------------------------------------------------
+extern "C" void uart_putc(uart_inst_t* uart, char c);
+void rpp_driver::SdkWrapper::uart_putc(uart_inst_t* uart, char c) {
+  ::uart_putc(uart, c);
+}
+// --------------------------------------------------
+extern "C" void uart_putc_raw(uart_inst_t* uart, char c);
+void rpp_driver::SdkWrapper::uart_putc_raw(uart_inst_t* uart, char c) {
+  ::uart_putc_raw(uart, c);
+}
+// --------------------------------------------------
+extern "C" void uart_puts(uart_inst_t* uart, const char* s);
+void rpp_driver::SdkWrapper::uart_puts(uart_inst_t* uart, const char* s) {
+  ::uart_puts(uart, s);
+}
+// --------------------------------------------------
+extern "C" void uart_read_blocking(uart_inst_t* uart, uint8_t* dst, size_t len);
+void rpp_driver::SdkWrapper::uart_read_blocking(uart_inst_t* uart, uint8_t* dst,
+                                                size_t len) {
+  ::uart_read_blocking(uart, dst, len);
+}
+// --------------------------------------------------
+extern "C" uint uart_set_baudrate(uart_inst_t* uart, uint baudrate);
+uint rpp_driver::SdkWrapper::uart_set_baudrate(uart_inst_t* uart,
+                                               uint baudrate) {
+  return ::uart_set_baudrate(uart, baudrate);
+}
+// --------------------------------------------------
+extern "C" void uart_set_break(uart_inst_t* uart, bool en);
+void rpp_driver::SdkWrapper::uart_set_break(uart_inst_t* uart, bool en) {
+  ::uart_set_break(uart, en);
+}
+// --------------------------------------------------
+extern "C" void uart_set_fifo_enabled(uart_inst_t* uart, bool enabled);
+void rpp_driver::SdkWrapper::uart_set_fifo_enabled(uart_inst_t* uart,
+                                                   bool enabled) {
+  ::uart_set_fifo_enabled(uart, enabled);
+}
+// --------------------------------------------------
+extern "C" void uart_set_format(uart_inst_t* uart, uint data_bits,
+                                uint stop_bits, uart_parity_t parity);
+void rpp_driver::SdkWrapper::uart_set_format(uart_inst_t* uart, uint data_bits,
+                                             uint stop_bits,
+                                             uart_parity_t parity) {
+  ::uart_set_format(uart, data_bits, stop_bits, parity);
+}
+// --------------------------------------------------
+extern "C" void uart_set_hw_flow(uart_inst_t* uart, bool cts, bool rts);
+void rpp_driver::SdkWrapper::uart_set_hw_flow(uart_inst_t* uart, bool cts,
+                                              bool rts) {
+  ::uart_set_hw_flow(uart, cts, rts);
+}
+// --------------------------------------------------
+extern "C" void uart_set_irq_enables(uart_inst_t* uart, bool rx_has_data,
+                                     bool tx_needs_data);
+void rpp_driver::SdkWrapper::uart_set_irq_enables(uart_inst_t* uart,
+                                                  bool rx_has_data,
+                                                  bool tx_needs_data) {
+  ::uart_set_irq_enables(uart, rx_has_data, tx_needs_data);
+}
+// --------------------------------------------------
+extern "C" void uart_set_irqs_enabled(uart_inst_t* uart, bool rx_has_data,
+                                      bool tx_needs_data);
+void rpp_driver::SdkWrapper::uart_set_irqs_enabled(uart_inst_t* uart,
+                                                   bool rx_has_data,
+                                                   bool tx_needs_data) {
+  ::uart_set_irqs_enabled(uart, rx_has_data, tx_needs_data);
+}
+// --------------------------------------------------
+extern "C" void uart_set_translate_crlf(uart_inst_t* uart, bool translate);
+void rpp_driver::SdkWrapper::uart_set_translate_crlf(uart_inst_t* uart,
+                                                     bool translate) {
+  ::uart_set_translate_crlf(uart, translate);
+}
+// --------------------------------------------------
+extern "C" void uart_tx_wait_blocking(uart_inst_t* uart);
+void rpp_driver::SdkWrapper::uart_tx_wait_blocking(uart_inst_t* uart) {
+  ::uart_tx_wait_blocking(uart);
+}
+// --------------------------------------------------
+extern "C" void uart_write_blocking(uart_inst_t* uart, const uint8_t* src,
+                                    size_t len);
+void rpp_driver::SdkWrapper::uart_write_blocking(uart_inst_t* uart,
+                                                 const uint8_t* src,
+                                                 size_t len) {
+  ::uart_write_blocking(uart, src, len);
+}
+#endif  //  __has_include(<hardware/uart.h>) || __has_include(<gmock/gmock.h>)
