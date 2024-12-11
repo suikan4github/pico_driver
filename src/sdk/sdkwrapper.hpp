@@ -1019,6 +1019,11 @@ class SdkWrapper {
                                    size_t len);
 #endif  //  __has_include(<hardware/uart.h>) || __has_include(<gmock/gmock.h>)
 
+#if __has_include(<hardware/vreg.h>) || __has_include(<gmock/gmock.h>)
+  virtual void vreg_disable_voltage_limit(void);
+  virtual void vreg_set_voltage(enum vreg_voltage voltage);
+#endif  //  __has_include(<hardware/vreg.h>) || __has_include(<gmock/gmock.h>)
+
 };  // class SdkWrapper
 
 #include "mocksdkwrapper.hpp"

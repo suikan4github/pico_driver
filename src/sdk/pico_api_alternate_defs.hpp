@@ -38,6 +38,8 @@ enum powman_power_domains { o, p };
 enum pwm_clkdiv_mode { q, r };
 /// @brief Alternate definition for Google Test build.
 enum sha256_endianness { s, t };
+/// @brief Alternate definition for Google Test build.
+enum vreg_voltage { u, v };
 
 //// @brief Alternate definition for Google Test build.
 typedef int uart_parity_t;

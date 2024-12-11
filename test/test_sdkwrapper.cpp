@@ -85,6 +85,7 @@ FAKE_VALUE_FUNC(bool, spin_lock_is_claimed, uint);
 FAKE_VALUE_FUNC(bool, tick_is_running, tick_gen_num_t);
 FAKE_VALUE_FUNC(bool, time_reached, absolute_time_t);
 FAKE_VALUE_FUNC(char, uart_getc, uart_inst_t *);
+FAKE_VOID_FUNC(vreg_set_voltage, enum vreg_voltage);
 }
 // The cpp file of the library to test.
 #include "../src/sdk/sdkwrapper.cpp"
@@ -2202,3 +2203,41 @@ TEST(SdkWrapper, uart_getc) {
   }
   RESET_FAKE(uart_getc);
 }  // TEST(SdkWrapper, uart_getc)
+
+// -----------------------------------------------------------
+//
+//  hardware_vreg
+//  virtual void vreg_set_voltage(enum vreg_voltage voltage);
+//
+// -----------------------------------------------------------
+
+TEST(SdkWrapper, vreg_set_voltage) {
+  std::random_device rng;
+  ::rpp_driver::SdkWrapper pico;
+
+  enum vreg_voltage param_array0[] = {u, v};
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(vreg_set_voltage);
+
+  // Check whether return values are correctly passed to wrapper.
+  int index = 0;
+  for (auto &&param0 : param_array0) {
+    pico.vreg_set_voltage(param0);
+    index++;
+  }
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(vreg_set_voltage_fake.call_count, std::size(param_array0));
+
+  // Check whether parameters were correctly passed from wrapper.
+  index = 0;
+  for (auto &&param0 : param_array0) {
+    // Check the data from test spy. Call order.
+    ASSERT_EQ(fff.call_history[index], (void *)vreg_set_voltage);
+    // Check the data from test spy. : Parameters.
+    ASSERT_EQ(vreg_set_voltage_fake.arg0_history[index], param0);
+    index++;
+  }
+  RESET_FAKE(vreg_set_voltage);
+}  // TEST(SdkWrapper, vreg_set_voltage)

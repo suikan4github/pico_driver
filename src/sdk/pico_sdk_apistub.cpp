@@ -15920,3 +15920,49 @@ extern "C" void _weak_uart_write_blocking(uart_inst_t* uart, const uint8_t* src,
     linker, "/alternatename:uart_write_blocking=_weak_uart_write_blocking")
 #endif  // x86 or amd64
 #endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void vreg_disable_voltage_limit(void);
+__attribute__((weak)) void vreg_disable_voltage_limit(void)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_vreg_disable_voltage_limit(void)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_vreg library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment( \
+    linker,      \
+    "/alternatename:_vreg_disable_voltage_limit=__weak_vreg_disable_voltage_limit")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment( \
+    linker,      \
+    "/alternatename:vreg_disable_voltage_limit=_weak_vreg_disable_voltage_limit")
+#endif  // x86 or amd64
+#endif  // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__)  // Compiler detection
+extern "C" void vreg_set_voltage(enum vreg_voltage voltage);
+__attribute__((weak)) void vreg_set_voltage(enum vreg_voltage voltage)
+#elif defined(_MSC_VER)  // Microsoft Visual C
+extern "C" void _weak_vreg_set_voltage(enum vreg_voltage voltage)
+#else                    // Other compilers are not supported
+#error "Unknown compiler."
+#endif  // Compiler detection
+{
+  assert(false &&
+         "Error : The hardware_vreg library is missing in the link phase.");
+}
+#if defined(_MSC_VER)  // weak binding in MSVC must be after definition
+#if defined(_M_IX86)   // for x86
+#pragma comment(linker, \
+                "/alternatename:_vreg_set_voltage=__weak_vreg_set_voltage")
+#elif defined(_M_AMD64)  // for AMD64
+#pragma comment(linker, \
+                "/alternatename:vreg_set_voltage=_weak_vreg_set_voltage")
+#endif  // x86 or amd64
+#endif  // _MSC_VER

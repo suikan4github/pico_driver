@@ -949,6 +949,8 @@ class MockSdkWrapper : public SdkWrapper {
   MOCK_METHOD1(uart_tx_wait_blocking, void(uart_inst_t* uart));
   MOCK_METHOD3(uart_write_blocking,
                void(uart_inst_t* uart, const uint8_t* src, size_t len));
+  MOCK_METHOD0(vreg_disable_voltage_limit, void());
+  MOCK_METHOD1(vreg_set_voltage, void(enum vreg_voltage voltage));
 }  // class MockSdkWrapper : public SdkWrapper
 ;
 // GCOVR_EXCL_STOP

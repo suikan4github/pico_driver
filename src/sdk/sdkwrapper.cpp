@@ -3941,3 +3941,16 @@ void rpp_driver::SdkWrapper::uart_write_blocking(uart_inst_t* uart,
   ::uart_write_blocking(uart, src, len);
 }
 #endif  //  __has_include(<hardware/uart.h>) || __has_include(<gmock/gmock.h>)
+
+#if __has_include(<hardware/vreg.h>) || __has_include(<gmock/gmock.h>)
+// --------------------------------------------------
+extern "C" void vreg_disable_voltage_limit(void);
+void rpp_driver::SdkWrapper::vreg_disable_voltage_limit(void) {
+  ::vreg_disable_voltage_limit();
+}
+// --------------------------------------------------
+extern "C" void vreg_set_voltage(enum vreg_voltage voltage);
+void rpp_driver::SdkWrapper::vreg_set_voltage(enum vreg_voltage voltage) {
+  ::vreg_set_voltage(voltage);
+}
+#endif  //  __has_include(<hardware/vreg.h>) || __has_include(<gmock/gmock.h>)
