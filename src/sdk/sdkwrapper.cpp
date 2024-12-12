@@ -3954,3 +3954,50 @@ void rpp_driver::SdkWrapper::vreg_set_voltage(enum vreg_voltage voltage) {
   ::vreg_set_voltage(voltage);
 }
 #endif  //  __has_include(<hardware/vreg.h>) || __has_include(<gmock/gmock.h>)
+
+#if __has_include(<hardware/watchdog.h>) || __has_include(<gmock/gmock.h>)
+// --------------------------------------------------
+extern "C" bool watchdog_caused_reboot(void);
+bool rpp_driver::SdkWrapper::watchdog_caused_reboot(void) {
+  return ::watchdog_caused_reboot();
+}
+// --------------------------------------------------
+extern "C" void watchdog_disable(void);
+void rpp_driver::SdkWrapper::watchdog_disable(void) { ::watchdog_disable(); }
+// --------------------------------------------------
+extern "C" void watchdog_enable(uint32_t delay_ms, bool pause_on_debug);
+void rpp_driver::SdkWrapper::watchdog_enable(uint32_t delay_ms,
+                                             bool pause_on_debug) {
+  ::watchdog_enable(delay_ms, pause_on_debug);
+}
+// --------------------------------------------------
+extern "C" bool watchdog_enable_caused_reboot(void);
+bool rpp_driver::SdkWrapper::watchdog_enable_caused_reboot(void) {
+  return ::watchdog_enable_caused_reboot();
+}
+// --------------------------------------------------
+extern "C" uint32_t watchdog_get_count(void);
+uint32_t rpp_driver::SdkWrapper::watchdog_get_count(void) {
+  return ::watchdog_get_count();
+}
+// --------------------------------------------------
+extern "C" uint32_t watchdog_get_time_remaining_ms(void);
+uint32_t rpp_driver::SdkWrapper::watchdog_get_time_remaining_ms(void) {
+  return ::watchdog_get_time_remaining_ms();
+}
+// --------------------------------------------------
+extern "C" void watchdog_reboot(uint32_t pc, uint32_t sp, uint32_t delay_ms);
+void rpp_driver::SdkWrapper::watchdog_reboot(uint32_t pc, uint32_t sp,
+                                             uint32_t delay_ms) {
+  ::watchdog_reboot(pc, sp, delay_ms);
+}
+// --------------------------------------------------
+extern "C" void watchdog_start_tick(uint cycles);
+void rpp_driver::SdkWrapper::watchdog_start_tick(uint cycles) {
+  ::watchdog_start_tick(cycles);
+}
+// --------------------------------------------------
+extern "C" void watchdog_update(void);
+void rpp_driver::SdkWrapper::watchdog_update(void) { ::watchdog_update(); }
+#endif  //  __has_include(<hardware/watchdog.h>) ||
+        //  __has_include(<gmock/gmock.h>)

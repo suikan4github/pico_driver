@@ -951,6 +951,16 @@ class MockSdkWrapper : public SdkWrapper {
                void(uart_inst_t* uart, const uint8_t* src, size_t len));
   MOCK_METHOD0(vreg_disable_voltage_limit, void());
   MOCK_METHOD1(vreg_set_voltage, void(enum vreg_voltage voltage));
+  MOCK_METHOD0(watchdog_caused_reboot, bool());
+  MOCK_METHOD0(watchdog_disable, void());
+  MOCK_METHOD2(watchdog_enable, void(uint32_t delay_ms, bool pause_on_debug));
+  MOCK_METHOD0(watchdog_enable_caused_reboot, bool());
+  MOCK_METHOD0(watchdog_get_count, uint32_t());
+  MOCK_METHOD0(watchdog_get_time_remaining_ms, uint32_t());
+  MOCK_METHOD3(watchdog_reboot,
+               void(uint32_t pc, uint32_t sp, uint32_t delay_ms));
+  MOCK_METHOD1(watchdog_start_tick, void(uint cycles));
+  MOCK_METHOD0(watchdog_update, void());
 }  // class MockSdkWrapper : public SdkWrapper
 ;
 // GCOVR_EXCL_STOP

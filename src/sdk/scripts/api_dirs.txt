@@ -24,3 +24,4 @@ hardware ticks
 hardware timer
 hardware uart
 hardware vreg
+hardware watchdog

@@ -1024,6 +1024,19 @@ class SdkWrapper {
   virtual void vreg_set_voltage(enum vreg_voltage voltage);
 #endif  //  __has_include(<hardware/vreg.h>) || __has_include(<gmock/gmock.h>)
 
+#if __has_include(<hardware/watchdog.h>) || __has_include(<gmock/gmock.h>)
+  virtual bool watchdog_caused_reboot(void);
+  virtual void watchdog_disable(void);
+  virtual void watchdog_enable(uint32_t delay_ms, bool pause_on_debug);
+  virtual bool watchdog_enable_caused_reboot(void);
+  virtual uint32_t watchdog_get_count(void);
+  virtual uint32_t watchdog_get_time_remaining_ms(void);
+  virtual void watchdog_reboot(uint32_t pc, uint32_t sp, uint32_t delay_ms);
+  virtual void watchdog_start_tick(uint cycles);
+  virtual void watchdog_update(void);
+#endif  //  __has_include(<hardware/watchdog.h>) ||
+        //  __has_include(<gmock/gmock.h>)
+
 };  // class SdkWrapper
 
 #include "mocksdkwrapper.hpp"

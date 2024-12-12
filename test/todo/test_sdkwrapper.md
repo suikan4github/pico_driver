@@ -1,10 +1,17 @@
 # test_SdkWrapper TDD
 
+## SdkWrapper::watchdog_start_tick()
+- [x] Implement member function . 
+- [x] Create test case to fail. 
+- [x] Make it success. 
+- [x] Remove the duplication. 
+
 ## SdkWrapper::vreg_set_voltage()
 - [x] Implement member function . 
 - [x] Create test case to fail. 
 - [x] Make it success. 
 - [x] Remove the duplication. 
+
 ## SdkWrapper::uart_getc()
 - [x] Implement member function . 
 - [x] Create test case to fail. 
