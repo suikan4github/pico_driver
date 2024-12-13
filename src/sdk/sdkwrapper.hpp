@@ -1037,6 +1037,12 @@ class SdkWrapper {
 #endif  //  __has_include(<hardware/watchdog.h>) ||
         //  __has_include(<gmock/gmock.h>)
 
+#if __has_include(<hardware/xosc.h>) || __has_include(<gmock/gmock.h>)
+  virtual void xosc_disable(void);
+  virtual void xosc_dormant(void);
+  virtual void xosc_init(void);
+#endif  //  __has_include(<hardware/xosc.h>) || __has_include(<gmock/gmock.h>)
+
 };  // class SdkWrapper
 
 #include "mocksdkwrapper.hpp"

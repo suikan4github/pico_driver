@@ -87,6 +87,7 @@ FAKE_VALUE_FUNC(bool, time_reached, absolute_time_t);
 FAKE_VALUE_FUNC(char, uart_getc, uart_inst_t *);
 FAKE_VOID_FUNC(vreg_set_voltage, enum vreg_voltage);
 FAKE_VOID_FUNC(watchdog_start_tick, uint);
+FAKE_VOID_FUNC(xosc_init);
 }
 // The cpp file of the library to test.
 #include "../src/sdk/sdkwrapper.cpp"
@@ -2281,3 +2282,24 @@ TEST(SdkWrapper, watchdog_start_tick) {
   }
   RESET_FAKE(watchdog_start_tick);
 }  // TEST(SdkWrapper, watchdog_start_tick)
+
+// -----------------------------------------------------------
+//
+//  hardware_xosc
+//  virtual void xosc_init(void);
+//
+// -----------------------------------------------------------
+
+TEST(SdkWrapper, xosc_init) {
+  std::random_device rng;
+  ::rpp_driver::SdkWrapper pico;
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(xosc_init);
+
+  pico.xosc_init();
+
+  // Check the data from test spy. Call order.
+  ASSERT_EQ(fff.call_history[0], (void *)xosc_init);
+  RESET_FAKE(xosc_init);
+}  // TEST(SdkWrapper, xosc_init)

@@ -12957,3 +12957,60 @@ extern "C"  void _weak_watchdog_update   ( void )
 #pragma comment(linker, "/alternatename:watchdog_update=_weak_watchdog_update")
 #endif // x86 or amd64
 #endif // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__) // Compiler detection
+extern "C"  void xosc_disable  ( void );
+__attribute__((weak)) void xosc_disable   ( void )
+#elif defined(_MSC_VER) // Microsoft Visual C
+extern "C"  void _weak_xosc_disable   ( void )
+#else // Other compilers are not supported
+#error "Unknown compiler."
+#endif // Compiler detection
+{
+    assert( false && "Error : The hardware_xosc library is missing in the link phase.");
+}
+#if defined(_MSC_VER) // weak binding in MSVC must be after definition
+#if defined(_M_IX86) // for x86
+#pragma comment(linker, "/alternatename:_xosc_disable=__weak_xosc_disable")
+#elif defined(_M_AMD64) // for AMD64
+#pragma comment(linker, "/alternatename:xosc_disable=_weak_xosc_disable")
+#endif // x86 or amd64
+#endif // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__) // Compiler detection
+extern "C"  void xosc_dormant  ( void );
+__attribute__((weak)) void xosc_dormant   ( void )
+#elif defined(_MSC_VER) // Microsoft Visual C
+extern "C"  void _weak_xosc_dormant   ( void )
+#else // Other compilers are not supported
+#error "Unknown compiler."
+#endif // Compiler detection
+{
+    assert( false && "Error : The hardware_xosc library is missing in the link phase.");
+}
+#if defined(_MSC_VER) // weak binding in MSVC must be after definition
+#if defined(_M_IX86) // for x86
+#pragma comment(linker, "/alternatename:_xosc_dormant=__weak_xosc_dormant")
+#elif defined(_M_AMD64) // for AMD64
+#pragma comment(linker, "/alternatename:xosc_dormant=_weak_xosc_dormant")
+#endif // x86 or amd64
+#endif // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__) // Compiler detection
+extern "C"  void xosc_init  ( void );
+__attribute__((weak)) void xosc_init   ( void )
+#elif defined(_MSC_VER) // Microsoft Visual C
+extern "C"  void _weak_xosc_init   ( void )
+#else // Other compilers are not supported
+#error "Unknown compiler."
+#endif // Compiler detection
+{
+    assert( false && "Error : The hardware_xosc library is missing in the link phase.");
+}
+#if defined(_MSC_VER) // weak binding in MSVC must be after definition
+#if defined(_M_IX86) // for x86
+#pragma comment(linker, "/alternatename:_xosc_init=__weak_xosc_init")
+#elif defined(_M_AMD64) // for AMD64
+#pragma comment(linker, "/alternatename:xosc_init=_weak_xosc_init")
+#endif // x86 or amd64
+#endif // _MSC_VER

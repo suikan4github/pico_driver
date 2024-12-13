@@ -25,3 +25,4 @@ hardware timer
 hardware uart
 hardware vreg
 hardware watchdog
+hardware xosc

@@ -961,6 +961,9 @@ class MockSdkWrapper : public SdkWrapper {
                void(uint32_t pc, uint32_t sp, uint32_t delay_ms));
   MOCK_METHOD1(watchdog_start_tick, void(uint cycles));
   MOCK_METHOD0(watchdog_update, void());
+  MOCK_METHOD0(xosc_disable, void());
+  MOCK_METHOD0(xosc_dormant, void());
+  MOCK_METHOD0(xosc_init, void());
 }  // class MockSdkWrapper : public SdkWrapper
 ;
 // GCOVR_EXCL_STOP

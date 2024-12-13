@@ -4001,3 +4001,15 @@ extern "C" void watchdog_update(void);
 void rpp_driver::SdkWrapper::watchdog_update(void) { ::watchdog_update(); }
 #endif  //  __has_include(<hardware/watchdog.h>) ||
         //  __has_include(<gmock/gmock.h>)
+
+#if __has_include(<hardware/xosc.h>) || __has_include(<gmock/gmock.h>)
+// --------------------------------------------------
+extern "C" void xosc_disable(void);
+void rpp_driver::SdkWrapper::xosc_disable(void) { ::xosc_disable(); }
+// --------------------------------------------------
+extern "C" void xosc_dormant(void);
+void rpp_driver::SdkWrapper::xosc_dormant(void) { ::xosc_dormant(); }
+// --------------------------------------------------
+extern "C" void xosc_init(void);
+void rpp_driver::SdkWrapper::xosc_init(void) { ::xosc_init(); }
+#endif  //  __has_include(<hardware/xosc.h>) || __has_include(<gmock/gmock.h>)
