@@ -120,3 +120,7 @@
 #if __has_include(<hardware/xosc.h>) || __has_include(<gmock/gmock.h>)
 #include <hardware/xosc.h>
 #endif  //  __has_include(<hardware/xosc.h>) || __has_include(<gmock/gmock.h>)
+
+#if __has_include(<pico/sync.h>) || __has_include(<gmock/gmock.h>)
+#include <pico/sync.h>
+#endif  //  __has_include(<pico/sync.h>) || __has_include(<gmock/gmock.h>)

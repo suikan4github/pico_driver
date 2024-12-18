@@ -10,6 +10,9 @@ MODULE_PREFIX=$1
 MODULE_NAME=$2
 MODULE="$MODULE_PREFIX"_"$MODULE_NAME"
 
+# Scratch pad files. 
+TEMPLIST=$(mktemp).h
+
 # Composit the source file path in the Raspberry Pi Pico SDK from the module prefix and module name. 
 # We assume PICO_SDK_PATH is correctly set. 
 TARGET="${PICO_SDK_PATH%/}/src/rp2_common/${MODULE_PREFIX}_${MODULE_NAME}/include/${MODULE_PREFIX}/${MODULE_NAME}.h"
@@ -19,17 +22,37 @@ if [ ! -e "$TARGET" ]; then
   TARGET="${PICO_SDK_PATH%/}/src/common/${MODULE_PREFIX}_${MODULE_NAME}/include/${MODULE_PREFIX}/${MODULE_NAME}.h"
 fi
 
-# for monitoring
-echo "Target : $TARGET"
+if [ "$MODULE_PREFIX" = "pico" ] && [ "$MODULE_NAME" = "sync" ]; then
+  # In this case, it should be pico_sync
 
-# Scratch pad files. 
-TEMPLIST=$(mktemp).h
+  # pico_sync/include/pico_critical_section.h
+  TARGET="${PICO_SDK_PATH%/}/src/common/${MODULE_PREFIX}_${MODULE_NAME}/include/${MODULE_PREFIX}/critical_section.h"
+  # for monitoring
+  echo "Target : $TARGET"
+  # Format the header file. 
+  ./format_header.sh < "$TARGET" > "$TEMPLIST"
 
-# Format the header file. 
-./format_header.sh < "$TARGET" > "$TEMPLIST"
+  # pico_sync/include/pico_critical_section.h
+  TARGET="${PICO_SDK_PATH%/}/src/common/${MODULE_PREFIX}_${MODULE_NAME}/include/${MODULE_PREFIX}/mutex.h"
+  # for monitoring
+  echo "Target : $TARGET"
+  # Format the header file. 
+  ./format_header.sh < "$TARGET" >> "$TEMPLIST"
 
+  # pico_sync/include/pico_critical_section.h
+  TARGET="${PICO_SDK_PATH%/}/src/common/${MODULE_PREFIX}_${MODULE_NAME}/include/${MODULE_PREFIX}/sem.h"
+  # for monitoring
+  echo "Target : $TARGET"
+  # Format the header file. 
+  ./format_header.sh < "$TARGET" >> "$TEMPLIST"
+else
+  # for monitoring
+  echo "Target : $TARGET"
 
-# sha256_get_write_addr is unable to support because the MOCK of that function causes "Invalid covariant return type" error. 
+  # Format the header file. 
+  ./format_header.sh < "$TARGET" > "$TEMPLIST"
+
+fi
 
 # for debug out.
 cat "$TEMPLIST" >> debug.hpp

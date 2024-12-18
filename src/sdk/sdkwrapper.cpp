@@ -4013,3 +4013,196 @@ void rpp_driver::SdkWrapper::xosc_dormant(void) { ::xosc_dormant(); }
 extern "C" void xosc_init(void);
 void rpp_driver::SdkWrapper::xosc_init(void) { ::xosc_init(); }
 #endif  //  __has_include(<hardware/xosc.h>) || __has_include(<gmock/gmock.h>)
+
+#if __has_include(<pico/sync.h>) || __has_include(<gmock/gmock.h>)
+// --------------------------------------------------
+extern "C" void critical_section_deinit(critical_section_t* crit_sec);
+void rpp_driver::SdkWrapper::critical_section_deinit(
+    critical_section_t* crit_sec) {
+  ::critical_section_deinit(crit_sec);
+}
+// --------------------------------------------------
+extern "C" void critical_section_enter_blocking(critical_section_t* crit_sec);
+void rpp_driver::SdkWrapper::critical_section_enter_blocking(
+    critical_section_t* crit_sec) {
+  ::critical_section_enter_blocking(crit_sec);
+}
+// --------------------------------------------------
+extern "C" void critical_section_exit(critical_section_t* crit_sec);
+void rpp_driver::SdkWrapper::critical_section_exit(
+    critical_section_t* crit_sec) {
+  ::critical_section_exit(crit_sec);
+}
+// --------------------------------------------------
+extern "C" void critical_section_init(critical_section_t* crit_sec);
+void rpp_driver::SdkWrapper::critical_section_init(
+    critical_section_t* crit_sec) {
+  ::critical_section_init(crit_sec);
+}
+// --------------------------------------------------
+extern "C" void critical_section_init_with_lock_num(
+    critical_section_t* crit_sec, uint lock_num);
+void rpp_driver::SdkWrapper::critical_section_init_with_lock_num(
+    critical_section_t* crit_sec, uint lock_num) {
+  ::critical_section_init_with_lock_num(crit_sec, lock_num);
+}
+// --------------------------------------------------
+extern "C" bool critical_section_is_initialized(critical_section_t* crit_sec);
+bool rpp_driver::SdkWrapper::critical_section_is_initialized(
+    critical_section_t* crit_sec) {
+  return ::critical_section_is_initialized(crit_sec);
+}
+// --------------------------------------------------
+extern "C" bool mutex_enter_block_until(mutex_t* mtx, absolute_time_t until);
+bool rpp_driver::SdkWrapper::mutex_enter_block_until(mutex_t* mtx,
+                                                     absolute_time_t until) {
+  return ::mutex_enter_block_until(mtx, until);
+}
+// --------------------------------------------------
+extern "C" void mutex_enter_blocking(mutex_t* mtx);
+void rpp_driver::SdkWrapper::mutex_enter_blocking(mutex_t* mtx) {
+  ::mutex_enter_blocking(mtx);
+}
+// --------------------------------------------------
+extern "C" bool mutex_enter_timeout_ms(mutex_t* mtx, uint32_t timeout_ms);
+bool rpp_driver::SdkWrapper::mutex_enter_timeout_ms(mutex_t* mtx,
+                                                    uint32_t timeout_ms) {
+  return ::mutex_enter_timeout_ms(mtx, timeout_ms);
+}
+// --------------------------------------------------
+extern "C" bool mutex_enter_timeout_us(mutex_t* mtx, uint32_t timeout_us);
+bool rpp_driver::SdkWrapper::mutex_enter_timeout_us(mutex_t* mtx,
+                                                    uint32_t timeout_us) {
+  return ::mutex_enter_timeout_us(mtx, timeout_us);
+}
+// --------------------------------------------------
+extern "C" void mutex_exit(mutex_t* mtx);
+void rpp_driver::SdkWrapper::mutex_exit(mutex_t* mtx) { ::mutex_exit(mtx); }
+// --------------------------------------------------
+extern "C" void mutex_init(mutex_t* mtx);
+void rpp_driver::SdkWrapper::mutex_init(mutex_t* mtx) { ::mutex_init(mtx); }
+// --------------------------------------------------
+extern "C" bool mutex_is_initialized(mutex_t* mtx);
+bool rpp_driver::SdkWrapper::mutex_is_initialized(mutex_t* mtx) {
+  return ::mutex_is_initialized(mtx);
+}
+// --------------------------------------------------
+extern "C" bool mutex_try_enter(mutex_t* mtx, uint32_t* owner_out);
+bool rpp_driver::SdkWrapper::mutex_try_enter(mutex_t* mtx,
+                                             uint32_t* owner_out) {
+  return ::mutex_try_enter(mtx, owner_out);
+}
+// --------------------------------------------------
+extern "C" bool mutex_try_enter_block_until(mutex_t* mtx,
+                                            absolute_time_t until);
+bool rpp_driver::SdkWrapper::mutex_try_enter_block_until(
+    mutex_t* mtx, absolute_time_t until) {
+  return ::mutex_try_enter_block_until(mtx, until);
+}
+// --------------------------------------------------
+extern "C" bool recursive_mutex_enter_block_until(recursive_mutex_t* mtx,
+                                                  absolute_time_t until);
+bool rpp_driver::SdkWrapper::recursive_mutex_enter_block_until(
+    recursive_mutex_t* mtx, absolute_time_t until) {
+  return ::recursive_mutex_enter_block_until(mtx, until);
+}
+// --------------------------------------------------
+extern "C" void recursive_mutex_enter_blocking(recursive_mutex_t* mtx);
+void rpp_driver::SdkWrapper::recursive_mutex_enter_blocking(
+    recursive_mutex_t* mtx) {
+  ::recursive_mutex_enter_blocking(mtx);
+}
+// --------------------------------------------------
+extern "C" bool recursive_mutex_enter_timeout_ms(recursive_mutex_t* mtx,
+                                                 uint32_t timeout_ms);
+bool rpp_driver::SdkWrapper::recursive_mutex_enter_timeout_ms(
+    recursive_mutex_t* mtx, uint32_t timeout_ms) {
+  return ::recursive_mutex_enter_timeout_ms(mtx, timeout_ms);
+}
+// --------------------------------------------------
+extern "C" bool recursive_mutex_enter_timeout_us(recursive_mutex_t* mtx,
+                                                 uint32_t timeout_us);
+bool rpp_driver::SdkWrapper::recursive_mutex_enter_timeout_us(
+    recursive_mutex_t* mtx, uint32_t timeout_us) {
+  return ::recursive_mutex_enter_timeout_us(mtx, timeout_us);
+}
+// --------------------------------------------------
+extern "C" void recursive_mutex_exit(recursive_mutex_t* mtx);
+void rpp_driver::SdkWrapper::recursive_mutex_exit(recursive_mutex_t* mtx) {
+  ::recursive_mutex_exit(mtx);
+}
+// --------------------------------------------------
+extern "C" void recursive_mutex_init(recursive_mutex_t* mtx);
+void rpp_driver::SdkWrapper::recursive_mutex_init(recursive_mutex_t* mtx) {
+  ::recursive_mutex_init(mtx);
+}
+// --------------------------------------------------
+extern "C" bool recursive_mutex_is_initialized(recursive_mutex_t* mtx);
+bool rpp_driver::SdkWrapper::recursive_mutex_is_initialized(
+    recursive_mutex_t* mtx) {
+  return ::recursive_mutex_is_initialized(mtx);
+}
+// --------------------------------------------------
+extern "C" bool recursive_mutex_try_enter(recursive_mutex_t* mtx,
+                                          uint32_t* owner_out);
+bool rpp_driver::SdkWrapper::recursive_mutex_try_enter(recursive_mutex_t* mtx,
+                                                       uint32_t* owner_out) {
+  return ::recursive_mutex_try_enter(mtx, owner_out);
+}
+// --------------------------------------------------
+extern "C" void runtime_init_mutex(void);
+void rpp_driver::SdkWrapper::runtime_init_mutex(void) {
+  ::runtime_init_mutex();
+}
+// --------------------------------------------------
+extern "C" bool sem_acquire_block_until(semaphore_t* sem,
+                                        absolute_time_t until);
+bool rpp_driver::SdkWrapper::sem_acquire_block_until(semaphore_t* sem,
+                                                     absolute_time_t until) {
+  return ::sem_acquire_block_until(sem, until);
+}
+// --------------------------------------------------
+extern "C" void sem_acquire_blocking(semaphore_t* sem);
+void rpp_driver::SdkWrapper::sem_acquire_blocking(semaphore_t* sem) {
+  ::sem_acquire_blocking(sem);
+}
+// --------------------------------------------------
+extern "C" bool sem_acquire_timeout_ms(semaphore_t* sem, uint32_t timeout_ms);
+bool rpp_driver::SdkWrapper::sem_acquire_timeout_ms(semaphore_t* sem,
+                                                    uint32_t timeout_ms) {
+  return ::sem_acquire_timeout_ms(sem, timeout_ms);
+}
+// --------------------------------------------------
+extern "C" bool sem_acquire_timeout_us(semaphore_t* sem, uint32_t timeout_us);
+bool rpp_driver::SdkWrapper::sem_acquire_timeout_us(semaphore_t* sem,
+                                                    uint32_t timeout_us) {
+  return ::sem_acquire_timeout_us(sem, timeout_us);
+}
+// --------------------------------------------------
+extern "C" int sem_available(semaphore_t* sem);
+int rpp_driver::SdkWrapper::sem_available(semaphore_t* sem) {
+  return ::sem_available(sem);
+}
+// --------------------------------------------------
+extern "C" void sem_init(semaphore_t* sem, int16_t initial_permits,
+                         int16_t max_permits);
+void rpp_driver::SdkWrapper::sem_init(semaphore_t* sem, int16_t initial_permits,
+                                      int16_t max_permits) {
+  ::sem_init(sem, initial_permits, max_permits);
+}
+// --------------------------------------------------
+extern "C" bool sem_release(semaphore_t* sem);
+bool rpp_driver::SdkWrapper::sem_release(semaphore_t* sem) {
+  return ::sem_release(sem);
+}
+// --------------------------------------------------
+extern "C" void sem_reset(semaphore_t* sem, int16_t permits);
+void rpp_driver::SdkWrapper::sem_reset(semaphore_t* sem, int16_t permits) {
+  ::sem_reset(sem, permits);
+}
+// --------------------------------------------------
+extern "C" bool sem_try_acquire(semaphore_t* sem);
+bool rpp_driver::SdkWrapper::sem_try_acquire(semaphore_t* sem) {
+  return ::sem_try_acquire(sem);
+}
+#endif  //  __has_include(<pico/sync.h>) || __has_include(<gmock/gmock.h>)

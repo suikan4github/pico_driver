@@ -27,6 +27,7 @@ cat - > "$SRCFILE"
 # 12. convert foo *bar to foo* bar. 
 # 13. grep removes the aliases of the std lib functions. 
 # 14. grep removes the functions unable to support. 
+#     sha256_get_write_addr is unable to support because the MOCK of that function causes "Invalid covariant return type" error. 
 # 15. tr removes consecutive spaces. uniq removes repeating lines. 
 clang-format "$SRCFILE" --style="{ColumnLimit: 9999}" > "$TEMPSRC"
 ctags -x --c++-kinds=pf "$TEMPSRC"|\
@@ -45,6 +46,8 @@ grep -v 'stdio_getchar' | grep -v 'stdio_putchar' | grep -v 'stdio_puts' |grep -
 grep -v 'sha256_get_write_addr' | \
 tr -s "[:space:]" | uniq  \
 
+
 # Remove the scratch pad files. 
 trap 'rm -f "$SRCFILE"' EXIT
 trap 'rm -f "$TEMPSRC"' EXIT
+

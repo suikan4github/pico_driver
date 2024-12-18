@@ -42,13 +42,19 @@ enum sha256_endianness { s, t };
 enum vreg_voltage { u, v };
 
 //// @brief Alternate definition for Google Test build.
+typedef int critical_section_t;
+//// @brief Alternate definition for Google Test build.
+typedef int mutex_t;
+//// @brief Alternate definition for Google Test build.
+typedef int recursive_mutex_t;
+//// @brief Alternate definition for Google Test build.
+typedef int semaphore_t;
+//// @brief Alternate definition for Google Test build.
 typedef int uart_parity_t;
 //// @brief Alternate definition for Google Test build.
 typedef int uart_inst_t;
 //// @brief Alternate definition for Google Test build.
 typedef int uart_hw_t;
-//// @brief Alternate definition for Google Test build.
-typedef int absolute_time_t;
 //// @brief Alternate definition for Google Test build.
 typedef int hardware_alarm_callback_t;
 //// @brief Alternate definition for Google Test build.

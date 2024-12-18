@@ -88,6 +88,9 @@ FAKE_VALUE_FUNC(char, uart_getc, uart_inst_t *);
 FAKE_VOID_FUNC(vreg_set_voltage, enum vreg_voltage);
 FAKE_VOID_FUNC(watchdog_start_tick, uint);
 FAKE_VOID_FUNC(xosc_init);
+FAKE_VALUE_FUNC(bool, critical_section_is_initialized, critical_section_t *);
+FAKE_VALUE_FUNC(bool, mutex_is_initialized, mutex_t *);
+FAKE_VALUE_FUNC(bool, sem_release, semaphore_t *);
 }
 // The cpp file of the library to test.
 #include "../src/sdk/sdkwrapper.cpp"
@@ -1996,7 +1999,7 @@ TEST(SdkWrapper, sha256_set_dma_size) {
 
 // -----------------------------------------------------------
 //
-//  hardware_pwm
+//  hardware_spi
 //  virtual bool spi_is_readable(const spi_inst_t *spi);
 //
 // -----------------------------------------------------------
@@ -2303,3 +2306,138 @@ TEST(SdkWrapper, xosc_init) {
   ASSERT_EQ(fff.call_history[0], (void *)xosc_init);
   RESET_FAKE(xosc_init);
 }  // TEST(SdkWrapper, xosc_init)
+
+// -----------------------------------------------------------
+//
+//  pico_sync
+//  virtual bool critical_section_is_initialized(critical_section_t *crit_sec);
+//
+// -----------------------------------------------------------
+
+TEST(SdkWrapper, critical_section_is_initialized) {
+  std::random_device rng;
+  ::rpp_driver::SdkWrapper pico;
+
+  std::uniform_int_distribution<critical_section_t> param_dist(0, INT_MAX);
+  critical_section_t param_array0[] = {param_dist(rng), param_dist(rng)};
+
+  bool retval_array[std::size(param_array0)] = {true, false};
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(critical_section_is_initialized);
+
+  SET_RETURN_SEQ(critical_section_is_initialized, retval_array,
+                 std::size(retval_array));
+
+  // Check whether return values are correctly passed to wrapper.
+  int index = 0;
+  for (auto &&param0 : param_array0) {
+    ASSERT_EQ(pico.critical_section_is_initialized(&param_array0[index]),
+              retval_array[index]);
+    index++;
+  }
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(critical_section_is_initialized_fake.call_count,
+            std::size(retval_array));
+
+  // Check whether parameters were correctly passed from wrapper.
+  index = 0;
+  for (auto &&param0 : param_array0) {
+    // Check the data from test spy. Call order.
+    ASSERT_EQ(fff.call_history[index], (void *)critical_section_is_initialized);
+    // Check the data from test spy. : Parameters.
+    ASSERT_EQ(critical_section_is_initialized_fake.arg0_history[index],
+              &param_array0[index]);
+    index++;
+  }
+  RESET_FAKE(critical_section_is_initialized);
+}  // TEST(SdkWrapper, critical_section_is_initialized)
+
+// -----------------------------------------------------------
+//
+//  pico_sync
+//  virtual bool mutex_is_initialized(mutex_t *mtx);
+//
+// -----------------------------------------------------------
+
+TEST(SdkWrapper, mutex_is_initialized) {
+  std::random_device rng;
+  ::rpp_driver::SdkWrapper pico;
+
+  std::uniform_int_distribution<mutex_t> param_dist(0, INT_MAX);
+  mutex_t param_array0[] = {param_dist(rng), param_dist(rng)};
+
+  bool retval_array[std::size(param_array0)] = {true, false};
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(mutex_is_initialized);
+
+  SET_RETURN_SEQ(mutex_is_initialized, retval_array, std::size(retval_array));
+
+  // Check whether return values are correctly passed to wrapper.
+  int index = 0;
+  for (auto &&param0 : param_array0) {
+    ASSERT_EQ(pico.mutex_is_initialized(&param_array0[index]),
+              retval_array[index]);
+    index++;
+  }
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(mutex_is_initialized_fake.call_count, std::size(retval_array));
+
+  // Check whether parameters were correctly passed from wrapper.
+  index = 0;
+  for (auto &&param0 : param_array0) {
+    // Check the data from test spy. Call order.
+    ASSERT_EQ(fff.call_history[index], (void *)mutex_is_initialized);
+    // Check the data from test spy. : Parameters.
+    ASSERT_EQ(mutex_is_initialized_fake.arg0_history[index],
+              &param_array0[index]);
+    index++;
+  }
+  RESET_FAKE(mutex_is_initialized);
+}  // TEST(SdkWrapper, mutex_is_initialized)
+
+// -----------------------------------------------------------
+//
+//  pico_sync
+//  virtual bool sem_release(semaphore_t *sem);
+//
+// -----------------------------------------------------------
+
+TEST(SdkWrapper, sem_release) {
+  std::random_device rng;
+  ::rpp_driver::SdkWrapper pico;
+
+  std::uniform_int_distribution<semaphore_t> param_dist(0, INT_MAX);
+  semaphore_t param_array0[] = {param_dist(rng), param_dist(rng)};
+
+  bool retval_array[std::size(param_array0)] = {true, false};
+
+  FFF_RESET_HISTORY();
+  RESET_FAKE(sem_release);
+
+  SET_RETURN_SEQ(sem_release, retval_array, std::size(retval_array));
+
+  // Check whether return values are correctly passed to wrapper.
+  int index = 0;
+  for (auto &&param0 : param_array0) {
+    ASSERT_EQ(pico.sem_release(&param_array0[index]), retval_array[index]);
+    index++;
+  }
+
+  // Check the data from test spy. How many time called?
+  ASSERT_EQ(sem_release_fake.call_count, std::size(retval_array));
+
+  // Check whether parameters were correctly passed from wrapper.
+  index = 0;
+  for (auto &&param0 : param_array0) {
+    // Check the data from test spy. Call order.
+    ASSERT_EQ(fff.call_history[index], (void *)sem_release);
+    // Check the data from test spy. : Parameters.
+    ASSERT_EQ(sem_release_fake.arg0_history[index], &param_array0[index]);
+    index++;
+  }
+  RESET_FAKE(sem_release);
+}  // TEST(SdkWrapper, sem_release)
