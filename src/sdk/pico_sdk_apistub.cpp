@@ -13014,3 +13014,630 @@ extern "C"  void _weak_xosc_init   ( void )
 #pragma comment(linker, "/alternatename:xosc_init=_weak_xosc_init")
 #endif // x86 or amd64
 #endif // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__) // Compiler detection
+extern "C"  void critical_section_deinit  ( critical_section_t* crit_sec );
+__attribute__((weak)) void critical_section_deinit   ( critical_section_t* crit_sec )
+#elif defined(_MSC_VER) // Microsoft Visual C
+extern "C"  void _weak_critical_section_deinit   ( critical_section_t* crit_sec )
+#else // Other compilers are not supported
+#error "Unknown compiler."
+#endif // Compiler detection
+{
+    assert( false && "Error : The pico_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER) // weak binding in MSVC must be after definition
+#if defined(_M_IX86) // for x86
+#pragma comment(linker, "/alternatename:_critical_section_deinit=__weak_critical_section_deinit")
+#elif defined(_M_AMD64) // for AMD64
+#pragma comment(linker, "/alternatename:critical_section_deinit=_weak_critical_section_deinit")
+#endif // x86 or amd64
+#endif // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__) // Compiler detection
+extern "C"  void critical_section_enter_blocking  ( critical_section_t* crit_sec );
+__attribute__((weak)) void critical_section_enter_blocking   ( critical_section_t* crit_sec )
+#elif defined(_MSC_VER) // Microsoft Visual C
+extern "C"  void _weak_critical_section_enter_blocking   ( critical_section_t* crit_sec )
+#else // Other compilers are not supported
+#error "Unknown compiler."
+#endif // Compiler detection
+{
+    assert( false && "Error : The pico_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER) // weak binding in MSVC must be after definition
+#if defined(_M_IX86) // for x86
+#pragma comment(linker, "/alternatename:_critical_section_enter_blocking=__weak_critical_section_enter_blocking")
+#elif defined(_M_AMD64) // for AMD64
+#pragma comment(linker, "/alternatename:critical_section_enter_blocking=_weak_critical_section_enter_blocking")
+#endif // x86 or amd64
+#endif // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__) // Compiler detection
+extern "C"  void critical_section_exit  ( critical_section_t* crit_sec );
+__attribute__((weak)) void critical_section_exit   ( critical_section_t* crit_sec )
+#elif defined(_MSC_VER) // Microsoft Visual C
+extern "C"  void _weak_critical_section_exit   ( critical_section_t* crit_sec )
+#else // Other compilers are not supported
+#error "Unknown compiler."
+#endif // Compiler detection
+{
+    assert( false && "Error : The pico_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER) // weak binding in MSVC must be after definition
+#if defined(_M_IX86) // for x86
+#pragma comment(linker, "/alternatename:_critical_section_exit=__weak_critical_section_exit")
+#elif defined(_M_AMD64) // for AMD64
+#pragma comment(linker, "/alternatename:critical_section_exit=_weak_critical_section_exit")
+#endif // x86 or amd64
+#endif // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__) // Compiler detection
+extern "C"  void critical_section_init  ( critical_section_t* crit_sec );
+__attribute__((weak)) void critical_section_init   ( critical_section_t* crit_sec )
+#elif defined(_MSC_VER) // Microsoft Visual C
+extern "C"  void _weak_critical_section_init   ( critical_section_t* crit_sec )
+#else // Other compilers are not supported
+#error "Unknown compiler."
+#endif // Compiler detection
+{
+    assert( false && "Error : The pico_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER) // weak binding in MSVC must be after definition
+#if defined(_M_IX86) // for x86
+#pragma comment(linker, "/alternatename:_critical_section_init=__weak_critical_section_init")
+#elif defined(_M_AMD64) // for AMD64
+#pragma comment(linker, "/alternatename:critical_section_init=_weak_critical_section_init")
+#endif // x86 or amd64
+#endif // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__) // Compiler detection
+extern "C"  void critical_section_init_with_lock_num  ( critical_section_t* crit_sec, uint lock_num );
+__attribute__((weak)) void critical_section_init_with_lock_num   ( critical_section_t* crit_sec, uint lock_num )
+#elif defined(_MSC_VER) // Microsoft Visual C
+extern "C"  void _weak_critical_section_init_with_lock_num   ( critical_section_t* crit_sec, uint lock_num )
+#else // Other compilers are not supported
+#error "Unknown compiler."
+#endif // Compiler detection
+{
+    assert( false && "Error : The pico_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER) // weak binding in MSVC must be after definition
+#if defined(_M_IX86) // for x86
+#pragma comment(linker, "/alternatename:_critical_section_init_with_lock_num=__weak_critical_section_init_with_lock_num")
+#elif defined(_M_AMD64) // for AMD64
+#pragma comment(linker, "/alternatename:critical_section_init_with_lock_num=_weak_critical_section_init_with_lock_num")
+#endif // x86 or amd64
+#endif // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__) // Compiler detection
+extern "C"  bool critical_section_is_initialized  ( critical_section_t* crit_sec );
+__attribute__((weak)) bool critical_section_is_initialized   ( critical_section_t* crit_sec )
+#elif defined(_MSC_VER) // Microsoft Visual C
+extern "C"  bool _weak_critical_section_is_initialized   ( critical_section_t* crit_sec )
+#else // Other compilers are not supported
+#error "Unknown compiler."
+#endif // Compiler detection
+{
+    assert( false && "Error : The pico_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER) // weak binding in MSVC must be after definition
+#if defined(_M_IX86) // for x86
+#pragma comment(linker, "/alternatename:_critical_section_is_initialized=__weak_critical_section_is_initialized")
+#elif defined(_M_AMD64) // for AMD64
+#pragma comment(linker, "/alternatename:critical_section_is_initialized=_weak_critical_section_is_initialized")
+#endif // x86 or amd64
+#endif // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__) // Compiler detection
+extern "C"  bool mutex_enter_block_until  ( mutex_t* mtx, absolute_time_t until );
+__attribute__((weak)) bool mutex_enter_block_until   ( mutex_t* mtx, absolute_time_t until )
+#elif defined(_MSC_VER) // Microsoft Visual C
+extern "C"  bool _weak_mutex_enter_block_until   ( mutex_t* mtx, absolute_time_t until )
+#else // Other compilers are not supported
+#error "Unknown compiler."
+#endif // Compiler detection
+{
+    assert( false && "Error : The pico_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER) // weak binding in MSVC must be after definition
+#if defined(_M_IX86) // for x86
+#pragma comment(linker, "/alternatename:_mutex_enter_block_until=__weak_mutex_enter_block_until")
+#elif defined(_M_AMD64) // for AMD64
+#pragma comment(linker, "/alternatename:mutex_enter_block_until=_weak_mutex_enter_block_until")
+#endif // x86 or amd64
+#endif // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__) // Compiler detection
+extern "C"  void mutex_enter_blocking  ( mutex_t* mtx );
+__attribute__((weak)) void mutex_enter_blocking   ( mutex_t* mtx )
+#elif defined(_MSC_VER) // Microsoft Visual C
+extern "C"  void _weak_mutex_enter_blocking   ( mutex_t* mtx )
+#else // Other compilers are not supported
+#error "Unknown compiler."
+#endif // Compiler detection
+{
+    assert( false && "Error : The pico_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER) // weak binding in MSVC must be after definition
+#if defined(_M_IX86) // for x86
+#pragma comment(linker, "/alternatename:_mutex_enter_blocking=__weak_mutex_enter_blocking")
+#elif defined(_M_AMD64) // for AMD64
+#pragma comment(linker, "/alternatename:mutex_enter_blocking=_weak_mutex_enter_blocking")
+#endif // x86 or amd64
+#endif // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__) // Compiler detection
+extern "C"  bool mutex_enter_timeout_ms  ( mutex_t* mtx, uint32_t timeout_ms );
+__attribute__((weak)) bool mutex_enter_timeout_ms   ( mutex_t* mtx, uint32_t timeout_ms )
+#elif defined(_MSC_VER) // Microsoft Visual C
+extern "C"  bool _weak_mutex_enter_timeout_ms   ( mutex_t* mtx, uint32_t timeout_ms )
+#else // Other compilers are not supported
+#error "Unknown compiler."
+#endif // Compiler detection
+{
+    assert( false && "Error : The pico_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER) // weak binding in MSVC must be after definition
+#if defined(_M_IX86) // for x86
+#pragma comment(linker, "/alternatename:_mutex_enter_timeout_ms=__weak_mutex_enter_timeout_ms")
+#elif defined(_M_AMD64) // for AMD64
+#pragma comment(linker, "/alternatename:mutex_enter_timeout_ms=_weak_mutex_enter_timeout_ms")
+#endif // x86 or amd64
+#endif // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__) // Compiler detection
+extern "C"  bool mutex_enter_timeout_us  ( mutex_t* mtx, uint32_t timeout_us );
+__attribute__((weak)) bool mutex_enter_timeout_us   ( mutex_t* mtx, uint32_t timeout_us )
+#elif defined(_MSC_VER) // Microsoft Visual C
+extern "C"  bool _weak_mutex_enter_timeout_us   ( mutex_t* mtx, uint32_t timeout_us )
+#else // Other compilers are not supported
+#error "Unknown compiler."
+#endif // Compiler detection
+{
+    assert( false && "Error : The pico_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER) // weak binding in MSVC must be after definition
+#if defined(_M_IX86) // for x86
+#pragma comment(linker, "/alternatename:_mutex_enter_timeout_us=__weak_mutex_enter_timeout_us")
+#elif defined(_M_AMD64) // for AMD64
+#pragma comment(linker, "/alternatename:mutex_enter_timeout_us=_weak_mutex_enter_timeout_us")
+#endif // x86 or amd64
+#endif // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__) // Compiler detection
+extern "C"  void mutex_exit  ( mutex_t* mtx );
+__attribute__((weak)) void mutex_exit   ( mutex_t* mtx )
+#elif defined(_MSC_VER) // Microsoft Visual C
+extern "C"  void _weak_mutex_exit   ( mutex_t* mtx )
+#else // Other compilers are not supported
+#error "Unknown compiler."
+#endif // Compiler detection
+{
+    assert( false && "Error : The pico_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER) // weak binding in MSVC must be after definition
+#if defined(_M_IX86) // for x86
+#pragma comment(linker, "/alternatename:_mutex_exit=__weak_mutex_exit")
+#elif defined(_M_AMD64) // for AMD64
+#pragma comment(linker, "/alternatename:mutex_exit=_weak_mutex_exit")
+#endif // x86 or amd64
+#endif // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__) // Compiler detection
+extern "C"  void mutex_init  ( mutex_t* mtx );
+__attribute__((weak)) void mutex_init   ( mutex_t* mtx )
+#elif defined(_MSC_VER) // Microsoft Visual C
+extern "C"  void _weak_mutex_init   ( mutex_t* mtx )
+#else // Other compilers are not supported
+#error "Unknown compiler."
+#endif // Compiler detection
+{
+    assert( false && "Error : The pico_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER) // weak binding in MSVC must be after definition
+#if defined(_M_IX86) // for x86
+#pragma comment(linker, "/alternatename:_mutex_init=__weak_mutex_init")
+#elif defined(_M_AMD64) // for AMD64
+#pragma comment(linker, "/alternatename:mutex_init=_weak_mutex_init")
+#endif // x86 or amd64
+#endif // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__) // Compiler detection
+extern "C"  bool mutex_is_initialized  ( mutex_t* mtx );
+__attribute__((weak)) bool mutex_is_initialized   ( mutex_t* mtx )
+#elif defined(_MSC_VER) // Microsoft Visual C
+extern "C"  bool _weak_mutex_is_initialized   ( mutex_t* mtx )
+#else // Other compilers are not supported
+#error "Unknown compiler."
+#endif // Compiler detection
+{
+    assert( false && "Error : The pico_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER) // weak binding in MSVC must be after definition
+#if defined(_M_IX86) // for x86
+#pragma comment(linker, "/alternatename:_mutex_is_initialized=__weak_mutex_is_initialized")
+#elif defined(_M_AMD64) // for AMD64
+#pragma comment(linker, "/alternatename:mutex_is_initialized=_weak_mutex_is_initialized")
+#endif // x86 or amd64
+#endif // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__) // Compiler detection
+extern "C"  bool mutex_try_enter  ( mutex_t* mtx, uint32_t* owner_out );
+__attribute__((weak)) bool mutex_try_enter   ( mutex_t* mtx, uint32_t* owner_out )
+#elif defined(_MSC_VER) // Microsoft Visual C
+extern "C"  bool _weak_mutex_try_enter   ( mutex_t* mtx, uint32_t* owner_out )
+#else // Other compilers are not supported
+#error "Unknown compiler."
+#endif // Compiler detection
+{
+    assert( false && "Error : The pico_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER) // weak binding in MSVC must be after definition
+#if defined(_M_IX86) // for x86
+#pragma comment(linker, "/alternatename:_mutex_try_enter=__weak_mutex_try_enter")
+#elif defined(_M_AMD64) // for AMD64
+#pragma comment(linker, "/alternatename:mutex_try_enter=_weak_mutex_try_enter")
+#endif // x86 or amd64
+#endif // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__) // Compiler detection
+extern "C"  bool mutex_try_enter_block_until  ( mutex_t* mtx, absolute_time_t until );
+__attribute__((weak)) bool mutex_try_enter_block_until   ( mutex_t* mtx, absolute_time_t until )
+#elif defined(_MSC_VER) // Microsoft Visual C
+extern "C"  bool _weak_mutex_try_enter_block_until   ( mutex_t* mtx, absolute_time_t until )
+#else // Other compilers are not supported
+#error "Unknown compiler."
+#endif // Compiler detection
+{
+    assert( false && "Error : The pico_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER) // weak binding in MSVC must be after definition
+#if defined(_M_IX86) // for x86
+#pragma comment(linker, "/alternatename:_mutex_try_enter_block_until=__weak_mutex_try_enter_block_until")
+#elif defined(_M_AMD64) // for AMD64
+#pragma comment(linker, "/alternatename:mutex_try_enter_block_until=_weak_mutex_try_enter_block_until")
+#endif // x86 or amd64
+#endif // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__) // Compiler detection
+extern "C"  bool recursive_mutex_enter_block_until  ( recursive_mutex_t* mtx, absolute_time_t until );
+__attribute__((weak)) bool recursive_mutex_enter_block_until   ( recursive_mutex_t* mtx, absolute_time_t until )
+#elif defined(_MSC_VER) // Microsoft Visual C
+extern "C"  bool _weak_recursive_mutex_enter_block_until   ( recursive_mutex_t* mtx, absolute_time_t until )
+#else // Other compilers are not supported
+#error "Unknown compiler."
+#endif // Compiler detection
+{
+    assert( false && "Error : The pico_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER) // weak binding in MSVC must be after definition
+#if defined(_M_IX86) // for x86
+#pragma comment(linker, "/alternatename:_recursive_mutex_enter_block_until=__weak_recursive_mutex_enter_block_until")
+#elif defined(_M_AMD64) // for AMD64
+#pragma comment(linker, "/alternatename:recursive_mutex_enter_block_until=_weak_recursive_mutex_enter_block_until")
+#endif // x86 or amd64
+#endif // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__) // Compiler detection
+extern "C"  void recursive_mutex_enter_blocking  ( recursive_mutex_t* mtx );
+__attribute__((weak)) void recursive_mutex_enter_blocking   ( recursive_mutex_t* mtx )
+#elif defined(_MSC_VER) // Microsoft Visual C
+extern "C"  void _weak_recursive_mutex_enter_blocking   ( recursive_mutex_t* mtx )
+#else // Other compilers are not supported
+#error "Unknown compiler."
+#endif // Compiler detection
+{
+    assert( false && "Error : The pico_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER) // weak binding in MSVC must be after definition
+#if defined(_M_IX86) // for x86
+#pragma comment(linker, "/alternatename:_recursive_mutex_enter_blocking=__weak_recursive_mutex_enter_blocking")
+#elif defined(_M_AMD64) // for AMD64
+#pragma comment(linker, "/alternatename:recursive_mutex_enter_blocking=_weak_recursive_mutex_enter_blocking")
+#endif // x86 or amd64
+#endif // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__) // Compiler detection
+extern "C"  bool recursive_mutex_enter_timeout_ms  ( recursive_mutex_t* mtx, uint32_t timeout_ms );
+__attribute__((weak)) bool recursive_mutex_enter_timeout_ms   ( recursive_mutex_t* mtx, uint32_t timeout_ms )
+#elif defined(_MSC_VER) // Microsoft Visual C
+extern "C"  bool _weak_recursive_mutex_enter_timeout_ms   ( recursive_mutex_t* mtx, uint32_t timeout_ms )
+#else // Other compilers are not supported
+#error "Unknown compiler."
+#endif // Compiler detection
+{
+    assert( false && "Error : The pico_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER) // weak binding in MSVC must be after definition
+#if defined(_M_IX86) // for x86
+#pragma comment(linker, "/alternatename:_recursive_mutex_enter_timeout_ms=__weak_recursive_mutex_enter_timeout_ms")
+#elif defined(_M_AMD64) // for AMD64
+#pragma comment(linker, "/alternatename:recursive_mutex_enter_timeout_ms=_weak_recursive_mutex_enter_timeout_ms")
+#endif // x86 or amd64
+#endif // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__) // Compiler detection
+extern "C"  bool recursive_mutex_enter_timeout_us  ( recursive_mutex_t* mtx, uint32_t timeout_us );
+__attribute__((weak)) bool recursive_mutex_enter_timeout_us   ( recursive_mutex_t* mtx, uint32_t timeout_us )
+#elif defined(_MSC_VER) // Microsoft Visual C
+extern "C"  bool _weak_recursive_mutex_enter_timeout_us   ( recursive_mutex_t* mtx, uint32_t timeout_us )
+#else // Other compilers are not supported
+#error "Unknown compiler."
+#endif // Compiler detection
+{
+    assert( false && "Error : The pico_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER) // weak binding in MSVC must be after definition
+#if defined(_M_IX86) // for x86
+#pragma comment(linker, "/alternatename:_recursive_mutex_enter_timeout_us=__weak_recursive_mutex_enter_timeout_us")
+#elif defined(_M_AMD64) // for AMD64
+#pragma comment(linker, "/alternatename:recursive_mutex_enter_timeout_us=_weak_recursive_mutex_enter_timeout_us")
+#endif // x86 or amd64
+#endif // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__) // Compiler detection
+extern "C"  void recursive_mutex_exit  ( recursive_mutex_t* mtx );
+__attribute__((weak)) void recursive_mutex_exit   ( recursive_mutex_t* mtx )
+#elif defined(_MSC_VER) // Microsoft Visual C
+extern "C"  void _weak_recursive_mutex_exit   ( recursive_mutex_t* mtx )
+#else // Other compilers are not supported
+#error "Unknown compiler."
+#endif // Compiler detection
+{
+    assert( false && "Error : The pico_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER) // weak binding in MSVC must be after definition
+#if defined(_M_IX86) // for x86
+#pragma comment(linker, "/alternatename:_recursive_mutex_exit=__weak_recursive_mutex_exit")
+#elif defined(_M_AMD64) // for AMD64
+#pragma comment(linker, "/alternatename:recursive_mutex_exit=_weak_recursive_mutex_exit")
+#endif // x86 or amd64
+#endif // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__) // Compiler detection
+extern "C"  void recursive_mutex_init  ( recursive_mutex_t* mtx );
+__attribute__((weak)) void recursive_mutex_init   ( recursive_mutex_t* mtx )
+#elif defined(_MSC_VER) // Microsoft Visual C
+extern "C"  void _weak_recursive_mutex_init   ( recursive_mutex_t* mtx )
+#else // Other compilers are not supported
+#error "Unknown compiler."
+#endif // Compiler detection
+{
+    assert( false && "Error : The pico_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER) // weak binding in MSVC must be after definition
+#if defined(_M_IX86) // for x86
+#pragma comment(linker, "/alternatename:_recursive_mutex_init=__weak_recursive_mutex_init")
+#elif defined(_M_AMD64) // for AMD64
+#pragma comment(linker, "/alternatename:recursive_mutex_init=_weak_recursive_mutex_init")
+#endif // x86 or amd64
+#endif // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__) // Compiler detection
+extern "C"  bool recursive_mutex_is_initialized  ( recursive_mutex_t* mtx );
+__attribute__((weak)) bool recursive_mutex_is_initialized   ( recursive_mutex_t* mtx )
+#elif defined(_MSC_VER) // Microsoft Visual C
+extern "C"  bool _weak_recursive_mutex_is_initialized   ( recursive_mutex_t* mtx )
+#else // Other compilers are not supported
+#error "Unknown compiler."
+#endif // Compiler detection
+{
+    assert( false && "Error : The pico_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER) // weak binding in MSVC must be after definition
+#if defined(_M_IX86) // for x86
+#pragma comment(linker, "/alternatename:_recursive_mutex_is_initialized=__weak_recursive_mutex_is_initialized")
+#elif defined(_M_AMD64) // for AMD64
+#pragma comment(linker, "/alternatename:recursive_mutex_is_initialized=_weak_recursive_mutex_is_initialized")
+#endif // x86 or amd64
+#endif // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__) // Compiler detection
+extern "C"  bool recursive_mutex_try_enter  ( recursive_mutex_t* mtx, uint32_t* owner_out );
+__attribute__((weak)) bool recursive_mutex_try_enter   ( recursive_mutex_t* mtx, uint32_t* owner_out )
+#elif defined(_MSC_VER) // Microsoft Visual C
+extern "C"  bool _weak_recursive_mutex_try_enter   ( recursive_mutex_t* mtx, uint32_t* owner_out )
+#else // Other compilers are not supported
+#error "Unknown compiler."
+#endif // Compiler detection
+{
+    assert( false && "Error : The pico_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER) // weak binding in MSVC must be after definition
+#if defined(_M_IX86) // for x86
+#pragma comment(linker, "/alternatename:_recursive_mutex_try_enter=__weak_recursive_mutex_try_enter")
+#elif defined(_M_AMD64) // for AMD64
+#pragma comment(linker, "/alternatename:recursive_mutex_try_enter=_weak_recursive_mutex_try_enter")
+#endif // x86 or amd64
+#endif // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__) // Compiler detection
+extern "C"  void runtime_init_mutex  ( void );
+__attribute__((weak)) void runtime_init_mutex   ( void )
+#elif defined(_MSC_VER) // Microsoft Visual C
+extern "C"  void _weak_runtime_init_mutex   ( void )
+#else // Other compilers are not supported
+#error "Unknown compiler."
+#endif // Compiler detection
+{
+    assert( false && "Error : The pico_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER) // weak binding in MSVC must be after definition
+#if defined(_M_IX86) // for x86
+#pragma comment(linker, "/alternatename:_runtime_init_mutex=__weak_runtime_init_mutex")
+#elif defined(_M_AMD64) // for AMD64
+#pragma comment(linker, "/alternatename:runtime_init_mutex=_weak_runtime_init_mutex")
+#endif // x86 or amd64
+#endif // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__) // Compiler detection
+extern "C"  bool sem_acquire_block_until  ( semaphore_t* sem, absolute_time_t until );
+__attribute__((weak)) bool sem_acquire_block_until   ( semaphore_t* sem, absolute_time_t until )
+#elif defined(_MSC_VER) // Microsoft Visual C
+extern "C"  bool _weak_sem_acquire_block_until   ( semaphore_t* sem, absolute_time_t until )
+#else // Other compilers are not supported
+#error "Unknown compiler."
+#endif // Compiler detection
+{
+    assert( false && "Error : The pico_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER) // weak binding in MSVC must be after definition
+#if defined(_M_IX86) // for x86
+#pragma comment(linker, "/alternatename:_sem_acquire_block_until=__weak_sem_acquire_block_until")
+#elif defined(_M_AMD64) // for AMD64
+#pragma comment(linker, "/alternatename:sem_acquire_block_until=_weak_sem_acquire_block_until")
+#endif // x86 or amd64
+#endif // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__) // Compiler detection
+extern "C"  void sem_acquire_blocking  ( semaphore_t* sem );
+__attribute__((weak)) void sem_acquire_blocking   ( semaphore_t* sem )
+#elif defined(_MSC_VER) // Microsoft Visual C
+extern "C"  void _weak_sem_acquire_blocking   ( semaphore_t* sem )
+#else // Other compilers are not supported
+#error "Unknown compiler."
+#endif // Compiler detection
+{
+    assert( false && "Error : The pico_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER) // weak binding in MSVC must be after definition
+#if defined(_M_IX86) // for x86
+#pragma comment(linker, "/alternatename:_sem_acquire_blocking=__weak_sem_acquire_blocking")
+#elif defined(_M_AMD64) // for AMD64
+#pragma comment(linker, "/alternatename:sem_acquire_blocking=_weak_sem_acquire_blocking")
+#endif // x86 or amd64
+#endif // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__) // Compiler detection
+extern "C"  bool sem_acquire_timeout_ms  ( semaphore_t* sem, uint32_t timeout_ms );
+__attribute__((weak)) bool sem_acquire_timeout_ms   ( semaphore_t* sem, uint32_t timeout_ms )
+#elif defined(_MSC_VER) // Microsoft Visual C
+extern "C"  bool _weak_sem_acquire_timeout_ms   ( semaphore_t* sem, uint32_t timeout_ms )
+#else // Other compilers are not supported
+#error "Unknown compiler."
+#endif // Compiler detection
+{
+    assert( false && "Error : The pico_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER) // weak binding in MSVC must be after definition
+#if defined(_M_IX86) // for x86
+#pragma comment(linker, "/alternatename:_sem_acquire_timeout_ms=__weak_sem_acquire_timeout_ms")
+#elif defined(_M_AMD64) // for AMD64
+#pragma comment(linker, "/alternatename:sem_acquire_timeout_ms=_weak_sem_acquire_timeout_ms")
+#endif // x86 or amd64
+#endif // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__) // Compiler detection
+extern "C"  bool sem_acquire_timeout_us  ( semaphore_t* sem, uint32_t timeout_us );
+__attribute__((weak)) bool sem_acquire_timeout_us   ( semaphore_t* sem, uint32_t timeout_us )
+#elif defined(_MSC_VER) // Microsoft Visual C
+extern "C"  bool _weak_sem_acquire_timeout_us   ( semaphore_t* sem, uint32_t timeout_us )
+#else // Other compilers are not supported
+#error "Unknown compiler."
+#endif // Compiler detection
+{
+    assert( false && "Error : The pico_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER) // weak binding in MSVC must be after definition
+#if defined(_M_IX86) // for x86
+#pragma comment(linker, "/alternatename:_sem_acquire_timeout_us=__weak_sem_acquire_timeout_us")
+#elif defined(_M_AMD64) // for AMD64
+#pragma comment(linker, "/alternatename:sem_acquire_timeout_us=_weak_sem_acquire_timeout_us")
+#endif // x86 or amd64
+#endif // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__) // Compiler detection
+extern "C"  int sem_available  ( semaphore_t* sem );
+__attribute__((weak)) int sem_available   ( semaphore_t* sem )
+#elif defined(_MSC_VER) // Microsoft Visual C
+extern "C"  int _weak_sem_available   ( semaphore_t* sem )
+#else // Other compilers are not supported
+#error "Unknown compiler."
+#endif // Compiler detection
+{
+    assert( false && "Error : The pico_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER) // weak binding in MSVC must be after definition
+#if defined(_M_IX86) // for x86
+#pragma comment(linker, "/alternatename:_sem_available=__weak_sem_available")
+#elif defined(_M_AMD64) // for AMD64
+#pragma comment(linker, "/alternatename:sem_available=_weak_sem_available")
+#endif // x86 or amd64
+#endif // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__) // Compiler detection
+extern "C"  void sem_init  ( semaphore_t* sem, int16_t initial_permits, int16_t max_permits );
+__attribute__((weak)) void sem_init   ( semaphore_t* sem, int16_t initial_permits, int16_t max_permits )
+#elif defined(_MSC_VER) // Microsoft Visual C
+extern "C"  void _weak_sem_init   ( semaphore_t* sem, int16_t initial_permits, int16_t max_permits )
+#else // Other compilers are not supported
+#error "Unknown compiler."
+#endif // Compiler detection
+{
+    assert( false && "Error : The pico_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER) // weak binding in MSVC must be after definition
+#if defined(_M_IX86) // for x86
+#pragma comment(linker, "/alternatename:_sem_init=__weak_sem_init")
+#elif defined(_M_AMD64) // for AMD64
+#pragma comment(linker, "/alternatename:sem_init=_weak_sem_init")
+#endif // x86 or amd64
+#endif // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__) // Compiler detection
+extern "C"  bool sem_release  ( semaphore_t* sem );
+__attribute__((weak)) bool sem_release   ( semaphore_t* sem )
+#elif defined(_MSC_VER) // Microsoft Visual C
+extern "C"  bool _weak_sem_release   ( semaphore_t* sem )
+#else // Other compilers are not supported
+#error "Unknown compiler."
+#endif // Compiler detection
+{
+    assert( false && "Error : The pico_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER) // weak binding in MSVC must be after definition
+#if defined(_M_IX86) // for x86
+#pragma comment(linker, "/alternatename:_sem_release=__weak_sem_release")
+#elif defined(_M_AMD64) // for AMD64
+#pragma comment(linker, "/alternatename:sem_release=_weak_sem_release")
+#endif // x86 or amd64
+#endif // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__) // Compiler detection
+extern "C"  void sem_reset  ( semaphore_t* sem, int16_t permits );
+__attribute__((weak)) void sem_reset   ( semaphore_t* sem, int16_t permits )
+#elif defined(_MSC_VER) // Microsoft Visual C
+extern "C"  void _weak_sem_reset   ( semaphore_t* sem, int16_t permits )
+#else // Other compilers are not supported
+#error "Unknown compiler."
+#endif // Compiler detection
+{
+    assert( false && "Error : The pico_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER) // weak binding in MSVC must be after definition
+#if defined(_M_IX86) // for x86
+#pragma comment(linker, "/alternatename:_sem_reset=__weak_sem_reset")
+#elif defined(_M_AMD64) // for AMD64
+#pragma comment(linker, "/alternatename:sem_reset=_weak_sem_reset")
+#endif // x86 or amd64
+#endif // _MSC_VER
+// --------------------------------------------------
+#if defined(__GNUC__) || defined(__clang__) // Compiler detection
+extern "C"  bool sem_try_acquire  ( semaphore_t* sem );
+__attribute__((weak)) bool sem_try_acquire   ( semaphore_t* sem )
+#elif defined(_MSC_VER) // Microsoft Visual C
+extern "C"  bool _weak_sem_try_acquire   ( semaphore_t* sem )
+#else // Other compilers are not supported
+#error "Unknown compiler."
+#endif // Compiler detection
+{
+    assert( false && "Error : The pico_sync library is missing in the link phase.");
+}
+#if defined(_MSC_VER) // weak binding in MSVC must be after definition
+#if defined(_M_IX86) // for x86
+#pragma comment(linker, "/alternatename:_sem_try_acquire=__weak_sem_try_acquire")
+#elif defined(_M_AMD64) // for AMD64
+#pragma comment(linker, "/alternatename:sem_try_acquire=_weak_sem_try_acquire")
+#endif // x86 or amd64
+#endif // _MSC_VER

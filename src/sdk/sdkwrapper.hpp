@@ -1043,6 +1043,48 @@ class SdkWrapper {
   virtual void xosc_init(void);
 #endif  //  __has_include(<hardware/xosc.h>) || __has_include(<gmock/gmock.h>)
 
+#if __has_include(<pico/sync.h>) || __has_include(<gmock/gmock.h>)
+  virtual void critical_section_deinit(critical_section_t* crit_sec);
+  virtual void critical_section_enter_blocking(critical_section_t* crit_sec);
+  virtual void critical_section_exit(critical_section_t* crit_sec);
+  virtual void critical_section_init(critical_section_t* crit_sec);
+  virtual void critical_section_init_with_lock_num(critical_section_t* crit_sec,
+                                                   uint lock_num);
+  virtual bool critical_section_is_initialized(critical_section_t* crit_sec);
+  virtual bool mutex_enter_block_until(mutex_t* mtx, absolute_time_t until);
+  virtual void mutex_enter_blocking(mutex_t* mtx);
+  virtual bool mutex_enter_timeout_ms(mutex_t* mtx, uint32_t timeout_ms);
+  virtual bool mutex_enter_timeout_us(mutex_t* mtx, uint32_t timeout_us);
+  virtual void mutex_exit(mutex_t* mtx);
+  virtual void mutex_init(mutex_t* mtx);
+  virtual bool mutex_is_initialized(mutex_t* mtx);
+  virtual bool mutex_try_enter(mutex_t* mtx, uint32_t* owner_out);
+  virtual bool mutex_try_enter_block_until(mutex_t* mtx, absolute_time_t until);
+  virtual bool recursive_mutex_enter_block_until(recursive_mutex_t* mtx,
+                                                 absolute_time_t until);
+  virtual void recursive_mutex_enter_blocking(recursive_mutex_t* mtx);
+  virtual bool recursive_mutex_enter_timeout_ms(recursive_mutex_t* mtx,
+                                                uint32_t timeout_ms);
+  virtual bool recursive_mutex_enter_timeout_us(recursive_mutex_t* mtx,
+                                                uint32_t timeout_us);
+  virtual void recursive_mutex_exit(recursive_mutex_t* mtx);
+  virtual void recursive_mutex_init(recursive_mutex_t* mtx);
+  virtual bool recursive_mutex_is_initialized(recursive_mutex_t* mtx);
+  virtual bool recursive_mutex_try_enter(recursive_mutex_t* mtx,
+                                         uint32_t* owner_out);
+  virtual void runtime_init_mutex(void);
+  virtual bool sem_acquire_block_until(semaphore_t* sem, absolute_time_t until);
+  virtual void sem_acquire_blocking(semaphore_t* sem);
+  virtual bool sem_acquire_timeout_ms(semaphore_t* sem, uint32_t timeout_ms);
+  virtual bool sem_acquire_timeout_us(semaphore_t* sem, uint32_t timeout_us);
+  virtual int sem_available(semaphore_t* sem);
+  virtual void sem_init(semaphore_t* sem, int16_t initial_permits,
+                        int16_t max_permits);
+  virtual bool sem_release(semaphore_t* sem);
+  virtual void sem_reset(semaphore_t* sem, int16_t permits);
+  virtual bool sem_try_acquire(semaphore_t* sem);
+#endif  //  __has_include(<pico/sync.h>) || __has_include(<gmock/gmock.h>)
+
 };  // class SdkWrapper
 
 #include "mocksdkwrapper.hpp"

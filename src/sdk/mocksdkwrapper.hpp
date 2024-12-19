@@ -964,6 +964,52 @@ class MockSdkWrapper : public SdkWrapper {
   MOCK_METHOD0(xosc_disable, void());
   MOCK_METHOD0(xosc_dormant, void());
   MOCK_METHOD0(xosc_init, void());
+  MOCK_METHOD1(critical_section_deinit, void(critical_section_t* crit_sec));
+  MOCK_METHOD1(critical_section_enter_blocking,
+               void(critical_section_t* crit_sec));
+  MOCK_METHOD1(critical_section_exit, void(critical_section_t* crit_sec));
+  MOCK_METHOD1(critical_section_init, void(critical_section_t* crit_sec));
+  MOCK_METHOD2(critical_section_init_with_lock_num,
+               void(critical_section_t* crit_sec, uint lock_num));
+  MOCK_METHOD1(critical_section_is_initialized,
+               bool(critical_section_t* crit_sec));
+  MOCK_METHOD2(mutex_enter_block_until,
+               bool(mutex_t* mtx, absolute_time_t until));
+  MOCK_METHOD1(mutex_enter_blocking, void(mutex_t* mtx));
+  MOCK_METHOD2(mutex_enter_timeout_ms, bool(mutex_t* mtx, uint32_t timeout_ms));
+  MOCK_METHOD2(mutex_enter_timeout_us, bool(mutex_t* mtx, uint32_t timeout_us));
+  MOCK_METHOD1(mutex_exit, void(mutex_t* mtx));
+  MOCK_METHOD1(mutex_init, void(mutex_t* mtx));
+  MOCK_METHOD1(mutex_is_initialized, bool(mutex_t* mtx));
+  MOCK_METHOD2(mutex_try_enter, bool(mutex_t* mtx, uint32_t* owner_out));
+  MOCK_METHOD2(mutex_try_enter_block_until,
+               bool(mutex_t* mtx, absolute_time_t until));
+  MOCK_METHOD2(recursive_mutex_enter_block_until,
+               bool(recursive_mutex_t* mtx, absolute_time_t until));
+  MOCK_METHOD1(recursive_mutex_enter_blocking, void(recursive_mutex_t* mtx));
+  MOCK_METHOD2(recursive_mutex_enter_timeout_ms,
+               bool(recursive_mutex_t* mtx, uint32_t timeout_ms));
+  MOCK_METHOD2(recursive_mutex_enter_timeout_us,
+               bool(recursive_mutex_t* mtx, uint32_t timeout_us));
+  MOCK_METHOD1(recursive_mutex_exit, void(recursive_mutex_t* mtx));
+  MOCK_METHOD1(recursive_mutex_init, void(recursive_mutex_t* mtx));
+  MOCK_METHOD1(recursive_mutex_is_initialized, bool(recursive_mutex_t* mtx));
+  MOCK_METHOD2(recursive_mutex_try_enter,
+               bool(recursive_mutex_t* mtx, uint32_t* owner_out));
+  MOCK_METHOD0(runtime_init_mutex, void());
+  MOCK_METHOD2(sem_acquire_block_until,
+               bool(semaphore_t* sem, absolute_time_t until));
+  MOCK_METHOD1(sem_acquire_blocking, void(semaphore_t* sem));
+  MOCK_METHOD2(sem_acquire_timeout_ms,
+               bool(semaphore_t* sem, uint32_t timeout_ms));
+  MOCK_METHOD2(sem_acquire_timeout_us,
+               bool(semaphore_t* sem, uint32_t timeout_us));
+  MOCK_METHOD1(sem_available, int(semaphore_t* sem));
+  MOCK_METHOD3(sem_init, void(semaphore_t* sem, int16_t initial_permits,
+                              int16_t max_permits));
+  MOCK_METHOD1(sem_release, bool(semaphore_t* sem));
+  MOCK_METHOD2(sem_reset, void(semaphore_t* sem, int16_t permits));
+  MOCK_METHOD1(sem_try_acquire, bool(semaphore_t* sem));
 }  // class MockSdkWrapper : public SdkWrapper
 ;
 // GCOVR_EXCL_STOP

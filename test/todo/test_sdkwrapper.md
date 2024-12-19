@@ -1,5 +1,25 @@
 # test_SdkWrapper TDD
 
+
+
+## SdkWrapper::sem_release()
+- [x] Implement member function . 
+- [x] Create test case to fail. 
+- [x] Make it success. 
+- [x] Remove the duplication. 
+
+## SdkWrapper::mutex_is_initialized()
+- [x] Implement member function . 
+- [x] Create test case to fail. 
+- [x] Make it success. 
+- [x] Remove the duplication. 
+
+## SdkWrapper::critical_section_is_initialized()
+- [x] Implement member function . 
+- [x] Create test case to fail. 
+- [x] Make it success. 
+- [x] Remove the duplication. 
+
 ## SdkWrapper::xosc_init()
 - [x] Implement member function . 
 - [x] Create test case to fail. 
