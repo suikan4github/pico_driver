@@ -6,6 +6,7 @@ Hotfix release.
 
 ### Added
 ### Changed
+- [Issue #25](https://github.com/suikan4github/rpp_driver/issues/25) DAdd wider API support of RasPi Pico SDK. 
 ### Deprecated
 ### Removed
 ### Fixed

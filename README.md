@@ -16,8 +16,51 @@ The following classes are provided in this version.
 | ::rpp_driver::I2sSlaveDuplex    | i2s/i2sslaveduplex.hpp     | Polling based PIO I2S driver |
 | ::rpp_driver::Adau1361          | codec/adau1361.hpp         | Audio CODEC driver           |
 | ::rpp_driver::UmbAdau1361Lower  | codec/umbadau1361lower.hpp | CODEC lower driver dedicated to UMB-ADAU1361-A board |
+## Supported headers
+The SdkWrapper class supports the following headers. 
+|Module                 | Done |
+|------------           |--|
+|hardware_adc           | x |
+|hardware_base          | Skipped. Macro only. |
+|hardware_boot_lock     | Skipped. Not published API. |
+|hardware_clocks        | x |
+|hardware_dcp           | Skipped. Assembly macro only. |
+|hardware_divider       | x |
+|hardware_dma           | x |
+|hardware_exception     | x |
+|hardware_flash         | x |
+|hardware_gpio          | x |
+|hardware_i2c           | x |
+|hardware_interp        | x |
+|hardware_irq           | x |
+|hardware_pio           | x |
+|hardware_pll           | x |
+|hardware_powman        | x |
+|hardware_pwm           | x |
+|hardware_rcp           | x |
+|hardware_resets        | x |
+|hardware_rtc           | x |
+|hardware_sha256        | x |
+|hardware_spi           | x |
+|hardware_sync          | x |
+|pico_sync| x |
+|hardware_ticks         | x |
+|hardware_timer         | x |
+|hardware_uart          | x |
+|hardware_vreg          | x |
+|hardware_watchdog      | x |
+|hardware_xosc          | x |
 
-
+The following functions are not supported. 
+| Functions                           | Reason |
+|-----------                          | -------------------------------------- |
+| stdio_getchar                       | Alias. Might be no need to user.       |
+| stdio_putchar                       | Alias. Might be no need to user.       |
+| stdio_puts                          | Alias. Might be no need to user.       |
+| stdio_vprintf                       | Alias. Might be no need to user.       |
+| stdio_printf                        | Alias. Might be no need to user.       |
+| stdio_set_chars_available_callback  | Too difficult to handle automatically. |
+| sha256_get_write_addr               | Too difficult to handle automatically. | 
 ## How to obtain this project
 
 The newest copy of this project is found in the [GitHub repository](https://github.com/suikan4github/rpp_driver). 
